@@ -1,5 +1,5 @@
 --Gamemode Script Name
-addons = "DayZ: "
+addons = "DayZ (0.8a)//"
 function addAddonInfo (name,description)
 	addons = addons..name.." | "
 	setGameType (addons)
