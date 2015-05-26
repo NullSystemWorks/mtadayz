@@ -27,7 +27,7 @@
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" protected="true" />
-	<file src="etelka.ttf" />
+	<file src="fonts/etelka.ttf" />
 	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
