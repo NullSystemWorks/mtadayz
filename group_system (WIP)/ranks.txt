@@ -1,0 +1,37 @@
+INFOS
+Name
+Online Status
+Days Alive
+Murders Committed
+Bandits Killed
+Heroism Level (Humanity)
+Current Location (Zone)
+Rank
+Times Died
+
+
+
+
+
+RANKS
+
+Leader
+Co-Leader
+General
+Officer
+Soldier
+Survivor
+Bandit
+
+PERMISSIONS
+
+Ruler			(May change rank role assignment and edit the Message of the Day)
+Recruiter		(Can invite other players)
+Regulator		(Can kick other players)
+Promotion		(Can promote players to ranks less than himself)
+Architect		(Can build or destroy buildings at the encampment)
+Treasurer		(Can access the Group Vault)
+Tech			(Can queue research projects)
+Tactician		(Can deploy, rearrange and destroy barricades, soldiers etc.)
+
+
