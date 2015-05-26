@@ -1,13 +1,13 @@
 <!--
 #---------------------------------------------------------------#
 ----*			DayZ MTA Script meta.xml					*----
-----* This Script is owned by Marwin, you are not allowed to use or own it.
-----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
-----* Skype: xxmavxx96										*----
+----* This Script is owned by Marwin, you are allowed to use or own it.
+----* Owner: Marwin
+----* 														*----
 #---------------------------------------------------------------#
 -->
 <meta>
-    <info author="Marwin  L  -ffs-Sniper" description="MTA:DayZ - DayZ for MTA" version="1.2b" type="gamemode" />
+    <info author="Marwin & L & -ffs-Sniper" description="MTA:DayZ - DayZ for MTA" version="0.8a" type="gamemode" />
     <script src="import_dxgui_v1.lua" type="client" cache="false" />
     <script src="editor_server.lua" type="server" />
     <script src="editor_client.lua" type="client" cache="false" />
@@ -19,269 +19,18 @@
     <script src="animals.lua" type="server" />
     <script src="weather.lua" type="server" />
     <script src="login.lua" type="server" />
-    <script src="tools/jq_server.lua" type="server" />
-    <script src="menu_client.lua" type="client" cache="false" />
-    <script src="inventory.lua" type="client" cache="false" />
-    <script src="survivorSystem_client.lua" type="client" cache="false" />
-	<!--<script src="combatlog_server.lua" type="server" /> -->
+	<script src="inventory.lua" type="client" cache="false" />
+	<script src="menu_client.lua" type="client" cache="false" />
+	<script src="survivorSystem_client.lua" type="client" cache="false" />
     <script src="animals_client.lua" type="client" cache="false" />
-    <script src="tools/jq_client.lua" type="client" cache="false" />
-    <script src="textlib.lua" type="client" cache="false"/>
+	<script src="textlib.lua" type="client" cache="false"/>
     <script src="addons.lua" type="server" />
-    <script src="shader/motion/motion_c.lua" type="client" />
-    <file src="shader/motion/motion.fx" />
-    <script src="shader/blackwhite/blackwhite_c.lua" type="client" />
-    <file src="shader/blackwhite/blackwhite.fx" />
-    <file src="tools/images/c_info/rand.png" />
-    <file src="tools/images/background.png" />
-    <file src="tools/images/imageHolder.png" />
-    <file src="tools/images/flags/died.png" />
-    <file src="tools/images/flags/join.png" />
-    <file src="tools/images/flags/quit.png" />
-    <script src="group_system/gang_client.lua" type="client" />
-    <script src="group_system/gang_utils.lua" type="server" />
-    <script src="group_system/gang_server.lua" type="server" />
-    <script src="group_system/groupsystem.lua" type="server" />
-    <script src="group_system/groupsystem_client.lua" type="client" />
-    <export function="addGang" type="server" />
-    <!-- Addon: Exported Functions -->
-    <export function="addAddonInfo" type="server" />
-    <export function="addDayZInfoBox" type="client" />
-    
-    <settings>
-        <setting name="*column_name" value="Group" />
-        <setting name="*gang_list_command" value="gangs" />
-        <setting name="*gang_create_command" value="creategang" />
-    </settings>
-    <file src="images/scrollmenu_1.png" />
-	<file src="images/scrollmenu_2.png" />
-    <file src="images/background_scoreboard.png" />
-    <file src="images/white.png" />
-    <file src="images/window_bg.png" />
-    <file src="images/dead.jpg" />
-	<file src="images/nightvision.png" />
-	<file src="images/infravision.png" />
-    <file src="images/dayzicons/bandit.png" />
-    <file src="images/dayzicons/blood.png" />
-    <file src="images/dayzicons/brokenbone.png" />
-    <file src="images/dayzicons/eye.png" />
-    <file src="images/dayzicons/food.png" />
-    <file src="images/dayzicons/sound.png" />
-    <file src="images/dayzicons/temperature.png" />
-    <file src="images/dayzicons/thirsty.png" />
-    <file src="images/dayzicons/medic.png" />
-    <file src="images/dayzicons/level_2.png" />
-    <file src="images/dayzicons/level_3.png" />
-    <file src="images/dayzicons/level_4.png" />
-    <file src="images/dayzicons/level_5.png" />
-	<file src="images/compassborder.png" />
-    <file src="images/compassarrow.png" />
-	<file src="images/inventory1.png" />
-	<file src="images/inventory2.png" />
-	<file src="images/inventory3.png" />
-	
-    <file src="mods/sniper.txd" />
-    <file src="mods/sniper.dff" />
-    <file src="mods/civilian.txd" />
-    <file src="mods/civilian.dff" />
-	<file src="mods/bandit3.txd" />
-    <file src="mods/bandit3.dff" />
-    <file src="mods/standart.txd" />
-    <file src="mods/standart.dff" />
-    <file src="mods/hero.txd" />
-    <file src="mods/hero.dff" />
-    <file src="mods/bear.txd" />
-    <file src="mods/bear.dff" />
-    <file src="mods/fox.txd" />
-    <file src="mods/fox.dff" />
-    <file src="mods/wolf.txd" />
-    <file src="mods/wolf.dff" />
-	
-	<file src="mods/fnfal.txd" />
-	<file src="mods/fnfal.dff" />
-	<file src="mods/g36c.txd" />
-	<file src="mods/g36c.dff" />
-	<file src="mods/crossbow.txd" />
-	<file src="mods/crossbow.dff" />
-	<file src="mods/bizon.txd" />
-	<file src="mods/bizon.dff" />
-	<file src="mods/dmr.txd" />
-	<file src="mods/dmr.dff" />
-	<file src="mods/dragunov.txd" />
-	<file src="mods/dragunov.dff" />
-	<file src="mods/revolver.txd" />
-	<file src="mods/revolver.dff" />
-	<file src="mods/sa58v.txd" />
-	<file src="mods/sa58v.dff" />
-	<file src="mods/remington.txd" />
-	<file src="mods/remington.dff" />
-	<file src="mods/m1911.txd" />
-	<file src="mods/m1911.dff" />
-	<file src="mods/sks.txd" />
-	<file src="mods/sks.dff" />
-	<file src="mods/knife.txd" />
-	<file src="mods/knife.dff" />
-	
-	
-    <file src="skins/22.txd" />
-    <file src="skins/56.txd" />
-    <file src="skins/67.txd" />
-    <file src="skins/68.txd" />
-    <file src="skins/69.txd" />
-    <file src="skins/70.txd" />
-    <file src="skins/84.txd" />
-    <file src="skins/92.txd" />
-    <file src="skins/97.txd" />
-    <file src="skins/105.txd" />
-    <file src="skins/107.txd" />
-    <file src="skins/108.txd" />
-    <file src="skins/111.txd" />
-    <file src="skins/126.txd" />
-    <file src="skins/127.txd" />
-    <file src="skins/128.txd" />
-    <file src="skins/152.txd" />
-    <file src="skins/162.txd" />
-    <file src="skins/167.txd" />
-    <file src="skins/188.txd" />
-    <file src="skins/192.txd" />
-    <file src="skins/195.txd" />
-    <file src="skins/206.txd" />
-    <file src="skins/209.txd" />
-    <file src="skins/212.txd" />
-    <file src="skins/229.txd" />
-    <file src="skins/230.txd" />
-    <file src="skins/258.txd" />
-    <file src="skins/264.txd" />
-    <file src="skins/274.txd" />
-    <file src="skins/277.txd" />
-    <file src="skins/280.txd" />
-    <file src="skins/287.txd" />
-	
-	<file src="skins/22.dff" />
-    <file src="skins/56.dff" />
-    <file src="skins/67.dff" />
-    <file src="skins/68.dff" />
-    <file src="skins/69.dff" />
-    <file src="skins/70.dff" />
-	<file src="skins/92.dff" />
-    <file src="skins/97.dff" />
-    <file src="skins/105.dff" />
-    <file src="skins/107.dff" />
-    <file src="skins/108.dff" />
-	<file src="skins/126.dff" />
-    <file src="skins/127.dff" />
-    <file src="skins/128.dff" />
-    <file src="skins/152.dff" />
-    <file src="skins/162.dff" />
-    <file src="skins/167.dff" />
-    <file src="skins/188.dff" />
-	<file src="skins/195.dff" />
-    <file src="skins/206.dff" />
-    <file src="skins/209.dff" />
-    <file src="skins/212.dff" />
-    <file src="skins/229.dff" />
-    <file src="skins/230.dff" />
-    <file src="skins/258.dff" />
-    <file src="skins/264.dff" />
-	<file src="skins/277.dff" /> 
-    <file src="skins/280.dff" /> 
-	
-	
-    <file src="sounds/mgroan1.ogg" />
-    <file src="sounds/mgroan2.ogg" />
-    <file src="sounds/mgroan3.ogg" />
-    <file src="sounds/mgroan4.ogg" />
-    <file src="sounds/mgroan5.ogg" />
-    <file src="sounds/mgroan6.ogg" />
-    <file src="sounds/mgroan7.ogg" />
-    <file src="sounds/mgroan8.ogg" />
-    <file src="sounds/mgroan9.ogg" />
-    <file src="sounds/mgroan10.ogg" />
-	<file src="sounds/hit1.mp3" />
-	<file src="sounds/hit2.mp3" />
-	<file src="sounds/hit3.mp3" />
-	<file src="sounds/day1.mp3" />
-	<file src="sounds/day2.mp3" />
-	<file src="sounds/day3.mp3" />
-	<file src="sounds/day4.mp3" />
-	<file src="sounds/day5.mp3" />
-	<file src="sounds/day6.mp3" />
-	<file src="sounds/day7.mp3" />
-	<file src="sounds/night1.mp3" />
-	<file src="sounds/night2.mp3" />
-	<file src="sounds/night3.mp3" />
-	<file src="sounds/night4.mp3" />
-	<file src="sounds/night5.mp3" />
-	<file src="sounds/night6.mp3" />
-	<file src="sounds/night7.mp3" />
-	<file src="sounds/ambience1.mp3" />
-	<file src="sounds/ambience2.mp3" />
-	<file src="sounds/ambience3.mp3" />
-	<file src="sounds/ambience4.mp3" />
-	<file src="sounds/cough.mp3" />
-	<file src="sounds/campfire.mp3" />
-	<file src="sounds/coughing.mp3" />
-	<file src="sounds/bonecrack.mp3" />
-	<file src="sounds/crafting.mp3" />
-	<file src="sounds/sneezing.mp3" />
-	<file src="sounds/openinventory.mp3" />
-	
-    <file src="items/assault_ammo.txd" />
-    <file src="items/assault_ammo.dff" />
-    <file src="items/backpack_alice.txd" />
-    <file src="items/backpack_alice.dff" />
-    <file src="items/backpack_coyote.txd" />
-    <file src="items/backpack_coyote.dff" />
-    <file src="items/beans_can.txd" />
-    <file src="items/beans_can.dff" />
-    <file src="items/first_aid_kit.txd" />
-    <file src="items/first_aid_kit.dff" />
-    <file src="items/heat_pack.txd" />
-    <file src="items/heat_pack.dff" />
-    <file src="items/katana.txd" />
-    <file src="items/katana.dff" />
-    <file src="items/pain_killers.txd" />
-    <file src="items/pain_killers.dff" />
-    <file src="items/pasta_can.txd" />
-    <file src="items/pasta_can.dff" />
-    <file src="items/pistol_ammo.txd" />
-    <file src="items/pistol_ammo.dff" />
-    <file src="items/shotgun_ammo.txd" />
-    <file src="items/shotgun_ammo.dff" />
-    <file src="items/backpack_small.txd" />
-    <file src="items/backpack_small.dff" />
-    <file src="items/backpack_czech.txd" />
-    <file src="items/backpack_czech.dff" />
-	<file src="items/backpack_ghillie.txd" />
-    <file src="items/backpack_ghillie.dff" />
-	<file src="items/backpack_os.txd" />
-    <file src="items/backpack_os.dff" />
-    <file src="items/smg_ammo.txd" />
-    <file src="items/smg_ammo.dff" />
-    <file src="items/sniper_ammo.txd" />
-    <file src="items/sniper_ammo.dff" />
-    <file src="items/soda_can.txd" />
-    <file src="items/soda_can.dff" />
-    <file src="items/water_bottle.txd" />
-    <file src="items/water_bottle.dff" />
-    <file src="items/tent.txd" />
-    <file src="items/tent.dff" />
-    <file src="items/wirefence.txd" />
-    <file src="items/wirefence.dff" />
-    <file src="items/camera.txd" />
-    <file src="items/camera.dff" />
-	
-    <script src="bone_attach/bone_attach.lua" />
-    <script src="bone_attach/bone_attach_c.lua" type="client" />
-    <script src="bone_attach/attach_func.lua" />
-    <script src="bone_attach/attach_func.lua" type="client" />
-    <script src="bone_attach/bone_pos_rot.lua" type="client" />
-	
-    <include resource="voice" />
-    <min_mta_version client="1.3.0-9.04464"></min_mta_version>
+	<script src="treelist.lua" type="server" />
+	<script src="treelist.lua" type="client" protected="true" />
+	<file src="etelka.ttf" />
 	
 	<!-- New Inventory -->
-	<script src="inventory_new.lua" type="client" />
+	<script src="inventory_new.lua" type="client" cache="false" />
 	<file src="icons/m4a1.png"/>
 	<file src="icons/sniper.png"/>
 	<file src="icons/winchester.png"/>
@@ -350,102 +99,241 @@
 	<file src="images/butoff.png"/>
 	<file src="images/butclick.png"/>
 	
+	<!-- Tools -->
+    <script src="tools/jq_client.lua" type="client" cache="false" />
+	<script src="tools/jq_server.lua" type="server" />
+	<file src="tools/images/c_info/rand.png" />
+    <file src="tools/images/background.png" />
+    <file src="tools/images/imageHolder.png" />
+    <file src="tools/images/flags/died.png" />
+    <file src="tools/images/flags/join.png" />
+    <file src="tools/images/flags/quit.png" />
+	
+	<!-- Shader -->
+    <script src="shader/motion/motion_c.lua" type="client" />
+    <file src="shader/motion/motion.fx" />
+    <script src="shader/blackwhite/blackwhite_c.lua" type="client" />
+    <file src="shader/blackwhite/blackwhite.fx" />
+	
+    <!-- Group System -->
+    <script src="group_system/gang_client.lua" type="client" />
+    <script src="group_system/gang_utils.lua" type="server" />
+    <script src="group_system/gang_server.lua" type="server" />
+    <script src="group_system/groupsystem.lua" type="server" />
+    <script src="group_system/groupsystem_client.lua" type="client" />
+    <export function="addGang" type="server" />
+	<settings>
+        <setting name="*column_name" value="Group" />
+        <setting name="*gang_list_command" value="gangs" />
+        <setting name="*gang_create_command" value="creategang" />
+    </settings>
+    
+	<!-- Bone Attachments -->
+	<script src="bone_attach/bone_attach.lua" />
+    <script src="bone_attach/bone_attach_c.lua" type="client" />
+    <script src="bone_attach/attach_func.lua" />
+    <script src="bone_attach/attach_func.lua" type="client" />
+    <script src="bone_attach/bone_pos_rot.lua" type="client" />
+	
+	<!-- Addon: Exported Functions -->
+    <export function="addAddonInfo" type="server" />
+    <export function="addDayZInfoBox" type="client" />
+    
+    <!-- Images -->
+    <file src="images/scrollmenu_1.png" />
+	<file src="images/scrollmenu_2.png" />
+    <file src="images/background_scoreboard.png" />
+    <file src="images/white.png" />
+    <file src="images/window_bg.png" />
+    <file src="images/dead.jpg" />
+	<file src="images/nightvision.png" />
+	<file src="images/infravision.png" />
+    <file src="images/dayzicons/bandit.png" />
+    <file src="images/dayzicons/blood.png" />
+    <file src="images/dayzicons/brokenbone.png" />
+    <file src="images/dayzicons/eye.png" />
+    <file src="images/dayzicons/food.png" />
+    <file src="images/dayzicons/sound.png" />
+    <file src="images/dayzicons/temperature.png" />
+    <file src="images/dayzicons/thirsty.png" />
+    <file src="images/dayzicons/medic.png" />
+    <file src="images/dayzicons/level_2.png" />
+    <file src="images/dayzicons/level_3.png" />
+    <file src="images/dayzicons/level_4.png" />
+    <file src="images/dayzicons/level_5.png" />
+	<file src="images/compassborder.png" />
+    <file src="images/compassarrow.png" />
+	<file src="images/inventory1.png" />
+	<file src="images/inventory2.png" />
+	<file src="images/inventory3.png" />
+	
+	<!-- Mods (Weapons & Playerskins) -->
+    <file src="mods/sniper.txd" />
+    <file src="mods/sniper.dff" />
+    <file src="mods/civilian.txd" />
+    <file src="mods/civilian.dff" />
+	<file src="mods/bandit3.txd" />
+    <file src="mods/bandit3.dff" />
+    <file src="mods/standart.txd" />
+    <file src="mods/standart.dff" />
+    <file src="mods/hero.txd" />
+    <file src="mods/hero.dff" />
+    <file src="mods/bear.txd" />
+    <file src="mods/bear.dff" />
+    <file src="mods/fox.txd" />
+    <file src="mods/fox.dff" />
+    <file src="mods/wolf.txd" />
+    <file src="mods/wolf.dff" />
+	<file src="mods/fnfal.txd" />
+	<file src="mods/fnfal.dff" />
+	<file src="mods/g36c.txd" />
+	<file src="mods/g36c.dff" />
+	<file src="mods/crossbow.txd" />
+	<file src="mods/crossbow.dff" />
+	<file src="mods/bizon.txd" />
+	<file src="mods/bizon.dff" />
+	<file src="mods/dmr.txd" />
+	<file src="mods/dmr.dff" />
+	<file src="mods/dragunov.txd" />
+	<file src="mods/dragunov.dff" />
+	<file src="mods/revolver.txd" />
+	<file src="mods/revolver.dff" />
+	<file src="mods/sa58v.txd" />
+	<file src="mods/sa58v.dff" />
+	<file src="mods/remington.txd" />
+	<file src="mods/remington.dff" />
+	<file src="mods/m1911.txd" />
+	<file src="mods/m1911.dff" />
+	<file src="mods/sks.txd" />
+	<file src="mods/sks.dff" />
+	<file src="mods/knife.txd" />
+	<file src="mods/knife.dff" />
+	
+	<!-- Skins -->
+    <file src="skins/22.txd" />
+    <file src="skins/56.txd" />
+    <file src="skins/67.txd" />
+    <file src="skins/68.txd" />
+    <file src="skins/69.txd" />
+    <file src="skins/70.txd" />
+    <file src="skins/84.txd" />
+    <file src="skins/92.txd" />
+    <file src="skins/97.txd" />
+    <file src="skins/105.txd" />
+    <file src="skins/107.txd" />
+    <file src="skins/108.txd" />
+    <file src="skins/111.txd" />
+    <file src="skins/126.txd" />
+    <file src="skins/127.txd" />
+    <file src="skins/128.txd" />
+    <file src="skins/152.txd" />
+    <file src="skins/162.txd" />
+    <file src="skins/167.txd" />
+    <file src="skins/188.txd" />
+    <file src="skins/192.txd" />
+    <file src="skins/195.txd" />
+    <file src="skins/206.txd" />
+    <file src="skins/209.txd" />
+    <file src="skins/212.txd" />
+    <file src="skins/229.txd" />
+    <file src="skins/230.txd" />
+    <file src="skins/258.txd" />
+    <file src="skins/264.txd" />
+    <file src="skins/274.txd" />
+    <file src="skins/277.txd" />
+    <file src="skins/280.txd" />
+    <file src="skins/287.txd" />
+	
+	<!-- Sounds -->
+    <file src="sounds/mgroan1.ogg" />
+    <file src="sounds/mgroan2.ogg" />
+    <file src="sounds/mgroan3.ogg" />
+    <file src="sounds/mgroan4.ogg" />
+    <file src="sounds/mgroan5.ogg" />
+    <file src="sounds/mgroan6.ogg" />
+    <file src="sounds/mgroan7.ogg" />
+    <file src="sounds/mgroan8.ogg" />
+    <file src="sounds/mgroan9.ogg" />
+    <file src="sounds/mgroan10.ogg" />
+	<file src="sounds/hit1.mp3" />
+	<file src="sounds/hit2.mp3" />
+	<file src="sounds/hit3.mp3" />
+	<file src="sounds/day1.mp3" />
+	<file src="sounds/day2.mp3" />
+	<file src="sounds/day3.mp3" />
+	<file src="sounds/day4.mp3" />
+	<file src="sounds/day5.mp3" />
+	<file src="sounds/day6.mp3" />
+	<file src="sounds/day7.mp3" />
+	<file src="sounds/night1.mp3" />
+	<file src="sounds/night2.mp3" />
+	<file src="sounds/night3.mp3" />
+	<file src="sounds/night4.mp3" />
+	<file src="sounds/night5.mp3" />
+	<file src="sounds/night6.mp3" />
+	<file src="sounds/night7.mp3" />
+	<file src="sounds/ambience1.mp3" />
+	<file src="sounds/ambience2.mp3" />
+	<file src="sounds/ambience3.mp3" />
+	<file src="sounds/ambience4.mp3" />
+	<file src="sounds/cough.mp3" />
+	<file src="sounds/campfire.mp3" />
+	<file src="sounds/coughing.mp3" />
+	<file src="sounds/bonecrack.mp3" />
+	<file src="sounds/crafting.mp3" />
+	<file src="sounds/sneezing.mp3" />
+	<file src="sounds/openinventory.mp3" />
+	
+	<!-- Item Textures -->
+    <file src="items/assault_ammo.txd" />
+    <file src="items/assault_ammo.dff" />
+    <file src="items/backpack_alice.txd" />
+    <file src="items/backpack_alice.dff" />
+    <file src="items/backpack_coyote.txd" />
+    <file src="items/backpack_coyote.dff" />
+    <file src="items/beans_can.txd" />
+    <file src="items/beans_can.dff" />
+    <file src="items/first_aid_kit.txd" />
+    <file src="items/first_aid_kit.dff" />
+    <file src="items/heat_pack.txd" />
+    <file src="items/heat_pack.dff" />
+    <file src="items/katana.txd" />
+    <file src="items/katana.dff" />
+    <file src="items/pain_killers.txd" />
+    <file src="items/pain_killers.dff" />
+    <file src="items/pasta_can.txd" />
+    <file src="items/pasta_can.dff" />
+    <file src="items/pistol_ammo.txd" />
+    <file src="items/pistol_ammo.dff" />
+    <file src="items/shotgun_ammo.txd" />
+    <file src="items/shotgun_ammo.dff" />
+    <file src="items/backpack_small.txd" />
+    <file src="items/backpack_small.dff" />
+    <file src="items/backpack_czech.txd" />
+    <file src="items/backpack_czech.dff" />
+	<file src="items/backpack_ghillie.txd" />
+    <file src="items/backpack_ghillie.dff" />
+	<file src="items/backpack_os.txd" />
+    <file src="items/backpack_os.dff" />
+    <file src="items/smg_ammo.txd" />
+    <file src="items/smg_ammo.dff" />
+    <file src="items/sniper_ammo.txd" />
+    <file src="items/sniper_ammo.dff" />
+    <file src="items/soda_can.txd" />
+    <file src="items/soda_can.dff" />
+    <file src="items/water_bottle.txd" />
+    <file src="items/water_bottle.dff" />
+    <file src="items/tent.txd" />
+    <file src="items/tent.dff" />
+    <file src="items/wirefence.txd" />
+    <file src="items/wirefence.dff" />
+    <file src="items/camera.txd" />
+    <file src="items/camera.dff" />
+	
+    
+	<!-- Include resources to start along with DayZ -->
+    <include resource="voice" />
+	<include resource="slothbot" />
+	<include resource="login" />
 	<include resource="imageButton" />
-	
-	<map src="/GhostBase/GhostBase.map"/>
-	
-	
-	<file src="skins/arma2tent.txd" />
-	<file src="skins/arma2tent.dff" />
-	<file src="skins/arma2tent.col" />
-	<file src="skins/casa.txd" />
-	<file src="skins/casa.dff" />
-	<file src="skins/casa.col" />
-	<file src="skins/medictent.txd" />
-	<file src="skins/medictent.dff" />
-	<file src="skins/medictent.col" />
-	<file src="skins/pinia.txd" />
-	<file src="skins/pinia.dff" />
-	<file src="skins/pinia.col" />
-	<file src="skins/tree1.txd" />
-	<file src="skins/tree1.dff" />
-	<file src="skins/tree1.col" />
-	<file src="skins/tree2.txd" />
-	<file src="skins/tree2.dff" />
-	<file src="skins/tree2.col" />
-	<file src="skins/asfalt.txd" />
-	<file src="skins/asfalt.dff" />
-	<file src="skins/asfalt.col" />
-	<file src="skins/asfaltlarg.txd" />
-	<file src="skins/asfaltlarg.dff" />
-	<file src="skins/asfaltlarg.col" />
-	<file src="skins/barn_small.txd" />
-	<file src="skins/barn_small.dff" />
-	<file src="skins/barn_small.col" />
-	<file src="skins/barn_medium.txd" />
-	<file src="skins/barn_medium.dff" />
-	<file src="skins/barn_medium.col" />
-	<file src="skins/slaughterhouse_big.txd" />
-	<file src="skins/slaughterhouse_big.dff" />
-	<file src="skins/slaughterhouse_big.col" />
-	<file src="skins/slaughterhouse_small.txd" />
-	<file src="skins/slaughterhouse_small.dff" />
-	<file src="skins/slaughterhouse_small.col" />
-	<file src="skins/house.txd" />
-	<file src="skins/house.dff" />
-	<file src="skins/house.col" />
-	<file src="skins/aerobase.txd" />
-	<file src="skins/aerobase.dff" />
-	<file src="skins/aerobase.col" />
-	<file src="skins/church.txd" />
-	<file src="skins/church.dff" />
-	<file src="skins/church.col" />
-	<file src="skins/fire.txd" />
-	<file src="skins/fire.dff" />
-	<file src="skins/fire.col" />
-	<file src="skins/hangar.txd" />
-	<file src="skins/hangar.dff" />
-	<file src="skins/hangar.col" />
-	
-	<file src="skins/highway_sfn1.txd" />
-	<file src="skins/roadsfe1.txd" />
-	<file src="skins/road2sfe.txd" />
-	<file src="skins/cs_roads.txd" />
-	<file src="skins/cs_mountain.txd" />
-	<file src="skins/sunset03_law2.txd" />
-	<file src="skins/cs_town.txd" />
-	<file src="skins/casa2.txd" />
-	<file src="skins/vgnbasktball.txd" />
-	<file src="skins/stalker.txd" />
-	<file src="skins/stalker.dff" />
-	<file src="skins/stalker.col" />
-	<file src="skins/cs_coast.txd" />
-	<file src="skins/vegashiways.txd" />
-	<file src="skins/vegasroads.txd" />
-	<file src="skins/sfe_swank1.txd" />
-	
-	<file src="skins/cen_bit_11.col" />
-	
-	<file src="skins/a51_ext.txd" />
-	<file src="skins/des2vegas_join.txd" />
-	<file src="skins/des_cen.txd" />
-	<file src="skins/des_n.txd" />
-	<file src="skins/des_ne.txd" />
-	<file src="skins/des_quarry.txd" />
-	<file src="skins/des_quarrybits.txd" />
-	<file src="skins/des_refinery.txd" />
-	<file src="skins/des_s.txd" />
-	<file src="skins/des_se1.txd" />
-	<file src="skins/des_se2.txd" />
-	<file src="skins/des_se3.txd" />
-	<file src="skins/des_se4.txd" />
-	<file src="skins/desert.txd" />
-	<file src="skins/desn2_alphabits.txd" />
-	<file src="skins/desn2_minestuff.txd" />
-	<file src="skins/lod_countn2.txd" />
-	
-	<script src="treelist.lua" type="server" />
-	<script src="treelist.lua" type="client" protected="true" />
-	
-	<file src="etelka.ttf" />
 </meta>
