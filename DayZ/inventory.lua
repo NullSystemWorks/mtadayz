@@ -144,6 +144,7 @@ inventoryItems = {
 {"MP5A5 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Bizon PP-19 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Revolver Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Desert Eagle Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Hunting Knife Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Hatchet Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Baseball Bat Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
@@ -161,7 +162,7 @@ inventoryItems = {
 -- [ AMMO BLUEPRINTS ] --
 {".45 ACP Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components,\n one is able to rebuild the item shown on this blueprint.","Craft"},
 {"9x19mm SD Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"9x19 Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"9x19mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"9x18mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"5.45x39mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"5.56x45mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},

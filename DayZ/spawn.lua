@@ -128,6 +128,110 @@ local playerDataTable = {
 {"9.3x62mm Cartridge"},
 {".303 British Cartridge"},
 {"Bolt"},
+
+-- [[ PRIMARY WEAPONS ]] --
+{"M4 Blueprint"},
+{"CZ 550 Blueprint"},
+{"Winchester 1866 Blueprint"},
+{"SPAZ-12 C. Shtgn. Blueprint"},
+{"Sawn-Off Shtgn. Blueprint"},
+{"AK-47 Blueprint"},
+{"Lee Enfield Blueprint"},
+{"Sporter 22 Blueprint"},
+{"Mosin 9130 Blueprint"},
+{"Crossbow Blueprint"},
+{"SKS Blueprint"},
+{"Blaze 95 D. R. Blueprint"},
+{"Remington 870 Blueprint"},
+{"FN FAL Blueprint"},
+{"G36C Blueprint"},
+{"Sa58V CCO Blueprint"},
+{"SVD Dragunov Blueprint"},
+{"DMR Blueprint"},
+
+-- [[ SECONDARY WEAPONS ]]-- 
+{"M1911 Blueprint"},
+{"M9 SD Blueprint"},
+{"PDW Blueprint"},
+{"G17 Blueprint"},
+{"MP5A5 Blueprint"},
+{"Bizon PP-19 Blueprint"},
+{"Revolver Blueprint"},
+{"Desert Eagle Blueprint"},
+{"Hunting Knife Blueprint"},
+{"Hatchet Blueprint"},
+{"Baseball Bat Blueprint"},
+{"Shovel Blueprint"},
+{"Golf Club Blueprint"},
+{"Machete Blueprint"},
+{"Crowbar Blueprint"},
+
+-- [[ SPECIAL WEAPONS ]] --
+{"Parachute Blueprint"},
+{"Tear Gas Blueprint"},
+{"Grenade Blueprint"},
+{"Binoculars Blueprint"},
+
+-- [[ AMMO ]] -- TO DO!!!
+{".45 ACP Cartridge Blueprint"},
+{"9x19mm SD Cartridge Blueprint"},
+{"9x19mm Cartridge Blueprint"},
+{"9x18mm Cartridge Blueprint"},
+{"5.45x39mm Cartridge Blueprint"},
+{"5.56x45mm Cartridge Blueprint"},
+{"1866 Slug Blueprint"},
+{"2Rnd. Slug Blueprint"},
+{"12 Gauge Pellet Blueprint"},
+{"9.3x62mm Cartridge Blueprint"},
+{".303 British Cartridge Blueprint"},
+{"Bolt Blueprint"},
+
+-- [[ ITEMS ]] --
+{"Medic Kit Blueprint"},
+{"Wire Fence Blueprint"},
+{"Tent Blueprint"},
+{"Camouflage Clthng. Blueprint"},
+{"Survivor Clthng. Blueprint"},
+{"Civilian Clthng. Blueprint"},
+{"Ghillie Suit Blueprint"},
+{"Roadflare Blueprint"},
+
+-- [[ TOOLBELT ]] --
+{"Toolbox Blueprint"},
+{"Radio Device Blueprint"},
+{"Infrared Goggles Blueprint"},
+{"Night Vision Goggles Blueprint"},
+
+-- [[ BLUEPRINT PARTS ]] --
+{"Gun Barrel"},
+{"Short Gun Barrel"},
+{"Gun Stock"},
+{"Thread"},
+{"Cloth"},
+{"Gun Powder"},
+{"Mechanical Supplies"},
+{"Cables"},
+{"Nails"},
+{"Sheet"},
+{"Barbed Wire"},
+{"Duct Tape"},
+{"Glue"},
+{"Drugs"},
+{"Bandaid"},
+{"Vitamins"},
+{"Tissue"},
+{"Small Box"},
+{"String"},
+{"Needle"},
+{"Microchips"},
+{"Optics"},
+{"Sharp Metal"},
+{"Handle"},
+{"Wooden Stick"},
+{"Hand Saw"},
+{"Metal Plate"},
+{"Metallic Stick"},
+{"Small Casing"},
 }
 
 
@@ -234,7 +338,6 @@ local vehicleDataTable = {
 
 {"Ghillie Backpack"},
 {"OS Backpack"},
-
 -- [[ PRIMARY WEAPONS ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},
@@ -243,18 +346,34 @@ local vehicleDataTable = {
 {"Sawn-Off Shtgn. Blueprint"},
 {"AK-47 Blueprint"},
 {"Lee Enfield Blueprint"},
+{"Sporter 22 Blueprint"},
+{"Mosin 9130 Blueprint"},
+{"Crossbow Blueprint"},
+{"SKS Blueprint"},
+{"Blaze 95 D. R. Blueprint"},
+{"Remington 870 Blueprint"},
+{"FN FAL Blueprint"},
+{"G36C Blueprint"},
+{"Sa58V CCO Blueprint"},
+{"SVD Dragunov Blueprint"},
+{"DMR Blueprint"},
 
 -- [[ SECONDARY WEAPONS ]]-- 
 {"M1911 Blueprint"},
 {"M9 SD Blueprint"},
 {"PDW Blueprint"},
+{"G17 Blueprint"},
 {"MP5A5 Blueprint"},
+{"Bizon PP-19 Blueprint"},
+{"Revolver Blueprint"},
 {"Desert Eagle Blueprint"},
 {"Hunting Knife Blueprint"},
 {"Hatchet Blueprint"},
 {"Baseball Bat Blueprint"},
 {"Shovel Blueprint"},
 {"Golf Club Blueprint"},
+{"Machete Blueprint"},
+{"Crowbar Blueprint"},
 
 -- [[ SPECIAL WEAPONS ]] --
 {"Parachute Blueprint"},
@@ -262,19 +381,19 @@ local vehicleDataTable = {
 {"Grenade Blueprint"},
 {"Binoculars Blueprint"},
 
--- [[ AMMO ]] --
-{"M1911 Mag Blueprint"},
-{"M9 SD Mag Blueprint"},
-{"Desert Eagle Mag Blueprint"},
-{"PDW Mag Blueprint"},
-{"MP5A5 Mag Blueprint"},
-{"AK Mag Blueprint"},
-{"M4 Mag Blueprint"},
+-- [[ AMMO ]] -- TO DO!!!
+{".45 ACP Cartridge Blueprint"},
+{"9x19mm SD Cartridge Blueprint"},
+{"9x19mm Cartridge Blueprint"},
+{"9x18mm Cartridge Blueprint"},
+{"5.45x39mm Cartridge Blueprint"},
+{"5.56x45mm Cartridge Blueprint"},
 {"1866 Slug Blueprint"},
 {"2Rnd. Slug Blueprint"},
-{"SPAZ-12 Pellet Blueprint"},
-{"CZ 550 Mag Blueprint"},
-{"Lee Enfield Mag Blueprint"},
+{"12 Gauge Pellet Blueprint"},
+{"9.3x62mm Cartridge Blueprint"},
+{".303 British Cartridge Blueprint"},
+{"Bolt Blueprint"},
 
 -- [[ ITEMS ]] --
 {"Medic Kit Blueprint"},
@@ -389,10 +508,6 @@ function spawnDayZPlayer(player)
 		else
 			setElementData(player,data[1],0)
 		end
-		if (isObjectInACLGroup("user." ..getAccountName(getPlayerAccount(player)), aclGetGroup("VIP"))) then
-			setElementData(player,"AK-47",1)
-			setElementData(player,"5.45x39mm Cartridge",60)
-		end
 	end
 	----------------------------------
 end
@@ -407,7 +522,7 @@ function checkBuggedAccount()
 		if getElementData(player,"logedin") then
 			if getElementModel(player) == 0 then
 				spawnDayZPlayer(player)
-				outputChatBox(getPlayerName(player).."s Account is buggy and has been reset.",getRootElement(),22,255,22,true)
+				outputChatBox(getPlayerName(player).."s Account was buggy and has been reset.",getRootElement(),22,255,22,true)
 			end
 		end
 	end	
@@ -543,12 +658,3 @@ function kilLDayZPlayer (killer,headshot,weapon)
 end
 addEvent("kilLDayZPlayer",true)
 addEventHandler("kilLDayZPlayer",getRootElement(),kilLDayZPlayer)
-
-
-addEvent("onPlayerHideBody",true)
-function onPlayerHideBody()
-	setTimer(destroyDeadPlayer,200,1,ped,pedCol)
-	setTimer(destroyDeadZombie,200,1,ped,pedCol)
-	check = true
-end
-addEventHandler("onPlayerHideBody",getRootElement(),onPlayerHideBody)

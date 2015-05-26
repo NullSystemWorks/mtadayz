@@ -136,18 +136,34 @@ local playerDataTable = {
 {"Sawn-Off Shtgn. Blueprint"},
 {"AK-47 Blueprint"},
 {"Lee Enfield Blueprint"},
+{"Sporter 22 Blueprint"},
+{"Mosin 9130 Blueprint"},
+{"Crossbow Blueprint"},
+{"SKS Blueprint"},
+{"Blaze 95 D. R. Blueprint"},
+{"Remington 870 Blueprint"},
+{"FN FAL Blueprint"},
+{"G36C Blueprint"},
+{"Sa58V CCO Blueprint"},
+{"SVD Dragunov Blueprint"},
+{"DMR Blueprint"},
 
 -- [[ SECONDARY WEAPONS ]]-- 
 {"M1911 Blueprint"},
 {"M9 SD Blueprint"},
 {"PDW Blueprint"},
+{"G17 Blueprint"},
 {"MP5A5 Blueprint"},
+{"Bizon PP-19 Blueprint"},
+{"Revolver Blueprint"},
 {"Desert Eagle Blueprint"},
 {"Hunting Knife Blueprint"},
 {"Hatchet Blueprint"},
 {"Baseball Bat Blueprint"},
 {"Shovel Blueprint"},
 {"Golf Club Blueprint"},
+{"Machete Blueprint"},
+{"Crowbar Blueprint"},
 
 -- [[ SPECIAL WEAPONS ]] --
 {"Parachute Blueprint"},
@@ -156,18 +172,18 @@ local playerDataTable = {
 {"Binoculars Blueprint"},
 
 -- [[ AMMO ]] -- TO DO!!!
-{"M1911 Mag Blueprint"},
-{"M9 SD Mag Blueprint"},
-{"Desert Eagle Mag Blueprint"},
-{"PDW Mag Blueprint"},
-{"MP5A5 Mag Blueprint"},
-{"AK Mag Blueprint"},
-{"M4 Mag Blueprint"},
+{".45 ACP Cartridge Blueprint"},
+{"9x19mm SD Cartridge Blueprint"},
+{"9x19mm Cartridge Blueprint"},
+{"9x18mm Cartridge Blueprint"},
+{"5.45x39mm Cartridge Blueprint"},
+{"5.56x45mm Cartridge Blueprint"},
 {"1866 Slug Blueprint"},
 {"2Rnd. Slug Blueprint"},
-{"SPAZ-12 Pellet Blueprint"},
-{"CZ 550 Mag Blueprint"},
-{"Lee Enfield Mag Blueprint"},
+{"12 Gauge Pellet Blueprint"},
+{"9.3x62mm Cartridge Blueprint"},
+{".303 British Cartridge Blueprint"},
+{"Bolt Blueprint"},
 
 -- [[ ITEMS ]] --
 {"Medic Kit Blueprint"},
@@ -489,7 +505,6 @@ local vehicleDataTable = {
 
 {"Ghillie Backpack"},
 {"OS Backpack"},
-
 -- [[ PRIMARY WEAPONS ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},
@@ -498,18 +513,34 @@ local vehicleDataTable = {
 {"Sawn-Off Shtgn. Blueprint"},
 {"AK-47 Blueprint"},
 {"Lee Enfield Blueprint"},
+{"Sporter 22 Blueprint"},
+{"Mosin 9130 Blueprint"},
+{"Crossbow Blueprint"},
+{"SKS Blueprint"},
+{"Blaze 95 D. R. Blueprint"},
+{"Remington 870 Blueprint"},
+{"FN FAL Blueprint"},
+{"G36C Blueprint"},
+{"Sa58V CCO Blueprint"},
+{"SVD Dragunov Blueprint"},
+{"DMR Blueprint"},
 
 -- [[ SECONDARY WEAPONS ]]-- 
 {"M1911 Blueprint"},
 {"M9 SD Blueprint"},
 {"PDW Blueprint"},
+{"G17 Blueprint"},
 {"MP5A5 Blueprint"},
+{"Bizon PP-19 Blueprint"},
+{"Revolver Blueprint"},
 {"Desert Eagle Blueprint"},
 {"Hunting Knife Blueprint"},
 {"Hatchet Blueprint"},
 {"Baseball Bat Blueprint"},
 {"Shovel Blueprint"},
 {"Golf Club Blueprint"},
+{"Machete Blueprint"},
+{"Crowbar Blueprint"},
 
 -- [[ SPECIAL WEAPONS ]] --
 {"Parachute Blueprint"},
@@ -517,19 +548,19 @@ local vehicleDataTable = {
 {"Grenade Blueprint"},
 {"Binoculars Blueprint"},
 
--- [[ AMMO ]] --
-{"M1911 Mag Blueprint"},
-{"M9 SD Mag Blueprint"},
-{"Desert Eagle Mag Blueprint"},
-{"PDW Mag Blueprint"},
-{"MP5A5 Mag Blueprint"},
-{"AK Mag Blueprint"},
-{"M4 Mag Blueprint"},
+-- [[ AMMO ]] -- TO DO!!!
+{".45 ACP Cartridge Blueprint"},
+{"9x19mm SD Cartridge Blueprint"},
+{"9x19mm Cartridge Blueprint"},
+{"9x18mm Cartridge Blueprint"},
+{"5.45x39mm Cartridge Blueprint"},
+{"5.56x45mm Cartridge Blueprint"},
 {"1866 Slug Blueprint"},
 {"2Rnd. Slug Blueprint"},
-{"SPAZ-12 Pellet Blueprint"},
-{"CZ 550 Mag Blueprint"},
-{"Lee Enfield Mag Blueprint"},
+{"12 Gauge Pellet Blueprint"},
+{"9.3x62mm Cartridge Blueprint"},
+{".303 British Cartridge Blueprint"},
+{"Bolt Blueprint"},
 
 -- [[ ITEMS ]] --
 {"Medic Kit Blueprint"},
@@ -662,7 +693,7 @@ function doBackup ()
 		outputDebugString("Vehicles And Tents Saved.")
 end
 setTimer(doBackup,3600000,0)
-addCommandHandler("backup",doBackup,false)
+--addCommandHandler("backup",doBackup,false)
 
 
 function createVehicleOnServerStart()
