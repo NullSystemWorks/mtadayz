@@ -1,28 +1,42 @@
 # README #
 
 
+
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Continuing the development of MTA DayZ for MTA:SA 1.4+
+* Current Version: 0.7a
+* Next Version: 0.8a
+* Check "Issues" frequently to see what else there is to do
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Install Git
+* Press "Clone" on the left side
+* Follow instructions
+* Create an account at HipChat
+* Start coding!
 
 ### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* If you have found a bug, do not fix immediately. Create an issue first, then fix it.
+* Review your code before you commit it. 
+* Test your code using a local server on your own PC or laptop.
+* If your code does not work, do not commit it.
+* Once you have solved an issue, close it in the issues tracker.
+
+### Issues Tracker ###
+
+* All issues must have a milestone set (usually the next version).
+* "Version" refers to the version where the bug has been found. Ignore it for "enhancement", "proposal" and "task".
+* If you have a problem with some part of the code, copy and paste it into the issue's description.
+* If you find a better way to solve an issue, write it in the comment.
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* If you plan on coding major changes, talk to L (mtadayz-dev) first!
+
+
+### Non-Disclosure Agreement ###
+
+Remember that you are not allowed to make the script public (not even parts of it) until we have Version 1.0.0!
