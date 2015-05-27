@@ -729,7 +729,7 @@ function createPickupsOnServerStart()
 		iPickup = iPickup + 1
 		createItemLoot("residential",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart2,10000,1)
+	setTimer(createPickupsOnServerStart2,30000,1)
 end
 
 function createPickupsOnServerStart2()
@@ -737,7 +737,7 @@ function createPickupsOnServerStart2()
 		iPickup = iPickup + 1
 		createItemLoot("industrial",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart3,10000,1)
+	setTimer(createPickupsOnServerStart3,30000,1)
 end
 
 function createPickupsOnServerStart3()
@@ -745,7 +745,7 @@ function createPickupsOnServerStart3()
 		iPickup = iPickup + 1
 		createItemLoot("farm",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart4,10000,1)
+	setTimer(createPickupsOnServerStart4,30000,1)
 end
 
 function createPickupsOnServerStart4()
@@ -753,7 +753,7 @@ function createPickupsOnServerStart4()
 		iPickup = iPickup + 1
 		createItemLoot("supermarket",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart5,10000,1)
+	setTimer(createPickupsOnServerStart5,30000,1)
 end
 
 function createPickupsOnServerStart5()
@@ -761,7 +761,7 @@ function createPickupsOnServerStart5()
 		iPickup = iPickup + 1
 		createItemLoot("military",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsForGhostBase,10000,1)
+	setTimer(createPickupsForGhostBase,30000,1)
 end
 
 function createPickupsForGhostBase()
