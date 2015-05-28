@@ -557,7 +557,7 @@ function renderDisplay ( )
 	
 	
 	--dxDrawRectangle (bX-400, bY+100, 400, 150, tocolor ( 65,60,30,255 ) )
-	dxDrawImage(bX-400,bY+100,400,150,"images/inventory2.png")
+	dxDrawImage(bX-410,bY+100,430,150,"images/inventory2.png")
 	if selectedItemLabel > 0 then
 		if selectedItemLabel <= #inventory then
 			dxDrawText ( inventory[selectedItemLabel+itOff][1], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
@@ -596,7 +596,7 @@ function renderDisplay ( )
 	
 	
 	--dxDrawRectangle (bX, bY-300, 350, 550, tocolor ( 0,0,0, 200 ) )
-	dxDrawImage(bX-10,bY-300,400,550,"images/inventory3.png")
+	dxDrawImage(bX,bY-300,400,550,"images/inventory3.png")
 	dxDrawText (getPlayerName(localPlayer), bX+20, bY-290, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1.5, 'verdana' )
 	dxDrawText ( 'Food/Drinks', bX+20, bY-260, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'verdana' )
 	

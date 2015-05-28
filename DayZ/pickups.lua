@@ -434,17 +434,6 @@ AMMO
 {"Baseball Bat",336,1,90,1.4},
 {"Shovel",337,1,90,0.3},
 },
-
-["GhostBase"] = {
-{"Water Bottle",2683,1,0,100},
-{"Lee Enfield",357,1,90,100},
-{"Alice Pack",1248,1,0,100},
-{"Binoculars",369,1,0,100},
-{"Map",1277,0.8,90,100},
-{"Tent",1279,1,0,4.100},
-{"Radio Device",330,1,0,100},
-{"M9 SD",347,1,90,100},
-},
 }
 
 weaponAmmoTable = {
@@ -762,13 +751,6 @@ function createPickupsOnServerStart5()
 		createItemLoot("military",pos[1],pos[2],pos[3],iPickup)
 	end
 	setTimer(createPickupsForGhostBase,30000,1)
-end
-
-function createPickupsForGhostBase()
-	for i,pos in ipairs(pickupPositions["GhostBase"]) do
-		iPickup = iPickup + 1
-		createItemLoot("GhostBase",pos[1],pos[2],pos[3],iPickup)
-	end
 end
 
 createPickupsOnServerStart()
