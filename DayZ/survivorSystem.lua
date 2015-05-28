@@ -1063,21 +1063,21 @@ setTimer(outputInfo1,infoTimer,1)
 
 function outputInfo2 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","Encountered a bug? Please report it at our forum: viscera-gaming.com!",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","Encountered a bug? Please report it to our development team!",200,200,22)
 	end
 	setTimer(outputInfo3,infoTimer,1)
 end
 
 function outputInfo3 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum: viscera-gaming.com!",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum.",200,200,22)
 	end
 	setTimer(outputInfo4,infoTimer,1)
 end
 
 function outputInfo4 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","viscera-gaming.com",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.8a",200,200,22)
 	end
 	setTimer(outputInfo5,infoTimer,1)
 end
@@ -1205,12 +1205,12 @@ addCommandHandler("pmsg",pmsgAdmin)
 	
 botSupportTable = {
 --Website
-{"website","what","","The URL is: www.community.vavegames.net.","","James"},
-{"website","where","","The URL is: www.community.vavegames.net.","","James"},
-{"website","which","","The URL is: www.community.vavegames.net.","","James"},
-{"website","how","","The URL is: www.community.vavegames.net.","","James"},
-{"website","got","","The URL is: www.community.vavegames.net.","","James"},
-{"website","know","","The URL is: www.community.vavegames.net.","","James"},
+{"website","what","","The URL is: COMMING SOON.","","James"},
+{"website","where","","The URL is: COMMING SOON.","","James"},
+{"website","which","","The URL is: COMMING SOON.","","James"},
+{"website","how","","The URL is: COMMING SOON.","","James"},
+{"website","got","","The URL is: COMMING SOON.","","James"},
+{"website","know","","The URL is: COMMING SOON.","","James"},
 --Chat
 {"hey","james","","Hey.","","James"},
 {"hey","paul","","Yo!.","","Paul"},
@@ -1304,7 +1304,7 @@ function kickPLayer (playersource,command,targetString,banTime,reason)
 		outputChatBox ("#FFFFFFYou are not an admin! ",playersource,27, 89, 224,true)		
 	end
 end
-addCommandHandler("kickplayer",banPLayer)
+addCommandHandler("kickplayer",kickPLayer)
 
 function kickAll (playersource,command,reason)
 	if (isObjectInACLGroup("user." ..getAccountName(getPlayerAccount(playersource)), aclGetGroup("Admin")))  then
