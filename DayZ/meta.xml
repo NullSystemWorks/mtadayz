@@ -29,6 +29,11 @@
 	<script src="treelist.lua" type="client" protected="true" />
 	<file src="fonts/etelka.ttf" />
 	
+	<!-- Log System -->
+	<script src="logsystem.lua" type="server" />
+	<export function="saveLog" type="server" />
+	<export function="returnLog" type="server" />
+	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
 	<file src="icons/m4a1.png"/>

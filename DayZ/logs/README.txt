@@ -1,0 +1,1 @@
+In this directory all DayZ Logs will be saved.
