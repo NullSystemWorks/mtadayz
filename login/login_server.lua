@@ -9,6 +9,12 @@ function tryToLoginPlayer (username, password)
 		logIn(source, account, password)
 		triggerClientEvent(source,"onPlayerDoneLogin", source, accountName, password)		
 		triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
+		local theTime = getRealTime()
+		local hour = theTime.hour
+		local minute = theTime.minute
+		local seconds = theTime.second
+		local theAccount = getPlayerAccount(client)
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client),"accounts")
 	else
 		outputChatBox("[LOGIN ERROR]#FF9900 Wrong password or username!",source,255,255,255,true)
 	end
@@ -25,6 +31,12 @@ function tryToRegsiterPlayer(username, pass)
 			triggerClientEvent(source,"onPlayerDoneLogin", source,username,pass)	
 			triggerEvent("onPlayerDayZRegister", getRootElement(),username,pass,source)
 			triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
+			local theTime = getRealTime()
+			local hour = theTime.hour
+			local minute = theTime.minute
+			local seconds = theTime.second
+			local theAccount = getPlayerAccount(client)
+			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client),"accounts")
 		else
 			reason = "Unknown Error!"
 			outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)
