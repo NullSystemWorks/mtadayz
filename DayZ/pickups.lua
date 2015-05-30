@@ -750,7 +750,6 @@ function createPickupsOnServerStart5()
 		iPickup = iPickup + 1
 		createItemLoot("military",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsForGhostBase,30000,1)
 end
 
 createPickupsOnServerStart()
@@ -816,9 +815,16 @@ function onPlayerTakeItemFromGround (itemName,col)
 	end
 	local x,y,z = getElementPosition(source)
 	local id,ItemType = getItemTablePosition (itemName)
-	setElementData(source,itemName,(getElementData(source,itemName) or 0)+itemPlus)
 	destroyElement(getElementData(col,"parent"))
 	destroyElement(col)
+	setElementData(client,itemName,(getElementData(client,itemName) or 0)+itemPlus)
+	-- To check if someone is duping items (several instances of the same player picking up the same item within a short timeframe can point to this)
+	local theTime = getRealTime()
+	local hour = theTime.hour
+	local minute = theTime.minute
+	local seconds = theTime.second
+	local theAccount = getPlayerAccount(client)
+	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName,"game")
 end
 addEvent( "onPlayerTakeItemFromGround", true )
 addEventHandler( "onPlayerTakeItemFromGround", getRootElement(), onPlayerTakeItemFromGround )
