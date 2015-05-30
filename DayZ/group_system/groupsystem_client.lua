@@ -4,11 +4,10 @@ playerGroupWindow["window"] =  guiCreateWindow(0.05,0.20,0.90,0.59,"Encampment S
 guiSetVisible(playerGroupWindow["window"],false)
 
 -- Encampment List
-playerGroupWindow["grouplist"] = guiCreateGridList(0.02, 0.06, 0.94, 0.47,true,playerGroupWindow["window"])
-playerGroupWindow["grouplist_groupname"] = guiGridListAddColumn( playerGroupWindow["grouplist"], "Group", 0.3 )
+playerGroupWindow["grouplist"] = guiCreateGridList(0.02, 0.06, 0.95, 0.47,true,playerGroupWindow["window"])
+playerGroupWindow["grouplist_groupname"] = guiGridListAddColumn( playerGroupWindow["grouplist"], "Group", 0.35 )
 playerGroupWindow["grouplist_groupleader"] = guiGridListAddColumn( playerGroupWindow["grouplist"], "Leader", 0.3 )
-playerGroupWindow["grouplist_groupmember"] = guiGridListAddColumn( playerGroupWindow["grouplist"], "Member", 0.3 )
-
+playerGroupWindow["grouplist_groupmember"] = guiGridListAddColumn( playerGroupWindow["grouplist"], "Members", 0.3 )
 
 -- Invitation List
 playerGroupWindow["groupinvitelist"] = guiCreateGridList (0.02, 0.55, 0.95, 0.33,true,playerGroupWindow["window"])
@@ -26,7 +25,9 @@ guiWindowSetSizable(playerGroupWindow["member_window"], false)
 guiSetVisible(playerGroupWindow["member_window"],false)
 
 playerGroupWindow["member_list"] = guiCreateGridList(0.01, 0.06, 0.34, 0.69, true, playerGroupWindow["member_window"])
-guiGridListAddColumn(playerGroupWindow["member_list"], "Name", 1)
+playerGroupWindow["member_list_playername"] = guiGridListAddColumn(playerGroupWindow["member_list"],"Name",0.3)
+playerGroupWindow["member_list_names"] = guiGridListAddColumn(playerGroupWindow["member_list"],"Account",0.3)
+playerGroupWindow["member_list_ranks"] = guiGridListAddColumn(playerGroupWindow["member_list"],"Rank",0.3)
 playerGroupWindow["member_list_destroygroup"] = guiCreateButton(0.46, 0.88, 0.09, 0.07, "Disband Encampment", true,playerGroupWindow["member_window"])
 playerGroupWindow["member_list_leavegang"] = guiCreateButton(0.35, 0.88, 0.09, 0.07, "Leave Encampment", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_inviteplayer"] = guiCreateButton(0.35, 0.79, 0.09, 0.07, "Invite New Player", true, playerGroupWindow["member_window"])
@@ -39,10 +40,10 @@ playerGroupWindow["member_list_online"] = guiCreateLabel(0.40, 0.09, 0.15, 0.03,
 playerGroupWindow["member_list_daysalive"] = guiCreateLabel(0.40, 0.14, 0.15, 0.03, "Days Alive:", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_murders"] = guiCreateLabel(0.40, 0.19, 0.15, 0.03, "Murders Committed:", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_bandits"] = guiCreateLabel(0.40, 0.24, 0.15, 0.03, "Bandits Killed:", true, playerGroupWindow["member_window"])
-playerGroupWindow["member_list_humanity"] = guiCreateLabel(0.40, 0.28, 0.15, 0.03, "Humanity:", true, playerGroupWindow["member_window"])
-playerGroupWindow["member_list_location"] = guiCreateLabel(0.40, 0.33, 0.15, 0.03, "Current Location:", true, playerGroupWindow["member_window"])
-playerGroupWindow["member_list_rank"] = guiCreateLabel(0.40, 0.38, 0.15, 0.03, "Rank:", true, playerGroupWindow["member_window"])
-playerGroupWindow["member_list_timesdied"] = guiCreateLabel(0.40, 0.43, 0.15, 0.03, "Times Died:", true, playerGroupWindow["member_window"])
+playerGroupWindow["member_list_humanity"] = guiCreateLabel(0.40, 0.29, 0.15, 0.03, "Humanity:", true, playerGroupWindow["member_window"])
+playerGroupWindow["member_list_location"] = guiCreateLabel(0.40, 0.34, 0.15, 0.03, "Current Location:", true, playerGroupWindow["member_window"])
+playerGroupWindow["member_list_rank"] = guiCreateLabel(0.40, 0.39, 0.15, 0.03, "Rank:", true, playerGroupWindow["member_window"])
+playerGroupWindow["member_list_timesdied"] = guiCreateLabel(0.40, 0.44, 0.15, 0.03, "Times Died:", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_online_1"] = guiCreateLabel(0.62, 0.09, 0.15, 0.03, "", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_daysalive_1"] = guiCreateLabel(0.62, 0.14, 0.15, 0.03, "", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_murders_1"] = guiCreateLabel(0.62, 0.19, 0.15, 0.03, "", true, playerGroupWindow["member_window"])
@@ -52,24 +53,113 @@ playerGroupWindow["member_list_location_1"] = guiCreateLabel(0.62, 0.34, 0.15, 0
 playerGroupWindow["member_list_rank_1"] = guiCreateLabel(0.62, 0.39, 0.15, 0.03, "", true, playerGroupWindow["member_window"])
 playerGroupWindow["member_list_timesdied_1"] = guiCreateLabel(0.62, 0.44, 0.15, 0.03, "", true, playerGroupWindow["member_window"])
 
+-- Kick Window
+playerGroupWindow["member_list_kicklist"] = guiCreateWindow(0.35, 0.18, 0.34, 0.66, "Select member you wish to kick", true)
+guiWindowSetMovable(playerGroupWindow["member_list_kicklist"],false)
+guiWindowSetSizable(playerGroupWindow["member_list_kicklist"], false)
+guiSetVisible(playerGroupWindow["member_list_kicklist"],false)
+
+playerGroupWindow["member_list_kicklist_gridlist"] = guiCreateGridList(0.03, 0.07, 0.93, 0.67, true, playerGroupWindow["member_list_kicklist"])
+playerGroupWindow["member_list_kicklist_gridlist_account"] = guiGridListAddColumn(playerGroupWindow["member_list_kicklist_gridlist"] , "Account", 0.5)
+playerGroupWindow["member_list_kicklist_gridlist_playername"] = guiGridListAddColumn(playerGroupWindow["member_list_kicklist_gridlist"] , "Player", 0.4)
+playerGroupWindow["member_list_kicklist_ok"]  = guiCreateButton(0.18, 0.88, 0.25, 0.09, "Kick", true,playerGroupWindow["member_list_kicklist"])
+playerGroupWindow["member_list_kicklist_cancel"]  = guiCreateButton(0.59, 0.88, 0.25, 0.09, "Cancel", true, playerGroupWindow["member_list_kicklist"])
+
 -- Rank Assignment
-playerGroupWindow["member_list_rank_window"] = guiCreateWindow(0.17, 0.12, 0.68, 0.74, "Rank Assignment", true)
+playerGroupWindow["member_list_rank_window"] = guiCreateWindow(0.32, 0.12, 0.36, 0.76, "Rank Assignment", true)
 guiSetVisible(playerGroupWindow["member_list_rank_window"],false)
 guiWindowSetSizable(playerGroupWindow["member_list_rank_window"], false)
-playerGroupWindow["member_list_rank_gridlist"] = guiCreateGridList(0.04, 0.08, 0.45, 0.75, true, playerGroupWindow["member_list_rank_window"])
-guiGridListAddColumn(playerGroupWindow["member_list_rank_gridlist"], "Name", 0.5)
-guiGridListAddColumn(playerGroupWindow["member_list_rank_gridlist"], "Rank", 0.5)
-playerGroupWindow["member_list_rank_promote"] = guiCreateButton(0.04, 0.86, 0.14, 0.08, "Promote", true, playerGroupWindow["member_list_rank_window"])
-playerGroupWindow["member_list_rank_demote"] = guiCreateButton(0.19, 0.86, 0.14, 0.08, "Demote", true, playerGroupWindow["member_list_rank_window"])
-playerGroupWindow["member_list_rank_setpermissions"] = guiCreateButton(0.35, 0.86, 0.14, 0.08, "Set Permissions", true, playerGroupWindow["member_list_rank_window"])
-playerGroupWindow["member_list_rank_labelpermissions"] = guiCreateLabel(0.69, 0.14, 0.15, 0.03, "Permissions:", true, playerGroupWindow["member_list_rank_window"])
-playerGroupWindow["member_list_rank_permissionslist"] = guiCreateMemo(0.51, 0.17, 0.47, 0.31, "", true, playerGroupWindow["member_list_rank_window"])
-guiMemoSetReadOnly(playerGroupWindow["member_list_rank_permissionslist"], true)
+playerGroupWindow["member_list_rank_gridlist"] = guiCreateGridList(0.08, 0.08, 0.84, 0.73, true, playerGroupWindow["member_list_rank_window"])
+playerGroupWindow["member_list_rank_gridlist_playername"] = guiGridListAddColumn(playerGroupWindow["member_list_rank_gridlist"],"Name",0.3)
+playerGroupWindow["member_list_rank_gridlist_account"] = guiGridListAddColumn(playerGroupWindow["member_list_rank_gridlist"], "Account", 0.3)
+playerGroupWindow["member_list_rank_gridlist_rank"] = guiGridListAddColumn(playerGroupWindow["member_list_rank_gridlist"], "Rank", 0.3)
+playerGroupWindow["member_list_rank_giverank"] = guiCreateButton(0.08, 0.87, 0.26, 0.08, "Give Rank", true, playerGroupWindow["member_list_rank_window"])
+playerGroupWindow["member_list_rank_managepermissions"] = guiCreateButton(0.36, 0.87, 0.26, 0.08, "Manage Permissions", true, playerGroupWindow["member_list_rank_window"])
+playerGroupWindow["member_list_rank_closebutton"] = guiCreateButton(0.65, 0.87, 0.26, 0.08, "Cancel", true, playerGroupWindow["member_list_rank_window"])
+
+-- Give Rank Window
+playerGroupWindow["member_list_rank_assign"] = guiCreateWindow(0.33, 0.23, 0.32, 0.57, "Assign Rank to Player", true)
+guiSetVisible(playerGroupWindow["member_list_rank_assign"],false)
+guiWindowSetMovable(playerGroupWindow["member_list_rank_assign"], false)
+guiWindowSetSizable(playerGroupWindow["member_list_rank_assign"], false)
+playerGroupWindow["member_list_rank_combobox"] = guiCreateComboBox(0.08, 0.36, 0.84, 0.41, "", true, playerGroupWindow["member_list_rank_assign"])
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "Co-Leader")
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "General")
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "Officer")
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "Soldier")
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "Survivor")
+guiComboBoxAddItem(playerGroupWindow["member_list_rank_combobox"], "Bandit")
+playerGroupWindow["member_list_rank_combobox_label1"] = guiCreateLabel(0.08, 0.17, 0.44, 0.04, "Current Rank:", true, playerGroupWindow["member_list_rank_assign"])
+guiSetFont(playerGroupWindow["member_list_rank_combobox_label1"], "default-bold-small")
+playerGroupWindow["member_list_rank_combobox_label2"] = guiCreateLabel(0.52, 0.17, 0.44, 0.04, " ", true, playerGroupWindow["member_list_rank_assign"])
+guiSetFont(playerGroupWindow["member_list_rank_combobox_label2"], "default-bold-small")
+playerGroupWindow["member_list_rank_combobox_confirm"] = guiCreateButton(0.16, 0.87, 0.29, 0.10, "Confirm", true, playerGroupWindow["member_list_rank_assign"])
+playerGroupWindow["member_list_rank_combobox_cancel"] = guiCreateButton(0.55, 0.87, 0.29, 0.10, "Cancel", true, playerGroupWindow["member_list_rank_assign"])
+
+-- Manage Permissions Window
+playerGroupWindow["member_list_manage_permissions"] = guiCreateWindow(0.09, 0.12, 0.82, 0.76, "Manage Permissions", true)
+guiSetVisible(playerGroupWindow["member_list_manage_permissions"],false)
+guiWindowSetMovable(playerGroupWindow["member_list_manage_permissions"], false)
+guiWindowSetSizable(playerGroupWindow["member_list_manage_permissions"], false)
+
+playerGroupWindow["member_list_manage_permissions_combobox"] = guiCreateComboBox(0.01, 0.13, 0.32, 0.31, "", true, playerGroupWindow["member_list_manage_permissions"])
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Leader")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Co-Leader")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "General")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Officer")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Soldier")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Survivor")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox"], "Bandit")
+playerGroupWindow["member_list_manage_permissions_combobox_confirm"] = guiCreateButton(0.73, 0.89, 0.11, 0.08, "Confirm", true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_combobox_cancel"] = guiCreateButton(0.87, 0.89, 0.11, 0.08, "Cancel", true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_combobox_label1"] = guiCreateLabel(0.12, 0.07, 0.16, 0.03, "Select Rank", true, playerGroupWindow["member_list_manage_permissions"])
+guiSetFont(playerGroupWindow["member_list_manage_permissions_combobox_label1"], "default-bold-small")
+playerGroupWindow["member_list_manage_permissions_combobox_perms"] = guiCreateComboBox(0.01, 0.49, 0.66, 0.36, "", true, playerGroupWindow["member_list_manage_permissions"])
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Ruler: Can edit permissions and set MOTD")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Recruiter: Can invite other players")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Regulator: Can kick other members")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Promoter: Can promote players")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Architect: Can build & destroy buildings at encampment")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Treasurer: Can access Encampment Vault")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Tech: Can queue research projects")
+guiComboBoxAddItem(playerGroupWindow["member_list_manage_permissions_combobox_perms"], "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc.")
+playerGroupWindow["member_list_manage_permissions_combobox_perms_label1"] = guiCreateLabel(0.26, 0.45, 0.23, 0.04, "Select Permission", true, playerGroupWindow["member_list_manage_permissions"])
+guiSetFont(playerGroupWindow["member_list_manage_permissions_combobox_perms_label1"], "default-bold-small")
+playerGroupWindow["member_list_manage_permissions_combobox_label2"] = guiCreateLabel(0.58, 0.13, 0.39, 0.28, "This window allows you to edit the permission set for each rank.\nNote that you have to press \"Confirm\" before you can edit the next rank, otherwise all your work will be lost!", true, playerGroupWindow["member_list_manage_permissions"])
+guiSetFont(playerGroupWindow["member_list_manage_permissions_combobox_label2"], "default-bold-small")
+guiLabelSetColor(playerGroupWindow["member_list_manage_permissions_combobox_label2"], 255,255,255)
+guiLabelSetHorizontalAlign(playerGroupWindow["member_list_manage_permissions_combobox_label2"], "center", true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_add"] = guiCreateButton(0.02, 0.89, 0.16, 0.08, "Add", true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_remove"] = guiCreateButton(0.21, 0.89, 0.16, 0.08, "Remove", true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_gridlist"] = guiCreateGridList(0.70, 0.49, 0.28, 0.37, true, playerGroupWindow["member_list_manage_permissions"])
+playerGroupWindow["member_list_manage_permissions_gridlist_column"] = guiGridListAddColumn(playerGroupWindow["member_list_manage_permissions_gridlist"], "Permission", 0.9)
 
 -- Encampment (TO DO)
+--[[
+"Encampment" means that players can buy - for a small one-time fee - a piece of land to build on.
+The land itself will be in another dimension as to not interfere with general gameplay.
+
+Instead of giving VIP, players have to build tents on their land to increase the amount of slots for their group.
+Also, certain buildings will, over time, produce various items (food, drinks, weapons, ammo, ...), however, those
+must be researched first.
+In order to build those, the members of their respective group will need to gather supplies, such as wood, nails, duct tape, ...
+Once a certain amount has been collected, the building can be built.
+
+A rough sketch of the GUI will be available soon.
+
+- L
+
+]]
+
 
 -- Group Vault (TO DO)
+--[[
+Allows members of a group to store items (functions like a tent, but can be accessed by everyone in the group).
+Items produced in "Encampment" will be transferred to the Group Vault, too.
 
+Will use the same system as tents.
+
+]]
 
 
 -- Disband Encampment Prompt
@@ -86,6 +176,63 @@ guiSetVisible(playerGroupWindow["invite_member_list_window"],false)
 playerGroupWindow["invite_member_list"] = guiCreateGridList ( 0.025,0.05,0.95,0.65,true,playerGroupWindow["invite_member_list_window"])
 playerGroupWindow["invite_member_list_name"] = guiGridListAddColumn( playerGroupWindow["invite_member_list"], "Name", 1 )
 playerGroupWindow["invite_member_list_invite"] = guiCreateButton(0.2,0.775,0.6,0.15, "Invite Player", true, playerGroupWindow["invite_member_list_window"] )
+
+-- Error Windows
+playerGroupWindow["error_selectplayer"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #001)", true)
+guiSetVisible(playerGroupWindow["error_selectplayer"],false)
+guiWindowSetMovable(playerGroupWindow["error_selectplayer"], false)
+guiWindowSetSizable(playerGroupWindow["error_selectplayer"], false)
+playerGroupWindow["error_selectplayer_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Please select a player!", true, playerGroupWindow["error_selectplayer"])
+playerGroupWindow["error_selectplayer_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_selectplayer"])
+
+playerGroupWindow["error_cannotchangerank"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #002)", true)
+guiSetVisible(playerGroupWindow["error_cannotchangerank"],false)
+guiWindowSetMovable(playerGroupWindow["error_cannotchangerank"], false)
+guiWindowSetSizable(playerGroupWindow["error_cannotchangerank"], false)
+playerGroupWindow["error_cannotchangerank_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Cannot change rank!", true, playerGroupWindow["error_cannotchangerank"])
+playerGroupWindow["error_cannotchangerank_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_cannotchangerank"])
+
+playerGroupWindow["error_insufficientpermission"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #003)", true)
+guiSetVisible(playerGroupWindow["error_insufficientpermission"],false)
+guiWindowSetMovable(playerGroupWindow["error_insufficientpermission"], false)
+guiWindowSetSizable(playerGroupWindow["error_insufficientpermission"], false)
+playerGroupWindow["error_insufficientpermission_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Insufficient permission!", true, playerGroupWindow["error_insufficientpermission"])
+playerGroupWindow["error_insufficientpermission_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_insufficientpermission"])
+
+playerGroupWindow["error_selectrank"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #004)", true)
+guiSetVisible(playerGroupWindow["error_selectrank"],false)
+guiWindowSetMovable(playerGroupWindow["error_selectrank"], false)
+guiWindowSetSizable(playerGroupWindow["error_selectrank"], false)
+playerGroupWindow["error_selectrank_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Insufficient permission!", true, playerGroupWindow["error_selectrank"])
+playerGroupWindow["error_selectrank_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_selectrank"])
+
+playerGroupWindow["error_nextversion"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #005)", true)
+guiSetVisible(playerGroupWindow["error_nextversion"],false)
+guiWindowSetMovable(playerGroupWindow["error_nextversion"], false)
+guiWindowSetSizable(playerGroupWindow["error_nextversion"], false)
+playerGroupWindow["error_nextversion_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "This feature is not available!", true, playerGroupWindow["error_nextversion"])
+playerGroupWindow["error_nextversion_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_nextversion"])
+
+playerGroupWindow["error_notloggedin"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #006)", true)
+guiSetVisible(playerGroupWindow["error_notloggedin"],false)
+guiWindowSetMovable(playerGroupWindow["error_notloggedin"], false)
+guiWindowSetSizable(playerGroupWindow["error_notloggedin"], false)
+playerGroupWindow["error_notloggedin_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Player is not logged in!", true, playerGroupWindow["error_notloggedin"])
+playerGroupWindow["error_notloggedin_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_notloggedin"])
+
+playerGroupWindow["error_selectlowerrank"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #007)", true)
+guiSetVisible(playerGroupWindow["error_selectlowerrank"],false)
+guiWindowSetMovable(playerGroupWindow["error_selectlowerrank"], false)
+guiWindowSetSizable(playerGroupWindow["error_selectlowerrank"], false)
+playerGroupWindow["error_selectlowerrank_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "Please select a rank\n lower than yours!", true, playerGroupWindow["error_selectlowerrank"])
+playerGroupWindow["error_selectlowerrank_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_selectlowerrank"])
+
+playerGroupWindow["error_cannotdemote"] = guiCreateWindow(0.34, 0.37, 0.31, 0.22, "Error (Code: #007)", true)
+guiSetVisible(playerGroupWindow["error_cannotdemote"],false)
+guiWindowSetMovable(playerGroupWindow["error_cannotdemote"], false)
+guiWindowSetSizable(playerGroupWindow["error_cannotdemote"], false)
+playerGroupWindow["error_cannotdemote_label1"] = guiCreateLabel(0.26, 0.26, 0.50, 0.11, "You cannot demote\n yourself!", true, playerGroupWindow["error_cannotdemote"])
+playerGroupWindow["error_cannotdemote_ok"] = guiCreateButton(0.37, 0.59, 0.25, 0.27, "OK", true, playerGroupWindow["error_cannotdemote"])
 
 function openPlayerGroupWindow ()
 	if not getElementData(getLocalPlayer(),"gang") == "logedin" then return end
@@ -105,7 +252,7 @@ function openMemberGroupWindow ()
 	if getElementData(getLocalPlayer(),"gang") == "None" then return end
 	local showing = guiGetVisible(playerGroupWindow["member_window"])
 	if showing == false then
-		if isPlayerKeySpamming() then return end
+		--if isPlayerKeySpamming() then return end		-- turned off for debug purposes, must be turned on before release
 		guiSetVisible(playerGroupWindow["window"],false)
 		refreshGangMemberTable()
 	else
@@ -113,6 +260,9 @@ function openMemberGroupWindow ()
 	end
 	guiSetVisible(playerGroupWindow["member_window"],not showing)
 	showCursor(not showing)
+	refreshGangMemberTable()
+	triggerServerEvent("isPlayerRole",localPlayer)
+	triggerServerEvent("isPlayerOriginalLeader",localPlayer)
 end
 bindKey("F2","down",openMemberGroupWindow)
 
@@ -137,40 +287,40 @@ addEventHandler("refreshGangListToClient", root, refreshGangList)
 --Actions
 function refreshGangMemberTable()
 	triggerServerEvent("refreshPlayerGangMemberList",getLocalPlayer())
-end
+end 
 
 function refreshGangMemberTable2 (gangtable)	
 	guiGridListClear(playerGroupWindow["member_list"])
+	guiGridListClear(playerGroupWindow["member_list_rank_gridlist"])
+	guiGridListClear(playerGroupWindow["member_list_kicklist_gridlist"])
 	for i, gangmember in ipairs(gangtable) do
 		local row = guiGridListAddRow ( playerGroupWindow["member_list"] )
+		local row2 = guiGridListAddRow (playerGroupWindow["member_list_rank_gridlist"])
+		local row3 = guiGridListAddRow(playerGroupWindow["member_list_kicklist_gridlist"])
 		local player = gangmember[4]
+		local name = gangmember[5]
+		local rank = gangmember[6]
 		if gangmember[2] then
 			gangmember[1] = gangmember[1].." (Leader)"
 		else
 			gangmember[1] = gangmember[1]
-		end
-		--[[
-		if gangmember[3] then
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"online") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_murders"], getElementData(player,"murders"), false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_daysonline"],getElementData(player,"alivetime") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"alivetime") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"alivetime") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"alivetime") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"alivetime") , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],getElementData(player,"alivetime") , false, false )
+		end		
+		if not getElementData(player,"logedin") then
+			r,g,b = 255,22,22
 		else
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_murders"], "-", false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_alivetime"],"-" , false, false )
-			guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_movestate"],"-" , false, false )
-		end
-		]]
-		r,g,b = 255,22,22
-		if gangmember[3] then
 			r,g,b = 22,255,22
 		end
-		guiGridListSetItemText ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_name"], gangmember[1], false, false )
-		guiGridListSetItemColor ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_name"], r, g, b )
+		guiGridListSetItemText ( playerGroupWindow["member_list"], row,playerGroupWindow["member_list_names"], gangmember[1], false, false )
+		guiGridListSetItemColor ( playerGroupWindow["member_list"], row, playerGroupWindow["member_list_names"], r, g, b )
+		guiGridListSetItemText(playerGroupWindow["member_list"],row,playerGroupWindow["member_list_ranks"],rank,false,false)
+		guiGridListSetItemText(playerGroupWindow["member_list"],row,playerGroupWindow["member_list_playername"],name,false,false)
+		
+		guiGridListSetItemText(playerGroupWindow["member_list_rank_gridlist"],row2,playerGroupWindow["member_list_rank_gridlist_playername"],name,false,false)
+		guiGridListSetItemText (playerGroupWindow["member_list_rank_gridlist"], row2,playerGroupWindow["member_list_rank_gridlist_account"], gangmember[1], false, false )
+		guiGridListSetItemText(playerGroupWindow["member_list_rank_gridlist"],row2,playerGroupWindow["member_list_rank_gridlist_rank"],rank,false,false)
+		
+		guiGridListSetItemText(playerGroupWindow["member_list_kicklist_gridlist"],row3,playerGroupWindow["member_list_kicklist_gridlist_account"] ,gangmember[1],false,false)
+		guiGridListSetItemText(playerGroupWindow["member_list_kicklist_gridlist"],row3,playerGroupWindow["member_list_kicklist_gridlist_playername"] ,name,false,false)
 	end	
 end
 addEvent("refreshGangMemberTableToClient", true)
@@ -211,77 +361,15 @@ function refreshPlayerInviteList ()
 	end
 end
 
-function playerGroupSystemButton (button,state)
-if not button == "mouse1" and not state == "down" then return end
-if source == playerGroupWindow["groupinvite_accept"] then
-	triggerServerEvent("acceptGroupInvite",getLocalPlayer())
-	guiGridListClear(playerGroupWindow["groupinvitelist"])
-	guiSetVisible(playerGroupWindow["window"],false)
-	showCursor(false)
-elseif source == playerGroupWindow["member_list_destroygroup"] then
-	guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],true)
-	guiBringToFront(playerGroupWindow["member_list_destroygroup_reclick_window"])
-elseif source == playerGroupWindow["member_list_destroygroup_reclick_yes"] then
-	triggerServerEvent("destroyGroup",getLocalPlayer())
-	guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],false)
-	guiSetVisible(playerGroupWindow["member_window"],false)
-	showCursor(false)
-elseif source == playerGroupWindow["member_list_destroygroup_reclick_cancel"] then
-	guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],false)
-elseif source == playerGroupWindow["member_list_leavegang"] then
-	triggerServerEvent("leaveGroup",getLocalPlayer())
-	guiSetVisible(playerGroupWindow["member_window"],false)
-	showCursor(false)
-elseif source == playerGroupWindow["member_list_inviteplayer"] then
-	guiSetVisible(playerGroupWindow["invite_member_list_window"],true)
-	guiBringToFront(playerGroupWindow["invite_member_list_window"])
-	refreshPlayerInviteList()
-elseif source == playerGroupWindow["invite_member_list_invite"] then
-	local playerName = guiGridListGetItemText ( playerGroupWindow["invite_member_list"], guiGridListGetSelectedItem ( playerGroupWindow["invite_member_list"] ), 1 )
-	triggerServerEvent("invitePlayerToGroup",getLocalPlayer(),playerName)
-	guiSetVisible(playerGroupWindow["invite_member_list_window"],true)
-elseif source == playerGroupWindow["member_list_kickplayer"] then
-	local playerName = guiGridListGetItemText ( playerGroupWindow["member_list"], guiGridListGetSelectedItem ( playerGroupWindow["member_list"] ), 1 )
-	triggerServerEvent("kickGroupMember",getLocalPlayer(),playerName)
-	guiSetVisible(playerGroupWindow["member_window"],false)
-	showCursor(false)
-elseif source == playerGroupWindow["member_list_groupvault"] then
-	guiSetVisible(playerGroupWindow["groupvault_window"],true)
-	guiBringToFront(playerGroupWindow["groupvault_window"])
-elseif source == playerGroupWindow["member_list_quests"] then
-	guiSetVisible(playerGroupWindow["groupquests_window"],true)
-	guiBringToFront(playerGroupWindow["groupquests_window"])
-elseif source == playerGroupWindow["assignrank"] then
-	guiSetVisible(playerGroupWindow["member_list_rank_window"],true)
-	guiBringToFront(playerGroupWindow["member_list_rank_window"])
-elseif source == playerGroupWindow["member_list_encampmentstatus"] then
-	guiSetVisible(playerGroupWindow["member_list_encampmentstatus_window"],true)
-	guiBringToFront(playerGroupWindow["member_list_encampmentstatus_window"])
-end
-end
-addEventHandler("onClientGUIClick",playerGroupWindow["groupinvite_accept"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_leavegang"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_inviteplayer"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_kickplayer"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_groupvault"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_assignrank"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_quests"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_encampmentstatus"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup_reclick_cancel"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup_reclick_yes"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["invite_member_list_invite"],playerGroupSystemButton,false)
-addEventHandler("onClientGUIClick",playerGroupWindow["member_list"],check)
-
 function check()
 local playerName = guiGridListGetItemText(playerGroupWindow["member_list"],guiGridListGetSelectedItem (playerGroupWindow["member_list"]),1)
 	if guiGridListGetItemText(playerGroupWindow["member_list"], guiGridListGetSelectedItem(playerGroupWindow["member_list"]), 1) ~= "" then
-		--guiSetEnabled(w.button.zone,true)
 		onlinestatus = getElementData(getPlayerFromName(playerName),"logedin")
 		daysalive = getElementData(getPlayerFromName(playerName),"daysalive")
-		location = getElementZoneName(getPlayerFromName(playerName))
+		x,y,z = getElementPosition(getPlayerFromName(playerName))
+		location = getZoneName(x,y,z)
 		murders = getElementData(getPlayerFromName(playerName),"murders")
- 		bandit = getElementData(getPlayerFromName(playerName),"bandit")
+ 		bandit = getElementData(getPlayerFromName(playerName),"banditskilled")
  		humanity = getElementData(getPlayerFromName(playerName),"humanity")
 		group_rank = getElementData(getPlayerFromName(playerName),"group_rank")
 		timesdied = getElementData(getPlayerFromName(playerName),"timesdied")
@@ -294,7 +382,7 @@ local playerName = guiGridListGetItemText(playerGroupWindow["member_list"],guiGr
 				guiLabelSetColor(playerGroupWindow["member_list_online_1"],255,0,0)
 			end
 
-		guiSetText(playerGroupWindow["member_list_daysalive1"],daysalive)
+		guiSetText(playerGroupWindow["member_list_daysalive_1"],daysalive)
 		guiSetText(playerGroupWindow["member_list_location_1"],location)
 		guiSetText(playerGroupWindow["member_list_murders_1"],murders)
 		guiSetText(playerGroupWindow["member_list_bandits_1"],bandit)
@@ -303,6 +391,479 @@ local playerName = guiGridListGetItemText(playerGroupWindow["member_list"],guiGr
 		guiSetText(playerGroupWindow["member_list_timesdied_1"],timesdied)
 	end
 end
+
+function checkForPermissions()
+local item = guiComboBoxGetSelected(playerGroupWindow["member_list_manage_permissions_combobox"])
+local text = guiComboBoxGetItemText(playerGroupWindow["member_list_manage_permissions_combobox"], item)
+local teamName = getElementData(localPlayer,"gang")
+local doesSaveExist = getElementData(localPlayer,"OldSave")
+end
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_combobox"],checkForPermissions,false)
+
+function addPermission()
+local rank = guiComboBoxGetSelected(playerGroupWindow["member_list_manage_permissions_combobox"])
+local text = guiComboBoxGetItemText(playerGroupWindow["member_list_manage_permissions_combobox"], rank)
+local permission = guiComboBoxGetSelected(playerGroupWindow["member_list_manage_permissions_combobox_perms"])
+local permissiontext = guiComboBoxGetItemText(playerGroupWindow["member_list_manage_permissions_combobox_perms"], permission)
+	if text == "Leader" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "Co-Leader" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "General" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "Officer" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "Soldier" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "Survivor" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	elseif text == "Bandit" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",true)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",true)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",true)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",true)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",true)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",true)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",true)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",true)
+		end
+	end
+end
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_add"],addPermission,false)
+
+function removePermission()
+local rank = guiComboBoxGetSelected(playerGroupWindow["member_list_manage_permissions_combobox"])
+local text = guiComboBoxGetItemText(playerGroupWindow["member_list_manage_permissions_combobox"], rank)
+local permission = guiComboBoxGetSelected(playerGroupWindow["member_list_manage_permissions_combobox_perms"])
+local permissiontext = guiComboBoxGetItemText(playerGroupWindow["member_list_manage_permissions_combobox_perms"], permission)
+	if text == "Leader" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "Co-Leader" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "General" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "Officer" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "Soldier" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "Survivor" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	elseif text == "Bandit" then
+		if permissiontext == "Ruler: Can edit permissions and set MOTD" then
+			setElementData(localPlayer,"isRuler",false)
+		elseif permissiontext == "Recruiter: Can invite other players" then
+			setElementData(localPlayer,"isRecruiter",false)
+		elseif permissiontext == "Regulator: Can kick other members" then
+			setElementData(localPlayer,"isRegulator",false)
+		elseif permissiontext == "Promoter: Can promote players" then
+			setElementData(localPlayer,"isPromoter",false)
+		elseif permissiontext == "Architect: Can build & destroy buildings at encampment" then
+			setElementData(localPlayer,"isArchitect",false)
+		elseif permissiontext == "Treasurer: Can access Encampment Vault" then
+			setElementData(localPlayer,"isTreasurer",false)
+		elseif permissiontext == "Tech: Can queue research projects" then
+			setElementData(localPlayer,"isTech",false)
+		elseif permissiontext == "Tactician: Can deploy, rearrange and destroy barricades, soldiers etc." then
+			setElementData(localPlayer,"isTactician",false)
+		end
+	end
+end
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_remove"],removePermission,false)
+
+function savePermissionsClient()
+triggerServerEvent("savePermissions",localPlayer)
+end
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_combobox_confirm"],savePermissionsClient)
+
+function playerGroupSystemButton (button,state)
+if not button == "mouse1" and not state == "down" then return end
+if source == playerGroupWindow["groupinvite_accept"] then
+	triggerServerEvent("acceptGroupInvite",getLocalPlayer())
+	guiGridListClear(playerGroupWindow["groupinvitelist"])
+	guiSetVisible(playerGroupWindow["window"],false)
+	showCursor(false)
+elseif source == playerGroupWindow["member_list_destroygroup"] then
+	guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],true)
+	guiBringToFront(playerGroupWindow["member_list_destroygroup_reclick_window"])
+elseif source == playerGroupWindow["member_list_destroygroup_reclick_yes"] then
+	local isRuler = getElementData(localPlayer,"isRuler")
+	if isRuler then
+		triggerServerEvent("destroyGroup",getLocalPlayer())
+		guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],false)
+		guiSetVisible(playerGroupWindow["member_window"],false)
+		showCursor(false)
+	else
+		guiSetVisible(playerGroupWindow["error_insufficientpermission"],true)
+		guiBringToFront(playerGroupWindow["error_insufficientpermission"])
+	end
+elseif source == playerGroupWindow["member_list_destroygroup_reclick_cancel"] then
+	guiSetVisible(playerGroupWindow["member_list_destroygroup_reclick_window"],false)
+elseif source == playerGroupWindow["member_list_leavegang"] then
+	triggerServerEvent("leaveGroup",getLocalPlayer())
+	guiSetVisible(playerGroupWindow["member_window"],false)
+	showCursor(false)
+elseif source == playerGroupWindow["member_list_inviteplayer"] then
+	guiSetVisible(playerGroupWindow["invite_member_list_window"],true)
+	guiBringToFront(playerGroupWindow["invite_member_list_window"])
+	refreshPlayerInviteList()
+elseif source == playerGroupWindow["invite_member_list_invite"] then
+	local isRecruiter = getElementData(localPlayer,"isRecruiter")
+	if isRecruiter then
+		local playerName = guiGridListGetItemText ( playerGroupWindow["invite_member_list"], guiGridListGetSelectedItem ( playerGroupWindow["invite_member_list"] ), 1 )
+		triggerServerEvent("invitePlayerToGroup",getLocalPlayer(),playerName)
+		guiSetVisible(playerGroupWindow["invite_member_list_window"],true)
+	else
+		guiSetVisible(playerGroupWindow["error_insufficientpermission"],true)
+		guiBringToFront(playerGroupWindow["error_insufficientpermission"])
+	end
+elseif source == playerGroupWindow["member_list_kickplayer"] then
+	guiSetVisible(playerGroupWindow["member_list_kicklist"],true)
+	showCursor(true)
+	guiSetVisible(playerGroupWindow["member_window"],false)
+elseif source == playerGroupWindow["member_list_kicklist_ok"] then
+	local isRegulator = getElementData(localPlayer,"isRegulator")
+	local playerName = guiGridListGetItemText ( playerGroupWindow["member_list_kicklist_gridlist"], guiGridListGetSelectedItem ( playerGroupWindow["member_list_kicklist_gridlist"] ), 1 )
+	if isRegulator then
+		if playerName ~= "" then
+			triggerServerEvent("kickGroupMember",getLocalPlayer(),playerName)
+		else
+			guiSetVisible(playerGroupWindow["error_selectplayer"],true)
+			guiBringToFront(playerGroupWindow["error_selectplayer"])
+		end
+	else
+		guiSetVisible(playerGroupWindow["error_insufficientpermission"],true)
+		guiBringToFront(playerGroupWindow["error_insufficientpermission"])
+	end
+elseif source == playerGroupWindow["member_list_kicklist_cancel"] then
+	guiSetVisible(playerGroupWindow["member_list_kicklist"],false)
+	showCursor(false)
+elseif source == playerGroupWindow["member_list_groupvault"] then
+	guiSetVisible(playerGroupWindow["groupvault_window"],true)
+	guiBringToFront(playerGroupWindow["groupvault_window"])
+elseif source == playerGroupWindow["member_list_quests"] then
+	guiSetVisible(playerGroupWindow["groupquests_window"],true)
+	guiBringToFront(playerGroupWindow["groupquests_window"])
+elseif source == playerGroupWindow["member_list_assignrank"] then
+		guiSetVisible(playerGroupWindow["member_list_rank_window"],true)
+		guiBringToFront(playerGroupWindow["member_list_rank_window"])
+elseif source == playerGroupWindow["member_list_rank_giverank"] then
+	if (guiGridListGetSelectedItem(playerGroupWindow["member_list_rank_gridlist"]) == -1) then
+		guiSetVisible(playerGroupWindow["error_selectplayer"],true)
+		guiBringToFront(playerGroupWindow["error_selectplayer"])
+	else
+		local playerName = guiGridListGetItemText (playerGroupWindow["member_list_rank_gridlist"], guiGridListGetSelectedItem (playerGroupWindow["member_list_rank_gridlist"]), 1 )
+		if string.find(playerName,"(Leader)") then
+			guiSetVisible(playerGroupWindow["error_cannotchangerank"],true)
+			guiBringToFront(playerGroupWindow["error_cannotchangerank"])
+		else
+			setElementData(localPlayer,"selectedMember",playerName)
+			guiSetVisible(playerGroupWindow["member_list_rank_assign"],true)
+			guiBringToFront(playerGroupWindow["member_list_rank_assign"])
+			--guiSetText(playerGroupWindow["member_list_rank_combobox_label2"],rank)
+			
+		end
+	end
+elseif source == playerGroupWindow["member_list_rank_managepermissions"] then
+	--[[	if getElementData(localPlayer,"isRuler") then
+			guiSetVisible(playerGroupWindow["member_list_manage_permissions"],true)
+			guiBringToFront(playerGroupWindow["member_list_manage_permissions"])
+		else
+			guiSetVisible(playerGroupWindow["error_insufficientpermission"],true)
+			guiBringToFront(playerGroupWindow["error_insufficientpermission"])
+		end
+		]]
+		outputChatBox("Will be available in the next version!",255,0,0)
+elseif source == playerGroupWindow["member_list_encampmentstatus"] then
+	guiSetVisible(playerGroupWindow["member_list_encampmentstatus_window"],true)
+	guiBringToFront(playerGroupWindow["member_list_encampmentstatus_window"])
+elseif source == playerGroupWindow["member_list_rank_closebutton"] then
+	guiSetVisible(playerGroupWindow["member_list_rank_window"],false)
+elseif source == playerGroupWindow["member_list_rank_combobox_cancel"] then
+	guiSetVisible(playerGroupWindow["member_list_rank_assign"],false)
+elseif source == playerGroupWindow["member_list_rank_combobox_confirm"] then
+	local item = guiComboBoxGetSelected(playerGroupWindow["member_list_rank_combobox"])
+	local text = guiComboBoxGetItemText(playerGroupWindow["member_list_rank_combobox"], item)
+	local isPromoter = getElementData(localPlayer,"isPromoter")
+	local getName = getElementData(localPlayer,"selectedMember")
+	local isOriginalLeader = getElementData(localPlayer,"isOriginalLeader")
+		if text ~= " " then
+			if isPromoter then
+				if not getName then
+					guiSetVisible(playerGroupWindow["error_selectplayer"],true)
+					guiBringToFront(playerGroupWindow["error_selectplayer"])
+				else
+					if isOriginalLeader then
+						guiSetVisible(playerGroupWindow["error_cannotdemote"],true)
+						guiBringToFront(playerGroupWindow["error_cannotdemote"])
+						return
+					else
+						setElementData(getPlayerFromName(getName),"group_rank",text)
+						triggerServerEvent("convertPlayerNameToAccount",localPlayer)
+						triggerServerEvent("saveRankToPlayer",localPlayer)
+						triggerServerEvent("savePermissionsToAccount",localPlayer)
+						guiSetVisible(playerGroupWindow["member_list_rank_assign"],false)
+					end
+				end
+			else
+				guiSetVisible(playerGroupWindow["error_insufficientpermission"],true)
+				guiBringToFront(playerGroupWindow["error_insufficientpermission"])
+			end
+		else
+			guiSetVisible(playerGroupWindow["error_selectrank"],true)
+			guiBringToFront(playerGroupWindow["error_selectrank"])
+		end
+elseif source == playerGroupWindow["member_list_manage_permissions_combobox_cancel"] then
+	guiSetVisible(playerGroupWindow["member_list_manage_permissions"],false)
+elseif source == playerGroupWindow["member_list_manage_permissions_combobox_confirm"] then
+	guiSetVisible(playerGroupWindow["member_list_manage_permissions"],false)
+elseif source == playerGroupWindow["error_cannotchangerank_ok"] then
+	guiSetVisible(playerGroupWindow["error_cannotchangerank"],false)
+elseif source == playerGroupWindow["error_selectplayer_ok"] then
+	guiSetVisible(playerGroupWindow["error_selectplayer"],false)
+elseif source == playerGroupWindow["error_selectrank_ok"] then
+	guiSetVisible(playerGroupWindow["error_selectrank"],false)
+elseif source == playerGroupWindow["error_insufficientpermission_ok"] then
+	guiSetVisible(playerGroupWindow["error_insufficientpermission"],false)
+elseif source == playerGroupWindow["error_nextversion_ok"] then
+	guiSetVisible(playerGroupWindow["error_nextversion"],false)
+elseif source == playerGroupWindow["error_notloggedin_ok"] then
+	guiSetVisible(playerGroupWindow["error_notloggedin"],false)
+elseif source == playerGroupWindow["error_selectlowerrank_ok"] then
+	guiSetVisible(playerGroupWindow["error_selectlowerrank"],false)
+elseif source == playerGroupWindow["error_cannotdemote_ok"] then
+	guiSetVisible(playerGroupWindow["error_cannotdemote"],false)
+end
+end
+addEventHandler("onClientGUIClick",playerGroupWindow["groupinvite_accept"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_leavegang"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_inviteplayer"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_kickplayer"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_groupvault"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_quests"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_encampmentstatus"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup_reclick_cancel"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_destroygroup_reclick_yes"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["invite_member_list_invite"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list"],check)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_assignrank"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_kicklist_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_kicklist_cancel"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_rank_giverank"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_rank_closebutton"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_rank_managepermissions"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_combobox_confirm"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_rank_combobox_cancel"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_rank_combobox_confirm"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["member_list_manage_permissions_combobox_cancel"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_selectplayer_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_cannotchangerank_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_nextversion_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_insufficientpermission_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_notloggedin_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_selectlowerrank_ok"],playerGroupSystemButton,false)
+addEventHandler("onClientGUIClick",playerGroupWindow["error_cannotdemote_ok"],playerGroupSystemButton,false)
+
 
 --
 

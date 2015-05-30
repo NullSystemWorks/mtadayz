@@ -2,10 +2,9 @@ invitations = {}
 
 addEventHandler("onResourceStart", resourceRoot, function()
 	local columnName = get("column_name")
-	exports.scoreboard:scoreboardAddColumn("gang", root, columnName:len() * 12, columnName)
-	executeSQLQuery("CREATE TABLE IF NOT EXISTS gangs (gang_name STRING, gang_leader STRING, gang_members, gang_subleaders STRING)")
-	executeSQLQuery("CREATE TABLE IF NOT EXISTS gang_members (gang_name STRING, member_account STRING, added_by STRING)")
-	executeSQLQuery("CREATE TABLE IF NOT EXISTS alliance (alliance_name STRING, alliance_creator STRING, alliance_gangs STRING)")
+	--exports.scoreboard:scoreboardAddColumn("gang", root, columnName:len() * 12, columnName)
+	executeSQLQuery("CREATE TABLE IF NOT EXISTS gangs (gang_name STRING, gang_leader STRING, gang_members, gang_subleaders STRING, camp_rank STRING)")
+	executeSQLQuery("CREATE TABLE IF NOT EXISTS gang_members (gang_name STRING, member_account STRING, player_name STRING, added_by STRING, camp_rank STRING)")
 	checkPlayerGroupDetails()	
 	for index, player in ipairs(getElementsByType("player")) do
 		local gang = getAccountGang(getAccountName(getPlayerAccount(player)))
@@ -44,7 +43,7 @@ addEventHandler("gangSystem:invitePlayer", root, function(playerName)
 			local playerAccountName = getAccountName(getPlayerAccount(player))
 			if getAccountGang(gangName, playerAccountName) == "None" then
 				invitations[player] = {gangName, source}
-				outputChatBox("Gang system: You have invited " .. getPlayerName(player) .. " to the gang.", source, 0, 255, 0)
+				outputChatBox("Gang system: You invited " .. getPlayerName(player) .. " to the gang.", source, 0, 255, 0)
 				outputChatBox("Gang system: You have been invited to " .. gangName .. ", write /accept to join.", player, 0, 255, 0)
 			else
 				outputChatBox("Gang system: This player is already in a gang!", source, 255, 0, 0)
@@ -79,7 +78,7 @@ addEventHandler("gangSystem:kickMember", root, function(memberAccount)
 		if getGangLeader(gangName) == accountName or isGangSubLeader(gangName, accountName) then
 			if getGangLeader(gangName) ~= memberAccount then
 				if removeGangMember(gangName, memberAccount, getPlayerName(source)) then
-					outputChatBox("Gang system: You have kicked " .. memberAccount .. " from the gang.", source, 255, 50, 0)
+					outputChatBox("Gang system: You kicked " .. memberAccount .. " from the gang.", source, 255, 50, 0)
 				end
 			else
 				outputChatBox("Gang system: You can't kick the gang leader.", source, 255, 0, 0)
@@ -97,7 +96,7 @@ addEventHandler("gangSystem:leaveGang", root, function()
 	if gangName ~= "None" and accountName ~= "Guest" then
 		if getGangLeader(gangName) ~= accountName then
 			if removeGangMember(gangName, accountName) then
-				outputChatBox("Gang system: You have left " .. gangName .. ".", source, 255, 50, 0)
+				outputChatBox("Gang system: You left " .. gangName .. ".", source, 255, 50, 0)
 			end
 		else
 			outputChatBox("Gang system: You may not leave the gang as you're the leader of it.", source, 255, 0, 0)
@@ -112,7 +111,7 @@ addEventHandler("gangSystem:destroyGang", root, function()
 	if gangName ~= "None" and accountName ~= "Guest" then
 		if getGangLeader(gangName) == accountName then
 			if removeGang(gangName) then
-				outputChatBox("Gang system: You have destroyed the gang " .. gangName .. ".", source, 255, 50, 0)
+				outputChatBox("Gang system: You destroyed the gang " .. gangName .. ".", source, 255, 50, 0)
 			end
 		else
 			outputChatBox("Gang system: You're not allowed to use this function.", source, 255, 0, 0)
@@ -146,14 +145,6 @@ addEventHandler("onPlayerLeaveGang", root, function(gangName)
 	end
 end)
 
-addEvent("onGangJoinAlliance",true)
-addEventHandler("OnGangJoinAlliance", root, function(gangName)
-	if doesGangExists(gangName) then
-		executeSQLUpdate("alliance","alliance_gangs = '" .. tostring(gangName) .. "'")
-	end
-end)
-
-
 addEvent("gangSystem:getSubLeaders", true)
 addEventHandler("gangSystem:getSubLeaders", root, function()
 	local gangName = getElementData(source, "gang")
@@ -172,7 +163,7 @@ addEventHandler("gangSystem:addSubLeader", root, function(memberAccount)
 			local isSubLeader, errorMsg = isGangSubLeader(gangName, memberAccount)
 			if not isSubLeader then
 				if editGangSubLeaders(gangName, memberAccount, true) then
-					outputChatBox("Gang system: You have added " .. memberAccount .. " as a sub leader.", source, 0, 255, 0)
+					outputChatBox("Gang system: You added " .. memberAccount .. " as a sub leader.", source, 0, 255, 0)
 				else
 					outputChatBox("Gang system: " .. tostring(errorMsg), source, 255, 50, 0)
 				end
@@ -195,7 +186,7 @@ addEventHandler("gangSystem:removeSubLeader", root, function(memberAccount)
 			if isSubLeader then
 				if editGangSubLeaders(gangName, memberAccount, false) then
 					triggerEvent("gangSystem:getSubLeaders", source)
-					outputChatBox("Gang system: You have removed " .. memberAccount .. " from a sub leaders.", source, 255, 50, 0)
+					outputChatBox("Gang system: You removed " .. memberAccount .. " from a sub leaders.", source, 255, 50, 0)
 				else
 					outputChatBox("Gang system: " .. tostring(errorMsg), source, 255, 50, 0)
 				end

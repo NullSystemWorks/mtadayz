@@ -1,14 +1,14 @@
-function addGang(gangName, gangLeader)
+function addGang(gangName, gangLeader, playerName)
 	if not doesGangExists(gangName) then
-		if executeSQLInsert("gangs", "'" .. tostring(gangName) .. "','" .. tostring(gangLeader) .. "','0','[ ]'") then
-			outputDebugString("Gang system: Gang created name: " .. tostring(gangName) .. ", leader: " .. tostring(gangLeader))
-			addGangMember(gangName, gangLeader, "System")
+		if executeSQLInsert("gangs", "'" .. tostring(gangName) .. "','" .. tostring(gangLeader) .. "','0','[ ]','Leader'") then
+			outputDebugString("Encampment created: " .. tostring(gangName) .. ", Creator: " .. tostring(gangLeader))
+			addGangMember(gangName, gangLeader, playerName, "System", "Leader")
 			return true
 		else
-			return false, "An error has occurred, could not create gang."
+			return false, "An error has occurred, could not create encampment."
 		end
 	else
-		return false, "Gang already exists."
+		return false, "Encampment exists already."
 	end
 end
 
@@ -22,6 +22,20 @@ function removeGang(gangName)
 		return false, "An error has occurred, cannot remove gang. Check if gang has been deleted already."
 	end
 end
+
+function TheGangRemover()
+	executeSQLDelete("gangs", "gang_name = 'AwesomeShit'")
+	for index, member in ipairs(executeSQLQuery("SELECT * FROM gang_members WHERE gang_name = 'AwesomeShit'")) do
+			removeGangMember(gangName, member.member_account)
+	end
+end
+addCommandHandler("remove",TheGangRemover)
+
+function DropTheTable()
+ executeSQLQuery("DROP TABLE gangs")
+ executeSQLQuery("DROP TABLE gang_members")
+end
+addCommandHandler("removesql",DropTheTable)
 
 function doesGangExists(gangName)
 	local check = executeSQLSelect("gangs", "*", "gang_name = '" .. tostring(gangName) .. "'")
@@ -46,20 +60,21 @@ function getGangMembers(gangName)
 	end
 end
 
-function addGangMember(gangName, memberAccount, addedBy)
+function addGangMember(gangName, memberAccount, playerName, addedBy, rank)
 	if not doesGangExists(gangName) then
 		return false, "The gang doesn't exists."
 	end
 	if isGangMember(gangName, memberAccount) then
 		return false, "This member already exists."
 	end
-	if executeSQLInsert("gang_members", "'" .. tostring(gangName) .. "','" .. tostring(memberAccount) .. "','" .. tostring(addedBy) .. "'") then
+	if executeSQLInsert("gang_members", "'" .. tostring(gangName) .. "','" .. tostring(memberAccount) .. "','" ..tostring(playerName).. "','" .. tostring(addedBy) .. "','"..tostring(rank).. "'") then
 		local account = getAccount(memberAccount)
+		local playerName = getPlayerName(getAccountPlayer(account))
 		if account and getAccountPlayer(account) then
 			setElementData(getAccountPlayer(account), "gang", gangName)
 			setTimer(triggerEvent, 200, 1, "onPlayerJoinGang", getAccountPlayer(account), gangName)
 		end
-		outputDebugString("Gang system: Member added to: " .. tostring(gangName) .. ", account: " .. tostring(memberAccount))
+		outputDebugString("Member added to: " .. tostring(gangName) .. ", Account: " .. tostring(memberAccount)..", Player: "..tostring(playerName)..", Rank: "..tostring(rank))
 		return true
 	else
 		return false, "An error has occurred."
