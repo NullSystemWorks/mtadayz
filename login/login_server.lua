@@ -14,7 +14,7 @@ function tryToLoginPlayer (username, password)
 		local minute = theTime.minute
 		local seconds = theTime.second
 		local theAccount = getPlayerAccount(client)
-		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client),"accounts")
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client).."\n","accounts")
 	else
 		outputChatBox("[LOGIN ERROR]#FF9900 Wrong password or username!",source,255,255,255,true)
 	end
@@ -36,7 +36,7 @@ function tryToRegsiterPlayer(username, pass)
 			local minute = theTime.minute
 			local seconds = theTime.second
 			local theAccount = getPlayerAccount(client)
-			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client),"accounts")
+			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client).."\n","accounts")
 		else
 			reason = "Unknown Error!"
 			outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)

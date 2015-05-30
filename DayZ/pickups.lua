@@ -824,7 +824,7 @@ function onPlayerTakeItemFromGround (itemName,col)
 	local minute = theTime.minute
 	local seconds = theTime.second
 	local theAccount = getPlayerAccount(client)
-	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName,"game")
+	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName.."\n","game")
 end
 addEvent( "onPlayerTakeItemFromGround", true )
 addEventHandler( "onPlayerTakeItemFromGround", getRootElement(), onPlayerTakeItemFromGround )
