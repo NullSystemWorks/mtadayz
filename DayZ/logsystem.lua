@@ -35,6 +35,13 @@ function saveLog(tstring,logtype)
 		local writ = fileWrite( file, tstring )
 		fileClose( file )
 		return true
+	elseif logtype and logtype == "game" and tstring then
+		local file = fileOpen("logs/game.log")
+		local size = fileGetSize( file )
+		local set = fileSetPos( file, size )
+		local writ = fileWrite( file, tstring )
+		fileClose( file )
+		return true
 	else
 	outputDebugString("[DayZ Logs] Error in saveLog Function. Invalid Arguments?")
 	return false
@@ -66,12 +73,18 @@ function returnLog(logtype)
 	buf = fileRead(file,size)
 	fileClose(file)
 	return buf
+	elseif logtype and logtype == "game" then
+	local file = fileOpen("logs/game.log")
+	local size = fileGetSize( file )
+	buf = fileRead(file,size)
+	fileClose(file)
+	return buf
 	else
 	outputDebugString("[DayZ Logs] Error in returnLog Function. Invalid Arguments?")
 	return false
 	end
 end
-local logFiles = { "logs/admin.log", "logs/debug.log", "logs/updates.log", "logs/accounts.log" }
+local logFiles = { "logs/admin.log", "logs/debug.log", "logs/updates.log", "logs/accounts.log", "logs/game.log" }
 addEventHandler("onResourceStart",resourceRoot,
 	function ()
 		for i, v in ipairs(logFiles)do
