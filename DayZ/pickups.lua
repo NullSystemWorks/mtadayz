@@ -824,6 +824,21 @@ function onPlayerTakeItemFromGround (itemName,col)
 	local minute = theTime.minute
 	local seconds = theTime.second
 	local theAccount = getPlayerAccount(client)
+	if hour < 10 then
+		hour = "0"..hour
+	else
+		hour = theTime.hour
+	end
+	if minute < 10 then
+		minute  = "0"..minute
+	else
+		minute = theTime.minute
+	end
+	if seconds < 10 then
+		minute = "0"..seconds
+	else
+		seconds = theTime.second
+	end
 	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName.."\n","game")
 end
 addEvent( "onPlayerTakeItemFromGround", true )
