@@ -100,6 +100,13 @@ local playerDataTable = {
 {"Parachute"},
 {"Compass"},
 
+{"Assault Pack (ACU)"},
+{"Alice Pack"},
+{"Ghillie Backpack"},
+{"OS Backpack"},
+{"Coyote Backpack"},
+{"Czech Backpack"},
+
 {"Mosin 9130"},
 {"Sporter 22"},
 {"Crossbow"},
@@ -299,9 +306,11 @@ local vehicleDataTable = {
 {"Scruffy Burgers"},
 {"Assault Pack (ACU)"},
 {"Alice Pack"},
-{"Radio Device"},
+{"Ghillie Backpack"},
+{"OS Backpack"},
 {"Coyote Backpack"},
 {"Czech Backpack"},
+{"Radio Device"},
 {"Baseball Bat"},
 {"Shovel"},
 {"Golf Club"},
@@ -336,8 +345,6 @@ local vehicleDataTable = {
 {".303 British Cartridge"},
 {"Bolt"},
 
-{"Ghillie Backpack"},
-{"OS Backpack"},
 -- [[ PRIMARY WEAPONS ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},

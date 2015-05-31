@@ -100,6 +100,13 @@ local playerDataTable = {
 {"Parachute"},
 {"Compass"},
 
+{"Assault Pack (ACU)"},
+{"Alice Pack"},
+{"Ghillie Backpack"},
+{"OS Backpack"},
+{"Coyote Backpack"},
+{"Czech Backpack"},
+
 {"Mosin 9130"},
 {"Sporter 22"},
 {"Crossbow"},
@@ -171,7 +178,7 @@ local playerDataTable = {
 {"Grenade Blueprint"},
 {"Binoculars Blueprint"},
 
--- [[ AMMO ]] -- TO DO!!!
+-- [[ AMMO ]] --
 {".45 ACP Cartridge Blueprint"},
 {"9x19mm SD Cartridge Blueprint"},
 {"9x19mm Cartridge Blueprint"},
@@ -463,10 +470,6 @@ local vehicleDataTable = {
 {"Empty Water Bottle"},
 {"Empty Soda Cans"},
 {"Scruffy Burgers"},
-{"Assault Pack (ACU)"},
-{"Alice Pack"},
-{"Czech Backpack"},
-{"Coyote Backpack"},
 {"Radio Device"},
 {"Baseball Bat"},
 {"Shovel"},
@@ -503,8 +506,13 @@ local vehicleDataTable = {
 {".303 British Cartridge"},
 {"Bolt"},
 
+{"Assault Pack (ACU)"},
+{"Alice Pack"},
 {"Ghillie Backpack"},
 {"OS Backpack"},
+{"Coyote Backpack"},
+{"Czech Backpack"},
+
 -- [[ PRIMARY WEAPONS ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},
@@ -548,7 +556,7 @@ local vehicleDataTable = {
 {"Grenade Blueprint"},
 {"Binoculars Blueprint"},
 
--- [[ AMMO ]] -- TO DO!!!
+-- [[ AMMO ]] --
 {".45 ACP Cartridge Blueprint"},
 {"9x19mm SD Cartridge Blueprint"},
 {"9x19mm Cartridge Blueprint"},

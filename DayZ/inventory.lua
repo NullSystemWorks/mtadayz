@@ -112,7 +112,7 @@ inventoryItems = {
 {"Czech Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n46 slots."},
 {"Coyote Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n64 slots."},
 {"Ghillie Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n45 slots."},
-{"OS Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n30 slots."},
+{"OS Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n100 slots."},
 
 
 -- [[ BLUEPRINTS ]] --
@@ -638,37 +638,92 @@ elseif itemName == "M136 Rocket" then
 elseif itemName == "Bolt" then
 	itemPlus = 7
 elseif itemName == "Assault Pack (ACU)" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 18 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You are using this backpack already!",255,22,0) return end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 18 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","The currently equipped backpack has more space!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 18 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 18 then
+		if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",18)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0
 elseif itemName == "Alice Pack" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 25 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You are using this backpack already!",255,22,0) return end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 25 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","The currently equipped backpack has more space!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 25 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 25 then
+		if getElementData(loot,itemName) ~= "Alice Pack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",25)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0
 elseif itemName == "Czech Backpack" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 36 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You are using this backpack already!",255,22,0) return end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 36 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","The currently equipped backpack has more space!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 36 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 36 then
+		if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",36)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0	
 elseif itemName == "Coyote Backpack" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 64 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You already have the best backpack!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 64 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 64 then
+		if getElementData(loot,itemName) ~= "Coyote Backpack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",64)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0
 elseif itemName == "Ghillie Backpack" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 45 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You are using this backpack already!",255,22,0) return end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 45 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","The currently equipped backpack has more space!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 45 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 45 then
+		if itemName ~= "Ghillie Backpack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",45)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0	
 elseif itemName == "OS Backpack" then
-	if getElementData(getLocalPlayer(),"MAX_Slots") == 100 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","You are using this backpack already!",255,22,0) return end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 100 then triggerEvent (getLocalPlayer(), "displayClientInfo", getLocalPlayer(),"Inventory","The currently equipped backpack has more space!",255,22,0) return end
+	if getElementData(localPlayer,"MAX_Slots") == 100 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 100 then
+		if getElementData(loot,itemName) ~= "OS Backpack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName,getElementData(loot,itemName)-1)
+			return
+		end
+	end
 	setElementData(getLocalPlayer(),"MAX_Slots",100)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0
@@ -1012,8 +1067,6 @@ function getWeaponAmmoType2 (weaponName)
 	end
 end
 
-
-
 function weaponSwitch (weapon)
 	if source == getLocalPlayer() then
 		local ammoName,_ = getWeaponAmmoType2 (weapon)
@@ -1057,6 +1110,8 @@ addEventHandler("onClientPlayerRadioSwitch",getRootElement(),makeRadioStayOff)
 Stuff to do:
 
 - Player must not move while crafting, or else crafting will cancel (Animation?)
+- Are the requirements too high/too low? Needs extensive testing!
+- More Blueprint Parts
 
 ]]
 
@@ -1065,26 +1120,77 @@ craftingTable = {
 
 -- {string Blueprint Name, string Blueprint Result, int Result Number, string Part1, string Part2, string Part3, int Part1Required, int Part2Required, int Part3Required, int CraftingTime},
 --  [[ PRIMARY WEAPONS ]] --
-{"M4 Blueprint","M4",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"CZ 550 Blueprint","CZ 550",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,4,1000},
-{"Winchester '66 Blueprint","Winchester 1866",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,1000},
-{"SPAZ-12 C. Shtgn. Blueprint","SPAZ-12 Combat Shotgun",1,"Gun Barrel","Gun Stock","Duct Tape",4,1,6,1000},
-{"Sawn-Off Shtgn. Blueprint","Sawn-Off Shotgun",1,"Gun Barrel","Gun Stock","Duct Tape",2,2,2,2000},
-{"AK-47 Blueprint","AK-47",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Lee Enfield Blueprint","Lee Enfield",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Sporter 22 Blueprint","Sporter 22",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Mosin 9130 Blueprint","Mosin 9130",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Crossbow Blueprint","Crossbow",1,"String","Handle","Wooden Stick",2,1,4,1000},
-{"SKS Blueprint","SKS",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Blaze 95 D. R. Blueprint","Blaze 95 Double Rifle",1,"Gun Barrel","Gun Stock","Duct Tape",4,1,6,1000},
-{"Remington 870 Blueprint","Remington 870",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,1000},
-{"FN FAL Blueprint","FN FAL",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"G36C Blueprint","G36C",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"Sa58V CCO Blueprint","Sa58V CCO",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,1000},
-{"SVD Dragunov Blueprint","SVD Dragunov",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,4,1000},
-{"DMR Blueprint","DMR",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,4,1000},
+{"M4 Blueprint","M4",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"CZ 550 Blueprint","CZ 550",1,"Gun Barrel","Gun Stock","Optics",1,1,1,10000},
+{"Winchester '66 Blueprint","Winchester 1866",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
+{"SPAZ-12 C. Shtgn. Blueprint","SPAZ-12 Combat Shotgun",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
+{"Sawn-Off Shtgn. Blueprint","Sawn-Off Shotgun",1,"Gun Barrel","Gun Stock","Duct Tape",2,2,2,3000},
+{"AK-47 Blueprint","AK-47",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"Lee Enfield Blueprint","Lee Enfield",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,7000},
+{"Sporter 22 Blueprint","Sporter 22",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,7000},
+{"Mosin 9130 Blueprint","Mosin 9130",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,7000},
+{"Crossbow Blueprint","Crossbow",1,"String","Handle","Wooden Stick",2,1,2,10000},
+{"SKS Blueprint","SKS",1,"Gun Barrel","Gun Stock","Duct Tape",1,1,2,7000},
+{"Blaze 95 D. R. Blueprint","Blaze 95 Double Rifle",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
+{"Remington 870 Blueprint","Remington 870",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
+{"FN FAL Blueprint","FN FAL",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"G36C Blueprint","G36C",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"Sa58V CCO Blueprint","Sa58V CCO",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"SVD Dragunov Blueprint","SVD Dragunov",1,"Gun Barrel","Gun Stock","Optics",1,1,1,10000},
+{"DMR Blueprint","DMR",1,"Gun Barrel","Gun Stock","Optics",1,1,1,10000},
 
 -- [[ SECONDARY WEAPONS ]] --
+{"M1911 Blueprint","M1911",1,"Short Gun Barrel","Gun Stock","Nails",1,1,2,700},
+{"M9 SD Blueprint","M9 SD",1,"Short Gun Barrel","Gun Stock","Metallic Stick",1,1,1,900},
+{"PDW Blueprint","PDW",1,"Short Gun Barrel","Gun Stock","Nails",1,1,2,700},
+{"G17 Blueprint","G17",1,"Short Gun Barrel","Gun Stock","Glue",1,1,2,700},
+{"MP5A5 Blueprint","MP5A5",1,"Short Gun Barrel","Gun Stock","Duct Tape",1,1,2,1200},
+{"Bizon PP-19 Blueprint","Bizon PP-19",1,"Short Gun Barrel","Gun Stock","Duct Tape",1,1,2,1200},
+{"Revolver Blueprint","Revolver",1,"Short Gun Barrel","Gun Stock","Nails",1,1,3,900},
+{"Desert Eagle Blueprint","Desert Eagle",1,"Short Gun Barrel","Gun Stock","Nails",1,1,3,900},
+{"Hunting Knife Blueprint","Hunting Knife",1,"Handle","Sharp Metal","Glue",1,1,1,200},
+{"Hatchet Blueprint","Hatchet",1,"Handle","Metal Plate","Barbed Wire",1,1,1,3000},
+{"Baseball Bat Blueprint","Baseball Bat",1,"Wooden Stick","Nails","Glue",1,1,1,200},
+{"Shovel Blueprint","Shovel",1,"Wooden Stick","Metal Plate","Nails",1,1,2,700},
+{"Golf Club Blueprint","Golf Club",1,"Metallic Stick","Metal Plate","Barbed Wire",1,1,1,700},
+{"Machete Blueprint","Machete",1,"Handle","Sharp Metal","Glue",1,2,2,3000},
+{"Crowbar Blueprint","Crowbar",1,"Metallic Stick","Hand Saw","Duct Tape",1,1,1,1200},
+
+-- [[ SPECIAL WEAPONS ]] --
+{"Parachute Blueprint","Parachute",1,"String","Cloth","Sheet",4,2,2,2000},
+{"Tear Gas Blueprint","Tear Gas",1,"Glue","Small Casing","String",2,1,1,2000},
+{"Grenade Blueprint","Grenade",1,"Small Casing","Gun Powder","Cables",1,4,1,2000},
+{"Binoculars Blueprint","Binoculars",1,"Optics","Small Box","Glue",2,1,1,2000},
+
+-- [[ AMMO ]] --
+{".45 ACP Cartridge Blueprint",".45 ACP Cartridge",1,"Small Casing","Gun Powder","Glue",1,1,1,500},
+{"9x19mm SD Cartridge Blueprint","9x19mm SD Cartridge",1,"Small Casing","Gun Powder","Glue",1,1,1,500},
+{"9x19mm Cartridge Blueprint","9x19mm Cartridge",1,"Small Casing","Gun Powder","Glue",1,1,1,500},
+{"9x18mm Cartridge Blueprint","9x18mm Cartridge",1,"GSmall Casing","Gun Powder","Glue",1,1,1,500},
+{"5.45x39mm Cartridge Blueprint","5.45x39mm Cartridge",1,"Small Casing","Gun Powder","Glue",1,3,1,500},
+{"5.56x45mm Cartridge Blueprint","5.56x45mm Cartridge",1,"Small Casing","Gun Powder","Glue",1,3,1,500},
+{"1866 Slug Blueprint","1866 Slug",1,"Small Casing","Gun Powder","Glue",1,2,1,500},
+{"2Rnd. Slug Blueprint","2Rnd. Slug",1,"Small Casing","Gun Powder","Glue",1,2,1,500},
+{"12 Gauge Pellet Blueprint","12 Gauge Pellet",1,"Small Casing","Gun Powder","Glue",1,2,1,500},
+{"9.3x62mm Cartridge Blueprint","9.3x62mm Cartridge",1,"Small Casing","Gun Powder","Glue",1,4,1,500},
+{".303 British Cartridge Blueprint",".303 British Cartridge",1,"Small Casing","Gun Powder","Glue",1,2,1,500},
+{"Bolt Blueprint","Bolt",1,"Wooden Stick","Sharp Metal","Hand Saw",2,1,1,500},
+
+-- [[ ITEMS ]] --
+{"Medic Kit Blueprint","Medic Kit",1,"Drugs","Vitamins","Bandaid",2,2,1,3400},
+{"Wire Fence Blueprint","Wire Fence",1,"Barbed Wire","Wooden Stick","Duct Tape",1,2,1,3400},
+{"Tent Blueprint","Tent",1,"String","Sheet","Wooden Stick",1,2,1,3400},
+{"Camouflage Clthng. Blueprint","Camouflage Clothing",1,"Thread","Cloth","Needle",3,1,1,8400},
+{"Survivor Clthng. Blueprint","Survivor Clothing",1,"Thread","Cloth","Needle",3,1,1,8400},
+{"Civilian Clthng. Blueprint","Civilian Clothing",1,"Thread","Cloth","Needle",3,1,1,8400},
+{"Ghillie Suit Blueprint","Ghillie Suit",1,"Thread","Cloth","Needle",3,3,2,16800},
+{"Roadflare Blueprint","Roadflare",1,"Small Box","Gun Powder","Tissue",1,1,1,1200},
+
+--[[ TOOLBELT ]] --
+{"Toolbox Blueprint","Toolbox",1,"Mechanical Supplies","Small Box","Hand Saw",1,1,1,600},
+{"Radio Device Blueprint","Radio Device",1,"Microchips","Small Box","Mechanical Supplies",2,1,1,600},
+{"Infrared Goggles Blueprint","Infrared Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
+{"Night Vision Goggles Blueprint","Night Vision Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
 
 }
 
