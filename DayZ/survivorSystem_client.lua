@@ -230,6 +230,16 @@ function playerStatsClientSite()
 		if getElementData(getLocalPlayer(),"Watch") >= 1 then
 			--showPlayerHudComponent("clock",true)
 			local hour, minutes = getTime()
+			if hour < 10 then
+				hour = "0"..hour
+			else
+				hour = hour
+			end
+			if minutes < 10 then
+				minutes = "0"..minutes
+			else
+				minutes = minutes
+			end
 			local sWidth,sHeight = guiGetScreenSize() -- The variables
 			dxDrawText(""..hour.."   ",sWidth*0.09625,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
 			dxDrawText(" : ",sWidth*0.118125,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
@@ -951,8 +961,8 @@ local zombiesounds = {"sounds/mgroan1.ogg", "sounds/mgroan2.ogg", "sounds/mgroan
 function playZombieSounds(ped)
 local zombies = getElementsByType("ped")
 	for theKey,theZomb in ipairs(zombies) do
-		if getElementData(zombies,"deadzombie") then 
-			return
+		if getElementData(theZomb,"deadzombie") then		
+			stopSound(sound)
 		else
 			local Zx,Zy,Zz = getElementPosition(theZomb)
 			local sound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
@@ -960,7 +970,7 @@ local zombies = getElementsByType("ped")
 		end
 	end
 end
---setTimer(playZombieSounds,60000,0)
+setTimer(playZombieSounds,60000,0)
 
 	
 --------------------------------------------------------
