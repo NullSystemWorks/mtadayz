@@ -1490,20 +1490,35 @@ function setCold()
 end
 setTimer(setCold,1500,0)
 
+--[[ 
+Volume (Noise):
+
+0 = Silent
+20 = Very Low
+40 = Low
+60 = Moderate
+80 = High
+100 = Very High
+
+]]
+
 function setVolume()
 	value = 0
+	local block, animation = getPedAnimation(localPlayer)
 	if getPedMoveState (getLocalPlayer()) == "stand" then
 		value = 0
-	elseif getPedMoveState (getLocalPlayer()) == "walk" then
+	elseif getPedMoveState (getLocalPlayer()) == "crouch" then	
+		value = 0
+	elseif getPedMoveState(localPlayer) == "crawl" then
 		value = 20
-	elseif getPedMoveState (getLocalPlayer()) == "powerwalk" then
+	elseif getPedMoveState (getLocalPlayer()) == "walk" then
 		value = 40
+	elseif getPedMoveState (getLocalPlayer()) == "powerwalk" then
+		value = 60
 	elseif getPedMoveState (getLocalPlayer()) == "jog" then
 		value = 80
 	elseif getPedMoveState (getLocalPlayer()) == "sprint" then	
 		value = 100
-	elseif getPedMoveState (getLocalPlayer()) == "crouch" then	
-		value = 20
 	elseif not getPedMoveState (getLocalPlayer()) then
 		value = 20
 	end
@@ -1516,24 +1531,41 @@ function setVolume()
 	if value > 100 then
 		value = 100
 	end
+	if block == "ped" or block == "SHOP" or block == "BEACH" then
+		value = 0
+	end
 	setElementData(getLocalPlayer(),"volume",value)
 end
 setTimer(setVolume,100,0)
 
+--[[
+Visibility:
+
+0 = Invisible
+20 = Very Low Visibility
+40 = Low Visibility
+60 = Moderate Visibility
+80 = High Visibility
+100 = Very High Visibility
+
+]]
 function setVisibility()
 	value = 0
+	local block, animation = getPedAnimation(localPlayer)
 	if getPedMoveState (getLocalPlayer()) == "stand" then
-		value = 60
+		value = 40
+	elseif getPedMoveState (getLocalPlayer()) == "crouch" then	
+		value = 0
+	elseif getPedMoveState(localPlayer) == "crawl" then
+		value = 20
 	elseif getPedMoveState (getLocalPlayer()) == "walk" then
-		value = 80
+		value = 60
 	elseif getPedMoveState (getLocalPlayer()) == "powerwalk" then
-		value = 80
+		value = 60
 	elseif getPedMoveState (getLocalPlayer()) == "jog" then
-		value = 80
+		value = 60
 	elseif getPedMoveState (getLocalPlayer()) == "sprint" then	
 		value = 80
-	elseif getPedMoveState (getLocalPlayer()) == "crouch" then	
-		value = 20
 	elseif not getPedMoveState (getLocalPlayer()) then	
 		value = 20
 	end
@@ -1545,7 +1577,10 @@ function setVisibility()
 	end
 	if isPedInVehicle (getLocalPlayer()) then
 		value = 100
-	end	
+	end
+	if block == "ped" or block == "SHOP" or block == "BEACH" then
+		value = 0
+	end
 	setElementData(getLocalPlayer(),"visibly",value)
 end
 setTimer(setVisibility,100,0)
@@ -1563,26 +1598,51 @@ function debugJump2()
 end
 
 weaponNoiseTable = {
+{2,20},
+{3,20},
+{4,20},
+{5,20},
+{6,20},
+{7,20},
+{8,20},
+{9,100},
+{10,20},
+{11,20},
+{12,100},
+{14,20},
+{15,20},
+{16,100},
+{17,40},
+{18,60},
 {22,20},
 {23,0},
 {24,60},
+{25,60},
+{26,60},
+{27,60},
 {28,40},
-{32,40},
 {29,40},
 {30,60},
 {31,60},
-{25,40},
-{26,60},
-{27,60},
-{33,40},
-{34,60},
-{36,60},
-{35,60},
+{32,40},
+{33,100},
+{34,100},
+{35,100},
+{36,100},
+
 }
---0 none
---20 low
---40 moderate
---60 high
+
+--[[
+Noise Values:
+
+0 = Silent (Level 0)
+20 = Very Low (Level 1)
+40 = Low (Level 2)
+60 = Moderate (Level 3)
+80 = High (Level 4)
+100 = Very High (Level 5)
+
+]]
 
 function getWeaponNoise(weapon)
 	for i,weapon2 in ipairs(weaponNoiseTable) do
@@ -1689,15 +1749,15 @@ function updateIcons ()
 		--sound
 		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/sound.png",0,0,0,tocolor(0,255,0))
 		local sound = getElementData(getLocalPlayer(),"volume")/20
-		if sound > 1 then
-			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0,tocolor(0,255,0))
-		end
+		--if sound > 1 then
+			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0)
+		--end
 		--visibly
 		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/eye.png",0,0,0,tocolor(0,255,0))
 		local sound = getElementData(getLocalPlayer(),"visibly")/20
-		if sound > 1 then
-			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0,tocolor(0,255,0))
-		end
+		--if sound > 1 then
+			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0)
+		--end
 		--brokenbone
 		if getElementData(getLocalPlayer(),"brokenbone") then
 			dxDrawImage ( screenWidth*0.9375 , screenHeight*0.55, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/brokenbone.png",0,0,0,tocolor(255,255,255))
