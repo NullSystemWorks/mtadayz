@@ -381,7 +381,9 @@ function saveAccounts () -- Save in the database
 		setAccountData(account,"last_x",x)
 		setAccountData(account,"last_y",y)
 		setAccountData(account,"last_z",z)
-		destroyElement(getElementData(source,"playerCol"))
+		if getElementData(source,"logedin") then
+			destroyElement(getElementData(source,"playerCol"))
+		end
 	end	
 	setElementData(source,"logedin",false)
 end
