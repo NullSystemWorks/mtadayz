@@ -1,11 +1,13 @@
---Gamemode Script Name
-addons = "DayZ (0.8a)//"
+-- [[ Setting game type (Is this still needed?) ]] --
+
+addons = "DayZ (0.8a) // "
 function addAddonInfo (name,description)
 	addons = addons..name.." | "
 	setGameType (addons)
 end
 
---night addon
+--night addon (Should be separate)
+--[[
 function nightAddon1 ()
 	if gameplayVariables["enablenight"] then 
 		addAddonInfo ("Night","Night time with fading effect.")
@@ -16,8 +18,9 @@ function nightAddon ()
 	setTimer(nightAddon1,10000,1)
 end
 nightAddon () 
+]]
 
---Load Addons
+-- [[ Automatically start all resources with "addon_" in name ]] --
 function loadAddons( res )
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
@@ -28,6 +31,7 @@ function loadAddons( res )
 end
 addEventHandler ( "onResourceStart", getResourceRootElement(getThisResource()), loadAddons )
 
+-- [[ Stops all resources with "addon_" in name
 function unloadAddons ( res )
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
@@ -37,6 +41,3 @@ function unloadAddons ( res )
 	end
 end
 addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), unloadAddons )
-
---Addon System
---Functions
