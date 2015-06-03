@@ -33,6 +33,12 @@
 	<export function="saveLog" type="server" />
 	<export function="returnLog" type="server" />
 	
+	<!-- Exports -->
+	<script src="exports_s.lua" type="server" />
+	<export function="setPlayerBlood" type="server" />
+	<export function="setPlayerMurders" type="server" />
+	<export function="setPlayerZombies" type="server" />
+	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
 	<file src="icons/m4a1.png"/>
