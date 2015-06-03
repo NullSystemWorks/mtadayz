@@ -621,16 +621,16 @@ local vehicleDataTable = {
 }
 
 
---local vehicleManager = getAccount("vehicleManager","ds4f9$")
-	--if not vehicleManager then
-	--addAccount("vehicleManager","ds4f9$")
-	--end
-
 function saveallvehicles(ps,command)
 	counter = 0
 	counterTent = 0
-	--delete Accounts 
+	
+
 	local vehicleManager = getAccount("vehicleManager","ds4f9$")
+	if not vehicleManager then
+	addAccount("vehicleManager","ds4f9$")
+	end
+	--delete Accounts 
 	--for i = 1, (getAccountData(vehicleManager,"vehicleamount") or 0) do
 		--local account = getAccount("vehicle_number_"..i,"ds4f9$")
 		--if not account then break end
