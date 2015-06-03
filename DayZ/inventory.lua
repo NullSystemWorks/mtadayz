@@ -211,7 +211,7 @@ inventoryItems = {
 {"Small Box",1,'clothes.png',128,128,"Component","A small box."},
 {"String",1,'clothes.png',128,128,"Component","A rather long string."},
 {"Needle",1,'clothes.png',128,128,"Component","A sharp instrument for sowing."},
-{"Microchips",1,'clothes.png',128,128,"Component","Can be used for electronical consumables."},
+{"Microchips",1,'clothes.png',128,128,"Component","Can be used for electric consumables."},
 {"Optics",1,'clothes.png',128,128,"Component","Can be used for items like the binoculars."},
 {"Sharp Metal",1,'clothes.png',128,128,"Component","TO DO"},
 {"Handle",1,'clothes.png',128,128,"Component","TO DO"},
@@ -833,6 +833,7 @@ function playerUseItem(itemName,itemInfo)
     elseif itemInfo == "Equip Special Weapon" then
         triggerServerEvent("onPlayerRearmWeapon",getLocalPlayer(),itemName,3)
 	elseif itemInfo == "Craft" then
+		setElementData(localPlayer,"selectedBlueprint",itemName)
 		checkComponents()
 	end
 end
@@ -1119,8 +1120,12 @@ Stuff to do:
 craftingTable = {
 
 -- {string Blueprint Name, string Blueprint Result, int Result Number, string Part1, string Part2, string Part3, int Part1Required, int Part2Required, int Part3Required, int CraftingTime},
+--[[ 
+Note that for CraftingTime, the progress bar is increased by +1 every milliseconds at which CraftingTime has been specified 
+(if it's set to 1000, the progress bar will be increased by 1 every second, if it's set to 60000, every 60 seconds) 
+]]
 --  [[ PRIMARY WEAPONS ]] --
-{"M4 Blueprint","M4",1,"Gun Barrel","Gun Stock","Nails",1,1,2,5000},
+{"M4 Blueprint","M4",1,"Gun Barrel","Gun Stock","Nails",1,1,2,500},
 {"CZ 550 Blueprint","CZ 550",1,"Gun Barrel","Gun Stock","Optics",1,1,1,10000},
 {"Winchester '66 Blueprint","Winchester 1866",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
 {"SPAZ-12 C. Shtgn. Blueprint","SPAZ-12 Combat Shotgun",1,"Gun Barrel","Gun Stock","Duct Tape",2,1,4,3000},
@@ -1194,71 +1199,116 @@ craftingTable = {
 
 }
 
-craftingTime = 0
-crafted = false
+-- [[ We initialize the crafting process ]] --
+selectedBlueprint = ""		-- The blueprint that will be used (equals data[1])
+craftedItem = ""			-- The end result of the crafting process (equals data[2])
+craftedAmount = 0			-- The amount of craftedItem (equals data[3])
+craftingTime = 0			-- How long will the item take to craft? (equals data[10])
+ComponentA = ""				-- Component A (equals data[4])
+ComponentB = ""				-- Component B (equals data[5])
+ComponentC = ""				-- Component C (equals data[6])
+ComponentA_Amount = ""		-- Amount for A (equals data[7])
+ComponentB_Amount = ""		-- Amount for B (equals data[8])
+ComponentC_Amount = ""		-- Amount for C (equals data[9])
+crafted = false				-- Has the item been crafted?
+isCrafting = false			-- Is the player crafting already?
 
--- Creates a progressbar for crafting
-function craftingTimer()
+
+-- [[ Using the assigned variables, we now craft the item ]] --
+function craftItem()
+	if getElementData(localPlayer,ComponentA) >= ComponentA_Amount then
+		if getElementData(localPlayer,ComponentB) >= ComponentB_Amount then
+			if getElementData(localPlayer,ComponentC) >= ComponentC_Amount then
+				if not isCrafting then
+					triggerEvent("onStartCraftingTimer",localPlayer)
+					if crafted then
+						startRollMessage2("Crafting","Item has been crafted!",0,255,0)
+						setElementData(localPlayer,craftedItem,getElementData(localPlayer,craftedItem)+craftedAmount)
+						setElementData(localPlayer,selectedBlueprint,getElementData(localPlayer,selectedBlueprint)-1)
+						setElementData(localPlayer,ComponentA,getElementData(localPlayer,ComponentA)-ComponentA_Amount)
+						setElementData(localPlayer,ComponentB,getElementData(localPlayer,ComponentB)-ComponentB_Amount)
+						setElementData(localPlayer,ComponentC,getElementData(localPlayer,ComponentC)-ComponentC_Amount)
+						craftingTime = 0
+						crafted = false
+						destroyElement(craftingBar)
+						killTimer(craftingTimer)
+						isCrafting = false
+					else
+						startRollMessage2("Crafting","Item is being crafted...",0,0,255)
+					end
+				else
+					startRollMessage2("Crafting","You are crafting already!",255,0,0)
+				end
+			else
+				startRollMessage2("Crafting","Not enough components! ("..ComponentC..")",255,0,0)
+				return
+			end
+		else
+			startRollMessage2("Crafting","Not enough components! ("..ComponentB..")",255,0,0)
+			return
+		end
+	else
+		startRollMessage2("Crafting","Not enough components! ("..ComponentA..")",255,0,0)
+		return
+	end
+end
+addEvent("onPlayerStartCrafting",true)
+addEventHandler("onPlayerStartCrafting",root,craftItem)
+
+-- [[ First we check if the player has all components, and if he has, assign the respective item ]] --
+function checkComponents()
+local getSelectedBlueprint = getElementData(localPlayer,"selectedBlueprint")
+	for i,data in ipairs(craftingTable) do
+		if getSelectedBlueprint == data[1] then
+			selectedBlueprint = data[1]
+			craftedItem = data[2]
+			craftedAmount = data[3]
+			ComponentA = data[4]
+			ComponentB = data[5]
+			ComponentC = data[6]
+			ComponentA_Amount = data[7]
+			ComponentB_Amount = data[8]
+			ComponentC_Amount = data[9]
+			craftingTime = data[10]
+			triggerEvent("onPlayerStartCrafting",localPlayer)
+			break
+		end
+	end
+end
+
+-- [[ Creates a progress bar for crafting ]] --
+function onStartCraftingTimer()
 	if isElement(craftingBar) then
 		return
 	else
 		craftingBar = guiCreateProgressBar(0.35,0.9,0.3,0.05,true)
 		guiProgressBarSetProgress(craftingBar,0)
 		craftingTimer = setTimer(increaseTimer,craftingTime,0)
-		craftingsound = playSound("sounds/crafting.mp3",true)
+		craftingsound = playSound("sounds/crafting.mp3",false)
+		isCrafting = true
+		
 	end
 end
-addEvent("onClientPlayerCrafting",true)
-addEventHandler("onClientPlayerCrafting",localPlayer,craftingTimer)
+addEvent("onStartCraftingTimer",true)
+addEventHandler("onStartCraftingTimer",localPlayer,onStartCraftingTimer)
 
+-- [[ Increasing the progress bar status until it's 100 ]] --
 function increaseTimer()
 	if guiProgressBarGetProgress(craftingBar) >= 100 then
-		for i,thename in ipairs (craftingTable) do
-			itemName = thename[2]
-		end
-		if getPlayerCurrentSlots() + getItemSlots(itemName) >= getPlayerMaxAviableSlots() then
+		if getPlayerCurrentSlots() --[[+ getItemSlots(itemName) ]] >= getPlayerMaxAviableSlots() then
 			setTimer(startRollMessage2("Crafting","Inventory is full!",255,0,0),100,1)
 			crafted = false
 			destroyElement(craftingBar)
+			destroyElement(secondsleftlabel)
 			killTimer(craftingTimer)
 			return
 		else
 			crafted = true
-			stopSound(craftingsound)
-			checkComponents()
-			destroyElement(craftingBar)
-			killTimer(craftingTimer)
+			isCrafting = false
+			craftItem()
+			return
 		end
 	else
 		guiProgressBarSetProgress(craftingBar,guiProgressBarGetProgress(craftingBar)+1)
-	end
-end
-
-
-function checkComponents()
-	for i,data in ipairs(craftingTable) do
-		if getElementData(localPlayer,data[1]) > 0 then
-			if (getElementData(localPlayer,data[4]) >= data[7]) and (getElementData(localPlayer,data[5]) >= data[8]) and (getElementData(localPlayer,data[6]) >= data[9]) then
-				craftingTime = data[10]
-				triggerEvent("onClientPlayerCrafting",localPlayer)
-				if crafted then
-					startRollMessage2("Crafting","Item has been crafted!",0,255,0)
-					setElementData(localPlayer,data[2],getElementData(localPlayer,data[2])+data[3])
-					setElementData(localPlayer,data[1],getElementData(localPlayer,data[1])-1)
-					setElementData(localPlayer,data[4],getElementData(localPlayer,data[4])-data[7])
-					setElementData(localPlayer,data[5],getElementData(localPlayer,data[5])-data[8])
-					setElementData(localPlayer,data[6],getElementData(localPlayer,data[6])-data[9])
-					craftingTime = 0
-					crafted = false
-					destroyElement(craftingBar)
-					killTimer(craftingTimer)
-				else
-					startRollMessage2("Crafting","Item is being crafted...",0,0,255)
-				end
-			else
-				startRollMessage2("Crafting","Not enough components!",255,0,0)
-				return
-			end
-		end
 	end
 end
