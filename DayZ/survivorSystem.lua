@@ -709,14 +709,14 @@ function onPlayerRequestChangingStats(itemName,itemInfo,data)
 		elseif itemName == "Pasta Can" then
 			blood = 200
 		end
-		setPedAnimation (source,"FOOD","EAT_Burger",nil,false,false,nil,false)
+		setPedAnimation (source,"FOOD","EAT_Burger",4000,false,false,nil,false)
 		setElementData(source,itemName,getElementData(source,itemName)-1)
 		addPlayerStats (source,"blood",blood)
 		addPlayerStats (source,data,gameplayVariables["foodrestore"])
 	elseif data == "thirst" then
 		setElementData(source,itemName,getElementData(source,itemName)-1)
 		addPlayerStats (source,data,gameplayVariables["thirstrestore"])
-		setPedAnimation (source,"VENDING","VEND_Drink2_P",nil,false,false,nil,false) 
+		setPedAnimation (source,"VENDING","VEND_Drink2_P",4000,false,false,nil,false) 
 		if itemName == "Water Bottle" then
 			setElementData(source,"Empty Water Bottle",(getElementData(source,"Empty Water Bottle") or 0)+1)
 		end
@@ -729,7 +729,7 @@ addEventHandler("onPlayerRequestChangingStats",getRootElement(),onPlayerRequestC
 
 function onPlayerUseMedicObject(itemName)
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",4000,false,false,nil,false)
 	setTimer( function ()
 		if itemName == "Bandage" then
 			setElementData(playersource,"bleeding",0)
@@ -760,7 +760,7 @@ addEventHandler("onPlayerUseMedicObject",getRootElement(),onPlayerUseMedicObject
 
 function onPlayerGiveMedicObject(itemName,player)
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",4000,false,false,nil,false)
 	setTimer( function ()
 		if itemName == "bandage" then
 			setElementData(player,"bleeding",0)
