@@ -37,7 +37,14 @@
 	<script src="exports_s.lua" type="server" />
 	<export function="setPlayerBlood" type="server" />
 	<export function="setPlayerMurders" type="server" />
-	<export function="setPlayerZombies" type="server" />
+	<export function="setPlayerZombiesKilled" type="server" />
+	
+	<export function="setPlayerHumanity" type="server" />
+	
+	<export function="getPlayerBlood" type="server" />
+	<export function="getPlayerMurders" type="server" />
+	<export function="getPlayerZombiesKilled" type="server" />
+	
 	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
@@ -167,6 +174,7 @@
     <file src="images/dayzicons/temperature.png" />
     <file src="images/dayzicons/thirsty.png" />
     <file src="images/dayzicons/medic.png" />
+	<file src="images/dayzicons/level_1.png" />
     <file src="images/dayzicons/level_2.png" />
     <file src="images/dayzicons/level_3.png" />
     <file src="images/dayzicons/level_4.png" />
