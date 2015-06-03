@@ -2,22 +2,131 @@
 
 	Author: CiBeR
 	Version: 0.1
-	Copyright: DayZ Gamemode. Al rights reserved to Developers
+	Copyright: DayZ Gamemode. All rights reserved to Developers
 	Current Devs: Lawliet, CiBeR
 	
 ]]--
+
+-- [[ Exported functions ]] --
+--[[ 
+getPlayerBlood - Arguments: element player. Returns: Amount of blood the player has (int)
+setPlayerBlood - Arguments: element player, int amount. Effect: sets player's blood to specified amount
+getPlayerZombiesKilled - Arguments: element player. Returns: Amount of zombies player has killed (int)
+setPlayerZombiesKilled - Arguments: element player, int amount. Effect: sets amount of killed zombies for player to specified value
+getPlayerHeadshots - Arguments: element player. Returns: Amount of head shots player has delivered (int)
+setPlayerHeadshots - Arguments: element player, int amount. Effect: sets amount of head shots player has delivered to specified value
+getPlayerMurders - Arguments: element player. Returns: Amount of murders player has committed (int)
+setPlayerMurders - Arguments: element player, int amount. Effect: sets amount of murders to specified value
+getPlayerBanditsKilled - Arguments: element player. Returns: Amount of bandits player has killed
+setPlayerBanditsKilled - Arguments: element player, int amount. Effect: sets amount of killed bandits to specified value
+getPlayerTemperature - Arguments: element player. Returns: Temperature of player (int)
+setPlayerTemperature - Arguments: element player, int amount. Effect: sets temperature to specified value
+getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
+setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
+
+
+
+
+]]
+
+-- [[ Player Blood Functions ]] --
 function setPlayerBlood(player,blood)
 	if isElement(player) and ( getElementType(player) == "player" ) and blood then
 		setElementData(player,"blood",blood)
 	end
 end
+
+function getPlayerBlood(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local blood = getElementData(player,"blood")
+		return blood
+	end
+end
+
+-- [[ Player Zombies Functions ]] --
+function setPlayerZombiesKilled(player,zkill)
+	if isElement(player) and ( getElementType(player) == "player" ) and zkill then
+		setElementData(player,"zombieskilled",zkill)
+	end
+end
+
+function getPlayerZombiesKilled(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local murders = getElementData(player,"zombieskilled")
+		return murders
+	end
+end
+
+
+-- [[ Player Headshots Function ]] --
+function setPlayerHeadshots(player,headshots)
+	if isElement(player) and ( getElementType(player) == "player" ) and headshots then
+		setElementData(player,"headshots",headshots)
+	end
+end
+
+function getPlayerHeadshots(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local headshots = getElementData(player,"headshots")
+		return headshots
+	end
+end
+
+-- [[ Player Murders Function ]] --
 function setPlayerMurders(player,murders)
 	if isElement(player) and ( getElementType(player) == "player" ) and murders then
 		setElementData(player,"murders",murders)
 	end
 end
-function setPlayerZombies(player,zkill)
-	if isElement(player) and ( getElementType(player) == "player" ) and zkill then
-		setElementData(player,"zombieskilled",zkill)
+
+function getPlayerMurders(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local murders = getElementData(player,"murders")
+		return murders
+	end
+end
+
+
+-- [[ Player Bandits Killed Function ]] --
+function setPlayerBanditsKilled(player,bkill)
+	if isElement(player) and ( getElementType(player) == "player" ) and bkill then
+		setElementData(player,"banditskilled",bkill)
+	end
+end
+
+function getPlayerBanditsKilled(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local bkill = getElementData(player,"banditskilled")
+		return bkill
+	end
+end
+
+
+-- [[ Player Temperature Function ]] --
+function setPlayerTemperature(player,temperature)
+	if isElement(player) and ( getElementType(player) == "player" ) and temperature then
+		setElementData(player,"temperature",temperature)
+	end
+end
+
+function getPlayerTemperature(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local temperature = getElementData(player,"temperature")
+		return temperature
+	end
+end
+
+
+-- [[ Player Humanity Function ]] --
+function setPlayerHumanity(player,humanity)
+	if isElement(player) and ( getElementType(player) == "player" ) and humanity then
+		setElementData(player,"humanity",humanity)
+	end
+end
+
+function getPlayerHumanity(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		local humanity = getElementData(player,"humanity")
+		return humanity
 	end
 end
