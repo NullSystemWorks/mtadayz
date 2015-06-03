@@ -635,13 +635,13 @@ function checkTemperature2()
 		if getElementData(player,"logedin") then
 			value = 0
 			if isElementInWater(player) then
-				value = gameplayVariables["temperaturewater"]
+				value = value+gameplayVariables["temperaturewater"]
 			end	
 			if getControlState (player,"sprint") then
 				value = value+gameplayVariables["temperaturesprint"]
 			end
 			if isPedInVehicle(player) then
-				value = value+0.5
+				value = value+0.008
 			addPlayerStats (player,"temperature",value)
 			end
 		end	
