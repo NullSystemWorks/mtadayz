@@ -1,73 +1,15 @@
 local vehicleDataTableForTent = {
-{"Wood Pile"},
-{"Bandage"},
-{"Water Bottle"},
-{"Pasta Can"},
-{"Beans Can"},
-{"Burger"},
-{"Box of Matches"},
-{"M911"},
-{"M9 SD"},
-{"Winchester 1866"},
-{"PDW"},
-{"Hunting Knife"},
-{"Morphine"},
-{"Hatchet"},
-{"Pizza"},
-{"Soda Bottle"},
-{"Empty Gas Canister"},
-{"Full Gas Canister"},
-{"Roadflare"},
-{"Milk"},
-{"Tear Gas"},
-{"Grenade"},
-{"Desert Eagle"},
-{"Sawn-Off Shotgun"},
-{"SPAZ-12 Combat Shotgun"},
-{"MP5A5"},
-{"Watch"},
-{"Medic Kit"},
-{"Heat Pack"},
-{"Lee Enfield"},
-{"AK-47"},
-{"Blood Bag"},
-{"GPS"},
-{"Map"},
-{"Toolbox"},
-{"Wire Fence"},
-{"Tire"},
-{"Engine"},
-{"Tank Parts"},
-{"CZ 550 Mag"},
+
+-- [[ Weapons ]] --
 {"M4"},
 {"CZ 550"},
-{"Satchel"},
-{"Infrared Goggles"},
-{"Night Vision Goggles"},
-{"Tent"},
-{"Raw Meat"},
-{"Cooked Meat"},
-{"Camouflage Clothing"},
-{"Ghillie Suit"},
-{"Civilian Clothing"},
-{"Survivor Clothing"},
-{"Painkiller"},
-{"Binoculars"},
-{"Empty Water Bottle"},
-{"Empty Soda Cans"},
-{"Scruffy Burgers"},
-{"Assault Pack (ACU)"},
-{"Alice Pack"},
-{"Radio Device"},
-{"Coyote Backpack"},
-{"Czech Backpack"},
-{"Baseball Bat"},
-{"Shovel"},
-{"Golf Club"},
-{"Compass"},
-
-{"Mosin 9130"},
+{"Winchester 1866"},
+{"SPAZ-12 Combat Shotgun"},
+{"Sawn-Off Shotgun"},
+{"AK-47"},
+{"Lee Enfield"},
 {"Sporter 22"},
+{"Mosin 9130"},
 {"Crossbow"},
 {"SKS"},
 {"Blaze 95 Double Rifle"},
@@ -77,11 +19,27 @@ local vehicleDataTableForTent = {
 {"Sa58V CCO"},
 {"SVD Dragunov"},
 {"DMR"},
+{"M1911"},
+{"M9 SD"},
+{"PDW"},
+{"G17"},
+{"MP5A5"},
+{"Desert Eagle"},
 {"Bizon PP-19"},
 {"Revolver"},
+{"Hunting Knife"},
+{"Hatchet"},
+{"Baseball Bat"},
+{"Shovel"},
+{"Golf Club"},
 {"Machete"},
 {"Crowbar"},
+{"Parachute"},
+{"Tear Gas"},
+{"Grenade"},
+{"Binoculars"},
 
+-- [[ Ammo ]] --
 {".45 ACP Cartridge"},
 {"9x19mm SD Cartridge"},
 {"9x19mm Cartridge"},
@@ -95,10 +53,69 @@ local vehicleDataTableForTent = {
 {".303 British Cartridge"},
 {"Bolt"},
 
+-- [[ Food / Drinks ]] --
+{"Baked Beans"},
+{"Pasta"},
+{"Sardines"},
+{"Frank & Beans"},
+{"Can (Corn"},
+{"Can (Peas"},
+{"Can (Pork"},
+{"Can (Stew)"},
+{"Can (Ravioli"},
+{"Can (Fruit"},
+{"Can (Chowder"},
+{"Pistachios"},
+{"Trail Mix"},
+{"MRE"},
+{"Water Bottle"},
+{"Soda Can (Pepsi)"},
+{"Soda Can (Cola)"},
+{"Soda Can (Mountain Dew)"},
+{"Can (Milk)"},
+
+-- [[ Items ]] --
+
+{"Wood Pile"},
+{"Bandage"},
+{"Road Flare"},
+{"Empty Gas Canister"},
+{"Full Gas Canister"},
+{"Medic Kit"},
+{"Heat Pack"},
+{"Painkiller"},
+{"Morphine"},
+{"Blood Bag"},
+{"Wire Fence"},
+{"Raw Meat"},
+{"Tire"},
+{"Engine"},
+{"Tank Parts"},
+{"Tent"},
+{"Box of Matches"},
+{"Watch"},
+{"GPS"},
+{"Map"},
+{"Toolbox"},
+{"IR Goggles"},
+{"NV Goggles"},
+{"Cooked Meat"},
+{"Radio Device"},
+{"Compass"},
+{"Camouflage Clothing"},
+{"Civilian Clothing"},
+{"Survivor Clothing"},
+{"Ghillie Suit"},
+{"Empty Water Bottle"},
+{"Empty Soda Can"},
+{"Assault Pack (ACU)"},
+{"Alice Pack"},
 {"Ghillie Backpack"},
 {"OS Backpack"},
+{"Coyote Backpack"},
+{"Czech Backpack"},
 
--- [[ PRIMARY WEAPONS ]] --
+-- [[ Blueprints ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},
 {"Winchester 1866 Blueprint"},
@@ -106,40 +123,48 @@ local vehicleDataTableForTent = {
 {"Sawn-Off Shtgn. Blueprint"},
 {"AK-47 Blueprint"},
 {"Lee Enfield Blueprint"},
-
--- [[ SECONDARY WEAPONS ]]-- 
+{"Sporter 22 Blueprint"},
+{"Mosin 9130 Blueprint"},
+{"Crossbow Blueprint"},
+{"SKS Blueprint"},
+{"Blaze 95 D. R. Blueprint"},
+{"Remington 870 Blueprint"},
+{"FN FAL Blueprint"},
+{"G36C Blueprint"},
+{"Sa58V CCO Blueprint"},
+{"SVD Dragunov Blueprint"},
+{"DMR Blueprint"},
 {"M1911 Blueprint"},
 {"M9 SD Blueprint"},
 {"PDW Blueprint"},
+{"G17 Blueprint"},
 {"MP5A5 Blueprint"},
+{"Bizon PP-19 Blueprint"},
+{"Revolver Blueprint"},
 {"Desert Eagle Blueprint"},
 {"Hunting Knife Blueprint"},
 {"Hatchet Blueprint"},
 {"Baseball Bat Blueprint"},
 {"Shovel Blueprint"},
 {"Golf Club Blueprint"},
-
--- [[ SPECIAL WEAPONS ]] --
+{"Machete Blueprint"},
+{"Crowbar Blueprint"},
 {"Parachute Blueprint"},
 {"Tear Gas Blueprint"},
 {"Grenade Blueprint"},
 {"Binoculars Blueprint"},
-
--- [[ AMMO ]] --
-{"M1911 Mag Blueprint"},
-{"M9 SD Mag Blueprint"},
-{"Desert Eagle Mag Blueprint"},
-{"PDW Mag Blueprint"},
-{"MP5A5 Mag Blueprint"},
-{"AK Mag Blueprint"},
-{"M4 Mag Blueprint"},
+{".45 ACP Cartridge Blueprint"},
+{"9x19mm SD Cartridge Blueprint"},
+{"9x19mm Cartridge Blueprint"},
+{"9x18mm Cartridge Blueprint"},
+{"5.45x39mm Cartridge Blueprint"},
+{"5.56x45mm Cartridge Blueprint"},
 {"1866 Slug Blueprint"},
 {"2Rnd. Slug Blueprint"},
-{"SPAZ-12 Pellet Blueprint"},
-{"CZ 550 Mag Blueprint"},
-{"Lee Enfield Mag Blueprint"},
-
--- [[ ITEMS ]] --
+{"12 Gauge Pellet Blueprint"},
+{"9.3x62mm Cartridge Blueprint"},
+{".303 British Cartridge Blueprint"},
+{"Bolt Blueprint"},
 {"Medic Kit Blueprint"},
 {"Wire Fence Blueprint"},
 {"Tent Blueprint"},
@@ -148,14 +173,10 @@ local vehicleDataTableForTent = {
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
 {"Roadflare Blueprint"},
-
--- [[ TOOLBELT ]] --
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
 {"Infrared Goggles Blueprint"},
 {"Night Vision Goggles Blueprint"},
-
--- [[ BLUEPRINT PARTS ]] --
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -185,6 +206,7 @@ local vehicleDataTableForTent = {
 {"Metal Plate"},
 {"Metallic Stick"},
 {"Small Casing"},
+
 }
 
 weaponAmmoTable = {
@@ -200,6 +222,7 @@ weaponAmmoTable = {
 
 ["9x19mm Cartridge"] = {
 {"PDW",28},
+{"G17",22},
 },
 
 ["9x18mm Cartridge"] = {
@@ -413,22 +436,24 @@ function backPackBack (dataName,oldValue)
 		end
 		local x,y,z = getElementPosition(source)
 		local rx,ry,rz = getElementRotation(source)
-		if newValue == 18 then
-			elementBackpack[source] = createObject(3026,x,y,z)
-		elseif newValue == 25 then
-			elementBackpack[source] = createObject(1248,x,y,z)
-		elseif newValue == 36 then
-			elementBackpack[source] = createObject(1575,x,y,z)
-		elseif newValue == 64 then
-			elementBackpack[source] = createObject(1252,x,y,z)
-		elseif newValue == 45 then
-			elementBackpack[source] = createObject(1275,x,y,z)
-		elseif newValue == 100 then
-			elementBackpack[source] = createObject(1644,x,y,z)
+		if newValue == 12 then
+			elementBackpack[source] = createObject(3026,x,y,z) -- acu
+		elseif newValue == 13 then
+			elementBackpack[source] = createObject(1248,x,y,z) -- ALICE
+		elseif newValue == 16 then
+			elementBackpack[source] = createObject(3026,x,y,z) -- Placeholder
+		elseif newValue == 17 then
+			elementBackpack[source] = createObject(1644,x,y,z) -- OS
+		elseif newValue == 18 then
+			elementBackpack[source] = createObject(1275,x,y,z) -- Ghillie
+		elseif newValue == 24 then
+			elementBackpack[source] = createObject(1252,x,y,z) -- Coyote
+		elseif newValue == 30 then
+			elementBackpack[source] = createObject(1575,x,y,z) -- Czech
 		elseif newValue == 8 then
 			return
 		end
-		if newValue == 36 then
+		if newValue == 30 then
 			attachElementToBone(elementBackpack[source],source,3,0,-0.16,0.05,270,0,180)
 		else
 			attachElementToBone(elementBackpack[source],source,3,0,-0.225,0.05,90,0,0)
@@ -472,7 +497,9 @@ function weaponSwitchBack ( previousWeaponID, currentWeaponID )
 		end
 	elseif currentWeaponID == weapID1 then
 		detachElementFromBone(elementWeaponBack[source])
-		destroyElement(elementWeaponBack[source])
+			if elementWeaponBack[source] then
+				destroyElement(elementWeaponBack[source])
+			end
 		elementWeaponBack[source] = false
 	end
 end
@@ -698,16 +725,36 @@ setTimer(checkHumanity,60000,0)
 
 function onPlayerRequestChangingStats(itemName,itemInfo,data)
 	if data == "food" then
-		if itemName == "Burger" then
-			blood = 300
-		elseif itemName == "Pizza" then
-			blood = 300
-		elseif itemName == "Cooked Meat" then
+		if itemName == "Baked Beans" then
+			blood = 200
+		elseif itemName == "Pasta" then
+			blood = 200
+		elseif itemName == "Sardines" then
+			blood = 200
+		elseif itemName == "Frank & Beans" then
+			blood = 200
+		elseif itemName == "Can (Corn)" then
+			blood = 200
+		elseif itemName == "Can (Peas)" then
+			blood = 200
+		elseif itemName == "Can (Pork)" then
+			blood = 200
+		elseif itemName == "Can (Stew)" then
+			blood = 200
+		elseif itemName == "Can (Ravioli)" then
+			blood = 200
+		elseif itemName == "Can (Fruit)" then
+			blood = 200
+		elseif itemName == "Can (Chowder)" then
+			blood = 200
+		elseif itemName == "MRE" then
 			blood = 800
-		elseif itemName == "Beans Can" then
-			blood = 200
-		elseif itemName == "Pasta Can" then
-			blood = 200
+		elseif itemName == "Pistachios" then
+			blood = 100
+		elseif itemName == "Trail Mix" then
+			blood = 100
+		elseif itemName == "Cooked Meat" then
+			blood = 1500
 		end
 		setPedAnimation (source,"FOOD","EAT_Burger",4000,false,false,nil,false)
 		setElementData(source,itemName,getElementData(source,itemName)-1)

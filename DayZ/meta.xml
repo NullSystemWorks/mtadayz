@@ -8,6 +8,7 @@
 -->
 <meta>
     <info author="Marwin & L & -ffs-Sniper" description="MTA:DayZ - DayZ for MTA" version="0.8a" type="gamemode" />
+	<min_mta_version server="1.4.1" client="1.4.1" />
     <script src="editor_server.lua" type="server" />
     <script src="editor_client.lua" type="client" cache="false" />
     <script src="pickups.lua" type="server" />
@@ -38,78 +39,119 @@
 	<export function="setPlayerBlood" type="server" />
 	<export function="setPlayerMurders" type="server" />
 	<export function="setPlayerZombiesKilled" type="server" />
-	
 	<export function="setPlayerHumanity" type="server" />
 	
 	<export function="getPlayerBlood" type="server" />
 	<export function="getPlayerMurders" type="server" />
 	<export function="getPlayerZombiesKilled" type="server" />
-	
+	<export function="getPlayerHumanity" type="server" />
 	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
-	<file src="icons/m4a1.png"/>
-	<file src="icons/sniper.png"/>
-	<file src="icons/winchester.png"/>
-	<file src="icons/m1014.png"/>
-	<file src="icons/sawn.png"/>
-	<file src="icons/akm.png"/>
-	<file src="icons/lee.png"/>
-	<file src="icons/colt.png"/>
-	<file src="icons/m9.png"/>
-	<file src="icons/mp5.png"/>
-	<file src="icons/pdw.png"/>
-	<file src="icons/revolver.png"/>
-	<file src="icons/knife.png"/>
-	<file src="icons/hatchet.png"/>
-	<file src="icons/bat.png"/>
-	<file src="icons/shovel.png"/>
-	<file src="icons/golf.png"/>
-	<file src="icons/parachute.png"/>
+	<file src="icons/ak47.png"/>
+	<file src="icons/baseball.png"/>
+	<file src="icons/binoculars.png"/>
+	<file src="icons/bizon.png"/>
+	<file src="icons/crossbow.png"/>
+	<file src="icons/crowbar.png"/>
+	<file src="icons/cz550.png"/>
+	<file src="icons/dmr.png"/>
+	<file src="icons/m4.png"/>
+	<file src="icons/enfield.png"/>
+	<file src="icons/fnfal.png"/>
+	<file src="icons/g17.png"/>
+	<file src="icons/g36c.png"/>
 	<file src="icons/gas.png"/>
 	<file src="icons/grenade.png"/>
-	<file src="icons/binocular.png"/>
-	<file src="icons/mag.png"/>
-	<file src="icons/burger.png"/>
-	<file src="icons/can.png"/>
-	<file src="icons/pizza.png"/>
-	<file src="icons/pepsi.png"/>
+	<file src="icons/hatchet.png"/>
+	<file src="icons/knife.png"/>
+	<file src="icons/m9sd.png"/>
+	<file src="icons/m1911.png"/>
+	<file src="icons/machete.png"/>
+	<file src="icons/mp5a5.png"/>
+	<file src="icons/parachute.png"/>
+	<file src="icons/pdw.png"/>
+	<file src="icons/remington.png"/>
+	<file src="icons/revolver.png"/>
+	<file src="icons/sa58v.png"/>
+	<file src="icons/sawn.png"/>
+	<file src="icons/shovel.png"/>
+	<file src="icons/spaz.png"/>
+	<file src="icons/svd.png"/>
+	<file src="icons/winchester.png"/>
+	
+	<file src="icons/9x18.png"/>
+	<file src="icons/9x19.png"/>
+	<file src="icons/9x19sd.png"/>
+	<file src="icons/45acp.png"/>
+	<file src="icons/ak.png"/>
+	<file src="icons/arrow.png"/>
+	<file src="icons/british.png"/>
+	<file src="icons/m4mag.png"/>
+	<file src="icons/shotgun.png"/>
+	<file src="icons/sniper.png"/>
+	
+	<file src="icons/bakedbeans.png"/>
+	<file src="icons/bottle.png"/>
+	<file src="icons/chowder.png"/>
 	<file src="icons/cola.png"/>
-	<file src="icons/meat.png"/>
-	<file src="icons/wood.png"/>
-	<file src="icons/bandage.png"/>
-	<file src="icons/flashlight.png"/>
-	<file src="icons/kan.png"/>
-	<file src="icons/chest.png"/>
-	<file src="icons/heater.png"/>
-	<file src="icons/tablet.png"/>
-	<file src="icons/morphine.png"/>
-	<file src="icons/blood.png"/>
-	<file src="icons/wirefence.png"/>
-	<file src="icons/flesh.png"/>
-	<file src="icons/wheel.png"/>
-	<file src="icons/engine.png"/>
-	<file src="icons/engine_part.png"/>
-	<file src="icons/tent.png"/>
-	<file src="icons/clothes.png"/>
+	<file src="icons/cookedmeat.png"/>
+	<file src="icons/corn.png"/>
+	<file src="icons/dew.png"/>
+	<file src="icons/frankbeans.png"/>
+	<file src="icons/fruit.png"/>
+	<file src="icons/milkcan.png"/>
+	<file src="icons/pasta.png"/>
+	<file src="icons/peas.png"/>
+	<file src="icons/pepsi.png"/>
+	<file src="icons/pork.png"/>
+	<file src="icons/ravioli.png"/>
+	<file src="icons/rawmeat.png"/>
+	<file src="icons/sardines.png"/>
+	<file src="icons/stew.png"/>
+	<file src="icons/pistachios.png"/>
+	<file src="icons/trailmix.png"/>
+	<file src="icons/mre.png"/>
+	
 	<file src="icons/acu.png"/>
 	<file src="icons/alice.png"/>
-	<file src="icons/chezh.png"/>
+	<file src="icons/antibiotics.png"/>
+	<file src="icons/bandage.png"/>
+	<file src="icons/bloodbag.png"/>
+	<file src="icons/blueprint.png"/>
+	<file src="icons/britishpack.png"/>
+	<file src="icons/canister.png"/>
+	<file src="icons/chest.png"/>
+	<file src="icons/clothes.png"/>
+	<file src="icons/compass.png"/>
 	<file src="icons/coyote.png"/>
-	<file src="icons/helmet.png"/>
-	<file src="icons/trap.png"/>
-	<file src="icons/injection.png"/>
-	<file src="icons/night.png"/>
-	<file src="icons/ir.png"/>
-	<file src="icons/map.png"/>
-	<file src="icons/matches.png"/>
-	<file src="icons/watch.png"/>
+	<file src="icons/czech.png"/>
+	<file src="icons/czechpouch.png"/>
+	<file src="icons/emptybottle.png"/>
+	<file src="icons/emptysoda.png"/>
+	<file src="icons/engine.png"/>
+	<file src="icons/engine_part.png"/>
+	<file src="icons/flashlight.png"/>
+	<file src="icons/ghillie.png"/>
 	<file src="icons/gps.png"/>
-	<file src="icons/tool.png"/>
+	<file src="icons/heatpack.png"/>
+	<file src="icons/map.png"/>
+	<file src="icons/matchbox.png"/>
+	<file src="icons/morphine.png"/>
+	<file src="icons/nvgoggles.png"/>
+	<file src="icons/painkillers.png"/>
+	<file src="icons/parts.png"/>
 	<file src="icons/radio.png"/>
-	<file src="icons/bottle.png"/>
-	<file src="icons/crossbow.png"/>
-	<file src="icons/milk.png"/>
+	<file src="icons/roadflare.png"/>
+	<file src="icons/survival.png"/>
+	<file src="icons/tent.png"/>
+	<file src="icons/toolbox.png"/>
+	<file src="icons/trashtincan.png"/>
+	<file src="icons/watch.png"/>
+	<file src="icons/wheel.png"/>
+	<file src="icons/wirefence.png"/>
+	<file src="icons/wood.png"/>
+
 	
 	<file src="images/buttArrow.png"/>
 	<file src="images/buttArrowDown.png"/>
@@ -184,6 +226,74 @@
 	<file src="images/inventory1.png" />
 	<file src="images/inventory2.png" />
 	<file src="images/inventory3.png" />
+	
+	<file src="images/world.jpg" type="client"></file>
+	<file src="images/gps.png" type="client"></file>
+	<file src="images/player.png" type="client"></file>
+	<file src="images/blip/0.png" type="client"></file>
+	<file src="images/blip/1.png" type="client"></file>
+	<file src="images/blip/2.png" type="client"></file>
+	<file src="images/blip/3.png" type="client"></file>
+	<file src="images/blip/4.png" type="client"></file>
+	<file src="images/blip/5.png" type="client"></file>
+	<file src="images/blip/6.png" type="client"></file>
+	<file src="images/blip/7.png" type="client"></file>
+	<file src="images/blip/8.png" type="client"></file>
+	<file src="images/blip/9.png" type="client"></file>
+	<file src="images/blip/10.png" type="client"></file>
+	<file src="images/blip/11.png" type="client"></file>
+	<file src="images/blip/12.png" type="client"></file>
+	<file src="images/blip/13.png" type="client"></file>
+	<file src="images/blip/14.png" type="client"></file>
+	<file src="images/blip/15.png" type="client"></file>
+	<file src="images/blip/16.png" type="client"></file>
+	<file src="images/blip/17.png" type="client"></file>
+	<file src="images/blip/18.png" type="client"></file>
+	<file src="images/blip/19.png" type="client"></file>
+	<file src="images/blip/20.png" type="client"></file>
+	<file src="images/blip/21.png" type="client"></file>
+	<file src="images/blip/22.png" type="client"></file>
+	<file src="images/blip/23.png" type="client"></file>
+	<file src="images/blip/24.png" type="client"></file>
+	<file src="images/blip/25.png" type="client"></file>
+	<file src="images/blip/26.png" type="client"></file>
+	<file src="images/blip/27.png" type="client"></file>
+	<file src="images/blip/28.png" type="client"></file>
+	<file src="images/blip/29.png" type="client"></file>
+	<file src="images/blip/30.png" type="client"></file>
+	<file src="images/blip/31.png" type="client"></file>
+	<file src="images/blip/32.png" type="client"></file>
+	<file src="images/blip/33.png" type="client"></file>
+	<file src="images/blip/34.png" type="client"></file>
+	<file src="images/blip/35.png" type="client"></file>
+	<file src="images/blip/36.png" type="client"></file>
+	<file src="images/blip/37.png" type="client"></file>
+	<file src="images/blip/38.png" type="client"></file>
+	<file src="images/blip/39.png" type="client"></file>
+	<file src="images/blip/40.png" type="client"></file>
+	<file src="images/blip/41.png" type="client"></file>
+	<file src="images/blip/42.png" type="client"></file>
+	<file src="images/blip/43.png" type="client"></file>
+	<file src="images/blip/44.png" type="client"></file>
+	<file src="images/blip/45.png" type="client"></file>
+	<file src="images/blip/46.png" type="client"></file>
+	<file src="images/blip/47.png" type="client"></file>
+	<file src="images/blip/48.png" type="client"></file>
+	<file src="images/blip/49.png" type="client"></file>
+	<file src="images/blip/50.png" type="client"></file>
+	<file src="images/blip/51.png" type="client"></file>
+	<file src="images/blip/52.png" type="client"></file>
+	<file src="images/blip/53.png" type="client"></file>
+	<file src="images/blip/54.png" type="client"></file>
+	<file src="images/blip/55.png" type="client"></file>
+	<file src="images/blip/56.png" type="client"></file>
+	<file src="images/blip/57.png" type="client"></file>
+	<file src="images/blip/58.png" type="client"></file>
+	<file src="images/blip/59.png" type="client"></file>
+	<file src="images/blip/60.png" type="client"></file>
+	<file src="images/blip/61.png" type="client"></file>
+	<file src="images/blip/62.png" type="client"></file>
+	<file src="images/blip/63.png" type="client"></file>
 	
 	<!-- Mods (Weapons & Playerskins) -->
     <file src="mods/sniper.txd" />

@@ -450,7 +450,7 @@ function rightItemClicked ()
 	local id = getElementData ( source, 'id' )
 	if getElementData ( source, 'foodLabel' ) then
 		local name = foodInventory[id][1]
-		if name == "Water Bottle" or name == "Milk" or name == "Soda Bottle" then
+		if name == "Water Bottle" or name == "Soda Can (Pepsi)" or name == "Soda Can (Cola)" or name == "Soda Can (Mountain Dew" or name == "Can (Milk)" then
 			playerUseItem ( name, "Drink" )
 		else
 			playerUseItem ( name, "Eat" )

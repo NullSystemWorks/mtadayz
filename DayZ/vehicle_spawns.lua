@@ -196,13 +196,11 @@ lootItems = {
 --{"GPS Jammer",2976,0.2,0,4},
 },
 ["hospital"] = {
-{"Medic Kit",2891,0.7,0},
 {"Heat Pack",1576,1,0},
 {"Bandage",1578,0.5,0},
 {"Blood Bag",1580,1,0},
 {"Morphine",1579,1,0},
 {"Blood Bag",1580,1,0},
-{"Medic Kit",2891,0.7,0},
 {"Blood Bag",1580,1,0},
 {"Painkiller",1580,1,0},
 },

@@ -11,227 +11,238 @@
 inventoryItems = {
 ["Weapons"] = {
 ["Primary Weapon"] = {
-{"M4",10, 'm4a1.png', 128, 64,"Assault Rifle", "Ammunition: 5.56x45mm Cartridge \nNoise: High (60)\nDamage: 3300"},
-{"CZ 550",10, 'sniper.png', 256,82,"Sniper", "Ammunition: 9.3x62mm Cartridge \nNoise: High (60)\nDamage: 7733"},
-{"Winchester 1866",10, 'winchester.png', 256, 143 ,"Shotgun", "Ammunition: 1866 Slug \nNoise: Moderate (40)\nDamage: 8910"},
-{"SPAZ-12 Combat Shotgun",10, 'm1014.png', 256, 128 ,"Shotgun", "Ammunition: 12 Gauge Pellet \nNoise: High (60)\nDamage: 3000"},
-{"Sawn-Off Shotgun",10, 'sawn.png', 256, 128,"Shotgun", "Ammunition: 2Rnd. Slug \nNoise: High (60)\nDamage: 6500"},
-{"AK-47",10, 'akm.png', 256, 128 ,"Assault Rifle", "Ammunition: 5.45x39mm Cartridge \nNoise: High (60)\nDamage: 2722"},
-{"Lee Enfield",10, 'lee.png', 256, 128,"Repeating Rifle", "Ammunition: .303 British Cartridge \nNoise: Moderate (40)\nDamage: 6722"},
-{"Sporter 22",10,'lee.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: Moderate (40)\nDamage: 6722"},
-{"Mosin 9130",10,'lee.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: Moderate (40)\nDamage: 6722"},
-{"Crossbow",10,'crossbow.png',128,128,"Crossbow","Ammunition: Bolt \nNoise: None (0)\nDamage: 5333"},
-{"SKS",10,'lee.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: High (60)\nDamage: 4000"},
-{"Blaze 95 Double Rifle",10,'m1014.png',256,128,"Shotgun","Ammunition: 2Rnd. Slug \nNoise: High (60)\nDamage: 4500"},
-{"Remington 870",10,'m1014.png',256,128,"Shotgun","Ammunition: 12 Gauge Pellet \nNoise: High (60)\nDamage: 4500"},
-{"FN FAL",10,'akm.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)\nDamage: 2800"},
-{"G36C",10,'akm.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)\nDamage: 3300"},
-{"Sa58V CCO",10,'akm.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)\nDamage: 4100"},
-{"SVD Dragunov",10,'sniper.png',256,82,"Sniper","Ammunition: 9.3x62mm Cartridge \nNoise: High (60)\nDamage: 8000"},
-{"DMR",10,'sniper.png',256,82,"Sniper","Ammunition: 9.3x62mm Cartridge \nNoise: High (60)\nDamage: 8200"},
+{"M4",10, 'm4.png', 256, 128,"Assault Rifle", "Ammunition: 5.56x45mm Cartridge \nNoise: High (60)"},
+{"CZ 550",10, 'cz550.png', 256,128,"Sniper", "Ammunition: 9.3x62mm Cartridge \nNoise: High (60)"},
+{"Winchester 1866",10, 'winchester.png', 256, 128 ,"Shotgun", "Ammunition: 1866 Slug \nNoise: Moderate (40)"},
+{"SPAZ-12 Combat Shotgun",10, 'spaz.png', 256, 128 ,"Shotgun", "Ammunition: 12 Gauge Pellet \nNoise: High (60)"},
+{"Sawn-Off Shotgun",10, 'sawn.png', 256, 128,"Shotgun", "Ammunition: 2Rnd. Slug \nNoise: High (60)"},
+{"AK-47",10, 'ak47.png', 256, 128 ,"Assault Rifle", "Ammunition: 5.45x39mm Cartridge \nNoise: High (60)"},
+{"Lee Enfield",10, 'enfield.png', 256, 128,"Repeating Rifle", "Ammunition: .303 British Cartridge \nNoise: Moderate (40)"},
+{"Sporter 22",10,'enfield.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: Moderate (40)"},
+{"Mosin 9130",10,'enfield.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: Moderate (40)"},
+{"Crossbow",10,'crossbow.png',128,128,"Crossbow","Ammunition: Bolt \nNoise: None (0)"},
+{"SKS",10,'enfield.png',256,128,"Repeating Rifle","Ammunition: .303 British Cartridge \nNoise: High (60)"},
+{"Blaze 95 Double Rifle",10,'spaz.png',256,128,"Shotgun","Ammunition: 2Rnd. Slug \nNoise: High (60)"},
+{"Remington 870",10,'remington.png',256,128,"Shotgun","Ammunition: 12 Gauge Pellet \nNoise: High (60)"},
+{"FN FAL",10,'fnfal.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)"},
+{"G36C",10,'g36c.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)"},
+{"Sa58V CCO",10,'sa58v.png',256,128,"Assault Rifle","Ammunition: 5.45x39mm Cartridge \nNoise: High (60)"},
+{"SVD Dragunov",10,'svd.png',256,128,"Sniper","Ammunition: 9.3x62mm Cartridge \nNoise: High (60)"},
+{"DMR",10,'dmr.png',256,128,"Sniper","Ammunition: 9.3x62mm Cartridge \nNoise: High (60)"},
 },
 
 ["Secondary Weapon"] = {
-{"M1911",5, 'colt.png', 256, 256,"Handgun", "Ammunition: .45 ACP Cartridge \nNoise: Low (20)\nDamage: 889"},
-{"M9 SD",5, 'm9.png', 256, 256,"Handgun", "Ammunition: 9x19mm SD Cartridge \nNoise: None (0)\nDamage: 889"},
-{"PDW",5, 'pdw.png', 256, 256,"Sub-Machine Gun", "Ammunition: 9x19mm Cartridge \nNoise: Moderate (40)\nDamage: 889"},
-{"G17",5,'colt.png',256,256,"Handgun","You shouldn't have this."},
-{"MP5A5",5, 'mp5.png', 256, 128,"Sub-Machine Gun", "Ammunition: 9x18mm Cartridge \nNoise: High (60)\nDamage: 889"},
-{"Desert Eagle",5, 'revolver.png',256,256,"Handgun","Ammunition: .45 ACP Cartridge \nNoise: High (60)\nDamage: 4500"},
-{"Bizon PP-19",5,'mp5.png',256,128,"Sub-Machine Gun","Ammunition: 9x18mm Cartridge \nNoise: High (60)\nDamage: 889"},
-{"Revolver",5,'revolver.png',256,256,"Handgun","Ammunition: .45 ACP Cartridge \nNoise: High (60)\nDamage: 4500"},
+{"M1911",5, 'm1911.png', 128, 128,"Handgun", "Ammunition: .45 ACP Cartridge \nNoise: Low (20)\nDamage: 889"},
+{"M9 SD",5, 'm9sd.png', 128, 128,"Handgun", "Ammunition: 9x19mm SD Cartridge \nNoise: None (0)\nDamage: 889"},
+{"PDW",5, 'pdw.png', 128, 128,"Sub-Machine Gun", "Ammunition: 9x19mm Cartridge \nNoise: Moderate (40)\nDamage: 889"},
+{"G17",5,'g17.png',128,128,"Handgun","You shouldn't have this."},
+{"MP5A5",5, 'mp5a5.png', 128, 128,"Sub-Machine Gun", "Ammunition: 9x18mm Cartridge \nNoise: High (60)\nDamage: 889"},
+{"Desert Eagle",5, 'revolver.png',128,128,"Handgun","Ammunition: .45 ACP Cartridge \nNoise: High (60)\nDamage: 4500"},
+{"Bizon PP-19",5,'bizon.png',128,128,"Sub-Machine Gun","Ammunition: 9x18mm Cartridge \nNoise: High (60)\nDamage: 889"},
+{"Revolver",5,'revolver.png',128,128,"Handgun","Ammunition: .45 ACP Cartridge \nNoise: High (60)\nDamage: 4500"},
 {"Hunting Knife",5, 'knife.png',128,128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 1500"},
 {"Hatchet",5, 'hatchet.png',128,128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 2000"},
-{"Baseball Bat",5, 'bat.png', 256,128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 1199"},
-{"Shovel",5, 'shovel.png', 256, 154,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 1203"},
-{"Golf Club",5, 'golf.png', 256, 192,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 953"},
-{"Machete",5,'bat.png',128,64,"Melee","<DEV WEAPON>\nDamage: 12500"},
-{"Crowbar",5,'bat.png',128,64,"Melee","You shouldn't have this."},
+{"Baseball Bat",5, 'bat.png', 128,128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 1199"},
+{"Shovel",5, 'shovel.png', 128, 128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 1203"},
+{"Golf Club",5, 'golf.png', 128, 128,"Melee", "Ammunition: None\n Noise: None (0)\nDamage: 953"},
+{"Machete",5, 'machete.png',128,128,"Melee","<DEV WEAPON>\nDamage: 12500"},
+{"Crowbar",5, 'crowbar.png',128,128,"Melee","You shouldn't have this."},
 },
 
 ["Specially Weapon"] = {
-{"Parachute",1, 'parachute.png', 128,128,"Item", "Equip to use.\n'Time to fly!'"},
+{"Parachute",1, 'parachute.png', 128,128,"Item", "Equip to use."},
 {"Tear Gas",1, 'gas.png', 128, 128,"Item", "You shouldn't have this."},
-{"Grenade",5, 'grenade.png', 128, 128,"Item", "'Noise: High(60)\nDamage: 17998\n'Fucking brutal.'"},
-{"Binoculars",1, 'binocular.png', 128, 128,"Item", "Click item to equip.\n'I can see my house from here!'"}
+{"Grenade",5, 'grenade.png', 128, 128,"Item", "'Noise: High(60)"},
+{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Click item to equip."}
 },
 
 },
 ["Ammo"] = {
-{".45 ACP Cartridge",0.085, 'mag.png',256,256,"Ammunition", "For:\nM1911\nDesert Eagle\nRevolver"},
-{"9x19mm SD Cartridge",0.085, 'mag.png',256,256,"Ammunition", "For:\nM9 SD"},
-{"9x19mm Cartridge",0.025, 'mag.png',256,256,"Ammunition", "For:\nPDW"},
-{"9x18mm Cartridge",0.025, 'mag.png',256,256,"Ammunition", "For:\nMP5A5\nBizon PP-19"},
-{"5.45x39mm Cartridge",0.035, 'mag.png',256,256,"Ammunition", "For:\nAK-47\nG36C\nFN FAL"},
-{"5.56x45mm Cartridge",0.035, 'mag.png',256,256,"Ammunition", "For:\nM4"},
-{"1866 Slug",0.067, 'mag.png',256,256,"Ammunition", "For:\nWinchester 1866"},
-{"2Rnd. Slug",0.067, 'mag.png',256,256,"Ammunition", "For:\nSawn-Off Shotgun\nBlaze 95 Double Rifle"},
-{"12 Gauge Pellet",0.067, 'mag.png',256,256,"Ammunition", "For:\nSPAZ-12 C. Shotgun\nRemington 870"},
-{"9.3x62mm Cartridge",0.1, 'mag.png',256,256,"Ammunition", "For:\nCZ 550\nDMR\nSVD Dragunov"},
-{".303 British Cartridge",0.1, 'mag.png',256,256,"Ammunition", "For:\nLee Enfield\nSporter 22\nMosin 9130\nSKS"},
-{"Bolt",0.1,'mag.png',256,256,"Ammunition","For:\nCrossbow"},
+{".45 ACP Cartridge",0.085, '45acp.png',128,128,"Ammunition", "For:\nM1911\nDesert Eagle\nRevolver"},
+{"9x19mm SD Cartridge",0.085, '9x19sd.png',128,128,"Ammunition", "For:\nM9 SD"},
+{"9x19mm Cartridge",0.025, '9x19.png',128,128,"Ammunition", "For:\nPDW"},
+{"9x18mm Cartridge",0.025, '9x18.png',128,128,"Ammunition", "For:\nMP5A5\nBizon PP-19"},
+{"5.45x39mm Cartridge",0.035, 'ak.png',128,128,"Ammunition", "For:\nAK-47\nG36C\nFN FAL"},
+{"5.56x45mm Cartridge",0.035, 'm4.png',128,128,"Ammunition", "For:\nM4"},
+{"1866 Slug",0.067, 'shotgun.png',128,128,"Ammunition", "For:\nWinchester 1866"},
+{"2Rnd. Slug",0.067, 'shotgun.png',128,128,"Ammunition", "For:\nSawn-Off Shotgun\nBlaze 95 Double Rifle"},
+{"12 Gauge Pellet",0.067, 'shotgun.png',128,128,"Ammunition", "For:\nSPAZ-12 C. Shotgun\nRemington 870"},
+{"9.3x62mm Cartridge",0.1, 'sniper.png',128,128,"Ammunition", "For:\nCZ 550\nDMR\nSVD Dragunov"},
+{".303 British Cartridge",0.1, 'british.png',128,128,"Ammunition", "For:\nLee Enfield\nSporter 22\nMosin 9130\nSKS"},
+{"Bolt",0.1,'arrow.png',128,128,"Ammunition","For:\nCrossbow"},
 },
 
 ["Food"] = {
+{"Baked Beans",1,'beans.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Pasta",1,'pasta.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Sardines",1,'sardines.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Frank & Beans",1,'frankbeans.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Corn)",1,'corn.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Peas)",1,'peas.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Pork)",1,'pork.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Stew)",1,'stew.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Ravioli)",1,'ravioli.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Fruit)",1,'fruit.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Can (Chowder)",1,'chowder.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"MRE",1,'mre.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Pistachios",1,'pistachios.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Trail Mix",1,'trailmix.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Cooked Meat",1, 'cookedmeat.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 800(Blood)"},
 {"Water Bottle",1, 'bottle.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Pasta Can",1,'can.png',256,256,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Beans Can",1,'can.png',256,256,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Burger",1,'burger.png',256,256,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 300(Blood)"},
-{"Pizza",1, 'pizza.png', 256, 256,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 300(Blood)"},
-{"Soda Bottle",1,'pepsi.png', 256, 256,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Milk",1,'milk.png', 256, 256,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Cooked Meat",1, 'meat.png',256,256,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 800(Blood)"},
+{"Soda Can (Pepsi)",1,'pepsi.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Soda Can (Cola)",1,'cola.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Soda Can (Mountain Dew)",1,'dew.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
+{"Can (Milk)",1,'milkcan.png',128,128,"Drink", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
 },
 
 ["Items"] = {
 {"Wood Pile",2, 'wood.png',128,128,"Item", "Use in combination with 'Box of Matches'\ntocreate a fire.\nCan cook Raw Meat."},
 {"Bandage",1, 'bandage.png', 128, 128, "Item", "Use when bleeding.","Bandage yourself"},
-{"Roadflare",1, 'flashlight.png', 128, 128, "Item", "Use to illuminate dark places\nor for a distraction.","Place"},
-{"Empty Gas Canister",2, 'kan.png', 128, 128,"Item", "Can be refilled at local\npatrol station."},
-{"Full Gas Canister",2, 'kan.png', 128, 128,"Item", "Filled with gas."},
+{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Use to illuminate dark places\nor for a distraction.","Place"},
+{"Empty Gas Canister",2, 'canister.png', 128, 128,"Item", "Can be refilled at local\npatrol station."},
+{"Full Gas Canister",2, 'canister.png', 128, 128,"Item", "Filled with gas."},
 {"Medic Kit",2, 'chest.png', 128, 128, "Item", "Use when low on blood.","Use"},
-{"Heat Pack",1, 'heater.png', 128, 128, "Item", "Use when low on temperature.","Use"},
-{"Painkiller",1, 'tablet.png', 256, 256, "Item", "Use when feeling pain.","Use"},
+{"Heat Pack",1, 'heatpack.png', 128, 128, "Item", "Use when low on temperature.","Use"},
+{"Painkiller",1, 'painkillers.png', 128, 128, "Item", "Use when feeling pain.","Use"},
 {"Morphine",1, 'morphine.png',128,128,"Item", "Use when suffering from\nbroken bones.","Use"},
-{"Blood Bag",1, 'blood.png', 128, 85, "Item", "Use on other players to full restore\ntheir blood.","Use"},
+{"Blood Bag",1, 'bloodbag.png', 128, 85, "Item", "Use on other players to full restore\ntheir blood.","Use"},
 {"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Use to protect narrow places.","Build a wire fence"}, 
-{"Raw Meat", 1, 'flesh.png', 128, 128,"Item", "Use on fireplaces to produce\nRaw Meat."}, 
+{"Raw Meat", 1, 'rawmeat.png', 128, 128,"Item", "Use on fireplaces to produce\nRaw Meat."}, 
 {"Tire", 2, 'wheel.png', 128, 128,"Item", "Can be used to repair a car."}, 
 {"Engine", 5, 'engine.png', 128,128,"Item", "Can be used to repair a car.",}, 
 {"Tank Parts", 3, 'engine_part.png', 128,128,"Item", "Can be used to reduce\nfuel consumption."},
-{"Tent", 3, 'tent.png', 256, 256, "Item", "Use to create your own\npersonal place to store\nitems in.","Pitch a tent"}, 
+{"Tent", 3, 'tent.png', 128, 128, "Item", "Use to create your own\npersonal place to store\nitems in.","Pitch a tent"}, 
 {"Camouflage Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
 {"Civilian Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
 {"Survivor Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
 {"Ghillie Suit",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.\nSPECIAL:\nWill become invisible when\nstanding still.","Put clothes on"},
-{"Empty Water Bottle", 1, 'gas.png', 128, 128,"Item", "Use in a body of water\n to refill.", "Fill bottle up"}, 
-{"Empty Soda Cans", 1,'cola.png', 256, 256,"Item", "Useless garbage."}, 
-{"Scruffy Burgers", 1,'burger.png',256,256,"Item", "Useless garbage."}, 
-{"Assault Pack (ACU)",1,'coyote.png',170,170,"Item", "Gives you an additional\n18 slots."},
-{"Alice Pack",1,'coyote.png',170,170,"Item", "Gives you an additional\n25 slots."},
-{"Czech Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n46 slots."},
-{"Coyote Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n64 slots."},
-{"Ghillie Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n45 slots."},
-{"OS Backpack",1,'coyote.png',170,170,"Item", "Gives you an additional\n100 slots."},
-
+{"Empty Water Bottle", 1, 'emptybottle.png', 128, 128,"Item", "Use in a body of water\n to refill.", "Fill bottle up"}, 
+{"Empty Soda Can", 1,'emptysoda.png', 128, 128,"Item", "Useless garbage."}, 
+{"Assault Pack (ACU)",1,'acu.png',170,170,"Item", "Gives you +\n12 slots."},
+{"Czech Vest Pouch",1,'czechpouch.png',170,170,"Item", "Gives you +\n13 slots."},
+{"ALICE Pack",1,'alice.png',170,170,"Item", "Gives you +\n16 slots."},
+{"Survival ACU",1,'survival.png',170,170,"Item", "Gives you +n17 slots."},
+{"British Assault Pack",1,'britishpack.png',170,170,"Item", "Gives you +\n18 slots."},
+{"Backpack (Coyote)",1,'coyote.png',170,170,"Item", "Gives +\n24 slots."},
+{"Czech Backpack",1,'czech.png',170,170,"Item", "Gives +\n30 slots."},
 
 -- [[ BLUEPRINTS ]] --
 -- [ PRIMARY WEAPONS ] --
-{"M4 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"CZ 550 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Winchester '66 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"SPAZ-12 C. Shtgn. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Sawn-Off Shtgn. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"AK-47 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Lee Enfield Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Sporter 22 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Mosin 9130 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Crossbow Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"SKS Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Blaze 95 D. R. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Remington 870 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"FN FAL Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"G36C Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Sa58V CCO Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"SVD Dragunov Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"DMR Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"M4 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"CZ 550 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Winchester '66 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"SPAZ-12 C. Shtgn. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Sawn-Off Shtgn. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"AK-47 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Lee Enfield Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Sporter 22 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Mosin 9130 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Crossbow Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"SKS Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Blaze 95 D. R. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Remington 870 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"FN FAL Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"G36C Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Sa58V CCO Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"SVD Dragunov Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"DMR Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ SECONDARY WEAPONS ] --
-{"M1911 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"M9 SD Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"PDW Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"G17 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"MP5A5 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Bizon PP-19 Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Revolver Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Desert Eagle Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Hunting Knife Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Hatchet Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Baseball Bat Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Shovel Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Golf Club Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Machete Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Crowbar Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"M1911 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"M9 SD Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"PDW Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"G17 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"MP5A5 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Bizon PP-19 Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Revolver Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Desert Eagle Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Hunting Knife Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Hatchet Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Baseball Bat Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Shovel Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Golf Club Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Machete Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Crowbar Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ SPECIAL WEAPONS ] --
-{"Parachute Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Tear Gas Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Grenade Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Binoculars Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Parachute Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Tear Gas Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Grenade Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Binoculars Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ AMMO BLUEPRINTS ] --
-{".45 ACP Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components,\n one is able to rebuild the item shown on this blueprint.","Craft"},
-{"9x19mm SD Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"9x19mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"9x18mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"5.45x39mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"5.56x45mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"1866 Slug Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"2Rnd. Slug Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"12 Gauge Pellet Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"9.3x62mm Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{".303 British Cartridge Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Bolt Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{".45 ACP Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components,\n one is able to rebuild the item shown on this blueprint.","Craft"},
+{"9x19mm SD Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"9x19mm Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"9x18mm Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"5.45x39mm Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"5.56x45mm Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"1866 Slug Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"2Rnd. Slug Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"12 Gauge Pellet Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"9.3x62mm Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{".303 British Cartridge Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Bolt Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ ITEMS BLUEPRINTS ] --
-{"Medic Kit Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Wire Fence Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Tent Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Camouflage Clthng. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Survivor Clthng. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Civilian Clthng. Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Ghillie Suit Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Roadflare Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Medic Kit Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Wire Fence Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Tent Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Camouflage Clthng. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Survivor Clthng. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Civilian Clthng. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Ghillie Suit Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Roadflare Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ TOOLBELT BLUEPRINTS ] --
-{"Toolbox Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Radio Device Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Infrared Goggles Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Night Vision Goggles Blueprint",1,'clothes.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Toolbox Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Radio Device Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Infrared Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Night Vision Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 
 -- [ BLUEPRINT PARTS ] --
-{"Gun Barrel",1,'clothes.png',128,128,"Used in:","All Primary Weapons Blueprints"},
-{"Short Gun Barrel",1,'clothes.png',128,128,"Used in:","All Secondary Gun Weapons Blueprints"},
-{"Gun Stock",1,'clothes.png',128,128,"Used in:","All Weapons Blueprints"},
-{"Thread",1,'clothes.png',128,128,"Used in:","Survivor Clothing Blueprint\nCivilian Clothing Blueprint\nCamouflage Clothing Blueprint\nGhillie Suit Blueprint"},
-{"Cloth",1,'clothes.png',128,128,"Component","Can be used to craft various clothings."},
-{"Gun Powder",1,'clothes.png',128,128,"Component","Universal component used for ammunition."},
-{"Mechanical Supplies",1,'clothes.png',128,128,"Component","Universal component used for electronics."},
-{"Cables",1,'clothes.png',128,128,"Component","Universal component used for electronics."},
-{"Nails",1,'clothes.png',128,128,"Component","Universal component used in various blueprints."},
-{"Sheet",1,'clothes.png',128,128,"Component","A sheet. What else did you expect?"},
-{"Barbed Wire",1,'clothes.png',128,128,"Component","Used for tactical consumables like the Wire Fence."},
-{"Duct Tape",1,'clothes.png',128,128,"Component","Universal component used for electronics."},
-{"Glue",1,'clothes.png',128,128,"Component","Universal component used for electronics."},
-{"Drugs",1,'clothes.png',128,128,"Component","Can be used for medical consumables."},
-{"Bandaid",1,'clothes.png',128,128,"Component","Can be used for medical consumables."},
-{"Vitamins",1,'clothes.png',128,128,"Component","Can be used for medical consumables."},
-{"Tissue",1,'clothes.png',128,128,"Component","Can be used for medical consumables."},
-{"Small Box",1,'clothes.png',128,128,"Component","A small box."},
-{"String",1,'clothes.png',128,128,"Component","A rather long string."},
-{"Needle",1,'clothes.png',128,128,"Component","A sharp instrument for sowing."},
-{"Microchips",1,'clothes.png',128,128,"Component","Can be used for electric consumables."},
-{"Optics",1,'clothes.png',128,128,"Component","Can be used for items like the binoculars."},
-{"Sharp Metal",1,'clothes.png',128,128,"Component","TO DO"},
-{"Handle",1,'clothes.png',128,128,"Component","TO DO"},
-{"Wooden Stick",1,'clothes.png',128,128,"Component","TO DO"},
-{"Hand Saw",1,'clothes.png',128,128,"Component","TO DO"},
-{"Metal Plate",1,'clothes.png',128,128,"Component","TO DO"},
-{"Metallic Stick",1,'clothes.png',128,128,"Component","TO DO"},
-{"Small Casing",1,'clothes.png',128,128,"Component","TO DO"},
+{"Gun Barrel",1,'parts.png',128,128,"Used in:","All Primary Weapons Blueprints"},
+{"Short Gun Barrel",1,'parts.png',128,128,"Used in:","All Secondary Gun Weapons Blueprints"},
+{"Gun Stock",1,'parts.png',128,128,"Used in:","All Weapons Blueprints"},
+{"Thread",1,'parts.png',128,128,"Used in:","Survivor Clothing Blueprint\nCivilian Clothing Blueprint\nCamouflage Clothing Blueprint\nGhillie Suit Blueprint"},
+{"Cloth",1,'parts.png',128,128,"Component","Can be used to craft various clothings."},
+{"Gun Powder",1,'parts.png',128,128,"Component","Universal component used for ammunition."},
+{"Mechanical Supplies",1,'parts.png',128,128,"Component","Universal component used for electronics."},
+{"Cables",1,'parts.png',128,128,"Component","Universal component used for electronics."},
+{"Nails",1,'parts.png',128,128,"Component","Universal component used in various blueprints."},
+{"Sheet",1,'parts.png',128,128,"Component","A sheet. What else did you expect?"},
+{"Barbed Wire",1,'parts.png',128,128,"Component","Used for tactical consumables like the Wire Fence."},
+{"Duct Tape",1,'parts.png',128,128,"Component","Universal component used for electronics."},
+{"Glue",1,'parts.png',128,128,"Component","Universal component used for electronics."},
+{"Drugs",1,'parts.png',128,128,"Component","Can be used for medical consumables."},
+{"Bandaid",1,'parts.png',128,128,"Component","Can be used for medical consumables."},
+{"Vitamins",1,'parts.png',128,128,"Component","Can be used for medical consumables."},
+{"Tissue",1,'parts.png',128,128,"Component","Can be used for medical consumables."},
+{"Small Box",1,'parts.png',128,128,"Component","A small box."},
+{"String",1,'parts.png',128,128,"Component","A rather long string."},
+{"Needle",1,'parts.png',128,128,"Component","A sharp instrument for sowing."},
+{"Microchips",1,'parts.png',128,128,"Component","Can be used for electric consumables."},
+{"Optics",1,'parts.png',128,128,"Component","Can be used for items like the binoculars."},
+{"Sharp Metal",1,'parts.png',128,128,"Component","TO DO"},
+{"Handle",1,'parts.png',128,128,"Component","TO DO"},
+{"Wooden Stick",1,'parts.png',128,128,"Component","TO DO"},
+{"Hand Saw",1,'parts.png',128,128,"Component","TO DO"},
+{"Metal Plate",1,'parts.png',128,128,"Component","TO DO"},
+{"Metallic Stick",1,'parts.png',128,128,"Component","TO DO"},
+{"Small Casing",1,'parts.png',128,128,"Component","TO DO"},
 },
 
 ["Toolbelt"] = {
-{"Night Vision Goggles", 1,'night.png',128,128,"Item", "Press 'N' to activate."}, 
-{"Infrared Goggles", 1,'ir.png',128,128,"Item", "Press 'I' to activate."}, 
-{"Map", 1,'map.png',256,256,"Item", "Press 'F11' to activate."}, 
-{"Box of Matches", 1, 'matches.png',100,100,"Item", "Use in combination with 'Wood Pile'\nto create a fire.", "Make a Fire"}, 
-{"Watch", 1,'watch.png',256,256,"Item", "Passive item, will be\nactivated when picking up."}, 
+{"Night Vision Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'N' to activate."}, 
+{"Infrared Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'I' to activate."}, 
+{"Map", 1,'map.png',128,128,"Item", "Press 'F11' to activate."}, 
+{"Box of Matches", 1, 'matchbox.png',100,100,"Item", "Use in combination with 'Wood Pile'\nto create a fire.", "Make a Fire"}, 
+{"Watch", 1,'watch.png',128,128,"Item", "Passive item, will be\nactivated when picking up."}, 
 {"GPS", 1,'gps.png',128,128,"Item", "Passive item, will be\nactivated when picking up."}, 
-{"Toolbox", 1,'tool.png',128,128,"Item", "Used to repair cars\n of all kinds."}, 
+{"Toolbox", 1,'toolbox.png',128,128,"Item", "Used to repair cars\n of all kinds."}, 
 {"Radio Device", 1,'radio.png',128,128,"Item", "Press 'Z' to activate."},
-{"Compass",1,'gps.png',128,128,"Item","Passive item, will be\nactivated when picking up."},
+{"Compass",1,'compass.png',128,128,"Item","Passive item, will be\nactivated when picking up."},
 },
 
 }
@@ -638,11 +649,71 @@ elseif itemName == "M136 Rocket" then
 elseif itemName == "Bolt" then
 	itemPlus = 7
 elseif itemName == "Assault Pack (ACU)" then
+	if getElementData(localPlayer,"MAX_Slots") == 12 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 12 then
+		if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
+	setElementData(getLocalPlayer(),"MAX_Slots",12)
+	setElementData(loot,itemName,getElementData(loot,itemName)-1)
+	itemPlus = 0
+elseif itemName == "Czech Vest Pouch" then
+	if getElementData(localPlayer,"MAX_Slots") == 13 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 13 then
+		if getElementData(loot,itemName) ~= "Czech Vest Pouch" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
+	setElementData(getLocalPlayer(),"MAX_Slots",13)
+	setElementData(loot,itemName,getElementData(loot,itemName)-1)
+	itemPlus = 0
+elseif itemName == "ALICE Pack" then
+	if getElementData(localPlayer,"MAX_Slots") == 16 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 16 then
+		if getElementData(loot,itemName) ~= "ALICE Pack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
+	setElementData(getLocalPlayer(),"MAX_Slots",16)
+	setElementData(loot,itemName,getElementData(loot,itemName)-1)
+	itemPlus = 0	
+elseif itemName == "Survival ACU" then
+	if getElementData(localPlayer,"MAX_Slots") == 17 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 17 then
+		if getElementData(loot,itemName) ~= "Survival ACU" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
+			return
+		end
+	end
+	setElementData(getLocalPlayer(),"MAX_Slots",17)
+	setElementData(loot,itemName,getElementData(loot,itemName)-1)
+	itemPlus = 0
+elseif itemName == "British Assault Pack" then
 	if getElementData(localPlayer,"MAX_Slots") == 18 then
 		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
 	end
 	if getElementData(getLocalPlayer(),"MAX_Slots") > 18 then
-		if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
+		if itemName ~= "British Assault Pack" then
 			itemName2 = itemName
 			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
 			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
@@ -651,80 +722,35 @@ elseif itemName == "Assault Pack (ACU)" then
 	end
 	setElementData(getLocalPlayer(),"MAX_Slots",18)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
-	itemPlus = 0
-elseif itemName == "Alice Pack" then
-	if getElementData(localPlayer,"MAX_Slots") == 25 then
-		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-	end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 25 then
-		if getElementData(loot,itemName) ~= "Alice Pack" then
-			itemName2 = itemName
-			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-			return
-		end
-	end
-	setElementData(getLocalPlayer(),"MAX_Slots",25)
-	setElementData(loot,itemName,getElementData(loot,itemName)-1)
-	itemPlus = 0
-elseif itemName == "Czech Backpack" then
-	if getElementData(localPlayer,"MAX_Slots") == 36 then
-		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-	end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 36 then
-		if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
-			itemName2 = itemName
-			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-			return
-		end
-	end
-	setElementData(getLocalPlayer(),"MAX_Slots",36)
-	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0	
-elseif itemName == "Coyote Backpack" then
-	if getElementData(localPlayer,"MAX_Slots") == 64 then
+elseif itemName == "Backpack (Coyote)" then
+	if getElementData(localPlayer,"MAX_Slots") == 24 then
 		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
 	end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 64 then
-		if getElementData(loot,itemName) ~= "Coyote Backpack" then
-			itemName2 = itemName
-			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-			return
-		end
-	end
-	setElementData(getLocalPlayer(),"MAX_Slots",64)
-	setElementData(loot,itemName,getElementData(loot,itemName)-1)
-	itemPlus = 0
-elseif itemName == "Ghillie Backpack" then
-	if getElementData(localPlayer,"MAX_Slots") == 45 then
-		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-	end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 45 then
-		if itemName ~= "Ghillie Backpack" then
-			itemName2 = itemName
-			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-			return
-		end
-	end
-	setElementData(getLocalPlayer(),"MAX_Slots",45)
-	setElementData(loot,itemName,getElementData(loot,itemName)-1)
-	itemPlus = 0	
-elseif itemName == "OS Backpack" then
-	if getElementData(localPlayer,"MAX_Slots") == 100 then
-		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-	end
-	if getElementData(getLocalPlayer(),"MAX_Slots") > 100 then
-		if getElementData(loot,itemName) ~= "OS Backpack" then
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 24 then
+		if getElementData(loot,itemName) ~= "Backpack (Coyote)" then
 			itemName2 = itemName
 			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
 			setElementData(loot,itemName,getElementData(loot,itemName)-1)
 			return
 		end
 	end
-	setElementData(getLocalPlayer(),"MAX_Slots",100)
+	setElementData(getLocalPlayer(),"MAX_Slots",24)
+	setElementData(loot,itemName,getElementData(loot,itemName)-1)
+	itemPlus = 0
+elseif itemName == "Czech Backpack" then
+	if getElementData(localPlayer,"MAX_Slots") == 30 then
+		setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
+	end
+	if getElementData(getLocalPlayer(),"MAX_Slots") > 30 then
+		if getElementData(loot,itemName) ~= "Czech Backpack" then
+			itemName2 = itemName
+			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
+			setElementData(loot,itemName,getElementData(loot,itemName)-1)
+			return
+		end
+	end
+	setElementData(getLocalPlayer(),"MAX_Slots",30)
 	setElementData(loot,itemName,getElementData(loot,itemName)-1)
 	itemPlus = 0
 end
@@ -764,7 +790,7 @@ end
 function getInventoryInfosForRightClickMenu(itemName)
 	for i,itemInfo in ipairs(inventoryItems["Food"]) do
 		if itemName == itemInfo[1] then
-			if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Milk" or itemInfo[1] == "Soda Bottle" then
+			if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Soda Can (Pepsi)" or itemInfo[1] == "Soda Can (Cola)" or itemInfo[1] == "Soda Can (Mountain Dew)" or itemInfo[1] == "Can (Milk)" then
 				info = "Drink"
 			else
 				info = "Eat"
@@ -852,6 +878,7 @@ weaponAmmoTable = {
 
 ["9x19mm Cartridge"] = {
 {"PDW",28},
+{"G17",22},
 },
 
 ["9x18mm Cartridge"] = {
@@ -1096,7 +1123,6 @@ end
 ]]
 
 setRadioChannel(0)
-
 function makeRadioStayOff()
 	setRadioChannel(0)
 	cancelEvent()
