@@ -29,6 +29,9 @@
 	<script src="treelist.lua" type="client" protected="true" />
 	<file src="fonts/etelka.ttf" />
 	
+	<!-- Anti Cheat -->
+	<script src="anticheat_s.lua" type="server" />
+	
 	<!-- Log System -->
 	<script src="logsystem.lua" type="server" />
 	<export function="saveLog" type="server" />
