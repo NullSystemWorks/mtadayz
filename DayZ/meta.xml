@@ -228,6 +228,10 @@
 	<file src="images/inventory1.png" />
 	<file src="images/inventory2.png" />
 	<file src="images/inventory3.png" />
+	<file src="images/primary.png" />
+	<file src="images/secondary.png" />
+	<file src="images/items.png" />
+	<file src="images/scroll.png" />
 	
 	<file src="images/world.jpg" type="client"></file>
 	<file src="images/gps.png" type="client"></file>

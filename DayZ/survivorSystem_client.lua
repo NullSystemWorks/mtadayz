@@ -1071,7 +1071,7 @@ statsLabel = {}
 
 statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,"images/scrollmenu_2.png",true)
 guiSetAlpha(statsWindows,0.8)
-guiSetVisible(statsWindow,false)
+guiSetVisible(statsWindows,false)
 --Zombies  Killed
 statsLabel["zombieskilled"] = guiCreateLabel(0,0.05,1,0.15,"Zombies killed: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["zombieskilled"],"center")
@@ -1126,7 +1126,7 @@ end
 addEvent("onClientPlayerDayZLogin", true)
 addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 
-function showDebugMonitor ()
+function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
 		local visible = guiGetVisible(statsWindows)
 		guiSetVisible(statsWindows,not visible)
@@ -1134,8 +1134,19 @@ function showDebugMonitor ()
 		guiSetVisible(statsWindow,false)
 	end
 end
-bindKey("F5","down",showDebugMonitor)
+bindKey("F5","down",showDebugMonitorOnF5)
 
+function showDebugMonitor()
+	guiSetVisible(statsWindows,true)
+end
+addEvent("showDebugMonitor",true)
+addEventHandler("showDebugMonitor",root,showDebugMonitor)
+
+function hideDebugMonitor()
+	guiSetVisible(statsWindows,false)
+end
+addEvent("hideDebugMonitor",true)
+addEventHandler("hideDebugMonitor",root,hideDebugMonitor)
 
 function refreshDebugMonitor()
 	if getElementData(getLocalPlayer(),"logedin") then
@@ -1446,6 +1457,18 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	end
 end
 addEventHandler ( "onClientPlayerDamage", getLocalPlayer (), playerGetDamageDayZ )
+
+function damageZombieOnVehicleHit(collider,force, bodyPart, x, y, z, nx, ny, nz)
+	if collider then
+		if (source == getPedOccupiedVehicle(localPlayer)) and (getElementType(collider) == "ped") then
+            setElementData(collider,"blood",getElementData(collider,"blood")-1000)
+			local pedX, pedY, pedZ = getElementPosition (collider)
+			local endX, endY, endZ = pedX-x, pedY-y, pedZ-z
+			setElementVelocity ( collider, endX, endY, endZ )
+		end
+    end
+end
+addEventHandler("onClientVehicleCollision", root,damageZombieOnVehicleHit)
 
 function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	cancelEvent()

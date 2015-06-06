@@ -275,6 +275,7 @@ function initInventory ()
 			exports.imageButton:createImageButton ( 'secWeap', screenWidth/2+300,screenHeight/2-160, 25, 64, 0, ':DayZ/images/butoff.png', ':DayZ/images/butclick.png' )
 			playSound ("sounds/openinventory.mp3",false)
 			triggerEvent("disableMenu",localPlayer)
+			triggerEvent("hideDebugMonitor",localPlayer)
 			addEventHandler ( "onClientRender", root, renderDisplay )
 			local yOff = 0
 			for i = 1, 11 do
@@ -348,6 +349,7 @@ end
 function closeInventory() 
 	showCursor ( false )
 	showChat(true)
+	triggerEvent("showDebugMonitor",localPlayer)
 			unbindKey ( 'mouse1', 'down', checkOnButton )
 			unbindKey ( 'mouse1', 'up', testoLabClick )
 			destroyElement ( testoLab )
@@ -599,13 +601,20 @@ function renderDisplay ( )
 	dxDrawImage(bX,bY-300,400,550,"images/inventory3.png")
 	dxDrawText (getPlayerName(localPlayer), bX+20, bY-290, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1.5, 'verdana' )
 	dxDrawText ( 'Food/Drinks', bX+20, bY-260, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'verdana' )
-	
+	dxDrawImage (bX+20, bY-240, 45, 45, 'images/items.png') 
+	dxDrawImage (bX+70, bY-240, 45, 45, 'images/items.png') 
+	dxDrawImage (bX+20, bY-190, 45, 45, 'images/items.png') 
+	dxDrawImage (bX+70, bY-190, 45, 45, 'images/items.png') 
+	dxDrawImage (bX+20, bY-140, 45, 45, 'images/items.png') 
+	dxDrawImage (bX+70, bY-140, 45, 45, 'images/items.png')
+	--[[
 	dxDrawRectangle (bX+20, bY-240, 45, 45, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+70, bY-240, 45, 45, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+20, bY-190, 45, 45, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+70, bY-190, 45, 45, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+20, bY-140, 45, 45, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+70, bY-140, 45, 45, tocolor ( 195, 195, 195, 50 ) )
+	]]
 
 	yOff = 0
 	local foodMax = 6
@@ -625,6 +634,16 @@ function renderDisplay ( )
 	end
 	
 	dxDrawText ( "Toolbelt", bX+20, bY-75, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'verdana' )
+	dxDrawImage (bX+20, bY-55, 64, 64, 'images/items.png' ) 
+	dxDrawImage (bX+90, bY-55, 64, 64, 'images/items.png' ) 
+	dxDrawImage (bX+160, bY-55, 64, 64, 'images/items.png' ) 
+	dxDrawImage (bX+230, bY-55, 64, 64, 'images/items.png' ) 
+	
+	dxDrawImage (bX+20, bY+20, 64, 64, 'images/items.png' )
+	dxDrawImage (bX+90, bY+20, 64, 64, 'images/items.png' ) 
+	dxDrawImage (bX+160, bY+20, 64, 64, 'images/items.png' ) 
+	dxDrawImage (bX+230, bY+20, 64, 64, 'images/items.png' ) 
+	--[[
 	dxDrawRectangle (bX+20, bY-55, 64, 64, tocolor (80,52,20, 50 ) ) 
 	dxDrawRectangle (bX+90, bY-55, 64, 64, tocolor ( 80,52,20, 50 ) ) 
 	dxDrawRectangle (bX+160, bY-55, 64, 64, tocolor ( 80,52,20, 50 ) ) 
@@ -634,6 +653,7 @@ function renderDisplay ( )
 	dxDrawRectangle (bX+90, bY+20, 64, 64, tocolor ( 80,52,20, 50 ) ) 
 	dxDrawRectangle (bX+160, bY+20, 64, 64, tocolor (80,52,20, 50 ) ) 
 	dxDrawRectangle (bX+230, bY+20, 64, 64, tocolor ( 80,52,20, 50 ) ) 
+	]]
 	local toolMax = 8
 	if toolMax > #toolInventory then toolMax = #toolInventory end
 	yOff = -55
@@ -650,9 +670,11 @@ function renderDisplay ( )
 	end
 	
 	dxDrawText ( "Primary Weapon", bX+125, bY-260, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'sans' )
-	dxDrawRectangle (bX+125, bY-240, 170, 64, tocolor ( 195, 195, 195, 50 ) ) 
+	--dxDrawRectangle (bX+125, bY-240, 170, 64, tocolor ( 195, 195, 195, 50 ) )
+	dxDrawImage(bX+125,bY-240,170,62,'images/primary.png')
 	dxDrawText ( "Secondary Weapon", bX+125, bY-177, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'sans' )
-	dxDrawRectangle (bX+125, bY-160, 170, 64, tocolor ( 195, 195, 195, 50 ) )
+	--dxDrawRectangle (bX+125, bY-160, 170, 64, tocolor ( 195, 195, 195, 50 ) )
+	dxDrawImage(bX+125, bY-160, 170, 62,'images/secondary.png')
 	if selectedMainWeapon > 0 then
 		dxDrawImage ( bX+125, bY-245, 170, 80, 'icons/'..inventoryWeap.main[selectedMainWeapon][2] )
 	end
@@ -673,7 +695,7 @@ function renderDisplay ( )
 		local yOff = 35
 		for i = 1, #inventoryWeap.main do
 			yOff = yOff+35
-			dxDrawRectangle (bX+125, bY-240+yOff, 170, 32, tocolor ( 136, 128, 98, 240 ) )
+			dxDrawRectangle (bX+125, bY-240+yOff, 170, 32, tocolor ( 136, 128, 98, 240 ) ) -- Weapon Selection Primary
 			dxDrawText ( inventoryWeap.main[i][1], bX+130, bY-235+yOff, screenWidth, screenHeight, tocolor ( 20,20,20,255), 1.4, 'sans' )
 		end
 	end
@@ -681,15 +703,21 @@ function renderDisplay ( )
 		local yOff = 35
 		for i = 1, #inventoryWeap.addit do
 			yOff = yOff+35
-			dxDrawRectangle (bX+125, bY-160+yOff, 170, 32, tocolor ( 136, 128, 98, 240 ) )
+			dxDrawRectangle (bX+125, bY-160+yOff, 170, 32, tocolor ( 136, 128, 98, 240 ) ) -- Weapon Selection Secondary
 			dxDrawText ( inventoryWeap.addit[i][1], bX+125, bY-160+yOff, screenWidth, screenHeight, tocolor ( 20,20,20,255), 1.4, 'sans' )
 		end
 	end
 	dxDrawText ( "Special Weapon", bX+20, bY+100, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'sans' )
+	dxDrawImage (bX+20, bY+120, 64, 64, 'images/items.png')
+	dxDrawImage (bX+90, bY+120, 64, 64, 'images/items.png') 
+	dxDrawImage (bX+160, bY+120, 64, 64, 'images/items.png') 
+	dxDrawImage (bX+230, bY+120, 64, 64, 'images/items.png')
+	--[[
 	dxDrawRectangle (bX+20, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) )
 	dxDrawRectangle (bX+90, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+160, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
 	dxDrawRectangle (bX+230, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
+	]]
 	xOff = -50
 	for i = 1, #inventoryWeap.spec do
 		xOff = xOff+70
@@ -715,7 +743,7 @@ function renderDisplay ( )
 			dxDrawText ( inventory[i+itOff][3], bX-75, bY-230+yOff, screenWidth, screenHeight, tocolor (0,0,0,255), 1.4, 'sans' )
 		end
 		if selectedItemLabel == i then
-			dxDrawRectangle (bX-395, bY-230+yOff, 370, 25, tocolor ( 10, 10, 10, 30 ) )
+			--dxDrawRectangle (bX-395, bY-230+yOff, 370, 25, tocolor ( 10, 10, 10, 30 ) )
 		end
 		yOff = yOff+30
 	end
