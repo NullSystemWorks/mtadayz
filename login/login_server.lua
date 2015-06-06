@@ -1,5 +1,15 @@
 local root = getRootElement()
 
+function callClientFunction(client, funcname, ...)
+    local arg = { ... }
+    if (arg[1]) then
+        for key, value in next, arg do
+            if (type(value) == "number") then arg[key] = tostring(value) end
+        end
+    end
+    -- If the clientside event handler is not in the same resource, replace 'resourceRoot' with the appropriate element
+    triggerClientEvent(client, "onServerCallsClientFunction", resourceRoot, funcname, unpack(arg or {}))
+end
 
 --LOGIN THE PLAYER FROM GUI
 function tryToLoginPlayer (username, password)
@@ -49,11 +59,22 @@ end
 addEvent("onClientSendRegisterDataToServer", true)
 addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsiterPlayer)
 
-
 addEventHandler("onPlayerJoin", getRootElement(),
 function()
-	fadeCamera(source, true) 
-	setCameraMatrix(source, 1468.8785400391, -919.25317382813, 100.153465271, 1468.388671875, -918.42474365234, 99.881813049316)
+	fadeCamera(source, true)
+	--triggerClientEvent("onJoinPlayTrack",source)
+	--callClientFunction(source,"onJoinPlayTrack")
+	sX = math.random(-3000,3000)	-- start X
+	sY = math.random(-3000,3000)	-- start Y
+	sZ = math.random(50,100)		-- start Z
+	rX = math.random(90,270)		-- Rotation X
+	rY = math.random(90,270)		-- Rotation Y
+	rZ = 0							-- Rotation Z
+	tX = math.random(-3000,3000)	-- Target X
+	tY = math.random(-3000,3000)	-- Target Y
+	tZ = sZ							-- Target Z
+	
+	callClientFunction(source,"smoothMoveCamera",sX,sY,sZ,rX,rY,rZ,tX,tY,tZ,rX,rY,rZ,100000)
 end)
 
 addEvent("requestServerNews", true)

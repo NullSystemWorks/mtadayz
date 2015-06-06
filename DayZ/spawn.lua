@@ -469,7 +469,7 @@ function spawnDayZPlayer(player)
 	spawnPlayer (player, x,y,z, math.random(0,360), 73, 0, 0)
 	setElementFrozen(player, true)
 	fadeCamera (player, true)
-	setCameraTarget (player, player)
+	setCameraTarget (player)
 	setTimer( function(player)
 		if isElement(player) then
 			setElementFrozen(player, false)

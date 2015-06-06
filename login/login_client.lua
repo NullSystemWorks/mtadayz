@@ -7,6 +7,12 @@ marwinButtons = {}
 sx,sy = guiGetScreenSize()
 font = {}
 scale = 1
+showPlayerHudComponent("area_name",false)
+showPlayerHudComponent("radar",false)
+sound = playSound("dayzsoundtrack.mp3",true)
+local sm = {}
+sm.moov = 0
+sm.object1,sm.object2 = nil,nil
 
 if sx < 1152 then
 	scale = sx/1152
@@ -20,6 +26,22 @@ font[0] = guiCreateFont( "font.ttf", 14*scale )
 font[1] = guiCreateFont( "font.ttf", 18*scale )
 font[2] = guiCreateFont( "font.ttf", 20*scale )
 font[3] = guiCreateFont( "font.ttf", 24*scale )
+
+function onJoinPlayTrack()
+	sound = playSound("dayzsoundtrack.mp3",true)
+end
+--addEvent("onJoinPlayTrack",true)
+--addEventHandler("onClientResourceStart",root,onJoinPlayTrack)
+
+function callClientFunction(funcname, ...)
+    local arg = { ... }
+    if (arg[1]) then
+        for key, value in next, arg do arg[key] = tonumber(value) or value end
+    end
+    loadstring("return "..funcname)()(unpack(arg))
+end
+addEvent("onServerCallsClientFunction", true)
+addEventHandler("onServerCallsClientFunction", resourceRoot, callClientFunction)
 
 --Button
 function createMarwinButton(x,y,widht,height,text,bool,parent,info)
@@ -208,6 +230,9 @@ function clickPanelButton (button, state)
 			local password = guiGetText(Login_Edit[2])
 			if not (tostring(username) == "") and not (tostring(password) == "") then
 				triggerServerEvent("onClientSendLoginDataToServer", getLocalPlayer(), username, password)
+				sm.moov = 0
+				stopSound(sound)
+				setCameraTarget(localPlayer)
 			else
 				reason = "Missing Password or Username!"
 				outputChatBox("[LOGIN ERROR]#FF9900 "..reason,255,255,255,true)
@@ -221,7 +246,10 @@ function clickPanelButton (button, state)
 				if not (tostring(username) == "") then
 					if not (tostring(pass1) == "") then
 						if pass1 == pass2 then
-							triggerServerEvent("onClientSendRegisterDataToServer", getLocalPlayer(), username, pass1)				
+							triggerServerEvent("onClientSendRegisterDataToServer", getLocalPlayer(), username, pass1)
+							sm.moov = 0
+							stopSound(sound)
+							setCameraTarget(localPlayer)
 						else
 							reason = "Passwords do not match!"
 							outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
@@ -266,8 +294,8 @@ addEventHandler("onClientResourceStart", resourceRoot,
 		showLoginWindow(true)
 		guiSetInputMode("no_binds_when_editing")
 		--playSound("winsound.mp3")
-		fadeCamera (true) 
-		setCameraMatrix(1468.8785400391, -919.25317382813, 100.153465271, 1468.388671875, -918.42474365234, 99.881813049316)
+		fadeCamera (true)
+		--setCameraMatrix(1468.8785400391, -919.25317382813, 100.153465271, 1468.388671875, -918.42474365234, 99.881813049316)
 		triggerServerEvent("requestServerNews", localPlayer) 	
 	end
 )
@@ -338,4 +366,36 @@ function rollLoginPanel ()
 		guiSetPosition(background_front,0.2+randomDirAnim*eval,0.25,true)
 	end
 	guiSetVisible(background_front,true)
+end
+ 
+local function removeCamHandler()
+	if(sm.moov == 1)then
+		sm.moov = 0
+	end
+end
+ 
+local function camRender()
+	if (sm.moov == 1) then
+		local x1,y1,z1 = getElementPosition(sm.object1)
+		local x2,y2,z2 = getElementPosition(sm.object2)
+		setCameraMatrix(x1,y1,z1,x2,y2,z2)
+	end
+end
+addEventHandler("onClientPreRender",root,camRender)
+ 
+function smoothMoveCamera(x1,y1,z1,x1t,y1t,z1t,x2,y2,z2,x2t,y2t,z2t,time)
+	if(sm.moov == 1)then return false end
+	sm.object1 = createObject(1337,x1,y1,z1)
+	sm.object2 = createObject(1337,x1t,y1t,z1t)
+	setElementAlpha(sm.object1,0)
+	setElementAlpha(sm.object2,0)
+	setObjectScale(sm.object1,0.01)
+	setObjectScale(sm.object2,0.01)
+	moveObject(sm.object1,time,x2,y2,z2,0,0,0,"InOutQuad")
+	moveObject(sm.object2,time,x2t,y2t,z2t,0,0,0,"InOutQuad")
+	sm.moov = 1
+	setTimer(removeCamHandler,time,1)
+	setTimer(destroyElement,time,1,sm.object1)
+	setTimer(destroyElement,time,1,sm.object2)
+	return true
 end

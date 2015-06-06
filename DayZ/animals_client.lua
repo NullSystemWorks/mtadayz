@@ -8,29 +8,29 @@
 #---------------------------------------------------------------#
 ]]
 
-snipertxd = engineLoadTXD ("mods/bear.txd");
+snipertxd = engineLoadTXD ("mods/animals/bear.txd");
 engineImportTXD (snipertxd, 12);
-sniperdff = engineLoadDFF ("mods/bear.dff", 12);
+sniperdff = engineLoadDFF ("mods/animals/bear.dff", 12);
 engineReplaceModel (sniperdff, 12);
 
-snipertxd = engineLoadTXD ("mods/goat.txd");
+snipertxd = engineLoadTXD ("mods/animals/goat.txd");
 engineImportTXD (snipertxd, 13);
-sniperdff = engineLoadDFF ("mods/goat.dff", 13);
+sniperdff = engineLoadDFF ("mods/animals/goat.dff", 13);
 engineReplaceModel (sniperdff, 13);
 
-snipertxd = engineLoadTXD ("mods/wolf.txd");
+snipertxd = engineLoadTXD ("mods/animals/wolf.txd");
 engineImportTXD (snipertxd, 14);
-sniperdff = engineLoadDFF ("mods/wolf.dff", 14);
+sniperdff = engineLoadDFF ("mods/animals/wolf.dff", 14);
 engineReplaceModel (sniperdff, 14);
 
-snipertxd = engineLoadTXD ("mods/cow1.txd");
+snipertxd = engineLoadTXD ("mods/animals/cow1.txd");
 engineImportTXD (snipertxd, 15);
-sniperdff = engineLoadDFF ("mods/cow1.dff", 15);
+sniperdff = engineLoadDFF ("mods/animals/cow1.dff", 15);
 engineReplaceModel (sniperdff, 15);
 
-snipertxd = engineLoadTXD ("mods/cow2.txd");
+snipertxd = engineLoadTXD ("mods/animals/cow2.txd");
 engineImportTXD (snipertxd, 16);
-sniperdff = engineLoadDFF ("mods/cow2.dff", 16);
+sniperdff = engineLoadDFF ("mods/animals/cow2.dff", 16);
 engineReplaceModel (sniperdff, 16);
 
 function animalDamage(attacker,weapon)

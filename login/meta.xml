@@ -24,6 +24,7 @@
 	<file src="font.ttf"/>
 	<file src="font2.ttf"/>
 	<file src="button.mp3"/>
+	<file src="dayzsoundtrack.mp3" />
 	
 	<settings>
 	<setting name="*news1" value="MTA:DayZ server is open again!"

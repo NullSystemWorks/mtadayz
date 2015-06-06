@@ -632,6 +632,14 @@ local vehicleDataTable = {
 
 }
 
+function addVehicleManager()
+	local vehicleManager = getAccount("vehicleManager","ds4f9$")
+	if not vehicleManager then
+		addAccount("vehicleManager","ds4f9$")
+	end
+end
+addEventHandler("onResourceStart",getRootElement(getThisResource()),addVehicleManager)
+
 
 function saveallvehicles(ps,command)
 	counter = 0

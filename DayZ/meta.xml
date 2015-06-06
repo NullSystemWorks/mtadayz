@@ -154,7 +154,6 @@
 	<file src="icons/wheel.png"/>
 	<file src="icons/wirefence.png"/>
 	<file src="icons/wood.png"/>
-
 	
 	<file src="images/buttArrow.png"/>
 	<file src="images/buttArrowDown.png"/>
@@ -298,49 +297,59 @@
 	<file src="images/blip/62.png" type="client"></file>
 	<file src="images/blip/63.png" type="client"></file>
 	
-	<!-- Mods (Weapons & Playerskins) -->
-    <file src="mods/sniper.txd" />
-    <file src="mods/sniper.dff" />
-    <file src="mods/civilian.txd" />
-    <file src="mods/civilian.dff" />
-	<file src="mods/bandit3.txd" />
-    <file src="mods/bandit3.dff" />
-    <file src="mods/standart.txd" />
-    <file src="mods/standart.dff" />
-    <file src="mods/hero.txd" />
-    <file src="mods/hero.dff" />
-    <file src="mods/bear.txd" />
-    <file src="mods/bear.dff" />
-    <file src="mods/fox.txd" />
-    <file src="mods/fox.dff" />
-    <file src="mods/wolf.txd" />
-    <file src="mods/wolf.dff" />
-	<file src="mods/fnfal.txd" />
-	<file src="mods/fnfal.dff" />
-	<file src="mods/g36c.txd" />
-	<file src="mods/g36c.dff" />
-	<file src="mods/crossbow.txd" />
-	<file src="mods/crossbow.dff" />
-	<file src="mods/bizon.txd" />
-	<file src="mods/bizon.dff" />
-	<file src="mods/dmr.txd" />
-	<file src="mods/dmr.dff" />
-	<file src="mods/dragunov.txd" />
-	<file src="mods/dragunov.dff" />
-	<file src="mods/revolver.txd" />
-	<file src="mods/revolver.dff" />
-	<file src="mods/sa58v.txd" />
-	<file src="mods/sa58v.dff" />
-	<file src="mods/remington.txd" />
-	<file src="mods/remington.dff" />
-	<file src="mods/m1911.txd" />
-	<file src="mods/m1911.dff" />
-	<file src="mods/sks.txd" />
-	<file src="mods/sks.dff" />
-	<file src="mods/knife.txd" />
-	<file src="mods/knife.dff" />
+	<!-- Mods (Weapons & Playerskins & Animals) -->
+    <file src="mods/playerskins/sniper.txd" />
+    <file src="mods/playerskins/sniper.dff" />
+    <file src="mods/playerskins/civilian.txd" />
+    <file src="mods/playerskins/civilian.dff" />
+	<file src="mods/playerskins/bandit2.txd" />
+	<file src="mods/playerskins/bandit2.dff" />
+	<file src="mods/playerskins/bandit3.txd" />
+    <file src="mods/playerskins/bandit3.dff" />
+    <file src="mods/playerskins/standart.txd" />
+    <file src="mods/playerskins/standart.dff" />
+    <file src="mods/playerskins/hero.txd" />
+    <file src="mods/playerskins/hero.dff" />
+    <file src="mods/animals/bear.txd" />
+    <file src="mods/animals/bear.dff" />
+    <file src="mods/animals/fox.txd" />
+    <file src="mods/animals/fox.dff" />
+	<file src="mods/animals/cow1.txd" />
+	<file src="mods/animals/cow1.dff" />
+	<file src="mods/animals/cow2.txd" />
+	<file src="mods/animals/cow2.dff" />
+	<file src="mods/animals/goat.txd" />
+	<file src="mods/animals/goat.dff" />
+    <file src="mods/animals/wolf.txd" />
+    <file src="mods/animals/wolf.dff" />
+	<file src="mods/weapons/fnfal.txd" />
+	<file src="mods/weapons/fnfal.dff" />
+	<file src="mods/weapons/g36c.txd" />
+	<file src="mods/weapons/g36c.dff" />
+	<file src="mods/weapons/crossbow.txd" />
+	<file src="mods/weapons/crossbow.dff" />
+	<file src="mods/weapons/bizon.txd" />
+	<file src="mods/weapons/bizon.dff" />
+	<file src="mods/weapons/dmr.txd" />
+	<file src="mods/weapons/dmr.dff" />
+	<file src="mods/weapons/dragunov.txd" />
+	<file src="mods/weapons/dragunov.dff" />
+	<file src="mods/weapons/revolver.txd" />
+	<file src="mods/weapons/revolver.dff" />
+	<file src="mods/weapons/sa58v.txd" />
+	<file src="mods/weapons/sa58v.dff" />
+	<file src="mods/weapons/remington.txd" />
+	<file src="mods/weapons/remington.dff" />
+	<file src="mods/weapons/m1911.txd" />
+	<file src="mods/weapons/m1911.dff" />
+	<file src="mods/weapons/sks.txd" />
+	<file src="mods/weapons/sks.dff" />
+	<file src="mods/weapons/knife.txd" />
+	<file src="mods/weapons/knife.dff" />
 	
-	<!-- Skins -->
+	
+	
+	<!-- Skins TXD -->
     <file src="skins/22.txd" />
     <file src="skins/56.txd" />
     <file src="skins/67.txd" />
@@ -374,6 +383,36 @@
     <file src="skins/277.txd" />
     <file src="skins/280.txd" />
     <file src="skins/287.txd" />
+	
+	<!-- Skin DFF -->
+	<file src="skins/22.dff" />
+    <file src="skins/56.dff" />
+    <file src="skins/67.dff" />
+    <file src="skins/68.dff" />
+    <file src="skins/69.dff" />
+    <file src="skins/70.dff" />
+    <file src="skins/92.dff" />
+    <file src="skins/97.dff" />
+    <file src="skins/105.dff" />
+    <file src="skins/107.dff" />
+    <file src="skins/108.dff" />
+    <file src="skins/126.dff" />
+    <file src="skins/127.dff" />
+    <file src="skins/128.dff" />
+    <file src="skins/152.dff" />
+    <file src="skins/162.dff" />
+    <file src="skins/167.dff" />
+    <file src="skins/188.dff" />
+    <file src="skins/195.dff" />
+    <file src="skins/206.dff" />
+    <file src="skins/209.dff" />
+    <file src="skins/212.dff" />
+    <file src="skins/229.dff" />
+    <file src="skins/230.dff" />
+    <file src="skins/258.dff" />
+    <file src="skins/264.dff" />
+    <file src="skins/277.dff" />
+    <file src="skins/280.dff" />
 	
 	<!-- Sounds -->
     <file src="sounds/mgroan1.ogg" />
@@ -416,48 +455,56 @@
 	<file src="sounds/openinventory.mp3" />
 	
 	<!-- Item Textures -->
-    <file src="items/assault_ammo.txd" />
-    <file src="items/assault_ammo.dff" />
-    <file src="items/backpack_alice.txd" />
-    <file src="items/backpack_alice.dff" />
-    <file src="items/backpack_coyote.txd" />
-    <file src="items/backpack_coyote.dff" />
-    <file src="items/beans_can.txd" />
+	<file src="items/army_clothes.txd" />
+	<file src="items/army_clothes.dff" />
+	<file src="items/sniper_clothes.txd" />
+	<file src="items/sniper_clothes.dff" />
+	<file src="items/civilian_clothes.txd" />
+	<file src="items/civilian_clothes.dff" />
+	<file src="items/standard_clothes.txd" />
+	<file src="items/standard_clothes.dff" />
+	<file src="items/beans_can.txd" />
     <file src="items/beans_can.dff" />
     <file src="items/first_aid_kit.txd" />
     <file src="items/first_aid_kit.dff" />
-    <file src="items/heat_pack.txd" />
+	<file src="items/heat_pack.txd" />
     <file src="items/heat_pack.dff" />
-    <file src="items/katana.txd" />
-    <file src="items/katana.dff" />
-    <file src="items/pain_killers.txd" />
+	<file src="items/pain_killers.txd" />
     <file src="items/pain_killers.dff" />
     <file src="items/pasta_can.txd" />
     <file src="items/pasta_can.dff" />
-    <file src="items/pistol_ammo.txd" />
+	<file src="items/pistol_ammo.txd" />
     <file src="items/pistol_ammo.dff" />
     <file src="items/shotgun_ammo.txd" />
     <file src="items/shotgun_ammo.dff" />
     <file src="items/backpack_small.txd" />
     <file src="items/backpack_small.dff" />
-    <file src="items/backpack_czech.txd" />
+	<file src="items/smg_ammo.txd" />
+    <file src="items/smg_ammo.dff" />
+    <file src="items/sniper_ammo.txd" />
+    <file src="items/sniper_ammo.dff" />
+	<file src="items/soda_can.txd" />
+    <file src="items/soda_can.dff" />
+    <file src="items/water_bottle.txd" />
+    <file src="items/water_bottle.dff" />
+    <file src="items/assault_ammo.txd" />
+    <file src="items/assault_ammo.dff" />
+    <file src="items/backpack_alice.txd" />
+    <file src="items/backpack_alice.dff" />
+	<file src="items/backpack_czech.txd" />
     <file src="items/backpack_czech.dff" />
+    <file src="items/backpack_coyote.txd" />
+    <file src="items/backpack_coyote.dff" />
 	<file src="items/backpack_ghillie.txd" />
     <file src="items/backpack_ghillie.dff" />
 	<file src="items/backpack_os.txd" />
     <file src="items/backpack_os.dff" />
-    <file src="items/smg_ammo.txd" />
-    <file src="items/smg_ammo.dff" />
-    <file src="items/sniper_ammo.txd" />
-    <file src="items/sniper_ammo.dff" />
-    <file src="items/soda_can.txd" />
-    <file src="items/soda_can.dff" />
-    <file src="items/water_bottle.txd" />
-    <file src="items/water_bottle.dff" />
-    <file src="items/tent.txd" />
+	<file src="items/tent.txd" />
     <file src="items/tent.dff" />
     <file src="items/wirefence.txd" />
     <file src="items/wirefence.dff" />
+    <file src="items/katana.txd" />
+    <file src="items/katana.dff" />
     <file src="items/camera.txd" />
     <file src="items/camera.dff" />
 	

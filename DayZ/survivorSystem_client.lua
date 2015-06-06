@@ -28,34 +28,34 @@ setPedTargetingMarkerEnabled(false)
 
 --Survivor Skins
 --Sniper
-snipertxd = engineLoadTXD ("mods/sniper.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/sniper.txd");
 engineImportTXD (snipertxd, 285);
-sniperdff = engineLoadDFF ("mods/sniper.dff", 285);
+sniperdff = engineLoadDFF ("mods/playerskins/sniper.dff", 285);
 engineReplaceModel (sniperdff, 285);
 --Civilian
-snipertxd = engineLoadTXD ("mods/civilian.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/civilian.txd");
 engineImportTXD (snipertxd, 179);
-sniperdff = engineLoadDFF ("mods/civilian.dff", 179);
+sniperdff = engineLoadDFF ("mods/playerskins/civilian.dff", 179);
 engineReplaceModel (sniperdff, 179);
 --Bandit1
-snipertxd = engineLoadTXD ("mods/bandit3.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/bandit3.txd");
 engineImportTXD (snipertxd, 180);
-sniperdff = engineLoadDFF ("mods/bandit3.dff", 180);
+sniperdff = engineLoadDFF ("mods/playerskins/bandit3.dff", 180);
 engineReplaceModel (sniperdff, 180);
 --Bandit2
-snipertxd = engineLoadTXD ("mods/bandit2.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/bandit2.txd");
 engineImportTXD (snipertxd, 288);
-sniperdff = engineLoadDFF ("mods/bandit2.dff", 288);
+sniperdff = engineLoadDFF ("mods/playerskins/bandit2.dff", 288);
 engineReplaceModel (sniperdff, 288);
 --Standard
-snipertxd = engineLoadTXD ("mods/standart.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/standart.txd");
 engineImportTXD (snipertxd, 73);
-sniperdff = engineLoadDFF ("mods/standart.dff", 73);
+sniperdff = engineLoadDFF ("mods/playerskins/standart.dff", 73);
 engineReplaceModel (sniperdff, 73);
 --Hero
-snipertxd = engineLoadTXD ("mods/hero.txd");
+snipertxd = engineLoadTXD ("mods/playerskins/hero.txd");
 engineImportTXD (snipertxd, 210);
-sniperdff = engineLoadDFF ("mods/hero.dff", 210);
+sniperdff = engineLoadDFF ("mods/playerskins/hero.dff", 210);
 engineReplaceModel (sniperdff, 210);
 
 
@@ -196,9 +196,9 @@ weaponDFF = engineLoadDFF ("items/katana.dff", 339);
 engineReplaceModel (weaponDFF, 339);
 
 -- Knife -> Better Knife
-weaponTXD = engineLoadTXD("mods/knife.txd");
+weaponTXD = engineLoadTXD("mods/weapons/knife.txd");
 engineImportTXD(weaponTXD, 335);
-weaponDFF = engineLoadDFF("mods/knife.dff", 0);
+weaponDFF = engineLoadDFF("mods/weapons/knife.dff", 0);
 engineReplaceModel(weaponDFF, 335);
 
 local function getRotationOfCamera()
@@ -308,6 +308,8 @@ function playerStatsClientSite()
 				end
 				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0)
 			end
+		else
+			dxSetRenderTarget()
 		end
 		if getElementData(getLocalPlayer(),"Watch") >= 1 then
 			--showPlayerHudComponent("clock",true)
@@ -675,28 +677,28 @@ addEventHandler("onClientRender",getRootElement(),WeaponHUD)
 addEventHandler("onClientPlayerSpawn",getRootElement(),WeaponHUD)
 
 function loadModels()
-	weapontxd1 = engineLoadTXD ("mods/fnfal.txd");
-	weapondff1 = engineLoadDFF ("mods/fnfal.dff", 0);
-	weapontxd2 = engineLoadTXD ("mods/g36c.txd");
-	weapondff2 = engineLoadDFF ("mods/g36c.dff", 0);
-	weapontxd3 = engineLoadTXD ("mods/crossbow.txd");
-	weapondff3 = engineLoadDFF ("mods/crossbow.dff", 0);
-	weapontxd4 = engineLoadTXD ("mods/dmr.txd");
-	weapondff4 = engineLoadDFF ("mods/dmr.dff", 0);
-	weapontxd5 = engineLoadTXD ("mods/dragunov.txd");
-	weapondff5 = engineLoadDFF ("mods/dragunov.dff", 0);
-	weapontxd6 = engineLoadTXD ("mods/bizon.txd");
-	weapondff6 = engineLoadDFF ("mods/bizon.dff", 0);
-	weapontxd7 = engineLoadTXD ("mods/remington.txd");
-	weapondff7 = engineLoadDFF ("mods/remington.dff", 0);
-	weapontxd8 = engineLoadTXD ("mods/revolver.txd");
-	weapondff8 = engineLoadDFF ("mods/revolver.dff", 0);
-	weapontxd9 = engineLoadTXD ("mods/m1911.txd");
-	weapondff9 = engineLoadDFF ("mods/m1911.dff", 0);
-	weapontxd10 = engineLoadTXD ("mods/sks.txd");
-	weapondff10 = engineLoadDFF ("mods/sks.dff", 0);
-	weapontxd11 = engineLoadTXD ("mods/sa58v.txd");
-	weapondff11 = engineLoadDFF ("mods/sa58v.dff", 0);
+	weapontxd1 = engineLoadTXD ("mods/weapons/fnfal.txd");
+	weapondff1 = engineLoadDFF ("mods/weapons/fnfal.dff", 0);
+	weapontxd2 = engineLoadTXD ("mods/weapons/g36c.txd");
+	weapondff2 = engineLoadDFF ("mods/weapons/g36c.dff", 0);
+	weapontxd3 = engineLoadTXD ("mods/weapons/crossbow.txd");
+	weapondff3 = engineLoadDFF ("mods/weapons/crossbow.dff", 0);
+	weapontxd4 = engineLoadTXD ("mods/weapons/dmr.txd");
+	weapondff4 = engineLoadDFF ("mods/weapons/dmr.dff", 0);
+	weapontxd5 = engineLoadTXD ("mods/weapons/dragunov.txd");
+	weapondff5 = engineLoadDFF ("mods/weapons/dragunov.dff", 0);
+	weapontxd6 = engineLoadTXD ("mods/weapons/bizon.txd");
+	weapondff6 = engineLoadDFF ("mods/weapons/bizon.dff", 0);
+	weapontxd7 = engineLoadTXD ("mods/weapons/remington.txd");
+	weapondff7 = engineLoadDFF ("mods/weapons/remington.dff", 0);
+	weapontxd8 = engineLoadTXD ("mods/weapons/revolver.txd");
+	weapondff8 = engineLoadDFF ("mods/weapons/revolver.dff", 0);
+	weapontxd9 = engineLoadTXD ("mods/weapons/m1911.txd");
+	weapondff9 = engineLoadDFF ("mods/weapons/m1911.dff", 0);
+	weapontxd10 = engineLoadTXD ("mods/weapons/sks.txd");
+	weapondff10 = engineLoadDFF ("mods/weapons/sks.dff", 0);
+	weapontxd11 = engineLoadTXD ("mods/weapons/sa58v.txd");
+	weapondff11 = engineLoadDFF ("mods/weapons/sa58v.dff", 0);
 
 end
 addEventHandler("onClientResourceStart",root,loadModels)
@@ -1069,6 +1071,7 @@ statsLabel = {}
 
 statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,"images/scrollmenu_2.png",true)
 guiSetAlpha(statsWindows,0.8)
+guiSetVisible(statsWindow,false)
 --Zombies  Killed
 statsLabel["zombieskilled"] = guiCreateLabel(0,0.05,1,0.15,"Zombies killed: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["zombieskilled"],"center")
@@ -1116,14 +1119,20 @@ guiSetFont (statsLabel["name"], "default-bold-small" )
 setElementData(statsLabel["name"],"identifikation","name")
 
 function showDebugMintorOnLogin ()
-	guiSetVisible(statsWindows,true)
+	if getElementData(localPlayer,"logedin") then
+		guiSetVisible(statsWindows,true)
+	end
 end
 addEvent("onClientPlayerDayZLogin", true)
 addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 
 function showDebugMonitor ()
-	local visible = guiGetVisible(statsWindows)
-	guiSetVisible(statsWindows,not visible)
+	if getElementData(localPlayer,"logedin") then
+		local visible = guiGetVisible(statsWindows)
+		guiSetVisible(statsWindows,not visible)
+	else
+		guiSetVisible(statsWindow,false)
+	end
 end
 bindKey("F5","down",showDebugMonitor)
 

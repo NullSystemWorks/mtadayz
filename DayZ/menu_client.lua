@@ -23,7 +23,7 @@ local optionsTable = {
 },
 }
 
-font[1] = guiCreateFont("etelka.ttf", 10)
+font[1] = guiCreateFont("fonts/etelka.ttf", 10)
 
 spalten[1] = ""
 spalten[2] = ""
