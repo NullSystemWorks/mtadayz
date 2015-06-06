@@ -30,7 +30,7 @@ end)
 
 function checkHealth(source)
     local vHealth = getElementData(source, "blood") or 0
-    if vHealth > maxHealth and not hasObjectPermissionTo ( source, "function.mute" ) then
+    if vHealth > maxHealth and not hasObjectPermissionTo ( source, "command.mute" ) then
         setElementData(source, "blood", 12000)
         kickPlayer(source, "[AC] : Health Hack")
     end
@@ -38,7 +38,7 @@ end
 
 function checkFood(source)
     local vFood = getElementData(source, "food") or 0
-    if vFood > maxFood and not hasObjectPermissionTo ( source, "function.mute" ) then
+    if vFood > maxFood and not hasObjectPermissionTo ( source, "command.mute" ) then
         setElementData(source, "food", 30)
         kickPlayer(source, "[AC] : Food Hack")
     end
@@ -46,7 +46,7 @@ end
 
 function checkThirst(source)
     local vThirst = getElementData(source, "thirst") or 0
-    if vThirst > maxThirst and not hasObjectPermissionTo ( source, "function.mute" ) then
+    if vThirst > maxThirst and not hasObjectPermissionTo ( source, "command.mute" ) then
         setElementData(source, "thirst", 30)
         kickPlayer(source, "[AC] : Thirst Hack")
     end
@@ -54,7 +54,7 @@ end
 
 function checkSlots(source)
     local vSlots = getElementData(source, "MAX_Slots") or 0
-    if vSlots > maxSlots and not hasObjectPermissionTo ( source, "function.mute" ) then
+    if vSlots > maxSlots and not hasObjectPermissionTo ( source, "command.mute" ) then
         setElementData(source, "MAX_Slots", 0)
         kickPlayer(source, "[AC] : Slots Hack")
     end
@@ -62,7 +62,7 @@ end
 
 function detectVehicleCheat(vehicle, seat, jacked)
   if ( getElementModel(vehicle) == 432 or getElementModel(vehicle) == 425 or getElementModel(vehicle) == 501 or getElementModel(vehicle) == 564 or getElementModel(Vehicle) == 594 or getElementModel(vehicle) == 601 or getElementModel(vehicle) == 447 or getElementModel(vehicle) == 520 ) then
-    if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "function.mute" ) then
+    if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "command.mute" ) then
        kickPlayer(source, "[AC] : Vehicle Hack")
     end
   end
@@ -77,7 +77,7 @@ WeaponID = {
 
 function detectWeaponCheat(previousWeaponID, currentWeaponID)
   if ( WeaponID[currentWeaponID] ) then
-    if not hasObjectPermissionTo ( source, "function.mute" ) then
+    if not hasObjectPermissionTo ( source, "command.mute" ) then
         kickPlayer(source, "[AC] : Weapon Hack")
     end
   end
