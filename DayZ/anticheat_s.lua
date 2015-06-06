@@ -83,3 +83,26 @@ function detectWeaponCheat(previousWeaponID, currentWeaponID)
   end
 end
 addEventHandler("onPlayerWeaponSwitch", getRootElement(), detectWeaponCheat)
+
+local lossCount = {}
+function checkLoss()
+	for i, v in ipairs(getElementsByType("player"))do
+		local loss = getNetworkStats(v)["packetlossLastSecond"]
+				if not lossCount[v] then
+				lossCount[v] = 0
+				end
+					if loss > 0 then -- If we have packet loss then send message and add counter.
+						startRollMessage2("Security", "You have packet loss and will be kicked!", 255, 22, 0)
+						lossCount[v] = lossCount[v] + 1
+						if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player
+							lossCount[v] = nil
+							kickPlayer(v, "[AC] : Packet Loss")
+						end
+					else -- If packet loss was corrected then reset counter
+						lossCount[v] = 0
+					end
+	end
+end
+if gameplayVariables["packetlosskick"] then -- Check boolean to see if we want to kick on packet loss
+setTimer(checkLoss,1000,0) -- Set timer to check every second
+end
