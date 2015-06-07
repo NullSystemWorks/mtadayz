@@ -5,8 +5,8 @@
 ### What is this repository for? ###
 
 * Continuing the development of MTA DayZ for MTA:SA 1.4+
-* Current Version: 0.8a
-* Next Version: 0.9a
+* Current Version: 0.7a
+* We are working on: Version 0.8a
 * Check "Issues" frequently to see what else there is to do
 
 ### How do I get set up? ###
