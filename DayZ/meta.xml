@@ -177,6 +177,22 @@
     <file src="shader/blackwhite/blackwhite.fx" />
 	
     <!-- Group System -->
+	<script src="group_system/group.lua" type="client"/>
+	<script src="group_system/group.slua" type="server"/>
+	<export function="removeRank" type="server"/>
+	<export function="isRank" type="server"/>
+	<export function="getGroupMembers" type="server"/>
+	<export function="getPlayerGroup" type="server"/>
+	<export function="getPlayerGroupRank" type="server"/>
+	<export function="getPlayerWarningLevel" type="server"/>
+	<export function="getPlayerJoinDate" type="server"/>
+	<export function="outputGroupMessage" type="server"/>
+	<export function="checkGroupAccess" type="server"/>
+	<export function="getPermissionCount" type="server"/>
+	<export function="getGroupRankCount" type="server"/>
+	<export function="getGroupBankAmount" type="server"/>
+	<export function="viewWindow" type="server"/>
+	<!--
     <script src="group_system/gang_client.lua" type="client" />
     <script src="group_system/gang_utils.lua" type="server" />
     <script src="group_system/gang_server.lua" type="server" />
@@ -188,6 +204,7 @@
         <setting name="*gang_list_command" value="gangs" />
         <setting name="*gang_create_command" value="creategang" />
     </settings>
+	-->
     
 	<!-- Bone Attachments -->
 	<script src="bone_attach/bone_attach.lua" />

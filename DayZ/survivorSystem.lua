@@ -638,14 +638,32 @@ function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
 			value = 0
-			if getWeather == 7 then
-				value = -0.1
-			elseif getWeather == 12 then
+			-- Winter
+			if getWeather == 1 then
+				value = -0.6
+			elseif getWeather == 4 then
+				value = -0.4
+			elseif getWeather == 15 then
+				value = -1.0
+			-- Spring
+			elseif getWeather == 2 then
 				value = 0
 			elseif getWeather == 16 then
-				value = -0.4
-			elseif getWeather == 4 then
+				value = -0.3
+			elseif getWeather == 5 then
+				value = 0.01
+			-- Summer
+			elseif getWeather == 0 then
+				value = 0
+			elseif getWeather == 18 then
+				value = 0.02
+			-- Autumn
+			elseif getWeather == 7 then
+				value = -0.05
+			elseif getWeather == 9 then
 				value = -0.1
+			else
+				value = 0
 			end
 			local hour, minutes = getTime()
 			if hour >= 21 and hour <= 8 then
@@ -655,7 +673,7 @@ function checkTemperature()
 		end
 	end	
 end
-setTimer(checkTemperature,60000,0)
+--setTimer(checkTemperature,60000,0)
 
 function checkTemperature2()
 	for i,player in ipairs(getElementsByType("player")) do
@@ -1452,6 +1470,14 @@ function funcBindLie ( player, key, keyState )
 	end
 end
 
+--[[
+addEvent("onZombieHitByVehicle",true)
+function onZombieHitByVehicle()
+	setPedAnimation (source,"ped","FLOOR_hit_f", -1,false)
+end
+addEventHandler("onZombieHitByVehicle",root,onZombieHitByVehicle)
+]]
+
 -- STAMINA SYSTEM (EVENTS)
 
 -- Event for changing animation
@@ -1477,12 +1503,27 @@ function bindTheKeys ()
 end
 addEventHandler("onPlayerLogin", getRootElement(), bindTheKeys)
 
+function saveSeasonsDays(dayspassed,season)
+local seasonsManager = getAccount("seasonsmanager","2%nN<?nVU")
+	if not seasonsManager then
+		addAccount("seasonsmanager","2%nN<?nVU")
+	end
+	setAccountData("seasonsmanager","seasondayspassed",{dayspassed,season})
+	outputServerLog("Season and Days Passed saved.")
+end
+addEvent("saveSeasonsDays",true)
+addEventHandler("saveSeasonsDays",root,saveSeasonsDays)
+
+function startSavingofSeasonDays()
+	triggerClientEvent("triggerSaveSeasonDays",root)
+end
+addEventHandler("onResourceStop",getRootElement(getThisResource()),startSavingofSeasonDays)
 
 local nearbyPlayers = {}
  
 addEventHandler( 'onPlayerVoiceStart', root,
     function()
-          local chatRadius = 10
+          local chatRadius = 20
           local posX, posY, posZ = getElementPosition( source )
           local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
           nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
@@ -1502,9 +1543,6 @@ addEventHandler("onPlayerVoiceStop",root,
          end
           nearbyPlayers = {}
     end)
-
--- [[ EVENT WEAPONS ]] --
-
 
 function onPlayerGhillieStateOn()
 local getSlots = getElementData(client,"MAX_Slots")
@@ -1566,73 +1604,3 @@ function onServerRespawnTrees( worldID, worldX, worldY, worldZ, worldRX, worldRY
 	outputChatBox("Trees have been respawned!",root,0,255,0,true)
 end
 addEventHandler("onServerRespawnTrees",root,onServerRespawnTrees)
-
-
---[[
-
-
-function getPointFromDistanceRotation(x, y, dist, angle)
- 
-    local a = math.rad(90 - angle);
- 
-    local dx = math.cos(a) * dist;
-    local dy = math.sin(a) * dist;
- 
-    return x+dx, y+dy;
- 
-end
-
-Hunter = nil
-function getPlayerNearestToPosition(x, y, z)
-	local nearestPlayer = nil
-	local nearestDistance = nil
-	for i, players in ipairs(getElementsByType("player")) do
-		local px, py, pz = getElementPosition(players)
-		local distance = getDistanceBetweenPoints3D(px, py, pz, x, y, z)
-		if nearestPlayer == nil then
-			nearestPlayer = players
-			nearestDistance = distance
-		elseif distance < nearestDistance then
-			nearestDistance = distance
-			nearestPlayer = players
-		end
-	end
-	if nearestPlayer == nil then
-		return false
-	else
-		return nearestPlayer
-	end
-end
-
-setTimer(
-	function()
-			localPed2 = RealHunter
-						if isElement(RealHunter) then
-			local x, y, z = getElementPosition(RealHunter)
-			local player = getPlayerNearestToPosition(x, y, z)
-			if player then
-				local px, py, pz = getElementPosition(player)
-				if getDistanceBetweenPoints3D(x, y, z, px, py, pz) < 10 then
-					if isElementInWater(RealHunter) then
-					setPedAnimation(RealHunter, "ped", "Player_Sneak", -1, true, true, false)
-					end
-					local rotZ = findRotation(x, y, px, py)
-					setPedRotation(RealHunter, rotZ)
-					if getDistanceBetweenPoints3D(px, py, pz, x, y, z) < 2 then
-						local health = getElementHealth(player)
-						if health < 5 or health == 5 then
-							setElementHealth(player, 0)
-							local leX, leY, leZ = getElementPosition(RealHunter)
-							setPedAnimation(RealHunter, "ped", "Player_Sneak", -1, true, true, false) 
-						else
-							setElementHealth(player, health - 5)
-						end
-					end
-				else
-				setPedAnimation(RealHunter, "ped", "Player_Sneak", -1, true, true, false) 
-				end
-			end
-		end
-	end
-, 50, 0)
-]]
