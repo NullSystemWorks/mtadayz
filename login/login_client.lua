@@ -1,6 +1,6 @@
 resourceRoot = getResourceRootElement( getThisResource( ) )
 localPlayer = getLocalPlayer()
-versionstring = "MTA:DayZ\nVersion: 0.8b\nLast Update: 30.05.15"
+versionstring = "MTA:DayZ\nVersion: 0.8a\nLast Update: 30.05.15"
 infoTable = {}
 Login_Edit = {}
 marwinButtons = {}
