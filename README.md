@@ -7,6 +7,7 @@
 * Continuing the development of MTA DayZ for MTA:SA 1.4+
 * Current Version: 0.7a
 * We are working on: Version 0.8a
+* **RELEASE DATE** for Version 0.8a: **06/20/2015**
 * Check "Issues" frequently to see what else there is to do
 
 ### How do I get set up? ###
