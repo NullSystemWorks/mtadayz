@@ -1,3 +1,219 @@
+--[[
+DYNAMIC RESOURCES SYSTEM
+
+The way it works:
+
+Each possible loot spawnpoint in the world has one buildingClass, denoted in the table buildingClasses. Items in their respective part
+of the table are GUARANTEED to spawn, though their chances are all different from each other. Now, some parts of table have a comment
+in them, for example, " -- generic: 56.02%. 
+This means that there is a 56.02% that an item from the table called "lootpileType", section ["generic"], will spawn. Between 2-5 items
+will spawn if the roll is sucessful, meaning each lootpile will always have at least 2-5 different items.
+
+This is achieved by first rolling a value between 0 and 99, and if it's above a certain value denoted in the table, the respective
+lootpileType will be called. Then, another roll gets executed which determines what items are going to spawn. Items in the lootpileType
+tables all have their own chance.
+
+Blueprints and their parts only spawn in industrial spawnpoints, and are randomly generated too.
+
+]]
+
+local buildingClasses = {
+
+["Residential"] = {
+{"Soda Can (Mountain Dew)",2647,1,0,0.28},
+{"Watch",2710,1,0,4.20},
+{"Compass",1579,1,0,1.40},
+{"Map",1277,0.8,90,0.84},
+{"PDW",352,1,90,3.64},
+{"M1911",346,1,90,1.40},
+{"Hunting Knife",335,1,90,2.24},
+{"Box of Matches",328,0.4,90,1.68},
+-- generic: 56.02%	~ 56%
+{"Lee Enfield",357,1,90,1.68},
+{"Revolver",348,1,90,1.12},
+{"Czech Backpack",1239,1,0,0.28},
+{"British Assault Pack",1644,1,0,0.84},
+{"ALICE Pack",1248,1,0,0.84},
+{"Winchester 1866",349,1,90,0.28},
+{"Tent",1279,1,0,0.5},
+-- military: 0.84% 	~ 1%
+-- trash: 14.01%	~ 14%
+{"Crossbow",349,1,90,0.28},
+{"Binoculars",369,1,0,1.68},
+{"Wood Pile",1463,0.4,0,1.68},
+{"Camouflage Clothing",1247,2,0,0.28},
+{"Ghillie Suit",1213,2,0,0.28},
+{"Crowbar",333,1,90,2.24},
+},
+
+-- Not yet implemented
+["Office"] = {
+{"Soda Can (Mountain Dew)",2647,1,0,0.28},
+{"Watch",2710,1,0,4.20},
+{"Compass",1579,1,0,1.40},
+{"Map",1277,0.8,90,0.84},
+{"PDW",352,1,90,3.64},
+{"M1911",346,1,90,1.40},
+{"Hunting Knife",335,1,90,2.24},
+{"Box of Matches",328,0.4,90,1.68},
+-- generic: 56.02%
+{"Lee Enfield",357,1,90,1.68},
+{"Revolver",348,1,90,1.12},
+{"Czech Backpack",1239,1,0,0.28},
+{"British Assault Pack",1644,1,0,0.84},
+{"ALICE Pack",1248,1,0,0.84},
+{"Winchester 1866",349,1,90,0.28},
+{"Tent",1279,1,0,0.28},
+-- military: 0.84%
+-- trash: 14.01%
+{"Crossbow",349,1,90,0.28},
+{"Binoculars",369,1,0,1.68},
+{"Wood Pile",1463,0.4,0,1.68},
+{"Camouflage Clothing",1247,2,0,0.28},
+{"Ghillie Suit",1213,2,0,0.28},
+{"Crowbar",333,1,90,2.24},
+},
+
+["Industrial"] = {
+-- generic: 17.65%	~ 18%
+-- trash: 28.43%	~ 28%
+-- military: 3.92%	~ 4%
+-- Missing: Blueprint Parts (randomly generated)
+{"Tire",1073,1,0,4.90},
+{"Tank Parts",1008,1,0.8,1.96},
+{"Engine",929,0.3,0,5.88},
+{"Hatchet",339,1,90,10.78},
+{"Hunting Knife",335,1,90,6.86},
+{"Toolbox",2969,0.5,0,1.96},
+{"Wire Fence",933,0.25,0,5.88},
+},
+
+["Farm"] = {
+{"Empty Gas Canister",1650,1,0,5.88},
+-- generic: 27.45%	~ 27%
+{"Mosin 9130",357,1,90,0.98},
+{"Lee Enfield",357,1,90,3.92},
+{"Winchester 1866",349,1,90,2.94},
+-- trash: 21.57%	~ 22%
+{"Crossbow",349,1,90,2.94},
+{"Wood Pile",1463,0.4,0,10.78},
+{"Hatchet",339,1,90,16.67},
+},
+
+["Supermarket"] = {
+{"Watch",2710,1,0,14.15},
+{"Compass",1579,1,0,0.94},
+{"Map",1277,0.8,90,4.72},
+{"PDW",352,1,90,1.89},
+{"M1911",346,1,90,1.89},
+{"Hunting Knife",335,1,90,1.89},
+{"Box of Matches",328,0.4,90,4.72},
+-- generic: 4.72%	~ 5%
+{"Lee Enfield",357,1,90,0.94},
+{"Revolver",348,1,90,0.94},
+{"Survival ACU",1239,1,0,0.94},
+{"British Assault Pack Backpack",1644,1,0,1.89},
+{"Alice Pack",1248,1,0,2.83},
+{"Winchester 1866",349,1,90,0.94},
+-- food: 28.3%		~ 28%
+-- trash: 14.15%	~ 14%
+{"Crossbow",349,1,90,0.94},
+{"Binoculars",369,1,0,4.72},
+{"Wood Pile",1463,0.4,0,1.89},
+},
+
+["Military"] = {
+{"M1911",346,1,90,1.40},
+{"M9 SD",347,1,90,0.38},
+{"M4",356,1,90,0.38},
+{"AK-47",355,1,90,3.82},
+{"Blaze 95 Double Rifle",351,1,90,1.91},
+{"DMR",358,1,90,0.19},
+{"PDW",352,1,90,0.96},
+{"Remington 870",351,1,90,1.53},
+{"G17",346,1,90,1.91},
+{"MP5A5",353,1,90,0.76},
+{"Sa58V CCO",355,1,90,0.19},
+{"Binoculars",369,1,0,1.15},
+{"Hunting Knife",335,1,90,1.91},
+{"GPS",2976,0.15,0,0.19},
+{"Map",1277,0.8,90,0.96},
+{"Assault Pack (ACU)",3026,1,0,1.15},
+{"British Assault Pack",1644,1,0,0.76},
+{"Backpack (Coyote)",1252,1,0,0.38},
+-- medical: 1.91%	~ 2%
+-- generic: 19.12%	~ 19%
+-- military: 47.8%	~ 48%
+},
+
+-- Not yet implemented
+["Barracks"] = {
+{"M9 SD",347,1,90,0.23},
+{"AK-47",355,1,90,2.30},
+{"SVD Dragunov",358,1,90,0.11},
+{"DMR",358,1,90,0.23},
+{"M4",356,1,90,1.15},
+{"Remington 870",351,1,90,1.15},
+{"G17",346,1,90,2.3},
+{"NV Goggles",368,1,90,0.11},
+{"Binoculars",369,1,0,1.15},
+{"Hunting Knife",335,1,90,1.72},
+{"GPS",2976,0.15,0,0.11},
+{"Map",1277,0.8,90,0.34},
+{"Assault Pack (ACU)",3026,1,0,0.23},
+{"ALICE Pack",1248,1,0,0.34},
+{"Backpack (Coyote)",1252,1,0,0.23},
+--medical: 3.45%
+--generic: 11.49%
+--military: 57.47%
+},
+
+-- Not yet implemented
+["Church"] = {
+{"Soda Can (Mountain Dew)",2647,1,0,0.28},
+{"Watch",2710,1,0,4.20},
+{"Compass",1579,1,0,1.40},
+{"Map",1277,0.8,90,0.84},
+{"PDW",352,1,90,3.64},
+{"M1911",346,1,90,1.40},
+{"Hunting Knife",335,1,90,2.24},
+{"Box of Matches",328,0.4,90,1.68},
+-- generic: 56.02%
+{"Lee Enfield",357,1,90,1.68},
+{"Revolver",348,1,90,1.12},
+{"Czech Backpack",1239,1,0,0.28},
+{"British Assault Pack",1644,1,0,0.84},
+{"ALICE Pack",1248,1,0,0.84},
+{"Winchester 1866",349,1,90,0.28},
+{"Tent",1279,1,0,0.5},
+-- military: 0.84%
+-- trash: 14.01%
+{"Crossbow",349,1,90,0.28},
+{"Binoculars",369,1,0,1.15},
+{"Wood Pile",1463,0.4,0,5},
+{"Camouflage Clothing",1247,2,0,4.5},
+{"Ghillie Suit",1213,2,0,0.01},
+{"Crowbar",333,1,90,2.24},
+},
+
+}
+--[[
+--AMMO
+{"1866 Slug",2358,2,0},
+{"2Rnd. Slug",2358,2,0},
+{"12 Gauge Pellet",2358,2,0},
+{"9x18mm Cartridge",2358,2,0},
+{"5.45x39mm Cartridge",1271,2,0},
+{"5.56x45mm Cartridge",1271,2,0},
+{".45 ACP Cartridge",3013,2,0},
+{"9x19mm SD Cartridge",3013,2,0},
+{"9.3x62mm Cartridge",2358,2,0},
+{".303 British Cartridge",2358,2,0},
+{"9x19mm Cartridge",2041,2,0},
+{"9x18mm Cartridge",2041,2,0},
+{"Bolt",2041,2,0},
+]]
+
 local lootpileType = {
 
 ["trash"] = {
@@ -10,12 +226,12 @@ local lootpileType = {
 {"Empty Soda Can",2673,0.5,0,8.82},
 {"Empty Tin Can",2673,0.5,0,8.82},
 {"Broken Whiskey Bottle",2673,0.5,0,8.82},
-{"Soda Bottle",2647,1,0,11.76},
-{"Milk",2856,1,0,8.82},
-{"Pizza",1582,1,0,4.90},
-{"Pasta Can",2770,1,0,4.90},
-{"Beans Can",2601,1,0,4.90},
-{"Burger",2768,1,0,4.90},
+{"Soda Can (Cola)",2647,1,0,11.76},
+{"Soda Can (Pepsi)",2856,1,0,8.82},
+{"Baked Beans",1582,1,0,4.90},
+{"Sardines",2770,1,0,4.90},
+{"Frank & Beans",2601,1,0,4.90},
+{"Pasta",2768,1,0,4.90},
 {".45 ACP Cartridge",3013,2,0,4.90},
 {"2Rnd. Slug",2358,2,0,4.90},
 {"12 Gauge Pellet",2358,2,0,4.90},
@@ -27,44 +243,49 @@ local lootpileType = {
 {"Empty Soda Can",2673,0.5,0,12.87},
 {"Empty Tin Can",2673,0.5,0,12.87},
 {"Broken Whiskey Bottle",2673,0.5,0,12.87},
-{"Soda Bottle",2647,1,0,8.91},
-{"Milk",2856,1,0,12.87},
-{"Pizza",1582,1,0,8.91},
-{"Pasta Can",2770,1,0,8.91},
-{"Beans Can",2601,1,0,8.91},
-{"Burger",2768,1,0,8.91},
+{"Soda Can (Cola)",2647,1,0,8.91},
+{"Soda Can (Pepsi)",2856,1,0,12.87},
+{"Can (Milk)",1582,1,0,4.90},
+{"Baked Beans",1582,1,0,8.91},
+{"Sardines",2770,1,0,8.91},
+{"Frank & Beans",2601,1,0,8.91},
+{"Pasta",2768,1,0,8.91},
+{"Can (Corn)",1582,1,0,4.90},
+{"Can (Peas)",1582,1,0,4.90},
+{"Can (Pork)",1582,1,0,4.90},
+{"Can (Stew)",1582,1,0,4.90},
+{"Can (Ravioli)",1582,1,0,4.90},
+{"Can (Fruit)",1582,1,0,4.90},
+{"Can (Chowder)",1582,1,0,4.90},
+{"MRE",1582,1,0,4.90},
+{"Pistachios",1582,1,0,4.90},
+{"Trail Mix",1582,1,0,4.90},
 {"Bandage",1578,0.5,0,3.96},
-},
-
-["hunter"] = {
-{"Bandage",1578,0.5,0,27.78},
-{".45 ACP Cartridge",3013,2,0,5.56},
-{"9.3x62mm Cartridge",2358,2,0,13.89},
-{".303 British Cartridge",2358,2,0,13.89},
-{"Empty Water Bottle",2683,1,0,5.56},
-{"Bolt",2041,2,0,27.78},
-{"Heat Pack",1576,5,0,5.56},
 },
 
 ["generic"] = {
 {"Empty Soda Can",2673,0.5,0,6},
 {"Empty Tin Can",2673,0.5,0,6},
 {"Broken Whiskey Bottle",2673,0.5,0,4},
-{"Soda Bottle",2647,1,0,6},
-{"Milk",2856,1,0,4},
-{"Pizza",1582,1,0,1},
-{"Pasta Can",2770,1,0,1},
-{"Beans Can",2601,1,0,1},
-{"Burger",2768,1,0,1},
+{"Soda Can (Cola)",2647,1,0,6},
+{"Soda Can (Pepsi)",2856,1,0,4},
+{"Baked Beans",1582,1,0,1},
+{"Sardines",2770,1,0,1},
+{"Frank & Beans",2601,1,0,1},
+{"Pasta",2768,1,0,1},
 {"Empty Water Bottle",2683,1,0,1},
 {"Water Bottle",2683,1,0,1},
 {"Bandage",1578,0.5,0,11},
-{".45 ACP Cartridge",3013,2,0,4},
+{".45 ACP Cartridge",3013,2,0,3},
+{"9.3x62mm Cartridge",2358,2,0,1},
+{".303 British Cartridge",2358,2,0,4},
+{"9x19mm SD Cartridge",3013,2,0,4},
 {"2Rnd. Slug",2358,2,0,5},
 {"12 Gauge Pellet",2358,2,0,5},
+{"9x18mm Cartridge",2358,2,0,9},
 {"1866 Slug",2358,2,0,2},
 {"Bolt",2041,2,0,4},
-{"Roadflare",324,1,90,7},
+{"Road Flare",324,1,90,7},
 {"Painkiller",2709,3,0,2},
 {"Heat Pack",1576,5,0,4},
 },
@@ -79,24 +300,22 @@ local lootpileType = {
 ["military"] = {
 {"Empty Tin Can",2673,0.5,0,17.82},
 {"Empty Soda Can",2673,0.5,0,8.91},
-{"Soda Bottle",2647,1,0,0.99},
-{"Milk",2856,1,0,0.99},
+{"Soda Can (Cola)",2647,1,0,0.99},
+{"Soda Can (Pepsi)",2856,1,0,0.99},
 {"Bandage",1578,0.5,0,3.96},
 {"Painkiller",2709,3,0,3.96},
 {"Morphine",1579,1,0,0.99},
-{"1866 Slug",2358,2,0,3.96},
-{"2Rnd. Slug",2358,2,0,3.96},
-{"12 Gauge Pellet",2358,2,0,3.96},
-{"9x18mm Cartridge",2358,2,0,1.98},
-{"5.45x39mm Cartridge",1271,2,0,3.96},
 {"5.56x45mm Cartridge",1271,2,0,3.96},
+{"9.3x62mm Cartridge",2358,2,0,3.96},
 {".45 ACP Cartridge",3013,2,0,4.95},
 {"9x19mm SD Cartridge",3013,2,0,0.99},
-{"9.3x62mm Cartridge",2358,2,0,3.96},
-{".303 British Cartridge",2358,2,0,1.98},
-{"9x19mm Cartridge",2041,2,0,3.96},
+{"5.45x39mm Cartridge",1271,2,0,3.96},
+{"12 Gauge Pellet",2358,2,0,3.96},
+{"1866 Slug",2358,2,0,3.96},
+{"2Rnd. Slug",2358,2,0,3.96},
+{"9x19mm Cartridge",2041,2,0,1.98},
 {"Bolt",2041,2,0,1.98},
-{"Roadflare",324,1,90,4},
+{"Road Flare",324,1,90,4},
 {"Wire Fence",933,0.25,0,1},
 {"Grenade",342,1,0,0.99},
 {"Heat Pack",1576,5,0,3.96},
@@ -108,12 +327,155 @@ local lootpileType = {
 {"9x18mm Cartridge",2358,2,0,9.38},
 {"1866 Slug",2358,2,0,9.38},
 {"12 Gauge Pellet",2358,2,0,16.63},
-{"Roadflare",324,1,90,9.38},
+{"Road Flare",324,1,90,9.38},
 },
 
+["BlueprintParts"] = {
+{"M4 Blueprint",2976,2969,0.5,0,3},
+{"CZ 550 Blueprint",2969,0.5,0,3},
+{"Winchester '66 Blueprint",2969,0.5,0,3},
+{"SPAZ-12 C. Shtgn. Blueprint",2969,0.5,0,3},
+{"Sawn-Off Shtgn. Blueprint",2969,0.5,0,3},
+{"AK-47 Blueprint",2969,0.5,0,3},
+{"Lee Enfield Blueprint",2969,0.5,0,3},
+{"Sporter 22 Blueprint",2969,0.5,0,3},
+{"Mosin 9130 Blueprint",2969,0.5,0,3},
+{"Crossbow Blueprint",2969,0.5,0,3},
+{"SKS Blueprint",2969,0.5,0,3},
+{"Blaze 95. D. R. Blueprint",2969,0.5,0,3},
+{"Remington 870 Blueprint",2969,0.5,0,3},
+{"FN FAL Blueprint",2969,0.5,0,3},
+{"G36C Blueprint",2969,0.5,0,3},
+{"Sa58V CCO Blueprint",2969,0.5,0,3},
+{"SVD Dragunov",2969,0.5,0,3},
+{"DMR Blueprint",2969,0.5,0,3},
+{"M1911 Blueprint",2969,0.5,0,3},
+{"M9 SD Blueprint",2969,0.5,0,3},
+{"PDW Blueprint",2969,0.5,0,3},
+{"MP5A5 Blueprint",2969,0.5,0,3},
+{"Bizon PP-19 Blueprint",2969,0.5,0,3},
+{"Revolver Blueprint",2969,0.5,0,3},
+{"Desert Eagle Blueprint",2969,0.5,0,3},
+{"Hunting Knife Blueprint",2969,0.5,0,3},
+{"Hatchet Blueprint",2969,0.5,0,3},
+{"Baseball Bat Blueprint",2969,0.5,0,3},
+{"Shovel Blueprint",2969,0.5,0,3},
+{"Golf Club Blueprint",2969,0.5,0,3},
+--{"Machete Blueprint",2969,0.5,0,0}, That's a dev weapon.
+{"Crowbar Blueprint",2969,0.5,0,3},
+{"Parachute Blueprint",2969,0.5,0,3},
+--{"Tear Gas Blueprint",2969,0.5,0,3},
+{"Grenade Blueprint",2969,0.5,0,3},
+{"Binoculars Blueprint",2969,0.5,0,3},
+{".45 ACP Cartridge Blueprint",2969,0.5,0,3},
+{"9x19mm SD Cartridge Blueprint",2969,0.5,0,3},
+{"9x19mm Cartridge Blueprint",2969,0.5,0,3},
+{"9x18mm Cartridge Blueprint",2969,0.5,0,3},
+{"5.45x39mm Cartridge Blueprint",2969,0.5,0,3},
+{"5.56x45mm Cartridge Blueprint",2969,0.5,0,3},
+{"1866 Slug Blueprint",2969,0.5,0,3},
+{"2Rnd. Slug Blueprint",2969,0.5,0,3},
+{"12 Gauge Pellet Blueprint",2969,0.5,0,3},
+{"9.3x62mm Cartridge Blueprint",2969,0.5,0,3},
+{".303 British Cartridge Blueprint",2969,0.5,0,3},
+{"Bolt Blueprint",2969,0.5,0,3},
+--{"Medic Kit Blueprint",2969,0.5,0,3},
+{"Wire Fence Blueprint",2969,0.5,0,3},
+{"Tent Blueprint",2969,0.5,0,3},
+{"Camouflage Clthng. Blueprint",2969,0.5,0,3},
+{"Survivor Clthng. Blueprint",2969,0.5,0,3},
+{"Civilian Clthng. Blueprint",2969,0.5,0,3},
+{"Ghillie Suit Blueprint",2969,0.5,0,3},
+{"Road Flare Blueprint",2969,0.5,0,3},
+{"Toolbox Blueprint",2969,0.5,0,3},
+{"Radio Device Blueprint",2969,0.5,0,3},
+{"IR Goggles Blueprint",2969,0.5,0,3},
+{"NV Goggles Blueprint",2969,0.5,0,3},
+},
+
+["other"] = {
+{"Raw Meat",2804,0.5,90},
+{"Cooked Meat",2806,0.5,90},
+{"Full Gas Canister",1650,1,0},
+{"Empty Water Bottle",2683,1,0},
+{"Survivor Clothing",1577,2,0},
+{"NV Goggles",368,1,90},
+{"IR Goggles",369,1,90},
+{"Box of Matches",328,0.4,90,5},
+{"Wood Pile",1463,0.4,0,5},
+{"M1911",346,1,90,3.5},
+{"PDW",352,1,90,2},
+{"Hunting Knife",335,1,90,2.5},
+{"Hatchet",339,1,90,1.8},
+{"Frank & Beans",1582,1,0,7},
+{"Soda Can (Mountain Dew)",2647,1,0,7},
+{"Empty Gas Canister",1650,1,0,5},
+{"Road Flare",324,1,90,6},
+{"Can (Milk)",2856,1,0,5},
+{"Assault Pack (ACU)",3026,1,0,6},
+{"Painkiller",2709,3,0,7},
+{"Empty Soda Cans",2673,0.5,0,12},
+{"Scruffy Burgers",2675,0.5,0,12},
+{"MP5A5",353,1,90,1.5},
+{"Bizon PP-19",353,1,90,1.5},
+{"Watch",2710,1,0,3},
+{"Heat Pack",1576,5,0,6},
+{"Wire Fence",933,0.25,0,1},
+{"Lee Enfield",357,1,90,1.5},
+{"Sporter 22",357,1,90,1.5},
+{"Mosin 9130",357,1,90,1.5},
+{"SKS",357,1,90,1.5},
+{"ALICE Pack",1248,1,0,1.5},
+{"Czech Backpack",1644,1,0,1.5},
+{"Backpack (Coyote)",1252,1,0,0.7},
+{"British Assault Pack",1275,1,0,0.7},
+{"Tire",1073,1,0,1},
+{"Tank Parts",1008,1,0.8,4},
+{"Morphine",1579,1,0,2},
+{"Civilian Clothing",1241,2,0,3.5},
+{"Map",1277,0.8,90,4},
+{"Toolbox",2969,0.5,0,3},
+{"Engine",929,0.3,0,3.5},
+{"Winchester 1866",349,1,90,2},
+{"Water Bottle",2683,1,0,4},
+{"M9 SD",347,1,90,5},
+{"Grenade",342,1,0,0.5},
+{"Sawn-Off Shotgun",350,1,90,2},
+{"Blaze 95 Double Rifle",350,1,90,2},
+{"SPAZ-12 Combat Shotgun",351,1,90,1.9},
+{"Remington 870",351,1,90,1.9},
+{"Binoculars",369,1,0,4},
+{"Camouflage Clothing",1247,2,0,4.5},
+{"AK-47",355,1,90,0.9},
+{"FN FAL",355,1,90,0.9},
+{"G36C",355,1,90,0.9},
+{"Sa58V CCO",355,1,90,0.9},
+{"M136 Rocket Launcher",359,1,90,0},
+{"Ghillie Suit",1213,2,0,0.01},
+{"M4",356,1,90,0.9},
+{"CZ 550",358,1,90,0.3},
+{"DMR",358,1,90,0.3},
+{"SVD Dragunov",358,1,90,0.3},
+{"Heat-Seeking RPG",360,1,90,0},
+{"Bandage",1578,0.5,0,4},
+{"Pasta Can",2770,1,0,5},
+{"Beans Can",2601,1,0,6},
+{"Burger",2768,1,0,2},
+{"Tent",1279,1,0,0.5},
+{"M1911",346,1,90,3},
+{"Desert Eagle",348,1,90,3},
+{"Revolver",348,1,90,3},
+{"GPS",2976,0.15,0,1},
+{"Medic Kit",2891,2.2,0},
+{"Blood Bag",1580,1,0},
+{"Radio Device",2966,0.5,0,5},
+{"Golf Club",333,1,90,1.9},
+{"Baseball Bat",336,1,90,1.4},
+{"Shovel",337,1,90,1.5},
+},
 }
 
-
+--[[
 local itemTable = {
 ----------------------
 ["farm"] = {
@@ -297,7 +659,7 @@ local itemTable = {
 {"Radio Device",330,1,0,6},
 {"Empty Soda Can",2673,0.5,0,14.15},
 },
---[[
+
 AMMO
 
 {"1866 Slug",2358,2,0},
@@ -314,7 +676,7 @@ AMMO
 {"9x18mm Cartridge",2041,2,0},
 {"Bolt",2041,2,0},
 
-]]
+
 
 ["other"] = {
 {"Raw Meat",2804,0.5,90},
@@ -435,6 +797,7 @@ AMMO
 {"Shovel",337,1,90,0.3},
 },
 }
+]]
 
 weaponAmmoTable = {
 
@@ -450,6 +813,7 @@ weaponAmmoTable = {
 
 ["9x19mm Cartridge"] = {
 {"PDW",28},
+{"G17",22},
 },
 
 ["9x18mm Cartridge"] = {
@@ -600,12 +964,12 @@ end
 
 function createItemPickup(item,x,y,z,tableStringName)
 	if item and x and y and z then
-		local object = createObject(itemTable[tostring(tableStringName)][item][2],x,y,z-0.875,itemTable[tostring(tableStringName)][item][4],0,math.random(0,360))
-		setObjectScale(object,itemTable[tostring(tableStringName)][item][3])
+		local object = createObject(buildingClasses[tostring(tableStringName)][item][2],x,y,z-0.875,buildingClasses[tostring(tableStringName)][item][4],0,math.random(0,360))
+		setObjectScale(object,buildingClasses[tostring(tableStringName)][item][3])
 		setElementCollisionsEnabled(object, false)
 		setElementFrozen (object,true)
 		local col = createColSphere(x,y,z,0.75)
-		setElementData(col,"item",itemTable[tostring(tableStringName)][item][1])
+		setElementData(col,"item",buildingClasses[tostring(tableStringName)][item][1])
 		setElementData(col,"parent",object)
 		setTimer(function()
 			if isElement(col) then
@@ -634,14 +998,15 @@ function math.percentChance (percent,repeatTime)
 	return hits
 end
 
+
 function createItemLoot (lootPlace,x,y,z,id)
 	col = createColSphere(x,y,z,1.25)
 	setElementData(col,"itemloot",true)
 	setElementData(col,"parent",lootPlace)
 	setElementData(col,"MAX_Slots",12)
 	--Items
-	for i, item in ipairs(itemTable[lootPlace]) do
-		local value =  math.percentChance (item[5],math.random(1,5))
+	for i, item in ipairs(buildingClasses[lootPlace]) do
+		local value =  math.percentChance(item[5],math.random(1,5))
 		setElementData(col,item[1],value)
 		--weapon Ammo
 		local ammoData,weapID = getWeaponAmmoType (item[1],true)
@@ -672,7 +1037,7 @@ function refreshItemLoot (col,place)
 	local counter = 0
 	local obejctItem = {}
 	--Tables
-	for i, item in ipairs(itemTable["other"]) do
+	for i, item in ipairs(lootpileType["other"]) do
 		if getElementData(col,item[1]) and getElementData(col,item[1]) > 0 then
 			if counter == 3 then
 				break
@@ -712,46 +1077,297 @@ end
 addEvent( "refreshItemLoot", true )
 addEventHandler( "refreshItemLoot", getRootElement(), refreshItemLoot )
 
+generic_items = false
+military_items = false
+trash_items = false
+blueprint_items = false
+
+function insertIntoTableResidential()
+	local value_generic = math.random(0,200)/2
+	local value_military = math.random(0,200)/2
+	local value_trash = math.random(0,200)/2
+	for i, item in ipairs(lootpileType["generic"]) do
+		if value_generic <= 56 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				generic_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Residential"],generic_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["military"]) do
+		if value_military <= 1 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				military_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Residential"],military_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["trash"]) do
+		if value_trash <= 14 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				trash_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Residential"],trash_items)
+			end
+		end
+	end
+	setTimer(insertIntoTableIndustrial,30000,1)
+end
+
 function createPickupsOnServerStart()
 	iPickup = 0
 	for i,pos in ipairs(pickupPositions["residential"]) do
 		iPickup = iPickup + 1
-		createItemLoot("residential",pos[1],pos[2],pos[3],iPickup)
+		createItemLoot("Residential",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart2,30000,1)
+	if generic_items then
+		for i, items in pairs(generic_items) do
+			generic_items[i] = nil
+		end
+	end
+	if military_items then
+		for i, items in pairs(military_items) do
+			military_items[i] = nil
+		end
+	end
+	if trash_items then
+		for i, items in pairs(trash_items) do
+			trash_items[i] = nil
+		end
+	end
+	setTimer(createPickupsOnServerStart2,60000,1)
+end
+
+function insertIntoTableIndustrial()
+local value_generic = math.random(0,200)/2
+local value_military = math.random(0,200)/2
+local value_trash = math.random(0,200)/2
+local value_blueprint = math.random(0,200)/2
+	for i, item in ipairs(lootpileType["generic"]) do
+		if value_generic <= 18 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				generic_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Industrial"],generic_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["military"]) do
+		if value_military <= 4  then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				military_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Industrial"],military_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["trash"]) do
+		if value_trash <= 28 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				trash_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Industrial"],trash_items)
+			end
+		end
+	end
+	for i,item in ipairs(lootpileType["BlueprintParts"]) do
+		if value_blueprint <= 10 then
+			local whatitem = math.percentChance(item[5],math.random(1,3))
+			if item[1] and whatitem == 1 then
+				blueprint_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Industrial"],blueprint_items)
+			end
+		end
+	end
+	setTimer(insertIntoTableFarm,30000,1)
 end
 
 function createPickupsOnServerStart2()
 	for i,pos in ipairs(pickupPositions["industrial"]) do
 		iPickup = iPickup + 1
-		createItemLoot("industrial",pos[1],pos[2],pos[3],iPickup)
+		createItemLoot("Industrial",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart3,30000,1)
+	if generic_items then
+		for i, items in pairs(generic_items) do
+			generic_items[i] = nil
+		end
+	end
+	if military_items then
+		for i, items in pairs(military_items) do
+			military_items[i] = nil
+		end
+	end
+	if trash_items then
+		for i, items in pairs(trash_items) do
+			trash_items[i] = nil
+		end
+	end
+	if blueprint_items then
+		for i, items in pairs(blueprint_items) do
+			blueprint_items[i] = nil
+		end
+	end
+	setTimer(createPickupsOnServerStart3,60000,1)
+end
+
+function insertIntoTableFarm()
+local value_generic = math.random(0,200)/2
+local value_military = math.random(0,200)/2
+local value_trash = math.random(0,200)/2
+	for i, item in ipairs(lootpileType["generic"]) do
+		if value_generic <= 27 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				generic_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Farm"],generic_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["trash"]) do
+		if value_trash <= 22 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				trash_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Farm"],trash_items)
+			end
+		end
+	end
+	setTimer(insertIntoTableSuperMarket,30000,1)
 end
 
 function createPickupsOnServerStart3()
 	for i,pos in ipairs(pickupPositions["farm"]) do
 		iPickup = iPickup + 1
-		createItemLoot("farm",pos[1],pos[2],pos[3],iPickup)
+		createItemLoot("Farm",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart4,30000,1)
+	if generic_items then
+		for i, items in pairs(generic_items) do
+			generic_items[i] = nil
+		end
+	end
+	if trash_items then
+		for i, items in pairs(trash_items) do
+			trash_items[i] = nil
+		end
+	end
+	setTimer(createPickupsOnServerStart4,60000,1)
+end
+
+function insertIntoTableSuperMarket()
+local value_generic = math.random(0,200)/2
+local value_military = math.random(0,200)/2
+local value_trash = math.random(0,200)/2
+	for i, item in ipairs(lootpileType["generic"]) do
+		if value_generic <= 5 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				generic_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Supermarket"],generic_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["food"]) do
+		if value_military <= 28 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				military_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Supermarket"],military_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["trash"]) do
+		if value_trash <= 14 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				trash_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Supermarket"],trash_items)
+			end
+		end
+	end
+	setTimer(insertIntoTableMilitary,30000,1)
 end
 
 function createPickupsOnServerStart4()
 	for i,pos in ipairs(pickupPositions["supermarket"]) do
 		iPickup = iPickup + 1
-		createItemLoot("supermarket",pos[1],pos[2],pos[3],iPickup)
+		createItemLoot("Supermarket",pos[1],pos[2],pos[3],iPickup)
 	end
-	setTimer(createPickupsOnServerStart5,30000,1)
+	if generic_items then
+		for i, items in pairs(generic_items) do
+			generic_items[i] = nil
+		end
+	end
+	if military_items then
+		for i, items in pairs(military_items) do
+			military_items[i] = nil
+		end
+	end
+	if trash_items then
+		for i, items in pairs(trash_items) do
+			trash_items[i] = nil
+		end
+	end
+	setTimer(createPickupsOnServerStart5,60000,1)
+end
+
+function insertIntoTableMilitary()
+local value_generic = math.random(0,200)/2
+local value_military = math.random(0,200)/2
+local value_trash = math.random(0,200)/2
+	for i, item in ipairs(lootpileType["generic"]) do
+		if value_generic <= 18 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				generic_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Military"],generic_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["military"]) do
+		if value_military <= 48 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				military_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Military"],military_items)
+			end
+		end
+	end
+	for i, item in ipairs(lootpileType["medical"]) do
+		if value_trash <= 2 then
+			local whatitem = math.percentChance(item[5],math.random(2,5))
+			if item[1] and whatitem == 1 then
+				trash_items = {item[1],item[2],item[3],item[4],item[5]}
+				table.insert(buildingClasses["Military"],trash_items)
+			end
+		end
+	end
 end
 
 function createPickupsOnServerStart5()
 	for i,pos in ipairs(pickupPositions["military"]) do
 		iPickup = iPickup + 1
-		createItemLoot("military",pos[1],pos[2],pos[3],iPickup)
+		createItemLoot("Military",pos[1],pos[2],pos[3],iPickup)
+	end
+	if generic_items then
+		for i, items in pairs(generic_items) do
+			generic_items[i] = nil
+		end
+	end
+	if military_items then
+		for i, items in pairs(military_items) do
+			military_items[i] = nil
+		end
+	end
+	if trash_items then
+		for i, items in pairs(trash_items) do
+			trash_items[i] = nil
+		end
 	end
 end
 
+insertIntoTableResidential()
 createPickupsOnServerStart()
 
 ------------------------------------------------------------------------------
@@ -862,7 +1478,7 @@ addEvent( "playerDropAItem", true )
 addEventHandler( "playerDropAItem", getRootElement(), playerDropAItem )
 
 function getItemTablePosition (itema)
-	for id, item in ipairs(itemTable[tostring("other")]) do
+	for id, item in ipairs(lootpileType[tostring("other")]) do
 		if itema == item[1] then
 			return id,"other"
 		end
@@ -891,6 +1507,7 @@ function refreshItemLoots ()
 			destroyElement(loots)
 		end	
 	end
+	insertIntoTableResidential()
 	createPickupsOnServerStart()
 	setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"] ,1)
 end

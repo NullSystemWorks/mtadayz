@@ -73,51 +73,51 @@ inventoryItems = {
 },
 
 ["Food"] = {
-{"Baked Beans",1,'beans.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Pasta",1,'pasta.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Sardines",1,'sardines.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Frank & Beans",1,'frankbeans.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Corn)",1,'corn.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Peas)",1,'peas.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Pork)",1,'pork.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Stew)",1,'stew.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Ravioli)",1,'ravioli.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Fruit)",1,'fruit.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"Can (Chowder)",1,'chowder.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
-{"MRE",1,'mre.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Pistachios",1,'pistachios.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Trail Mix",1,'trailmix.png', 128, 128,"Food", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Cooked Meat",1, 'cookedmeat.png',128,128,"Food", "Restores: Hunger, Blood\nAmount: 100(Hunger), 800(Blood)"},
-{"Water Bottle",1, 'bottle.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Soda Can (Pepsi)",1,'pepsi.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Soda Can (Cola)",1,'cola.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Soda Can (Mountain Dew)",1,'dew.png', 128, 128,"Drink", "Restores: Thirst\nAmount: 100(Thirst)"},
-{"Can (Milk)",1,'milkcan.png',128,128,"Drink", "Restores: Hunger, Blood\nAmount: 100(Hunger), 200(Blood)"},
+{"Baked Beans",1,'beans.png',128,128,"Food", "Canned Baked Beans used for sustainment.\nLasts well over five years if stored correctly."},
+{"Pasta",1,'pasta.png',128,128,"Food", "Canned Pasta used for sustainment.\nLasts well over five years if stored correctly."},
+{"Sardines",1,'sardines.png',128,128,"Food", "Canned Sardines used for sustainment.\nLasts well over five years if stored correctly."},
+{"Frank & Beans",1,'frankbeans.png',128,128,"Food","Canned Frank & Beans used for sustainment.\nLasts well over five years if stored correctly."},
+{"Can (Corn)",1,'corn.png',128,128,"Food", "A clean, unopened tin can of corn."},
+{"Can (Peas)",1,'peas.png',128,128,"Food", "A clean, unopened tin can of peas."},
+{"Can (Pork)",1,'pork.png',128,128,"Food", "A clean, unopened tin can of pork."},
+{"Can (Stew)",1,'stew.png',128,128,"Food", "A clean, unopened tin can of beef stew."},
+{"Can (Ravioli)",1,'ravioli.png',128,128,"Food", "A clean, unopened tin can of ravioli."},
+{"Can (Fruit)",1,'fruit.png',128,128,"Food", "A clean, unopened tin can of mixed fruits."},
+{"Can (Chowder)",1,'chowder.png',128,128,"Food", "A clean, unopened tin can of clam chowder."},
+{"MRE",1,'mre.png', 128, 128,"Food", "Meal Ready-to-Eat."},
+{"Pistachios",1,'pistachios.png', 128, 128,"Food", "A pack of pistachios, roasted and salted."},
+{"Trail Mix",1,'trailmix.png', 128, 128,"Food", "Contains twelve different fruits and nuts."},
+{"Cooked Meat",1, 'cookedmeat.png',128,128,"Food", "Meat that has been cooked over a fire."},
+{"Water Bottle",1, 'bottle.png', 128, 128,"Drink", "A bottle of water that has been\nfiltered and can be consumed."},
+{"Soda Can (Pepsi)",1,'pepsi.png', 128, 128,"Drink", "An aluminium can containing a tasty\n carbonated beverage full of sugar,\n artificial flavors, and preservatives."},
+{"Soda Can (Cola)",1,'cola.png', 128, 128,"Drink", "An aluminium can containing a tasty\n carbonated beverage full of sugar,\n artificial flavors, and preservatives."},
+{"Soda Can (Mountain Dew)",1,'dew.png', 128, 128,"Drink", "An aluminium can containing a tasty\n carbonated beverage full of sugar,\n artificial flavors, and preservatives."},
+{"Can (Milk)",1,'milkcan.png',128,128,"Drink", "An aluminium can containing a tasty\n carbonated beverage full of sugar,\n artificial flavors, and preservatives."},
 },
 
 ["Items"] = {
-{"Wood Pile",2, 'wood.png',128,128,"Item", "Use in combination with 'Box of Matches'\ntocreate a fire.\nCan cook Raw Meat."},
-{"Bandage",1, 'bandage.png', 128, 128, "Item", "Use when bleeding.","Bandage yourself"},
-{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Use to illuminate dark places\nor for a distraction.","Place"},
-{"Empty Gas Canister",2, 'canister.png', 128, 128,"Item", "Can be refilled at local\npatrol station."},
-{"Full Gas Canister",2, 'canister.png', 128, 128,"Item", "Filled with gas."},
-{"Medic Kit",2, 'chest.png', 128, 128, "Item", "Use when low on blood.","Use"},
-{"Heat Pack",1, 'heatpack.png', 128, 128, "Item", "Use when low on temperature.","Use"},
-{"Painkiller",1, 'painkillers.png', 128, 128, "Item", "Use when feeling pain.","Use"},
-{"Morphine",1, 'morphine.png',128,128,"Item", "Use when suffering from\nbroken bones.","Use"},
-{"Blood Bag",1, 'bloodbag.png', 128, 85, "Item", "Use on other players to full restore\ntheir blood.","Use"},
-{"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Use to protect narrow places.","Build a wire fence"}, 
-{"Raw Meat", 1, 'rawmeat.png', 128, 128,"Item", "Use on fireplaces to produce\nRaw Meat."}, 
-{"Tire", 2, 'wheel.png', 128, 128,"Item", "Can be used to repair a car."}, 
-{"Engine", 5, 'engine.png', 128,128,"Item", "Can be used to repair a car.",}, 
-{"Tank Parts", 3, 'engine_part.png', 128,128,"Item", "Can be used to reduce\nfuel consumption."},
-{"Tent", 3, 'tent.png', 128, 128, "Item", "Use to create your own\npersonal place to store\nitems in.","Pitch a tent"}, 
-{"Camouflage Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
-{"Civilian Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
+{"Wood Pile",2, 'wood.png',128,128,"Item", "A small pile of freshly chopped\n wood that can be used for making\n a fireplace and various other things."},
+{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services standard first aid dressing.\n Used to stop bleeding of wounds.","Bandage yourself"},
+{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Hand operated flare commonly found\n in roadside emergency kits. Will burn\n for approximately five minutes.","Place"},
+{"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\n refuelling vehicles and powering generators.\It's empty."},
+{"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\n refuelling vehicles and powering generators."},
+{"Medic Kit",2, 'chest.png', 128, 128, "Item", "<You shouldn't have this.>","Use"},
+{"Heat Pack",1, 'heatpack.png', 128, 128, "Item", "A heating pad that heats when you\n start the crystallisation process.\n Used to provide quick warmth to your body.","Use"},
+{"Painkiller",1, 'painkillers.png', 128, 128, "Item", "A moderate painkiller suitable\n for regular use of relief of pain\n and inflamation caused by moderate wounds.","Use"},
+{"Morphine",1, 'morphine.png',128,128,"Item", "Used for intramuscular injection to manage\n severe pain such as those from fractures.","Use"},
+{"Blood Bag",1, 'bloodbag.png', 128, 85, "Item", "Bag of blood used for administering\n a blood transfusion.","Use"},
+{"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Razor wire in large coils which\n can be expanded like a concertina with\n steel pickets to form military wire obstacles.","Build a wire fence"}, 
+{"Raw Meat", 1, 'rawmeat.png', 128, 128,"Item", "Raw meat gutted from an animal."}, 
+{"Tire", 2, 'wheel.png', 128, 128,"Item", "An old car wheel that could be\n used to repair a vehicle with a broken one."}, 
+{"Engine", 5, 'engine.png', 128,128,"Item", "Engine components with oil and lubricant.\n Everything you would need to repair an engine.",}, 
+{"Tank Parts", 3, 'engine_part.png', 128,128,"Item", "An old fuel tank that could be used\n to repair a vehicle with a broken one."},
+{"Tent", 3, 'tent.png', 128, 128, "Item", "A camping tent that can be pitched,\n allowing you extended storage\n safe from others.","Pitch a tent"}, 
+{"Camouflage Clothing",1,'clothes.png',128,128,"Item","A mixture of camouflage trousers\n with a brown t-shirt and no hat.\nCan be unpacked and worn.","Put clothes on"},
+{"Civilian Clothing",1,'clothes.png',128,128,"Item","A normal mixture of civilian clothing\n with a light-weight vest and hat.\nCan be unpacked and worn.","Put clothes on"},
 {"Survivor Clothing",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.","Put clothes on"},
-{"Ghillie Suit",1,'clothes.png',128,128,"Item","Use to 'adorn' yourself\nwith new clothes.\nSPECIAL:\nWill become invisible when\nstanding still.","Put clothes on"},
-{"Empty Water Bottle", 1, 'emptybottle.png', 128, 128,"Item", "Use in a body of water\n to refill.", "Fill bottle up"}, 
-{"Empty Soda Can", 1,'emptysoda.png', 128, 128,"Item", "Useless garbage."}, 
+{"Ghillie Suit",1,'clothes.png',128,128,"Item","A type of camouflage clothing\ndesigned to resemble heavy foliage.\nCan be unpacked and worn.","Put clothes on"},
+{"Empty Water Bottle", 1, 'emptybottle.png', 128, 128,"Item", "A bottle of water that has been\nfiltered and can be consumed.\nIt's empty, though.", "Fill bottle up"}, 
+{"Empty Soda Can", 1,'emptysoda.png', 128, 128,"Item", "A aluminium can that once contained\n a tasty carbonated beverage,\n and now contains nothing."}, 
 {"Assault Pack (ACU)",1,'acu.png',170,170,"Item", "Gives you +\n12 slots."},
 {"Czech Vest Pouch",1,'czechpouch.png',170,170,"Item", "Gives you +\n13 slots."},
 {"ALICE Pack",1,'alice.png',170,170,"Item", "Gives you +\n16 slots."},
@@ -192,13 +192,13 @@ inventoryItems = {
 {"Survivor Clthng. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Civilian Clthng. Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Ghillie Suit Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Roadflare Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"Road Flare Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 -- [ TOOLBELT BLUEPRINTS ] --
 {"Toolbox Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 {"Radio Device Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Infrared Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
-{"Night Vision Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"IR Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
+{"NV Goggles Blueprint",1,'blueprint.png',128,128,"Blueprint","Given the right tools and components, one is able to\n rebuild the item shown on this blueprint.","Craft"},
 
 
 -- [ BLUEPRINT PARTS ] --
@@ -234,8 +234,8 @@ inventoryItems = {
 },
 
 ["Toolbelt"] = {
-{"Night Vision Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'N' to activate."}, 
-{"Infrared Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'I' to activate."}, 
+{"NV Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'N' to activate."}, 
+{"IR Goggles", 1,'nvgoggles.png',128,128,"Item", "Press 'I' to activate."}, 
 {"Map", 1,'map.png',128,128,"Item", "Press 'F11' to activate."}, 
 {"Box of Matches", 1, 'matchbox.png',100,100,"Item", "Use in combination with 'Wood Pile'\nto create a fire.", "Make a Fire"}, 
 {"Watch", 1,'watch.png',128,128,"Item", "Passive item, will be\nactivated when picking up."}, 
@@ -832,7 +832,7 @@ function playerUseItem(itemName,itemInfo)
 		triggerServerEvent("onPlayerPitchATent",getLocalPlayer(),itemName)
 	elseif itemInfo == "Build a wire fence"	then
 		triggerServerEvent("onPlayerBuildAWireFence",getLocalPlayer(),itemName)
-	elseif itemName == "Roadflare" then
+	elseif itemName == "Road Flare" then
 		triggerServerEvent("onPlayerPlaceRoadflare",getLocalPlayer(),itemName)	
 	elseif itemInfo == "Make a Fire" then
 		if getElementData (getLocalPlayer(),"Wood Pile") > 0 then
@@ -1215,13 +1215,13 @@ Note that for CraftingTime, the progress bar is increased by +1 every millisecon
 {"Survivor Clthng. Blueprint","Survivor Clothing",1,"Thread","Cloth","Needle",3,1,1,8400},
 {"Civilian Clthng. Blueprint","Civilian Clothing",1,"Thread","Cloth","Needle",3,1,1,8400},
 {"Ghillie Suit Blueprint","Ghillie Suit",1,"Thread","Cloth","Needle",3,3,2,16800},
-{"Roadflare Blueprint","Roadflare",1,"Small Box","Gun Powder","Tissue",1,1,1,1200},
+{"Road Flare Blueprint","Road Flare",1,"Small Box","Gun Powder","Tissue",1,1,1,1200},
 
 --[[ TOOLBELT ]] --
 {"Toolbox Blueprint","Toolbox",1,"Mechanical Supplies","Small Box","Hand Saw",1,1,1,600},
 {"Radio Device Blueprint","Radio Device",1,"Microchips","Small Box","Mechanical Supplies",2,1,1,600},
-{"Infrared Goggles Blueprint","Infrared Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
-{"Night Vision Goggles Blueprint","Night Vision Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
+{"IR Goggles Blueprint","IR Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
+{"NV Goggles Blueprint","NV Goggles",1,"Optics","Microchips","Glue",2,4,1,2000},
 
 }
 

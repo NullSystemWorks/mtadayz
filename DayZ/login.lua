@@ -96,13 +96,13 @@ local playerDataTable = {
 {"Pasta"},
 {"Sardines"},
 {"Frank & Beans"},
-{"Can (Corn"},
-{"Can (Peas"},
-{"Can (Pork"},
+{"Can (Corn)"},
+{"Can (Peas)"},
+{"Can (Pork)"},
 {"Can (Stew)"},
-{"Can (Ravioli"},
-{"Can (Fruit"},
-{"Can (Chowder"},
+{"Can (Ravioli)"},
+{"Can (Fruit)"},
+{"Can (Chowder)"},
 {"Pistachios"},
 {"Trail Mix"},
 {"MRE"},
@@ -210,11 +210,11 @@ local playerDataTable = {
 {"Survivor Clthng. Blueprint"},
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
-{"Roadflare Blueprint"},
+{"Road Flare Blueprint"},
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
-{"Infrared Goggles Blueprint"},
-{"Night Vision Goggles Blueprint"},
+{"IR Goggles Blueprint"},
+{"NV Goggles Blueprint"},
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -320,6 +320,7 @@ function playerRegister(username, pass, player)
 	fadeCamera (player, true)
 	setCameraTarget (player, player)
 	playerCol = createColSphere(x,y,z,1.5)
+	setElementData(player,"playerCol",playerCol)
 	attachElements ( playerCol, player, 0, 0, 0 )
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
@@ -376,9 +377,7 @@ end
 addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
 
-
-
-function saveAccounts () -- Save in the database
+function savePlayerAccount() -- Save in the database
 	local account = getPlayerAccount(source)
 	if account then
 	for i,data in ipairs(playerDataTable) do
@@ -393,26 +392,27 @@ function saveAccounts () -- Save in the database
 		end
 	end	
 	setElementData(source,"logedin",false)
+	outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
 end
-addEventHandler ( "onPlayerQuit", getRootElement(), saveAccounts )
+addEventHandler ( "onPlayerQuit", getRootElement(), savePlayerAccount)
 
-function saveAccounts2 () -- Save in the database
-for i, player in ipairs(getElementsByType("player")) do
-	local account = getPlayerAccount(player)
-	if account then
-	for i,data in ipairs(playerDataTable) do
-		setAccountData(account,data[1],getElementData(player,data[1]))
-	end
-		local x,y,z =  getElementPosition(player)
-		setAccountData(account,"last_x",x)
-		setAccountData(account,"last_y",y)
-		setAccountData(account,"last_z",z)
-	end	
+function saveAllAccounts() -- Save in the database
+	for i, player in ipairs(getElementsByType("player")) do
+		local account = getPlayerAccount(player)
+		if account then
+			for i,data in ipairs(playerDataTable) do
+				setAccountData(account,data[1],getElementData(player,data[1]))
+			end
+			local x,y,z =  getElementPosition(player)
+			setAccountData(account,"last_x",x)
+			setAccountData(account,"last_y",y)
+			setAccountData(account,"last_z",z)
+		end	
 	--setElementData(player,"logedin",false)
+	end
+	outputServerLog("[DayZ] All accounts have been saved.")
 end
-outputDebugString("Player Accounts Saved.")
-end
-addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), saveAccounts2 )
+addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), saveAllAccounts)
 
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
@@ -481,13 +481,13 @@ local vehicleDataTable = {
 {"Pasta"},
 {"Sardines"},
 {"Frank & Beans"},
-{"Can (Corn"},
-{"Can (Peas"},
-{"Can (Pork"},
+{"Can (Corn)"},
+{"Can (Peas)"},
+{"Can (Pork)"},
 {"Can (Stew)"},
-{"Can (Ravioli"},
-{"Can (Fruit"},
-{"Can (Chowder"},
+{"Can (Ravioli)"},
+{"Can (Fruit)"},
+{"Can (Chowder)"},
 {"Pistachios"},
 {"Trail Mix"},
 {"MRE"},
@@ -595,11 +595,11 @@ local vehicleDataTable = {
 {"Survivor Clthng. Blueprint"},
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
-{"Roadflare Blueprint"},
+{"Road Flare Blueprint"},
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
-{"Infrared Goggles Blueprint"},
-{"Night Vision Goggles Blueprint"},
+{"IR Goggles Blueprint"},
+{"NV Goggles Blueprint"},
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -717,10 +717,11 @@ end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveallvehicles)
 
 function doBackup ()
+		outputServerLog("[DayZ] COMMENCING BACKUP OF VEHICLES AND TENTS...")
 		outputChatBox ("BACKUP OF ALL VEHICLES AND TENTS, PLEASE STAND IDLE!",getRootElement(),255,0,0,true)
 		saveallvehicles()
 		outputChatBox ("BACKUP: DONE!",getRootElement(),0,255,0,true)
-		outputDebugString("Vehicles And Tents Saved.")
+		outputServerLog("[DayZ] Vehicles and Tents have been saved.")
 end
 setTimer(doBackup,3600000,0)
 --addCommandHandler("backup",doBackup,false)
@@ -798,7 +799,7 @@ function createVehicleOnServerStart()
 			setElementData(tentCol,data[1],getAccountData(tentData,data[1]))
 		end
 	end
-	outputDebugString("Vehicles And Tents Created.")
+	outputServerLog("[DayZ] Vehicles and Tents have been loaded.")
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), createVehicleOnServerStart)
 

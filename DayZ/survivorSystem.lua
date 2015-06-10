@@ -58,13 +58,13 @@ local vehicleDataTableForTent = {
 {"Pasta"},
 {"Sardines"},
 {"Frank & Beans"},
-{"Can (Corn"},
-{"Can (Peas"},
-{"Can (Pork"},
+{"Can (Corn)"},
+{"Can (Peas)"},
+{"Can (Pork)"},
 {"Can (Stew)"},
-{"Can (Ravioli"},
-{"Can (Fruit"},
-{"Can (Chowder"},
+{"Can (Ravioli)"},
+{"Can (Fruit)"},
+{"Can (Chowder)"},
 {"Pistachios"},
 {"Trail Mix"},
 {"MRE"},
@@ -172,11 +172,11 @@ local vehicleDataTableForTent = {
 {"Survivor Clthng. Blueprint"},
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
-{"Roadflare Blueprint"},
+{"Road Flare Blueprint"},
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
-{"Infrared Goggles Blueprint"},
-{"Night Vision Goggles Blueprint"},
+{"IR Goggles Blueprint"},
+{"NV Goggles Blueprint"},
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -687,8 +687,8 @@ function checkTemperature2()
 			end
 			if isPedInVehicle(player) then
 				value = value+0.008
-			addPlayerStats (player,"temperature",value)
 			end
+			addPlayerStats (player,"temperature",value)
 		end	
 	end
 end
@@ -1052,7 +1052,7 @@ end
 --Chat Systeme					 					  --
 --------------------------------------------------------
 
-local chatRadius = 15
+local chatRadius = 20
 local chatEadioRadius = 250
  
 function sendMessageToNearbyPlayers( message, messageType )
@@ -1063,7 +1063,7 @@ cancelEvent()
         local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
         destroyElement( chatSphere )
         for index, nearbyPlayer in ipairs( nearbyPlayers ) do
-            outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source).." : "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 211,211,211,true ) -- Color changed from 60,200,40 to 211,211,211
+            outputChatBox("("..string.gsub((getPlayerName(source)..") : "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true ) -- Color changed from 60,200,40 to 211,211,211
         end
 	end	
 end
@@ -1120,7 +1120,7 @@ local infoTimer = 240000
 
 function outputInfo1 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","You can use the middle mouse button or '-' to do various actions.",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","Press - to interact with the left side menu.",200,200,22)
 	end
 	setTimer(outputInfo2,infoTimer,1)
 end
@@ -1503,6 +1503,7 @@ function bindTheKeys ()
 end
 addEventHandler("onPlayerLogin", getRootElement(), bindTheKeys)
 
+--[[
 function saveSeasonsDays(dayspassed,season)
 local seasonsManager = getAccount("seasonsmanager","2%nN<?nVU")
 	if not seasonsManager then
@@ -1518,6 +1519,7 @@ function startSavingofSeasonDays()
 	triggerClientEvent("triggerSaveSeasonDays",root)
 end
 addEventHandler("onResourceStop",getRootElement(getThisResource()),startSavingofSeasonDays)
+]]
 
 local nearbyPlayers = {}
  
@@ -1545,7 +1547,6 @@ addEventHandler("onPlayerVoiceStop",root,
     end)
 
 function onPlayerGhillieStateOn()
-local getSlots = getElementData(client,"MAX_Slots")
 local getWeapon = getElementData(client,"currentweapon_1")
 local getAttach1 = isElementAttachedToBone(elementWeaponBack[source])
 local getAttach2 = isElementAttachedToBone(elementBackpack[source])
@@ -1561,7 +1562,6 @@ addEvent("onPlayerGhillieStateOn",true)
 addEventHandler("onPlayerGhillieStateOn",root,onPlayerGhillieStateOn)
 
 function onPlayerGhillieStateOff()
-local getSlots = getElementData(client,"MAX_Slots")
 local getWeapon = getElementData(client,"currentweapon_1")
 local getAttach1 = isElementAttachedToBone(elementWeaponBack[source])
 local getAttach2 = isElementAttachedToBone(elementBackpack[source])

@@ -1,36 +1,8 @@
---[[
--- Client Side --
-
-local x, y, z = getPedBonePosition(localPlayer, 8)
-weapon = createWeapon("Sniper", x, y, z+1)
-
-bindKey("x", "down",
-function()
-	local x, y, z = getPedBonePosition(localPlayer, 8)
-	setWeaponTarget(weapon, x, y, z)
-	fireWeapon(weapon)
-end)
-
-addEventHandler("onClientPlayerDamage", localPlayer,
-function()
-	outputChatBox("Client: Hit")
-end)
-
-
--- Server Side --
-
-addEventHandler("onPlayerDamage", root,
-function()
-	outputChatBox("Server: Hit")
-end)
-]]
 DaysPassed = 0
 Season = false
-
 local realtime = getRealTime()
 setTime(realtime.hour, realtime.minute)
 setMinuteDuration(2000)
---setSkyGradient(0, 100, 196, 136, 170, 212)
 setFarClipDistance(1000)
 setFogDistance(100)
 
@@ -45,7 +17,6 @@ function addDaysPassed()
 local hours,minute = getTime()
 	if hours == 0 and minute == 1 then
 		DaysPassed = DaysPassed+1
-		--outputChatBox("Days Passed: "..DaysPassed,root,0,255,0,true)
 	end
 end
 setTimer(addDaysPassed,2000,0)
@@ -67,20 +38,19 @@ function setSeason()
 	elseif DaysPassed == 273 then
 		Season = "Autumn"
 	end
-	--outputDebugString("New Season:" ..Season)
 end
 setTimer(setSeason,2000,0)
 
 WeatherTable = {
 
 ["Winter"] = {
-	{15},
+	{15}, -- Snow
 	{1},
 	{4},
 },
 
 ["Spring"] = {
-	{1},
+	{2},
 	{16},
 	{5},
 },
@@ -92,9 +62,9 @@ WeatherTable = {
 },
 	
 ["Autumn"] = {
-	{4},
+	{7},
 	{9},
-	{15},
+	{15}, -- Snow
 	
 },
 }
@@ -137,6 +107,22 @@ local number = math.random(1,3)
 	end
 end
 setTimer(setTheWeather,math.random(1800000,3600000),0)
+
+--[[
+function getCurrentSeason(season)
+	outputChatBox("Current Season: "..Season)
+	outputChatBox("Days Passed: "..DaysPassed)
+end
+addCommandHandler("season",getCurrentSeason)
+
+function saveSeasonDays()
+	season = Season
+	daysPassed = DaysPassed
+	triggerServerEvent("saveSeasonDays",season,daysPassed)
+end
+addEvent("triggerSaveSeasonDays",true)
+addEventHandler("triggerSaveSeasonDays",root,saveSeasonDays)
+]]
 
 function setWeather2()
 	local number = math.random(1,6)

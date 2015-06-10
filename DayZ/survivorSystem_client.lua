@@ -348,7 +348,7 @@ guiSetVisible(infravision,false)
 
 function playerZoom (key,keyState)
 	if key == "n" then
-		if getElementData(getLocalPlayer(),"Night Vision Goggles") > 0 then
+		if getElementData(getLocalPlayer(),"NV Goggles") > 0 then
 			if nightvision then
 				nightvision = false
 				guiSetVisible(nightvisionimage,false)
@@ -369,7 +369,7 @@ function playerZoom (key,keyState)
 			end
 		end
 	elseif key == "i" then
-		if getElementData(getLocalPlayer(),"Infrared Goggles") > 0 then
+		if getElementData(getLocalPlayer(),"IR Goggles") > 0 then
 			if infaredvision then
 				infaredvision = false
 				guiSetVisible(infravision,false)
@@ -651,9 +651,9 @@ if getElementData(getLocalPlayer(),"logedin") then
     elseif weaponID == 43 then
         weapName = "Binoculars"
     elseif weaponID == 44 then
-        weapName = "Night-Vision Goggles"
+        weapName = "NV Goggles"
     elseif weaponID == 45 then
-        weapName = "Infrared Goggles"
+        weapName = "IR Goggles"
     elseif weaponID == 46 then
         weapName = "Parachute"
     elseif weaponID == 2 then
@@ -1458,17 +1458,21 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 end
 addEventHandler ( "onClientPlayerDamage", getLocalPlayer (), playerGetDamageDayZ )
 
+--[[
 function damageZombieOnVehicleHit(collider,force, bodyPart, x, y, z, nx, ny, nz)
 	if collider then
 		if (source == getPedOccupiedVehicle(localPlayer)) and (getElementType(collider) == "ped") then
             setElementData(collider,"blood",getElementData(collider,"blood")-1000)
+			outputChatBox("Hit! :"..getElementData(collider,"blood"))
 			local pedX, pedY, pedZ = getElementPosition (collider)
 			local endX, endY, endZ = pedX-x, pedY-y, pedZ-z
-			setElementVelocity ( collider, endX, endY, endZ )
+			--setElementVelocity ( collider, endX, endY, endZ )
+			triggerServerEvent("onZombieHitByVehicle",collider)
 		end
     end
 end
 addEventHandler("onClientVehicleCollision", root,damageZombieOnVehicleHit)
+]]
 
 function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	cancelEvent()
@@ -1598,7 +1602,7 @@ function setCold()
 		end	
 	end	
 end
-setTimer(setCold,1500,0)
+setTimer(setCold,10000,0)
 
 --[[ 
 Volume (Noise):
@@ -1708,37 +1712,39 @@ function debugJump2()
 end
 
 weaponNoiseTable = {
-{2,20},
-{3,20},
-{4,20},
-{5,20},
-{6,20},
-{7,20},
-{8,20},
-{9,100},
-{10,20},
-{11,20},
-{12,100},
-{14,20},
-{15,20},
-{16,100},
-{17,40},
-{18,60},
-{22,20},
-{23,0},
-{24,60},
-{25,60},
-{26,60},
-{27,60},
-{28,40},
-{29,40},
-{30,60},
-{31,60},
-{32,40},
-{33,100},
-{34,100},
-{35,100},
-{36,100},
+-- Weapons with * as operator are louder, while those with / are quieter
+-- Also, those with * as operator have lower values, those with / have higher ones
+{2,20,"/",5},
+{3,20,"/",5},
+{4,20,"/",5},
+{5,20,"/",5},
+{6,20,"/",5},
+{7,20,"/",5},
+{8,20,"/",5},
+{9,100,"*",0.4},
+{10,20,"/",5},
+{11,20,"/",5},
+{12,100,"*",0.4},
+{14,20,"/",5},
+{15,20,"/",5},
+{16,100,"*",0.4},
+{17,40,"/",2},
+{18,60,"*",1},
+{22,40,"/",2},
+{23,0,"/",100},
+{24,60,"*",1},
+{25,60,"*",1},
+{26,60,"*",1},
+{27,60,"*",1},
+{28,40,"/",1},
+{29,40,"/",1},
+{30,80,"*",0.5},
+{31,80,"*",0.5},
+{32,40,"/",2},
+{33,100,"*",0.4},
+{34,100,"*",0.4},
+{35,100,"*",0.4},
+{36,100,"*",0.4},
 
 }
 
@@ -1752,6 +1758,14 @@ Noise Values:
 80 = High (Level 4)
 100 = Very High (Level 5)
 
+Factors: (Max Distance)
+100 = 0m
+5 = 20m
+2 = 50m
+1 = 100m
+0.5 = 200m
+0.4 = 250m
+
 ]]
 
 function getWeaponNoise(weapon)
@@ -1761,6 +1775,24 @@ function getWeaponNoise(weapon)
 		end
 	end
 	return 0
+end
+
+function getWeaponNoiseOperator(weapon)
+    for i,weapon2 in ipairs(weaponNoiseTable) do
+        if weapon == weapon2[1] then
+            return weapon2[3]
+        end
+    end
+	return "/"
+end
+
+function getWeaponNoiseFactor(weapon)
+    for i,weapon2 in ipairs(weaponNoiseTable) do
+        if weapon == weapon2[1] then
+            return weapon2[4]
+        end
+    end
+	return 5
 end
 
 function debugShooting()
@@ -1811,33 +1843,47 @@ function checkZombies()
 end
 setTimer(checkZombies,5000,0)
 
+function checkFactorAndOperator()
+	local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
+    local weaponFactor = getWeaponNoiseFactor(getPedWeapon(localPlayer))
+	outputChatBox("Operator: "..weaponOperator)
+	outputChatBox("Factor: "..weaponFactor)
+end
+addCommandHandler("factor",checkFactorAndOperator)
+
 function checkZombies3()
-	local x,y,z = getElementPosition(getLocalPlayer())
-	for i,ped in ipairs(getElementsByType("ped")) do
-		if getElementData(ped,"zombie") then
-			local sound = getElementData(getLocalPlayer(),"volume")/5
-			local visibly = getElementData(getLocalPlayer(),"visibly")/5
-			local xZ,yZ,zZ = getElementPosition(ped)
-			if getDistanceBetweenPoints3D (x,y,z,xZ,yZ,zZ) < sound+visibly then
-				if getElementData ( ped, "leader" ) == nil then
-					triggerServerEvent("botAttack",getLocalPlayer(),ped)
-					
-				end
+    local x,y,z = getElementPosition(getLocalPlayer())
+    local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
+    local weaponFactor = getWeaponNoiseFactor(getPedWeapon(localPlayer))
+    for i,ped in ipairs(getElementsByType("ped")) do
+        if getElementData(ped,"zombie") then
+			if weaponOperator then
+				value = getWeaponNoiseFactor(getPedWeapon(localPlayer))
 			else
+				value = 5
+			end
+			local sound = getElementData(localPlayer,"volume")/value
+            local visibly = getElementData(getLocalPlayer(),"visibly")/5
+            local xZ,yZ,zZ = getElementPosition(ped)
+            if getDistanceBetweenPoints3D (x,y,z,xZ,yZ,zZ) < sound+visibly then
+                if getElementData ( ped, "leader" ) == nil then
+                    triggerServerEvent("botAttack",getLocalPlayer(),ped)
+
+                end
+            else
 				if getElementData ( ped, "target" ) == getLocalPlayer() then
 					setElementData(ped,"target",nil)
 					triggerEvent("onZombieMove",getRootElement(),ped)
 				end
-				if getElementData ( ped, "leader" ) == getLocalPlayer() then
-					triggerServerEvent("botStopFollow",getLocalPlayer(),ped)
-					triggerEvent("onZombieMove",getRootElement(),ped)
-				end
-			end
-		end
-	end
+                if getElementData ( ped, "leader" ) == getLocalPlayer() then
+                    triggerServerEvent("botStopFollow",getLocalPlayer(),ped)
+                    triggerEvent("onZombieMove",getRootElement(),ped)
+                end
+            end
+        end
+    end
 end
 setTimer(checkZombies3,500,0)
-
 
 fading = 0
 fading2 = "up"
@@ -2784,18 +2830,6 @@ function findDaVowel( string )
 end
 
 addEventHandler( "onClientPlayerWeaponSwitch", localPlayer, onClientPlayerWeaponSwitch )
-
-
-function increaseZombieInCity()
-local x,y,z = getElementPosition(localPlayer)
-local theZone = getZoneName(x,y,z)
-	if theZone == "Las Venturas" or theZone == "Los Santos" or theZone == "San Fierro" then
-		gameplayVariables["playerzombies"] = 18
-	else
-		gameplayVariables["playerzombies"] = 12
-	end
-end
-setTimer(increaseZombieInCity,10000,0)
 
 function playCampfireSound()
 	x = getElementData(source,"x")

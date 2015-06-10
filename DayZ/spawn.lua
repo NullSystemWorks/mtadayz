@@ -95,13 +95,13 @@ local playerDataTable = {
 {"Pasta"},
 {"Sardines"},
 {"Frank & Beans"},
-{"Can (Corn"},
-{"Can (Peas"},
-{"Can (Pork"},
+{"Can (Corn)"},
+{"Can (Peas)"},
+{"Can (Pork)"},
 {"Can (Stew)"},
-{"Can (Ravioli"},
-{"Can (Fruit"},
-{"Can (Chowder"},
+{"Can (Ravioli)"},
+{"Can (Fruit)"},
+{"Can (Chowder)"},
 {"Pistachios"},
 {"Trail Mix"},
 {"MRE"},
@@ -209,11 +209,11 @@ local playerDataTable = {
 {"Survivor Clthng. Blueprint"},
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
-{"Roadflare Blueprint"},
+{"Road Flare Blueprint"},
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
-{"Infrared Goggles Blueprint"},
-{"Night Vision Goggles Blueprint"},
+{"IR Goggles Blueprint"},
+{"NV Goggles Blueprint"},
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -311,13 +311,13 @@ local vehicleDataTable = {
 {"Pasta"},
 {"Sardines"},
 {"Frank & Beans"},
-{"Can (Corn"},
-{"Can (Peas"},
-{"Can (Pork"},
+{"Can (Corn)"},
+{"Can (Peas)"},
+{"Can (Pork)"},
 {"Can (Stew)"},
-{"Can (Ravioli"},
-{"Can (Fruit"},
-{"Can (Chowder"},
+{"Can (Ravioli)"},
+{"Can (Fruit)"},
+{"Can (Chowder)"},
 {"Pistachios"},
 {"Trail Mix"},
 {"MRE"},
@@ -425,11 +425,11 @@ local vehicleDataTable = {
 {"Survivor Clthng. Blueprint"},
 {"Civilian Clthng. Blueprint"},
 {"Ghillie Suit Blueprint"},
-{"Roadflare Blueprint"},
+{"Road Flare Blueprint"},
 {"Toolbox Blueprint"},
 {"Radio Device Blueprint"},
-{"Infrared Goggles Blueprint"},
-{"Night Vision Goggles Blueprint"},
+{"IR Goggles Blueprint"},
+{"NV Goggles Blueprint"},
 {"Gun Barrel"},
 {"Short Gun Barrel"},
 {"Gun Stock"},
@@ -580,31 +580,28 @@ function kilLDayZPlayer (killer,headshot,weapon)
 				ped = createPed(skin,x,y,z,rotZ)
 				pedCol = createColSphere(x,y,z,1.5)
 				killPed(ped)
-				if not check then
-					setTimer(destroyDeadPlayer,3600000*0.75,1,ped,pedCol) -- 3600000*0.75
-				else return
-				end
+				setTimer(destroyDeadPlayer,3600000*0.75,1,ped,pedCol) -- 3600000*0.75
 				attachElements (pedCol,ped,0,0,0)
 				setElementData(pedCol,"parent",ped)
 				setElementData(pedCol,"playername",getPlayerName(source))
 				setElementData(pedCol,"deadman",true)
 				setElementData(pedCol,"MAX_Slots",getElementData(source,"MAX_Slots"))
-				setElementData(pedCol,"hidebody",ped)
-				local time = getRealTime()
+				local time = getTime()
 				local hours = time.hour
 				local minutes = time.minute
-				setElementData(pedCol,"deadreason",getPlayerName(source).." is dead. Cause of death: "..(weapon or "Unknown")..". Time of death: "..hours..":"..minutes.." o'clock.")
+				setElementData(pedCol,"deadreason",getPlayerName(source).." is dead. Cause of death: "..(weapon or "Unknown")..". Time of death: "..hours..":"..minutes)
 			end	
 		end
 	end
 	if killer then
 		if not getElementData(source,"bandit") then
-			addPlayerStats (killer,"humanity",math.random(-2500,-1000))
+			local value = getElementData(source,"humanity")
+			addPlayerStats (killer,"humanity",-value)
 		else
-			addPlayerStats (killer,"humanity",math.random(1000,2500))
+			addPlayerStats (killer,"humanity",1500)
 		end
 		setElementData(killer,"murders",getElementData(killer,"murders")+1)
-		if getElementData(killer,"humanity") < 0 then
+		if getElementData(killer,"humanity") <= 0 then
 			setElementData(killer,"bandit",true)
 		end
 		if getElementData(source,"bandit") == true then
