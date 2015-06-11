@@ -1,0 +1,16 @@
+<meta>
+    <info author="-ffs-Sniper" description="Advanced GlobalChat MTA:DayZ addon" version="1.0.1" type="script" />
+	
+	<script src="chat_client.lua" type="client" />
+	<script src="chat_server.lua" type="server" />
+	
+	<!-- Settings adjustable via admin panel -->
+	<!-- No need to restart the resource after changing settings -->
+    <settings>
+		<setting name="*prefix" value="[GLOBAL]" friendlyname="Chat prefix" group="General" examples="[GLOBAL]" desc="Prefix of all global chat messages" />
+		<setting name="*messagedelay" value="1000" friendlyname="Time between messages" group="General" examples="1000" desc="The time in miliseconds (1 ms = 1 sec) for a player to wait between messages." />
+		<setting name="*colorcode1" value="#8EE5EE" friendlyname="Prefix color" group="Colors" examples="#AD505C" desc="Color of the prefix" />
+		<setting name="*colorcode2" value="#8EE5EE" friendlyname="Nick color" group="Colors" examples="#AD505C" desc="Color of the nickname" />
+		<setting name="*colorcode3" value="#F0F8FF" friendlyname="Message color" group="Colors" examples="#DBD7D7" desc="Color of the message" />
+    </settings>
+</meta>

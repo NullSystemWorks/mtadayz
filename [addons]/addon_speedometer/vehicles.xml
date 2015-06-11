@@ -1,0 +1,218 @@
+<vehicles>
+<vehicle id="400" shortname="LANDSTAL" name="Landstalker" maxspeed="200"   />
+<vehicle id="401" shortname="BRAVURA" name="Bravura" maxspeed="200" scale="20" />
+<vehicle id="402" shortname="BUFFALO" name="Buffalo" maxspeed="220" scale="20"  />
+<vehicle id="403" shortname="LINERUN" name="Linerunner" maxspeed="150" scale="20"  />
+<vehicle id="404" shortname="PEREN" name="Perennial" maxspeed="180" scale="20"   />
+<vehicle id="405" shortname="SENTINEL" name="Sentinel" maxspeed="200" scale="20" />
+<vehicle id="406" shortname="DUMPER" name="Dumper" maxspeed="160"  scale="20"  />
+<vehicle id="407" shortname="FIRETRUK" name="Fire Truck" maxspeed="180" scale="20" />
+<vehicle id="408" shortname="TRASH" name="Trashmaster" maxspeed="150" scale="20" />
+<vehicle id="409" shortname="STRETCH" name="Stretch" maxspeed="200" scale="20"   />
+<vehicle id="410" shortname="MANANA" name="Manana" maxspeed="180" scale="20" />
+<vehicle id="411" shortname="INFERNUS" name="Infernus" maxspeed="240" scale="20" />
+<vehicle id="412" shortname="VOODOO" name="Voodoo" maxspeed="200" scale="20" />
+<vehicle id="413" shortname="PONY" name="Pony" maxspeed="170" scale="20" />
+<vehicle id="414" shortname="MULE" name="Mule" maxspeed="160" scale="20" />
+<vehicle id="415" shortname="CHEETAH" name="Cheetah" maxspeed="220" scale="20"  />
+<vehicle id="416" shortname="AMBULAN" name="Ambulance" maxspeed="190"  scale="20"  />
+<vehicle id="418" shortname="MOONBEAM" name="Moonbeam" maxspeed="180" scale="20" />
+<vehicle id="419" shortname="ESPERANT" name="Esperanto" maxspeed="200" scale="20" />
+<vehicle id="420" shortname="TAXI" name="Taxi" maxspeed="200" scale="20"  />
+<vehicle id="421" shortname="WASHING" name="Washington" maxspeed="200" scale="20" />
+<vehicle id="422" shortname="BOBCAT" name="Bobcat" maxspeed="180" scale="20" />
+<vehicle id="423" shortname="MRWHOOP" name="" maxspeed="160" scale="20" />
+<vehicle id="424" shortname="BFINJECT" name="" maxspeed="170" scale="20" />
+<vehicle id="426" shortname="PREMIER" name="Premier" maxspeed="210" scale="20" />
+<vehicle id="427" shortname="ENFORCER" name="Enforcer" maxspeed="210"  scale="20" />
+<vehicle id="428" shortname="SECURICA" name="Securicar" maxspeed="210"  scale="20"   />
+<vehicle id="429" shortname="BANSHEE" name="Banshee" maxspeed="220" scale="20" />
+<vehicle id="431" shortname="BUS" name="Bus" maxspeed="190" scale="20" />
+<vehicle id="432" shortname="RHINO" name="Rhino" maxspeed="160" scale="20" />
+<vehicle id="433" shortname="BARRACKS" name="Barracks" maxspeed="160"  scale="20"   />
+<vehicle id="434" shortname="HOTKNIFE" name="Hotknife" maxspeed="200"  scale="20"   />
+<vehicle id="436" shortname="PREVION" name="Previon" maxspeed="210" scale="20" />
+<vehicle id="437" shortname="COACH" name="Coach" maxspeed="200" scale="20" />
+<vehicle id="438" shortname="CABBIE" name="Cabbie" maxspeed="180" scale="20" />
+<vehicle id="439" shortname="STALLION" name="Stallion" maxspeed="200" scale="20" />
+<vehicle id="440" shortname="RUMPO" name="Rumpo" maxspeed="190" scale="20" />
+<vehicle id="442" shortname="ROMERO" name="Romero" maxspeed="190"   scale="20" />
+<vehicle id="443" shortname="PACKER" name="Packer" maxspeed="190" scale="20" />
+<vehicle id="444" shortname="MONSTER" name="Monster" maxspeed="170" scale="15"  />
+<vehicle id="445" shortname="ADMIRAL" name="Admiral" maxspeed="200" scale="20" />
+<vehicle id="449" shortname="TRAM" name="Tram" maxspeed="150"/>
+<vehicle id="451" shortname="TURISMO" name="Turismo" maxspeed="220"  scale="20"  />
+<vehicle id="455" shortname="FLATBED" name="Flatbed" maxspeed="190" scale="20" />
+<vehicle id="456" shortname="YANKEE" name="Yankee" maxspeed="170"  scale="20"  />
+<vehicle id="457" shortname="GOLFCART" name="Caddy" maxspeed="160" scale="20" />
+<vehicle id="458" shortname="SOLAIR" name="Solair" maxspeed="200" scale="20"   />
+<vehicle id="459" shortname="TOPFUN" name="Berkley's RC Van" maxspeed="190" scale="20" />
+<vehicle id="466" shortname="GLENDALE" name="Glendale" maxspeed="190" scale="20" />
+<vehicle id="467" shortname="OCEANIC" name="Oceanic" maxspeed="190" scale="20" />
+<vehicle id="470" shortname="PATRIOT" name="Patriot" maxspeed="190" scale="20" />
+<vehicle id="474" shortname="HERMES" name="Hermes" maxspeed="200" scale="20" />
+<vehicle id="475" shortname="SABRE" name="Sabre" maxspeed="210" scale="20" />
+<vehicle id="477" shortname="ZR350" name="ZR-350" maxspeed="220" numbersEvery="20"   />
+<vehicle id="478" shortname="WALTON" name="Walton" maxspeed="180" scale="20" />
+<vehicle id="479" shortname="REGINA" name="Regina" maxspeed="190" scale="20" />
+<vehicle id="480" shortname="COMET" name="Comet" maxspeed="210" scale="20" />
+<vehicle id="482" shortname="BURRITO" name="Burrito" maxspeed="190" scale="20" />
+<vehicle id="483" shortname="CAMPER" name="Camper" maxspeed="180" scale="20" />
+<vehicle id="485" shortname="BAGGAGE" name="Baggage" maxspeed="160" scale="20" />
+<vehicle id="486" shortname="DOZER" name="Dozer" maxspeed="100" scale="10"  />
+<vehicle id="489" shortname="RANCHER" name="Rancher" maxspeed="190"  scale="20"  />
+<vehicle id="490" shortname="FBIRANCH" name="" maxspeed="200" scale="20" />
+<vehicle id="491" shortname="VIRGO" name="Virgo" maxspeed="200" scale="20" />
+<vehicle id="492" shortname="GREENWOO" name="Greenwood" maxspeed="180" scale="20" />
+<vehicle id="494" shortname="HOTRING" name="Hotring Racer" maxspeed="240"   scale="20"   />
+<vehicle id="502" shortname="?" name="Hotring Racer" maxspeed="240"    scale="20"  />
+<vehicle id="504" shortname="?" name="Bloodring Banger" maxspeed="210"   scale="20"   />
+<vehicle id="495" shortname="SANDKING" name="Sandking" maxspeed="200" scale="15" />
+<vehicle id="496" shortname="BLISTAC" name="Blista Compact" maxspeed="200" scale="20" />
+<vehicle id="498" shortname="BOXVILLE" name="Boxville" maxspeed="170"  scale="20"   />
+<vehicle id="499" shortname="BENSON" name="Benson" maxspeed="180"  scale="20"  />
+<vehicle id="500" shortname="MESA" name="Mesa" maxspeed="180"   scale="20"     />
+<vehicle id="505" shortname="?" name="Rancher Lure" maxspeed="190" scale="20" />
+<vehicle id="506" shortname="SUPERGT" name="Super GT" maxspeed="210"  scale="20"  />
+<vehicle id="507" shortname="ELEGANT" name="Elegant" maxspeed="200" scale="20" />
+<vehicle id="508" shortname="JOURNEY" name="Journey" maxspeed="170" scale="15" />
+<vehicle id="514" shortname="PETROL" name="Tanker" maxspeed="190" scale="20" />
+<vehicle id="515" shortname="RDTRAIN" name="Roadtrain" maxspeed="190" scale="20" />
+<vehicle id="516" shortname="NEBULA" name="Nebula" maxspeed="200" scale="20" />
+<vehicle id="517" shortname="MAJESTIC" name="Majestic" maxspeed="200" scale="20" />
+<vehicle id="518" shortname="BUCCANEE" name="Buccaneer" maxspeed="200" scale="20" />
+<vehicle id="524" shortname="CEMENT" name="Cement Truck" maxspeed="190" scale="20" />
+<vehicle id="525" shortname="TOWTRUCK" name="Towtruck" maxspeed="200" scale="20" />
+<vehicle id="526" shortname="FORTUNE" name="Fortune" maxspeed="200" scale="20" />
+<vehicle id="527" shortname="CADRONA" name="Cadrona" maxspeed="200" scale="20" />
+<vehicle id="528" shortname="FBITRUCK" name="FBI Truck" maxspeed="210" scale="20" />
+<vehicle id="529" shortname="WILLARD" name="Willard" maxspeed="200" scale="20" />
+<vehicle id="530" shortname="FORKLIFT" name="Forklift" maxspeed="160" scale="20" />
+<vehicle id="531" shortname="TRACTOR" name="Tractor" maxspeed="160" scale="20" />
+<vehicle id="532" shortname="COMBINE" name="Combine Harvester" maxspeed="160" scale="20" />
+<vehicle id="533" shortname="FELTZER" name="Feltzer" maxspeed="200" scale="20" />
+<vehicle id="534" shortname="REMINGTN" name="Remington" maxspeed="210" scale="20" />
+<vehicle id="535" shortname="SLAMVAN" name="Slamvan" maxspeed="180" scale="20" />
+<vehicle id="536" shortname="BLADE" name="Blade" maxspeed="210" scale="20" />
+<!--  Trains -->
+<vehicle id="537" shortname="FREIGHT" name="Freight" maxspeed="110" />
+<vehicle id="538" shortname="STREAK" name="" maxspeed="110" />
+<vehicle id="569" shortname="FREIFLAT" name="Freight Train Flatbed" maxspeed="110"/>
+<vehicle id="570" shortname="CSTREAK" name="Streak Train Trailer" maxspeed="110"/>
+<vehicle id="591" shortname="ARTICT3" name="" maxspeed="120"/>
+
+<vehicle id="540" shortname="VINCENT" name="Vincent" maxspeed="200" scale="20" />
+<vehicle id="541" shortname="BULLET" name="Bullet" maxspeed="230" scale="20" />
+<vehicle id="542" shortname="CLOVER" name="Clover" maxspeed="200" scale="20" />
+<vehicle id="543" shortname="SADLER" name="Sadler" maxspeed="190" scale="20" />
+<vehicle id="544" shortname="RANGER" name="Fire Truck (Ladder)?" maxspeed="170" scale="20" />
+<vehicle id="545" shortname="HUSTLER" name="Hustler" maxspeed="190" scale="20" />
+<vehicle id="546" shortname="INTRUDER" name="Intruder" maxspeed="190" scale="20" />
+<vehicle id="547" shortname="PRIMO" name="Primo" maxspeed="190" scale="20" />
+<vehicle id="549" shortname="TAMPA" name="Tampa" maxspeed="190" scale="20" />
+<vehicle id="550" shortname="SUNRISE" name="Sunrise" maxspeed="200" scale="20" />
+<vehicle id="551" shortname="MERIT" name="Merit" maxspeed="200" scale="20" />
+<vehicle id="552" shortname="UTILITY" name="Utility Van" maxspeed="180" scale="20" />
+<vehicle id="554" shortname="YOSEMITE" name="Yosemite" maxspeed="180" scale="20" />
+<vehicle id="555" shortname="WINDSOR" name="Windsor" maxspeed="190" scale="20" />
+<vehicle id="556" shortname="MTRUCK_A" name="Monster 2" maxspeed="170" scale="15" />
+<vehicle id="557" shortname="MTRUCK_B" name="Monster 3" maxspeed="170" scale="15" />
+<vehicle id="558" shortname="URANUS" name="Uranus" maxspeed="200" scale="20" />
+<vehicle id="559" shortname="JESTER" name="Jester" maxspeed="200" scale="20" />
+<vehicle id="560" shortname="SULTAN" name="Sultan" maxspeed="200" scale="20" />
+<vehicle id="561" shortname="STRATUM" name="Stratum" maxspeed="200" scale="20" />
+<vehicle id="562" shortname="ELEGY" name="Elegy" maxspeed="200" scale="20" />
+<vehicle id="564" shortname="RCTIGER" name="RC Tiger" maxspeed="160" scale="20" />
+<vehicle id="565" shortname="FLASH" name="Flash" maxspeed="200" scale="20" />
+<vehicle id="566" shortname="TAHOMA" name="Tahoma" maxspeed="200" scale="20" />
+<vehicle id="567" shortname="SAVANNA" name="Savanna" maxspeed="210" scale="20" />
+<vehicle id="568" shortname="BANDITO" name="Bandito" maxspeed="170" scale="20" />
+<vehicle id="571" shortname="KART" name="Kart" maxspeed="150" scale="10" />
+<vehicle id="572" shortname="MOWER" name="Mower" maxspeed="150" scale="15" />
+<vehicle id="573" shortname="DUNE" name="Dune" maxspeed="190" scale="20" />
+<vehicle id="574" shortname="SWEEPER" name="Sweeper" maxspeed="140" scale="20"  />
+<vehicle id="575" shortname="BROADWAY" name="Broadway" maxspeed="200" scale="20" />
+<vehicle id="576" shortname="TORNADO" name="Tornado" maxspeed="200" scale="20" />
+<vehicle id="578" shortname="DFT30" name="DFT-30" maxspeed="200" scale="20" />
+<vehicle id="579" shortname="HUNTLEY" name="Huntley" maxspeed="190" scale="20" />
+<vehicle id="580" shortname="STAFFORD" name="Stafford" maxspeed="190" scale="20" />
+<vehicle id="582" shortname="NEWSVAN" name="News Van" maxspeed="190" scale="20" />
+<vehicle id="583" shortname="TUG" name="Tug" maxspeed="150" scale="20" />
+<vehicle id="585" shortname="EMPEROR" name="Emperor" maxspeed="200" scale="20" />
+<vehicle id="586" shortname="FLOAT" name="Wayfarer" maxspeed="220" scale="20" />
+<vehicle id="587" shortname="EUROS" name="Euros" maxspeed="200" scale="20" />
+<vehicle id="588" shortname="HOTDOG" name="Hotdog" maxspeed="170" scale="20" />
+<vehicle id="589" shortname="CLUB" name="Club" maxspeed="190" scale="20" />
+<vehicle id="594" shortname="RCCAM" name="RC Cam" maxspeed="100" scale="15" />
+<vehicle id="596" shortname="POLICE_LA" name="Police LS" maxspeed="210" scale="20" />
+<vehicle id="597" shortname="POLICE_SF" name="Police SF" maxspeed="210" scale="20" />
+<vehicle id="598" shortname="POLICE_VG" name="Police LV" maxspeed="210" scale="20" />
+<vehicle id="599" shortname="POLRANGER" name="Ranger" maxspeed="190" scale="20" />
+<vehicle id="600" shortname="PICADOR" name="Picador" maxspeed="180" scale="20" />
+<vehicle id="601" shortname="SWATVAN" name="SWAT Van" maxspeed="180" scale="20" />
+<vehicle id="602" shortname="ALPHA" name="Alpha" maxspeed="200" scale="20" />
+<vehicle id="603" shortname="PHOENIX" name="Phoenix" maxspeed="200" scale="20" />
+<vehicle id="604" shortname="?" name="Glendale Damaged" maxspeed="190" scale="20" />
+<vehicle id="605" shortname="?" name="Sadler" maxspeed="190" scale="20" />
+<vehicle id="606" shortname="BAGBOXA" name="" maxspeed="160"/>
+<vehicle id="607" shortname="BAGBOXB" name="" maxspeed="160"/>
+<vehicle id="608" shortname="STAIRS" name="" maxspeed="160"/>
+<vehicle id="609" shortname="BOXBURG" name="Boxville Mission" maxspeed="170" scale="20" />
+<vehicle id="610" shortname="FARM_TR1" name="" maxspeed="160"/>
+<vehicle id="611" shortname="UTIL_TR1" name="" maxspeed="160"/>
+<!-- Bikes -->
+<vehicle id="448" shortname="ROLLER?" name="Pizzaboy" maxspeed="200" scale="20"  />
+<vehicle id="461" shortname="BIKE" name="Bike" maxspeed="190"/>
+<vehicle id="462" shortname="MOPED" name="Faggio" maxspeed="210"   scale="20"   />
+<vehicle id="468" shortname="DIRTBIKE" name="Sanchez" maxspeed="220"  scale="20"  />
+<vehicle id="521" shortname="FCR900" name="FCR-900" maxspeed="230"   scale="20"  />
+<vehicle id="522" shortname="NRG500" name="NRG-500" maxspeed="240"   scale="20"  />
+<vehicle id="523" shortname="HPV1000" name="HPV1000" maxspeed="220" scale="20"  />
+<vehicle id="581" shortname="BF400" name="BF-400" maxspeed="220"   scale="20"   />
+<vehicle id="586" shortname="WAYFARER" name="Wayfarer" maxspeed="220" scale="20"  />
+<vehicle id="471" shortname="QUADBIKE" name="Quadbike" maxspeed="160" scale="20"  />
+<vehicle id="481" shortname="BMX" name="BMX" maxspeed="140"  scale="20"  />
+<vehicle id="509" shortname="CHOPPERB" name="Bike" maxspeed="140" scale="20"  />
+<vehicle id="510" shortname="MTB" name="Mountain Bike" maxspeed="160" scale="20"  />
+<vehicle id="463" shortname="FREEWAY" name="Freeway" maxspeed="220"  scale="20"  />
+<!-- Boats -->
+<vehicle id="430" shortname="PREDATOR" name="Predator" maxspeed="180"  scale="20"  />
+<vehicle id="452" shortname="SPEEDER" name="Speeder" maxspeed="180"   scale="20"   />
+<vehicle id="453" shortname="REEFER" name="Reefer" maxspeed="60" scale="10" fromAngle="240" addAngle="120"       />
+<vehicle id="" shortname="RIO" name="" maxspeed="190"/>
+<vehicle id="446" shortname="SQUALO" name="Squalo" maxspeed="240"     scale="20"   />
+<vehicle id="454" shortname="TROPIC" name="Tropic" maxspeed="120" scale="15" fromAngle="270" addAngle="180"       />
+<vehicle id="472" shortname="COASTGRD" name="Coastguard" maxspeed="120"   />
+<vehicle id="473" shortname="DINGHY" name="Dinghy" maxspeed="100" scale="10" fromAngle="280" addAngle="200"   />
+<vehicle id="484" shortname="MARQUIS" name="Marquis" maxspeed="70" scale="10" fromAngle="240" addAngle="120"    />
+<vehicle id="493" shortname="CUPBOAT" name="Jetmax" maxspeed="180"   />
+<vehicle id="595" shortname="LAUNCH" name="Launch" maxspeed="110"    />
+<!-- Planes -->
+<vehicle id="460" shortname="SEAPLANE" name="Skimmer" maxspeed="220" scale="20" />
+<vehicle id="539" shortname="VORTEX" name="Vortex" maxspeed="180" scale="20" />
+<vehicle id="476" shortname="RUSTLER" name="Rustler" maxspeed="250" scale="20" />
+<vehicle id="511" shortname="BEAGLE" name="Beagle" maxspeed="200" scale="20" />
+<vehicle id="512" shortname="CROPDUST" name="Cropduster" maxspeed="190" scale="20" />
+<vehicle id="513" shortname="STUNT" name="Stuntplane" maxspeed="210" scale="20" />
+<vehicle id="519" shortname="SHAMAL" name="Shamal" maxspeed="250" scale="20" />
+<vehicle id="520" shortname="HYDRA" name="Hydra" maxspeed="250" scale="20" />
+<vehicle id="553" shortname="NEVADA" name="Nevada" maxspeed="250" scale="20" />
+<vehicle id="577" shortname="AT400" name="AT-400" maxspeed="250" scale="20" />
+<vehicle id="592" shortname="ANDROM" name="Andromada" maxspeed="250" scale="20" />
+<vehicle id="593" shortname="DODO" name="Dodo" maxspeed="220" scale="20" />
+<!-- Helicopters -->
+<vehicle id="469" shortname="SPARROW" name="Sparrow" maxspeed="130" scale="10" />
+<vehicle id="447" shortname="SEASPAR" name="Seasparrow" maxspeed="140" scale="10" />
+<vehicle id="487" shortname="MAVERICK" name="Maverick" maxspeed="170" scale="20" />
+<vehicle id="577" shortname="COASTMAV" name="" maxspeed="200"/>
+<vehicle id="497" shortname="POLMAV" name="Police Maverick" maxspeed="180" scale="20" />
+<vehicle id="425" shortname="HUNTER" name="Hunter" maxspeed="200" scale="20" />
+<vehicle id="417" shortname="LEVIATHN" name="Leviathan" maxspeed="160" scale="20" />
+<vehicle id="548" shortname="CARGOBOB" name="Cargobob" maxspeed="160" scale="20" />
+<vehicle id="563" shortname="RAINDANC" name="Raindance" maxspeed="160" scale="20" />
+<!-- RC Vehicles -->
+<vehicle id="464" shortname="RCBARON" name="" maxspeed="75" scale="10" />
+<vehicle id="501" shortname="RCGOBLIN" name="" maxspeed="75" scale="10" />
+<vehicle id="465" shortname="RCRAIDER" name="" maxspeed="75" scale="10" />
+<vehicle id="441" shortname="RCBANDIT" name="RC Bandit" maxspeed="140" scale="20" />
+</vehicles>

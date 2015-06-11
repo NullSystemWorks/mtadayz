@@ -1854,10 +1854,9 @@ addCommandHandler("factor",checkFactorAndOperator)
 function checkZombies3()
     local x,y,z = getElementPosition(getLocalPlayer())
     local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
-    local weaponFactor = getWeaponNoiseFactor(getPedWeapon(localPlayer))
     for i,ped in ipairs(getElementsByType("ped")) do
         if getElementData(ped,"zombie") then
-			if weaponOperator then
+			if getElementData(localPlayer,"shooting") and getElementData(localPlayer,"shooting") > 0 then
 				value = getWeaponNoiseFactor(getPedWeapon(localPlayer))
 			else
 				value = 5

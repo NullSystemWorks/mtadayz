@@ -712,7 +712,7 @@ function saveallvehicles(ps,command)
 		setAccountData(vehicleManager,"vehicleamount",counter)
 		setAccountData(vehicleManager,"tentamount",counterTent)
 	end
-	outputDebugString("Vehicles And Tents Saved.")
+	outputServerLog("[DayZ] Vehicles and tents have been saved.")
 end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveallvehicles)
 

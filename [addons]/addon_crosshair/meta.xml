@@ -1,0 +1,8 @@
+<meta>
+	<info author="sbx320" type="script" name="Crosshair Replacer" version="9001" />
+	<script src="client.lua" 		type="client"/>
+	<file src="siteM16_1.png" 		type="client"/>
+	<file src="texreplace.fx" 		type="client"/>
+	<export function="register" 	type="client"/>
+	<export function="unregister" 	type="client"/>
+</meta>

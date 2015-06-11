@@ -1545,7 +1545,7 @@ function onPlayerTakeItemFromGround (itemName,col)
 	else
 		seconds = theTime.second
 	end
-	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName.."\n","game")
+	exports.DayZ:saveLog("[DayZ] ["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." picked up from ground: "..itemName.."\n","game")
 end
 addEvent( "onPlayerTakeItemFromGround", true )
 addEventHandler( "onPlayerTakeItemFromGround", getRootElement(), onPlayerTakeItemFromGround )
@@ -1599,7 +1599,7 @@ function refreshItemLoots ()
 	end
 	insertIntoTableResidential()
 	createPickupsOnServerStart()
-	setTimer(refreshItemLootPoints,300000,1) --gameplayVariables["itemrespawntimer"]
+	setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"],1)
 end
 
 
@@ -1610,5 +1610,5 @@ function refreshItemLootPoints ()
 	outputChatBox("#ff2200WARNING! #ffffff - SPAWNPOINTS FOR ITEMS WILL BE REFRESHED IN 1 MINUTE! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
 	setTimer(refreshItemLoots,60000,1)
 end
-setTimer(refreshItemLootPoints,300000 ,1)
+setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"],1)
 

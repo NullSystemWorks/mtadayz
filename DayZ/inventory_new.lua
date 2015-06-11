@@ -670,10 +670,8 @@ function renderDisplay ( )
 	end
 	
 	dxDrawText ( "Primary Weapon", bX+125, bY-260, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'sans' )
-	--dxDrawRectangle (bX+125, bY-240, 170, 64, tocolor ( 195, 195, 195, 50 ) )
 	dxDrawImage(bX+125,bY-240,170,62,'images/primary.png')
 	dxDrawText ( "Secondary Weapon", bX+125, bY-177, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'sans' )
-	--dxDrawRectangle (bX+125, bY-160, 170, 64, tocolor ( 195, 195, 195, 50 ) )
 	dxDrawImage(bX+125, bY-160, 170, 62,'images/secondary.png')
 	if selectedMainWeapon > 0 then
 		dxDrawImage ( bX+125, bY-245, 170, 80, 'icons/'..inventoryWeap.main[selectedMainWeapon][2] )
@@ -712,12 +710,6 @@ function renderDisplay ( )
 	dxDrawImage (bX+90, bY+120, 64, 64, 'images/items.png') 
 	dxDrawImage (bX+160, bY+120, 64, 64, 'images/items.png') 
 	dxDrawImage (bX+230, bY+120, 64, 64, 'images/items.png')
-	--[[
-	dxDrawRectangle (bX+20, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) )
-	dxDrawRectangle (bX+90, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
-	dxDrawRectangle (bX+160, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
-	dxDrawRectangle (bX+230, bY+120, 64, 64, tocolor ( 195, 195, 195, 50 ) ) 
-	]]
 	xOff = -50
 	for i = 1, #inventoryWeap.spec do
 		xOff = xOff+70
@@ -726,7 +718,7 @@ function renderDisplay ( )
 	
 	yOff = 0
 	local mainMax = 11
-	if mainMax > #inventory then mainMax = #inventory end
+	if mainMax > #inventory then mainMax = #inventory outputChatBox("mainMax: "..mainMax) end
 	for i = 1, mainMax do
 		if inventory[i+itOff][2] == 0 and inventory[i+itOff][3] == 0 then inventory[i+itOff][2] = 1 end
 		if inventory[i+itOff][5]/inventory[i+itOff][6] == 1 then
@@ -743,7 +735,7 @@ function renderDisplay ( )
 			dxDrawText ( inventory[i+itOff][3], bX-75, bY-230+yOff, screenWidth, screenHeight, tocolor (0,0,0,255), 1.4, 'sans' )
 		end
 		if selectedItemLabel == i then
-			--dxDrawRectangle (bX-395, bY-230+yOff, 370, 25, tocolor ( 10, 10, 10, 30 ) )
+			dxDrawRectangle (bX-395, bY-230+yOff, 370, 25, tocolor ( 10, 10, 10, 30 ) )
 		end
 		yOff = yOff+30
 	end

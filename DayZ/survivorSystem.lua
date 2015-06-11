@@ -1058,6 +1058,25 @@ local chatEadioRadius = 250
 function sendMessageToNearbyPlayers( message, messageType )
 cancelEvent()
     if (messageType == 0) then
+		local theTime = getRealTime()
+		local hour = theTime.hour
+		local minute = theTime.minute
+		local seconds = theTime.second
+		if hour < 10 then
+			hour = "0"..hour
+		else
+			hour = theTime.hour
+		end
+		if minute < 10 then
+			minute  = "0"..minute
+		else
+			minute = theTime.minute
+		end
+		if seconds < 10 then
+			minute = "0"..seconds
+		else
+			seconds = theTime.second
+		end
 		local posX, posY, posZ = getElementPosition( source )
         local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
         local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
@@ -1065,7 +1084,8 @@ cancelEvent()
         for index, nearbyPlayer in ipairs( nearbyPlayers ) do
             outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true ) -- Color changed from 60,200,40 to 211,211,211
         end
-	end	
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', '').."\n","chat")
+	end
 end
 addEventHandler( "onPlayerChat", getRootElement(), sendMessageToNearbyPlayers )
 
@@ -1082,6 +1102,7 @@ function playerRadioChat(playersource,cmd,...)
 				outputChatBox("[RADIO]"..string.gsub((getPlayerName(playersource).." : "..msg2), '#%x%x%x%x%x%x', ''),nearbyPlayer, 238,238,0,true ) -- Color changed from 60,200,40 to 238,238,0
 			end
         end
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [RADIO]"..string.gsub((getPlayerName(source)..": "..msg2), '#%x%x%x%x%x%x', '').."\n","chat")
 	end
 end
 addCommandHandler( "radiochat", playerRadioChat )

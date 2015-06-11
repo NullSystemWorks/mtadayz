@@ -1,0 +1,9 @@
+<meta>
+	<info author="Renkon" type="script" name="GIP (Give-an-Item Panel)" version="1.0.0"/>
+	<script src="gip_c.lua" type="client" />
+	<script src="gip_s.lua" type="server" />
+	
+	<settings>
+		<setting name="aclMinimumGroup" value="Admin" examples="Admin" desc="Minimum level in ACL to be able to give items (add commas to separate)"/>
+	</settings>
+</meta>
