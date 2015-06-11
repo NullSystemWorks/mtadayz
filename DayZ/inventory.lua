@@ -73,7 +73,7 @@ inventoryItems = {
 },
 
 ["Food"] = {
-{"Baked Beans",1,'beans.png',128,128,"Food", "Canned Baked Beans used for sustainment.\nLasts well over five years if stored correctly."},
+{"Baked Beans",1,'bakedbeans.png',128,128,"Food", "Canned Baked Beans used for sustainment.\nLasts well over five years if stored correctly."},
 {"Pasta",1,'pasta.png',128,128,"Food", "Canned Pasta used for sustainment.\nLasts well over five years if stored correctly."},
 {"Sardines",1,'sardines.png',128,128,"Food", "Canned Sardines used for sustainment.\nLasts well over five years if stored correctly."},
 {"Frank & Beans",1,'frankbeans.png',128,128,"Food","Canned Frank & Beans used for sustainment.\nLasts well over five years if stored correctly."},

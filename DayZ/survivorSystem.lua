@@ -1063,7 +1063,7 @@ cancelEvent()
         local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
         destroyElement( chatSphere )
         for index, nearbyPlayer in ipairs( nearbyPlayers ) do
-            outputChatBox("("..string.gsub((getPlayerName(source)..") : "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true ) -- Color changed from 60,200,40 to 211,211,211
+            outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true ) -- Color changed from 60,200,40 to 211,211,211
         end
 	end	
 end

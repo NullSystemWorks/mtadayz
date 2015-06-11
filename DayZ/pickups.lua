@@ -196,6 +196,86 @@ local buildingClasses = {
 {"Crowbar",333,1,90,2.24},
 },
 
+["other"] = {
+{"Raw Meat",2804,0.5,90},
+{"Cooked Meat",2806,0.5,90},
+{"Full Gas Canister",1650,1,0},
+{"Empty Water Bottle",2683,1,0},
+{"Survivor Clothing",1577,2,0},
+{"NV Goggles",368,1,90},
+{"IR Goggles",369,1,90},
+{"Box of Matches",328,0.4,90,5},
+{"Wood Pile",1463,0.4,0,5},
+{"M1911",346,1,90,3.5},
+{"PDW",352,1,90,2},
+{"Hunting Knife",335,1,90,2.5},
+{"Hatchet",339,1,90,1.8},
+{"Frank & Beans",1582,1,0,7},
+{"Soda Can (Mountain Dew)",2647,1,0,7},
+{"Empty Gas Canister",1650,1,0,5},
+{"Road Flare",324,1,90,6},
+{"Can (Milk)",2856,1,0,5},
+{"Assault Pack (ACU)",3026,1,0,6},
+{"Painkiller",2709,3,0,7},
+{"Empty Soda Cans",2673,0.5,0,12},
+{"Scruffy Burgers",2675,0.5,0,12},
+{"MP5A5",353,1,90,1.5},
+{"Bizon PP-19",353,1,90,1.5},
+{"Watch",2710,1,0,3},
+{"Heat Pack",1576,5,0,6},
+{"Wire Fence",933,0.25,0,1},
+{"Lee Enfield",357,1,90,1.5},
+{"Sporter 22",357,1,90,1.5},
+{"Mosin 9130",357,1,90,1.5},
+{"SKS",357,1,90,1.5},
+{"ALICE Pack",1248,1,0,1.5},
+{"Czech Backpack",1644,1,0,1.5},
+{"Backpack (Coyote)",1252,1,0,0.7},
+{"British Assault Pack",1275,1,0,0.7},
+{"Tire",1073,1,0,1},
+{"Tank Parts",1008,1,0.8,4},
+{"Morphine",1579,1,0,2},
+{"Civilian Clothing",1241,2,0,3.5},
+{"Map",1277,0.8,90,4},
+{"Toolbox",2969,0.5,0,3},
+{"Engine",929,0.3,0,3.5},
+{"Winchester 1866",349,1,90,2},
+{"Water Bottle",2683,1,0,4},
+{"M9 SD",347,1,90,5},
+{"Grenade",342,1,0,0.5},
+{"Sawn-Off Shotgun",350,1,90,2},
+{"Blaze 95 Double Rifle",350,1,90,2},
+{"SPAZ-12 Combat Shotgun",351,1,90,1.9},
+{"Remington 870",351,1,90,1.9},
+{"Binoculars",369,1,0,4},
+{"Camouflage Clothing",1247,2,0,4.5},
+{"AK-47",355,1,90,0.9},
+{"FN FAL",355,1,90,0.9},
+{"G36C",355,1,90,0.9},
+{"Sa58V CCO",355,1,90,0.9},
+{"M136 Rocket Launcher",359,1,90,0},
+{"Ghillie Suit",1213,2,0,0.01},
+{"M4",356,1,90,0.9},
+{"CZ 550",358,1,90,0.3},
+{"DMR",358,1,90,0.3},
+{"SVD Dragunov",358,1,90,0.3},
+{"Bandage",1578,0.5,0,4},
+{"Pasta Can",2770,1,0,5},
+{"Beans Can",2601,1,0,6},
+{"Burger",2768,1,0,2},
+{"Tent",1279,1,0,0.5},
+{"M1911",346,1,90,3},
+{"Desert Eagle",348,1,90,3},
+{"Revolver",348,1,90,3},
+{"GPS",2976,0.15,0,1},
+{"Medic Kit",2891,2.2,0},
+{"Blood Bag",1580,1,0},
+{"Radio Device",2966,0.5,0,5},
+{"Golf Club",333,1,90,1.9},
+{"Baseball Bat",336,1,90,1.4},
+{"Shovel",337,1,90,1.5},
+},
+
 }
 --[[
 --AMMO
@@ -1037,7 +1117,7 @@ function refreshItemLoot (col,place)
 	local counter = 0
 	local obejctItem = {}
 	--Tables
-	for i, item in ipairs(lootpileType["other"]) do
+	for i, item in ipairs(buildingClasses["other"]) do
 		if getElementData(col,item[1]) and getElementData(col,item[1]) > 0 then
 			if counter == 3 then
 				break
@@ -1122,6 +1202,7 @@ function createPickupsOnServerStart()
 		iPickup = iPickup + 1
 		createItemLoot("Residential",pos[1],pos[2],pos[3],iPickup)
 	end
+	--[[
 	if generic_items then
 		for i, items in pairs(generic_items) do
 			generic_items[i] = nil
@@ -1137,6 +1218,7 @@ function createPickupsOnServerStart()
 			trash_items[i] = nil
 		end
 	end
+	]]
 	setTimer(createPickupsOnServerStart2,60000,1)
 end
 
@@ -1189,6 +1271,7 @@ function createPickupsOnServerStart2()
 		iPickup = iPickup + 1
 		createItemLoot("Industrial",pos[1],pos[2],pos[3],iPickup)
 	end
+	--[[
 	if generic_items then
 		for i, items in pairs(generic_items) do
 			generic_items[i] = nil
@@ -1209,6 +1292,7 @@ function createPickupsOnServerStart2()
 			blueprint_items[i] = nil
 		end
 	end
+	]]
 	setTimer(createPickupsOnServerStart3,60000,1)
 end
 
@@ -1242,6 +1326,7 @@ function createPickupsOnServerStart3()
 		iPickup = iPickup + 1
 		createItemLoot("Farm",pos[1],pos[2],pos[3],iPickup)
 	end
+	--[[
 	if generic_items then
 		for i, items in pairs(generic_items) do
 			generic_items[i] = nil
@@ -1252,6 +1337,7 @@ function createPickupsOnServerStart3()
 			trash_items[i] = nil
 		end
 	end
+	]]
 	setTimer(createPickupsOnServerStart4,60000,1)
 end
 
@@ -1294,6 +1380,7 @@ function createPickupsOnServerStart4()
 		iPickup = iPickup + 1
 		createItemLoot("Supermarket",pos[1],pos[2],pos[3],iPickup)
 	end
+	--[[
 	if generic_items then
 		for i, items in pairs(generic_items) do
 			generic_items[i] = nil
@@ -1309,6 +1396,7 @@ function createPickupsOnServerStart4()
 			trash_items[i] = nil
 		end
 	end
+	]]
 	setTimer(createPickupsOnServerStart5,60000,1)
 end
 
@@ -1350,6 +1438,7 @@ function createPickupsOnServerStart5()
 		iPickup = iPickup + 1
 		createItemLoot("Military",pos[1],pos[2],pos[3],iPickup)
 	end
+	--[[
 	if generic_items then
 		for i, items in pairs(generic_items) do
 			generic_items[i] = nil
@@ -1365,6 +1454,7 @@ function createPickupsOnServerStart5()
 			trash_items[i] = nil
 		end
 	end
+	]]
 end
 
 insertIntoTableResidential()
@@ -1469,16 +1559,8 @@ end
 addEvent( "onPlayerChangeLoot", true )
 addEventHandler( "onPlayerChangeLoot", getRootElement(), onPlayerChangeLoot )
 
-function playerDropAItem(itemName)
-	local x,y,z = getElementPosition(source)
-	local item,itemString = getItemTablePosition(itemName)
-	local itemPickup = createItemPickup(item,x+math.random(-1.25,1.25),y+math.random(-1.25,1.25),z,itemString)
-end
-addEvent( "playerDropAItem", true )
-addEventHandler( "playerDropAItem", getRootElement(), playerDropAItem )
-
 function getItemTablePosition (itema)
-	for id, item in ipairs(lootpileType[tostring("other")]) do
+	for id, item in ipairs(buildingClasses[tostring("other")]) do
 		if itema == item[1] then
 			return id,"other"
 		end
@@ -1486,6 +1568,14 @@ function getItemTablePosition (itema)
 
 	return item,itemString
 end
+
+function playerDropAItem(itemName)
+	local x,y,z = getElementPosition(source)
+	local item,itemString = getItemTablePosition(itemName)
+	local itemPickup = createItemPickup(item,x+math.random(-1.25,1.25),y+math.random(-1.25,1.25),z,itemString)
+end
+addEvent( "playerDropAItem", true )
+addEventHandler( "playerDropAItem", getRootElement(), playerDropAItem )
 
 function refreshItemLoots ()
 	outputChatBox("#ffaa00WARNING! #ffffff - SPAWNPOINTS FOR ITEMS ARE BEING REFRESHED! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
@@ -1509,7 +1599,7 @@ function refreshItemLoots ()
 	end
 	insertIntoTableResidential()
 	createPickupsOnServerStart()
-	setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"] ,1)
+	setTimer(refreshItemLootPoints,300000,1) --gameplayVariables["itemrespawntimer"]
 end
 
 
@@ -1520,5 +1610,5 @@ function refreshItemLootPoints ()
 	outputChatBox("#ff2200WARNING! #ffffff - SPAWNPOINTS FOR ITEMS WILL BE REFRESHED IN 1 MINUTE! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
 	setTimer(refreshItemLoots,60000,1)
 end
-setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"] ,1)
+setTimer(refreshItemLootPoints,300000 ,1)
 
