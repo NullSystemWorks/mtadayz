@@ -61,11 +61,13 @@ function checkSlots(source)
 end
 
 function detectVehicleCheat(vehicle, seat, jacked)
-  if ( getElementModel(vehicle) == 432 or getElementModel(vehicle) == 425 or getElementModel(vehicle) == 501 or getElementModel(vehicle) == 564 or getElementModel(Vehicle) == 594 or getElementModel(vehicle) == 601 or getElementModel(vehicle) == 447 or getElementModel(vehicle) == 520 ) then
-    if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "command.mute" ) then
-       kickPlayer(source, "[AC] : Vehicle Hack")
-    end
-  end
+	if vehicle then
+		if ( getElementModel(vehicle) == 432 or getElementModel(vehicle) == 425 or getElementModel(vehicle) == 501 or getElementModel(vehicle) == 564 or getElementModel(Vehicle) == 594 or getElementModel(vehicle) == 601 or getElementModel(vehicle) == 447 or getElementModel(vehicle) == 520 ) then
+			if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "command.mute" ) then
+				kickPlayer(source, "[AC] : Vehicle Hack")
+			end
+		end
+	end
 end
 addEventHandler("onPlayerVehicleEnter", getRootElement(), detectVehicleCheat)
 
