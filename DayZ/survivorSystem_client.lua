@@ -1367,20 +1367,15 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	if weapon == 37 then
 		return
 	end
-	if not attacker then
-		return
-	else
-		if getElementData(attacker,"zombie") then
-			setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-gameplayVariables["zombiedamage"])
-			local number = math.random(1,7)
-			if number == 4 then
-				setElementData(getLocalPlayer(),"bleeding",getElementData(getLocalPlayer(),"bleeding") + math.floor(loss*10))
-			end
+	if getElementData(attacker,"zombie") then
+		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-gameplayVariables["zombiedamage"])
+		local number = math.random(1,7)
+		if number == 4 then
+			setElementData(getLocalPlayer(),"bleeding",getElementData(getLocalPlayer(),"bleeding") + math.floor(loss*10))
 		end
 	end
 	if weapon == 49 then
 		if loss > 30 then
-			playSound("sounds/bonecrack.mp3",false)
 			setElementData(getLocalPlayer(),"brokenbone",true)
 			setControlState ("jump",true)
 			setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-math.floor(loss*10))
@@ -1409,6 +1404,7 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		end
 		if bodypart == 7 or bodypart == 8 then
 			setElementData(getLocalPlayer(),"brokenbone",true)
+			playSound("sounds/brokenbone.mp3",false)
 		end
 		playRandomHitSound()
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-math.random(damage*0.75,damage*1.25))
@@ -1436,7 +1432,6 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-math.random(100,1000))
 		local number = math.random(1,5)
 		if loss > 30 then
-			playSound("sounds/bonecrack.mp3",false)
 			setElementData(getLocalPlayer(),"brokenbone",true)
 			setControlState ("jump",true)
 		end

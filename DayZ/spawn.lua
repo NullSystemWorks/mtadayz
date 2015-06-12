@@ -586,10 +586,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 				setElementData(pedCol,"playername",getPlayerName(source))
 				setElementData(pedCol,"deadman",true)
 				setElementData(pedCol,"MAX_Slots",getElementData(source,"MAX_Slots"))
-				local time = getTime()
-				local hours = time.hour
-				local minutes = time.minute
-				setElementData(pedCol,"deadreason",getPlayerName(source).." is dead. Cause of death: "..(weapon or "Unknown")..". Time of death: "..hours..":"..minutes)
+				setElementData(pedCol,"deadreason",getPlayerName(source).." is dead.")
 			end	
 		end
 	end

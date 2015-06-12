@@ -10,7 +10,7 @@
  maxHealth = 12000
  maxFood = 100
  maxThirst = 100
- maxSlots = 80 -- You must put the number of slots of the best backpack of your server
+ maxSlots = 30 -- You must put the number of slots of the best backpack of your server
 
 addEventHandler("onElementDataChange",getRootElement(),
  function(data)
@@ -55,7 +55,7 @@ end
 function checkSlots(source)
     local vSlots = getElementData(source, "MAX_Slots") or 0
     if vSlots > maxSlots and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "MAX_Slots", 0)
+        setElementData(source, "MAX_Slots", 8)
         kickPlayer(source, "[AC] : Slots Hack")
     end
 end

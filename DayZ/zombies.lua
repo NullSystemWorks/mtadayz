@@ -181,7 +181,7 @@ function createZomieForPlayer (x,y,z)
 		setElementData(zombie,"blood",gameplayVariables["zombieblood"])
 		setElementData(zombie,"owner",source)
 		call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
-		setPedAnimation (zombie, "PED", "Player_Sneak", -1, true, true, true)
+		setPedAnimation (zombie, "RYDER", "RYD_Die_PT1", -1, true, true, true)
 		--outputChatBox("Server: zombie created (reason: )")
 		-------------------
 	end

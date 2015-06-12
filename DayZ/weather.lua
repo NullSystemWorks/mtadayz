@@ -9,9 +9,9 @@ setFogDistance(100)
 function checkSetTime()
 	local hours,minute = getTime()
     setTime(hours, minute)
-    setMinuteDuration(2000)
+    setMinuteDuration(10000)
 end
-setTimer(checkSetTime,2000,0)
+setTimer(checkSetTime,10000,0)
 
 function addDaysPassed()
 local hours,minute = getTime()
@@ -19,14 +19,14 @@ local hours,minute = getTime()
 		DaysPassed = DaysPassed+1
 	end
 end
-setTimer(addDaysPassed,2000,0)
+setTimer(addDaysPassed,10000,0)
 
 function resetDaysPassed()
 	if DaysPassed == 364 then
 		DaysPassed = 0
 	end
 end
-setTimer(resetDaysPassed,2000,0)
+setTimer(resetDaysPassed,10000,0)
 
 function setSeason()
 	if DaysPassed == 0 then
@@ -39,7 +39,7 @@ function setSeason()
 		Season = "Autumn"
 	end
 end
-setTimer(setSeason,2000,0)
+setTimer(setSeason,10000,0)
 
 WeatherTable = {
 
