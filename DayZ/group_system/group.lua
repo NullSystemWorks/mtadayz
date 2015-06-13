@@ -166,9 +166,9 @@ function makeGUI()
 	addEventHandler("onClientGUIClick", warningLevelEdit, function() if (guiGetText(source) == "Warning Level") then guiSetText(source, "") end end, false)
 	addEventHandler("onClientGUIClick", inviteSearchEdit, function() if (guiGetText(source) == "Search..") then guiSetText(source, "") end end, false)
 	
-	addEventHandler("onClientGUIClick", groupBankWithdrawButton, withdrawMoney, false)
-	addEventHandler("onClientGUIDoubleClick", groupBankWindow, function() guiSetVisible(groupBankWindow, false) end, false)
-	addEventHandler("onClientGUIClick", groupBankDepositButton, depositMoney, false)
+	--addEventHandler("onClientGUIClick", groupBankWithdrawButton, withdrawMoney, false)
+	--addEventHandler("onClientGUIDoubleClick", groupBankWindow, function() guiSetVisible(groupBankWindow, false) end, false)
+	--addEventHandler("onClientGUIClick", groupBankDepositButton, depositMoney, false)
 	--addEventHandler("onClientGUIClick", groupBankButton, function() guiBringToFront(groupBankWindow) guiSetVisible(groupBankWindow, not guiGetVisible(groupBankWindow)) end, false)
 	
 	--exports.misc:centerAllWindows(resourceRoot)
