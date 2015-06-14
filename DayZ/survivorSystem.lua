@@ -109,10 +109,10 @@ local vehicleDataTableForTent = {
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
 {"Assault Pack (ACU)"},
-{"Alice Pack"},
-{"Ghillie Backpack"},
-{"OS Backpack"},
-{"Coyote Backpack"},
+{"ALICE Pack"},
+{"British Assault Pack"},
+{"Czech Vest Pouch"},
+{"Backpack (Coyote)"},
 {"Czech Backpack"},
 
 -- [[ Blueprints ]] --
@@ -1490,8 +1490,18 @@ function funcBindLie ( player, key, keyState )
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
 	end
 end
-
 --[[
+function onClientMoveWhileLying(key)
+	if key == "w" then
+		setControlState(client,"forwards",true)
+	else
+		return
+	end
+end
+addEvent("onClientMoveWhileLying",true)
+addEventHandler("onClientMoveWhileLying",root,onClientMoveWhileLying)
+
+
 addEvent("onZombieHitByVehicle",true)
 function onZombieHitByVehicle()
 	setPedAnimation (source,"ped","FLOOR_hit_f", -1,false)

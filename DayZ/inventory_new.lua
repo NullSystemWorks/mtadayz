@@ -718,7 +718,7 @@ function renderDisplay ( )
 	
 	yOff = 0
 	local mainMax = 11
-	if mainMax > #inventory then mainMax = #inventory outputChatBox("mainMax: "..mainMax) end
+	if mainMax > #inventory then mainMax = #inventory end
 	for i = 1, mainMax do
 		if inventory[i+itOff][2] == 0 and inventory[i+itOff][3] == 0 then inventory[i+itOff][2] = 1 end
 		if inventory[i+itOff][5]/inventory[i+itOff][6] == 1 then

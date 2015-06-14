@@ -16,6 +16,7 @@ local spawnPositions = {
 local playerDataTable = {
 {"alivetime"},
 {"daysalive"},
+{"timesdied"},
 {"skin"},
 {"MAX_Slots"},
 {"bandit"},
@@ -146,11 +147,12 @@ local playerDataTable = {
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
 {"Assault Pack (ACU)"},
-{"Alice Pack"},
-{"Ghillie Backpack"},
-{"OS Backpack"},
-{"Coyote Backpack"},
+{"ALICE Pack"},
+{"British Assault Pack"},
+{"Czech Vest Pouch"},
+{"Backpack (Coyote)"},
 {"Czech Backpack"},
+{"Survival ACU"},
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
@@ -362,11 +364,13 @@ local vehicleDataTable = {
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
 {"Assault Pack (ACU)"},
-{"Alice Pack"},
-{"Ghillie Backpack"},
-{"OS Backpack"},
-{"Coyote Backpack"},
+{"ALICE Pack"},
+{"British Assault Pack"},
+{"Czech Vest Pouch"},
+{"Backpack (Coyote)"},
 {"Czech Backpack"},
+{"Survival ACU"},
+
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},

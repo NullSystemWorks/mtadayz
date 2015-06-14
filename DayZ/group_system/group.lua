@@ -11,12 +11,9 @@ local c = {}
 local validRank = {}
 local permForRank = {}
 
-addEventHandler("onClientResourceStart", getResourceRootElement(),
-function()
-	guiSetInputMode("no_binds_when_editing")
-end)
 
 function makeGUI()
+	guiSetInputMode("no_binds_when_editing")
 	window = guiCreateWindow(0.14, 0.16, 0.72, 0.68, "Encampment System", true)
 	guiWindowSetSizable(window, false)
 	guiSetAlpha(window, 1.00)
