@@ -1481,15 +1481,20 @@ end
 
 function funcBindLie ( player, key, keyState )
 	if lying then
-		lying = false
 		setPedAnimation(player,"ped","getup_front",-1,false)
 		setTimer(function() setPedAnimation (player,false) end,1300,1)
 	else
 		if isPedInVehicle(player) then return end
-		lying = true
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
+		
+		local x,y,z = getElementPosition(player)
+		setElementPosition(player,x,y,z) --Move the player up a little (due to a bug)
 	end
+	
+	lying = not lying
+	triggerClientEvent(player,"onPlayerProne",resourceRoot,lying)
 end
+
 --[[
 function onClientMoveWhileLying(key)
 	if key == "w" then
@@ -1527,12 +1532,20 @@ addEventHandler("switchToNormal",root,function(target)
 end)
 
 
-function bindTheKeys ()
-  bindKey(source,",","down",funcBindHandsup)
-  bindKey(source,".","down",funcBindSit)
-  bindKey(source,"l","down",funcBindLie)
+function bindTheKeys (player)
+  bindKey(player,",","down",funcBindHandsup)
+  bindKey(player,".","down",funcBindSit)
+  bindKey(player,"l","down",funcBindLie)
 end
-addEventHandler("onPlayerLogin", getRootElement(), bindTheKeys)
+addEventHandler("onPlayerLogin", getRootElement(), function() bindTheKeys(source) end)
+addEventHandler("onResourceStart",resourceRoot, --Rebind keys for players on resource start
+function()
+	for k,v in ipairs(getElementsByType("player")) do
+		if not isGuestAccount(getPlayerAccount(v)) then
+			bindTheKeys(v)
+		end
+	end
+end)
 
 --[[
 function saveSeasonsDays(dayspassed,season)

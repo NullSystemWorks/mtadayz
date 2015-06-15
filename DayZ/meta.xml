@@ -529,6 +529,9 @@
     <file src="items/camera.txd" />
     <file src="items/camera.dff" />
 	
+	<!-- Enable OOP for some scripts -->
+	<oop>true</oop>
+	
     
 	<!-- Include resources to start along with DayZ -->
     <include resource="voice" />

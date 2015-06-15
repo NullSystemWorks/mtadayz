@@ -1038,18 +1038,19 @@ addEventHandler("onClientPlayerWeaponSwitch",localPlayer,onClientPlayerSkinChang
 	
 -- PLAY ZOMBIE SOUNDS
 local zombiesounds = {"sounds/mgroan1.ogg", "sounds/mgroan2.ogg", "sounds/mgroan3.ogg", "sounds/mgroan4.ogg", "sounds/mgroan5.ogg", "sounds/mgroan6.ogg", "sounds/mgroan7.ogg", "sounds/mgroan8.ogg", "sounds/mgroan9.ogg", "sounds/mgroan10.ogg"} 
+local zedSound
 
 function playZombieSounds(ped)
 local zombies = getElementsByType("ped")
 	for theKey,theZomb in ipairs(zombies) do
 		if getElementData(theZomb,"deadzombie") then
-			if sound then
-				stopSound(sound)
+			if zedSound then
+				stopSound(zedSound)
 			end
 		else
 			local Zx,Zy,Zz = getElementPosition(theZomb)
-			sound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
-			setSoundMaxDistance(sound,5)
+			zedSound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
+			setSoundMaxDistance(zedSound,5)
 		end
 	end
 end
@@ -3018,4 +3019,113 @@ function freecamMouse (cX,cY,aX,aY)
 			rotY = PI / 3.5
 		end
 	end
+end
+
+local proned = false
+local proneObject
+local speed = 16
+local animTimer
+
+function onPlayerProne(state) 
+	proned = state
+	
+	--NOTE: We had to re-apply the animation clientside due to a positioning bug with GTA. Go along with it.
+	if not proned then
+		setPedAnimation(localPlayer,"ped","getup_front",-1,false)
+		if proneObject and isElement(proneObject) then destroyElement(proneObject) end
+		if animTimer and isTimer(animTimer) then killTimer(animTimer) end
+		animTimer = setTimer(setPedAnimation,1300,1,localPlayer)
+	else
+		setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+		
+		if proneObject and isElement(proneObject) then destroyElement(proneObject) end
+		local x,y,z = getElementPosition(localPlayer)
+		proneObject = createObject(1337,x,y,z)
+		attachElements(localPlayer,proneObject,0,0,0)
+		setElementCollisionsEnabled(proneObject,false)
+		setElementAlpha(proneObject,0)
+	end
+end
+addEvent("onPlayerProne",true)
+addEventHandler("onPlayerProne",root,onPlayerProne)
+
+addEventHandler("onPlayerWasted",root,
+function()
+	proned = false
+end)
+
+addEventHandler("onClientRender",root,
+function()
+	if not proned then return end
+	
+	_pos = localPlayer:getPosition()
+	
+	if isKeyDown("W") then
+		pos = _pos + localPlayer.matrix.forward / speed
+		
+		--Check if line of sight is clear, otherwise revert
+		sightPos = _pos + localPlayer.matrix.forward * 1.25
+		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
+			pos = _pos --revert
+		end
+	elseif isKeyDown("A") then
+		pos = _pos - localPlayer.matrix.right / speed
+		
+		--Check if line of sight is clear, otherwise revert
+		sightPos = _pos - localPlayer.matrix.right * 1.25
+		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
+			pos = _pos --revert
+		end
+	elseif isKeyDown("S") then
+		pos = _pos - localPlayer.matrix.forward / speed
+		
+		--Check if line of sight is clear, otherwise revert
+		sightPos = _pos - localPlayer.matrix.forward * 1.25
+		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
+			pos = _pos --revert
+		end
+	elseif isKeyDown("D") then
+		pos = pos + localPlayer.matrix.right / speed
+		
+		--Check if line of sight is clear, otherwise revert
+		sightPos = _pos + localPlayer.matrix.right * 1.25
+		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
+			pos = _pos --revert
+		end
+	end
+	
+	if isKeyDown("W") or isKeyDown("A") or isKeyDown("S") or isKeyDown("D") then
+		setElementPosition(proneObject,pos)
+	end
+	
+	--Simulate gravity (VERY BUGGY ATM)
+	if not isPedOnGround(localPlayer) then
+		local x,y,z = getElementPosition(localPlayer)
+		local gPos = getGroundPosition(localPlayer:getPosition()) + 1
+		
+		if (gPos > 0) then
+			if (gPos - 0.2 < 0) then
+				offset = gPos
+			else
+				offset = 0.2
+			end
+			
+			setElementPosition(proneObject,x,y,z-offset)
+		elseif (gPos < 0) then
+			if (gPos + 0.2 > 0) then
+				offset = gPos
+			else
+				offset = 0.2
+			end
+			
+			setElementPosition(proneObject,x,y,z+offset)
+		end
+	end
+	
+	--Update the rotation based on the camera's rotation
+	setElementRotation(localPlayer,0,0,360 - getPedCameraRotation(localPlayer))
+end)
+
+function isKeyDown(key)
+	if getKeyState(key) then return true else return false end
 end
