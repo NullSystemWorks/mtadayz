@@ -550,8 +550,8 @@ function playerPressedKey(button, press)
 			local anim,anim2 = getPedAnimation (getLocalPlayer())
 			if anim and anim == "SCRATCHING" and anim2 == "sclng_r" then
 				triggerServerEvent("onClientMovesWhileAnimation",getLocalPlayer())
-			end	
+			end
 		end
-    end
+	end
 end
 addEventHandler("onClientKey", root, playerPressedKey)

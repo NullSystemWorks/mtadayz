@@ -513,6 +513,7 @@ function spawnDayZVehicles()
 		--others
 		setElementData(vehCol,"fuel",10)
 end
+
 --spawnDayZVehicles()
 function spawnVehiclePack (ps,cmd)
 	if getElementData(ps,"admin") then

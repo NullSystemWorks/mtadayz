@@ -720,14 +720,15 @@ end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveallvehicles)
 
 function doBackup ()
+	if gameplayVariables["backupenabled"] then
 		outputServerLog("[DayZ] COMMENCING BACKUP OF VEHICLES AND TENTS...")
 		outputChatBox ("BACKUP OF ALL VEHICLES AND TENTS, PLEASE STAND IDLE!",getRootElement(),255,0,0,true)
 		saveallvehicles()
 		outputChatBox ("BACKUP: DONE!",getRootElement(),0,255,0,true)
-		outputServerLog("[DayZ] Vehicles and Tents have been saved.")
+		outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN SAVED.")
+	end
 end
-setTimer(doBackup,3600000,0)
---addCommandHandler("backup",doBackup,false)
+setTimer(doBackup,gameplayVariables["backupinterval"],0)
 
 
 function createVehicleOnServerStart()

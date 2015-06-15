@@ -108,22 +108,6 @@ local number = math.random(1,3)
 end
 setTimer(setTheWeather,math.random(1800000,3600000),0)
 
---[[
-function getCurrentSeason(season)
-	outputChatBox("Current Season: "..Season)
-	outputChatBox("Days Passed: "..DaysPassed)
-end
-addCommandHandler("season",getCurrentSeason)
-
-function saveSeasonDays()
-	season = Season
-	daysPassed = DaysPassed
-	triggerServerEvent("saveSeasonDays",season,daysPassed)
-end
-addEvent("triggerSaveSeasonDays",true)
-addEventHandler("triggerSaveSeasonDays",root,saveSeasonDays)
-]]
-
 function setWeather2()
 	local number = math.random(1,6)
 	if number == 2 then

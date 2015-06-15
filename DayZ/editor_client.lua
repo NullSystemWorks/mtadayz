@@ -25,13 +25,13 @@ shownText = {}
 
 gameplayVariables = {}
 
--- PING CHECK	
-
+-- PING CHECK
 	gameplayVariables["ping"] = 600 -- Checks if ping is over the set amount. DEFAULT: 600
 	
 -- ZOMBIE DAMAGE
 	gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: math.random(400,900), for consistent damage, remove math.random(400,900) and insert value (EXAMPLE: 1000)
-	
+
+-- MISC
 	gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: true - SET TO false to disable - remember you need to set it in editor_server.lua too.
 	
 -- WEAPON DAMAGE

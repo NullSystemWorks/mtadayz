@@ -1838,14 +1838,6 @@ function checkZombies()
 end
 setTimer(checkZombies,5000,0)
 
-function checkFactorAndOperator()
-	local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
-    local weaponFactor = getWeaponNoiseFactor(getPedWeapon(localPlayer))
-	outputChatBox("Operator: "..weaponOperator)
-	outputChatBox("Factor: "..weaponFactor)
-end
-addCommandHandler("factor",checkFactorAndOperator)
-
 function checkZombies3()
     local x,y,z = getElementPosition(getLocalPlayer())
     local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
@@ -2660,7 +2652,7 @@ setTimer(getPlayerStance,3000,0)
 
 
 -- DEBUG FUNCTIONS FOR DEVS ONLY!
-
+--[[
 devMode = false
 
 function setDevModeOn(cmd)
@@ -2711,51 +2703,6 @@ function onClientPlayerDev()
 	end
 end
 setTimer(onClientPlayerDev,1000,0)
-
---[[
-local x,y = guiGetScreenSize()
-local alpha = 0 
-local fadeOut = true
-
-function showPlayerWelcomeMessage()
-	addEventHandler("onClientRender", root, showWelcomeMessage)
-	alpha = 0
-	fadeOut = true
-end
-
-function welcomeOnSpawn()
-	if source == localPlayer then
-		showPlayerWelcomeMessage()
-	end
-end
-
-addEventHandler ("onClientPlayerSpawn", getLocalPlayer(), welcomeOnSpawn)
- 
-function showWelcomeMessage()
-	local xOff = dxGetTextWidth ( 'Chelyabinsk     ', 1.2, 'bankgothic' )
-	local xp, yp, zp = getElementPosition ( localPlayer )
-	local mins, hour = getTime ()
-	if mins > 0 and mins < 10 then
-		mins = '0'..tostring(mins)
-	end
-	local daysalive = getElementData(localPlayer, "daysalive") or 0
-	dxDrawText ( 'Chelyabinsk', x-xOff, y-200, x,y, tocolor ( 255, 255, 255, alpha ), 1.2, 'bankgothic' )
-	if fadeIn then
-		alpha = alpha-10
-		if alpha < 10 then
-			fadeIn = false
-			removeEventHandler( "onClientRender", root, showWelcomeMessage )
-		end
-	end
-	if fadeOut then
-		alpha = alpha+5
-		if alpha > 245 then
-			alpha = 255
-			setTimer ( function () fadeIn = true end, 3000, 1 )
-			fadeOut = false
-		end
-	end
-end
 ]]
 
 local length = 3

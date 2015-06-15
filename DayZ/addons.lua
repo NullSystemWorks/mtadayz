@@ -31,7 +31,7 @@ function loadAddons( res )
 end
 addEventHandler ( "onResourceStart", getResourceRootElement(getThisResource()), loadAddons )
 
--- [[ Stops all resources with "addon_" in name
+-- [[ Stops all resources with "addon_" in name ]] --
 function unloadAddons ( res )
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
