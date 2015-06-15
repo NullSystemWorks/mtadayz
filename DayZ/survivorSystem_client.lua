@@ -3111,7 +3111,7 @@ function()
 			end
 			
 			setElementPosition(proneObject,x,y,z-offset)
-		elseif (gPos < 0) then
+		elseif (gPos < 2) then
 			if (gPos + 0.2 > 0) then
 				offset = gPos
 			else
