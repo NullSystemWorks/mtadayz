@@ -1,0 +1,45 @@
+# CHANGELOG #
+This changelog lists all changes made to MTA DayZ. It adheres to the following features description.
+
+## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
+
+### ADDED: For new features
+### CHANGED: For changes in existing features
+### DEPRECATED: For once-stable removed in upcoming releases
+### REMOVED: For deprecated features removed in the release it's mentioned in
+### FIXED: For all bugs
+### SECURITY: To invite users to upgrade in case vulnerabilities
+
+# - #
+## [0.8.0a] - 2015-06-20
+### ADDED: Completely new inventory UI
+### ADDED: 13 new weapons (total of 32)
+### ADDED: Logging system (to log everything related to the game, see README in logs folder)
+### ADDED: Completely new group_system (Part 1 of 3)
+### ADDED: Crafting
+### ADDED: Temperature increasing when inside vehicle
+### ADDED: Basic exports (check README in DayZ folder)
+### ADDED: Logging of local and group chat (see logs/chat.log)
+### ADDED: Basic woodcutting system (chop trees to get wood)
+### ADDED: Special effect for ghillie suit: Stand still and you will turn almost invisible
+### ADDED: Several food and drinks
+### ADDED: Basic seasons system
+### CHANGED: Background removed for left side menu, changed font
+### CHANGED: Players can now pick up backpacks
+### CHANGED: Temperature now must hit 33° before player gets a cold
+### CHANGED: Time now runs like this: 1 Minute In-Game = 10 Seconds Real Time
+### CHANGED: Noise and visibility values for both player and weapons
+### CHANGED: Ammunition system
+### CHANGED: Primary weapons take up 10 slots, secondary 5
+### CHANGED: Backpack slots (highest is 30 now)
+### CHANGED: Dynamic Item Respawn System (Part 1 of 2)
+### CHANGED: Louder weapons will attract zombies from far away
+### FIXED: Error when player quits before logging in
+### FIXED: Temperature not decreasing when in water
+### FIXED: Looping animations
+### SECURITY: Added antihack measures
+### SECURITY: Added measurements against item duping
+
+# - #
+## [0.7.0] - ?
+INITIAL VERSION
