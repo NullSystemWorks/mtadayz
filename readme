@@ -36,6 +36,24 @@ remove: Removes the player from being admin/supporter
 /svp 
 Respawns vehicles (admin needed, via /add admin)
 
+
+## EXPORTED FUNCTIONS ##
+getPlayerBlood - Arguments: element player. Returns: Amount of blood the player has (int)
+setPlayerBlood - Arguments: element player, int amount. Effect: sets player's blood to specified amount
+getPlayerZombiesKilled - Arguments: element player. Returns: Amount of zombies player has killed (int)
+setPlayerZombiesKilled - Arguments: element player, int amount. Effect: sets amount of killed zombies for player to specified value
+getPlayerHeadshots - Arguments: element player. Returns: Amount of head shots player has delivered (int)
+setPlayerHeadshots - Arguments: element player, int amount. Effect: sets amount of head shots player has delivered to specified value
+getPlayerMurders - Arguments: element player. Returns: Amount of murders player has committed (int)
+setPlayerMurders - Arguments: element player, int amount. Effect: sets amount of murders to specified value
+getPlayerBanditsKilled - Arguments: element player. Returns: Amount of bandits player has killed
+setPlayerBanditsKilled - Arguments: element player, int amount. Effect: sets amount of killed bandits to specified value
+getPlayerTemperature - Arguments: element player. Returns: Temperature of player (int)
+setPlayerTemperature - Arguments: element player, int amount. Effect: sets temperature to specified value
+getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
+setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
+
+
 ## editor_server.lua & editor_client.lua ##
 Both files contain settings with which you can customize your server. More will be added over time. 
 

@@ -20,10 +20,11 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Temperature increasing when inside vehicle
 ### ADDED: Basic exports (check README in DayZ folder)
 ### ADDED: Logging of local and group chat (see logs/chat.log)
-### ADDED: Basic woodcutting system (chop trees to get wood)
+### ADDED: Basic woodcutting system (chop trees to get wood, Los Santos only)
 ### ADDED: Special effect for ghillie suit: Stand still and you will turn almost invisible
 ### ADDED: Several food and drinks
 ### ADDED: Basic seasons system
+### ADDED: First Person Mode (press 'o')
 ### CHANGED: Background removed for left side menu, changed font
 ### CHANGED: Players can now pick up backpacks
 ### CHANGED: Temperature now must hit 33° before player gets a cold
