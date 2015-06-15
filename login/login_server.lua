@@ -1,5 +1,13 @@
 local root = getRootElement()
 
+--List of system accounts that shouldn't be logged into by normal players. (Jack)
+local blockedAccounts = {
+	{"vehicleManager"},
+	{"tent_number"},
+	{"vehicle_number"},
+	{"seasonmanager"}
+}
+
 function callClientFunction(client, funcname, ...)
     local arg = { ... }
     if (arg[1]) then
@@ -13,6 +21,16 @@ end
 
 --LOGIN THE PLAYER FROM GUI
 function tryToLoginPlayer (username, password)
+	--Parse through our blockedAccounts array for system accounts
+	for k,v in ipairs(blockedAccounts) do
+		local found = string.find(username:lower(),v[1]:lower())
+		if found then
+			outputChatBox("[LOGIN ERROR]#FF9900 You cannot log into "..username.." as it is a system account.",source,255,255,255,true)
+			return false
+		end
+	end
+	
+	--Proceed with logging in...
 	local account = getAccount(username, password)
 	if account then
 		local accountName = getAccountName(account)
@@ -33,6 +51,15 @@ addEvent("onClientSendLoginDataToServer", true)
 addEventHandler("onClientSendLoginDataToServer", root, tryToLoginPlayer)
 
 function tryToRegsiterPlayer(username, pass)
+	--Parse through our blockedAccounts array for system accounts
+	for k,v in ipairs(blockedAccounts) do
+		local found = string.find(username:lower(),v[1]:lower())
+		if found then
+			outputChatBox("[LOGIN ERROR]#FF9900 You cannot register "..username.." as it is a system account.",source,255,255,255,true)
+			return false
+		end
+	end
+
 	if not getAccount(username) then
 		theAccount = addAccount(username, pass)
 		if (theAccount) then
@@ -47,14 +74,16 @@ function tryToRegsiterPlayer(username, pass)
 			local seconds = theTime.second
 			local theAccount = getPlayerAccount(client)
 			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client).."\n","accounts")
+			return true
 		else
 			reason = "Unknown Error!"
-			outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)
 		end
 	else
 		reason = "Account already exists!"
-		outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)
 	end
+	
+	outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)
+	return false
 end
 addEvent("onClientSendRegisterDataToServer", true)
 addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsiterPlayer)
