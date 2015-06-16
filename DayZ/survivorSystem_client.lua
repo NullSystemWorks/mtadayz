@@ -701,7 +701,7 @@ function loadModels()
 	weapondff11 = engineLoadDFF ("mods/weapons/sa58v.dff", 0);
 
 end
-addEventHandler("onClientResourceStart",root,loadModels)
+addEventHandler("onClientResourceStart",ressourceRoot,loadModels)
 
 loaded = false
 
@@ -1069,6 +1069,8 @@ function math.round(number, decimals, method)
 end
 
 statsLabel = {}
+statsFont = guiCreateFont("fonts/bitstream.ttf",8)
+
 
 statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,"images/scrollmenu_2.png",true)
 guiSetAlpha(statsWindows,0.8)
@@ -1076,47 +1078,47 @@ guiSetVisible(statsWindows,false)
 --Zombies  Killed
 statsLabel["zombieskilled"] = guiCreateLabel(0,0.05,1,0.15,"Zombies killed: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["zombieskilled"],"center")
-guiSetFont (statsLabel["zombieskilled"], "default-bold-small" )
+guiSetFont (statsLabel["zombieskilled"], statsFont )
 setElementData(statsLabel["zombieskilled"],"identifikation","zombieskilled")
 --Headshots
 statsLabel["headshots"] = guiCreateLabel(0,0.15,1,0.15,"Headshots: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["headshots"],"center")
-guiSetFont (statsLabel["headshots"], "default-bold-small" )
+guiSetFont (statsLabel["headshots"], statsFont )
 setElementData(statsLabel["headshots"],"identifikation","headshots")
 --Murders
 statsLabel["murders"] = guiCreateLabel(0,0.25,1,0.15,"Murders: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["murders"],"center")
-guiSetFont (statsLabel["murders"], "default-bold-small" )
+guiSetFont (statsLabel["murders"], statsFont )
 setElementData(statsLabel["murders"],"identifikation","murders")
 --Bandits Killed
 statsLabel["banditskilled"] = guiCreateLabel(0,0.35,1,0.15,"Bandits killed: 0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["banditskilled"],"center")
-guiSetFont (statsLabel["banditskilled"], "default-bold-small" )
+guiSetFont (statsLabel["banditskilled"], statsFont )
 setElementData(statsLabel["banditskilled"],"identifikation","banditskilled")
 --Blood
 statsLabel["blood"] = guiCreateLabel(0,0.45,1,0.15,"Blood: 12000",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["blood"],"center")
-guiSetFont (statsLabel["blood"], "default-bold-small" )
+guiSetFont (statsLabel["blood"], statsFont )
 setElementData(statsLabel["blood"],"identifikation","blood")
 --Zombies
 statsLabel["zombies"] = guiCreateLabel(0,0.55,1,0.15,"Zombies (Alive/Total): 0/0",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["zombies"],"center")
-guiSetFont (statsLabel["zombies"], "default-bold-small" )
+guiSetFont (statsLabel["zombies"], statsFont )
 setElementData(statsLabel["zombies"],"identifikation","zombies")
 --Temperature
 statsLabel["temperature"] = guiCreateLabel(0,0.65,1,0.15,"Temperature: 37°C",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["temperature"],"center")
-guiSetFont (statsLabel["temperature"], "default-bold-small" )
+guiSetFont (statsLabel["temperature"], statsFont )
 setElementData(statsLabel["temperature"],"identifikation","temperature")
 --Humanity
 statsLabel["humanity"] = guiCreateLabel(0,0.75,1,0.15,"Humanity: 2500",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["humanity"],"center")
-guiSetFont (statsLabel["humanity"], "default-bold-small" )
+guiSetFont (statsLabel["humanity"], statsFont )
 setElementData(statsLabel["humanity"],"identifikation","humanity")
 --Name
 statsLabel["name"] = guiCreateLabel(0,0.85,1,0.15,"Name: "..getPlayerName(getLocalPlayer()),true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["name"],"center")
-guiSetFont (statsLabel["name"], "default-bold-small" )
+guiSetFont (statsLabel["name"], statsFont )
 setElementData(statsLabel["name"],"identifikation","name")
 
 function showDebugMintorOnLogin ()
@@ -3118,7 +3120,7 @@ function()
 				offset = 0.2
 			end
 			
-			setElementPosition(proneObject,x,y,z+offset)
+			setElementPosition(proneObject,x,y,z+0.5+offset)
 		end
 	end
 	

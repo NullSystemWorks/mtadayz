@@ -27,7 +27,7 @@
 	<file src="dayzsoundtrack.mp3" />
 	
 	<settings>
-	<setting name="*news1" value="MTA:DayZ server is open again!"
+	<setting name="*news1" value="Current Version: 0.8a"
 					friendlyname="News 1"
 					group="News 1"
 					accept="*"

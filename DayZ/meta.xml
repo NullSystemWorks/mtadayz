@@ -27,7 +27,11 @@
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" protected="true" />
+	
+	<!-- Fonts -->
 	<file src="fonts/etelka.ttf" />
+	<file src="fonts/bitstream.ttf" />
+	<file src="fonts/tahomab.ttf" />
 	
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
