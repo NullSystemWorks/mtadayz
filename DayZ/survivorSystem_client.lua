@@ -717,7 +717,7 @@ function loadModels()
 	weapondff11 = engineLoadDFF ("mods/weapons/sa58v.dff", 0);
 
 end
-addEventHandler("onClientResourceStart",ressourceRoot,loadModels)
+addEventHandler("onClientResourceStart",resourceRoot,loadModels)
 
 loaded = false
 
