@@ -50,9 +50,10 @@ local AnimalSkins = {12,13,14,15,16}
 function spawnDayZAnimals()
 	for i,animal in ipairs(animals) do
 		local x,y,z = animal[1],animal[2],animal[3]
-		ped = createPed(math.random(12,16), x,y,z)
-		setElementData(ped,"animal",true)
-		triggerClientEvent("onAnimalMovement",ped)
+		local rX,rY = math.random(1,359),math.random(1,359)
+		animal = createPed(math.random(12,16), x,y,z)
+		setElementRotation(animal,rX,rY,0,"default",true)
+		setElementData(animal,"animal",true)
 	end
 end	
 

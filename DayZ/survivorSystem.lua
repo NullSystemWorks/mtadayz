@@ -906,7 +906,7 @@ end
 
 function onPlayerPitchATent (itemName)
 	setElementData(source,itemName,getElementData(source,itemName)-1)
-	setPedAnimation (source,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (source,"BOMBER","BOM_Plant",1300,false,false,nil,false)
 	local source = source
 	setTimer( function ()		
 			local x,y,z = getElementPosition(source)
@@ -935,7 +935,7 @@ addEventHandler("onPlayerPitchATent",getRootElement(),onPlayerPitchATent)
 
 function onPlayerBuildAWireFence (itemName)
 	setElementData(source,itemName,getElementData(source,itemName)-1)
-	setPedAnimation (source,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (source,"BOMBER","BOM_Plant",1300,false,false,nil,false)
 	local source = source
 	setTimer( function ()				
 			local x,y,z = getElementPosition(source)
@@ -982,7 +982,7 @@ addEventHandler("removeTent",getRootElement(),removeTent)
 
 function addPlayerCookMeat ()
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",1300,false,false,nil,false)
 	local meat = getElementData(playersource,"Raw Meat")
 	setTimer(function()
 			setElementData(playersource,"Raw Meat",0)

@@ -43,16 +43,3 @@ function animalDamage(attacker,weapon)
 	end	
 end
 addEventHandler ( "onClientPedDamage",getRootElement(),animalDamage)
-
-function animalMovement(ped)
-setTimer(function()
-local rotation = math.random(1,359)
-	if getElementData(ped,"animal") then
-		setPedRotation(ped,rotation)
-		setPedAnimation (ped, "ped", "Player_Sneak", -1, true, true, true)
-	else return
-	end	
-end,4000,0)
-end
-addEvent("onAnimalMovement",true)
-addEventHandler("onAnimalMovement",getRootElement(),animalMovement)
