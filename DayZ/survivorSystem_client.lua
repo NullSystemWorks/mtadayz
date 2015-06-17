@@ -226,6 +226,9 @@ end
 local enableBlips = false
 local renderNorthBlip = false
 local alwaysRenderMap = false
+local worldmap
+local gpsborder
+local alpha = 255
 
 local worldW, worldH = 3072, 3072
 local blip = 12 
@@ -257,13 +260,13 @@ function playerStatsClientSite()
 				local camX,camY,camZ = getElementRotation(getCamera())
 				dxSetRenderTarget(rt, true)
 				if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
-					dxDrawRectangle(0, 0, mW, mH, 0xFF7CA7D1) --render background
-					dxDrawImage(X - worldW/2, mH/5 + (Y - worldH/2), worldW, worldH, "images/world.jpg", camZ, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
+					dxDrawRectangle(0, 0, mW, mH, tocolor(124, 167, 209,alpha)) --render background
+					worldmap = dxDrawImage(X - worldW/2, mH/5 + (Y - worldH/2), worldW, worldH, "images/world.jpg", camZ, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, alpha))
 				end
 				dxSetRenderTarget()
-				dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, "images/gps.png",0,0,0,tocolor(255,255,255,255),true)
+				gpsborder = dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, "images/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
 				--dxDrawRectangle((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, tocolor(0, 0, 0, 175))
-				dxDrawImage((10+15)*xFactor, sy-((200+5))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, 150))
+				dxDrawImage((10+15)*xFactor, sy-((200+5))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
 				local col = tocolor(r, g, b, 190)
 				local bg = tocolor(r, g, b, 100)
 				local rx, ry, rz = getElementRotation(localPlayer)
@@ -290,7 +293,7 @@ function playerStatsClientSite()
 							bcR, bcG, bcB = getBlipColor(v)
 						end
 						local bS = getBlipSize(v)
-						dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "image/blip/"..bid..".png", 0, 0, 0, tocolor(bcR, bcG, bcB, bcA))
+						dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "image/blip/"..bid..".png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
 					end
 				end
 				if renderNorthBlip then
@@ -306,7 +309,7 @@ function playerStatsClientSite()
 						dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, "images/blip/4.png", 0, 0, 0) --draw north (4) blip
 					end
 				end
-				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0)
+				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,255,255,alpha))
 			end
 		else
 			dxSetRenderTarget()
@@ -339,6 +342,19 @@ function playerStatsClientSite()
 end
 setTimer(playerStatsClientSite,1000,0)
 addEventHandler("onClientRender",getRootElement(),playerStatsClientSite)
+
+function hideGPSOnInventoryOpen()
+	alpha = 0
+end
+addEvent("hideGPSOnInventoryOpen",true)
+addEventHandler("hideGPSOnInventoryOpen",root,hideGPSOnInventoryOpen)
+
+function showGPSOnInventoryClose()
+	alpha = 255
+end
+addEvent("showGPSOnInventoryClose",true)
+addEventHandler("showGPSOnInventoryClose",root,showGPSOnInventoryClose)
+
 
 nightvisionimage = guiCreateStaticImage(0,0,1,1,"images/nightvision.png",true)
 guiSetVisible(nightvisionimage,false)

@@ -30,6 +30,7 @@
 	
 	<!-- Fonts -->
 	<file src="fonts/etelka.ttf" />
+	<file src="fonts/etelka_narrow.ttf" />
 	<file src="fonts/bitstream.ttf" />
 	<file src="fonts/tahomab.ttf" />
 	
