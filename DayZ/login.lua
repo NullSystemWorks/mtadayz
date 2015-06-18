@@ -1,3 +1,13 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script login.lua				    *----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
+
 local spawnPositions = {
 {-278.6669921875,-2882.1572265625,32.104232788086},
 {-958.5595703125,-2887.9912109375,64.82421875},

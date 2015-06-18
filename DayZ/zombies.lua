@@ -1,3 +1,13 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script zombies.lua				    *----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
+
 ZombiePedSkins = {22,56,67,68,69,70,92,97,105,107,108,126,127,128,152,162,167,188,195,206,209,212,229,230,258,264,277,280 } --ALTERNATE SKIN LISTS FOR ZOMBIES (SHORTER LIST IS TEXTURED ZOMBIES ONLY)
 
 ZombieLootSkins = {

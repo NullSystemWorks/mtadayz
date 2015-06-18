@@ -1,3 +1,13 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script animals.lua			    	*----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
+
 animals = {
 {-1350.775390625,-1070.8291015625,160.71176147461},
 {-1369.1123046875,-1094.70703125,163.45556640625},

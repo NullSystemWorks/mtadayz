@@ -1,9 +1,9 @@
 --[[
 
 	Author: CiBeR
-	Version: 0.1
+	Version: 0.2
 	Copyright: DayZ Gamemode. All rights reserved to Developers
-	Current Devs: Lawliet, CiBeR
+	Current Devs: Lawliet, CiBeR, Jboy
 	
 ]]--
 

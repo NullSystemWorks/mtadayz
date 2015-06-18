@@ -3,7 +3,7 @@
 	Author: CiBeR
 	Version: 0.1
 	Copyright: DayZ Gamemode. All rights reserved to Developers
-	Current Devs: Lawliet, CiBeR
+	Current Devs: Lawliet, CiBeR, Jboy
 	
 ]]--
 -- Settings

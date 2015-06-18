@@ -1,3 +1,13 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script vehicle_spawns.lua			*----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
+
 hunterSpawns = gameplayVariables["hunterspawns"]
 
 pickupSpawns = gameplayVariables["pickupspawns"]

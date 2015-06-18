@@ -1,3 +1,13 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script addons.lua			    	*----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
+
 -- [[ Setting game type (Is this still needed?) ]] --
 
 addons = "DayZ 0.8a // "

@@ -1,3 +1,12 @@
+--[[
+#---------------------------------------------------------------#
+----*			DayZ MTA Script inventory_new.lua			*----
+----* This Script is owned by Marwin, you are not allowed to use or own it.
+----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
+----* Skype: xxmavxx96
+----* Developers: L, CiBeR,	Jboy							*----
+#---------------------------------------------------------------#
+]]
 
 local screenWidth,screenHeight = guiGetScreenSize()
 local button = dxCreateTexture ( "images/butoff.png" )
