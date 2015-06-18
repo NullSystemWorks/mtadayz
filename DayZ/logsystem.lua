@@ -57,47 +57,54 @@ function saveLog(tstring,logtype)
 end
 function returnLog(logtype)
 	if logtype and logtype == "admin" then
-	local file = fileOpen("logs/admin.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/admin.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	elseif logtype and logtype == "debug" then
-	local file = fileOpen("logs/debug.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/debug.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	elseif logtype and logtype == "updates" then
-	local file = fileOpen("logs/updates.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/updates.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	elseif logtype and logtype == "accounts" then
-	local file = fileOpen("logs/accounts.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/accounts.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	elseif logtype and logtype == "game" then
-	local file = fileOpen("logs/game.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/game.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	elseif logtype and logtype == "chat" then
-	local file = fileOpen("logs/chat.log")
-	local size = fileGetSize( file )
-	buf = fileRead(file,size)
-	fileClose(file)
-	return buf
+		local file = fileOpen("logs/chat.log")
+		local size = fileGetSize( file )
+		buf = fileRead(file,size)
+		fileClose(file)
+		return buf
 	else
-	outputDebugString("[DayZ Logs] Error in returnLog Function. Invalid Arguments?")
-	return false
+		outputDebugString("[DayZ Logs] Error in returnLog Function. Invalid Arguments?")
+		return false
 	end
 end
-local logFiles = { "logs/admin.log", "logs/debug.log", "logs/updates.log", "logs/accounts.log", "logs/game.log", "logs/chat.log" }
+local logFiles = { 
+	"logs/admin.log", 
+	"logs/debug.log", 
+	"logs/updates.log", 
+	"logs/accounts.log", 
+	"logs/game.log", 
+	"logs/chat.log" 
+}
 addEventHandler("onResourceStart",resourceRoot,
 	function ()
 		for i, v in ipairs(logFiles)do
