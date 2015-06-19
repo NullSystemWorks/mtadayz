@@ -24,6 +24,7 @@ setPlayerTemperature - Arguments: element player, int amount. Effect: sets tempe
 getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
 setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
 
+getActualTime - No Arguments. Returns Actual Real Time, Format: HH:MM:SS
 
 
 
@@ -129,4 +130,27 @@ function getPlayerHumanity(player)
 		local humanity = getElementData(player,"humanity")
 		return humanity
 	end
+end
+
+function getActualTime()
+		local theTime = getRealTime()
+		local hour = theTime.hour
+		local minute = theTime.minute
+		local seconds = theTime.second
+		if hour < 10 then
+			hour = "0"..hour
+		else
+			hour = theTime.hour
+		end
+		if minute < 10 then
+			minute  = "0"..minute
+		else
+			minute = theTime.minute
+		end
+		if seconds < 10 then
+			minute = "0"..seconds
+		else
+			seconds = theTime.second
+		end
+		return hour, minute, seconds
 end
