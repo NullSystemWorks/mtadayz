@@ -32,8 +32,9 @@ gameplayVariables = {}
 	gameplayVariables["sprintthirst"] = -0.3 -- Amount of losing thirst when sprinting - DEFAULT: -0.2
 	gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: false - SET TO true to enable - remember you need to set it in editor_client.lua too.
 	gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn. Note: You can also do math on the number.
-	gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packe loss is 100% for 5 seconds. DEFAULT: true
+	gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packet loss is 100% for 5 seconds. DEFAULT: true
 	gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter DEFAULT: 10
+	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
 
 -- SERVER BACKUP
 	gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

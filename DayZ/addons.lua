@@ -32,6 +32,7 @@ nightAddon ()
 
 -- [[ Automatically start all resources with "addon_" in name ]] --
 function loadAddons( res )
+if not gameplayVariables["autostartaddons"] then return end
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
 		if string.find(name,"addon_") then
@@ -43,6 +44,7 @@ addEventHandler ( "onResourceStart", getResourceRootElement(getThisResource()), 
 
 -- [[ Stops all resources with "addon_" in name ]] --
 function unloadAddons ( res )
+if not gameplayVariables["autostartaddons"] then return end
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
 		if string.find(name,"addon_") then
