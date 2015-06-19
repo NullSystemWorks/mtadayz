@@ -572,12 +572,8 @@ function destroyDeadPlayer (ped,pedCol)
 	destroyElement(pedCol)
 end
 
-check = false
-deadVariable = {}
-
 function kilLDayZPlayer (killer,headshot,weapon)
 	pedCol = false
-	deadVariable["counter"] = 30000
 	local account = getPlayerAccount(source)
 	--if getElementData(source,"isInEvent") then removePlayerEvent(source) return end
 	if not account then return end
@@ -679,7 +675,6 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	setAccountData(account,"isDead",true)
 	setElementData(source,"isDead",true)
-	--triggerClientEvent ( "onRollMessageStart", getRootElement(),"#FFFFFF"..getPlayerName(source).." #FFFFFFwas killed",0,22,255, "died")
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
 	destroyElement(getElementData(source,"playerCol"))
 	setTimer(spawnDayZPlayer,5000,1,source)

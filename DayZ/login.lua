@@ -725,7 +725,7 @@ function saveallvehicles(ps,command)
 		setAccountData(vehicleManager,"vehicleamount",counter)
 		setAccountData(vehicleManager,"tentamount",counterTent)
 	end
-	outputServerLog("[DayZ] Vehicles and tents have been saved.")
+	outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN SAVED.")
 end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveallvehicles)
 
@@ -735,7 +735,7 @@ function doBackup ()
 		outputChatBox ("BACKUP OF ALL VEHICLES AND TENTS, PLEASE STAND IDLE!",getRootElement(),255,0,0,true)
 		saveallvehicles()
 		outputChatBox ("BACKUP: DONE!",getRootElement(),0,255,0,true)
-		outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN SAVED.")
+		outputServerLog("[DayZ] BACKUP OF VEHICLES AND TENTS HAS BEEN SAVED.")
 	end
 end
 setTimer(doBackup,gameplayVariables["backupinterval"],0)
@@ -813,7 +813,7 @@ function createVehicleOnServerStart()
 			setElementData(tentCol,data[1],getAccountData(tentData,data[1]))
 		end
 	end
-	outputServerLog("[DayZ] Vehicles and Tents have been loaded.")
+	outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN LOADED.")
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), createVehicleOnServerStart)
 

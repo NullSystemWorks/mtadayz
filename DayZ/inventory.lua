@@ -97,13 +97,13 @@ inventoryItems = {
 
 ["Items"] = {
 {"Wood Pile",2, 'wood.png',128,128,"Item", "A small pile of freshly chopped\nwood that can be used for making\na fireplace and various other things."},
-{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services standard first aid dressing.\nUsed to stop bleeding of \nwounds.","Bandage yourself"},
+{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services standard first aid dressing.\nUsed to stop bleeding of wounds.","Bandage yourself"},
 {"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Hand operated flare commonly found\n in roadside emergency kits. Will burn\n for approximately five minutes.","Place"},
 {"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\nrefuelling vehicles and powering generators.\nIt's empty."},
 {"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\nrefuelling vehicles and powering generators."},
 {"Medic Kit",2, 'chest.png', 128, 128, "Item", "<You shouldn't have this.>","Use"},
 {"Heat Pack",1, 'heatpack.png', 128, 128, "Item", "A heating pad that heats when you\nstart the crystallisation process.\nUsed to provide quick warmth to your body.","Use"},
-{"Painkiller",1, 'painkillers.png', 128, 128, "Item", "A moderate painkiller suitable\nfor regular use of relief of pain\nand inflammation caused by moderate wounds.","Use"},
+{"Painkiller",1, 'painkillers.png', 128, 128, "Item", "A moderate painkiller suitable\nfor regular use of relief of pain\nand inflammation caused by moderate \nwounds.","Use"},
 {"Morphine",1, 'morphine.png',128,128,"Item", "Used for intramuscular injection to manage\nsevere pain such as those from fractures.","Use"},
 {"Blood Bag",1, 'bloodbag.png', 128, 85, "Item", "Bag of blood used for administering\na blood transfusion.","Use"},
 {"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Razor wire in large coils which\ncan be expanded like a concertina with\nsteel pickets to form military wire obstacles.","Build a wire fence"}, 
@@ -1107,17 +1107,6 @@ function weaponSwitch (weapon)
 	end
 end
 addEventHandler ( "onClientPlayerWeaponFire", getLocalPlayer(), weaponSwitch )
-
---[[
-function weaponDegrade(weapon)
-local getCurrentMainWeapon = getElementData(localPlayer,"currentweapon_1")
-local getCurrentSecondaryWeapon = getElementData(localPlayer,"currentweapon_2")
-
-	if source == localPlayer then
-		return
-	end
-end
-]]
 
 setRadioChannel(0)
 function makeRadioStayOff()

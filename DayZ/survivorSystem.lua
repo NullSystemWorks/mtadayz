@@ -1030,7 +1030,7 @@ function onPlayerMakeAFire (itemName)
 	setElementData(fire,"z",pz-0.75)
 	triggerClientEvent(source,"refreshInventoryManual",source)
 	triggerClientEvent("playCampfireSound",fire)
-	setPedAnimation (source,"BOMBER","BOM_Plant",nil,false,false,nil,false)
+	setPedAnimation (source,"BOMBER","BOM_Plant",1300,false,false,nil,false)
 	setTimer(function()
 		triggerClientEvent("stopCampfireSound",fire)
 		destroyElement(fireCol)
@@ -1459,7 +1459,7 @@ addEventHandler("onPlayerCommand", root, preventCommandSpam)
 
 function kickPlayerOnHighPing ()
 	outputChatBox (getPlayerName(source).." was kicked due to high ping!",getRootElement(),27, 89, 224,true)	
-	kickPlayer(source,"Your Ping was straight too high.")
+	kickPlayer(source,"Your Ping was too high!")
 end
 addEvent("kickPlayerOnHighPing",true)
 addEventHandler("kickPlayerOnHighPing", getRootElement(),kickPlayerOnHighPing)
@@ -1493,6 +1493,19 @@ function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
 		setTimer(function() setPedAnimation (player,false) end,1300,1)
+		lying = false
+	else
+		if isPedInVehicle(player) then return end
+		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
+		lying = true
+	end
+end
+
+--[[
+function funcBindLie ( player, key, keyState )
+	if lying then
+		setPedAnimation(player,"ped","getup_front",-1,false)
+		setTimer(function() setPedAnimation (player,false) end,1300,1)
 	else
 		if isPedInVehicle(player) then return end
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
@@ -1504,25 +1517,8 @@ function funcBindLie ( player, key, keyState )
 	lying = not lying
 	triggerClientEvent(player,"onPlayerProne",resourceRoot,lying)
 end
-
---[[
-function onClientMoveWhileLying(key)
-	if key == "w" then
-		setControlState(client,"forwards",true)
-	else
-		return
-	end
-end
-addEvent("onClientMoveWhileLying",true)
-addEventHandler("onClientMoveWhileLying",root,onClientMoveWhileLying)
-
-
-addEvent("onZombieHitByVehicle",true)
-function onZombieHitByVehicle()
-	setPedAnimation (source,"ped","FLOOR_hit_f", -1,false)
-end
-addEventHandler("onZombieHitByVehicle",root,onZombieHitByVehicle)
 ]]
+
 
 -- STAMINA SYSTEM (EVENTS)
 

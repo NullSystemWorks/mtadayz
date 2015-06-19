@@ -11,7 +11,7 @@
 --SERVER OUTPUTS
 shownInfos = {}
 
-	shownInfos["nomag"] = "No cartridges left for this weapon!"
+	shownInfos["nomag"] = "No ammo left for this weapon!"
 	shownInfos["youconsumed"] = "You consumed"
 	shownInfos["needwatersource"] = "You have to be inside a body of water!"
 	shownInfos["filledup"] = "You filled your Water Bottle up!"
@@ -20,7 +20,7 @@ shownInfos = {}
 --GAMEPLAY SETUP
 gameplayVariables = {}
 
-	gameplayVariables["zombieblood"] = 4500 -- Zombie Blood/Health - DEFAULT: 6000
+	gameplayVariables["zombieblood"] = 4500 -- Zombie Blood/Health - DEFAULT: 4500
 	gameplayVariables["foodrestore"] = 100 -- Amount of hunger to be restored when eating - DEFAULT: math.random(40,100) - FOR FULL RESTORE, JUST WRITE 100
 	gameplayVariables["thirstrestore"] = 100 -- Amount of hunger to be restored when drinking - DEFAULT: math.random(40,100) - FOR FULL RESTORE, JUST WRITE 100
 	gameplayVariables["loseHunger"] = -1.5 -- Amount of losing hunger per minute - DEFAULT: -1.5
@@ -29,7 +29,7 @@ gameplayVariables = {}
 	gameplayVariables["amountzombies"] = 10 -- Amount of zombies - DEFAULT: 3 - THE HIGHER THIS VALUE, THE MORE LAG CAN OCCUR!
 	gameplayVariables["temperaturewater"] = -0.1 -- Amount of temperature to be lost when in water - DEFAULT: -0.01
 	gameplayVariables["temperaturesprint"] = 0.005 -- Amount of temperature to be gained when sprinting - DEFAULT: 0.005
-	gameplayVariables["sprintthirst"] = -0.3 -- Amount of losing thirst when sprinting - DEFAULT: -0.2
+	gameplayVariables["sprintthirst"] = -0.2 -- Amount of losing thirst when sprinting - DEFAULT: -0.2
 	gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: false - SET TO true to enable - remember you need to set it in editor_client.lua too.
 	gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn. Note: You can also do math on the number.
 	gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packet loss is 100% for 5 seconds. DEFAULT: true

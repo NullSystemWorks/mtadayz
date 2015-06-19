@@ -517,7 +517,7 @@ if ( keyState == "down" ) then
 				disableMenu()
 				return
 			end	
-			if itemName == "Assault Pack (ACU)" or itemName == "Alice Pack" or itemName == "Czech Backpack" or itemName == "Coyote Backpack" then
+			if itemName == "Assault Pack (ACU)" or itemName == "ALICE Pack" or itemName == "Czech Backpack" or itemName == "Backpack (Coyote)" or itemName == "British Assault Pack" or itemName == "Czech Vest Pouch" or itemName == "Survival ACU" then
 				local col = getElementData(getLocalPlayer(),"currentCol")
 				triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
 				disableMenu()

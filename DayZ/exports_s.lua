@@ -4,6 +4,7 @@
 	Version: 0.2
 	Copyright: DayZ Gamemode. All rights reserved to Developers
 	Current Devs: Lawliet, CiBeR, Jboy
+
 	
 ]]--
 
@@ -23,10 +24,7 @@ getPlayerTemperature - Arguments: element player. Returns: Temperature of player
 setPlayerTemperature - Arguments: element player, int amount. Effect: sets temperature to specified value
 getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
 setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
-
 getActualTime - No Arguments. Returns Actual Real Time, Format: HH:MM:SS
-
-
 
 ]]
 

@@ -1,15 +1,12 @@
 --[[
 #---------------------------------------------------------------#
-----*			DayZ MTA Script survivorSystem_client.lua	*----
+----*			DayZ MTA Script survivor_system.lua			*----
 ----* This Script is owned by Marwin, you are not allowed to use or own it.
 ----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
 ----* Skype: xxmavxx96
-----* Developers: L, CiBeR,	Jboy							*----
+----*														*----
 #---------------------------------------------------------------#
 ]]
-
---local dayzTheme = dxGetTheme("Orange")
---dxCreateWindow(0.2*sx,0.2*sy,0.6*sx,0.6*sy,"test",tocolor(255,255,255),nil,orange)
 
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
@@ -3039,6 +3036,7 @@ function freecamMouse (cX,cY,aX,aY)
 	end
 end
 
+--[[
 local proned = false
 local proneObject
 local speed = 16
@@ -3147,3 +3145,4 @@ end)
 function isKeyDown(key)
 	if getKeyState(key) then return true else return false end
 end
+]]

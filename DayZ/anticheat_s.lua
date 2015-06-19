@@ -4,6 +4,7 @@
 	Version: 0.1
 	Copyright: DayZ Gamemode. All rights reserved to Developers
 	Current Devs: Lawliet, CiBeR, Jboy
+
 	
 ]]--
 -- Settings
@@ -31,7 +32,7 @@ end)
 function checkHealth(source)
     local vHealth = getElementData(source, "blood") or 0
     if vHealth > maxHealth and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "blood", 12000)
+        setElementData(source, "blood", 1000)
         kickPlayer(source, "[AC] : Health Hack")
     end
 end

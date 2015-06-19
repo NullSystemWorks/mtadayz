@@ -7,7 +7,7 @@
 #---------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, 1Boy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.8a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.8a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
     <script src="editor_server.lua" type="server" />
     <script src="editor_client.lua" type="client" cache="false" />
@@ -26,7 +26,10 @@
 	<script src="textlib.lua" type="client" cache="false"/>
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
-	<script src="treelist.lua" type="client" protected="true" />
+	<script src="treelist.lua" type="client" cache="false" />
+	
+	<!-- Help File -->
+	<config src="help.xml" type="client" />
 	
 	<!-- Fonts -->
 	<file src="fonts/etelka.ttf" />
@@ -198,19 +201,6 @@
 	<export function="getGroupRankCount" type="server"/>
 	<export function="getGroupBankAmount" type="server"/>
 	<export function="viewWindow" type="server"/>
-	<!--
-    <script src="group_system/gang_client.lua" type="client" />
-    <script src="group_system/gang_utils.lua" type="server" />
-    <script src="group_system/gang_server.lua" type="server" />
-    <script src="group_system/groupsystem.lua" type="server" />
-    <script src="group_system/groupsystem_client.lua" type="client" />
-    <export function="addGang" type="server" />
-	<settings>
-        <setting name="*column_name" value="Group" />
-        <setting name="*gang_list_command" value="gangs" />
-        <setting name="*gang_create_command" value="creategang" />
-    </settings>
-	-->
     
 	<!-- Bone Attachments -->
 	<script src="bone_attach/bone_attach.lua" />
@@ -259,70 +249,8 @@
 	<file src="images/world.jpg" type="client"></file>
 	<file src="images/gps.png" type="client"></file>
 	<file src="images/player.png" type="client"></file>
-	<file src="images/blip/0.png" type="client"></file>
-	<file src="images/blip/1.png" type="client"></file>
 	<file src="images/blip/2.png" type="client"></file>
-	<file src="images/blip/3.png" type="client"></file>
 	<file src="images/blip/4.png" type="client"></file>
-	<file src="images/blip/5.png" type="client"></file>
-	<file src="images/blip/6.png" type="client"></file>
-	<file src="images/blip/7.png" type="client"></file>
-	<file src="images/blip/8.png" type="client"></file>
-	<file src="images/blip/9.png" type="client"></file>
-	<file src="images/blip/10.png" type="client"></file>
-	<file src="images/blip/11.png" type="client"></file>
-	<file src="images/blip/12.png" type="client"></file>
-	<file src="images/blip/13.png" type="client"></file>
-	<file src="images/blip/14.png" type="client"></file>
-	<file src="images/blip/15.png" type="client"></file>
-	<file src="images/blip/16.png" type="client"></file>
-	<file src="images/blip/17.png" type="client"></file>
-	<file src="images/blip/18.png" type="client"></file>
-	<file src="images/blip/19.png" type="client"></file>
-	<file src="images/blip/20.png" type="client"></file>
-	<file src="images/blip/21.png" type="client"></file>
-	<file src="images/blip/22.png" type="client"></file>
-	<file src="images/blip/23.png" type="client"></file>
-	<file src="images/blip/24.png" type="client"></file>
-	<file src="images/blip/25.png" type="client"></file>
-	<file src="images/blip/26.png" type="client"></file>
-	<file src="images/blip/27.png" type="client"></file>
-	<file src="images/blip/28.png" type="client"></file>
-	<file src="images/blip/29.png" type="client"></file>
-	<file src="images/blip/30.png" type="client"></file>
-	<file src="images/blip/31.png" type="client"></file>
-	<file src="images/blip/32.png" type="client"></file>
-	<file src="images/blip/33.png" type="client"></file>
-	<file src="images/blip/34.png" type="client"></file>
-	<file src="images/blip/35.png" type="client"></file>
-	<file src="images/blip/36.png" type="client"></file>
-	<file src="images/blip/37.png" type="client"></file>
-	<file src="images/blip/38.png" type="client"></file>
-	<file src="images/blip/39.png" type="client"></file>
-	<file src="images/blip/40.png" type="client"></file>
-	<file src="images/blip/41.png" type="client"></file>
-	<file src="images/blip/42.png" type="client"></file>
-	<file src="images/blip/43.png" type="client"></file>
-	<file src="images/blip/44.png" type="client"></file>
-	<file src="images/blip/45.png" type="client"></file>
-	<file src="images/blip/46.png" type="client"></file>
-	<file src="images/blip/47.png" type="client"></file>
-	<file src="images/blip/48.png" type="client"></file>
-	<file src="images/blip/49.png" type="client"></file>
-	<file src="images/blip/50.png" type="client"></file>
-	<file src="images/blip/51.png" type="client"></file>
-	<file src="images/blip/52.png" type="client"></file>
-	<file src="images/blip/53.png" type="client"></file>
-	<file src="images/blip/54.png" type="client"></file>
-	<file src="images/blip/55.png" type="client"></file>
-	<file src="images/blip/56.png" type="client"></file>
-	<file src="images/blip/57.png" type="client"></file>
-	<file src="images/blip/58.png" type="client"></file>
-	<file src="images/blip/59.png" type="client"></file>
-	<file src="images/blip/60.png" type="client"></file>
-	<file src="images/blip/61.png" type="client"></file>
-	<file src="images/blip/62.png" type="client"></file>
-	<file src="images/blip/63.png" type="client"></file>
 	
 	<!-- Mods (Weapons & Playerskins & Animals) -->
     <file src="mods/playerskins/sniper.txd" />
@@ -538,10 +466,10 @@
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	
-    
 	<!-- Include resources to start along with DayZ -->
     <include resource="voice" />
 	<include resource="slothbot" />
 	<include resource="login" />
 	<include resource="imageButton" />
+	<include resource="helpmanager" />
 </meta>
