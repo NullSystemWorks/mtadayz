@@ -176,8 +176,9 @@ function build_loginWin()
 					Login_Edit[5] = guiCreateEdit(0.45, 0.55, 0.175, 0.055, "", true,background_front)		
 					guiEditSetMasked(Login_Edit[5],true)
 				--Gender
-				--malebutton = guiCreateRadioButton(0.46, 0.65, 0.15, 0.05, "Male", true, background_front)
-				--femalebutton = guiCreateRadioButton(0.46, 0.71, 0.15, 0.05, "Female", true, background_front)
+                male = guiCreateRadioButton(0.46, 0.65, 0.15, 0.05, "Male", true, background_front)
+                female = guiCreateRadioButton(0.46, 0.71, 0.15, 0.05, "Female", true, background_front)
+                selected = guiRadioButtonSetSelected(male,true)
 		--News/Updates
 			--News Headline
 				newsH = guiCreateLabel(0.726, 0.115, 0.25, 0.05,"News:",true,background_front)
