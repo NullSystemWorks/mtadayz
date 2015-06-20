@@ -25,6 +25,7 @@ gameplayVariables = {}
 	gameplayVariables["thirstrestore"] = 100 -- Amount of hunger to be restored when drinking - DEFAULT: math.random(40,100) - FOR FULL RESTORE, JUST WRITE 100
 	gameplayVariables["loseHunger"] = -1.5 -- Amount of losing hunger per minute - DEFAULT: -1.5
 	gameplayVariables["loseThirst"] = -1.5 -- Amount of losing thirst per minute - DEFAULT: -1.5
+	gameplayVariables["loseWire"] = 1000 -- Amount of losing blood when hitting a Wirefence that's not yours. DEFAULT: 1000
 	gameplayVariables["playerzombies"] = 12 -- Amount of spawning zombies per player - DEFAULT: 6 - THE HIGHER THIS VALUE, THE MORE LAG CAN OCCUR!
 	gameplayVariables["amountzombies"] = 10 -- Amount of zombies - DEFAULT: 3 - THE HIGHER THIS VALUE, THE MORE LAG CAN OCCUR!
 	gameplayVariables["temperaturewater"] = -0.1 -- Amount of temperature to be lost when in water - DEFAULT: -0.01

@@ -296,6 +296,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			showClientMenuItem("Wirefence")
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
+			triggerServerEvent ( "checkFenceOwner", getLocalPlayer(), getLocalPlayer(), getElementData(source,"owner"))
 			setNewbieInfo (true,"Wirefence","Press '-' or 'middle-mouse' to remove the fence!\n REQUIRED: Toolbox",source)
 			return
 		end

@@ -962,6 +962,7 @@ function onPlayerBuildAWireFence (itemName)
 			tent = createObject(983,vx,vy,pz,xr,yr,vrot)
 			setObjectScale(tent,1)
 			tentCol = createColSphere(x,y,z,2)
+			setElementData(tentCol,"owner",getAccountName(getPlayerAccount(source)))
 			attachElements ( tentCol, tent, 0, 0, 0 )
 			setElementData(tentCol,"parent",tent)
 			setElementData(tent,"parent",tentCol)
@@ -1654,3 +1655,18 @@ function onServerRespawnTrees( worldID, worldX, worldY, worldZ, worldRX, worldRY
 	outputChatBox("Trees have been respawned!",root,0,255,0,true)
 end
 addEventHandler("onServerRespawnTrees",root,onServerRespawnTrees)
+function checkFenceOwner(element,ownerData)
+	if getElementType(element) == "player" and element == client then
+		local acc = getAccountName(getPlayerAccount(element))
+			if acc then
+				if acc ~= ownerData then
+					setElementData(element,"blood",getElementData(element,"blood") - gameplayVariables["loseWire"] )
+				else
+				end
+			else
+			end
+	else
+	end
+end
+addEvent("checkFenceOwner",true)
+addEventHandler("checkFenceOwner",root,checkFenceOwner)
