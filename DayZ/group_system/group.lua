@@ -5,6 +5,12 @@
 --  DEVELOPER:  Sebbe (Smart)
 ------------------------------------------------------------------------------------
 
+addEventHandler("onClientResourceStart", getResourceRootElement(),
+function()
+	guiSetInputMode("no_binds_when_editing")
+end)
+
+
 local invited = {}
 local got = {}
 local c = {}
@@ -13,7 +19,6 @@ local permForRank = {}
 
 
 function makeGUI()
-	guiSetInputMode("no_binds_when_editing")
 	window = guiCreateWindow(0.14, 0.16, 0.72, 0.68, "Encampment System", true)
 	guiWindowSetSizable(window, false)
 	guiSetAlpha(window, 1.00)
@@ -66,35 +71,35 @@ function makeGUI()
 	messageSaveButton = guiCreateButton(0.02, 0.89, 0.24, 0.08, "Save", true, messageWindow)
 	guiSetVisible(messageWindow, false)
 	
-	inviteWindow = guiCreateWindow(0.32, 0.15, 0.38, 0.69, "Invite Player", false)
+	inviteWindow = guiCreateWindow(0.32, 0.15, 0.38, 0.69, "Invite Player", true)
 	guiWindowSetSizable(inviteWindow, false)
 	guiSetAlpha(inviteWindow, 1.00)
-	inviteSearchEdit = guiCreateEdit(0.03, 0.06, 0.94, 0.08, "", false, inviteWindow)
-	inviteList = guiCreateGridList(0.04, 0.15, 0.93, 0.73, false, inviteWindow)
+	inviteSearchEdit = guiCreateEdit(0.03, 0.06, 0.94, 0.08, "", true, inviteWindow)
+	inviteList = guiCreateGridList(0.04, 0.15, 0.93, 0.73, true, inviteWindow)
 	guiGridListAddColumn(inviteList, "Name", 0.5)
-	inviteCloseButton = guiCreateButton(0.04, 0.90, 0.26, 0.08, "Close", false, inviteWindow)
-	inviteButton = guiCreateButton(0.71, 0.90, 0.26, 0.07, "Invite", false, inviteWindow)
+	inviteCloseButton = guiCreateButton(0.04, 0.90, 0.26, 0.08, "Close", true, inviteWindow)
+	inviteButton = guiCreateButton(0.71, 0.90, 0.26, 0.07, "Invite", true, inviteWindow)
 	guiSetVisible(inviteWindow, false)
 
 	listWindow = guiCreateWindow(0.32, 0.20, 0.37, 0.62, "Encampment List", true)
 	guiWindowSetSizable(listWindow, false)
 	guiSetAlpha(listWindow, 1.00)
 	listEdit = guiCreateEdit(0.03, 0.06, 0.94, 0.09, "", true, listWindow)
-	groupListGrid = guiCreateGridList(0.03, 0.16, 0.94, 0.73, false, listWindow)
+	groupListGrid = guiCreateGridList(0.03, 0.16, 0.94, 0.73, true, listWindow)
 	guiGridListAddColumn(groupListGrid, "Encampment", 0.4)
 	guiGridListAddColumn(groupListGrid, "Founder", 0.3)
 	guiGridListAddColumn(groupListGrid, "Members", 0.2)
 	closeGroupList = guiCreateButton(0.03, 0.90, 0.93, 0.08, "Close", true, listWindow)
 	guiSetVisible(listWindow, false)
 
-	warnWindow = guiCreateWindow(0.32, 0.26, 0.35, 0.28, "", false)
+	warnWindow = guiCreateWindow(0.32, 0.26, 0.35, 0.28, "", true)
 	guiWindowSetSizable(warnWindow, false)
 	guiSetAlpha(warnWindow, 1.00)
 
-	warningReasonEdit = guiCreateEdit(0.03, 0.16, 0.92, 0.23, "Reason", false, warnWindow)
-	warningLevelEdit = guiCreateEdit(0.03, 0.44, 0.92, 0.23, "Warning Level", false, warnWindow)
-	warningCloseButton = guiCreateButton(0.03, 0.78, 0.31, 0.16, "Close", false, warnWindow)
-	warnButton = guiCreateButton(0.64, 0.79, 0.31, 0.15, "Warn", false, warnWindow)
+	warningReasonEdit = guiCreateEdit(0.03, 0.16, 0.92, 0.23, "Reason", true, warnWindow)
+	warningLevelEdit = guiCreateEdit(0.03, 0.44, 0.92, 0.23, "Warning Level", true, warnWindow)
+	warningCloseButton = guiCreateButton(0.03, 0.78, 0.31, 0.16, "Close", true, warnWindow)
+	warnButton = guiCreateButton(0.64, 0.79, 0.31, 0.15, "Warn", true, warnWindow)
 	guiSetVisible(warnWindow, false)
 	
 	permWindow = guiCreateWindow(0.33, 0.13, 0.34, 0.74, "Rank Management", true)
