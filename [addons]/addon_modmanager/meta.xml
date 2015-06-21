@@ -1,0 +1,10 @@
+<meta>
+	<info author="1B0Y" name="Mod Manager" version="1.0" type="script" description="Enables the users to import mods without having to learn any coding."/>
+	<script src="manager.lua" type="client"/>
+	<script src="mods.lua" type="client"/>
+	
+	<!-- PLACE ALL MOD FILES BELOW (Example below)-->
+	
+	<file src="mods/jeep.dff"/>
+	<file src="mods/jeep.txd"/>
+</meta>
