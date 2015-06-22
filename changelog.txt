@@ -11,6 +11,19 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### SECURITY: To invite users to upgrade in case vulnerabilities
 
 # - #
+## [0.8.0.2a] - 2015-06-22
+### ADDED: Option to enable/disable automatic start of addons (check editor_server.lua)
+### FIXED: Active binds when editing text and memos in group system
+### FIXED: Not being able to modify rank of member in group
+### FIXED: Not being able to warn member of group
+### FIXED: Packet loss spam
+
+
+## [0.8.0.1a] - 2015-06-21
+### FIXED: Active binds when editing text and memos in group system
+### FIXED: Absolute values some in group system windows
+
+
 ## [0.8.0a] - 2015-06-20
 ### ADDED: Completely new inventory UI
 ### ADDED: 13 new weapons (total of 32)
