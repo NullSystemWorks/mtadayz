@@ -5,11 +5,6 @@
 --  DEVELOPER:  Sebbe (Smart)
 ------------------------------------------------------------------------------------
 
-addEventHandler("onClientResourceStart", getResourceRootElement(),
-function()
-	guiSetInputMode("no_binds_when_editing")
-end)
-
 
 local invited = {}
 local got = {}
@@ -47,20 +42,20 @@ function makeGUI()
 	
 	adminPanel = guiCreateTab("Management", mainPanel)
 
-	adminMembsList = guiCreateGridList(0.01, 0.08, 0.99, 0.50, true, adminPanel)
+	adminMembsList = guiCreateGridList(0.01, 0.08, 0.95, 0.50, true, adminPanel)
 	guiGridListAddColumn(adminMembsList, "Last Nick", 0.2)
 	guiGridListAddColumn(adminMembsList, "Account", 0.2)
 	guiGridListAddColumn(adminMembsList, "Rank", 0.2)
 	guiGridListAddColumn(adminMembsList, "Last Time Online", 0.2)
 	guiGridListAddColumn(adminMembsList, "Warning Level", 0.2)
 	viewSetRankButton = guiCreateButton(0.01, 0.59, 0.17, 0.10, "Set Rank", true, adminPanel)
-	logButton = guiCreateButton(0.21, 0.59, 0.17, 0.10, "View Log", true, adminPanel)
-	viewAdminInviteButton = guiCreateButton(0.39, 0.59, 0.17, 0.10, "Invite Player(s)", true, adminPanel)
-	--groupBankButton = guiCreateButton(318, 185, 92, 30, "Group Vault", false, adminPanel)
-	manageRanksButton = guiCreateButton(0.78, 0.59, 0.17, 0.10, "Manage Ranks", true, adminPanel)
+	logButton = guiCreateButton(0.20, 0.59, 0.17, 0.10, "View Log", true, adminPanel)
+	viewAdminInviteButton = guiCreateButton(0.40, 0.59, 0.17, 0.10, "Invite Player", true, adminPanel)
+	groupBankButton = guiCreateButton(0.60, 0.59, 0.17, 0.10, "Group Vault", true, adminPanel)
+	manageRanksButton = guiCreateButton(0.80, 0.59, 0.17, 0.10, "Manage Ranks", true, adminPanel)
 	viewWarnsButton = guiCreateButton(0.01, 0.70, 0.17, 0.10, "Warn Player", true, adminPanel)
-	viewMessageButton = guiCreateButton(0.21, 0.70, 0.17, 0.10, "Set Message", true, adminPanel)
-	--kickPlayerButton = guiCreateButton(216, 220, 92, 30, "Kick Player", false, adminPanel)
+	viewMessageButton = guiCreateButton(0.20, 0.70, 0.17, 0.10, "Set Message", true, adminPanel)
+	--kickPlayerButton = guiCreateButton(0.40, 0.70, 0.17, 0.10, "Kick Player", true, adminPanel)
 	
 	messageWindow = guiCreateWindow(0.23, 0.13, 0.57, 0.58, "Encampment Board", true)
 	guiWindowSetSizable(messageWindow, false)
@@ -171,9 +166,8 @@ function makeGUI()
 	--addEventHandler("onClientGUIClick", groupBankWithdrawButton, withdrawMoney, false)
 	--addEventHandler("onClientGUIDoubleClick", groupBankWindow, function() guiSetVisible(groupBankWindow, false) end, false)
 	--addEventHandler("onClientGUIClick", groupBankDepositButton, depositMoney, false)
-	--addEventHandler("onClientGUIClick", groupBankButton, function() guiBringToFront(groupBankWindow) guiSetVisible(groupBankWindow, not guiGetVisible(groupBankWindow)) end, false)
+	addEventHandler("onClientGUIClick", groupBankButton, function() outputChatBox("This feature is not available yet!",255,0,0,true) end, false)
 	
-	--exports.misc:centerAllWindows(resourceRoot)
 end
 addEventHandler("onClientResourceStart", resourceRoot, makeGUI)
 
@@ -240,16 +234,16 @@ end
 
 function setRank()
 	local irrelevant = guiComboBoxGetSelected(setRankCombo)
-	local name = guiComboBoxGetItemText(setRankCombo, irrelevant)
+	local rank = guiComboBoxGetItemText(setRankCombo, irrelevant)
 	--if (not validRank[name]) then return end
 	local account = guiGridListGetItemText(adminMembsList, guiGridListGetSelectedItem(adminMembsList), 2)
 	if (not account) then return end
-	triggerServerEvent("groupSystem.setTheRank", root, name, account)
+	triggerServerEvent("groupSystem.setTheRank", root, rank, account)
 end
 
 function kickFromGroup()
 	local account = guiGridListGetItemText(adminMembsList, guiGridListGetSelectedItem(adminMembsList), 2)
-	if (not account) then return end
+	if (not account) then outputChatBox("Please select a player!",255,0,0) return end
 	triggerServerEvent("groupSystem.kickFromGroup", root, account)
 end
 
@@ -385,9 +379,11 @@ function openWindowAndSend()
 	if (guiGetVisible(window)) then
 		guiSetVisible(window, false)
 		showCursor(false)
+		guiSetInputEnabled(false)
 	else
 		showCursor(true)
 		guiSetVisible(window, true)
+		guiSetInputEnabled(true)
 		triggerServerEvent("groupSystem.viewWindow", root)
 	end
 end
@@ -452,7 +448,7 @@ function viewWindow(group, rank, datejoined, msg, perms, money)
 		guiSetText(dateJoinedLabel, "Date Joined: "..tostring(datejoined))
 		guiSetText(myGroupLabel, "My Encampment: "..tostring(group))
 		guiSetText(myGroupRankLabel, "Encampment Rank: "..tostring(rank))
-		guiSetText(groupBankAmountLabel, "Encampment Vault Amount: "..tostring(money))
+		--guiSetText(groupBankAmountLabel, "Encampment Vault Amount: "..tostring(money))
 		printManagment()
 		guiGridListClear(adminMembsList)
 	end
@@ -472,7 +468,7 @@ function viewWindow(group, rank, datejoined, msg, perms, money)
 		--guiSetEnabled(blackListButton, boolean(perms[12]))
 		guiSetEnabled(viewWarnsButton, warn)
 		guiSetEnabled(viewMessageButton, boolean(perms[9]))
-		guiSetEnabled(groupBankWithdrawButton, boolean(perms[16]))
+		--guiSetEnabled(groupBankWithdrawButton, boolean(perms[16]))
 	end
 	guiSetText(messageMemo, tostring(msg))
 end

@@ -12,7 +12,7 @@
 
 addons = "DayZ 0.8a // "
 function addAddonInfo (name,description)
-	addons = addons..name.." | "
+	addons = addons.." "..name.." | "
 	setGameType (addons)
 end
 

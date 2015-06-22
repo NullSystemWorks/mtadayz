@@ -14,7 +14,7 @@ addEventHandler("onPlayerLogin", root,
 
 addEventHandler("onPlayerQuit",root,
 	function()
-		outputSideChat("Player "..getPlayerName(source).. "disconnected",root,255,255,255)
+		outputSideChat("Player "..getPlayerName(source).. " disconnected",root,255,255,255)
 	end
 )
 

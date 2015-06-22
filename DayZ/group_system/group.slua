@@ -7,8 +7,8 @@
 
 
 local groupTable = {}
-local logging = true -- Set this to false if you don't want group stuff to be logged in your server.log
-local debugInfo = true -- Set this to false if you don't want to see see group logs in your debug mode. 
+local logging = false -- Set this to false if you don't want group stuff to be logged in your server.log
+local debugInfo = false -- Set this to false if you don't want to see see group logs in your debug mode. 
 local GAC = {} -- index = account (string), [1] = group name, [2] = rank, [3] = warning level, [4] = date Joined, [5] = last time online (Not Available)
 local users = {}
 local myGang = {}
@@ -46,10 +46,11 @@ function groupLog(group, message)
 	if (logging) then
 		outputServerLog("GROUP: "..group.." - "..message)
 	end
-	
+	--[[
 	if (debugInfo) then
 		outputDebugString("GROUP: "..group.." - "..message)
 	end
+	]]
 end
 
 --Lets start
@@ -209,7 +210,7 @@ function outputGroupMessage(message, group)
 			if (getAccountPlayer(acc)) then
 				local color = fromJSON(groupTable[group][3])
 				local hex = getHexCode(color[1], color[2], color[3])
-				outputChatBox(hex.."("..group..") #FFFFFF"..message, getAccountPlayer(acc), 255, 255, 255, true)
+				outputChatBox("[CAMP] "..message, getAccountPlayer(acc), 9,249,17, true)
 				groupLog(group, message)
 			end
 		end
@@ -420,8 +421,9 @@ addEvent("groupSystem.leaveGroup", true)
 addEventHandler("groupSystem.leaveGroup", root, leaveGroup)
 
 function kickAccount(account)
+	if (not checkGroupAccess(client, 4)) then outputChatBox("Insufficient permission!",client,255,0,0,true) return end
 	dbExec(db, "DELETE FROM groupmember WHERE account=?", tostring(account))
-	GAC[GetAccount] = nil
+	GAC[account] = nil
 	
 	local plr = getAccountPlayer(getAccount(account))
 	if (plr) then
@@ -429,11 +431,13 @@ function kickAccount(account)
 		viewWindow(plr)
 	end
 end
+addEvent("groupSystem.kickFromGroup",true)
+addEventHandler("groupSystem.kickFromGroup",root,kickAccount)
 
 function updateMessage(message)
 	local group = getPlayerGroup(client)
-	if (not groupTable[group]) then outputChatBox"1" return end
-	if (not checkGroupAccess(client, 9)) then outputChatBox"2" return end
+	if (not groupTable[group]) then return end
+	if (not checkGroupAccess(client, 9)) then return end
 	groupTable[group][2] = message
 	viewWindow(client)
 	dbExec(db, "UPDATE groups SET message=? WHERE name=?", tostring(message), tostring(group))
@@ -497,37 +501,37 @@ function warnAccount(account, lvl, reason)
 	local online = getAccountPlayer(getAccount(account))
 	local group = getPlayerGroup(client)
 	if (not checkGroupAccess(client, 5)) then return end
-	if (not GAC[GetAccount] or not GAC[GetAccount][3]) then return end
+	if (not GAC[account] or not GAC[account][3]) then return end
 	local mine = getPermissionCount(group, getPlayerGroupRank(client))
-	local his = getPermissionCount(group, GAC[GetAccount][2])
+	local his = getPermissionCount(group, GAC[account][2])
 	if (getAccountName(getPlayerAccount(client)) == account and mine <= 12) then return end
 	if (tonumber(mine) <= tonumber(his) and getAccountName(getPlayerAccount(client)) ~= account) then
 		outputChatBox("You cannot warn this account because it has more permissions attributes than you!", client, 255, 0, 0)
 		return
 	end
 	
-	if (tonumber(GAC[GetAccount][3] + lvl) < 1) then
+	if (tonumber(GAC[account][3] + lvl) < 1) then
 		add = 0
-	elseif (tonumber(GAC[GetAccount][3] + lvl) >= 100) then
+	elseif (tonumber(GAC[account][3] + lvl) >= 100) then
 		if (not checkGroupAccess(client, 4)) then return end
-		if (account == getAccountName(getPlayerAccount(client))) then outputChatBox("You can not kick yourself!", client, 255, 0, 0) return end
+		if (account == getAccountName(getPlayerAccount(client))) then outputChatBox("You cannot kick yourself!", client, 255, 0, 0) return end
 		kickAccount(account)
 		outputGroupMessage("Account: "..account.." has been kicked by "..getPlayerName(client).." ("..reason..")", group)
 		groupLog(group, "Account: "..account.." has been kicked by "..getPlayerName(client).." ("..reason..")", group)
 		return
 	else
-		add = GAC[GetAccount][3] + lvl
+		add = GAC[account][3] + lvl
 	end
 	
 	if (online) then
-		outputGroupMessage(getPlayerName(online).." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")", group)
+		outputGroupMessage(getPlayerName(online).." has been warned by "..getPlayerName(client).." (Level: "..lvl.." (Reason: "..reason..") Total: "..add..")", group)
 		groupLog(group, getPlayerName(online).." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")")
 	else
-		groupLog(group, "Account: "..account.." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")")
-		outputGroupMessage("Account: "..account.." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")", group)
+		groupLog(group, "Account: "..account.." has been warned by "..getPlayerName(client).." ("..lvl.." (Reason: "..reason..") Total: "..add..")")
+		outputGroupMessage("Account: "..account.." has been warned by "..getPlayerName(client).." (Level: "..lvl.." ("..reason..") Total: "..add..")", group)
 	end
 	
-	GAC[GetAccount][3] = add
+	GAC[account][3] = add
 	dbExec(db, "UPDATE groupmember SET warningLvl=? WHERE account=?", tostring(add), tostring(account))
 	viewWindow(client)
 end
@@ -538,30 +542,18 @@ function showLog()
 	local group = getPlayerGroup(client)
 	if (not group) then return end
 	if (not checkGroupAccess(client, 10)) then return end
-	outputChatBox("This feature is not available!", client, 255, 0, 0)
+	outputChatBox("This feature is not available yet!", client, 255, 0, 0)
 	--exports.logs:viewGroupLog(client, group)
 end
 addEvent("groupSystem.showLog", true)
 addEventHandler("groupSystem.showLog", root, showLog)
-
---[[function grouChat(plr, cmd, ...)
-	local group = getPlayerGroup(plr)
-	local message = table.concat({...}, " ")
-	if (not group) then return end
-	outputGroupMessage("[GROUP] "..getPlayerName(plr)..": "..message, group)
-	--exports.logs:log(plr, "GC: "..getPlayerName(plr)..": "..message, "playerLog")
-	groupLog(group, "GC: "..getPlayerName(plr)..": "..message)
-end
-addCommandHandler("gc", grouChat)]]
--- message type 2
-
 
 function groupChat(message, messageType)
 	cancelEvent()
     if (messageType == 2) then
 		local group = getPlayerGroup(source)
 		if not (group) then return end
-		outputGroupMessage("[CAMP] "..getPlayerName(source)..": "..message, group)
+		outputGroupMessage(getPlayerName(source)..": "..message, group)
 	end	
 end
 addEventHandler( "onPlayerChat", getRootElement(), groupChat )
@@ -643,27 +635,27 @@ function setTheRank(rank, account)
 		return
 	end
 	local online = getAccountPlayer(getAccount(account))
-	if (not checkGroupAccess(client, 14)) then return end
+	if (not checkGroupAccess(client, 14)) then outputChatBox("Insufficient permission!",client,255,0,0,true) return end
 	if (tonumber(his) > tonumber(mine)) then
 		outputChatBox("You cannot set the rank of this account because it has more permissions attributes than you!", client, 255, 0, 0)
 		return
 	end
-	if (not GAC[GetAccount]) then return end
-	if (GAC[GetAccount][1] ~= group) then return end
-	if (GAC[GetAccount][2] == rank) then
+	if (not GAC[account]) then outputChatBox("No GAC[GetAccount]!",client,255,0,0,true) return end
+	if (GAC[account][1] ~= group) then outputChatBox("No GAC[GetAccount][1] ~= group!",client,255,0,0,true) return end
+	if (GAC[account][2] == rank) then
 		outputChatBox("This account already has the rank "..rank, client, 255, 0, 0)
 		return
 	end
 	if (online) then
 		outputGroupMessage(getPlayerName(client).." has set "..getPlayerName(online).."'s rank to: "..rank, group)
-		groupLog(group, getPlayerName(client).." has set "..getPlayerName(online).."'s rank to: "..rank)
+		--groupLog(group, getPlayerName(client).." has set "..getPlayerName(online).."'s rank to: "..rank)
 	else
-		groupLog(group, getPlayerName(client).." has set account: "..account.."'s rank to: "..rank)
+		--groupLog(group, getPlayerName(client).." has set account: "..account.."'s rank to: "..rank)
 		outputGroupMessage(getPlayerName(client).." has set account: "..account.."'s rank to: "..rank, group)
 	end
 	dbExec(db, "UPDATE groupmember SET rank=? WHERE account=?", tostring(rank), tostring(account))
 	outputChatBox("You have set the rank of account "..account.." to "..rank, client, 0, 255, 0)
-	GAC[GetAccount][2] = rank
+	GAC[account][2] = rank
 end
 addEvent("groupSystem.setTheRank", true)
 addEventHandler("groupSystem.setTheRank", root, setTheRank)
@@ -681,7 +673,6 @@ function changeGroupColor(plr, cmd, r, g, b)
 	outputChatBox("Group colour changed to R: "..r.." G: "..g.." B: "..b, r, g, b, "default-bold", plr, true, 0.15)
 	groupLog(group, getPlayerName(plr).." has set chat color to: "..r..", "..g..", "..b)
 end
-addCommandHandler("chatcolor", changeGroupColor)
 
 function changeTurfColor(plr, cmd, r, g, b)
 	local r, g, b = r or 255, g or 255, b or 255
@@ -695,7 +686,6 @@ function changeTurfColor(plr, cmd, r, g, b)
 	outputChatBox("Turf colour changed to R: "..r.." G: "..g.." B: "..b, plr, r, g, b, "default-bold", true, 0.15)
 	groupLog(group, getPlayerName(plr).." has set turf color to: "..r..", "..g..", "..b)
 end
-addCommandHandler("turfcolor", changeTurfColor)
 	
 function setCorrectElementData()
 	for ind, plr in pairs(getElementsByType("player")) do
