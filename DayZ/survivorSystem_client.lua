@@ -1859,7 +1859,7 @@ function checkZombies3()
     local weaponOperator = getWeaponNoiseOperator(getPedWeapon(localPlayer))
     for i,ped in ipairs(getElementsByType("ped")) do
         if getElementData(ped,"zombie") then
-			if getElementData(localPlayer,"shooting") > 0 then
+			if getElementData(localPlayer,"shooting") and getElementData(localPlayer,"shooting") > 0 then
 				value = getWeaponNoiseFactor(getPedWeapon(localPlayer))
 			else
 				value = 5

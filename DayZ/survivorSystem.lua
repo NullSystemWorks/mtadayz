@@ -548,6 +548,13 @@ function weaponDelete(dataName,oldValue)
 			if getElementData (source,dataName) == 0 then
 				local ammoData,weapID = getWeaponAmmoType(dataName)
 				takeWeapon (source,weapID)
+				if dataName == weapon1 then
+					setElementData(source,"currentweapon_1",0)
+				elseif dataName == weapon2 then
+					setElementData(source,"currentweapon_2",0)
+				elseif dataName == weapon3 then
+					setElementData(source,"currentweapon_3",0)
+				end
 			end
 		end
 		local weapon1 = getElementData(source,"currentweapon_1")
@@ -1655,6 +1662,7 @@ function onServerRespawnTrees( worldID, worldX, worldY, worldZ, worldRX, worldRY
 	outputChatBox("Trees have been respawned!",root,0,255,0,true)
 end
 addEventHandler("onServerRespawnTrees",root,onServerRespawnTrees)
+
 function checkFenceOwner(element,ownerData)
 	if getElementType(element) == "player" and element == client then
 		local acc = getAccountName(getPlayerAccount(element))

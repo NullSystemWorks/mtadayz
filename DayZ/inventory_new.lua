@@ -463,7 +463,7 @@ function rightItemClicked ()
 	local id = getElementData ( source, 'id' )
 	if getElementData ( source, 'foodLabel' ) then
 		local name = foodInventory[id][1]
-		if name == "Water Bottle" or name == "Soda Can (Pepsi)" or name == "Soda Can (Cola)" or name == "Soda Can (Mountain Dew" or name == "Can (Milk)" then
+		if name == "Water Bottle" or name == "Soda Can (Pepsi)" or name == "Soda Can (Cola)" or name == "Soda Can (Mountain Dew)" or name == "Can (Milk)" then
 			playerUseItem ( name, "Drink" )
 		else
 			playerUseItem ( name, "Eat" )
@@ -845,6 +845,7 @@ function moveItemInInventory()
 		setTimer(placeItemsInInventory, 200, 2)
 	end
 end
+
 function weapSelectionLabelClicked ()
 	if getElementData ( source, 'mainWeapSelection' ) then
 		local id = getElementData ( source, 'id' )

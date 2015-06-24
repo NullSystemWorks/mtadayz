@@ -1,6 +1,6 @@
 resourceRoot = getResourceRootElement( getThisResource( ) )
 localPlayer = getLocalPlayer()
-versionstring = "MTA:DayZ\nVersion: 0.8a\nLast Update: 30.05.15"
+versionstring = "MTA:DayZ\nVersion: 0.8.1a\nLast Update: 24.06.15"
 infoTable = {}
 Login_Edit = {}
 marwinButtons = {}
@@ -10,6 +10,7 @@ scale = 1
 showPlayerHudComponent("area_name",false)
 showPlayerHudComponent("radar",false)
 sound = playSound("dayzsoundtrack.mp3",true)
+setSoundVolume(sound,0.5)
 local sm = {}
 sm.moov = 0
 sm.object1,sm.object2 = nil,nil

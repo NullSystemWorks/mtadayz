@@ -206,83 +206,203 @@ local buildingClasses = {
 },
 
 ["other"] = {
-{"Raw Meat",2804,0.5,90},
-{"Cooked Meat",2806,0.5,90},
-{"Full Gas Canister",1650,1,0},
-{"Empty Water Bottle",2683,1,0},
-{"Survivor Clothing",1577,2,0},
-{"NV Goggles",368,1,90},
-{"IR Goggles",369,1,90},
-{"Box of Matches",328,0.4,90,5},
-{"Wood Pile",1463,0.4,0,5},
-{"M1911",346,1,90,3.5},
-{"PDW",352,1,90,2},
-{"Hunting Knife",335,1,90,2.5},
-{"Hatchet",339,1,90,1.8},
-{"Frank & Beans",1582,1,0,7},
-{"Soda Can (Mountain Dew)",2647,1,0,7},
-{"Empty Gas Canister",1650,1,0,5},
-{"Road Flare",324,1,90,6},
-{"Can (Milk)",2856,1,0,5},
-{"Assault Pack (ACU)",3026,1,0,6},
-{"Painkiller",2709,3,0,7},
-{"Empty Soda Cans",2673,0.5,0,12},
-{"Scruffy Burgers",2675,0.5,0,12},
-{"MP5A5",353,1,90,1.5},
-{"Bizon PP-19",353,1,90,1.5},
-{"Watch",2710,1,0,3},
-{"Heat Pack",1576,5,0,6},
-{"Wire Fence",933,0.25,0,1},
+{"M4",356,1,90,0.9},
+{"CZ 550",358,1,90,0.3},
+{"Winchester 1866",349,1,90,2},
+{"SPAZ-12 Combat Shotgun",351,1,90,1.9},
+{"Sawn-Off Shotgun",350,1,90,2},
+{"AK-47",355,1,90,0.9},
 {"Lee Enfield",357,1,90,1.5},
 {"Sporter 22",357,1,90,1.5},
 {"Mosin 9130",357,1,90,1.5},
+{"Crossbow",349,1,90,1.5},
 {"SKS",357,1,90,1.5},
-{"ALICE Pack",1248,1,0,1.5},
-{"Czech Backpack",1644,1,0,1.5},
-{"Backpack (Coyote)",1252,1,0,0.7},
-{"British Assault Pack",1275,1,0,0.7},
-{"Tire",1073,1,0,1},
-{"Tank Parts",1008,1,0.8,4},
-{"Morphine",1579,1,0,2},
-{"Civilian Clothing",1241,2,0,3.5},
-{"Map",1277,0.8,90,4},
-{"Toolbox",2969,0.5,0,3},
-{"Engine",929,0.3,0,3.5},
-{"Winchester 1866",349,1,90,2},
-{"Water Bottle",2683,1,0,4},
-{"M9 SD",347,1,90,5},
-{"Grenade",342,1,0,0.5},
-{"Sawn-Off Shotgun",350,1,90,2},
 {"Blaze 95 Double Rifle",350,1,90,2},
-{"SPAZ-12 Combat Shotgun",351,1,90,1.9},
 {"Remington 870",351,1,90,1.9},
-{"Binoculars",369,1,0,4},
-{"Camouflage Clothing",1247,2,0,4.5},
-{"AK-47",355,1,90,0.9},
 {"FN FAL",355,1,90,0.9},
 {"G36C",355,1,90,0.9},
 {"Sa58V CCO",355,1,90,0.9},
-{"M136 Rocket Launcher",359,1,90,0},
-{"Ghillie Suit",1213,2,0,0.01},
-{"M4",356,1,90,0.9},
-{"CZ 550",358,1,90,0.3},
-{"DMR",358,1,90,0.3},
 {"SVD Dragunov",358,1,90,0.3},
-{"Bandage",1578,0.5,0,4},
-{"Pasta Can",2770,1,0,5},
-{"Beans Can",2601,1,0,6},
-{"Burger",2768,1,0,2},
-{"Tent",1279,1,0,0.5},
-{"M1911",346,1,90,3},
+{"DMR",358,1,90,0.3},
+{"M1911",346,1,90,3.5},
+{"M9 SD",347,1,90,5},
+{"PDW",352,1,90,2},
+{"G17",346,1,90,2.3},
+{"MP5A5",353,1,90,1.5},
 {"Desert Eagle",348,1,90,3},
+{"Bizon PP-19",353,1,90,1.5},
 {"Revolver",348,1,90,3},
-{"GPS",2976,0.15,0,1},
-{"Medic Kit",2891,2.2,0},
-{"Blood Bag",1580,1,0},
-{"Radio Device",2966,0.5,0,5},
-{"Golf Club",333,1,90,1.9},
+{"Hunting Knife",335,1,90,2.5},
+{"Hatchet",339,1,90,1.8},
 {"Baseball Bat",336,1,90,1.4},
+{"Golf Club",333,1,90,1.9},
 {"Shovel",337,1,90,1.5},
+{"Crowbar",333,1,90,2.24},
+{"Grenade",342,1,0,0.5},
+{"Binoculars",369,1,0,4},
+{".45 ACP Cartridge",3013,2,0,1.5},
+{"9x19mm SD Cartridge",3013,2,0,1.5},
+{"9x19mm Cartridge",2041,2,0,1.5},
+{"9x18mm Cartridge",2041,2,0,1.5},
+{"5.45x39mm Cartridge",1271,2,0,1.5},
+{"5.56x45mm Cartridge",1271,2,0,1.5},
+{"1866 Slug",2358,2,0,1.5},
+{"2Rnd. Slug",2358,2,0,1.5},
+{"12 Gauge Pellet",2358,2,0,1.5},
+{"9.3x62mm Cartridge",2358,2,0,1.5},
+{".303 British Cartridge",2358,2,0,1.5},
+{"Bolt",2041,2,0,1.5},
+{"Pasta",2770,1,0,5},
+{"Baked Beans",2601,1,0,6},
+{"Sardines",2768,1,0,2},
+{"Frank & Beans",1582,1,0,7},
+{"Can (Corn)",1582,1,0,4.90},
+{"Can (Peas)",1582,1,0,4.90},
+{"Can (Pork)",1582,1,0,4.90},
+{"Can (Stew)",1582,1,0,4.90},
+{"Can (Ravioli)",1582,1,0,4.90},
+{"Can (Fruit)",1582,1,0,4.90},
+{"Can (Chowder)",1582,1,0,4.90},
+{"MRE",1582,1,0,4.90},
+{"Pistachios",1582,1,0,4.90},
+{"Trail Mix",1582,1,0,4.90},
+{"Raw Meat",2804,0.5,90},
+{"Cooked Meat",2806,0.5,90},
+{"Water Bottle",2683,1,0,4},
+{"Soda Can (Cola)",2647,1,0,6},
+{"Soda Can (Pepsi)",2856,1,0,4},
+{"Soda Can (Mountain Dew)",2647,1,0,7},
+{"Can (Milk)",2856,1,0,5},
+{"Wood Pile",1463,0.4,0,5},
+{"Bandage",1578,0.5,0,4},
+{"Road Flare",324,1,90,6},
+{"Empty Gas Canister",1650,1,0,5},
+{"Full Gas Canister",1650,1,0},
+{"Medic Kit",2891,2.2,0},
+{"Heat Pack",1576,5,0,6},
+{"Painkiller",2709,3,0,7},
+{"Morphine",1579,1,0,2},
+{"Blood Bag",1580,1,0},
+{"Wire Fence",933,0.25,0,1},
+{"Tire",1073,1,0,1},
+{"Engine",929,0.3,0,3.5},
+{"Tank Parts",1008,1,0.8,4},
+{"Tent",1279,1,0,0.5},
+{"Survivor Clothing",1577,2,0},
+{"Civilian Clothing",1241,2,0,3.5},
+{"Camouflage Clothing",1247,2,0,4.5},
+{"Ghillie Suit",1213,2,0,0.01},
+{"Empty Water Bottle",2683,1,0},
+{"Assault Pack (ACU)",3026,1,0,6},
+{"Czech Vest Pouch",1575,1,0,1.5},
+{"ALICE Pack",1248,1,0,1.5},
+{"Survival ACU",1644,1,0,0.7},
+{"British Assault Pack",1275,1,0,0.7},
+{"Backpack (Coyote)",1252,1,0,0.7},
+{"Czech Backpack",1644,1,0,0.7},
+{"M4 Blueprint",2976,2969,0.5,0,3},
+{"CZ 550 Blueprint",2969,0.5,0,3},
+{"Winchester '66 Blueprint",2969,0.5,0,3},
+{"SPAZ-12 C. Shtgn. Blueprint",2969,0.5,0,3},
+{"Sawn-Off Shtgn. Blueprint",2969,0.5,0,3},
+{"AK-47 Blueprint",2969,0.5,0,3},
+{"Lee Enfield Blueprint",2969,0.5,0,3},
+{"Sporter 22 Blueprint",2969,0.5,0,3},
+{"Mosin 9130 Blueprint",2969,0.5,0,3},
+{"Crossbow Blueprint",2969,0.5,0,3},
+{"SKS Blueprint",2969,0.5,0,3},
+{"Blaze 95. D. R. Blueprint",2969,0.5,0,3},
+{"Remington 870 Blueprint",2969,0.5,0,3},
+{"FN FAL Blueprint",2969,0.5,0,3},
+{"G36C Blueprint",2969,0.5,0,3},
+{"Sa58V CCO Blueprint",2969,0.5,0,3},
+{"SVD Dragunov",2969,0.5,0,3},
+{"DMR Blueprint",2969,0.5,0,3},
+{"M1911 Blueprint",2969,0.5,0,3},
+{"M9 SD Blueprint",2969,0.5,0,3},
+{"PDW Blueprint",2969,0.5,0,3},
+{"MP5A5 Blueprint",2969,0.5,0,3},
+{"Bizon PP-19 Blueprint",2969,0.5,0,3},
+{"Revolver Blueprint",2969,0.5,0,3},
+{"Desert Eagle Blueprint",2969,0.5,0,3},
+{"Hunting Knife Blueprint",2969,0.5,0,3},
+{"Hatchet Blueprint",2969,0.5,0,3},
+{"Baseball Bat Blueprint",2969,0.5,0,3},
+{"Shovel Blueprint",2969,0.5,0,3},
+{"Golf Club Blueprint",2969,0.5,0,3},
+--{"Machete Blueprint",2969,0.5,0,0}, That's a dev weapon.
+{"Crowbar Blueprint",2969,0.5,0,3},
+{"Parachute Blueprint",2969,0.5,0,3},
+--{"Tear Gas Blueprint",2969,0.5,0,3},
+{"Grenade Blueprint",2969,0.5,0,3},
+{"Binoculars Blueprint",2969,0.5,0,3},
+{".45 ACP Cartridge Blueprint",2969,0.5,0,3},
+{"9x19mm SD Cartridge Blueprint",2969,0.5,0,3},
+{"9x19mm Cartridge Blueprint",2969,0.5,0,3},
+{"9x18mm Cartridge Blueprint",2969,0.5,0,3},
+{"5.45x39mm Cartridge Blueprint",2969,0.5,0,3},
+{"5.56x45mm Cartridge Blueprint",2969,0.5,0,3},
+{"1866 Slug Blueprint",2969,0.5,0,3},
+{"2Rnd. Slug Blueprint",2969,0.5,0,3},
+{"12 Gauge Pellet Blueprint",2969,0.5,0,3},
+{"9.3x62mm Cartridge Blueprint",2969,0.5,0,3},
+{".303 British Cartridge Blueprint",2969,0.5,0,3},
+{"Bolt Blueprint",2969,0.5,0,3},
+--{"Medic Kit Blueprint",2969,0.5,0,3},
+{"Wire Fence Blueprint",2969,0.5,0,3},
+{"Tent Blueprint",2969,0.5,0,3},
+{"Camouflage Clthng. Blueprint",2969,0.5,0,3},
+{"Survivor Clthng. Blueprint",2969,0.5,0,3},
+{"Civilian Clthng. Blueprint",2969,0.5,0,3},
+{"Ghillie Suit Blueprint",2969,0.5,0,3},
+{"Road Flare Blueprint",2969,0.5,0,3},
+{"Toolbox Blueprint",2969,0.5,0,3},
+{"Radio Device Blueprint",2969,0.5,0,3},
+{"IR Goggles Blueprint",2969,0.5,0,3},
+{"NV Goggles Blueprint",2969,0.5,0,3},
+{"Gun Barrel",2969,0.5,0,3},
+{"Short Gun Barrel",2969,0.5,0,3},
+{"Gun Stock",2969,0.5,0,3},
+{"Thread",2969,0.5,0,3},
+{"Cloth",2969,0.5,0,3},
+{"Gun Powder",2969,0.5,0,3},
+{"Mechanical Supplies",2969,0.5,0,3},
+{"Cables",2969,0.5,0,3},
+{"Nails",2969,0.5,0,3},
+{"Sheet",2969,0.5,0,3},
+{"Barbed Wire",2969,0.5,0,3},
+{"Duct Tape",2969,0.5,0,3},
+{"Glue",2969,0.5,0,3},
+{"Drugs",2969,0.5,0,3},
+{"Bandaid",2969,0.5,0,3},
+{"Vitamins",2969,0.5,0,3},
+{"Tissue",2969,0.5,0,3},
+{"Small Box",2969,0.5,0,3},
+{"String",2969,0.5,0,3},
+{"Needle",2969,0.5,0,3},
+{"Microchips",2969,0.5,0,3},
+{"Optics",2969,0.5,0,3},
+{"Sharp Metal",2969,0.5,0,3},
+{"Handle",2969,0.5,0,3},
+{"Wooden Stick",2969,0.5,0,3},
+{"Hand Saw",2969,0.5,0,3},
+{"Metal Plate",2969,0.5,0,3},
+{"Metallic Stick",2969,0.5,0,3},
+{"Small Casing",2969,0.5,0,3},
+{"NV Goggles",368,1,90},
+{"IR Goggles",369,1,90},
+{"Map",1277,0.8,90,4},
+{"Box of Matches",328,0.4,90,5},
+{"Watch",2710,1,0,3},
+{"GPS",2976,0.15,0,1},
+{"Toolbox",2969,0.5,0,3},
+{"Radio Device",2966,0.5,0,5},
+{"Compass",1579,1,0,1.40},
+
+{"Empty Soda Cans",2673,0.5,0,12},
+{"M136 Rocket Launcher",359,1,90,0},
+{"Scruffy Burgers",2675,0.5,0,0},
+
 },
 
 }
@@ -480,6 +600,35 @@ local lootpileType = {
 {"Radio Device Blueprint",2969,0.5,0,3},
 {"IR Goggles Blueprint",2969,0.5,0,3},
 {"NV Goggles Blueprint",2969,0.5,0,3},
+{"Gun Barrel",2969,0.5,0,3},
+{"Short Gun Barrel",2969,0.5,0,3},
+{"Gun Stock",2969,0.5,0,3},
+{"Thread",2969,0.5,0,3},
+{"Cloth",2969,0.5,0,3},
+{"Gun Powder",2969,0.5,0,3},
+{"Mechanical Supplies",2969,0.5,0,3},
+{"Cables",2969,0.5,0,3},
+{"Nails",2969,0.5,0,3},
+{"Sheet",2969,0.5,0,3},
+{"Barbed Wire",2969,0.5,0,3},
+{"Duct Tape",2969,0.5,0,3},
+{"Glue",2969,0.5,0,3},
+{"Drugs",2969,0.5,0,3},
+{"Bandaid",2969,0.5,0,3},
+{"Vitamins",2969,0.5,0,3},
+{"Tissue",2969,0.5,0,3},
+{"Small Box",2969,0.5,0,3},
+{"String",2969,0.5,0,3},
+{"Needle",2969,0.5,0,3},
+{"Microchips",2969,0.5,0,3},
+{"Optics",2969,0.5,0,3},
+{"Sharp Metal",2969,0.5,0,3},
+{"Handle",2969,0.5,0,3},
+{"Wooden Stick",2969,0.5,0,3},
+{"Hand Saw",2969,0.5,0,3},
+{"Metal Plate",2969,0.5,0,3},
+{"Metallic Stick",2969,0.5,0,3},
+{"Small Casing",2969,0.5,0,3},
 },
 
 ["other"] = {
@@ -1211,23 +1360,6 @@ function createPickupsOnServerStart()
 		iPickup = iPickup + 1
 		createItemLoot("Residential",pos[1],pos[2],pos[3],iPickup)
 	end
-	--[[
-	if generic_items then
-		for i, items in pairs(generic_items) do
-			generic_items[i] = nil
-		end
-	end
-	if military_items then
-		for i, items in pairs(military_items) do
-			military_items[i] = nil
-		end
-	end
-	if trash_items then
-		for i, items in pairs(trash_items) do
-			trash_items[i] = nil
-		end
-	end
-	]]
 	setTimer(createPickupsOnServerStart2,60000,1)
 end
 
@@ -1280,28 +1412,6 @@ function createPickupsOnServerStart2()
 		iPickup = iPickup + 1
 		createItemLoot("Industrial",pos[1],pos[2],pos[3],iPickup)
 	end
-	--[[
-	if generic_items then
-		for i, items in pairs(generic_items) do
-			generic_items[i] = nil
-		end
-	end
-	if military_items then
-		for i, items in pairs(military_items) do
-			military_items[i] = nil
-		end
-	end
-	if trash_items then
-		for i, items in pairs(trash_items) do
-			trash_items[i] = nil
-		end
-	end
-	if blueprint_items then
-		for i, items in pairs(blueprint_items) do
-			blueprint_items[i] = nil
-		end
-	end
-	]]
 	setTimer(createPickupsOnServerStart3,60000,1)
 end
 
@@ -1335,18 +1445,6 @@ function createPickupsOnServerStart3()
 		iPickup = iPickup + 1
 		createItemLoot("Farm",pos[1],pos[2],pos[3],iPickup)
 	end
-	--[[
-	if generic_items then
-		for i, items in pairs(generic_items) do
-			generic_items[i] = nil
-		end
-	end
-	if trash_items then
-		for i, items in pairs(trash_items) do
-			trash_items[i] = nil
-		end
-	end
-	]]
 	setTimer(createPickupsOnServerStart4,60000,1)
 end
 
@@ -1389,23 +1487,6 @@ function createPickupsOnServerStart4()
 		iPickup = iPickup + 1
 		createItemLoot("Supermarket",pos[1],pos[2],pos[3],iPickup)
 	end
-	--[[
-	if generic_items then
-		for i, items in pairs(generic_items) do
-			generic_items[i] = nil
-		end
-	end
-	if military_items then
-		for i, items in pairs(military_items) do
-			military_items[i] = nil
-		end
-	end
-	if trash_items then
-		for i, items in pairs(trash_items) do
-			trash_items[i] = nil
-		end
-	end
-	]]
 	setTimer(createPickupsOnServerStart5,60000,1)
 end
 
@@ -1447,23 +1528,6 @@ function createPickupsOnServerStart5()
 		iPickup = iPickup + 1
 		createItemLoot("Military",pos[1],pos[2],pos[3],iPickup)
 	end
-	--[[
-	if generic_items then
-		for i, items in pairs(generic_items) do
-			generic_items[i] = nil
-		end
-	end
-	if military_items then
-		for i, items in pairs(military_items) do
-			military_items[i] = nil
-		end
-	end
-	if trash_items then
-		for i, items in pairs(trash_items) do
-			trash_items[i] = nil
-		end
-	end
-	]]
 end
 
 insertIntoTableResidential()

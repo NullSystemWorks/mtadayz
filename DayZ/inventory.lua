@@ -493,129 +493,88 @@ end
 
 function onPlayerMoveItemOutOFInventory (itemName,loot)
 local itemPlus = 1
-if itemName == ".45 ACP Cartridge" then
-	itemPlus = 7
-elseif itemName == "9x19mm SD Cartridge" then
-	itemPlus = 15
-elseif itemName == "9x19mm Cartridge" then
-	itemPlus = 30
-elseif itemName == "9x18mm Cartridge" then
-	itemPlus = 20
-elseif itemName == "5.45x39mm Cartridge" then
-	itemPlus = 30
-elseif itemName == "5.56x45mm Cartridge" then
-	itemPlus = 20
-elseif itemName == "1866 Slug" then
-	itemPlus = 7
-elseif itemName == "2Rnd. Slug" then
-	itemPlus = 2
-elseif itemName == "12 Gauge Pellet" then
-	itemPlus = 7
-elseif itemName == "9.3x62mm Cartridge" then
-	itemPlus = 5
-elseif itemName == ".303 British Cartridge" then
-	itemPlus = 10
-elseif itemName == "M136 Rocket" then
-	itemPlus = 0
-elseif itemName == "Bolt" then
-	itemPlus = 7
-elseif itemName == "M4" or itemName == "Mosin 9130" or itemName == "Sporter 22" or itemName == "SKS" or itemName == "Blaze 95 Double Rifle" or itemName == "DMR" or itemName == "SVD Dragunov" or itemName == "Crossbow" or itemName == "Bizon PP-19" or itemName == "FN FAL" or itemName == "G36C" or itemName == "Sa58V CCO" or itemName == "AK-47" or itemName == "CZ 550" or itemName == "Winchester 1866" or itemName == "SPAZ-12 Combat Shotgun" or itemName == "Sawn-Off Shotgun" or itemName == "Heat-Seeking RPG" or itemName == "M136 Rocket Launcher" or itemName == "Lee Enfield" then
-	triggerServerEvent("removeBackWeaponOnDrop",getLocalPlayer())
-end
-if loot then
-		if not getElementData(loot, "itemloot") and getElementType(getElementData(loot, "parent")) == "vehicle" and itemName == "Full Gas Canister" then
-			if getElementData(loot, "fuel") + 20 < getVehicleMaxFuel(loot) then
-				addingfuel = 20
-			elseif getVehicleMaxFuel(loot) + 15 < getElementData(loot, "fuel") + 20 then
-				triggerEvent("displayClientInfo", getLocalPlayer(), "Vehicle", "The tank is full!", 255, 22, 0)
-				return true
-			else
-				addingfuel = getVehicleMaxFuel(loot) - getElementData(loot, "fuel")
+	if itemName == ".45 ACP Cartridge" then
+		itemPlus = 7
+	elseif itemName == "9x19mm SD Cartridge" then
+		itemPlus = 15
+	elseif itemName == "9x19mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "9x18mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "5.45x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "5.56x45mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "1866 Slug" then
+		itemPlus = 7
+	elseif itemName == "2Rnd. Slug" then
+		itemPlus = 2
+	elseif itemName == "12 Gauge Pellet" then
+		itemPlus = 7
+	elseif itemName == "9.3x62mm Cartridge" then
+		itemPlus = 5
+	elseif itemName == ".303 British Cartridge" then
+		itemPlus = 10
+	elseif itemName == "M136 Rocket" then
+		itemPlus = 0
+	elseif itemName == "Bolt" then
+		itemPlus = 7
+	elseif itemName == "M4" or itemName == "Mosin 9130" or itemName == "Sporter 22" or itemName == "SKS" or itemName == "Blaze 95 Double Rifle" or itemName == "DMR" or itemName == "SVD Dragunov" or itemName == "Crossbow" or itemName == "Bizon PP-19" or itemName == "FN FAL" or itemName == "G36C" or itemName == "Sa58V CCO" or itemName == "AK-47" or itemName == "CZ 550" or itemName == "Winchester 1866" or itemName == "SPAZ-12 Combat Shotgun" or itemName == "Sawn-Off Shotgun" or itemName == "Heat-Seeking RPG" or itemName == "M136 Rocket Launcher" or itemName == "Lee Enfield" then
+		triggerServerEvent("removeBackWeaponOnDrop",getLocalPlayer())
+	end
+	if loot then
+		if not getElementData(loot,"itemloot") and getElementType(getElementData(loot,"parent")) == "vehicle" then
+			if itemName == "Full Gas Canister" then
+				if getElementData(loot,"fuel")+20 < getVehicleMaxFuel(loot) then
+					addingfuel = 20
+				elseif getElementData(loot,"fuel")+20 > getVehicleMaxFuel(loot)+15 then
+					triggerEvent ("displayClientInfo", getLocalPlayer(),"Vehicle","The tank is full!",255,22,0) 
+					return
+				else
+					addingfuel = getVehicleMaxFuel(loot)-getElementData(loot,"fuel")
+				end
+				setElementData(loot,"fuel",getElementData(loot,"fuel")+addingfuel)
+			setElementData(getLocalPlayer(),itemName,getElementData(getLocalPlayer(),itemName)-itemPlus)
+			setElementData(getLocalPlayer(),"Empty Gas Canister",(getElementData(getLocalPlayer(),"Empty Gas Canister") or 0)+itemPlus) 
+			triggerEvent ("displayClientInfo", getLocalPlayer(),"Vehicle","Filled gas into vehicle!",22,255,0) 
+			return
 			end
-			setElementData(loot, "fuel", getElementData(loot, "fuel") + addingfuel)
-			setElementData(getLocalPlayer(), itemName, getElementData(getLocalPlayer(), itemName) - itemPlus)
-			setElementData(getLocalPlayer(), "Empty Gas Canister", (getElementData(getLocalPlayer(), "Empty Gas Canister") or 0) + itemPlus)
-			triggerEvent("displayClientInfo", getLocalPlayer(), "Vehicle", "Filled gas into vehicle!", 22, 255, 0)
-			return true
 		end
-		itemName2 = itemName
-		if itemName == "Tire_inVehicle" then itemName2 = "Tire" end
-		if itemName == "Engine_inVehicle" then itemName2 = "Engine" end
-		if itemName == "Parts_inVehicle" then itemName2 = "Tank Parts" end
-		if not getElementData(loot, itemName) then
-			setElementData(loot, itemName, 1)
-		else
-			setElementData(loot, itemName, getElementData(loot, itemName)+1)
-		end
-		local players = getElementsWithinColShape(loot, "player")
-		if #players > 1 then
-			triggerServerEvent("onPlayerChangeLoot", getRootElement(), loot)
-		end
-		if not getElementData(loot, "itemloot") and getElementType(getElementData(loot, "parent")) == "vehicle" then
-			setElementData(getLocalPlayer(), itemName2, getElementData(getLocalPlayer(), itemName2) - itemPlus)
-			triggerServerEvent("refreshItemLoot", getRootElement(), loot, getElementData(loot, "parent"))
-			return true
-		end
-		if itemName == "Tire_inVehicle" then itemName = "Tire" end
-		if itemName == "Engine_inVehicle" then itemName = "Engine" end
-		if itemName == "Parts_inVehicle" then itemName = "Tank Parts" end
-		setElementData(getLocalPlayer(), itemName, getElementData(getLocalPlayer(), itemName) - itemPlus)
-		if loot and getElementData(loot, "itemloot") then
-			triggerServerEvent("refreshItemLoot", getRootElement(), loot, getElementData(loot, "parent"))
+	end
+	itemName2 = itemName
+	if itemName == "Tire_inVehicle" then itemName2 = "Tire" end
+	if itemName == "Engine_inVehicle" then itemName2 = "Engine" end
+	if itemName == "Parts_inVehicle" then itemName2 = "Fuel Tank Parts" end
+	--[[if (getElementData(getLocalPlayer(),itemName2) or 0)/itemPlus < 1 then
+		triggerEvent ("displayClientInfo", getLocalPlayer(),"Inventory","Can't drop this!",255,22,0)
+	return
+	end]]
+	if loot then
+		setElementData(loot,itemName,(getElementData(loot,itemName) or 0)+1)
+		local players = getElementsWithinColShape (loot,"player")
+			if #players > 1 then
+				triggerServerEvent("onPlayerChangeLoot",getRootElement(),loot)
+			end	
+		if not getElementData(loot,"itemloot") and getElementType(getElementData(loot,"parent")) == "vehicle" then
 		end
 	else
-		if itemName == "Tire_inVehicle" then itemName = "Tire" end
-		if itemName == "Engine_inVehicle" then itemName = "Engine" end
-		if itemName == "Parts_inVehicle" then itemName = "Tank Parts" end
-		setElementData(getLocalPlayer(), itemName, getElementData(getLocalPlayer(), itemName) - itemPlus)
-		triggerServerEvent("playerDropAItem", getLocalPlayer(), itemName)
+		triggerServerEvent("playerDropAItem",getLocalPlayer(),itemName)
+	end
+	if itemName == "Tire_inVehicle" then itemName = "Tire" end
+	if itemName == "Engine_inVehicle" then itemName = "Engine" end
+	if itemName == "Parts_inVehicle" then itemName = "Fuel Tank Parts" end
+	setElementData(getLocalPlayer(),itemName,getElementData(getLocalPlayer(),itemName)-itemPlus)
+	if loot and getElementData(loot,"itemloot") then
+		triggerServerEvent("refreshItemLoot",getRootElement(),loot,getElementData(loot,"parent"))
 	end
 end
-addEvent("onPlayerMoveItemOutOFInventory", true)
-addEventHandler("onPlayerMoveItemOutOFInventory", getRootElement(), onPlayerMoveItemOutOFInventory)
+addEvent( "onPlayerMoveItemOutOFInventory", true )
+addEventHandler( "onPlayerMoveItemOutOFInventory", getRootElement(), onPlayerMoveItemOutOFInventory )
 
-
-function onPlayerMoveItemInInventory()
-	local itemName = guiGridListGetItemText(gridlistItems.loot, guiGridListGetSelectedItem(gridlistItems.loot), 1)
-	if isPlayerInLoot() then
-		if getElementData(isPlayerInLoot(), itemName) and getElementData(isPlayerInLoot(), itemName) >= 1 then
-			if not isToolbeltItem(itemName) then
-				if getPlayerCurrentSlots() + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then
-					if not playerMovedInInventory then
-						triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
-						playerMovedInInventory = true
-						setTimer(function()
-							playerMovedInInventory = false
-						end, 700, 1)
-					else
-						startRollMessage2("Inventory", "Abusing exploits will result in a ban!", 255, 22, 0)
-						return true
-					end
-				else
-					startRollMessage2("Inventory", "Inventory is full!", 255, 22, 0)
-					return true
-				end
-			else
-				playerMovedInInventory = true
-				 setTimer(function()
-					 playerMovedInInventory = false
-				end, 700, 1)
-				triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
-			end
-		end
-	end
-	if isPlayerInLoot() then
-		local gearName = guiGetText(headline.loot)
-		local col = getElementData(getLocalPlayer(), "currentCol")
-		setTimer(refreshInventory, 200, 2)
-		setTimer(refreshLoot, 200, 2, col, gearName)
-	end
-end
 
 function refreshLoot()
 	return true
 end
-
 
 function onPlayerMoveItemInInventory (itemName,loot)
 local itemPlus = 1
