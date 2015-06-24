@@ -598,3 +598,27 @@ function acceptInvite()
 	guiGridListRemoveRow(mineListInvites, guiGridListGetSelectedItem(mineListInvites))
 	triggerServerEvent("groupSystem.accepInvite", root, group)
 end
+
+
+--GPS
+playerBlibs = {}
+amouunt = 0
+function updateGPS()
+	amouunt = 0
+	local gangname = getElementData(getLocalPlayer(),"Group")
+	for i, blip in ipairs(playerBlibs) do
+		if isElement(blip) then
+			destroyElement(blip)
+		end
+	end
+	if not getElementData(localPlayer,"Group") then return end	
+	playerBlibs = {}	
+	for i, player in ipairs(getElementsByType("player")) do
+		if gangname == getElementData(player,"Group") and player ~= localPlayer then
+			amouunt = amouunt+1
+			playerBlibs[amouunt] = createBlipAttachedTo(player,0,2,22,255,22)
+			setBlipVisibleDistance(playerBlibs[amouunt],1000)
+		end
+	end
+end
+setTimer(updateGPS,10000,0)

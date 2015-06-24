@@ -1092,7 +1092,7 @@ function createItemLoot (lootPlace,x,y,z,id)
 	col = createColSphere(x,y,z,1.25)
 	setElementData(col,"itemloot",true)
 	setElementData(col,"parent",lootPlace)
-	setElementData(col,"MAX_Slots",12)
+	setElementData(col,"MAX_Slots",20)
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do
 		local value =  math.percentChance(item[5],math.random(1,5))

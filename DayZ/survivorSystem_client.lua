@@ -220,7 +220,7 @@ function getPointFromDistanceRotation(x, y, dist, angle)
     return x+dx, y+dy;
 end
 
-local enableBlips = false
+local enableBlips = true
 local renderNorthBlip = false
 local alwaysRenderMap = false
 local worldmap

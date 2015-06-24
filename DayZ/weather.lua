@@ -118,20 +118,6 @@ local number = math.random(1,3)
 end
 setTimer(setTheWeather,math.random(1800000,3600000),0)
 
-function setWeather2()
-	local number = math.random(1,6)
-	if number == 2 then
-		setWeather ( 7 )
-	elseif number == 3 then
-		setWeather ( 8 )
-	elseif number == 4 then
-		setWeather ( 6 )
-	elseif number == 5 then
-		setWeather ( 9 )	
-	end
-end
---setTimer(setWeather2,3600000,0)
-
 function setNight (hour,minutes)
 	if gameplayVariables["enablenight"] then
 		if hour == 21 then

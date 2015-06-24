@@ -8,7 +8,6 @@
 	<script src="xml.lua" type="client" />
 	<script src="odometer.lua" type="client" />
 	<script src="client.lua" type="client" />
-	<config src="help.xml" type="client" />
 
 	<file src="vehicles.xml" />
 	<file src="bg.png" />
