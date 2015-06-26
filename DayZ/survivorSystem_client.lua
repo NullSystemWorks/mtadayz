@@ -54,6 +54,11 @@ snipertxd = engineLoadTXD ("mods/playerskins/hero.txd");
 engineImportTXD (snipertxd, 210);
 sniperdff = engineLoadDFF ("mods/playerskins/hero.dff", 210);
 engineReplaceModel (sniperdff, 210);
+-- Army
+snipertxd = engineLoadTXD ("mods/playerskins/army.txd");
+engineImportTXD (snipertxd, 287);
+sniperdff = engineLoadDFF ("mods/playerskins/army.dff", 287);
+engineReplaceModel (sniperdff, 287);
 
 
 --Items

@@ -265,6 +265,8 @@
     <file src="mods/playerskins/standart.dff" />
     <file src="mods/playerskins/hero.txd" />
     <file src="mods/playerskins/hero.dff" />
+	<file src="mods/playerskins/army.txd" />
+	<file src="mods/playerskins/army.dff" />
     <file src="mods/animals/bear.txd" />
     <file src="mods/animals/bear.dff" />
     <file src="mods/animals/fox.txd" />
