@@ -561,7 +561,7 @@ function stopZombieSound()
 		setPedVoice(theZomb, "PED_TYPE_DISABLED")
 	end
 end
-setTimer(stopZombieSound,5000,0)
+setTimer(stopZombieSound,1000,0)
 
 function WeaponHUD()
 if getElementData(getLocalPlayer(),"logedin") then
@@ -1055,10 +1055,47 @@ addEventHandler("onClientPlayerWeaponSwitch",localPlayer,onClientPlayerSkinChang
 
 	
 -- PLAY ZOMBIE SOUNDS
-local zombiesounds = {"sounds/mgroan1.ogg", "sounds/mgroan2.ogg", "sounds/mgroan3.ogg", "sounds/mgroan4.ogg", "sounds/mgroan5.ogg", "sounds/mgroan6.ogg", "sounds/mgroan7.ogg", "sounds/mgroan8.ogg", "sounds/mgroan9.ogg", "sounds/mgroan10.ogg"} 
-local zedSound
+local zombiesounds = {
+	"sounds/zombies/zgroan (1).ogg", 
+	"sounds/zombies/zgroan (2).ogg",
+	"sounds/zombies/zgroan (3).ogg", 
+	"sounds/zombies/zgroan (4).ogg", 
+	"sounds/zombies/zgroan (5).ogg", 
+	"sounds/zombies/zgroan (6).ogg", 
+	"sounds/zombies/zgroan (7).ogg",
+	"sounds/zombies/zgroan (8).ogg",
+	"sounds/zombies/zgroan (9).ogg",
+	"sounds/zombies/zgroan (10).ogg",
+	"sounds/zombies/zgroan (11).ogg", 
+	"sounds/zombies/zgroan (12).ogg",
+	"sounds/zombies/zgroan (13).ogg", 
+	"sounds/zombies/zgroan (14).ogg", 
+	"sounds/zombies/zgroan (15).ogg", 
+	"sounds/zombies/zgroan (16).ogg", 
+	"sounds/zombies/zgroan (17).ogg",
+	"sounds/zombies/zgroan (18).ogg",
+	"sounds/zombies/zgroan (19).ogg",
+	"sounds/zombies/zgroan (20).ogg", 
+	"sounds/zombies/zgroan (21).ogg", 
+	"sounds/zombies/zgroan (22).ogg",
+	"sounds/zombies/zgroan (23).ogg", 
+	"sounds/zombies/zgroan (24).ogg", 
+	"sounds/zombies/zgroan (25).ogg", 
+	"sounds/zombies/zgroan (26).ogg", 
+	"sounds/zombies/zgroan (27).ogg",
+	"sounds/zombies/zgroan (28).ogg",
+	"sounds/zombies/zgroan (29).ogg",
+	"sounds/zombies/zgroan (30).ogg", 
+	"sounds/zombies/zgroan (31).ogg", 
+	"sounds/zombies/zgroan (32).ogg",
+	"sounds/zombies/zgroan (33).ogg", 
+	"sounds/zombies/zgroan (34).ogg", 
+	"sounds/zombies/zgroan (35).ogg", 
+	"sounds/zombies/zgroan (36).ogg", 
+} 
+local zedSound = false
 
-function playZombieSounds(ped)
+function playZombieSounds()
 local zombies = getElementsByType("ped")
 	for theKey,theZomb in ipairs(zombies) do
 		if getElementData(theZomb,"deadzombie") then
@@ -1072,7 +1109,7 @@ local zombies = getElementsByType("ped")
 		end
 	end
 end
-setTimer(playZombieSounds,60000,0)
+setTimer(playZombieSounds,6000,0)
 
 	
 --------------------------------------------------------

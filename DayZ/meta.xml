@@ -39,6 +39,7 @@
 	
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
+	<script src="anticheat_c.lua" type="client" cache="false" />
 	
 	<!-- Log System -->
 	<script src="logsystem.lua" type="server" />
@@ -236,6 +237,7 @@
     <file src="images/dayzicons/level_3.png" />
     <file src="images/dayzicons/level_4.png" />
     <file src="images/dayzicons/level_5.png" />
+	<file src="images/dayzicons/lc.png" />
 	<file src="images/compassborder.png" />
     <file src="images/compassarrow.png" />
 	<file src="images/inventory1.png" />
@@ -371,17 +373,44 @@
     <file src="skins/277.dff" />
     <file src="skins/280.dff" />
 	
-	<!-- Sounds -->
-    <file src="sounds/mgroan1.ogg" />
-    <file src="sounds/mgroan2.ogg" />
-    <file src="sounds/mgroan3.ogg" />
-    <file src="sounds/mgroan4.ogg" />
-    <file src="sounds/mgroan5.ogg" />
-    <file src="sounds/mgroan6.ogg" />
-    <file src="sounds/mgroan7.ogg" />
-    <file src="sounds/mgroan8.ogg" />
-    <file src="sounds/mgroan9.ogg" />
-    <file src="sounds/mgroan10.ogg" />
+	<!-- Sounds -->	
+	<file src="sounds/zombies/zgroan (1).ogg" />
+	<file src="sounds/zombies/zgroan (2).ogg" />
+	<file src="sounds/zombies/zgroan (3).ogg" />
+	<file src="sounds/zombies/zgroan (4).ogg" />
+	<file src="sounds/zombies/zgroan (5).ogg" />
+	<file src="sounds/zombies/zgroan (6).ogg" />
+	<file src="sounds/zombies/zgroan (7).ogg" />
+	<file src="sounds/zombies/zgroan (8).ogg" />
+	<file src="sounds/zombies/zgroan (9).ogg" />
+	<file src="sounds/zombies/zgroan (10).ogg" />
+	<file src="sounds/zombies/zgroan (11).ogg" />
+	<file src="sounds/zombies/zgroan (12).ogg" />
+	<file src="sounds/zombies/zgroan (13).ogg" />
+	<file src="sounds/zombies/zgroan (14).ogg" />
+	<file src="sounds/zombies/zgroan (15).ogg" />
+	<file src="sounds/zombies/zgroan (16).ogg" />
+	<file src="sounds/zombies/zgroan (17).ogg" />
+	<file src="sounds/zombies/zgroan (18).ogg" />
+	<file src="sounds/zombies/zgroan (19).ogg" />
+	<file src="sounds/zombies/zgroan (20).ogg" />
+	<file src="sounds/zombies/zgroan (21).ogg" />
+	<file src="sounds/zombies/zgroan (22).ogg" />
+	<file src="sounds/zombies/zgroan (23).ogg" />
+	<file src="sounds/zombies/zgroan (24).ogg" />
+	<file src="sounds/zombies/zgroan (25).ogg" />
+	<file src="sounds/zombies/zgroan (26).ogg" />
+	<file src="sounds/zombies/zgroan (27).ogg" />
+	<file src="sounds/zombies/zgroan (28).ogg" />
+	<file src="sounds/zombies/zgroan (29).ogg" />
+	<file src="sounds/zombies/zgroan (30).ogg" />
+	<file src="sounds/zombies/zgroan (31).ogg" />
+	<file src="sounds/zombies/zgroan (32).ogg" />
+	<file src="sounds/zombies/zgroan (33).ogg" />
+	<file src="sounds/zombies/zgroan (34).ogg" />
+	<file src="sounds/zombies/zgroan (35).ogg" />
+	<file src="sounds/zombies/zgroan (36).ogg" />
+	
 	<file src="sounds/hit1.mp3" />
 	<file src="sounds/hit2.mp3" />
 	<file src="sounds/hit3.mp3" />

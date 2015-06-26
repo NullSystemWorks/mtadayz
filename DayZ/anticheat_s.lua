@@ -88,24 +88,34 @@ end
 addEventHandler("onPlayerWeaponSwitch", getRootElement(), detectWeaponCheat)
 
 local lossCount = {}
+local isLosingConnection = false
 function checkLoss()
-	for i, v in ipairs(getElementsByType("player"))do
+	for i, v in ipairs(getElementsByType("player")) do
 		local loss = getNetworkStats(v)["packetlossLastSecond"]
-				if not lossCount[v] then
-				lossCount[v] = 0
-				end
-					if loss > 80 then -- If we have packet loss then send message and add counter.
-						outputSideChat("You have packet loss...",v,255,0,0)
-						lossCount[v] = lossCount[v] + 1
-						if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player
-							lossCount[v] = nil
-							kickPlayer(v, "[AC] : Packet Loss")
-						end
-					else -- If packet loss was corrected then reset counter
-						lossCount[v] = 0
-					end
+		if not lossCount[v] then
+			lossCount[v] = 0
+		end
+		if loss > 80 then -- If we have packet loss then send message and add counter.
+			if not isLosingConnection then
+				isLosingConnection = true
+				triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
+			end
+			--outputSideChat("You have packet loss...",v,255,0,0)
+			lossCount[v] = lossCount[v] + 1
+			if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player
+				lossCount[v] = nil
+				kickPlayer(v, "[AC] : Packet Loss")
+			end
+		else -- If packet loss was corrected then reset counter
+			lossCount[v] = 0
+			isLosingConnection = false
+		end
+	end
+	if isLosingConnection then
+		outputSideChat(getPlayerName(v).." is losing connection...",root,255,0,0)
 	end
 end
-if gameplayVariables["packetlosskick"] then -- Check boolean to see if we want to kick on packet loss
-setTimer(checkLoss,2000,0) -- Set timer to check every two seconds
-end
+
+	if gameplayVariables["packetlosskick"] then -- Check boolean to see if we want to kick on packet loss
+		setTimer(checkLoss,2000,0) -- Set timer to check every two seconds
+	end
