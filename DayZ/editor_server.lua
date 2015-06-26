@@ -36,7 +36,8 @@ gameplayVariables = {}
 	gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packet loss is 100% for 5 seconds. DEFAULT: true
 	gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter DEFAULT: 10
 	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
-
+	gameplayVariables["serverLocale"] = "en_EN" -- Sets server default language must mach the one set in editor_client.lua DEFAULT: en_EN // Posible values: en_EN (English), es_ES (Spanish), ar_AR (Arabic), de_DE (German), pt_PT (Portuguese), fr_FR (French), pl_PL (Polish)
+	
 -- SERVER BACKUP
 	gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.
 	gameplayVariables["backupinterval"] = 3600000 -- Number of milliseconds that should elapse before backup. Minimum: 50. - 1000 milliseconds = 1 second. - DEFAULT: 3600000ms (= 1 hour)
