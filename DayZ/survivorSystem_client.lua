@@ -437,56 +437,34 @@ function setClientNight (hour,minutes)
 	end
 end
 
+local citysounds = {"sounds/ambience/helicopter.mp3"}
 
-local daysounds = {"sounds/day1.mp3", "sounds/day2.mp3", "sounds/day3.mp3", "sounds/day4.mp3", "sounds/day5.mp3", "sounds/day6.mp3","sounds/day7.mp3"}
-local nightsounds = {"sounds/night1.mp3", "sounds/night2.mp3", "sounds/night3.mp3", "sounds/night4.mp3","sounds/night5.mp3","sounds/night6.mp3","sounds/night7.mp3"}
-local daynature = {"sounds/ambience1.mp3", "sounds/ambience2.mp3"}
-local nightnature = {"sounds/ambience3.mp3"}
-local citysounds = {"sounds/ambience4.mp3"}
+local ambiencesounds = {
+	"sounds/ambience/ambience_1.ogg",
+	"sounds/ambience/ambience_2.ogg",
+	"sounds/ambience/ambience_3.ogg",
+	"sounds/ambience/ambience_4.ogg",
+	"sounds/ambience/ambience_5.ogg",
+	"sounds/ambience/ambience_6.ogg",
+	"sounds/ambience/ambience_7.ogg",
+	"sounds/ambience/ambience_8.ogg",
+	"sounds/ambience/ambience_9.ogg",
+	"sounds/ambience/ambience_10.ogg",
+	"sounds/ambience/ambience_11.ogg",
+	"sounds/ambience/ambience_12.ogg",
+	"sounds/ambience/ambience_13.ogg",
+	"sounds/ambience/ambience_14.ogg",
+	"sounds/ambience/ambience_15.ogg",
+	"sounds/ambience/ambience_16.ogg",
+}
 
-
-function PlayDaySounds(hour,minutes)
-	local hour = getTime()
-	if hour >= 7 and hour <= 21 then
-		playSound(daysounds[math.random(1, #daysounds)], false)
-	end
+function playAmbienceMusic()
+	playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
 end
-setTimer(PlayDaySounds, 180000, 0)
-
-function PlayNightSounds(hour,minutes)
-	local hour = getTime()
-	if hour >= 22 and hour <= 7 then
-		playSound(nightsounds[math.random(1, #nightsounds)], false)
-	end
-end
-setTimer(PlayNightSounds, 180000, 0)
-
-function PlayNightAmbience(hour,minutes)
-local hour = getTime()
-local x,y,z = getElementPosition(getLocalPlayer())
-local zone = getZoneName(x,y,z)
-	if hour >= 22 and hour <= 7 then
-		if zone == "Red County" or zone == "Whetstone" or zone == "Flint County" then
-			playSound("sounds/ambience3.mp3",false)
-		else return end
-	end
-end
-setTimer(PlayNightAmbience,30000,0)
-
-function PlayDayAmbience(hour,minutes)
-local hour = getTime()
-local x,y,z = getElementPosition(getLocalPlayer())
-local zone = getZoneName(x,y,z)
-	if hour >= 7 and hour <= 21 then
-		if zone == "Red County" or zone == "Whetstone" or zone == "Flint County" then
-			playSound(daynature[math.random(1,#daynature)],false)
-		else return end
-	end
-end
-setTimer(PlayDayAmbience,30000,0)
+setTimer(playAmbienceMusic,25000,0)
 
 function PlayCityAmbience()
-local x,y,z = getElementPosition(getLocalPlayer())
+local x,y,z = getElementPosition(localPlayer)
 local city = getZoneName(x,y,z)
 	if city == "Los Santos" or city == "Las Venturas" or city == "San Fierro" then
 		playSound("sounds/ambience4.mp3",false)
@@ -1098,14 +1076,15 @@ local zedSound = false
 function playZombieSounds()
 local zombies = getElementsByType("ped")
 	for theKey,theZomb in ipairs(zombies) do
+		if theZomb and isElement(theZomb) and isElementStreamedIn(theZomb) then
+			local Zx,Zy,Zz = getElementPosition(theZomb)
+			zedSound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
+			setSoundMaxDistance(zedSound,5)
+		end
 		if getElementData(theZomb,"deadzombie") then
 			if zedSound then
 				stopSound(zedSound)
 			end
-		else
-			local Zx,Zy,Zz = getElementPosition(theZomb)
-			zedSound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
-			setSoundMaxDistance(zedSound,5)
 		end
 	end
 end
