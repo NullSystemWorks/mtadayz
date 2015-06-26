@@ -7,7 +7,7 @@
 #---------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.8a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.8.1a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
     <script src="editor_server.lua" type="server" />
     <script src="editor_client.lua" type="client" cache="false" />

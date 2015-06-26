@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.8a"
+		dayzVersion = "MTA:DayZ 0.8.1a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -3036,11 +3036,11 @@ function freecamMouse (cX,cY,aX,aY)
 	end
 end
 
---[[
 local proned = false
 local proneObject
 local speed = 16
 local animTimer
+checkForHandler = false
 
 function onPlayerProne(state) 
 	proned = state
@@ -3051,98 +3051,126 @@ function onPlayerProne(state)
 		if proneObject and isElement(proneObject) then destroyElement(proneObject) end
 		if animTimer and isTimer(animTimer) then killTimer(animTimer) end
 		animTimer = setTimer(setPedAnimation,1300,1,localPlayer)
+		removeEventHandler("onClientRender",root,moveWhileProne)
+		checkForHandler = false
 	else
 		setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
 		
 		if proneObject and isElement(proneObject) then destroyElement(proneObject) end
 		local x,y,z = getElementPosition(localPlayer)
-		proneObject = createObject(1337,x,y,z)
+		local rX,rY,rZ = getElementRotation(localPlayer)
+		proneObject = createObject(2061,x,y,z,rX,rY,rZ)
 		attachElements(localPlayer,proneObject,0,0,0)
 		setElementCollisionsEnabled(proneObject,false)
 		setElementAlpha(proneObject,0)
+		addEventHandler("onClientRender",root,moveWhileProne)
+		checkForHandler = false
 	end
 end
 addEvent("onPlayerProne",true)
 addEventHandler("onPlayerProne",root,onPlayerProne)
 
-addEventHandler("onPlayerWasted",root,
+addEventHandler("onPlayerSpawn",root,
 function()
 	proned = false
+	if checkForHandler then
+		removeEventHandler("onClientRender",root,moveWhileProne)
+		checkForHandler = false
+	end
 end)
 
-addEventHandler("onClientRender",root,
-function()
+function moveWhileProne()
 	if not proned then return end
-	
-	_pos = localPlayer:getPosition()
+	_pos = proneObject:getPosition()
+	playerPosX, playerPosY, playerPosZ = getElementPosition(localPlayer)
+	bX,bY,bZ = getPedBonePosition(localPlayer,8)
 	
 	if isKeyDown("W") then
-		pos = _pos + localPlayer.matrix.forward / speed
-		
-		--Check if line of sight is clear, otherwise revert
-		sightPos = _pos + localPlayer.matrix.forward * 1.25
-		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
-			pos = _pos --revert
+		pos = Vector3(playerPosX,playerPosY,playerPosZ) + proneObject.matrix.forward / speed	
+		sightPos = Vector3(bX,bY,bZ) + proneObject.matrix.forward 
+		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,true,true,false) then
+			-- Currently, the player is able to "glide" past some objects, such as walls of buildings. This causes him to fall below the map. Any fix?
+			pos = (Vector3(playerPosX,playerPosY,playerPosZ) + (proneObject.matrix.up/10)) + (proneObject.matrix.forward/8)
 		end
 	elseif isKeyDown("A") then
 		pos = _pos - localPlayer.matrix.right / speed
-		
-		--Check if line of sight is clear, otherwise revert
 		sightPos = _pos - localPlayer.matrix.right * 1.25
 		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
 			pos = _pos --revert
 		end
 	elseif isKeyDown("S") then
-		pos = _pos - localPlayer.matrix.forward / speed
-		
-		--Check if line of sight is clear, otherwise revert
-		sightPos = _pos - localPlayer.matrix.forward * 1.25
+		pos = Vector3(playerPosX,playerPosY,playerPosZ) - proneObject.matrix.forward / speed
+		sightPos = Vector3(bX,bY,bZ) - proneObject.matrix.forward 
 		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
-			pos = _pos --revert
+			pos = _pos
 		end
 	elseif isKeyDown("D") then
 		pos = pos + localPlayer.matrix.right / speed
-		
-		--Check if line of sight is clear, otherwise revert
 		sightPos = _pos + localPlayer.matrix.right * 1.25
 		if not isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false) then
-			pos = _pos --revert
+			pos = _pos
 		end
 	end
-	
 	if isKeyDown("W") or isKeyDown("A") or isKeyDown("S") or isKeyDown("D") then
 		setElementPosition(proneObject,pos)
 	end
+	isOnGround = isPedOnGround(localPlayer)
+	isInWater = isElementInWater(localPlayer)
+	x,y,z = getElementPosition(localPlayer)
+	gPos = getGroundPosition(x,y,z)
+	_pos = localPlayer:getPosition()
+	sightPos = _pos + (localPlayer.matrix.forward) * 2
+	lineClear = isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false)
+	positionBelow = _pos - localPlayer.matrix.up
 	
-	--Simulate gravity (VERY BUGGY ATM)
-	if not isPedOnGround(localPlayer) then
-		local x,y,z = getElementPosition(localPlayer)
-		local gPos = getGroundPosition(localPlayer:getPosition()) + 1
-		
-		if (gPos > 0) then
-			if (gPos - 0.2 < 0) then
-				offset = gPos
-			else
-				offset = 0.2
+	if not isOnGround then
+		if not isInWater then
+			if gPos > -45 then
+				DownPos = (Vector3(playerPosX,playerPosY,playerPosZ) - (proneObject.matrix.up/10)) + (proneObject.matrix.forward/8)
 			end
-			
-			setElementPosition(proneObject,x,y,z-offset)
-		elseif (gPos < 2) then
-			if (gPos + 0.2 > 0) then
-				offset = gPos
-			else
-				offset = 0.2
-			end
-			
-			setElementPosition(proneObject,x,y,z+0.5+offset)
+			setElementPosition(proneObject,DownPos)
 		end
 	end
 	
 	--Update the rotation based on the camera's rotation
 	setElementRotation(localPlayer,0,0,360 - getPedCameraRotation(localPlayer))
-end)
+	setElementRotation(proneObject,0,0,360 - getPedCameraRotation(localPlayer))
+	
+	--[[ For Debug, note it's for 800x600
+	dxDrawText("Is on ground: ", 43, 231, 121, 247, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(isOnGround), 125, 231, 203, 247, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("Is in water:", 43, 257, 121, 273, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(isInWater), 125, 257, 203, 273, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("X, Y, Z:", 43, 283, 121, 299, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(""..tonumber(x)..", "..tonumber(y)..", "..tonumber(z), 125, 283, 620, 299, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("gPos:", 43, 309, 121, 325, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(gPos), 125, 309, 203, 325, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("Line Clear:", 43, 335, 121, 351, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(lineClear), 125, 335, 203, 351, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("Pos Below: ", 43, 335+26, 121, 351+26, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(positionBelow), 125, 335+26, 203, 351+26, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)	
+	]]
+end
 
 function isKeyDown(key)
 	if getKeyState(key) then return true else return false end
 end
+
+--[[ Debug 
+function drawLineOfSight()
+	bX,bY,bZ = getPedBonePosition(localPlayer,8)
+	_pos = localPlayer:getPosition()
+	sightPos = Vector3(bX,bY,bZ) + (localPlayer.matrix.forward) * 1.25
+	lineClear = isLineOfSightClear(_pos,sightPos,true,true,true,true,false,false,false,false)
+	x,y,z = getElementPosition(localPlayer)
+	positionBelow = localPlayer.position - localPlayer.matrix.up
+	dxDrawLine3D(bX,bY,bZ,sightPos,tocolor(255,0,0,255),3,true)
+	dxDrawText("Line Clear:", 43, 335, 121, 351, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(lineClear), 125, 335, 203, 351, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("X, Y, Z:", 43, 283, 121, 299, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(""..tonumber(x)..", "..tonumber(y)..", "..tonumber(bZ), 125, 283, 620, 299, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText("Position Below: ", 43, 335+26, 121, 351+26, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+	dxDrawText(tostring(positionBelow), 125, 335+26, 203, 351+26, tocolor(255, 255, 255, 255), 1.00, "default", "left", "top", false, false, false, false, false)
+end
+addEventHandler("onClientRender",root,drawLineOfSight)
 ]]

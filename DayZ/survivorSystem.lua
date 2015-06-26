@@ -1497,6 +1497,7 @@ function funcBindSit ( player, key, keyState )
 	end	
 end
 
+--[[
 function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
@@ -1508,8 +1509,8 @@ function funcBindLie ( player, key, keyState )
 		lying = true
 	end
 end
+]]
 
---[[
 function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
@@ -1525,7 +1526,6 @@ function funcBindLie ( player, key, keyState )
 	lying = not lying
 	triggerClientEvent(player,"onPlayerProne",resourceRoot,lying)
 end
-]]
 
 
 -- STAMINA SYSTEM (EVENTS)

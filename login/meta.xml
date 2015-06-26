@@ -27,7 +27,7 @@
 	<file src="dayzsoundtrack.mp3" />
 	
 	<settings>
-	<setting name="*news1" value="Current Version: 0.8a"
+	<setting name="*news1" value="Version: 0.8.1a"
 					friendlyname="News 1"
 					group="News 1"
 					accept="*"
