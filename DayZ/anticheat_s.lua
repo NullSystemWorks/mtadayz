@@ -95,7 +95,7 @@ function checkLoss()
 				lossCount[v] = 0
 				end
 					if loss > 80 then -- If we have packet loss then send message and add counter.
-						outputSideChat("You have packet loss...",source,255,255,255)
+						outputSideChat("You have packet loss...",v,255,0,0)
 						lossCount[v] = lossCount[v] + 1
 						if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player
 							lossCount[v] = nil
@@ -107,5 +107,5 @@ function checkLoss()
 	end
 end
 if gameplayVariables["packetlosskick"] then -- Check boolean to see if we want to kick on packet loss
-setTimer(checkLoss,1000,0) -- Set timer to check every second
+setTimer(checkLoss,2000,0) -- Set timer to check every two seconds
 end
