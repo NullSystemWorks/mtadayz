@@ -1518,13 +1518,14 @@ function funcBindLie ( player, key, keyState )
 	else
 		if isPedInVehicle(player) then return end
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
+		outputChatBox("Attention! Moving while prone is currently bugged. Do not move while near buildings or objects! If you do that, you will fall through the map!",player,255,0,0,false)
 		
 		local x,y,z = getElementPosition(player)
 		setElementPosition(player,x,y,z) --Move the player up a little (due to a bug)
 	end
 	
 	lying = not lying
-	triggerClientEvent(player,"onPlayerProne",resourceRoot,lying)
+	triggerClientEvent(player,"onPlayerProne",player,lying)
 end
 
 

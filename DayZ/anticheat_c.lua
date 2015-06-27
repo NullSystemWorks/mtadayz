@@ -22,7 +22,12 @@ function onPlayerIsLosingConnection(isLosingConnection)
 		end
 	end
 end
+addEvent("onPlayerIsLosingConnection",true)
+addEventHandler("onPlayerIsLosingConnection",root,onPlayerIsLosingConnection)
+
 
 function playerLosingConnection()
-	dxDrawImage(screenW * 0.8400, screenH * 0.8433, screenW * 0.0700, screenH * 0.0900, "images/dayzicons/lc.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+	if clientLosingConnection then
+		dxDrawImage(screenW * 0.8400, screenH * 0.8433, screenW * 0.0700, screenH * 0.0900, "images/dayzicons/lc.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+	end
 end
