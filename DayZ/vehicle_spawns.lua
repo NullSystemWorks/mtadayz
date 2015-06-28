@@ -778,8 +778,11 @@ addEventHandler("onPlayerQuit",getRootElement(),debugFixxing)
 
 function setEngineStateByPlayer (playersource)
 	local veh = getPedOccupiedVehicle (playersource)
+	if getElementData(getElementData(veh,"parent"),"fuel") <= 1 then 
+	return
+	else
 	setVehicleEngineState (veh, not getVehicleEngineState(veh))
-	if getElementData(getElementData(veh,"parent"),"fuel") <= 0 then return end
+	end
 	if getVehicleEngineState(veh) == true then
 		triggerClientEvent (playersource, "displayClientInfo", playersource,"Vehicle","Engine started!",22,255,0)
 	else
