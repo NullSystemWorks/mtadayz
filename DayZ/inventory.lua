@@ -746,10 +746,12 @@ end
 function getInventoryInfosForRightClickMenu(itemName)
 	for i,itemInfo in ipairs(inventoryItems["Food"]) do
 		if itemName == itemInfo[1] then
-			if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Soda Can (Pepsi)" or itemInfo[1] == "Soda Can (Cola)" or itemInfo[1] == "Soda Can (Mountain Dew)" or itemInfo[1] == "Can (Milk)" then
-				info = "Drink"
-			else
-				info = "Eat"
+			if not isPlayerInLoot() then
+				if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Soda Can (Pepsi)" or itemInfo[1] == "Soda Can (Cola)" or itemInfo[1] == "Soda Can (Mountain Dew)" or itemInfo[1] == "Can (Milk)" then
+					info = "Drink"
+				else
+					info = "Eat"
+				end
 			end
 			return itemName, info 
 		end
@@ -777,9 +779,13 @@ local playerFire = {}
 local fireCounter = 0
 function playerUseItem(itemName,itemInfo)
 	if itemInfo == "Drink" then
-		triggerServerEvent("onPlayerRequestChangingStats",getLocalPlayer(),itemName,itemInfo,"thirst")
+		if getElementData(localPlayer,itemName) >= 1 then
+			triggerServerEvent("onPlayerRequestChangingStats",getLocalPlayer(),itemName,itemInfo,"thirst")
+		end
 	elseif itemInfo == "Eat" then
-		triggerServerEvent("onPlayerRequestChangingStats",getLocalPlayer(),itemName,itemInfo,"food")	
+		if getElementData(localPlayer,itemName) >= 1 then
+			triggerServerEvent("onPlayerRequestChangingStats",getLocalPlayer(),itemName,itemInfo,"food")
+		end
 	elseif itemInfo == "Put clothes on" then
 		triggerServerEvent("onPlayerChangeSkin",getLocalPlayer(),itemName)
 	elseif itemName == "Empty Water Bottle" then
