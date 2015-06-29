@@ -465,6 +465,19 @@ if playerMovedInInventory then startRollMessage2("Inventory", "Abusing explots w
 				if not getElementData(isPlayerInLoot(), itemName.."_inVehicle") then setElementData(isPlayerInLoot(), itemName .. "_inVehicle", 0) end
 				if (itemName == "Tire" and tires > 0 and getElementData ( isPlayerInLoot(), "Tire_inVehicle") < tires) or ( itemName == "Engine" and engine > 0 and getElementData ( isPlayerInLoot(), "Engine_inVehicle") < engine) or ( itemName == "Parts" and parts > 0 and getElementData ( isPlayerInLoot(), "Parts_inVehicle") < parts) then
 					triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName.."_inVehicle", isPlayerInLoot())
+					--[[front_left,rear_left,front_right,rear_right = getVehicleWheelStates(veh)
+					if front_left == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then 
+						setVehicleWheelStates(veh,0)
+					end
+					if rear_left == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
+						setVehicleWheelStates(veh,0)
+					end
+					if front_right == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
+						setVehicleWheelStates(veh,0)
+					end
+					if rear_right == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
+						setVehicleWheelStates(veh,0)
+					end]]
 				else
 					triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName, isPlayerInLoot())
 				end
@@ -544,7 +557,7 @@ local itemPlus = 1
 	itemName2 = itemName
 	if itemName == "Tire_inVehicle" then itemName2 = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName2 = "Engine" end
-	if itemName == "Parts_inVehicle" then itemName2 = "Fuel Tank Parts" end
+	if itemName == "Parts_inVehicle" then itemName2 = "Tank Parts" end
 	--[[if (getElementData(getLocalPlayer(),itemName2) or 0)/itemPlus < 1 then
 		triggerEvent ("displayClientInfo", getLocalPlayer(),"Inventory","Can't drop this!",255,22,0)
 	return
@@ -562,7 +575,7 @@ local itemPlus = 1
 	end
 	if itemName == "Tire_inVehicle" then itemName = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName = "Engine" end
-	if itemName == "Parts_inVehicle" then itemName = "Fuel Tank Parts" end
+	if itemName == "Parts_inVehicle" then itemName = "Tank Parts" end
 	setElementData(getLocalPlayer(),itemName,getElementData(getLocalPlayer(),itemName)-itemPlus)
 	if loot and getElementData(loot,"itemloot") then
 		triggerServerEvent("refreshItemLoot",getRootElement(),loot,getElementData(loot,"parent"))

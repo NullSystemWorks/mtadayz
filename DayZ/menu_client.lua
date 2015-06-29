@@ -289,7 +289,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			showClientMenuItem("patrol")
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
-			setNewbieInfo (true,"patrolstation","Press '-' or 'middle-mouse' to refill a canister!\n REQUIRED: Empty Gas Canister",source)
+			--setNewbieInfo (true,"patrolstation","Press '-' or 'middle-mouse' to refill a canister!\n REQUIRED: Empty Gas Canister",source)
 			return
 		end
 		if getElementData(source,"wirefence") then
@@ -297,14 +297,14 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
 			triggerServerEvent ( "checkFenceOwner", getLocalPlayer(), getLocalPlayer(), getElementData(source,"owner"))
-			setNewbieInfo (true,"Wirefence","Press '-' or 'middle-mouse' to remove the fence!\n REQUIRED: Toolbox",source)
+			--setNewbieInfo (true,"Wirefence","Press '-' or 'middle-mouse' to remove the fence!\n REQUIRED: Toolbox",source)
 			return
 		end
 		if getElementData(source,"fireplace") then
 			showClientMenuItem("Fireplace")
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
-			setNewbieInfo (true,"Fireplace","Press '-' or 'middle-mouse' to cook meat!\n REQUIRED: Raw Meat",source)
+			--setNewbieInfo (true,"Fireplace","Press '-' or 'middle-mouse' to cook meat!\n REQUIRED: Raw Meat",source)
 			isInFirePlace = true
 			return
 		end
@@ -313,14 +313,14 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",true)
 			setElementData(getLocalPlayer(),"lootname","Gear ("..getElementData(source,"playername")..")")
-			setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
+			--setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
 			return
 		end
 		if getElementData(source,"item") then
 			showClientMenuItem("Take",getElementData(source,"item"))
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
-			setNewbieInfo (true,"Item pickup","Press '-' or 'middle-mouse' to pick this item up!",source)
+			--setNewbieInfo (true,"Item pickup","Press '-' or 'middle-mouse' to pick this item up!",source)
 			return
 		end
 		if getElementData(source,"helicrash") then
@@ -328,7 +328,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",true)
 			setElementData(getLocalPlayer(),"lootname","Gear (Helicrash)")
-			setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
+			--setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
 			return
 		end
 		if getElementData(source,"hospitalbox") then
@@ -336,7 +336,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",true)
 			setElementData(getLocalPlayer(),"lootname","Gear (Hospitalbox)")
-			setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
+			--setNewbieInfo (true,"Gear","Press J to access the gear menu!",source)
 			return
 		end
 		if getElementData(source,"vehicle") then
@@ -345,7 +345,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",true)
 			setElementData(getLocalPlayer(),"lootname","Gear ("..(getVehicleName(getElementData(source,"parent")) or "Tent")..")")
-			setNewbieInfo (true,"Gear","Press J to acess the gear menu!",source)
+			--setNewbieInfo (true,"Gear","Press J to acess the gear menu!",source)
 			return
 			end
 		end
@@ -383,11 +383,13 @@ local newbieHead = "-"
 local newbieText = "-"
 local newbiePosition = 0,0,0
 
+local lootIcon = ""
+
 function setNewbieInfo (show,head,text,element)
---newbieShow = show
---newbieHead = head
---newbieText = text
---newbiePosition = element
+newbieShow = show
+newbieHead = head
+newbieText = ""
+newbiePosition = element
 return
 end
 
@@ -397,9 +399,16 @@ function()
 	local x,y,z = getElementPosition(newbiePosition)
 	local x,y = getScreenFromWorldPosition (x,y,z)
 	local length = dxGetTextWidth(newbieText,1,"default-bold")
-	dxDrawRectangle ( x-length/2-screenWidth*0.01,y, screenWidth*0.02+length, screenHeight*0.1, tocolor (33,33,33,100) )
-	dxDrawingColorText(newbieHead,x-length/2-screenWidth*0.01,y, x+length/2+screenWidth*0.01, y+screenHeight*0.03, tocolor(22,255,22,120),0.5, 1.1, "default-bold", "center", "center")
-	dxDrawingColorText(newbieText,x-length/2-screenWidth*0.01,y+screenHeight*0.03, x+length/2+screenWidth*0.01, y+screenHeight*0.07, tocolor(255,255,255,120),0.5, 1, "default-bold", "center", "center")
+	local col = getElementData(localPlayer,"currentCol")
+	local objects = getElementData(col,"objectsINloot")
+	--dxDrawRectangle ( x-length/2-screenWidth*0.01,y, screenWidth*0.02+length, screenHeight*0.1, tocolor (33,33,33,100) )
+	--dxDrawingColorText(newbieHead,x-length/2-screenWidth*0.01,y, x+length/2+screenWidth*0.01, y+screenHeight*0.03, tocolor(22,255,22,120),0.5, 1.1, "default-bold", "center", "center")
+	if objects then
+		if x and y then
+			dxDrawImage(x-length/2-screenWidth*0.01,y, screenWidth*0.1, screenHeight*0.08,"images/dayzicons/loot.png",0,0,0)
+		--dxDrawingColorText(newbieText,x-length/2-screenWidth*0.01,y+screenHeight*0.03, x+length/2+screenWidth*0.01, y+screenHeight*0.07, tocolor(255,255,255,120),0.5, 1, "default-bold", "center", "center")
+		end
+	end
 end
 )
 

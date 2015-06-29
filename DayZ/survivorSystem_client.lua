@@ -1908,9 +1908,18 @@ function checkZombies3()
 end
 setTimer(checkZombies3,500,0)
 
+function math.percent(percent,maxvalue)
+    if tonumber(percent) and tonumber(maxvalue) then
+        local x = (maxvalue*percent)/100
+        return x
+    end
+    return false
+end
+
 fading = 0
 fading2 = "up"
 local screenWidth,screenHeight = guiGetScreenSize()
+
 function updateIcons ()
 	if getElementData(getLocalPlayer(),"logedin") then
 		--fading
@@ -1943,43 +1952,86 @@ function updateIcons ()
 		end
 		--bandit	
 		local humanity =  getElementData(getLocalPlayer(),"humanity")
-		if humanity > 0 then
-			local humanity =  getElementData(getLocalPlayer(),"humanity")/9.8
-			r,g,b = 255-humanity,humanity,0
-		else	
-			r,g,b = 255,0,0
+		local humanity_icon = "images/dayzicons/humanity/2500.png"
+		local number = 0
+		if humanity >= 5000 and humanity >= 3501 then
+			number = 5
+		elseif humanity <= 3500 and humanity >= 2501 then
+			number = 4
+		elseif humanity <= 2500 and humanity >= 1 then
+			number = 3
+		elseif humanity <= 0 and humanity >= -1001 then
+			number = 2
+		elseif humanity <= -1000 and humanity >= -2501 then
+			number = 1
+		elseif humanity >= -2500 then
+			number = 0
 		end
-			dxDrawImage ( screenWidth*0.925 , screenHeight*0.6, screenHeight*0.1, screenHeight*0.1, "images/dayzicons/bandit.png",0,0,0,tocolor(r,g,b))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.6, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/humanity/"..number..".png",0,0,0,tocolor(0,255,0))
 		--temperature
 		local temperature = math.round(getElementData(getLocalPlayer(),"temperature"),2)
 		r,g,b = 0,255,0
+		local number = 5
 		if temperature <= 37 then
 			value = (37-temperature)*42.5
 			r,g,b = 0,255-value,value
+			number = 3
 		elseif temperature > 37 and temperature < 41 then
 			r,g,b = 0,255,0
+			number = 5
 		elseif temperature == 41 then
+			number = 5
 			r,g,b = 255,0,0
 		end
 		if value > 215 then
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature.png",0,0,0,tocolor(r,g,b,fading))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..number..".png",0,0,0,tocolor(r,g,b,fading))
 		else
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature.png",0,0,0,tocolor(r,g,b))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..number..".png",0,0,0,tocolor(r,g,b))
 		end
 		--thirsty
 		r,g,b = 0,255,0
-		local thirst = getElementData(getLocalPlayer(),"thirst")*2.55
-		r,g,b = 255-thirst,thirst,0
-		if thirst < 15 then
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/thirsty.png",0,0,0,tocolor(r,g,b,fading))
+		local thirst = getElementData(localPlayer,"thirst")
+		local thirst_coloring = getElementData(getLocalPlayer(),"thirst")*2.55
+		r,g,b = 255-thirst_coloring,thirst_coloring,0
+		local thirst_icon = "images/dayzicons/thirst/100.png"
+		if thirst >= 100 and thirst <= 81 then
+			thirst_icon = "images/dayzicons/thirst/100.png"
+		elseif thirst <= 80 and thirst >= 61 then
+			thirst_icon = "images/dayzicons/thirst/80.png"
+		elseif thirst <= 60 and thirst >= 41 then
+			thirst_icon = "images/dayzicons/thirst/60.png"
+		elseif thirst <= 40 and thirst >= 21 then
+			thirst_icon = "images/dayzicons/thirst/40.png"
+		elseif thirst <= 20 and thirst >= 1 then
+			thirst_icon = "images/dayzicons/thirst/20.png"
+		elseif thirst < 1 then
+			thirst_icon = "images/dayzicons/thirst/0.png"
+		end
+		if thirst_coloring < 15 then
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, thirst_icon,0,0,0,tocolor(r,g,b,fading))
 		else
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/thirsty.png",0,0,0,tocolor(r,g,b))
-		end	
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, thirst_icon,0,0,0,tocolor(r,g,b))
+		end
 		--blood
 		r,g,b = 0,255,0
-		local blood = getElementData(getLocalPlayer(),"blood")/47.2
-		r,g,b = 255-blood,blood,0
-		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/blood.png",0,0,0,tocolor(r,g,b))
+		local blood = getElementData(localPlayer,"blood")
+		local blood_coloring = getElementData(getLocalPlayer(),"blood")/47.2
+		r,g,b = 255-blood_coloring,blood_coloring,0
+		local blood_icon = "images/dayzicons/blood/12000.png"
+		if blood >= 12000 and blood >= 10001 then
+			blood_icon = "images/dayzicons/blood/12000.png"
+		elseif blood <= 10000 and blood >= 8001 then
+			blood_icon = "images/dayzicons/blood/10000.png"
+		elseif blood <= 8000 and blood >= 6001 then
+			blood_icon = "images/dayzicons/blood/8000.png"
+		elseif blood <= 6000 and blood >= 4001 then
+			blood_icon = "images/dayzicons/blood/6000.png"
+		elseif blood <= 4000 and blood >= 2001 then
+			blood_icon = "images/dayzicons/blood/4000.png"
+		elseif blood <= 2000 then
+			blood_icon = "images/dayzicons/blood/2000.png"
+		end	
+		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, blood_icon,0,0,0,tocolor(r,g,b))
 		if getElementData(getLocalPlayer(),"bleeding") > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
@@ -1987,10 +2039,24 @@ function updateIcons ()
 		r,g,b = 0,255,0
 		local food = getElementData(getLocalPlayer(),"food")*2.55
 		r,g,b = 255-food,food,0
+		local food_icon = "images/dayzicons/hunger/100.png"
+		if food >= 100 and food <= 81 then
+			food_icon = "images/dayzicons/hunger/100.png"
+		elseif food <= 80 and food >= 61 then
+			food_icon = "images/dayzicons/hunger/80.png"
+		elseif food <= 60 and food >= 41 then
+			food_icon = "images/dayzicons/hunger/60.png"
+		elseif food <= 40 and food >= 21 then
+			food_icon = "images/dayzicons/hunger/40.png"
+		elseif food <= 20 and food >= 1 then
+			food_icon = "images/dayzicons/hunger/20.png"
+		elseif food < 1 then
+			food_icon = "images/dayzicons/hunger/0.png"
+		end
 		if food < 15 then
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/food.png",0,0,0,tocolor(r,g,b,fading))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, food_icon,0,0,0,tocolor(r,g,b,fading))
 		else
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/food.png",0,0,0,tocolor(r,g,b))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, food_icon,0,0,0,tocolor(r,g,b))
 		end	
 		--Nametags
 		local x,y,z = getElementPosition(getLocalPlayer())
@@ -2040,6 +2106,7 @@ function updateIcons ()
 		--Vehicle Infos
 		local veh = getPedOccupiedVehicle (getLocalPlayer())
 		if veh then
+			local screenW, screenH = guiGetScreenSize()
 			local maxfuel = getElementData(veh,"maxfuel")
 			local fuel = getElementData(getElementData(veh,"parent"),"fuel")
 			local needengine = getElementData(veh,"needengines")
@@ -2052,27 +2119,37 @@ function updateIcons ()
 			local w = dxGetTextWidth(engine.."/"..needengine.." Engine",1.02,"default-bold")
 			if engine == needengine then
 				r,g,b = 0,255,0
+				number = 1
 			else
 				r,g,b = 255,0,0
+				number = 0
 			end
-			dxDrawText (engine.."/"..needengine.." Engine" ,screenWidth*0.5-w/2 , screenHeight*0,screenWidth*0.5-w/2 , screenHeight*0,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			--dxDrawText (engine.."/"..needengine.." Engine" ,screenWidth*0.5-w/2 , screenHeight*0,screenWidth*0.5-w/2 , screenHeight*0,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/eng_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			local w = dxGetTextWidth(tires.."/"..needtires.." Tires",1.02,"default-bold")
 			if tires == needtires then
 				r,g,b = 0,255,0
+				number = 1
 			else
 				r,g,b = 255,0,0
+				number = 0
 			end
-			dxDrawText (tires.."/"..needtires.." Tires",screenWidth*0.5-w/2 , screenHeight*0+offset,screenWidth*0.5-w/2 , screenHeight*0+offset,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			--dxDrawText (tires.."/"..needtires.." Tires",screenWidth*0.5-w/2 , screenHeight*0+offset,screenWidth*0.5-w/2 , screenHeight*0+offset,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			dxDrawImage(screenW * 0.5175, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/whl/whl_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			local w = dxGetTextWidth(parts.."/"..needparts.." Tank Parts",1.02,"default-bold")
 			if parts == needparts then
 				r,g,b = 0,255,0
+				number = 1
 			else
 				r,g,b = 255,0,0
+				number = 0
 			end
-			dxDrawText (parts.."/"..needparts.." Tank Parts",screenWidth*0.5-w/2 , screenHeight*0+offset*2,screenWidth*0.5-w/2 , screenHeight*0+offset, tocolor (r,g,b, 220 ) , 1.02, "default-bold" )
+			--dxDrawText (parts.."/"..needparts.." Tank Parts",screenWidth*0.5-w/2 , screenHeight*0+offset*2,screenWidth*0.5-w/2 , screenHeight*0+offset, tocolor (r,g,b, 220 ) , 1.02, "default-bold" )
+			dxDrawImage(screenW * 0.5787, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/tank/tank_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			local w = dxGetTextWidth("Fuel:"..math.floor(fuel).."/"..maxfuel,1.02,"default-bold")
-			if fuel == maxfuel then
+			--[[if fuel == maxfuel then
 				r,g,b = 0,255,0
+				number = 100
 			elseif fuel < maxfuel/10 then
 				r,g,b = 255,0,0	
 			elseif fuel < maxfuel/4 then
@@ -2083,8 +2160,44 @@ function updateIcons ()
 				r,g,b = 125,200,0		
 			elseif fuel < maxfuel/1.5 then
 				r,g,b = 50,200,0
+			end]]
+			-- a*100/b
+			if fuel == maxfuel then
+				number = 100
+			elseif fuel >= (maxfuel*99)/100 then
+				number = 90
+			elseif fuel >= (maxfuel*90)/100 then 
+				number = 90
+			elseif fuel >= (maxfuel*80)/100 then
+				number = 80
+			elseif fuel >= (maxfuel*70)/100 then
+				number = 70
+			elseif fuel >= (maxfuel*60)/100 then
+				number = 60
+			elseif fuel >= (maxfuel*50)/100 then
+				number = 50
+			elseif fuel >= (maxfuel*40)/100 then
+				number = 40
+			elseif fuel >= (maxfuel*30)/100 then
+				number = 30
+			elseif fuel >= (maxfuel*20)/100 then
+				number = 20
+			elseif fuel >= (maxfuel*1)/100 then
+				number = 10
+			elseif fuel == (maxfuel*0)/100 then
+				number = 0
 			end
-			dxDrawText ("Fuel:"..math.floor(fuel).."/"..maxfuel,screenWidth*0.5-w/2 , screenHeight*0+offset*3,screenWidth*0.5-w/2 , screenHeight*0+offset*2,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			--dxDrawText ("Fuel:"..math.floor(fuel).."/"..maxfuel,screenWidth*0.5-w/2 , screenHeight*0+offset*3,screenWidth*0.5-w/2 , screenHeight*0+offset*2,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			dxDrawImage(screenW * 0.4975, screenH * -0.0983, screenW * 0.0200, screenH * 0.2750, "images/dayzicons/vehicle/fuel/"..number..".png", 270, 0, 0, tocolor(255, 255, 255, 255), false)
+			local veh_health = getElementHealth(veh)/10
+			if veh_health == 100 and veh_health >= 51 then
+				number = 0
+			elseif veh_health <= 50 and veh_health >= 31 then
+				number = 1
+			elseif veh_health <= 30 and veh_health >= 0 then
+				number = 2
+			end
+			dxDrawImage(screenW * 0.3950, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/hull/hull_"..number..".png", 0, 0, 0, tocolor(255,255,255,255), false)
 		end
 		if not playerTarget then return end
 		local x,y,z = getElementPosition(playerTarget)

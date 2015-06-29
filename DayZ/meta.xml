@@ -223,21 +223,78 @@
     <file src="images/dead.jpg" />
 	<file src="images/nightvision.png" />
 	<file src="images/infravision.png" />
-    <file src="images/dayzicons/bandit.png" />
-    <file src="images/dayzicons/blood.png" />
-    <file src="images/dayzicons/brokenbone.png" />
     <file src="images/dayzicons/eye.png" />
-    <file src="images/dayzicons/food.png" />
-    <file src="images/dayzicons/sound.png" />
-    <file src="images/dayzicons/temperature.png" />
-    <file src="images/dayzicons/thirsty.png" />
-    <file src="images/dayzicons/medic.png" />
+	<file src="images/dayzicons/sound.png" />
+	<file src="images/dayzicons/brokenbone.png" />
+	<file src="images/dayzicons/medic.png" />
+	
+	<file src="images/dayzicons/humanity/5.png" />
+	<file src="images/dayzicons/humanity/4.png" />
+	<file src="images/dayzicons/humanity/3.png" />
+	<file src="images/dayzicons/humanity/2.png" />
+	<file src="images/dayzicons/humanity/1.png" />
+	<file src="images/dayzicons/humanity/0.png" />
+	
+	<file src="images/dayzicons/blood/12000.png" />
+	<file src="images/dayzicons/blood/10000.png" />
+	<file src="images/dayzicons/blood/8000.png" />
+	<file src="images/dayzicons/blood/6000.png" />
+	<file src="images/dayzicons/blood/4000.png" />
+	<file src="images/dayzicons/blood/2000.png" />
+    
+    <file src="images/dayzicons/hunger/100.png" />
+	<file src="images/dayzicons/hunger/80.png" />
+	<file src="images/dayzicons/hunger/60.png" />
+	<file src="images/dayzicons/hunger/40.png" />
+	<file src="images/dayzicons/hunger/20.png" />
+	<file src="images/dayzicons/hunger/0.png" />
+	
+    <file src="images/dayzicons/temperature/5.png" />
+	<file src="images/dayzicons/temperature/4.png" />
+	<file src="images/dayzicons/temperature/3.png" />
+	<file src="images/dayzicons/temperature/2.png" />
+	<file src="images/dayzicons/temperature/1.png" />
+	<file src="images/dayzicons/temperature/0.png" />
+	
+	<file src="images/dayzicons/thirst/100.png" />
+	<file src="images/dayzicons/thirst/80.png" />
+	<file src="images/dayzicons/thirst/60.png" />
+	<file src="images/dayzicons/thirst/40.png" />
+	<file src="images/dayzicons/thirst/20.png" />
+	<file src="images/dayzicons/thirst/0.png" />
+	
+	<file src="images/dayzicons/vehicle/engine/eng_0.png" />
+	<file src="images/dayzicons/vehicle/engine/eng_1.png" />
+	
+	<file src="images/dayzicons/vehicle/fuel/0.png" />
+	<file src="images/dayzicons/vehicle/fuel/10.png" />
+	<file src="images/dayzicons/vehicle/fuel/20.png" />
+	<file src="images/dayzicons/vehicle/fuel/30.png" />
+	<file src="images/dayzicons/vehicle/fuel/40.png" />
+	<file src="images/dayzicons/vehicle/fuel/50.png" />
+	<file src="images/dayzicons/vehicle/fuel/60.png" />
+	<file src="images/dayzicons/vehicle/fuel/70.png" />
+	<file src="images/dayzicons/vehicle/fuel/80.png" />
+	<file src="images/dayzicons/vehicle/fuel/90.png" />
+	<file src="images/dayzicons/vehicle/fuel/100.png" />
+	
+	<file src="images/dayzicons/vehicle/hull/hull_0.png" />
+	<file src="images/dayzicons/vehicle/hull/hull_1.png" />
+	<file src="images/dayzicons/vehicle/hull/hull_2.png" />
+	
+	<file src="images/dayzicons/vehicle/tank/tank_0.png" />
+	<file src="images/dayzicons/vehicle/tank/tank_1.png" />
+	
+	<file src="images/dayzicons/vehicle/whl/whl_0.png" />
+	<file src="images/dayzicons/vehicle/whl/whl_1.png" />
+    
 	<file src="images/dayzicons/level_1.png" />
     <file src="images/dayzicons/level_2.png" />
     <file src="images/dayzicons/level_3.png" />
     <file src="images/dayzicons/level_4.png" />
     <file src="images/dayzicons/level_5.png" />
 	<file src="images/dayzicons/lc.png" />
+	<file src="images/dayzicons/loot.png" />
 	<file src="images/compassborder.png" />
     <file src="images/compassarrow.png" />
 	<file src="images/inventory1.png" />
