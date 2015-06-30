@@ -33,8 +33,10 @@ gameplayVariables = {}
 
 -- MISC
 	gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: true - SET TO false to disable - remember you need to set it in editor_server.lua too.
+
 -- LANGUAGE
 	gameplayVariables["serverLocale"] = "en_EN" -- Sets server default language must mach the one set in editor_client.lua DEFAULT: en_EN // Posible values: en_EN (English), es_ES (Spanish), ar_AR (Arabic), de_DE (German), pt_PT (Portuguese), fr_FR (French), pl_PL (Polish)
+
 -- WEAPON DAMAGE
 damageTable = {
 -- {"WEAPON NAME",DAMAGE},
@@ -57,8 +59,6 @@ damageTable = {
 {"Baseball Bat",1199},
 {"Shovel",1203},
 {"Golf Club",953},
-
---[[ NEW WEAPONS ]]--
 {"Mosin 9130",6722},
 {"Sporter 22",6722},
 {"Crossbow",5333},

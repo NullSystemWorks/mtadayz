@@ -46,6 +46,10 @@
 	<export function="saveLog" type="server" />
 	<export function="returnLog" type="server" />
 	
+	<!-- Language Files -->
+	<script src="language_c.lua" type="client" cache="false" />
+	<script src="language_s.lua" type="server" />
+	
 	<!-- Exports -->
 	<script src="exports_s.lua" type="server" />
 	<export function="setPlayerBlood" type="server" />

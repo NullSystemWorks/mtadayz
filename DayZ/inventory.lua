@@ -252,6 +252,19 @@ inventoryItems = {
 local headline = {}
 local gridlistItems = {}
 local buttonItems = {}
+local languageCode = getLocalization()["code"]
+
+function checkTheLanguage()
+	if languageCode == "en_US" then
+		languageCode = "en_US"
+	elseif languageCode == "de" then
+		languageCode = "de"
+	else
+		outputChatBox("No language defined, switching to en_US")
+		languageCode = "en_US"
+	end
+end
+addEventHandler("onClientResourceStart",root,checkTheLanguage)
 
 function hideInventoryManual()
 	closeInventory()
@@ -285,32 +298,32 @@ end
 
 function getPlayerCurrentSlots()
 local current_SLOTS = 0
-	for id,item in ipairs(inventoryItems["Weapons"]["Primary Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
 	end
-	for id,item in ipairs(inventoryItems["Weapons"]["Secondary Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Secondary Weapon"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
 	end
-	for id,item in ipairs(inventoryItems["Weapons"]["Specially Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Specially Weapon"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
 	end
-	for id,item in ipairs(inventoryItems["Ammo"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Ammo"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
 	end
-	for id,item in ipairs(inventoryItems["Food"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Food"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
 	end
-	for id,item in ipairs(inventoryItems["Items"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Items"]) do
 		if getElementData(getLocalPlayer(), item[1]) and getElementData(getLocalPlayer(), item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(getLocalPlayer(), item[1])
 		end
@@ -321,32 +334,32 @@ end
 function getLootCurrentSlots(loot)
 	if isElement ( loot ) then
 	  local current_SLOTS = 0
-	  for id,item in ipairs(inventoryItems["Weapons"]["Primary Weapon"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
 	  end
-	  for id,item in ipairs(inventoryItems["Weapons"]["Secondary Weapon"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Secondary Weapon"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
 	  end
-	  for id,item in ipairs(inventoryItems["Weapons"]["Specially Weapon"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Specially Weapon"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
 	  end
-	  for id,item in ipairs(inventoryItems["Ammo"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Ammo"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
 	  end
-	  for id,item in ipairs(inventoryItems["Food"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Food"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
 	  end
-	  for id,item in ipairs(inventoryItems["Items"]) do
+	  for id,item in ipairs(languageTextTable[languageCode]["Items"]) do
 		if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
 		  current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
 		end
@@ -359,32 +372,32 @@ end
 
 function getItemSlots(itema)
 local current_SLOTS = 0
-	for id,item in ipairs(inventoryItems["Weapons"]["Primary Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
 		if itema == item[1] then
 			return item[2]
 		end
 	end
-	for id,item in ipairs(inventoryItems["Weapons"]["Secondary Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Secondary Weapon"]) do
 		if itema == item[1] then
 			return item[2]
 		end
 	end
-	for id,item in ipairs(inventoryItems["Weapons"]["Specially Weapon"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Specially Weapon"]) do
 		if itema == item[1] then
 			return item[2]
 		end
 	end
-	for id,item in ipairs(inventoryItems["Ammo"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Ammo"]) do
 		if itema == item[1] then
 			return item[2]
 		end
 	end
-	for id,item in ipairs(inventoryItems["Food"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Food"]) do
 		if itema == item[1] then
 			return item[2]
 		end
 	end
-	for id,item in ipairs(inventoryItems["Items"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Items"]) do
 		if itema == item[1] then
 			return item[2]
 		end
@@ -394,7 +407,7 @@ end
 
 function isToolbeltItem(itema)
 local current_SLOTS = 0
-	for id,item in ipairs(inventoryItems["Toolbelt"]) do
+	for id,item in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
 		if itema == item[1] then
 			return true
 		end
@@ -757,7 +770,7 @@ end
 
 
 function getInventoryInfosForRightClickMenu(itemName)
-	for i,itemInfo in ipairs(inventoryItems["Food"]) do
+	for i,itemInfo in ipairs(languageTextTable[languageCode]["Food"]) do
 		if itemName == itemInfo[1] then
 			if not isPlayerInLoot() then
 				if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Soda Can (Pepsi)" or itemInfo[1] == "Soda Can (Cola)" or itemInfo[1] == "Soda Can (Mountain Dew)" or itemInfo[1] == "Can (Milk)" then
@@ -769,18 +782,18 @@ function getInventoryInfosForRightClickMenu(itemName)
 			return itemName, info 
 		end
 	end
-	for i,itemInfo in ipairs(inventoryItems["Items"]) do
+	for i,itemInfo in ipairs(languageTextTable[languageCode]["Items"]) do
 		if itemName == itemInfo[1] then
-			if #itemInfo >= 8 then
-				return itemName, itemInfo[8]
+			if #itemInfo >= 9 then
+				return itemName, itemInfo[9]
 			end
 			break
 		end
 	end
-	for i,itemInfo in ipairs(inventoryItems["Toolbelt"]) do
+	for i,itemInfo in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
 		if itemName == itemInfo[1] then
-			if #itemInfo >= 8 then
-				return itemName, itemInfo[8]
+			if #itemInfo >= 9 then
+				return itemName, itemInfo[9]
 			end
 			break
 		end

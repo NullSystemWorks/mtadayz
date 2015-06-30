@@ -101,6 +101,9 @@ function removeItemFromInventory (name)
 	end
 end
 
+local languages = {"en_US","de","es","ar","pt","pl"}
+local languageCode = getLocalization()["code"]
+
 function placeItemsInInventory()
 	local loot = isPlayerInLoot()
 	inventory = {}
@@ -108,89 +111,97 @@ function placeItemsInInventory()
 	inventoryWeap.main = {}
 	inventoryWeap.addit = {}
 	inventoryWeap.spec = {}
-
+	
 	foodInventory={}
 	toolInventory={}
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Primary Weapon"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
-		end
+	if languageCode == "en_US" then
+		languageCode = "en_US"
+	elseif languageCode == "de" then
+		languageCode = "de"
+	else
+		outputChatBox("No language defined, switching to en_US")
+		languageCode = "en_US"
 	end
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Primary Weapon"] ) do
-		if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-			table.insert ( inventoryWeap.main, {weap[1],weap[3],weap[4],weap[5]} )
-			if getElementData(localPlayer, "currentweapon_1") == weap[1] then
-				selectedMainWeapon = #inventoryWeap.main
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Primary Weapon"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
 			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Secondary Weapon"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
-		end
-	end
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Secondary Weapon"] ) do
-		if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-			table.insert ( inventoryWeap.addit, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7]} )
-			if getElementData(localPlayer, "currentweapon_2") == weap[1] then
-				selectedAdditWeapon = #inventoryWeap.addit
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Primary Weapon"] ) do
+			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
+				table.insert ( inventoryWeap.main, {weap[1],weap[3],weap[4],weap[5]} )
+				if getElementData(localPlayer, "currentweapon_1") == weap[1] then
+					selectedMainWeapon = #inventoryWeap.main
+				end
 			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Ammo"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Secondary Weapon"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Food"] ) do
-		if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-			table.insert ( foodInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Secondary Weapon"] ) do
+			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
+				table.insert ( inventoryWeap.addit, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+				if getElementData(localPlayer, "currentweapon_2") == weap[1] then
+					selectedAdditWeapon = #inventoryWeap.addit
+				end
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Toolbelt"] ) do
-		if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-			table.insert ( toolInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Ammo"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Specially Weapon"] ) do
-		if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-			table.insert ( inventoryWeap.spec, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Food"] ) do
+			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
+				table.insert ( foodInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Weapons"]["Specially Weapon"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Toolbelt"] ) do
+			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
+				table.insert ( toolInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Food"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Specially Weapon"] ) do
+			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
+				table.insert ( inventoryWeap.spec, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Items"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Specially Weapon"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
-	for i, weap in ipairs ( inventoryItems["Toolbelt"] ) do
-		local inLoot = getThisItemInLoot (weap[1])
-		local inInventory = getElementData ( localPlayer, weap[1] ) or 0
-		if inLoot > 0 or inInventory > 0 then
-			table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7]} )
+		for i, weap in ipairs ( languageTextTable[languageCode]["Food"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
 		end
-	end
+		for i, weap in ipairs ( languageTextTable[languageCode]["Items"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
+		end
+		for i, weap in ipairs ( languageTextTable[languageCode]["Toolbelt"] ) do
+			local inLoot = getThisItemInLoot (weap[1])
+			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
+			if inLoot > 0 or inInventory > 0 then
+				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
+			end
+		end
 end
 
 function testoLabClick (but, state, x, y)
@@ -428,7 +439,7 @@ function closeInventory()
 			inventoryShow = false
 end
 
-function itemLabelClicked ()
+function itemLabelClicked()
 	if getElementData ( source, 'itemLabel' ) then
 		local name, info = getInventoryInfosForRightClickMenu ( inventory[getElementData ( source, 'id' )][1] )
 		if name == "Box of Matches" and getElementData(getLocalPlayer(), "Wood Pile") == 0 then
@@ -471,10 +482,10 @@ function rightItemClicked ()
 		setTimer(placeItemsInInventory, 200, 2)
 	elseif getElementData ( source, 'toolLabel' ) then
 		local name = toolInventory[id][1]
-		for i,itemInfo in ipairs(inventoryItems["Toolbelt"]) do
+		for i,itemInfo in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
 			if name == itemInfo[1] then
-				if #itemInfo >= 8 then
-					playerUseItem ( name, itemInfo[8] )
+				if #itemInfo >= 9 then
+					playerUseItem ( name, itemInfo[9] )
 				end
 			end
 		end
@@ -573,9 +584,9 @@ function renderDisplay ( )
 	dxDrawImage(bX-410,bY+100,430,150,"images/inventory2.png")
 	if selectedItemLabel > 0 then
 		if selectedItemLabel <= #inventory then
-			dxDrawText ( inventory[selectedItemLabel+itOff][1], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
-			dxDrawText ( inventory[selectedItemLabel+itOff][7], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
-			dxDrawText ( inventory[selectedItemLabel+itOff][8], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
+			dxDrawText ( inventory[selectedItemLabel+itOff][9], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' ) 	-- Item Name
+			dxDrawText ( inventory[selectedItemLabel+itOff][7], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )			-- Item Type
+			dxDrawText ( inventory[selectedItemLabel+itOff][8], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )			-- Item Description
 			local sizeX = 128
 			local offX = -32
 			if inventory[selectedItemLabel+itOff][5]/inventory[selectedItemLabel+itOff][6] == 1 then
@@ -586,21 +597,21 @@ function renderDisplay ( )
 		end
 	elseif foodLabelSelected then
 		if selectedFoodLabelID <= #foodInventory then
-			dxDrawText ( foodInventory[selectedFoodLabelID][1], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( foodInventory[selectedFoodLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( foodInventory[selectedFoodLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( foodInventory[selectedFoodLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor (0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..foodInventory[selectedFoodLabelID][2] )
 		end
 	elseif toolLabelSelected then
 		if selectedToolLabelID <= #toolInventory then
-			dxDrawText ( toolInventory[selectedToolLabelID][1], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( toolInventory[selectedToolLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( toolInventory[selectedToolLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( toolInventory[selectedToolLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..toolInventory[selectedToolLabelID][2] )
 		end
 	elseif specLabelSelected then
 		if selectedSpecLabelID <= #inventoryWeap.spec then
-			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][1], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor (0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..inventoryWeap.spec[selectedSpecLabelID][2] )
@@ -738,7 +749,7 @@ function renderDisplay ( )
 			offX = 32
 		end
 		dxDrawImage ( bX-320, bY-230+yOff, offX, 16, 'icons/'..inventory[i+itOff][4] )
-		dxDrawText ( inventory[i+itOff][1], bX-306+offX, bY-230+yOff, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.4, 'sans' )
+		dxDrawText ( inventory[i+itOff][9], bX-306+offX, bY-230+yOff, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.4, 'sans' )
 		if inventory[i+itOff][2] > 0 then
 			dxDrawText ( inventory[i+itOff][2], bX-355, bY-230+yOff, screenWidth, screenHeight, tocolor (0,0,0,255), 1.4, 'sans' )
 		end
