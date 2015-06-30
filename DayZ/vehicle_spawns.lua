@@ -460,7 +460,7 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"parent",veh)
 		setElementData(veh,"parent",vehCol)
 		setElementData(vehCol,"vehicle",true)
-		setElementData(vehCol,"MAX_Slots",0)
+		setElementData(vehCol,"MAX_Slots",1)
 		--Engine + Tires
 		local tires,engine,parts = getVehicleAddonInfos (getElementModel(veh))
 		setElementData(vehCol,"Tire_inVehicle",math.random(0,tires))

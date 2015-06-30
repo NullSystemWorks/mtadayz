@@ -492,7 +492,11 @@ if playerMovedInInventory then startRollMessage2("Inventory", "Abusing explots w
 						setVehicleWheelStates(veh,0)
 					end]]
 				else
-					triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+					if isToolbeltItem(itemName) or getLootCurrentSlots(getElementData(getLocalPlayer(), "currentCol")) + getItemSlots(itemName) <= getLootMaxAviableSlots(isPlayerInLoot()) then
+						triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+					else
+						startRollMessage2("Inventory","Vehicle's inventory is full!",255,22,0)
+					end
 				end
 				playerMovedInInventory = true
 				setTimer(function()

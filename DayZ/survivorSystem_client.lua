@@ -1436,7 +1436,7 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		end
 		damage = getWeaponDamage (weapon)
 		if bodypart == 9 then
-			damage = damage*1.5
+			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
 		end
 		if bodypart == 7 or bodypart == 8 then
@@ -1521,7 +1521,7 @@ function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		elseif weapon and weapon > 1 and attacker and getElementType(attacker) == "player" then
 			damage = getWeaponDamage (weapon)
 			if bodypart == 9 then
-				damage = damage*1.5
+				damage = damage*gameplayVariables["headshotdamage_zombie"]
 				headshot = true
 			end
 				setElementData(source,"blood",getElementData(source,"blood")-damage)
@@ -2116,7 +2116,7 @@ function updateIcons ()
 			local tires = getElementData(getElementData(veh,"parent"),"Tire_inVehicle") or 0
 			local parts = getElementData(getElementData(veh,"parent"),"Parts_inVehicle") or 0
 			local offset = dxGetFontHeight(1.02,"default-bold")
-			local w = dxGetTextWidth(engine.."/"..needengine.." Engine",1.02,"default-bold")
+			--local w = dxGetTextWidth(engine.."/"..needengine.." Engine",1.02,"default-bold")
 			if engine == needengine then
 				r,g,b = 0,255,0
 				number = 1
@@ -2126,7 +2126,7 @@ function updateIcons ()
 			end
 			--dxDrawText (engine.."/"..needengine.." Engine" ,screenWidth*0.5-w/2 , screenHeight*0,screenWidth*0.5-w/2 , screenHeight*0,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
 			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/eng_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
-			local w = dxGetTextWidth(tires.."/"..needtires.." Tires",1.02,"default-bold")
+			--local w = dxGetTextWidth(tires.."/"..needtires.." Tires",1.02,"default-bold")
 			if tires == needtires then
 				r,g,b = 0,255,0
 				number = 1
@@ -2136,7 +2136,7 @@ function updateIcons ()
 			end
 			--dxDrawText (tires.."/"..needtires.." Tires",screenWidth*0.5-w/2 , screenHeight*0+offset,screenWidth*0.5-w/2 , screenHeight*0+offset,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
 			dxDrawImage(screenW * 0.5175, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/whl/whl_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
-			local w = dxGetTextWidth(parts.."/"..needparts.." Tank Parts",1.02,"default-bold")
+			--local w = dxGetTextWidth(parts.."/"..needparts.." Tank Parts",1.02,"default-bold")
 			if parts == needparts then
 				r,g,b = 0,255,0
 				number = 1
@@ -2146,7 +2146,7 @@ function updateIcons ()
 			end
 			--dxDrawText (parts.."/"..needparts.." Tank Parts",screenWidth*0.5-w/2 , screenHeight*0+offset*2,screenWidth*0.5-w/2 , screenHeight*0+offset, tocolor (r,g,b, 220 ) , 1.02, "default-bold" )
 			dxDrawImage(screenW * 0.5787, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/tank/tank_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
-			local w = dxGetTextWidth("Fuel:"..math.floor(fuel).."/"..maxfuel,1.02,"default-bold")
+			--local w = dxGetTextWidth("Fuel:"..math.floor(fuel).."/"..maxfuel,1.02,"default-bold")
 			--[[if fuel == maxfuel then
 				r,g,b = 0,255,0
 				number = 100
@@ -2162,33 +2162,36 @@ function updateIcons ()
 				r,g,b = 50,200,0
 			end]]
 			-- a*100/b
-			if fuel == maxfuel then
-				number = 100
-			elseif fuel >= (maxfuel*99)/100 then
-				number = 90
-			elseif fuel >= (maxfuel*90)/100 then 
-				number = 90
-			elseif fuel >= (maxfuel*80)/100 then
-				number = 80
-			elseif fuel >= (maxfuel*70)/100 then
-				number = 70
-			elseif fuel >= (maxfuel*60)/100 then
-				number = 60
-			elseif fuel >= (maxfuel*50)/100 then
-				number = 50
-			elseif fuel >= (maxfuel*40)/100 then
-				number = 40
-			elseif fuel >= (maxfuel*30)/100 then
-				number = 30
-			elseif fuel >= (maxfuel*20)/100 then
-				number = 20
-			elseif fuel >= (maxfuel*1)/100 then
-				number = 10
-			elseif fuel == (maxfuel*0)/100 then
-				number = 0
-			end
+			if getElementModel(veh) ~= 509 then
+				if fuel == maxfuel then
+					number = 100
+				elseif fuel >= (maxfuel*99)/100 then
+					number = 90
+				elseif fuel >= (maxfuel*90)/100 then 
+					number = 90
+				elseif fuel >= (maxfuel*80)/100 then
+					number = 80
+				elseif fuel >= (maxfuel*70)/100 then
+					number = 70
+				elseif fuel >= (maxfuel*60)/100 then
+					number = 60
+				elseif fuel >= (maxfuel*50)/100 then
+					number = 50
+				elseif fuel >= (maxfuel*40)/100 then
+					number = 40
+				elseif fuel >= (maxfuel*30)/100 then
+					number = 30
+				elseif fuel >= (maxfuel*20)/100 then
+					number = 20
+				elseif fuel >= (maxfuel*1)/100 then
+					number = 10
+				elseif fuel == (maxfuel*0)/100 then
+					number = 0
+				end
+			
 			--dxDrawText ("Fuel:"..math.floor(fuel).."/"..maxfuel,screenWidth*0.5-w/2 , screenHeight*0+offset*3,screenWidth*0.5-w/2 , screenHeight*0+offset*2,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
 			dxDrawImage(screenW * 0.4975, screenH * -0.0983, screenW * 0.0200, screenH * 0.2750, "images/dayzicons/vehicle/fuel/"..number..".png", 270, 0, 0, tocolor(255, 255, 255, 255), false)
+			end
 			local veh_health = getElementHealth(veh)/10
 			if veh_health == 100 and veh_health >= 51 then
 				number = 0

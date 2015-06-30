@@ -34,9 +34,11 @@ gameplayVariables = {}
 -- MISC
 	gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: true - SET TO false to disable - remember you need to set it in editor_server.lua too.
 
--- LANGUAGE
-	gameplayVariables["serverLocale"] = "en_EN" -- Sets server default language must mach the one set in editor_client.lua DEFAULT: en_EN // Posible values: en_EN (English), es_ES (Spanish), ar_AR (Arabic), de_DE (German), pt_PT (Portuguese), fr_FR (French), pl_PL (Polish)
-
+-- HEADSHOT MULTIPLIER
+	gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
+	gameplayVariables["headshotdamage_zombie"] = 1.5 -- Multiplier for damage on head shot (zombies). DEFAULT: 1.5, EXAMPLE: damage*1.5
+	
+	
 -- WEAPON DAMAGE
 damageTable = {
 -- {"WEAPON NAME",DAMAGE},
