@@ -110,6 +110,7 @@ function checkLoss()
 			else -- If packet loss was corrected then reset counter
 				lossCount[v] = 0
 				isLosingConnection = false
+				triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
 			end
 		end
 	end
