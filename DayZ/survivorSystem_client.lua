@@ -3179,7 +3179,8 @@ local speed = 16
 local animTimer
 checkForHandler = false
 
-function onPlayerProne(state) 
+function onPlayerProne(state)
+	if not gameplayVariables["enableProne"] then return end
 	proned = state
 	
 	--NOTE: We had to re-apply the animation clientside due to a positioning bug with GTA. Go along with it.
@@ -3216,6 +3217,9 @@ function()
 end)
 
 function moveWhileProne()
+	--Check whether prone is enabled or not
+	if not gameplayVariables["enableprone"] then return false end--
+
 	_pos = proneObject:getPosition()
 	playerPosX, playerPosY, playerPosZ = getElementPosition(localPlayer)
 	local bX,bY,bZ = getPedBonePosition(localPlayer,8)
