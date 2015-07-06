@@ -288,7 +288,9 @@ end
 dayzVehicles = {}
 function spawnDayZVehicles()
 	if getElementData(getRootElement(),"serverhasloadvehicles") then return end
+	v_counter = 0
 	for i,veh in ipairs(pickupSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(422,x,y,z)
 		vehCol = createColSphere(x,y,z,2)
@@ -306,8 +308,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{422,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(patriotSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(470,x,y,z)
 		vehCol = createColSphere(x,y,z,2.5)
@@ -325,6 +329,7 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{470,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 		for i,items in ipairs(lootItems["helicrashsides"]) do
 			local randomNumber = math.random(1,10)
 			if randomNumber == 5 then
@@ -333,6 +338,7 @@ function spawnDayZVehicles()
 		end
 	end
 	for i,veh in ipairs(sanchezSpanws) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(468,x,y,z)
 		vehCol = createColSphere(x,y,z,1.5)
@@ -350,8 +356,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{468,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(barracksSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(433,x,y,z)
 		vehCol = createColSphere(x,y,z,4)
@@ -369,6 +377,7 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{433,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 		for i,items in ipairs(lootItems["helicrashsides"]) do
 			local randomNumber = math.random(1,10)
 			if randomNumber == 5 then
@@ -377,6 +386,7 @@ function spawnDayZVehicles()
 		end
 	end
 	for i,veh in ipairs(coachSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(437,x,y,z)
 		vehCol = createColSphere(x,y,z,4)
@@ -394,8 +404,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{437,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(camperSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(483,x,y,z)
 		vehCol = createColSphere(x,y,z,4)
@@ -413,8 +425,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{483,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",15)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(journeySpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(508,x,y,z)
 		vehCol = createColSphere(x,y,z,4)
@@ -432,8 +446,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{508,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",15)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(fisherBootSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(453,x,y,z)
 		vehCol = createColSphere(x,y,z,4)
@@ -451,8 +467,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{453,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,veh in ipairs(bikeSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = veh[1],veh[2],veh[3]
 		veh = createVehicle(509,x,y,z)
 		vehCol = createColSphere(x,y,z,2)
@@ -470,8 +488,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{509,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",0)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 	for i,tent in ipairs(tentSpawns) do
+		v_counter = v_counter+1
 		local x,y,z = tent[1],tent[2],tent[3]
 		tent = createObject(3243,x,y,z-1)
 		setObjectScale(tent,0.5)
@@ -482,8 +502,10 @@ function spawnDayZVehicles()
 		setElementData(tentCol,"tent",true)
 		setElementData(tentCol,"vehicle",true)
 		setElementData(tentCol,"MAX_Slots",30)
+		setElementData(vehCol,"veh_ID",v_counter)
 	end
 		--Maverik
+		v_counter = v_counter+1
 		local item_id = math.random(table.size(maverikSpawns))
 		local x,y,z = maverikSpawns[item_id][1],maverikSpawns[item_id][2],maverikSpawns[item_id][3]
 		hunter = createVehicle(487,x,y,z)
@@ -502,8 +524,10 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{487,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 	
 		--Police Maverik
+		v_counter = v_counter+1
 		local item_id = math.random(table.size(hunterSpawns))
 		local x,y,z = hunterSpawns[item_id][1],hunterSpawns[item_id][2],hunterSpawns[item_id][3]
 		hunter = createVehicle(497,x,y,z)
@@ -522,6 +546,7 @@ function spawnDayZVehicles()
 		setElementData(vehCol,"spawn",{497,x,y,z})
 		--others
 		setElementData(vehCol,"fuel",10)
+		setElementData(vehCol,"veh_ID",v_counter)
 end
 
 --spawnDayZVehicles()
@@ -670,7 +695,7 @@ function onPlayerEnterDayzVehicle(veh,seat)
 		setElementData(col,"Parts_inVehicle",math.random(0,parts))
 	end
 	if (getElementData(col,"fuel") or 0) <= 1 then
-		if not getElementModel(veh) == 509 then
+		if getElementModel(veh) ~= 509 then
 			triggerClientEvent (source, "displayClientInfo", source,"Vehicle","No tank left in this vehicle!",22,255,0)
 			setVehicleEngineState ( veh, false )
 			return

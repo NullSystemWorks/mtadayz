@@ -37,6 +37,8 @@ gameplayVariables = {}
 	gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter DEFAULT: 10
 	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
 	gameplayVariables["serverLocale"] = "en_EN" -- Sets server default language must mach the one set in editor_client.lua DEFAULT: en_EN // Posible values: en_EN (English), es_ES (Spanish), ar_AR (Arabic), de_DE (German), pt_PT (Portuguese), fr_FR (French), pl_PL (Polish)
+	gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players - DEFAULT: true
+	
 	
 -- SERVER BACKUP
 	gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

@@ -864,6 +864,9 @@ skinTable = {
 {"Civilian Clothing",179},
 {"Ghillie Suit",285},
 {"Survivor Clothing",73},
+
+{"Survivor Clothing (Female)",192},
+{"Civilian Clothing (Female)",172},
 }
 
 function getSkinIDFromName(name)
@@ -885,17 +888,30 @@ end
 function addPlayerSkin(skin)
 	local current = getElementData(source,"skin")
 	local name = getSkinNameFromID(current)
-	--setElementData(source,name,getElementData(source,name)+1)
-	setElementData(source,skin,getElementData(source,skin)-1)
 	local id = getSkinIDFromName(skin)
-	setElementData(source,"skin",id)
-	setElementModel(source,id)
-	triggerClientEvent(source,"refreshInventoryManual",source)
+	local gender = getElementData(source,"gender")
+	if gender == "female" then
+		if id == 172 or id == 192 or id == 285 then
+			setElementData(source,skin,getElementData(source,skin)-1)
+			setElementData(source,"skin",id)
+			setElementModel(source,id)
+			triggerClientEvent(source,"refreshInventoryManual",source)
+		else
+			outputChatBox("You can't wear this!",source,255,0,0,true)
+		end
+	else
+		if id == 172 or id == 192 then
+			outputChatBox("You can't wear this!",source,255,0,0,true)
+		else
+			setElementData(source,skin,getElementData(source,skin)-1)
+			setElementData(source,"skin",id)
+			setElementModel(source,id)
+			triggerClientEvent(source,"refreshInventoryManual",source)
+		end
+	end
 end
 addEvent("onPlayerChangeSkin",true)
 addEventHandler("onPlayerChangeSkin",getRootElement(),addPlayerSkin)
-
-
 
 function onPlayerRefillWaterBottle (itemName)
 	if isElementInWater(source) then
@@ -1138,17 +1154,25 @@ function checkBandit ()
 		if getElementData(player,"logedin") then
 			local current = getElementData(player,"skin")
 			if getElementData(player,"bandit") then
-				if current == 179 or current == 287 then
-					setElementModel(player,288)
-				elseif current == 73 then
-					setElementModel(player,180)
+				if getElementData(player,"gender") == "male" then
+					if current == 179 or current == 287 then
+						setElementModel(player,288)
+					elseif current == 73 then
+						setElementModel(player,180)
+					end
+				elseif getElementData(player,"gender") == "female" then
+					if current == 192 then
+						setElementModel(player,191)
+					elseif current == 172 then
+						setElementModel(player,211)
+					end
 				end
 			elseif getElementData(player,"humanity") == 5000 then
-				if current == 73 or current == 179 or current == 287 then
+				if current == 73 or current == 179 or current == 287 or current == 172 or current == 192 then
 					setElementModel(player,210)
 				end
 			else
-				setElementModel(player,getElementData(player,"skin"))
+				setElementModel(player,current)
 			end
 		end
 	end
@@ -1515,17 +1539,19 @@ function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
 		setTimer(function() setPedAnimation (player,false) end,1300,1)
+		lying = false
 	else
 		if isPedInVehicle(player) then return end
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
-		outputChatBox("Attention! Moving while prone is currently bugged. Do not move while near buildings or objects! If you do that, you will fall through the map!",player,255,0,0,false)
+		lying = true
 		
 		local x,y,z = getElementPosition(player)
 		setElementPosition(player,x,y,z) --Move the player up a little (due to a bug)
 	end
-	
-	lying = not lying
-	triggerClientEvent(player,"onPlayerProne",player,lying)
+	if gameplayVariables["enableprone"] then
+		outputChatBox("Attention! Moving while prone is currently bugged. Do not move while near buildings or objects! If you do that, you will fall through the map!",player,255,0,0,false)
+		triggerClientEvent(player,"onPlayerProne",player,lying)
+	end
 end
 
 

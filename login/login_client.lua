@@ -1,6 +1,6 @@
 resourceRoot = getResourceRootElement( getThisResource( ) )
 localPlayer = getLocalPlayer()
-versionstring = "MTA:DayZ\nVersion: 0.8.1a\nLast Update: 24.06.15"
+versionstring = "MTA:DayZ\nVersion: 0.9.0a\nLast Update: 20.07.15"
 infoTable = {}
 Login_Edit = {}
 marwinButtons = {}
@@ -31,8 +31,6 @@ font[3] = guiCreateFont( "font.ttf", 24*scale )
 function onJoinPlayTrack()
 	sound = playSound("dayzsoundtrack.mp3",true)
 end
---addEvent("onJoinPlayTrack",true)
---addEventHandler("onClientResourceStart",root,onJoinPlayTrack)
 
 function callClientFunction(funcname, ...)
     local arg = { ... }
@@ -106,12 +104,6 @@ function build_loginWin()
 		infoTable["pass"] = ""
 	end
 	xmlSaveFile(confFile)
-	--is this even needed?
-	--[[confFile = xmlLoadFile("@preferences.xml")
-	if (confFile) then
-		xmlNodeSetAttribute(confFile,"username","")
-		xmlNodeSetAttribute(confFile,"pass","")
-	end]]
 	--Create Window
 	--Background
 		background_front = guiCreateStaticImage( 0.2, 0.25, 0.6, 0.5, "images/background_1.png", true )
@@ -126,7 +118,6 @@ function build_loginWin()
 			guiLabelSetHorizontalAlign (guestInfo, "center")
 			guiLabelSetColor ( guestInfo,50,255,50)	
 		--Login
-			--login_box = guiCreateStaticImage( 0.025, 0.1, 0.325, 0.85, "images/box_background.png", true , background_front)
 			loginButton = createMarwinButton(0.1,0.825,0.175,0.1,"Login",true,background_front,"login")
 			--Text
 			loginInfo = guiCreateLabel(0.025, 0.46, 0.325, 0.175,"Login!",true,background_front)
@@ -148,7 +139,6 @@ function build_loginWin()
 					Login_Edit[2] = guiCreateEdit(0.1, 0.725, 0.175, 0.055, infoTable["pass"], true,background_front)
 					guiEditSetMasked(Login_Edit[2],true)
 		--Register
-			--register_box = guiCreateStaticImage( 0.375, 0.45, 0.325, 0.5, "images/box_background.png", true , background_front)
 			registerButton = createMarwinButton(0.45,0.825,0.175,0.1,"Register",true,background_front,"register")
 			--Text
 			registerInfo = guiCreateLabel(0.375, 0.15, 0.325, 0.1,"Register!",true,background_front)
@@ -177,9 +167,9 @@ function build_loginWin()
 					Login_Edit[5] = guiCreateEdit(0.45, 0.55, 0.175, 0.055, "", true,background_front)		
 					guiEditSetMasked(Login_Edit[5],true)
 				--Gender
-                male = guiCreateRadioButton(0.46, 0.65, 0.15, 0.05, "Male", true, background_front)
-                female = guiCreateRadioButton(0.46, 0.71, 0.15, 0.05, "Female", true, background_front)
-                selected = guiRadioButtonSetSelected(male,true)
+                Login_Edit[6] = guiCreateRadioButton(0.46, 0.65, 0.15, 0.05, "Male", true, background_front)
+                Login_Edit[7] = guiCreateRadioButton(0.46, 0.71, 0.15, 0.05, "Female", true, background_front)
+                guiRadioButtonSetSelected(Login_Edit[6],true)
 		--News/Updates
 			--News Headline
 				newsH = guiCreateLabel(0.726, 0.115, 0.25, 0.05,"News:",true,background_front)
@@ -238,13 +228,20 @@ function clickPanelButton (button, state)
 			else
 				reason = "Missing Password or Username!"
 				outputChatBox("[LOGIN ERROR]#FF9900 "..reason,255,255,255,true)
+				return false
 			end
 		elseif info and info == "guest" then  
 				showLoginWindow(false)
 		elseif info and info == "register" then  
 				local username = guiGetText(Login_Edit[3])
 				local pass1 = guiGetText(Login_Edit[4])
-				local pass2 = guiGetText(Login_Edit[5])				
+				local pass2 = guiGetText(Login_Edit[5])
+				local gender = guiRadioButtonGetSelected(Login_Edit[6])
+				if gender then
+					setElementData(localPlayer,"gender","male")
+				else
+					setElementData(localPlayer,"gender","female")
+				end				
 				if not (tostring(username) == "") then
 					if not (tostring(pass1) == "") then
 						if pass1 == pass2 then
@@ -255,14 +252,17 @@ function clickPanelButton (button, state)
 						else
 							reason = "Passwords do not match!"
 							outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
+							return false
 						end
 					else
 						reason = "No password was entered!"
 						outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
+						return false
 					end
 				else
 					reason = "No username was entered!"
 					outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
+					return false
 				end	
 			end
 		end

@@ -64,10 +64,29 @@ function spawnDayZAnimals()
 		animal = createPed(math.random(12,16), x,y,z)
 		setElementRotation(animal,rX,rY,0,"default",true)
 		setElementData(animal,"animal",true)
+		--setPedAnimation (animal, "RYDER", "RYD_Die_PT1", -1, true, true, true)
+		setPedAnimation (animal, "ped", "Player_Sneak", -1, true, true, true)
 	end
 end	
 
 spawnDayZAnimals()
+
+function animalMovement(ped)
+	local rotation = math.random(1,359)
+	setPedRotation(ped,rotation)
+	setPedAnimation (ped, "ped", "Player_Sneak", -1, true, true, true)
+end
+addEvent("onAnimalsMove",true)
+addEventHandler("onAnimalsMove",getRootElement(),animalMovement)
+
+function checkAnimals()
+	for i,ped in ipairs(getElementsByType("ped")) do
+		if getElementData(ped,"animal") and not getElementData(ped,"deadman") then
+			triggerEvent("onAnimalsMove",getRootElement(),ped)
+		end
+    end
+end
+setTimer(checkAnimals,5000,0)
 
 function destroyDeadAnimal (ped,pedCol,x,y,z)
 	local ped = createPed(skin,x,y,z)

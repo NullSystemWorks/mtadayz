@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.8.2.1a"
+		dayzVersion = "MTA:DayZ 0.9.0a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -59,6 +59,26 @@ snipertxd = engineLoadTXD ("mods/playerskins/army.txd");
 engineImportTXD (snipertxd, 287);
 sniperdff = engineLoadDFF ("mods/playerskins/army.dff", 287);
 engineReplaceModel (sniperdff, 287);
+--Standard (Female)
+snipertxd = engineLoadTXD ("mods/playerskins/femalestandard.txd");
+engineImportTXD (snipertxd, 192);
+sniperdff = engineLoadDFF ("mods/playerskins/femalestandard.dff", 192);
+engineReplaceModel (sniperdff, 192);
+--Civilian (Female)
+snipertxd = engineLoadTXD ("mods/playerskins/civilian_female.txd");
+engineImportTXD (snipertxd, 172);
+sniperdff = engineLoadDFF ("mods/playerskins/civilian_female.dff", 172);
+engineReplaceModel (sniperdff, 172);
+-- Bandit 1 (Female)
+snipertxd = engineLoadTXD ("mods/playerskins/bandit_female1.txd");
+engineImportTXD (snipertxd, 191);
+sniperdff = engineLoadDFF ("mods/playerskins/bandit_female1.dff", 191);
+engineReplaceModel (sniperdff, 191);
+-- Bandit 2 (Female)
+snipertxd = engineLoadTXD ("mods/playerskins/bandit_female2.txd");
+engineImportTXD (snipertxd, 211);
+sniperdff = engineLoadDFF ("mods/playerskins/bandit_female2.dff", 211);
+engineReplaceModel (sniperdff, 211);
 
 
 --Items
@@ -459,9 +479,11 @@ local ambiencesounds = {
 }
 
 function playAmbienceMusic()
-	playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
+	if getElementData(localPlayer,"logedin") then
+		playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
+	end
 end
-setTimer(playAmbienceMusic,25000,0)
+setTimer(playAmbienceMusic,65000,0)
 
 function PlayCityAmbience()
 local x,y,z = getElementPosition(localPlayer)
@@ -1076,12 +1098,12 @@ local zedSound = false
 function playZombieSounds()
 local zombies = getElementsByType("ped")
 	for theKey,theZomb in ipairs(zombies) do
-		if theZomb and isElement(theZomb) and isElementStreamedIn(theZomb) then
+		if theZomb and isElement(theZomb) and isElementStreamedIn(theZomb) and getElementData(theZomb,"zombie") and not getElementData(theZomb,"animal") then
 			local Zx,Zy,Zz = getElementPosition(theZomb)
 			zedSound = playSound3D(zombiesounds[math.random(1,#zombiesounds)], Zx, Zy, Zz, false)
 			setSoundMaxDistance(zedSound,5)
 		end
-		if getElementData(theZomb,"deadzombie") then
+		if getElementData(theZomb,"deadman") then
 			if zedSound then
 				stopSound(zedSound)
 			end
@@ -1401,11 +1423,15 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	cancelEvent()
 	damage = 100
 	headshot = false
+	damage_half = 1
 	if weapon == 37 then
 		return
 	end
 	if getElementData(attacker,"zombie") then
-		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-gameplayVariables["zombiedamage"])
+		if getElementData(localPlayer,"humanity") >= 5000 then
+			damage_half = 2
+		end
+		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-(gameplayVariables["zombiedamage"]/damage_half))
 		local number = math.random(1,7)
 		if number == 4 then
 			setElementData(getLocalPlayer(),"bleeding",getElementData(getLocalPlayer(),"bleeding") + math.floor(loss*10))
@@ -1435,6 +1461,9 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			setElementData(getLocalPlayer(),"pain",true)
 		end
 		damage = getWeaponDamage (weapon)
+		if damage <= 1000 then
+			damage = 0
+		end
 		if bodypart == 9 then
 			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
@@ -2192,12 +2221,12 @@ function updateIcons ()
 			--dxDrawText ("Fuel:"..math.floor(fuel).."/"..maxfuel,screenWidth*0.5-w/2 , screenHeight*0+offset*3,screenWidth*0.5-w/2 , screenHeight*0+offset*2,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
 			dxDrawImage(screenW * 0.4975, screenH * -0.0983, screenW * 0.0200, screenH * 0.2750, "images/dayzicons/vehicle/fuel/"..number..".png", 270, 0, 0, tocolor(255, 255, 255, 255), false)
 			end
-			local veh_health = getElementHealth(veh)/10
-			if veh_health == 100 and veh_health >= 51 then
+			local veh_health = getElementHealth(veh)
+			if veh_health <= 1000 and veh_health >= 510 then
 				number = 0
-			elseif veh_health <= 50 and veh_health >= 31 then
+			elseif veh_health <= 500 and veh_health >= 310 then
 				number = 1
-			elseif veh_health <= 30 and veh_health >= 0 then
+			elseif veh_health <= 300 and veh_health >= 0 then
 				number = 2
 			end
 			dxDrawImage(screenW * 0.3950, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/hull/hull_"..number..".png", 0, 0, 0, tocolor(255,255,255,255), false)
@@ -3180,7 +3209,6 @@ local animTimer
 checkForHandler = false
 
 function onPlayerProne(state)
-	if not gameplayVariables["enableProne"] then return end
 	proned = state
 	
 	--NOTE: We had to re-apply the animation clientside due to a positioning bug with GTA. Go along with it.
@@ -3217,9 +3245,6 @@ function()
 end)
 
 function moveWhileProne()
-	--Check whether prone is enabled or not
-	if not gameplayVariables["enableprone"] then return false end--
-
 	_pos = proneObject:getPosition()
 	playerPosX, playerPosY, playerPosZ = getElementPosition(localPlayer)
 	local bX,bY,bZ = getPedBonePosition(localPlayer,8)

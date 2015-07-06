@@ -29,10 +29,12 @@ function tryToLoginPlayer (username, password)
 			return false
 		end
 	end
-	
 	--Proceed with logging in...
 	local account = getAccount(username, password)
-	if account then
+	if not account then
+		outputChatBox("[LOGIN ERROR]#FF9900 Account does not exist, try registering!",source,255,255,255,true)
+		return false
+	elseif account then
 		local accountName = getAccountName(account)
 		logIn(source, account, password)
 		triggerClientEvent(source,"onPlayerDoneLogin", source, accountName, password)		
@@ -43,8 +45,6 @@ function tryToLoginPlayer (username, password)
 		local seconds = theTime.second
 		local theAccount = getPlayerAccount(client)
 		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client).."\n","accounts")
-	else
-		outputChatBox("[LOGIN ERROR]#FF9900 Wrong password or username!",source,255,255,255,true)
 	end
 end
 addEvent("onClientSendLoginDataToServer", true)
@@ -76,10 +76,12 @@ function tryToRegsiterPlayer(username, pass)
 			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client).."\n","accounts")
 			return true
 		else
-			reason = "Unknown Error!"
+			reason = "Was unable to add account!"
+			return false
 		end
 	else
 		reason = "Account already exists!"
+		return false
 	end
 	
 	outputChatBox("[LOGIN ERROR]#FF9900 "..reason,source,255,255,255,true)

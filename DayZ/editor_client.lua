@@ -38,8 +38,6 @@ gameplayVariables = {}
 	gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
 	gameplayVariables["headshotdamage_zombie"] = 1.5 -- Multiplier for damage on head shot (zombies). DEFAULT: 1.5, EXAMPLE: damage*1.5
 
--- PRONE TOGGLER
-	gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players.
 	
 -- WEAPON DAMAGE
 damageTable = {

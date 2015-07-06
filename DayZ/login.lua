@@ -154,6 +154,8 @@ local playerDataTable = {
 {"Camouflage Clothing"},
 {"Civilian Clothing"},
 {"Survivor Clothing"},
+{"Survivor Clothing (Female)"},
+{"Civilian Clothing (Female)"},
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
@@ -256,16 +258,42 @@ local playerDataTable = {
 {"Metal Plate"},
 {"Metallic Stick"},
 {"Small Casing"},
-
 }
-
-
+--[[
+addEventHandler("onResourceStart",getResourceRootElement(getThisResource()), function()
+	vehicledatabase = dbConnect("sqlite", "database/vehicles.db","","","share=1")
+	tentdatabase = dbConnect("sqlite", "database/tents.db","","","share=1")
+	local vehicle_table = dbExec(vehicledatabase, "CREATE TABLE IF NOT EXISTS vehicles (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, fuel FLOAT, Tire_inVehicle INT, Engine_inVehicle INT, Parts_inVehicle INT, Items TEXT, ID INT)")
+	local tents_table = dbExec(tentdatabase, "CREATE TABLE IF NOT EXISTS tents (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, tent_Scale FLOAT, Items TEXT, ID INT)")
+	if vehicledatabase then
+		outputServerLog("[DayZ] CONNECTED TO VEHICLE DATABASE.")
+	else
+		outputServerLog("[DayZ] FAILED TO CONNECT TO DATABASE 'vehicles'. CHECK IF IT EXISTS.")
+	end
+	if tentdatabase then
+		outputServerLog("[DayZ] CONNECTED TO TENT DATABASE.")
+	else
+		outputServerLog("[DayZ] FAILED TO CONNECT TO DATABASE 'tents'. CHECK IF IT EXISTS.")
+	end
+	if tents_table then
+		outputServerLog("[DayZ] Table 'tents' has been created.")
+	else
+		outputServerLog("[DayZ] Failed to create table 'tents'!")
+	end
+	if vehicle_table then
+		outputServerLog("[DayZ] Table 'vehicles' has been created.")
+	else
+		outputServerLog("[DayZ] Failed to create table 'vehicles'!")
+	end
+end)
+]]
 
 function playerLogin(username, pass, player)
 	local playerID = getAccountData(getPlayerAccount(player),"playerID")
 	account = getPlayerAccount(player)
 	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
 	local skin = getAccountData(account,"skin")
+	local gender = getAccountData(account,"gender")
 	createZombieTable (player)
 	if getAccountData(account,"isDead") then
 		spawnDayZPlayer(player)
@@ -285,6 +313,7 @@ function playerLogin(username, pass, player)
 	attachElements ( playerCol, player, 0, 0, 0 )
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
+	setElementData(player,"gender",gender)
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
@@ -328,7 +357,14 @@ addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
 function playerRegister(username, pass, player)
 	local number = math.random(table.size(spawnPositions))
 	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-	spawnPlayer (player, x,y,z, math.random(0,360), 73, 0, 0)
+	local skin = 73
+	local gender = getElementData(player, "gender")
+	if gender == "male" then
+		skin = 73
+	elseif gender == "female" then
+		skin = 172
+	end
+	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
 	fadeCamera (player, true)
 	setCameraTarget (player, player)
 	playerCol = createColSphere(x,y,z,1.5)
@@ -346,7 +382,7 @@ function playerRegister(username, pass, player)
 		elseif data[1] =="MAX_Slots" then
 			setElementData(player,data[1],8)
 		elseif data[1] =="skin" then
-			setElementData(player,data[1],73)
+			setElementData(player,data[1],skin)
 		elseif data[1] =="blood" then
 			setElementData(player,data[1],12000)
 		elseif data[1] =="temperature" then
@@ -384,7 +420,6 @@ function playerRegister(username, pass, player)
 	setAccountData(account,"playerID",value+1)
 	setElementData(player,"logedin",true)
 	createZombieTable (player)
-	
 end
 addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
@@ -396,9 +431,11 @@ function savePlayerAccount() -- Save in the database
 		setAccountData(account,data[1],getElementData(source,data[1]))
 	end
 		local x,y,z =  getElementPosition(source)
+		local gender = getElementData(source,"gender")
 		setAccountData(account,"last_x",x)
 		setAccountData(account,"last_y",y)
 		setAccountData(account,"last_z",z)
+		setAccountData(account,"gender",gender)
 		if getElementData(source,"logedin") then
 			destroyElement(getElementData(source,"playerCol"))
 		end
@@ -416,11 +453,12 @@ function saveAllAccounts() -- Save in the database
 				setAccountData(account,data[1],getElementData(player,data[1]))
 			end
 			local x,y,z =  getElementPosition(player)
+			local gender = getElementData(player,"gender")
 			setAccountData(account,"last_x",x)
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
-		end	
-	--setElementData(player,"logedin",false)
+			setAccountData(account,"gender",gender)
+		end
 	end
 	outputServerLog("[DayZ] All accounts have been saved.")
 end
@@ -541,6 +579,8 @@ local vehicleDataTable = {
 {"Civilian Clothing"},
 {"Survivor Clothing"},
 {"Ghillie Suit"},
+{"Survivor Clothing (Female)"},
+{"Civilian Clothing (Female)"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
 {"Assault Pack (ACU)"},
@@ -728,6 +768,7 @@ function saveallvehicles(ps,command)
 	outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN SAVED.")
 end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveallvehicles)
+
 
 function doBackup ()
 	if gameplayVariables["backupenabled"] then

@@ -259,6 +259,8 @@ function checkTheLanguage()
 		languageCode = "en_US"
 	elseif languageCode == "de" then
 		languageCode = "de"
+	elseif languageCode == "cs" then
+		languageCode = "cs"
 	else
 		outputChatBox("No language defined, switching to en_US")
 		languageCode = "en_US"

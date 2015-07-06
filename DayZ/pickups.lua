@@ -1225,6 +1225,19 @@ function table.size(tab)
     return length
 end
 
+function table.merge(table1,...)
+	for _,table2 in ipairs({...}) do
+		for key,value in pairs(table2) do
+			if (type(key) == "number") then
+				table.insert(table1,value)
+			else
+				table1[key] = value
+			end
+		end
+	end
+	return table1
+end
+
 function math.percentChance (percent,repeatTime)
 	local hits = 0
 	for i = 1, repeatTime do
@@ -1324,32 +1337,14 @@ function insertIntoTableResidential()
 	local value_generic = math.random(0,200)/2
 	local value_military = math.random(0,200)/2
 	local value_trash = math.random(0,200)/2
-	for i, item in ipairs(lootpileType["generic"]) do
-		if value_generic <= 56 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				generic_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Residential"],generic_items)
-			end
-		end
+	if value_generic <= 56 then
+		table.merge(buildingClasses["Residential"],lootpileType["generic"])
 	end
-	for i, item in ipairs(lootpileType["military"]) do
-		if value_military <= 1 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				military_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Residential"],military_items)
-			end
-		end
+	if value_military <= 1 then
+		table.merge(buildingClasses["Residential"],lootpileType["military"])
 	end
-	for i, item in ipairs(lootpileType["trash"]) do
-		if value_trash <= 14 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				trash_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Residential"],trash_items)
-			end
-		end
+	if value_trash <= 14 then
+		table.merge(buildingClasses["Residential"],lootpileType["trash"])
 	end
 	setTimer(insertIntoTableIndustrial,30000,1)
 end
@@ -1368,32 +1363,14 @@ local value_generic = math.random(0,200)/2
 local value_military = math.random(0,200)/2
 local value_trash = math.random(0,200)/2
 local value_blueprint = math.random(0,200)/2
-	for i, item in ipairs(lootpileType["generic"]) do
-		if value_generic <= 18 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				generic_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Industrial"],generic_items)
-			end
-		end
+	if value_generic <= 18 then
+		table.merge(buildingClasses["Industrial"],lootpileType["generic"])
 	end
-	for i, item in ipairs(lootpileType["military"]) do
-		if value_military <= 4  then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				military_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Industrial"],military_items)
-			end
-		end
+	if value_military <= 4  then
+		table.merge(buildingClasses["Industrial"],lootpileType["military"])
 	end
-	for i, item in ipairs(lootpileType["trash"]) do
-		if value_trash <= 28 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				trash_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Industrial"],trash_items)
-			end
-		end
+	if value_trash <= 28 then
+		table.merge(buildingClasses["Industrial"],lootpileType["trash"])
 	end
 	for i,item in ipairs(lootpileType["BlueprintParts"]) do
 		if value_blueprint <= 10 then
@@ -1419,23 +1396,11 @@ function insertIntoTableFarm()
 local value_generic = math.random(0,200)/2
 local value_military = math.random(0,200)/2
 local value_trash = math.random(0,200)/2
-	for i, item in ipairs(lootpileType["generic"]) do
-		if value_generic <= 27 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				generic_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Farm"],generic_items)
-			end
-		end
+	if value_generic <= 27 then
+		table.merge(buildingClasses["Farm"],lootpileType["generic"])
 	end
-	for i, item in ipairs(lootpileType["trash"]) do
-		if value_trash <= 22 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				trash_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Farm"],trash_items)
-			end
-		end
+	if value_trash <= 22 then
+		table.merge(buildingClasses["Farm"],lootpileType["trash"])
 	end
 	setTimer(insertIntoTableSuperMarket,30000,1)
 end
@@ -1452,32 +1417,14 @@ function insertIntoTableSuperMarket()
 local value_generic = math.random(0,200)/2
 local value_military = math.random(0,200)/2
 local value_trash = math.random(0,200)/2
-	for i, item in ipairs(lootpileType["generic"]) do
-		if value_generic <= 5 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				generic_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Supermarket"],generic_items)
-			end
-		end
+	if value_generic <= 5 then
+		table.merge(buildingClasses["Supermarket"],lootpileType["generic"])
 	end
-	for i, item in ipairs(lootpileType["food"]) do
-		if value_military <= 28 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				military_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Supermarket"],military_items)
-			end
-		end
+	if value_military <= 28 then
+		table.merge(buildingClasses["Supermarket"],lootpileType["food"])
 	end
-	for i, item in ipairs(lootpileType["trash"]) do
-		if value_trash <= 14 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				trash_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Supermarket"],trash_items)
-			end
-		end
+	if value_trash <= 14 then
+		table.merge(buildingClasses["Supermarket"],lootpileType["trash"])
 	end
 	setTimer(insertIntoTableMilitary,30000,1)
 end
@@ -1494,32 +1441,14 @@ function insertIntoTableMilitary()
 local value_generic = math.random(0,200)/2
 local value_military = math.random(0,200)/2
 local value_trash = math.random(0,200)/2
-	for i, item in ipairs(lootpileType["generic"]) do
-		if value_generic <= 18 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				generic_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Military"],generic_items)
-			end
-		end
+	if value_generic <= 18 then
+		table.merge(buildingClasses["Military"],lootpileType["generic"])
 	end
-	for i, item in ipairs(lootpileType["military"]) do
-		if value_military <= 48 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				military_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Military"],military_items)
-			end
-		end
+	if value_military <= 48 then
+		table.merge(buildingClasses["Military"],lootpileType["military"])
 	end
-	for i, item in ipairs(lootpileType["medical"]) do
-		if value_trash <= 2 then
-			local whatitem = math.percentChance(item[5],math.random(2,5))
-			if item[1] and whatitem == 1 then
-				trash_items = {item[1],item[2],item[3],item[4],item[5]}
-				table.insert(buildingClasses["Military"],trash_items)
-			end
-		end
+	if value_trash <= 2 then
+		table.merge(buildingClasses["Military"],lootpileType["medical"])
 	end
 end
 

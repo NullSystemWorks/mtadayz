@@ -152,6 +152,8 @@ local playerDataTable = {
 {"Camouflage Clothing"},
 {"Civilian Clothing"},
 {"Survivor Clothing"},
+{"Survivor Clothing (Female)"},
+{"Civilian Clothing (Female)"},
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
@@ -369,6 +371,8 @@ local vehicleDataTable = {
 {"Camouflage Clothing"},
 {"Civilian Clothing"},
 {"Survivor Clothing"},
+{"Survivor Clothing (Female)"},
+{"Civilian Clothing (Female)"},
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
@@ -474,12 +478,17 @@ local vehicleDataTable = {
 {"Small Casing"},
 }
 
-
-
 function spawnDayZPlayer(player)
 	local number = math.random(table.size(spawnPositions))
 	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-	spawnPlayer (player, x,y,z, math.random(0,360), 73, 0, 0)
+	local gender = getElementData(player,"gender")
+	local skin = 73
+	if gender == "male" then
+		skin = 73
+	elseif gender == "female" then
+		skin = 172
+	end
+	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
 	fadeCamera (player, true)
 	setCameraTarget (player)
@@ -509,7 +518,7 @@ function spawnDayZPlayer(player)
 		elseif data[1] =="MAX_Slots" then
 			setElementData(player,data[1],8)	
 		elseif data[1] =="skin" then
-			setElementData(player,data[1],73)
+			setElementData(player,data[1],skin)
 		elseif data[1] =="blood" then
 			setElementData(player,data[1],12000)
 		elseif data[1] =="temperature" then
@@ -542,9 +551,6 @@ function spawnDayZPlayer(player)
 	end
 	----------------------------------
 end
---addEvent("onPlayerLoginToDayZ",true)
---addEventHandler("onPlayerLoginToDayZ",getRootElement(),spawnDayZPlayer)
---addEventHandler("onPlayerJoin",getRootElement(),spawnDayZPlayer)
 
 function checkBuggedAccount()
 	for i,player in ipairs(getElementsByType("player")) do
