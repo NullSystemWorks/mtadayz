@@ -844,6 +844,8 @@ function playerUseItem(itemName,itemInfo)
         triggerServerEvent("onPlayerUseMedicObject",getLocalPlayer(),itemName)
     elseif itemName == "Bandage" then
         triggerServerEvent("onPlayerUseMedicObject",getLocalPlayer(),itemName)  
+	elseif itemName == "Blood Bag" then
+		triggerServerEvent("onPlayerUseMedicObject",getLocalPlayer(),itemName)
     elseif itemInfo == "Use Googles" then
         triggerServerEvent("onPlayerChangeView",getLocalPlayer(),itemName)  
     elseif itemInfo == "Equip Primary Weapon" then
