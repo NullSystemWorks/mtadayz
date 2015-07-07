@@ -10,6 +10,54 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: For all bugs
 ### SECURITY: To invite users to upgrade in case vulnerabilities
 
+
+# - #
+## [0.9.0a] - 2015-07-20
+
+
+# - #
+## [0.8.3.1a] - 2015-07-02
+### FIXED: Item names not appearing in inventory
+
+# - # 
+## [0.8.3a] - 2015-07-01
+### ADDED: Option for how much damage a headshot should deal for zombies and players (check editor_client.lua, "headshotdamage_")
+### ADDED: Check if player is logged in before it plays ambience music
+### FIXED: Exploit where players could eat and drink items infinitely when said items were in loot and not inventory
+### FIXED: Exploit where players could put more items into a vehicle's inventory than it has slots
+### FIXED: Exploit where players could still drive a vehicle despite having no fuel
+
+# - #
+## [0.8.2.1a] - 2015-06-27
+### FIXED: Game breaking bug where inventory wouldn't appear when prone
+### FIXED: Event not having been added for anticheat (oops on our part!)
+
+# - #
+## [0.8.2a] - 2015-06-26
+### ADDED: All files from previous hotfixes which have not been changed since their last introduction
+### ADDED: 36 new sounds for zombies
+### ADDED: 16 new ambience sounds being played in the background
+### ADDED: Symbol appearing in the lower right corner when losing connection/packets
+### ADDED: Move while prone (press L, currently buggy)
+### CHANGED: Skin for Camouflage Clothing
+### CHANGED: "You have packet loss..." is now "(Player Name) is losing connection..."
+### FIXED: Sound issues with weapons (addon_sounds)
+### FIXED: "You have packet loss..." won't be displayed for every player on the server anymore, just the one who is having packet loss
+### FIXED: "Expecting sound at argument 1, got nil" error spam
+
+# - #
+## [0.8.1a] - 2015-06-24
+### ADDED: Added blips to group system (visible on map only)
+### CHANGED: More tolerance for packet loss check (meaning you won't get kicked out of the server immediately)
+### CHANGED: Lowered volume of soundtrack being played when joining a server
+### CHANGED: Version on login panel now reads 0.8.1a
+### CHANGED:Last Update on login panel now reads 24.06.15
+### FIXED: Bug where there'd be more slots occupied than available in a lootpile (for example, it would show 20/12)
+### FIXED: Bug where Soda (Mountain Dew) not being drinkable
+### FIXED: "Attempt to compare boolean with number" spam
+### FIXED: Bug where some items not appearing on ground when dropping them
+### FIXED: Bug where an equipped weapon being dropped and taken again would result in not having said weapon equipped
+
 # - #
 ## [0.8.0.2a] - 2015-06-22
 ### ADDED: Option to enable/disable automatic start of addons (check editor_server.lua)
