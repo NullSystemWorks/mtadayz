@@ -203,7 +203,10 @@ engineImportTXD (itemTXD, 983);
 itemDFF = engineLoadDFF ("items/wirefence.dff", 983);
 engineReplaceModel (itemDFF, 983);
 
---Weapons
+itemTXD = engineLoadTXD ("items/windscreenglass.txd");
+engineImportTXD (itemTXD, 3104);
+itemDFF = engineLoadDFF ("items/windscreenglass.dff", 3104);
+engineReplaceModel (itemDFF, 3104);
 
 -- Camera -> Binoculars
 weaponTXD = engineLoadTXD ("items/camera.txd");
@@ -220,7 +223,7 @@ engineReplaceModel (weaponDFF, 339);
 -- Knife -> Better Knife
 weaponTXD = engineLoadTXD("mods/weapons/knife.txd");
 engineImportTXD(weaponTXD, 335);
-weaponDFF = engineLoadDFF("mods/weapons/knife.dff", 0);
+weaponDFF = engineLoadDFF("mods/weapons/knife.dff", 355);
 engineReplaceModel(weaponDFF, 335);
 
 local function getRotationOfCamera()
@@ -2126,7 +2129,8 @@ function updateIcons ()
 						if sx and sy then
 							--Draw Vehicle
 							local w = dxGetTextWidth(getVehicleName(veh),1.02,"default-bold")
-							dxDrawText ( getVehicleName(veh), sx-(w/2), sy, sx-(w/2), sy, tocolor ( 100, 255, 100, 200 ), 1.02, "default-bold" )	
+							local vehName = getElementData(getElementData(veh,"parent"),"vehicle_name")
+							dxDrawText ( vehName, sx-(w/2), sy, sx-(w/2), sy, tocolor ( 100, 255, 100, 200 ), 1.02, "default-bold" )	
 						end
 					end
 				end
@@ -2141,20 +2145,42 @@ function updateIcons ()
 			local needengine = getElementData(veh,"needengines")
 			local needtires = getElementData(veh,"needtires")
 			local needparts = getElementData(veh,"needparts")
+			local needscrap = getElementData(veh,"needscrap")
+			local needglass = getElementData(veh,"needglass")
+			local needrotary = getElementData(veh,"needrotary")
+			local vehiclename = getElementData(veh,"vehicle_name")
 			local engine = getElementData(getElementData(veh,"parent"),"Engine_inVehicle") or 0
 			local tires = getElementData(getElementData(veh,"parent"),"Tire_inVehicle") or 0
 			local parts = getElementData(getElementData(veh,"parent"),"Parts_inVehicle") or 0
+			local scrap = getElementData(getElementData(veh,"parent"),"Scrap_inVehicle") or 0
+			local glass = getElementData(getElementData(veh,"parent"),"Glass_inVehicle") or 0
+			local rotary = getElementData(getElementData(veh,"parent"),"Rotary_inVehicle") or 0
 			local offset = dxGetFontHeight(1.02,"default-bold")
 			--local w = dxGetTextWidth(engine.."/"..needengine.." Engine",1.02,"default-bold")
-			if engine == needengine then
-				r,g,b = 0,255,0
-				number = 1
+			local enginetype = ""
+			if needrotary == 0 then
+				if engine == needengine then
+					r,g,b = 0,255,0
+					number = 1
+					enginetype = "eng"
+				else
+					r,g,b = 255,0,0
+					number = 0
+					enginetype = "eng"
+				end
 			else
-				r,g,b = 255,0,0
-				number = 0
+				if rotary == needrotary then
+					r,g,b = 0,255,0
+					number = 1
+					enginetype = "mrot"
+				else
+					r,g,b = 255,0,0
+					number = 0
+					enginetype = "mrot"
+				end
 			end
 			--dxDrawText (engine.."/"..needengine.." Engine" ,screenWidth*0.5-w/2 , screenHeight*0,screenWidth*0.5-w/2 , screenHeight*0,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
-			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/eng_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/"..enginetype.."_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			--local w = dxGetTextWidth(tires.."/"..needtires.." Tires",1.02,"default-bold")
 			if tires == needtires then
 				r,g,b = 0,255,0

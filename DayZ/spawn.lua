@@ -264,6 +264,9 @@ local vehicleDataTable = {
 {"Tire_inVehicle"},
 {"Engine_inVehicle"},
 {"Parts_inVehicle"},
+{"Scrap_inVehicle"},
+{"Glass_inVehicle"},
+{"Rotary_inVehicle"},
 {"fuel"},
 
 -- [[ Weapons ]] --

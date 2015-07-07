@@ -101,6 +101,9 @@ local vehicleDataTableForTent = {
 {"Tire"},
 {"Engine"},
 {"Tank Parts"},
+{"Scrap Metal"},
+{"Main Rotary Parts"},
+{"Windscreen Glass"},
 {"Tent"},
 {"Box of Matches"},
 {"Watch"},
@@ -124,6 +127,8 @@ local vehicleDataTableForTent = {
 {"Czech Vest Pouch"},
 {"Backpack (Coyote)"},
 {"Czech Backpack"},
+{"San Fierro Carrier Keycard"},
+{"Area 69 Keycard"},
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
@@ -654,7 +659,7 @@ end
 function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
-			value = 0
+			local value = 0
 			-- Winter
 			if getWeather == 1 then
 				value = -0.6
@@ -1198,14 +1203,14 @@ end
 
 function outputInfo3 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum.",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum: mtadayz.heliohost.org",200,200,22)
 	end
 	setTimer(outputInfo4,infoTimer,1)
 end
 
 function outputInfo4 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.8a",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.0a",200,200,22)
 	end
 	setTimer(outputInfo5,infoTimer,1)
 end
@@ -1228,7 +1233,7 @@ function getTeamMemberOnline ()
 		end
 	end
 	if theTableMembersOnline == "" then
-		return "None"
+		return "N/A"
 	else
 		return theTableMembersOnline
 	end
@@ -1705,3 +1710,69 @@ function checkFenceOwner(element,ownerData)
 end
 addEvent("checkFenceOwner",true)
 addEventHandler("checkFenceOwner",root,checkFenceOwner)
+
+
+-- Block for San Fierro Carrier and Area 69 unless player has the corresponding keycard
+areaDoor_1 = createObject(8948,217.39999389648,1875.9000244141,13.89999961853,0,0,272)
+areaDoor_2 = createObject(8948,210.10000610352,1875.6999511719,13.89999961853,0,0,272)
+areaDoorCol = createColCuboid(210,1875,12,8,4,4)
+areaSign = createObject(3927,218.10000610352,1877.1999511719,12.699999809265,0,0,264)
+	
+carrierDoor = createObject(2938,-1422.5,494.89999389648,4.6999998092651,0,0,0)
+carrierDoorCol = createColCuboid(-1425,490,2,4,10,4)
+carrierSign = createObject(3927,-1422.5999755859,501.5,2.5,0,0,88)
+
+function onPlayerActivateKeycard(itemName)
+	if itemName == "San Fierro Carrier Keycard" then
+		setElementData(source,"CarrierCardActive",true)
+		setTimer(function()
+			if source then
+				setElementData(source,"CarrierCardActive",false)
+			end
+		end,180000,1,source)
+	elseif itemName == "Area 69 Keycard" then
+		setElementData(source,"AreaCardActive",true)
+		setTimer(function()
+			if source then
+				setElementData(source,"AreaCardActive",false)
+			end
+		end,180000,1,source)
+	end
+	outputChatBox("You activated the "..itemName..". You have 3 minutes before you have to activate the keycard again!",source,255,0,0,true)
+end
+addEvent("onPlayerActivateKeycard",true)
+addEventHandler("onPlayerActivateKeycard",root,onPlayerActivateKeycard)
+
+function moveCarrierDoorIfKeyCard(hitElement)
+	if getElementData(hitElement,"CarrierCardActive") then
+		moveObject(carrierDoor,1000,-1422.5,494.89999389648+12,4.6999998092651)
+		setTimer(function()
+			setElementData(hitElement,"San Fierro Carrier Keycard",getElementData(hitElement,"San Fierro Carrier Keycard")-1)
+		end,10000,1,hitElement)
+	else
+		outputChatBox("You need activate the 'San Fierro Carrier Keycard' to open this door! Open your inventory and click on the keycard to activate it.",hitElement,255,0,0,true)
+	end
+end
+addEventHandler("onColShapeHit",carrierDoorCol,moveCarrierDoorIfKeyCard)
+
+function moveAreaDoorIfKeyCard(hitElement)
+	if getElementData(hitElement,"AreaCardActive") then
+		moveObject(areaDoor_1,1000,217.39999389648-12,1875.9000244141,13.89999961853)
+		setTimer(function()
+			setElementData(hitElement,"Area 69 Keycard",getElementData(hitElement,"Area 69 Keycard")-1)
+		end,10000,1,hitElement)
+	else
+		outputChatBox("You need to activate the 'Area 69 Keycard' to open this door! Open your inventory and click on the keycard to activate it.",hitElement,255,0,0,true)
+	end
+end
+addEventHandler("onColShapeHit",areaDoorCol,moveAreaDoorIfKeyCard)
+
+function closeCarrierDoorAfterHit()
+	moveObject(carrierDoor,1000,-1422.5,494.89999389648,4.6999998092651)
+end
+addEventHandler("onColShapeLeave",areaDoorCol,closeCarrierDoorAfterHit)
+
+function closeAreaDoorAfterHit()
+	moveObject(areaDoor_1,1000,217.39999389648,1875.9000244141,13.89999961853)
+end
+addEventHandler("onColShapeLeave",areaDoorCol,closeAreaDoorAfterHit)

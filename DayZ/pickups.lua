@@ -1464,30 +1464,6 @@ createPickupsOnServerStart()
 
 ------------------------------------------------------------------------------
 --OTHER ITEM STUFF
-vehicleFuelTable = {
--- {MODEL ID, MAX. FUEL},
-{422,80},
-{470,100},
-{468,30},
-{433,140},
-{437,140},
-{509,0},
-{487,60},
-{497,60},
-{453,60},
-{483,140},
-{508,140},
-}
-
-function getVehicleMaxFuel(loot)
-	local modelID = getElementModel(getElementData(loot,"parent"))
-	for i,vehicle in ipairs(vehicleFuelTable) do
-		if modelID == vehicle[1] then
-			 return vehicle[2]
-		end
-	end
-	return false
-end
 
 
 function onPlayerTakeItemFromGround (itemName,col)

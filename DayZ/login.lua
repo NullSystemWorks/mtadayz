@@ -140,6 +140,9 @@ local playerDataTable = {
 {"Tire"},
 {"Engine"},
 {"Tank Parts"},
+{"Scrap Metal"},
+{"Main Rotary Parts"},
+{"Windscreen Glass"},
 {"Tent"},
 {"Box of Matches"},
 {"Watch"},
@@ -166,6 +169,8 @@ local playerDataTable = {
 {"Backpack (Coyote)"},
 {"Czech Backpack"},
 {"Survival ACU"},
+{"San Fierro Carrier Keycard"},
+{"Area 69 Keycard"},
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
@@ -471,6 +476,9 @@ local vehicleDataTable = {
 {"Tire_inVehicle"},
 {"Engine_inVehicle"},
 {"Parts_inVehicle"},
+{"Scrap_inVehicle"},
+{"Glass_inVehicle"},
+{"Rotary_inVehicle"},
 {"fuel"},
 
 -- [[ Weapons ]] --
@@ -564,6 +572,9 @@ local vehicleDataTable = {
 {"Tire"},
 {"Engine"},
 {"Tank Parts"},
+{"Scrap Metal"},
+{"Main Rotary Parts"},
+{"Windscreen Glass"},
 {"Tent"},
 {"Box of Matches"},
 {"Watch"},
@@ -590,6 +601,8 @@ local vehicleDataTable = {
 {"Backpack (Coyote)"},
 {"Czech Backpack"},
 {"Survival ACU"},
+{"San Fierro Carrier Keycard"},
+{"Area 69 Keycard"},
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
@@ -751,6 +764,7 @@ function saveallvehicles(ps,command)
 				local x,y,z = getElementPosition(vehicle)
 				local rx,ry,rz = getElementRotation(vehicle)
 				local health = getElementHealth(vehicle)
+				local vehicle_name = getElementData(col,"vehicle_name")
 				setAccountData(account,"last_x",x)
 				setAccountData(account,"last_y",y)
 				setAccountData(account,"last_z",z)
@@ -759,6 +773,7 @@ function saveallvehicles(ps,command)
 				setAccountData(account,"last_rz",rz)
 				setAccountData(account,"health",health)
 				setAccountData(account,"model",model)
+				setAccountData(account,"vehicle_name",vehicle_name)
 				setAccountData(account,"isExploded",getElementData(vehicle,"isExploded") or false)
 			end
 		end
@@ -804,37 +819,26 @@ function createVehicleOnServerStart()
 		xxx,yyy,zzz = getAccountData(vehicle,"spawn_x"),getAccountData(vehicle,"spawn_y"),getAccountData(vehicle,"spawn_z")
 		setElementData(vehCol,"spawn",{getAccountData(vehicle,"model"),xxx,yyy,zzz})
 		if wastedVehicle then
-			if getAccountData(vehicle,"model") == 497 then
-				item_id = math.random(table.size(hunterSpawns))
-				xxx,yyy,zzz = hunterSpawns[item_id][1],hunterSpawns[item_id][2],hunterSpawns[item_id][3]
-			end
-			if getAccountData(vehicle,"model") == 487 then
-				local item_id = math.random(table.size(maverikSpawns))
-				x,y,z = maverikSpawns[item_id][1],maverikSpawns[item_id][2],maverikSpawns[item_id][3]
-			end
 			setElementPosition(veh,xxx,yyy,zzz+1)
 			setElementRotation(veh,0,0,0)
 			--Engine + Tires + Tank Parts
-			local tires,engine,parts = getVehicleAddonInfos (getElementModel(veh))
+			local tires,engine,parts,scrap,glass,rotary,name = getVehicleAddonInfos (getElementModel(veh))
 			setElementData(vehCol,"Tire_inVehicle",math.random(0,tires))
 			setElementData(vehCol,"Engine_inVehicle",math.random(0,engine))
 			setElementData(vehCol,"Parts_inVehicle",math.random(0,parts))
+			setElementData(vehCol,"Scrap_inVehicle",math.random(0,scrap))
+			setElementData(vehCol,"Glass_inVehicle",math.random(0,glass))
+			setElementData(vehCol,"Rotary_inVehicle",math.random(0,rotary))
+			setElementData(vehCol,"vehicle_name",name)
 		end
 		--others
 		setElementData(vehCol,"fuel",getAccountData(vehicle,"fuel"))
+		setElementData(vehCol,"vehicle_name",getAccountData(vehicle,"vehicle_name"))
 		if not wastedVehicle then
 			for i, data in ipairs(vehicleDataTable) do 
 				setElementData(vehCol,data[1],getAccountData(vehicle,data[1]))
 			end
 		else
-			if getElementModel(veh) == 433 or getElementModel(veh) == 470 then
-				for i,items in ipairs(lootItems["helicrashsides"]) do
-					local randomNumber = math.random(1,10)
-					if randomNumber == 5 then
-						setElementData(vehCol,items[1],math.random(1,2))
-					end
-				end
-			end	
 			setElementData(vehCol,"fuel",10)
 		end
 	end
@@ -854,6 +858,7 @@ function createVehicleOnServerStart()
 			setElementData(tentCol,data[1],getAccountData(tentData,data[1]))
 		end
 	end
+	setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
 	outputServerLog("[DayZ] VEHICLES AND TENTS HAVE BEEN LOADED.")
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), createVehicleOnServerStart)

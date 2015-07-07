@@ -254,6 +254,7 @@ local gridlistItems = {}
 local buttonItems = {}
 local languageCode = getLocalization()["code"]
 
+-- Option to change language via command?
 function checkTheLanguage()
 	if languageCode == "en_US" then
 		languageCode = "en_US"
@@ -416,43 +417,83 @@ local current_SLOTS = 0
 	end
 return false
 end
+
 vehicleAddonsInfo = {
--- {Model ID, Tires, Engine, Tank Parts}
-{422,4,1,1},
-{470,4,1,1},
-{468,2,1,1},
-{433,6,1,1},
-{437,6,1,1},
-{509,0,0,0},
-{487,0,1,1},
-{497,0,1,1},
-{453,0,1,1},
-{483,4,1,1},
-{508,4,1,1},
+-- {Model,Wheels,Engine,TankParts,ScrapMetal,WindscreenGlass,RotaryParts,Name}
+
+-- VEHICLES
+{471,4,1,1,1,0,0,"ATV"},
+{431,6,1,1,1,4,0,"Bus"},
+{509,2,0,0,1,0,0,"Old Bike"},
+{546,4,1,1,1,4,0,"GAZ"},
+{433,8,1,1,1,3,0,"Military Offroad"},
+{468,2,1,1,1,0,0,"Motorcycle"},
+{543,4,1,1,1,4,0,"Offroad Pickup Truck"},
+{426,4,1,1,1,5,0,"Old Hatchback"},
+{422,4,1,1,1,2,0,"Pickup Truck"},
+{418,4,4,1,1,0,0,"S1203 Van"},
+{400,4,1,1,1,4,0,"Skoda"},
+{531,4,1,1,1,3,0,"Tractor"},
+{470,4,1,1,1,6,0,"UAZ"},
+{455,6,1,1,1,0,0,"Ural Civilian"},
+{490,4,1,1,1,4,0,"SUV"},
+{478,6,1,1,1,0,0,"V3S Civilian"},
+
+-- AIRCRAFT
+{469,0,1,0,4,8,1,"AH6X Little Bird"},
+{417,0,1,0,4,8,1,"UH-1H Huey"},
+{487,0,1,0,4,8,1,"Mi-17"},
+{488,0,1,0,2,4,1,"MH6J"},
+{511,2,1,0,1,2,2,"An-2 Biplane"},
+
+-- BOATS
+{453,0,1,0,1,2,0,"Fishing Boat"},
+{595,0,1,0,1,2,0,"Small Boat"},
+{473,0,1,0,1,1,0,"PBX"},
 }
 
 function getVehicleAddonInfos (id)
 	for i,veh in ipairs(vehicleAddonsInfo) do
 		if veh[1] == id then
-			return veh[2],veh[3], veh[4]
+			return veh[2],veh[3], veh[4], veh[5], veh[6], veh[7],veh[8]
 		end
 	end
 end
 
---OTHER ITEM STUFF
+
 vehicleFuelTable = {
--- {Model ID, Max Fuel}
-{422,80},
-{470,100},
-{468,30},
-{433,140},
-{437,140},
+-- {Model,MaxFuel}
+
+-- VEHICLES
+{471,30},
+{431,100},
 {509,0},
-{487,60},
-{497,60},
-{453,60},
-{483,140},
-{508,140},
+{546,200},
+{433,200},
+{468,55},
+{543,100},
+{426,50},
+{422,200},
+{418,60},
+{400,200},
+{531,100},
+{470,100},
+{455,200},
+{490,200},
+{478,160},
+
+-- AIRCRAFT
+{469,1000},
+{417,1000},
+{487,1000},
+{488,600},
+{511,400},
+
+-- BOATS
+{453,100},
+{595,100},
+{473,100}
+
 }
 
 function getVehicleMaxFuel(loot)
@@ -473,26 +514,16 @@ if playerMovedInInventory then startRollMessage2("Inventory", "Abusing explots w
 			local isTent = getElementData(isPlayerInLoot(), "tent")
 			if isVehicle and not isTent then
 				local veh = getElementData(isPlayerInLoot(), "parent")
-				local tires,engine,parts = getVehicleAddonInfos(getElementModel(veh))
+				local tires,engine,parts,scrap,glass,rotary = getVehicleAddonInfos(getElementModel(veh))
 				if itemName == "Tire" then itemName = "Tire" end
 				if itemName == "Engine" then itemName = "Engine" end
 				if itemName == "Tank Parts" then itemName = "Parts" end
+				if itemName == "Scrap Metal" then itemName = "Scrap" end
+				if itemName == "Windscreen Glass" then itemName = "Glass" end
+				if itemName == "Main Rotary Parts" then itemName = "Rotary" end
 				if not getElementData(isPlayerInLoot(), itemName.."_inVehicle") then setElementData(isPlayerInLoot(), itemName .. "_inVehicle", 0) end
-				if (itemName == "Tire" and tires > 0 and getElementData ( isPlayerInLoot(), "Tire_inVehicle") < tires) or ( itemName == "Engine" and engine > 0 and getElementData ( isPlayerInLoot(), "Engine_inVehicle") < engine) or ( itemName == "Parts" and parts > 0 and getElementData ( isPlayerInLoot(), "Parts_inVehicle") < parts) then
+				if (itemName == "Tire" and tires > 0 and getElementData ( isPlayerInLoot(), "Tire_inVehicle") < tires) or ( itemName == "Engine" and engine > 0 and getElementData ( isPlayerInLoot(), "Engine_inVehicle") < engine) or ( itemName == "Parts" and parts > 0 and getElementData ( isPlayerInLoot(), "Parts_inVehicle") < parts) or ( itemName == "Scrap" and scrap > 0 and getElementData ( isPlayerInLoot(), "Scrap_inVehicle") < scrap) or ( itemName == "Glass" and glass > 0 and getElementData ( isPlayerInLoot(), "Glass_inVehicle") < glass) or ( itemName == "Rotary" and rotary > 0 and getElementData ( isPlayerInLoot(), "Rotary_inVehicle") < rotary) then
 					triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName.."_inVehicle", isPlayerInLoot())
-					--[[front_left,rear_left,front_right,rear_right = getVehicleWheelStates(veh)
-					if front_left == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then 
-						setVehicleWheelStates(veh,0)
-					end
-					if rear_left == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
-						setVehicleWheelStates(veh,0)
-					end
-					if front_right == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
-						setVehicleWheelStates(veh,0)
-					end
-					if rear_right == 2 and (getElementData(isPlayerInLoot(),"Tire_inVehicle") < tires) then
-						setVehicleWheelStates(veh,0)
-					end]]
 				else
 					if isToolbeltItem(itemName) or getLootCurrentSlots(getElementData(getLocalPlayer(), "currentCol")) + getItemSlots(itemName) <= getLootMaxAviableSlots(isPlayerInLoot()) then
 						triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName, isPlayerInLoot())
@@ -577,10 +608,9 @@ local itemPlus = 1
 	if itemName == "Tire_inVehicle" then itemName2 = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName2 = "Engine" end
 	if itemName == "Parts_inVehicle" then itemName2 = "Tank Parts" end
-	--[[if (getElementData(getLocalPlayer(),itemName2) or 0)/itemPlus < 1 then
-		triggerEvent ("displayClientInfo", getLocalPlayer(),"Inventory","Can't drop this!",255,22,0)
-	return
-	end]]
+	if itemName == "Scrap_inVehicle" then itemName2 = "Scrap Metal" end
+	if itemName == "Glass_inVehicle" then itemName2 = "Windscreen Glass" end
+	if itemName == "Rotary_inVehicle" then itemName2 = "Main Rotary Parts" end
 	if loot then
 		setElementData(loot,itemName,(getElementData(loot,itemName) or 0)+1)
 		local players = getElementsWithinColShape (loot,"player")
@@ -595,6 +625,9 @@ local itemPlus = 1
 	if itemName == "Tire_inVehicle" then itemName = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName = "Engine" end
 	if itemName == "Parts_inVehicle" then itemName = "Tank Parts" end
+	if itemName == "Scrap Metal" then itemName = "Scrap" end
+	if itemName == "Windscreen Glass" then itemName = "Glass" end
+	if itemName == "Main Rotary Parts" then itemName = "Rotary" end
 	setElementData(getLocalPlayer(),itemName,getElementData(getLocalPlayer(),itemName)-itemPlus)
 	if loot and getElementData(loot,"itemloot") then
 		triggerServerEvent("refreshItemLoot",getRootElement(),loot,getElementData(loot,"parent"))
@@ -857,6 +890,8 @@ function playerUseItem(itemName,itemInfo)
 	elseif itemInfo == "Craft" then
 		setElementData(localPlayer,"selectedBlueprint",itemName)
 		checkComponents()
+	elseif itemInfo == "Activate" then
+		triggerServerEvent("onPlayerActivateKeycard",localPlayer,itemName)
 	end
 end
 

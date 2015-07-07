@@ -20,6 +20,7 @@ local optionsTable = {
 {"Give Painkillers"},
 {"Give Bandage"},
 {"Give Morphine"},
+{"Administer Blood Bag"},
 },
 }
 

@@ -10,7 +10,7 @@
 
 -- [[ Setting game type (Is this still needed?) ]] --
 
-addons = "DayZ 0.8.1a // "
+addons = "DayZ 0.9.0a // "
 function addAddonInfo (name,description)
 	addons = addons.." "..name.." | "
 	setGameType (addons)

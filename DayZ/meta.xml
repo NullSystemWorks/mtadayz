@@ -169,6 +169,7 @@
 	<file src="icons/wheel.png"/>
 	<file src="icons/wirefence.png"/>
 	<file src="icons/wood.png"/>
+	<file src="icons/keycard.png" />
 	
 	<file src="images/buttArrow.png"/>
 	<file src="images/buttArrowDown.png"/>
@@ -270,6 +271,9 @@
 	
 	<file src="images/dayzicons/vehicle/engine/eng_0.png" />
 	<file src="images/dayzicons/vehicle/engine/eng_1.png" />
+	
+	<file src="images/dayzicons/vehicle/engine/mrot_0.png" />
+	<file src="images/dayzicons/vehicle/engine/mrot_1.png" />
 	
 	<file src="images/dayzicons/vehicle/fuel/0.png" />
 	<file src="images/dayzicons/vehicle/fuel/10.png" />
@@ -559,6 +563,8 @@
     <file src="items/katana.dff" />
     <file src="items/camera.txd" />
     <file src="items/camera.dff" />
+	<file src="items/windscreenglass.txd" />
+	<file src="items/windscreenglass.dff" />
 	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>

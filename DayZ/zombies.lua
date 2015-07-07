@@ -154,6 +154,8 @@ itemTableZombies = {
 {"12 Gauge Pellet",2358,2,0,4.90},
 {"Bandage",1578,0.5,0,5.88},
 {"Painkiller",2709,3,0,5.88},
+{"Area 69 Keybard",1581,1,0,7},
+{"San Fierro Carrier Keycard",1581,1,0,7},
 }
 
 function createZombieTable (player)

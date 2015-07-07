@@ -104,6 +104,21 @@ end
 local languages = {"en_US","de","cs"}
 local languageCode = getLocalization()["code"]
 
+-- Option to change language via command?
+function checkTheLanguage()
+	if languageCode == "en_US" then
+		languageCode = "en_US"
+	elseif languageCode == "de" then
+		languageCode = "de"
+	elseif languageCode == "cs" then
+		languageCode = "cs"
+	else
+		outputChatBox("No language defined, switching to en_US")
+		languageCode = "en_US"
+	end
+end
+addEventHandler("onClientResourceStart",root,checkTheLanguage)
+
 function placeItemsInInventory()
 	local loot = isPlayerInLoot()
 	inventory = {}
@@ -114,15 +129,6 @@ function placeItemsInInventory()
 	
 	foodInventory={}
 	toolInventory={}
-	if languageCode == "en_US" then
-		languageCode = "en_US"
-	elseif languageCode == "de" then
-		languageCode = "de"
-	elseif languageCode == "cs" then
-		languageCode = "cs"
-	else
-		languageCode = "en_US"
-	end
 		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Primary Weapon"] ) do
 			local inLoot = getThisItemInLoot (weap[1])
 			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
@@ -196,7 +202,7 @@ function placeItemsInInventory()
 				table.insert ( inventory, {weap[1],inLoot,inInventory,weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
 			end
 		end
-		for i, weap in ipairs ( inventoryItems["Toolbelt"] ) do
+		for i, weap in ipairs ( languageTextTable[languageCode]["Toolbelt"] ) do
 			local inLoot = getThisItemInLoot (weap[1])
 			local inInventory = getElementData ( localPlayer, weap[1] ) or 0
 			if inLoot > 0 or inInventory > 0 then
@@ -461,7 +467,7 @@ function itemLabelClicked()
 		if name == "Morphine" and not getElementData(getLocalPlayer(), "brokenbone") then
 			return true 
 		end
-		if name == "Blood Bag" then
+		if name == "Blood Bag" and getElementData(localPlayer,"blood") > 100 then
 			return true
 		end
 		if info then
@@ -483,7 +489,7 @@ function rightItemClicked ()
 		setTimer(placeItemsInInventory, 200, 2)
 	elseif getElementData ( source, 'toolLabel' ) then
 		local name = toolInventory[id][1]
-		for i,itemInfo in ipairs(inventoryItems["Toolbelt"]) do
+		for i,itemInfo in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
 			if name == itemInfo[1] then
 				if #itemInfo >= 9 then
 					playerUseItem ( name, itemInfo[9] )
@@ -598,21 +604,21 @@ function renderDisplay ( )
 		end
 	elseif foodLabelSelected then
 		if selectedFoodLabelID <= #foodInventory then
-			dxDrawText ( foodInventory[selectedFoodLabelID][9], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( foodInventory[selectedFoodLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( foodInventory[selectedFoodLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( foodInventory[selectedFoodLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor (0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..foodInventory[selectedFoodLabelID][2] )
 		end
 	elseif toolLabelSelected then
 		if selectedToolLabelID <= #toolInventory then
-			dxDrawText ( toolInventory[selectedToolLabelID][9], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( toolInventory[selectedToolLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( toolInventory[selectedToolLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( toolInventory[selectedToolLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..toolInventory[selectedToolLabelID][2] )
 		end
 	elseif specLabelSelected then
 		if selectedSpecLabelID <= #inventoryWeap.spec then
-			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][9], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
+			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][7], bX-390, bY+110, screenWidth, screenHeight, tocolor ( 114,100,47,255), 1.4, 'verdana' )
 			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][5], bX-390, bY+130, screenWidth, screenHeight, tocolor (0,0,0,255), 1.3, 'sans' )
 			dxDrawText ( inventoryWeap.spec[selectedSpecLabelID][6], bX-390, bY+150, screenWidth, screenHeight, tocolor ( 0,0,0,255), 1.3, 'sans' )
 			dxDrawImage ( bX-100, bY+180, 64, 64, 'icons/'..inventoryWeap.spec[selectedSpecLabelID][2] )
