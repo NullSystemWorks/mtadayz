@@ -566,6 +566,15 @@
 	<file src="items/windscreenglass.txd" />
 	<file src="items/windscreenglass.dff" />
 	
+	<!-- DayZ Admin Panel -->
+	<script src="dayzadmin/dayzadmin_c.lua" type="client" cache="false" />
+	<script src="dayzadmin/dayzadmin_gui.lua" type="client" cache="false" />
+	<script src="dayzadmin/dayzadmin_s.lua" type="server" />
+	
+	<file src="dayzadmin/images/playerblip.png" />
+	<file src="dayzadmin/images/carblip.png" />
+	<file src="dayzadmin/images/map.png" />
+	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	

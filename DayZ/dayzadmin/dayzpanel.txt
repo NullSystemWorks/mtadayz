@@ -1,0 +1,15 @@
+DayZ ADMIN PANEL
+
+
+- List of players and vehicles
+- Player/vehicle inventories + positions
+- Inventory editor
+- Teleportation, skin change, reset humanity, kill, heal (blood, status)
+- Configurable admin access levels
+- Map with blips of players and vehicles
+- Search for items, players, vehicles
+- Global message
+- Reset player location
+- Leaderboard
+- Stats and player search
+- view player chat (Local, Group, Radio)
