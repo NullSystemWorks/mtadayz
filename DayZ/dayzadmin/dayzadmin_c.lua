@@ -47,7 +47,7 @@ addEventHandler("onAdminPanelOpen",root,onAdminPanelOpen)
 function onAdminPanelUpdateLiveMap()
 	for id, player in ipairs(getElementsByType("player")) do
 		if not adminpanel.image[player] then
-			adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "playerblip.png" or "playerblip.png", true, adminpanel.tab[5])
+			adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "images/playerblip.png" or "images/playerblip.png", true, adminpanel.tab[5])
 		end
 		local x, y = getElementPosition(player)
 		local mX,mY = guiGetSize(adminpanel.map[1],false)
@@ -57,7 +57,7 @@ function onAdminPanelUpdateLiveMap()
 	end
 	for id, vehicle in ipairs(getElementsByType("vehicle")) do
 		if not adminpanel.image[vehicle] then
-			adminpanel.image[vehicle] = guiCreateStaticImage(0.488,0.488,0.01,0.01, vehicle and "carblip.png", true, adminpanel.tab[5])
+			adminpanel.image[vehicle] = guiCreateStaticImage(0.488,0.488,0.01,0.01, vehicle and "images/carblip.png", true, adminpanel.tab[5])
 		end
 		local x, y = getElementPosition(vehicle)
 		local mX,mY = guiGetSize(adminpanel.map[1],false)

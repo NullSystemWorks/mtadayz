@@ -1355,7 +1355,7 @@ languageTextTable = {
 		{".303 British Cartridge Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nEmbalagem Pequena(x1)\nPólvora(x2)\nCola(x1)","Cartucho Britânico .303","Craft"},
 		{"Bolt Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nVareta(x2)\nMetal Afiado(x2)\nSerrote de Mão(x1)","Flecha [Projetada]","Craft"},
 		{"Medic Kit Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nDrogas(x2)\nVitaminas(x2)\nCurativo(x1)","Kit Médico [Projetado]","Craft"},
-		{"Wire Fence Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nArame Farpado(x1)\nVareta(x2)\nFita Adesiva(x1)",""Cerca de Arame [Projetada]","Craft"},
+		{"Wire Fence Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nArame Farpado(x1)\nVareta(x2)\nFita Adesiva(x1)","Cerca de Arame [Projetada]","Craft"},
 		{"Tent Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nCorda(x1)\nLençol(x2)\nVareta(x1)","Barraca [Projetada]","Craft"},
 		{"Camouflage Clthng. Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nFio(x3)\nPano(x1)\nAgulha(x1)","Roupa Camuflada [Projetada]","Craft"},
 		{"Survivor Clthng. Blueprint",1,'blueprint.png',128,128,"Projeto","Componentes:\nFio(x3)\nPano(x1)\nAgulha(x1)","Roupa de Sobrevivente [Projetada]","Craft"},
