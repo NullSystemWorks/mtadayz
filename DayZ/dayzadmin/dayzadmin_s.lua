@@ -57,12 +57,6 @@ function()
 	end
 end)
 
--- Debug
-addEventHandler("onResourceStart",getResourceRootElement(getThisResource()),
-function()
-bindKey(getPlayerFromName("L"),"F7","down","dayz")
-end)
-
 local PanelIsOpen = false
 
 -- Second check, in case something goes wrong or player loses permission to open Admin Panel
@@ -113,7 +107,7 @@ function(pName, item, quantity)
 	setElementData(getPlayerFromName(pName), item, quantity)
 	outputChatBox("Given "..quantity.." "..item.." to "..pName, source, 255, 255, 0)
 	outputChatBox(getAccountName(getPlayerAccount(client)).." gave you "..quantity.." "..item, getPlayerFromName(pName), 255, 255, 0)
-	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." got an item via GIP: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
+	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." got an item via DayZ Admin Panel: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
 end)
 
 function onAdminPanelSetPlayerStat(name, stat, value)
@@ -131,7 +125,7 @@ addEventHandler("onAdminPanelSendGlobalMessage",root,onAdminPanelSendGlobalMessa
 
 function onAdminPanelKillPlayer(player)
 	setElementData(getPlayerFromName(player), "blood", -1)
-	outputChatBox("You killed "..player.."!",source,255,0,0,0)
+	outputChatBox("You killed "..player.."!",source,255,0,0)
 end
 addEvent("onAdminPanelKillPlayer",true)
 addEventHandler("onAdminPanelKillPlayer",root,onAdminPanelKillPlayer)
@@ -180,6 +174,8 @@ addEvent("onAdminPanelFixVehicle",true)
 addEventHandler("onAdminPanelFixVehicle",root,onAdminPanelFixVehicle)
 
 function onAdminPanelSpawnVehicle(player,vehicle,x,y,z)
+	--[[
+	-- Do not uncomment this, as the vehicle ID's are currently unfiltered. Said ID's are essential for respawning vehicles and their items.
 	local model = getVehicleModelFromName(vehicle)
 	local tires,engine,parts,scrap,glass,rotary,name,colsphere,slots,fuel = getVehicleInfos(model)
 	local veh = createVehicle(model,x,y+5,z,0,0,0)
@@ -200,9 +196,10 @@ function onAdminPanelSpawnVehicle(player,vehicle,x,y,z)
 	setElementData(vehCol,"spawn",{473,x,y,z})
 	--others
 	setElementData(vehCol,"fuel",fuel)
-	setElementData(vehCol,"veh_ID","adminpanel")
+	setElementID(vehCol,"0")
 	setElementHealth(veh,1000)
 	outputChatBox("You spawned a "..vehicle.." for "..player,source,0,255,0)
+	]]
 end
 addEvent("onAdminPanelSpawnVehicle",true)
 addEventHandler("onAdminPanelSpawnVehicle",root,onAdminPanelSpawnVehicle)

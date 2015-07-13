@@ -2190,6 +2190,7 @@ function updateIcons ()
 				number = 0
 			end
 			--dxDrawText (tires.."/"..needtires.." Tires",screenWidth*0.5-w/2 , screenHeight*0+offset,screenWidth*0.5-w/2 , screenHeight*0+offset,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
+			dxDrawText(tonumber(tires).."/"..tonumber(needtires), screenW * 0.5162, screenH * 0.1083, screenW * 0.5687, screenH * 0.1333, tocolor(73, 251, 3, 255), 1.00, "default-bold", "center", "top", false, false, false, false, false)
 			dxDrawImage(screenW * 0.5175, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/whl/whl_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			--local w = dxGetTextWidth(parts.."/"..needparts.." Tank Parts",1.02,"default-bold")
 			if parts == needparts then

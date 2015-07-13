@@ -395,6 +395,8 @@ playerDataTable = {
 {"Backpack (Coyote)"},
 {"Czech Backpack"},
 {"Survival ACU"},
+{"Area 69 Keycard"},
+{"San Fierro Carrier Keycard"},
 
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
@@ -900,7 +902,8 @@ function()
 		local vehicle = guiComboBoxGetItemText(adminpanel.vehcombobox[1], guiComboBoxGetSelected(adminpanel.vehcombobox[1]))
 		local x,y,z = getElementPosition(getPlayerFromName(playerName))
 		if (getPlayerFromName(playerName)) then
-			triggerServerEvent("onAdminPanelSpawnVehicle", localPlayer, playerName, vehicle, x,y,z)
+			-- DO NOT UNCOMMENT! triggerServerEvent("onAdminPanelSpawnVehicle", localPlayer, playerName, vehicle, x,y,z)
+			outputChatBox("This feature is currently bugged!",255,0,0)
 		else
 			outputChatBox("Player disconnected or changed name!",255,0,0)
 		end

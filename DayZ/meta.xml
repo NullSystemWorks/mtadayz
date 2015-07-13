@@ -9,6 +9,9 @@
 <meta>
     <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.0a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
+	<script src="library/slither.lua" type="shared" />
+	<script src="library/async.lua" type="shared" />
+	<script src="logsystem.lua" type="server" />
     <script src="editor_server.lua" type="server" />
     <script src="editor_client.lua" type="client" cache="false" />
     <script src="pickups.lua" type="server" />
@@ -27,7 +30,6 @@
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" cache="false" />
-	<!--<script src="vehicle_save.lua" type="server" /> -->
 	
 	<!-- Help File -->
 	<config src="help.xml" type="client" />
@@ -43,7 +45,6 @@
 	<script src="anticheat_c.lua" type="client" cache="false" />
 	
 	<!-- Log System -->
-	<script src="logsystem.lua" type="server" />
 	<export function="saveLog" type="server" />
 	<export function="returnLog" type="server" />
 	
@@ -567,6 +568,7 @@
 	<file src="items/windscreenglass.dff" />
 	
 	<!-- DayZ Admin Panel -->
+	<!--
 	<script src="dayzadmin/dayzadmin_c.lua" type="client" cache="false" />
 	<script src="dayzadmin/dayzadmin_gui.lua" type="client" cache="false" />
 	<script src="dayzadmin/dayzadmin_s.lua" type="server" />
@@ -574,6 +576,7 @@
 	<file src="dayzadmin/images/playerblip.png" />
 	<file src="dayzadmin/images/carblip.png" />
 	<file src="dayzadmin/images/map.png" />
+	-->
 	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>

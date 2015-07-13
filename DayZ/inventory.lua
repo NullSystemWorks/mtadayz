@@ -511,7 +511,7 @@ function getVehicleMaxFuel(loot)
 end
 
 function moveItemOutOfInventory(itemName)
-if playerMovedInInventory then startRollMessage2("Inventory", "Abusing explots will result in a ban!", 255, 22, 0) return true end
+if playerMovedInInventory then startRollMessage2("Inventory", "Abusing exploits will result in a ban!", 255, 22, 0) return true end
 	if getElementData(getLocalPlayer(), itemName) and getElementData(getLocalPlayer(), itemName) >= 1 then
 		if isPlayerInLoot() then
 			local isVehicle = getElementData(isPlayerInLoot(), "vehicle")

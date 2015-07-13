@@ -223,46 +223,38 @@ lootItems = {
 }
 
 vehicleAddonsInfo = {
--- {Model,Wheels,Engine,TankParts,ScrapMetal,WindscreenGlass,RotaryParts,Name}
+-- {Model, Wheels, Engine, TankParts, ScrapMetal, WindscreenGlass, RotaryParts, Name, ColsphereSize, Slots, Fuel,RealName}
 
 -- VEHICLES
-{471,4,1,1,1,0,0,"ATV"},
-{431,6,1,1,1,4,0,"Bus"},
-{509,2,0,0,1,0,0,"Old Bike"},
-{546,4,1,1,1,4,0,"GAZ"},
-{433,8,1,1,1,3,0,"Military Offroad"},
-{468,2,1,1,1,0,0,"Motorcycle"},
-{543,4,1,1,1,4,0,"Offroad Pickup Truck"},
-{426,4,1,1,1,5,0,"Old Hatchback"},
-{422,4,1,1,1,2,0,"Pickup Truck"},
-{418,4,4,1,1,0,0,"S1203 Van"},
-{400,4,1,1,1,4,0,"Skoda"},
-{531,4,1,1,1,3,0,"Tractor"},
-{470,4,1,1,1,6,0,"UAZ"},
-{455,6,1,1,1,0,0,"Ural Civilian"},
-{490,4,1,1,1,4,0,"SUV"},
-{478,6,1,1,1,0,0,"V3S Civilian"},
+{471,4,1,1,1,0,0,"ATV",2,50,30,"Quadbike"},
+{431,6,1,1,1,4,0,"Bus",5,50,100,"Bus"},
+{509,2,0,0,1,0,0,"Old Bike",2,0,0,"Bike"},
+{546,4,1,1,1,4,0,"GAZ",3,50,200,"Intruder"},
+{433,8,1,1,1,3,0,"Military Offroad",4,50,200,"Barracks"},
+{468,2,1,1,1,0,0,"Motorcycle",2,5,55,"Sanchez"},
+{543,4,1,1,1,4,0,"Offroad Pickup Truck",3,50,100,"Sadler"},
+{426,4,1,1,1,5,0,"Old Hatchback",3,50,50,"Premier"},
+{422,4,1,1,1,2,0,"Pickup Truck",3,50,200,"Bobcat"},
+{418,4,4,1,1,0,0,"S1203 Van",3,50,60,"Moonbeam"},
+{400,4,1,1,1,4,0,"Skoda",3,75,200,"Landstalker"},
+{531,4,1,1,1,3,0,"Tractor",3,50,100,"Tractor"},
+{470,4,1,1,1,6,0,"UAZ",3,50,100,"Patriot"},
+{455,6,1,1,1,0,0,"Ural Civilian",5,200,200,"Flatbed"},
+{490,4,1,1,1,4,0,"SUV",3,50,200,"FBI Rancher"},
+{478,6,1,1,1,0,0,"V3S Civilian",5,200,160,"Walton"},
 
 -- AIRCRAFT
-{469,0,1,0,4,8,1,"AH6X Little Bird"},
-{417,0,1,0,4,8,1,"UH-1H Huey"},
-{487,0,1,0,4,8,1,"Mi-17"},
-{488,0,1,0,2,4,1,"MH6J"},
-{511,2,1,0,1,2,2,"An-2 Biplane"},
+{469,0,1,0,4,8,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
+{417,0,1,0,4,8,1,"UH-1H Huey",7,50,1000,"Leviathan"},
+{487,0,1,0,4,8,1,"Mi-17",7,20,1000,"Maverick"},
+{488,0,1,0,2,4,1,"MH6J",7,20,600,"News Chopper"},
+{511,2,1,0,1,2,2,"An-2 Biplane",7,100,400,"Beagle"},
 
 -- BOATS
-{453,0,1,0,1,2,0,"Fishing Boat"},
-{595,0,1,0,1,2,0,"Small Boat"},
-{473,0,1,0,1,1,0,"PBX"},
+{453,0,1,0,1,2,0,"Fishing Boat",4,400,100,"Reefer"},
+{595,0,1,0,1,2,0,"Small Boat",3,0,100,"Launch"},
+{473,0,1,0,1,1,0,"PBX",2,0,100,"Dinghy"},
 }
-
-function getVehicleAddonInfos (id)
-	for i,veh in ipairs(vehicleAddonsInfo) do
-		if veh[1] == id then
-			return veh[2],veh[3], veh[4], veh[5], veh[6], veh[7],veh[8]
-		end
-	end
-end
 
 vehicleFuelTable = {
 -- {Model,MaxFuel}
@@ -298,6 +290,237 @@ vehicleFuelTable = {
 {473,100}
 
 }
+
+local itemsDataTable = {
+	{"M4"},
+	{"CZ 550"},
+	{"Winchester 1866"},
+	{"SPAZ-12 Combat Shotgun"},
+	{"Sawn-Off Shotgun"},
+	{"AK-47"},
+	{"Lee Enfield"},
+	{"Sporter 22"},
+	{"Mosin 9130"},
+	{"Crossbow"},
+	{"SKS"},
+	{"Blaze 95 Double Rifle"},
+	{"Remington 870"},
+	{"FN FAL"},
+	{"G36C"},
+	{"Sa58V CCO"},
+	{"SVD Dragunov"},
+	{"DMR"},
+	{"M1911"},
+	{"M9 SD"},
+	{"PDW"},
+	{"G17"},
+	{"MP5A5"},
+	{"Desert Eagle"},
+	{"Bizon PP-19"},
+	{"Revolver"},
+	{"Hunting Knife"},
+	{"Hatchet"},
+	{"Baseball Bat"},
+	{"Shovel"},
+	{"Golf Club"},
+	{"Machete"},
+	{"Crowbar"},
+	{"Parachute"},
+	{"Tear Gas"},
+	{"Grenade"},
+	{"Binoculars"},
+	{"45 ACP Cartridge"},
+	{"9x19mm SD Cartridge"},
+	{"9x19mm Cartridge"},
+	{"9x18mm Cartridge"},
+	{"545x39mm Cartridge"},
+	{"556x45mm Cartridge"},
+	{"1866 Slug"},
+	{"2Rnd Slug"},
+	{"12 Gauge Pellet"},
+	{"93x62mm Cartridge"},
+	{"303 British Cartridge"},
+	{"Bolt"},
+	{"Baked Beans"},
+	{"Pasta"},
+	{"Sardines"},
+	{"Frank_Beans"},
+	{"Can (Corn)"},
+	{"Can (Peas)"},
+	{"Can (Pork)"},
+	{"Can (Stew)"},
+	{"Can (Ravioli)"},
+	{"Can (Fruit)"},
+	{"Can (Chowder)"},
+	{"Pistachios"},
+	{"Trail Mix"},
+	{"MRE"},
+	{"Water Bottle"},
+	{"Soda Can (Pepsi)"},
+	{"Soda Can (Cola)"},
+	{"Soda Can (Mountain Dew)"},
+	{"Can (Milk)"},
+	{"Wood Pile"},
+	{"Bandage"},
+	{"Road Flare"},
+	{"Empty Gas Canister"},
+	{"Full Gas Canister"},
+	{"Medic Kit"},
+	{"Heat Pack"},
+	{"Painkiller"},
+	{"Morphine"},
+	{"Blood Bag"},
+	{"Wire Fence"},
+	{"Raw Meat"},
+	{"Tire"},
+	{"Engine"},
+	{"Tank Parts"},
+	{"Tent"},
+	{"Box of Matches"},
+	{"Watch"},
+	{"GPS"},
+	{"Map"},
+	{"Toolbox"},
+	{"IR Goggles"},
+	{"NV Goggles"},
+	{"Cooked Meat"},
+	{"Radio Device"},
+	{"Compass"},
+	{"Camouflage Clothing"},
+	{"Civilian Clothing"},
+	{"Survivor Clothing"},
+	{"Ghillie Suit"},
+	{"Empty Water Bottle"},
+	{"Empty Soda Can"},
+	{"Assault Pack (ACU)"},
+	{"ALICE Pack"},
+	{"British Assault Pack"},
+	{"Czech Vest Pouch"},
+	{"Backpack (Coyote)"},
+	{"Czech Backpack"},
+	{"Survival ACU"},
+	{"Area 69 Keycard"},
+	{"San Fierro Carrier Keycard"},
+	{"M4 Blueprint"},
+	{"CZ 550 Blueprint"},
+	{"Winchester 1866 Blueprint"},
+	{"SPAZ-12 C Shtgn Blueprint"},
+	{"Sawn-Off Shtgn Blueprint"},
+	{"AK-47 Blueprint"},
+	{"Lee Enfield Blueprint"},
+	{"Sporter 22 Blueprint"},
+	{"Mosin 9130 Blueprint"},
+	{"Crossbow Blueprint"},
+	{"SKS Blueprint"},
+	{"Blaze 95 D R Blueprint"},
+	{"Remington 870 Blueprint"},
+	{"FN FAL Blueprint"},
+	{"G36C Blueprint"},
+	{"Sa58V CCO Blueprint"},
+	{"SVD Dragunov Blueprint"},
+	{"DMR Blueprint"},
+	{"M1911 Blueprint"},
+	{"M9 SD Blueprint"},
+	{"PDW Blueprint"},
+	{"G17 Blueprint"},
+	{"MP5A5 Blueprint"},
+	{"Bizon PP-19 Blueprint"},
+	{"Revolver Blueprint"},
+	{"Desert Eagle Blueprint"},
+	{"Hunting Knife Blueprint"},
+	{"Hatchet Blueprint"},
+	{"Baseball Bat Blueprint"},
+	{"Shovel Blueprint"},
+	{"Golf Club Blueprint"},
+	{"Machete Blueprint"},
+	{"Crowbar Blueprint"},
+	{"Parachute Blueprint"},
+	{"Tear Gas Blueprint"},
+	{"Grenade Blueprint"},
+	{"Binoculars Blueprint"},
+	{"45 ACP Cartridge Blueprint"},
+	{"9x19mm SD Cartridge Blueprint"},
+	{"9x19mm Cartridge Blueprint"},
+	{"9x18mm Cartridge Blueprint"},
+	{"545x39mm Cartridge Blueprint"},
+	{"556x45mm Cartridge Blueprint"},
+	{"1866 Slug Blueprint"},
+	{"2Rnd Slug Blueprint"},
+	{"12 Gauge Pellet Blueprint"},
+	{"93x62mm Cartridge Blueprint"},
+	{"303 British Cartridge Blueprint"},
+	{"Bolt Blueprint"},
+	{"Medic Kit Blueprint"},
+	{"Wire Fence Blueprint"},
+	{"Tent Blueprint"},
+	{"Camouflage Clthng Blueprint"},
+	{"Survivor Clthng Blueprint"},
+	{"Civilian Clthng Blueprint"},
+	{"Ghillie Suit Blueprint"},
+	{"Road Flare Blueprint"},
+	{"Toolbox Blueprint"},
+	{"Radio Device Blueprint"},
+	{"IR Goggles Blueprint"},
+	{"NV Goggles Blueprint"},
+	{"Gun Barrel"},
+	{"Short Gun Barrel"},
+	{"Gun Stock"},
+	{"Thread"},
+	{"Cloth"},
+	{"Gun Powder"},
+	{"Mechanical Supplies"},
+	{"Cables"},
+	{"Nails"},
+	{"Sheet"},
+	{"Barbed Wire"},
+	{"Duct Tape"},
+	{"Glue"},
+	{"Drugs"},
+	{"Bandaid"},
+	{"Vitamins"},
+	{"Tissue"},
+	{"Small Box"},
+	{"String"},
+	{"Needle"},
+	{"Microchips"},
+	{"Optics"},
+	{"Sharp Metal"},
+	{"Handle"},
+	{"Wooden Stick"},
+	{"Hand Saw"},
+	{"Metal Plate"},
+	{"Metallic Stick"},
+	{"Small Casing"},
+}
+
+addEventHandler("onResourceStart",getResourceRootElement(getThisResource()), function()
+	local vehicleManager = getAccount("vehicleManager","ds4f9$")
+	if not vehicleManager then
+		addAccount("vehicleManager","ds4f9$")
+	end
+	vehicledatabase = dbConnect("sqlite", "database/vehicles.db","","","share=1")
+	--dbExec(vehicledatabase,"DROP TABLE vehicles") -- Debug
+	local vehicle_table = dbExec(vehicledatabase, "CREATE TABLE IF NOT EXISTS vehicles (model INT, Veh_Health FLOAT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, fuel FLOAT, Tire_inVehicle INT, Engine_inVehicle INT, Parts_inVehicle INT, Scrap_inVehicle INT, Glass_inVehicle INT, Rotary_inVehicle INT, vehicle_name TEXT, ColSize FLOAT, ID INT)")
+	if vehicledatabase then
+		outputServerLog("[DayZ] CONNECTED TO VEHICLE DATABASE.")
+	else
+		outputServerLog("[DayZ] FAILED TO CONNECT TO DATABASE 'vehicles'. CHECK IF IT EXISTS.")
+	end
+	if vehicle_table then
+		outputServerLog("[DayZ] Table 'vehicles' has been created.")
+	else
+		outputServerLog("[DayZ] Failed to create table 'vehicles'!")
+	end
+end)
+
+
+function getVehicleAddonInfos (id)
+	for i,veh in ipairs(vehicleAddonsInfo) do
+		if veh[1] == id then
+			return veh[2], veh[3], veh[4], veh[5], veh[6], veh[7], veh[8], veh[9], veh[10], veh[11], veh[12]
+		end
+	end
+end
 
 function getVehicleMaxFuel(loot)
 	local modelID = getElementModel(getElementData(loot,"parent"))
@@ -386,6 +609,95 @@ end
 
 dayzVehicles = {}
 
+theItems = {}
+
+function saveVehiclesToDB()
+    dbExec(vehicledatabase, "DROP TABLE vehicles")
+    dbExec(vehicledatabase, "CREATE TABLE IF NOT EXISTS vehicles (model INT, Veh_Health FLOAT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, fuel FLOAT, Tire_inVehicle INT, Engine_inVehicle INT, Parts_inVehicle INT, Scrap_inVehicle INT, Glass_inVehicle INT, Rotary_inVehicle INT, vehicle_name TEXT, ColSize FLOAT, ID INT)")
+    for i, data in ipairs(itemsDataTable) do
+		dbExec(vehicledatabase,'ALTER TABLE vehicles ADD "'..data[1]..'" INT')
+	end
+	for i, col in ipairs(getElementsByType("colshape")) do
+		local veh = getElementData(col,"vehicle")
+		local tent = getElementData(col,"tent")
+		if veh and not tent then
+			local vehicle = getElementData(col,"parent")
+			local model = getElementModel(vehicle)
+			local veh_health = getElementHealth(vehicle)
+			local x, y, z = getElementPosition(vehicle)
+			local rotx, roty, rotz = getElementRotation(vehicle)
+			local slots = getElementData(getElementData(vehicle, "parent"), "MAX_Slots") or 0
+			local fuel = getElementData(getElementData(vehicle, "parent"), "fuel") or 0
+			local tires = getElementData(getElementData(vehicle, "parent"), "Tire_inVehicle")
+			local engines = getElementData(getElementData(vehicle, "parent"), "Engine_inVehicle") or 0
+			local parts = getElementData(getElementData(vehicle, "parent"), "Parts_inVehicle") or 0
+			local scrap = getElementData(getElementData(vehicle, "parent"), "Scrap_inVehicle") or 0
+			local glass = getElementData(getElementData(vehicle, "parent"), "Glass_inVehicle") or 0
+			local rotary = getElementData(getElementData(vehicle, "parent"), "Rotary_inVehicle") or 0
+			local name = getElementData(getElementData(vehicle,"parent"),"vehicle_name") or getVehicleName(model)
+			local veh_ID = getElementID(getElementData(vehicle,"parent"))
+			local tires2,engine2,parts2,scrap2,glass2,rotary2,name2,colsphere,slots2,fuel2 = getVehicleAddonInfos(model)
+			dbExec(vehicledatabase, "INSERT INTO vehicles (model, Veh_Health, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, fuel, Tire_inVehicle, Engine_inVehicle, Parts_inVehicle, Scrap_inVehicle, Glass_inVehicle, Rotary_inVehicle, vehicle_name, ColSize, ID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", model, veh_health, x, y, z, rotx, roty, rotz, slots, fuel, tires, engines, parts, scrap, glass, rotary, name, colsphere, veh_ID)
+			for key,item in ipairs(itemsDataTable) do
+				local itemAmount = getElementData(col, item[1]) or 0
+				dbExec(vehicledatabase, 'UPDATE vehicles SET "'..item[1]..'"=? WHERE ID=?',itemAmount,veh_ID)
+			end
+		end
+	end
+	outputServerLog("[DayZ] VEHICLES HAVE BEEN SAVED TO THE DATABASE.")
+end
+addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveVehiclesToDB)
+
+function createVehiclesFromDB(model, Veh_Health, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, fuel, Tire_inVehicle, Engine_inVehicle, Parts_inVehicle, Scrap_inVehicle, Glass_inVehicle, Rotary_inVehicle, vehicle_name, ColSize, ID, theItems)
+	local veh = createVehicle(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ)
+    local vehCol = createColSphere(last_x, last_y, last_z, tonumber(ColSize))
+    attachElements(vehCol, veh, 0, 0, 0)
+    setElementData(vehCol, "parent", veh)
+    setElementData(veh, "parent", vehCol)
+    setElementData(vehCol,"vehicle", true)
+    setElementData(vehCol,"MAX_Slots",tonumber(MAX_Slots))
+    setElementData(vehCol,"Tire_inVehicle",tonumber(Tire_inVehicle))
+    setElementData(vehCol,"Engine_inVehicle",tonumber(Engine_inVehicle))
+    setElementData(vehCol,"Parts_inVehicle",tonumber(Parts_inVehicle))
+	setElementData(vehCol,"Scrap_inVehicle",tonumber(Scrap_inVehicle))
+	setElementData(vehCol,"Glass_inVehicle",tonumber(Glass_inVehicle))
+	setElementData(vehCol,"Rotary_inVehicle",tonumber(Rotary_inVehicle))
+    setElementData(vehCol, "spawn", {model, last_x, last_y, last_z})
+    setElementData(vehCol, "fuel", tonumber(fuel))
+	setElementID(vehCol, tostring(ID))
+	setElementData(vehCol,"vehicle_name",tostring(vehicle_name))
+	setElementHealth(veh,tonumber(Veh_Health))
+    for i, data in ipairs(theItems) do
+		if getElementID(vehCol) == tostring(data[1]) then
+			setElementData(vehCol, tostring(data[2]),tonumber(data[3]))
+		end
+	end
+end
+
+function loadVehiclesFromDB(q)
+    if (q) then
+        local p = dbPoll( q, -1 )
+        if (#p > 0) then
+            for _, d in pairs (p) do
+				for i,item in ipairs(itemsDataTable) do
+					if d[item[1]] then
+						table.insert(theItems,{d["ID"],item[1],d[item[1]]})
+					end
+				end
+				createVehiclesFromDB( d["model"], d["Veh_Health"], d["last_x"], d["last_y"], d["last_z"], d["last_rX"], d["last_rY"], d["last_rZ"], d["MAX_Slots"], d["fuel"], d["Tire_inVehicle"], d["Engine_inVehicle"], d["Parts_inVehicle"], d["Scrap_inVehicle"], d["Glass_inVehicle"], d["Rotary_inVehicle"], d["vehicle_name"], d["ColSize"], d["ID"], theItems)
+			end
+        end
+    end
+end
+
+
+function loadVehiclesOnServerStart()
+	dbQuery(loadVehiclesFromDB, { }, vehicledatabase, "SELECT * FROM vehicles")
+	outputServerLog("[DayZ] VEHICLES HAVE BEEN LOADED.")
+end
+addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadVehiclesOnServerStart)
+
+
 --[[
 RARITY TYPES AND THEIR CHANCES
 
@@ -395,9 +707,10 @@ Rare: 10%
 
 ]]
 
-local v_counter = 0
+
 function spawnDayZVehicles()
-if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
+if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
+local v_counter = 0
 	for i,veh in ipairs(ATV_Spawns) do
 		local number = math.percentChance(veh[7],8)
 		if number and number >= 1 then
@@ -424,8 +737,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{471,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Bus_Spawns) do	
@@ -454,8 +768,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{431,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Bike_Spawns) do
@@ -483,8 +798,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{509,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",0)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(GAZ_Spawns) do
@@ -513,8 +829,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{546,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Military_O_Spawns) do
@@ -542,10 +859,11 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{433,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementData(vehCol,"Grenade",10)
 			setElementData(vehCol,"9.3x62mm Cartridge",10)
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Motorcycle_Spawns) do
@@ -574,8 +892,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{468,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Pickup_O_Spawns) do
@@ -604,8 +923,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{543,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Hatchback_Spawns) do
@@ -634,8 +954,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{426,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Pickup_Spawns) do
@@ -664,8 +985,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{422,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(SVan_Spawns) do
@@ -694,8 +1016,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{418,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Skoda_Spawns) do
@@ -724,8 +1047,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{426,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Tractor_Spawns) do
@@ -754,8 +1078,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{531,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(UAZ_Spawns) do
@@ -784,8 +1109,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{470,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Ural_C_Spawns) do
@@ -814,8 +1140,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{455,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(SUV_Spawns) do
@@ -844,8 +1171,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{490,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(V3S_C_Spawns) do
@@ -874,8 +1202,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{478,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	-- AIRCRAFT
@@ -905,8 +1234,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{469,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(UH1H_Huey_Spawns) do
@@ -935,8 +1265,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{417,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(Mi17_Spawns) do
@@ -965,8 +1296,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{487,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(MH6J_Spawns) do
@@ -995,8 +1327,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{488,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(An2_BP_Spawns) do
@@ -1025,8 +1358,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{511,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	-- BOATS
@@ -1056,8 +1390,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{453,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(SmallBoat_Spawns) do
@@ -1086,8 +1421,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{595,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,veh in ipairs(PBX_Spawns) do
@@ -1116,8 +1452,9 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 			setElementData(vehCol,"spawn",{473,x,y,z})
 			--others
 			setElementData(vehCol,"fuel",10)
-			setElementData(vehCol,"veh_ID",v_counter)
+			setElementID(vehCol,tostring(v_counter))
 			setElementHealth(veh,math.random(300,1000))
+			exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 		end
 	end
 	for i,tent in ipairs(tentSpawns) do
@@ -1134,22 +1471,10 @@ if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then ret
 		setElementData(tentCol,"MAX_Slots",30)
 		setElementData(tentCol,"veh_ID",v_counter)
 	end
+	setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
+	exports.DayZ:saveLog("----- END OF SPAWNING VEHICLES -----\r\n","debug")
 end
-
-spawnDayZVehicles()
-
-
-function spawnVehiclePack (ps,cmd)
-	if getElementData(ps,"admin") then
-		if getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then
-			setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",false)
-			spawnDayZVehicles()
-			setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
-		end
-		outputChatBox("Vehicles have been respawned!",ps,255,0,0,true)
-	end
-end
-addCommandHandler("svp",spawnVehiclePack)
+setTimer(spawnDayZVehicles,10000,1)
 
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
