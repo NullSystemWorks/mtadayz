@@ -1,9 +1,0 @@
-<meta>
-	<info author="L" type="script" name="Statistics Window for MTA DayZ" version="1.0.0" description="Premium Version"/>
-	<script src="statistics_client.lua" type="client" cache="false" />
-	<script src="statistics_server.lua" type="server" />
-	
-	<settings>
-		<setting name="aclMinimumGroup" value="Moderator,Admin" examples="Moderator,Admin" desc="Rank/Group mininum in order to use this addon"/>
-	</settings>
-</meta>

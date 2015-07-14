@@ -423,43 +423,43 @@ return false
 end
 
 vehicleAddonsInfo = {
--- {Model,Wheels,Engine,TankParts,ScrapMetal,WindscreenGlass,RotaryParts,Name}
+-- {Model, Wheels, Engine, TankParts, ScrapMetal, WindscreenGlass, RotaryParts, Name, ColsphereSize, Slots, Fuel,RealName}
 
 -- VEHICLES
-{471,4,1,1,1,0,0,"ATV"},
-{431,6,1,1,1,4,0,"Bus"},
-{509,2,0,0,1,0,0,"Old Bike"},
-{546,4,1,1,1,4,0,"GAZ"},
-{433,8,1,1,1,3,0,"Military Offroad"},
-{468,2,1,1,1,0,0,"Motorcycle"},
-{543,4,1,1,1,4,0,"Offroad Pickup Truck"},
-{426,4,1,1,1,5,0,"Old Hatchback"},
-{422,4,1,1,1,2,0,"Pickup Truck"},
-{418,4,4,1,1,0,0,"S1203 Van"},
-{400,4,1,1,1,4,0,"Skoda"},
-{531,4,1,1,1,3,0,"Tractor"},
-{470,4,1,1,1,6,0,"UAZ"},
-{455,6,1,1,1,0,0,"Ural Civilian"},
-{490,4,1,1,1,4,0,"SUV"},
-{478,6,1,1,1,0,0,"V3S Civilian"},
+{471,4,1,1,0,0,0,"ATV",2,50,30,"Quadbike"},
+{431,6,1,1,0,0,0,"Bus",5,50,100,"Bus"},
+{509,2,0,0,0,0,0,"Old Bike",2,0,0,"Bike"},
+{546,4,1,1,0,0,0,"GAZ",3,50,200,"Intruder"},
+{433,8,1,1,0,0,0,"Military Offroad",4,50,200,"Barracks"},
+{468,2,1,1,0,0,0,"Motorcycle",2,5,55,"Sanchez"},
+{543,4,1,1,0,0,0,"Offroad Pickup Truck",3,50,100,"Sadler"},
+{426,4,1,1,0,0,0,"Old Hatchback",3,50,50,"Premier"},
+{422,4,1,1,0,0,0,"Pickup Truck",3,50,200,"Bobcat"},
+{418,4,4,1,0,0,0,"S1203 Van",3,50,60,"Moonbeam"},
+{400,4,1,1,0,0,0,"Skoda",3,75,200,"Landstalker"},
+{531,4,1,1,0,0,0,"Tractor",3,50,100,"Tractor"},
+{470,4,1,1,0,0,0,"UAZ",3,50,100,"Patriot"},
+{455,6,1,1,0,0,0,"Ural Civilian",5,200,200,"Flatbed"},
+{490,4,1,1,0,0,0,"SUV",3,50,200,"FBI Rancher"},
+{478,6,1,1,0,0,0,"V3S Civilian",5,200,160,"Walton"},
 
 -- AIRCRAFT
-{469,0,1,0,4,8,1,"AH6X Little Bird"},
-{417,0,1,0,4,8,1,"UH-1H Huey"},
-{487,0,1,0,4,8,1,"Mi-17"},
-{488,0,1,0,2,4,1,"MH6J"},
-{511,2,1,0,1,2,2,"An-2 Biplane"},
+{469,0,1,0,0,0,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
+{417,0,1,0,0,0,1,"UH-1H Huey",7,50,1000,"Leviathan"},
+{487,0,1,0,0,0,1,"Mi-17",7,20,1000,"Maverick"},
+{488,0,1,0,0,0,1,"MH6J",7,20,600,"News Chopper"},
+{511,2,1,0,0,0,2,"An-2 Biplane",7,100,400,"Beagle"},
 
 -- BOATS
-{453,0,1,0,1,2,0,"Fishing Boat"},
-{595,0,1,0,1,2,0,"Small Boat"},
-{473,0,1,0,1,1,0,"PBX"},
+{453,0,1,0,0,0,0,"Fishing Boat",4,400,100,"Reefer"},
+{595,0,1,0,0,0,0,"Small Boat",3,0,100,"Launch"},
+{473,0,1,0,0,0,0,"PBX",2,0,100,"Dinghy"},
 }
 
 function getVehicleAddonInfos (id)
 	for i,veh in ipairs(vehicleAddonsInfo) do
 		if veh[1] == id then
-			return veh[2],veh[3], veh[4], veh[5], veh[6], veh[7],veh[8]
+			return veh[2],veh[3], veh[4], veh[5], veh[6], veh[7], veh[8], veh[9], veh[10], veh[11], veh[12]
 		end
 	end
 end

@@ -276,11 +276,12 @@ function playerLogin(username, pass, player)
 	end
 	spawnPlayer (player, x,y,z+0.5, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
-	fadeCamera (player, true)
+	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
 	setTimer( function(player)
 		if isElement(player) then
 			setElementFrozen(player, false)
+			fadeCamera(player,true)
 		end
 	end,500,1,player)
 	playerCol = createColSphere(x,y,z,1.5)
@@ -292,7 +293,7 @@ function playerLogin(username, pass, player)
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
-			if data[1] == "brokenbone" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
+			if data[1] == "brokenbone" or data[1] == "gender" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
 				elementData = elementData
 			else
 				elementData = 0
@@ -340,8 +341,14 @@ function playerRegister(username, pass, player)
 		skin = 172
 	end
 	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
-	fadeCamera (player, true)
+	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
+	setTimer( function(player)
+		if isElement(player) then
+			setElementFrozen(player, false)
+			fadeCamera(player,true)
+		end
+	end,500,1,player)
 	playerCol = createColSphere(x,y,z,1.5)
 	setElementData(player,"playerCol",playerCol)
 	attachElements ( playerCol, player, 0, 0, 0 )
@@ -383,7 +390,9 @@ function playerRegister(username, pass, player)
 		elseif data[1] =="bandit" then
 			setElementData(player,data[1],false)	
 		elseif data[1] =="humanity" then
-			setElementData(player,data[1],2500)		
+			setElementData(player,data[1],2500)	
+		elseif data[1] == "gender" then
+			setElementData(player,data[1],gender)
 		else
 			setElementData(player,data[1],0)
 		end	

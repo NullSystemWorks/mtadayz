@@ -1333,6 +1333,9 @@ military_items = false
 trash_items = false
 blueprint_items = false
 
+local async = Async()
+async:setPriority("normal")
+
 function insertIntoTableResidential()
 	local value_generic = math.random(0,200)/2
 	local value_military = math.random(0,200)/2
@@ -1351,10 +1354,12 @@ end
 
 function createPickupsOnServerStart()
 	iPickup = 0
+	async:iterate(1, 1, function()
 	for i,pos in ipairs(pickupPositions["residential"]) do
 		iPickup = iPickup + 1
 		createItemLoot("Residential",pos[1],pos[2],pos[3],iPickup)
 	end
+	end)
 	setTimer(createPickupsOnServerStart2,60000,1)
 end
 
@@ -1459,12 +1464,8 @@ function createPickupsOnServerStart5()
 	end
 end
 
-insertIntoTableResidential()
-createPickupsOnServerStart()
-
-------------------------------------------------------------------------------
---OTHER ITEM STUFF
-
+setTimer(insertIntoTableResidential,5000,1)
+setTimer(createPickupsOnServerStart,30000,1)
 
 function onPlayerTakeItemFromGround (itemName,col)
 	itemPlus = 1
@@ -1556,7 +1557,9 @@ addEvent( "playerDropAItem", true )
 addEventHandler( "playerDropAItem", getRootElement(), playerDropAItem )
 
 function refreshItemLoots ()
-	outputChatBox("#ffaa00WARNING! #ffffff - SPAWNPOINTS FOR ITEMS ARE BEING REFRESHED! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
+	if gameplayVariables["respawnwarning"] then
+		outputChatBox("#ffaa00WARNING! #ffffff - SPAWNPOINTS FOR ITEMS ARE BEING REFRESHED! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
+	end
 	for i, loots in ipairs(getElementsByType("colshape")) do
 		local itemloot = getElementData(loots,"itemloot")
 		if itemloot then
@@ -1585,7 +1588,9 @@ end
 function refreshItemLootPoints ()
 	local time = getRealTime()
 	local hour = time.hour
-	outputChatBox("#ff2200WARNING! #ffffff - SPAWNPOINTS FOR ITEMS WILL BE REFRESHED IN 1 MINUTE! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
+	if gameplayVariables["respawnwarning"] then
+		outputChatBox("#ff2200WARNING! #ffffff - SPAWNPOINTS FOR ITEMS WILL BE REFRESHED IN 1 MINUTE! BEWARE OF MASSIVE LAG!",getRootElement(),255,255,255,true)
+	end
 	setTimer(refreshItemLoots,60000,1)
 end
 setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"],1)

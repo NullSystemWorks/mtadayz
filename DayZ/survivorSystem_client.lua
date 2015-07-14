@@ -566,6 +566,11 @@ function stopZombieSound()
 end
 setTimer(stopZombieSound,1000,0)
 
+function stopPlayerVoices()
+	setPedVoice(localPlayer, "PED_TYPE_DISABLED")
+end
+addEventHandler("onClientPlayerSpawn",localPlayer,stopPlayerVoices)
+
 function WeaponHUD()
 if getElementData(getLocalPlayer(),"logedin") then
     ammo = getPedTotalAmmo (getLocalPlayer())
@@ -1435,6 +1440,12 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			damage_half = 2
 		end
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-(gameplayVariables["zombiedamage"]/damage_half))
+		local gender = getElementData(localPlayer,"gender")
+		if gender == "male" then
+			playSFX("pain_a",2,53,false)
+		elseif gender == "female" then
+			playSFX("pain_a",1,52,false)
+		end
 		local number = math.random(1,7)
 		if number == 4 then
 			setElementData(getLocalPlayer(),"bleeding",getElementData(getLocalPlayer(),"bleeding") + math.floor(loss*10))
@@ -1774,6 +1785,15 @@ setTimer(debugJump,100,0)
 function debugJump2()
 	setElementData(getLocalPlayer(),"jumping",false)
 end
+
+function setPlayerSneakOnWalk()
+	if getControlState("walk") then
+		setPedWalkingStyle(localPlayer,69)
+	else
+		setPedWalkingStyle(localPlayer,54)
+	end
+end
+setTimer(setPlayerSneakOnWalk,1000,0)
 
 weaponNoiseTable = {
 -- Weapons with * as operator are louder, while those with / are quieter

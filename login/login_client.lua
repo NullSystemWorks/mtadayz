@@ -1,6 +1,4 @@
-resourceRoot = getResourceRootElement( getThisResource( ) )
-localPlayer = getLocalPlayer()
-versionstring = "MTA:DayZ\nVersion: 0.9.0a\nLast Update: 20.07.15"
+resourceRoot = getResourceRootElement(getThisResource())
 infoTable = {}
 Login_Edit = {}
 marwinButtons = {}
@@ -11,47 +9,28 @@ showPlayerHudComponent("area_name",false)
 showPlayerHudComponent("radar",false)
 sound = playSound("dayzsoundtrack.mp3",true)
 setSoundVolume(sound,0.5)
-local sm = {}
-sm.moov = 0
-sm.object1,sm.object2 = nil,nil
 
 if sx < 1152 then
 	scale = sx/1152
 end
-if sx < 1024 then
-	outputChatBox("We highly recommend you to at least use 1024x768 as resolution!", 255, 0, 0)
-end
 
 font[-1] = guiCreateFont( "font2.ttf", 8*scale )
-font[0] = guiCreateFont( "font.ttf", 14*scale )
+font[0] = guiCreateFont( "font.ttf", 16*scale )
 font[1] = guiCreateFont( "font.ttf", 18*scale )
 font[2] = guiCreateFont( "font.ttf", 20*scale )
 font[3] = guiCreateFont( "font.ttf", 24*scale )
-
-function onJoinPlayTrack()
-	sound = playSound("dayzsoundtrack.mp3",true)
-end
-
-function callClientFunction(funcname, ...)
-    local arg = { ... }
-    if (arg[1]) then
-        for key, value in next, arg do arg[key] = tonumber(value) or value end
-    end
-    loadstring("return "..funcname)()(unpack(arg))
-end
-addEvent("onServerCallsClientFunction", true)
-addEventHandler("onServerCallsClientFunction", resourceRoot, callClientFunction)
+font[4] = guiCreateFont("font.ttf",90*scale)
 
 --Button
 function createMarwinButton(x,y,widht,height,text,bool,parent,info)
-	button = guiCreateStaticImage(x,y,widht,height,"images/button_standard.png", bool,parent or nil)
+	button = guiCreateStaticImage(x,y,widht,height,"images/button.png", bool,parent or nil)
 	table.insert(marwinButtons,button)
 	guiBringToFront(button)
 	label = guiCreateLabel(0,0,1,1,text,bool,button)
 	guiBringToFront(label)
 	setElementData(label,"parent",button)
 	setElementData(button,"info",info)
-	guiSetFont(label,font[1])
+	guiSetFont(label,font[0])
 	guiLabelSetVerticalAlign (label, "center")
 	guiLabelSetHorizontalAlign (label, "center")
 	addEventHandler("onClientMouseEnter",label,markButton,false)
@@ -61,24 +40,26 @@ end
 
 function markButton ()
 	parent = getElementData(source,"parent")
-	guiStaticImageLoadImage (parent,"images/button_mouse.png")
+	guiStaticImageLoadImage (parent,"images/button.png")
 	setElementData(getLocalPlayer(),"clickedButton",parent)
 	playSound("button.mp3")
 end
 
 function unmarkButton (b,s)
 	parent = getElementData(source,"parent")
-	guiStaticImageLoadImage (parent,"images/button_standard.png")
+	guiStaticImageLoadImage (parent,"images/button.png")
 	setElementData(getLocalPlayer(),"clickedButton",false)
 end
---Button end
 
-function build_loginWin()
-	guiSetInputMode("no_binds_when_editing")
-	showCursor(true)
-	--transfer old login data to new secure place
-	oldFile = xmlLoadFile("preferencesL.xml")
-	confFile = xmlLoadFile("@preferencesL.xml")
+news = {
+"[07/20/15]\nVersion 0.9.0 is out!\n\n--- CHANGELOG ---\n[NEW]Vehicles are saved in custom database\n[NEW]Revamped Vehicle HUD\n[NEW]Multi-Language Support*\n[NEW]Gender Selection\n[NEW]Keycards for Area 69 and San Fierro Carrier\n[NEW]Heroes take less damage from zombies and weapons\n[NEW]Added 16 cars, 5 helicopters, 1 plane & 3 boats\n[CHANGED]Icons for HUD\n\n\nThe complete changelog can be found at mtadayz.heliohost.org!\n\n\n*Languages available at time of release: English, German, Czech, Dutch, Portuguese"
+}
+
+function showLogin()
+guiSetInputMode("no_binds_when_editing")
+showCursor(true)
+oldFile = xmlLoadFile("preferencesL.xml")
+confFile = xmlLoadFile("@preferencesL.xml")
 	if not confFile and oldFile then
 		confFile = xmlCreateFile("@preferencesL.xml","user")
 		local usr = xmlNodeGetAttribute(oldFile,"username")
@@ -90,7 +71,6 @@ function build_loginWin()
 	if oldFile then
 		xmlUnloadFile(oldFile)
 	end
-	--
 	confFile = xmlLoadFile("@preferencesL.xml")
 	if (confFile) then
 		infoTable["account"] = xmlNodeGetAttribute(confFile,"username")
@@ -104,112 +84,45 @@ function build_loginWin()
 		infoTable["pass"] = ""
 	end
 	xmlSaveFile(confFile)
-	--Create Window
-	--Background
-		background_front = guiCreateStaticImage( 0.2, 0.25, 0.6, 0.5, "images/background_1.png", true )
-		tab_front = guiCreateStaticImage( 0, 0, 1, 0.075, "images/tab.png", true ,background_front)
-		--Header Text
-			headline = guiCreateLabel(0,0.15,1,0.8,"MTA:DayZ I LOGIN PANEL",true,tab_front)
-			guiSetFont(headline,font[2])
-			guiLabelSetHorizontalAlign (headline, "center")
-		--Version
-			guestInfo = guiCreateLabel(0.025, 0.1, 0.325, 0.3,versionstring,true,background_front)
-			guiSetFont(guestInfo,font[1])
-			guiLabelSetHorizontalAlign (guestInfo, "center")
-			guiLabelSetColor ( guestInfo,50,255,50)	
-		--Login
-			loginButton = createMarwinButton(0.1,0.825,0.175,0.1,"Login",true,background_front,"login")
-			--Text
-			loginInfo = guiCreateLabel(0.025, 0.46, 0.325, 0.175,"Login!",true,background_front)
-			guiSetFont(loginInfo,font[1])
-			guiLabelSetHorizontalAlign (loginInfo, "center")
-			guiLabelSetColor ( loginInfo,50,255,50)
-				--Username
-				username = guiCreateLabel(0.025, 0.55, 0.325, 0.04,"Username",true,background_front)
-				guiSetFont(username,font[0])
-				guiLabelSetHorizontalAlign (username, "center")
-					--Edit Box
-					Login_Edit[1] = guiCreateEdit(0.1, 0.6, 0.175, 0.055, infoTable["account"], true,background_front)
-				--Password
-				password = guiCreateLabel(0.025, 0.675, 0.325, 0.04,"Password",true,background_front)
-				guiSetFont(password,font[0])
-				guiLabelSetHorizontalAlign (password, "center")
-				loginIcon = guiCreateStaticImage( 0.1, 0.46, 0.03, 0.05, "images/login_icon.png", true , background_front)
-					--Edit Box
-					Login_Edit[2] = guiCreateEdit(0.1, 0.725, 0.175, 0.055, infoTable["pass"], true,background_front)
-					guiEditSetMasked(Login_Edit[2],true)
-		--Register
-			registerButton = createMarwinButton(0.45,0.825,0.175,0.1,"Register",true,background_front,"register")
-			--Text
-			registerInfo = guiCreateLabel(0.375, 0.15, 0.325, 0.1,"Register!",true,background_front)
-			guiSetFont(registerInfo,font[1])
-			guiLabelSetHorizontalAlign (registerInfo, "center")
-			guiLabelSetColor ( registerInfo,50,255,50)
-				--Username
-				username = guiCreateLabel(0.375, 0.25, 0.325, 0.04,"Username",true,background_front)
-				guiSetFont(username,font[0])
-				guiLabelSetHorizontalAlign (username, "center")
-					--Edit Box
-					Login_Edit[3] = guiCreateEdit(0.45, 0.3, 0.175, 0.055, "", true,background_front)
-				--Password
-				password = guiCreateLabel(0.375, 0.375, 0.325, 0.04,"Password",true,background_front)
-				guiSetFont(password,font[0])
-				guiLabelSetHorizontalAlign (password, "center")
-				loginIcon = guiCreateStaticImage( 0.45, 0.15, 0.03, 0.05, "images/signup_icon.png", true , background_front)
-					--Edit Box
-					Login_Edit[4] = guiCreateEdit(0.45, 0.425, 0.175, 0.055, "", true,background_front)		
-					guiEditSetMasked(Login_Edit[4],true)
-				--Password #2
-				password2 = guiCreateLabel(0.375, 0.5, 0.325, 0.04,"Repeat password",true,background_front)
-				guiSetFont(password2,font[0])
-				guiLabelSetHorizontalAlign (password2, "center")
-					--Edit Box
-					Login_Edit[5] = guiCreateEdit(0.45, 0.55, 0.175, 0.055, "", true,background_front)		
-					guiEditSetMasked(Login_Edit[5],true)
-				--Gender
-                Login_Edit[6] = guiCreateRadioButton(0.46, 0.65, 0.15, 0.05, "Male", true, background_front)
-                Login_Edit[7] = guiCreateRadioButton(0.46, 0.71, 0.15, 0.05, "Female", true, background_front)
-                guiRadioButtonSetSelected(Login_Edit[6],true)
-		--News/Updates
-			--News Headline
-				newsH = guiCreateLabel(0.726, 0.115, 0.25, 0.05,"News:",true,background_front)
-				guiSetFont(newsH,font[0])
-				guiLabelSetHorizontalAlign (newsH, "center")
-				guiLabelSetColor ( newsH,50,255,50)
-			--news_box1
-			news_box1 = guiCreateStaticImage( 0.73, 0.16, 0.244, 0.2, "images/news.png", true , background_front)
-			guiSetAlpha(news_box1,0.8)
-			news1 = guiCreateLabel(0.025, 0.125, 1, 1,"-",true,news_box1)
-			guiSetFont(news1,"default-bold-small")
-			news_box1_new = guiCreateStaticImage( 0, 0, 0.15, 0.1, "images/new.png", true , news_box1)
-			guiSetVisible(news_box1_new,false)
-			--news_box2
-			news_box2 = guiCreateStaticImage( 0.73, 0.36, 0.244, 0.2, "images/news.png", true , background_front)
-			guiSetAlpha(news_box2,0.4)
-			news2 = guiCreateLabel(0.025, 0.125, 1, 1,"-",true,news_box2)
-			guiSetFont(news2,"default-bold-small")
-			news_box2_new = guiCreateStaticImage( 0, 0, 0.15, 0.1, "images/new.png", true , news_box2)
-			guiSetVisible(news_box2_new,false)
-			--news_box3
-			news_box3 = guiCreateStaticImage( 0.73, 0.56, 0.244, 0.2, "images/news.png", true , background_front)
-			guiSetAlpha(news_box3,0.8)
-			news3 = guiCreateLabel(0.025, 0.125, 1, 1,"-",true,news_box3)
-			guiSetFont(news3,"default-bold-small")
-			news_box3_new = guiCreateStaticImage( 0, 0, 0.15, 0.1, "images/new.png", true , news_box3)
-			guiSetVisible(news_box3_new,false)
-			--news_box4
-			news_box4 = guiCreateStaticImage( 0.73, 0.76, 0.244, 0.19, "images/news.png", true , background_front)
-			guiSetAlpha(news_box4,0.4)
-			news4 = guiCreateLabel(0.025, 0.125, 1, 1,"-",true,news_box4)
-			guiSetFont(news4,"default-bold-small")
-			news_box4_new = guiCreateStaticImage( 0, 0, 0.15, 0.1, "images/new.png", true , news_box4)
-			guiSetVisible(news_box4_new,false)
-			--others
-			news_box = guiCreateStaticImage( 0.726, 0.1, 0.25, 0.85, "images/box_background.png", true , background_front)
-			guiCreateStaticImage(0.79, 0.114, 0.028, 0.045, "images/on.png", true , background_front)
+	
+	local number = math.random(1,5)
+	
+	background_front = guiCreateStaticImage(0.00, 0.00, 1, 1, "images/background_"..number..".png", true)
+	background_news = guiCreateStaticImage(0.72, 0.20, 0.27, 0.70, "images/background_news.png", true, background_front)
+	background_news_label = guiCreateLabel(0.01, 0.01, 1, 0.1, "NEWS", true,background_news)
+	background_news_text = guiCreateLabel(0.01,0.1, 1, 0.9, news[1],true,background_news)
+	title_label = guiCreateLabel(0.29, 0.08, 0.43, 0.18, "MTA DayZ", true,background_front)
+	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.0a", true,background_front)
+	login_label = guiCreateLabel(0.05, 0.64, 0.20, 0.05, "LOGIN", true,background_front)
+	Login_Edit[1] = guiCreateEdit(0.05, 0.67, 0.25, 0.05, infoTable["account"], true,background_front)
+	Login_Edit[2] = guiCreateEdit(0.31, 0.67, 0.25, 0.05, infoTable["pass"], true,background_front)
+	register_label = guiCreateLabel(0.05, 0.79, 0.20, 0.05, "REGISTER", true,background_front)
+	Login_Edit[3] = guiCreateEdit(0.05, 0.82, 0.25, 0.05, "", true,background_front)
+	Login_Edit[4] = guiCreateEdit(0.31, 0.82, 0.25, 0.05, "", true,background_front)
+	Login_Edit[5] = guiCreateRadioButton(0.31, 0.89, 0.08, 0.03, "Male", true,background_front)
+	Login_Edit[6] = guiCreateRadioButton(0.39, 0.89, 0.08, 0.03, "Female", true,background_front)
+	loginButton = createMarwinButton(0.59, 0.67, 0.11, 0.05, "Login", true, background_front, "login")
+	registerButton = createMarwinButton(0.59, 0.82, 0.11, 0.05, "Register", true, background_front, "register")
+	error_label = guiCreateLabel(0.05, 0.56, 0.50, 0.06, "", true, background_front)
+
+	guiSetFont(login_label,font[0])
+	guiSetFont(title_label,font[4])
+	guiSetFont(version_label,font[3])
+	guiSetFont(register_label,font[0])
+	guiSetFont(error_label,font[1])
+	guiSetAlpha(background_news,0.7)
+	guiLabelSetHorizontalAlign(background_news_text,"left",true)
+	guiRadioButtonSetSelected(Login_Edit[5],true)
+	guiEditSetMasked(Login_Edit[2],true)
+	guiEditSetMasked(Login_Edit[4],true)
+	if number == 2 or number == 4 or number == 5 then
+		guiLabelSetColor(title_label,0,0,0)
+		guiLabelSetColor(version_label,0,0,0)
+	else
+		guiLabelSetColor(title_label,255,255,255)
+		guiLabelSetColor(version_label,255,255,255)
+	end
 end
-
-
 
 --LOGIN
 function clickPanelButton (button, state)
@@ -222,46 +135,40 @@ function clickPanelButton (button, state)
 			local password = guiGetText(Login_Edit[2])
 			if not (tostring(username) == "") and not (tostring(password) == "") then
 				triggerServerEvent("onClientSendLoginDataToServer", getLocalPlayer(), username, password)
-				sm.moov = 0
 				stopSound(sound)
 				setCameraTarget(localPlayer)
 			else
 				reason = "Missing Password or Username!"
-				outputChatBox("[LOGIN ERROR]#FF9900 "..reason,255,255,255,true)
+				guiSetText(error_label,reason)
+				setTimer(function() guiSetText(error_label,"") end,3000,1)
 				return false
 			end
 		elseif info and info == "guest" then  
-				showLoginWindow(false)
+				return
 		elseif info and info == "register" then  
 				local username = guiGetText(Login_Edit[3])
-				local pass1 = guiGetText(Login_Edit[4])
-				local pass2 = guiGetText(Login_Edit[5])
-				local gender = guiRadioButtonGetSelected(Login_Edit[6])
+				local pass = guiGetText(Login_Edit[4])
+				local gender = guiRadioButtonGetSelected(Login_Edit[5])
 				if gender then
 					setElementData(localPlayer,"gender","male")
 				else
 					setElementData(localPlayer,"gender","female")
 				end				
 				if not (tostring(username) == "") then
-					if not (tostring(pass1) == "") then
-						if pass1 == pass2 then
-							triggerServerEvent("onClientSendRegisterDataToServer", getLocalPlayer(), username, pass1)
-							sm.moov = 0
-							stopSound(sound)
-							setCameraTarget(localPlayer)
-						else
-							reason = "Passwords do not match!"
-							outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
-							return false
-						end
+					if not (tostring(pass) == "") then
+						triggerServerEvent("onClientSendRegisterDataToServer", getLocalPlayer(), username, pass)
+						stopSound(sound)
+						setCameraTarget(localPlayer)
 					else
 						reason = "No password was entered!"
-						outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
+						guiSetText(error_label,reason)
+						setTimer(function() guiSetText(error_label,"") end,3000,1)
 						return false
 					end
 				else
 					reason = "No username was entered!"
-					outputChatBox("[REGISTRATION ERROR]#FF9900 "..reason,255,255,255,true)
+					guiSetText(error_label,reason)
+					setTimer(function() guiSetText(error_label,"") end,3000,1)
 					return false
 				end	
 			end
@@ -270,41 +177,29 @@ function clickPanelButton (button, state)
 end
 addEventHandler("onClientClick",getRootElement(),clickPanelButton)
 
-function onClientGetNews(text1,text2,text3,text4,bool1,bool2,bool3,bool4)
-	--workaround fix for line breaks
-	local text1 = string.gsub(text1, "<br>", "\n")
-	local text2 = string.gsub(text2, "<br>", "\n")
-	local text3 = string.gsub(text3, "<br>", "\n")
-	local text4 = string.gsub(text4, "<br>", "\n")
-	guiSetText(news1,text1)
-	guiSetText(news2,text2)
-	guiSetText(news3,text3)
-	guiSetText(news4,text4)
-	guiSetVisible(news_box1_new,bool1 == "true" and true or false)
-	guiSetVisible(news_box2_new,bool2 == "true" and true or false)
-	guiSetVisible(news_box3_new,bool3 == "true" and true or false)
-	guiSetVisible(news_box4_new,bool4 == "true" and true or false)
+addEvent("onErrorOutputReason",true)
+function onErrorOutputReason(reason)
+	if reason then
+		guiSetText(error_label,reason)
+		setTimer(function() guiSetText(error_label,"") end,3000,1)
+	end
 end
-addEvent("onClientGetNews",true)
-addEventHandler("onClientGetNews",getRootElement(),onClientGetNews)
+addEventHandler("onErrorOutputReason",root,onErrorOutputReason)
 
 --BUILD WINDOW ON RESOURCE START
 addEventHandler("onClientResourceStart", resourceRoot, 
 	function ()
-		build_loginWin()
-		guiSetVisible(background_front,false)
-		showLoginWindow(true)
-		guiSetInputMode("no_binds_when_editing")
-		--playSound("winsound.mp3")
-		fadeCamera (true)
-		--setCameraMatrix(1468.8785400391, -919.25317382813, 100.153465271, 1468.388671875, -918.42474365234, 99.881813049316)
-		triggerServerEvent("requestServerNews", localPlayer) 	
+		fadeCamera(false,2000,0,0,0)
+		setCameraMatrix(6000,6000,2000)
+		showLogin()
+		guiSetInputMode("no_binds_when_editing")	
 	end
 )
 
 --onPlayerDoneLogin
 function hideLoginWindow(accountName, pass)
-	showLoginWindow(false)
+	guiSetVisible(background_front,false)
+	showCursor(false)
 	toggleSavePassword(accountName, pass)
 end
 addEvent("onPlayerDoneLogin", true)
@@ -316,88 +211,4 @@ function toggleSavePassword(name, pass)
 	xmlNodeSetAttribute(confFile, "username", name)
 	xmlNodeSetAttribute(confFile, "pass", pass)
 	xmlSaveFile(confFile)
-end
-
-function showLoginWindow(bool)
-setElementData(getLocalPlayer(),"clickedButton",false)
-	showCursor(bool)
-	if bool then
-		guiSetPosition(background_front,0.2, -0.75,true)
-		addEventHandler("onClientRender",getRootElement(),rollLoginPanel)
-		rollProgress = 1
-		rollIn = true
-		guiSetInputMode("no_binds_when_editing")
-	else
-		guiSetPosition(background_front,0.2, 0.25,true)
-		addEventHandler("onClientRender",getRootElement(),rollLoginPanel)
-		rollProgress = 0
-		rollIn = false
-		guiSetInputMode("allow_binds")
-	end
-	randomDirAnim = (math.random() > 0.5) and -1 or 1
-	useXAxis = (math.random() > 0.5) and true or false
-	animType = useXAxis and "InBounce" or "InElastic"
-end
-
---rollIn = true
-
-function rollLoginPanel ()
-	local eval
-	if rollIn then
-		if rollProgress > 0 then
-			rollProgress = ((rollProgress * 1000) - 15)/1000
-			if rollProgress < 0 then rollProgress = 0 end
-			eval = getEasingValue(rollProgress, animType)
-		else
-			removeEventHandler("onClientRender",getRootElement(),rollLoginPanel)
-			return
-		end
-	else
-		if rollProgress < 1 then
-			rollProgress = ((rollProgress * 100) + 3)/100
-			if rollProgress > 1 then rollProgress = 1 end
-			eval = getEasingValue(rollProgress, "InQuad")
-		else
-			removeEventHandler("onClientRender",getRootElement(),rollLoginPanel)
-			return
-		end
-	end
-	if useXAxis then
-		guiSetPosition(background_front,0.2,0.25+randomDirAnim*eval,true)	
-	else
-		guiSetPosition(background_front,0.2+randomDirAnim*eval,0.25,true)
-	end
-	guiSetVisible(background_front,true)
-end
- 
-local function removeCamHandler()
-	if(sm.moov == 1)then
-		sm.moov = 0
-	end
-end
- 
-local function camRender()
-	if (sm.moov == 1) then
-		local x1,y1,z1 = getElementPosition(sm.object1)
-		local x2,y2,z2 = getElementPosition(sm.object2)
-		setCameraMatrix(x1,y1,z1,x2,y2,z2)
-	end
-end
-addEventHandler("onClientPreRender",root,camRender)
- 
-function smoothMoveCamera(x1,y1,z1,x1t,y1t,z1t,x2,y2,z2,x2t,y2t,z2t,time)
-	if(sm.moov == 1)then return false end
-	sm.object1 = createObject(1337,x1,y1,z1)
-	sm.object2 = createObject(1337,x1t,y1t,z1t)
-	setElementAlpha(sm.object1,0)
-	setElementAlpha(sm.object2,0)
-	setObjectScale(sm.object1,0.01)
-	setObjectScale(sm.object2,0.01)
-	moveObject(sm.object1,time,x2,y2,z2,0,0,0,"InOutQuad")
-	moveObject(sm.object2,time,x2t,y2t,z2t,0,0,0,"InOutQuad")
-	sm.moov = 1
-	setTimer(removeCamHandler,time,1)
-	setTimer(destroyElement,time,1,sm.object1)
-	setTimer(destroyElement,time,1,sm.object2)
-	return true
 end

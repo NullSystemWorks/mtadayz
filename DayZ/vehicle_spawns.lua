@@ -226,34 +226,34 @@ vehicleAddonsInfo = {
 -- {Model, Wheels, Engine, TankParts, ScrapMetal, WindscreenGlass, RotaryParts, Name, ColsphereSize, Slots, Fuel,RealName}
 
 -- VEHICLES
-{471,4,1,1,1,0,0,"ATV",2,50,30,"Quadbike"},
-{431,6,1,1,1,4,0,"Bus",5,50,100,"Bus"},
-{509,2,0,0,1,0,0,"Old Bike",2,0,0,"Bike"},
-{546,4,1,1,1,4,0,"GAZ",3,50,200,"Intruder"},
-{433,8,1,1,1,3,0,"Military Offroad",4,50,200,"Barracks"},
-{468,2,1,1,1,0,0,"Motorcycle",2,5,55,"Sanchez"},
-{543,4,1,1,1,4,0,"Offroad Pickup Truck",3,50,100,"Sadler"},
-{426,4,1,1,1,5,0,"Old Hatchback",3,50,50,"Premier"},
-{422,4,1,1,1,2,0,"Pickup Truck",3,50,200,"Bobcat"},
-{418,4,4,1,1,0,0,"S1203 Van",3,50,60,"Moonbeam"},
-{400,4,1,1,1,4,0,"Skoda",3,75,200,"Landstalker"},
-{531,4,1,1,1,3,0,"Tractor",3,50,100,"Tractor"},
-{470,4,1,1,1,6,0,"UAZ",3,50,100,"Patriot"},
-{455,6,1,1,1,0,0,"Ural Civilian",5,200,200,"Flatbed"},
-{490,4,1,1,1,4,0,"SUV",3,50,200,"FBI Rancher"},
-{478,6,1,1,1,0,0,"V3S Civilian",5,200,160,"Walton"},
+{471,4,1,1,0,0,0,"ATV",2,50,30,"Quadbike"},
+{431,6,1,1,0,0,0,"Bus",5,50,100,"Bus"},
+{509,2,0,0,0,0,0,"Old Bike",2,0,0,"Bike"},
+{546,4,1,1,0,0,0,"GAZ",3,50,200,"Intruder"},
+{433,8,1,1,0,0,0,"Military Offroad",4,50,200,"Barracks"},
+{468,2,1,1,0,0,0,"Motorcycle",2,5,55,"Sanchez"},
+{543,4,1,1,0,0,0,"Offroad Pickup Truck",3,50,100,"Sadler"},
+{426,4,1,1,0,0,0,"Old Hatchback",3,50,50,"Premier"},
+{422,4,1,1,0,0,0,"Pickup Truck",3,50,200,"Bobcat"},
+{418,4,4,1,0,0,0,"S1203 Van",3,50,60,"Moonbeam"},
+{400,4,1,1,0,0,0,"Skoda",3,75,200,"Landstalker"},
+{531,4,1,1,0,0,0,"Tractor",3,50,100,"Tractor"},
+{470,4,1,1,0,0,0,"UAZ",3,50,100,"Patriot"},
+{455,6,1,1,0,0,0,"Ural Civilian",5,200,200,"Flatbed"},
+{490,4,1,1,0,0,0,"SUV",3,50,200,"FBI Rancher"},
+{478,6,1,1,0,0,0,"V3S Civilian",5,200,160,"Walton"},
 
 -- AIRCRAFT
-{469,0,1,0,4,8,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
-{417,0,1,0,4,8,1,"UH-1H Huey",7,50,1000,"Leviathan"},
-{487,0,1,0,4,8,1,"Mi-17",7,20,1000,"Maverick"},
-{488,0,1,0,2,4,1,"MH6J",7,20,600,"News Chopper"},
-{511,2,1,0,1,2,2,"An-2 Biplane",7,100,400,"Beagle"},
+{469,0,1,0,0,0,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
+{417,0,1,0,0,0,1,"UH-1H Huey",7,50,1000,"Leviathan"},
+{487,0,1,0,0,0,1,"Mi-17",7,20,1000,"Maverick"},
+{488,0,1,0,0,0,1,"MH6J",7,20,600,"News Chopper"},
+{511,2,1,0,0,0,2,"An-2 Biplane",7,100,400,"Beagle"},
 
 -- BOATS
-{453,0,1,0,1,2,0,"Fishing Boat",4,400,100,"Reefer"},
-{595,0,1,0,1,2,0,"Small Boat",3,0,100,"Launch"},
-{473,0,1,0,1,1,0,"PBX",2,0,100,"Dinghy"},
+{453,0,1,0,0,0,0,"Fishing Boat",4,400,100,"Reefer"},
+{595,0,1,0,0,0,0,"Small Boat",3,0,100,"Launch"},
+{473,0,1,0,0,0,0,"PBX",2,0,100,"Dinghy"},
 }
 
 vehicleFuelTable = {
@@ -647,6 +647,28 @@ function saveVehiclesToDB()
 	outputServerLog("[DayZ] VEHICLES HAVE BEEN SAVED TO THE DATABASE.")
 end
 addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveVehiclesToDB)
+
+function createBackupOfVehicles(playerSource,command)
+	if gameplayVariables["backupenabled"] then
+		if hasObjectPermissionTo (playerSource, "command.mute") then
+			outputServerLog("[DayZ] CREATING BACKUP OF VEHICLES...")
+			saveVehiclesToDB()
+		else
+			outputChatBox("You are not allowed to use this command!",playerSource,255,0,0)
+		end
+	else
+		outputChatBox("Backup for vehicles is turned off!",playerSource,255,0,0)
+	end
+end
+addCommandHandler("backup",createBackupOfVehicles)
+
+function createBackupOfVehiclesOnInterval()
+	if gameplayVariables["backupenabled"] then
+		outputServerLog("[DayZ] CREATING BACKUP OF VEHICLES...")
+	end
+end
+setTimer(createBackupOfVehiclesOnInterval,gameplayVariables["backupinterval"],0)
+
 
 function createVehiclesFromDB(model, Veh_Health, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, fuel, Tire_inVehicle, Engine_inVehicle, Parts_inVehicle, Scrap_inVehicle, Glass_inVehicle, Rotary_inVehicle, vehicle_name, ColSize, ID, theItems)
 	local veh = createVehicle(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ)

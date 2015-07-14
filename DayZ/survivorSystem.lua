@@ -554,11 +554,11 @@ function weaponDelete(dataName,oldValue)
 				local ammoData,weapID = getWeaponAmmoType(dataName)
 				takeWeapon (source,weapID)
 				if dataName == weapon1 then
-					setElementData(source,"currentweapon_1",0)
+					setElementData(source,"currentweapon_1",false)
 				elseif dataName == weapon2 then
-					setElementData(source,"currentweapon_2",0)
+					setElementData(source,"currentweapon_2",false)
 				elseif dataName == weapon3 then
-					setElementData(source,"currentweapon_3",0)
+					setElementData(source,"currentweapon_3",false)
 				end
 			end
 		end
