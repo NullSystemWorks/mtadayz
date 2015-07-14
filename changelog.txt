@@ -14,6 +14,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 # - #
 ## [0.9.0a] - 2015-07-20
 ### ADDED: Revamped Vehicle HUD
+### ADDED: Vehicles are now stored in a custom database (database/vehicles.db)
 ### ADDED: 16 new vehicles, 5 helicopters, 1 plane, 3 boats
 ### ADDED: Chance that vehicles will not spawn at designated spawn points (random, see editor_server.lua)
 ### ADDED: SUV has built-in GPS
