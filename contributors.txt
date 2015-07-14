@@ -1,11 +1,13 @@
 # - DEVELOPERS - #
 
-L 				(mtadayz-dev)
-.:CiBeR:. 		(CiBeR96)
+L				(mtadayz-dev)
+.:CiBeR:.		(CiBeR96)
 Jack Johnson	(1B0Y)
 
 
 # - CONTRIBUTORS - #
 Sebbe (Smart)	(For his new group system: https://forum.multitheftauto.com/viewtopic.php?f=108&t=67832)
-Fortitu			(For translating the gamemode to Czech)
-L				(For translating the gamemode to German)
+Fortitu			(Translation: Czech)
+L				(Translation: German)
+imCEASER		(Translation: Portuguese)
+Bastard			(Translation: Dutch)

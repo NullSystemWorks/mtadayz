@@ -193,6 +193,12 @@
     <script src="shader/blackwhite/blackwhite_c.lua" type="client" />
     <file src="shader/blackwhite/blackwhite.fx" />
 	
+	<!-- Scoreboard -->
+	<script src="scoreboard/scoreboard_c.lua" type="client" />
+	<script src="scoreboard/scoreboard_s.lua" type="server" />
+	<file src="scoreboard/ranks/1.png" />
+	<file src="scoreboard/ranks/0.png" />
+	
     <!-- Group System -->
 	<script src="group_system/group.lua" type="client"/>
 	<script src="group_system/group.slua" type="server"/>
