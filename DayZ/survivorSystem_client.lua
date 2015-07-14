@@ -2690,7 +2690,7 @@ function scoreBoard ()
 		yA = playerAmount*offset+playerLocalAdd
 	end	
 end
-addEventHandler ( "onClientRender", getRootElement(), scoreBoard )
+--addEventHandler ( "onClientRender", getRootElement(), scoreBoard )
 
 
 
