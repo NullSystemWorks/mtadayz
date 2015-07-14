@@ -35,10 +35,9 @@ gameplayVariables = {}
 	gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn. Note: You can also do math on the number.
 	gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packet loss is 100% for 5 seconds. DEFAULT: true
 	gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter DEFAULT: 10
-	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
-	gameplayVariables["serverLocale"] = "en_EN" -- Sets server default language must mach the one set in editor_client.lua DEFAULT: en_EN // Posible values: en_EN (English), es_ES (Spanish), ar_AR (Arabic), de_DE (German), pt_PT (Portuguese), fr_FR (French), pl_PL (Polish)
+	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix)
 	gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players - DEFAULT: true
-	
+	gameplayVariables["respawnwarning"] = true -- Should the warning "BEWARE OF MASSIVE LAG" when items are being respawned be displayed? If set to true, warning will be displayed. - DEFAULT: true
 	
 -- SERVER BACKUP
 	gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.
