@@ -1,102 +1,83 @@
-local x, y = 200, 200
 local recx, recy = 200, 200
 local recw, rech = 560, 200
 local eastype = "OutElastic"
- 
-local totallines = 10
-local nbToSkip = 0
- 
-local playersTable = getElementsByType("player")
-setTimer(function()
-    playersTable = getElementsByType("player")
-end, 3000, 0)
- 
-local selectedPlayer = playersTable[1]
+local screenW, screenH = guiGetScreenSize()
+local font = {}
+local serverName = ""
 
- 
+function getTheServerName(name)
+	serverName = name
+end
+addEvent("getTheServerName",true)
+addEventHandler("getTheServerName",root,getTheServerName)
 
-function performRender()
-    local tick = getTickCount()
-    local endTime = tickk + 3000
-    local laufzeit = tick - tickk
-    local dauer = endTime - tickk
-    local progress = laufzeit/dauer
-    local recintw, recinth, _ = interpolateBetween(x, y, 0, recw, rech, 0, progress, eastype)
-    local recintx, recinty, _ = interpolateBetween(0, 0, 0, recx, recy, 0, progress, eastype)
-    dxDrawRectangle(recintx, recinty, recintw, recinth, tocolor(101, 101, 101, 100), false)
-    dxDrawRectangle(recintx+10, recinty+10, 180, 180, tocolor(50, 50, 50, 200), false)
- 
-    local line = 0
-    for k, player in ipairs (playersTable) do
-        if k > nbToSkip and line < totallines-1 then
-            local nameplayer = getPlayerName(player)
-            if player == selectedPlayer or line == 0 then
-                dxDrawRectangle(recintx+10, recinty+10+line*20, 180, 20, tocolor(0, 192, 252, 80), false)
-				--dxDrawRectangle(recintx+10, recinty+10+line+1*20, 180, 20, tocolor(0, 192, 252, 80), false)
-            end
-            dxDrawText(nameplayer, recintx+15, recinty+10+line*20, recintx+15+180, recinty+12+line*20+20, tocolor(255,255,255,255), 1, "default-bold", "left", "center", false, false, true, true)
-            --dxDrawText("Bot~1", recintx+15, recinty+10+line+1*20, recintx+15+180, recinty+12+line+1*20+20, tocolor(255,255,255,255), 1, "default-bold", "left", "center", false, false, true, true)
-			line = line + 1
-        end
-    end
- 
-    -- Drawing details only
-	local ping = getPlayerPing(selectedPlayer)
-    local nameplayer = getPlayerName(selectedPlayer) or "Undefined"
-	local level = getElementData(selectedPlayer,"lvl")or 0
-    local money = getPlayerMoney(selectedPlayer) or 0
-    local country = getElementData(selectedPlayer, "country") or "N/A"
-    local playerX, playerY, playerZ = getElementPosition( selectedPlayer )
-    local zone = getZoneName( playerX, playerY, playerZ )
-    if getElementData(selectedPlayer,"rank") then
-        local rank = getElementData(selectedPlayer,"rank")
-        cadena = "ranks/"..rank..".png"
-    else
-        --cadena = "ranks/1.png"
-    end
-	local rR,gG,bB = math.random(0,255), math.random(0,255), math.random(0,255)
-	local pl = getElementsByType("player")
-    dxDrawImage( recintx+400, recinty+30, 150, 150, cadena)
-    dxDrawText("DayZ Scoreboard 1.0", recintx+435, (recinty+180), x, y, tocolor(255,255,255, 150), 1, "default", "left", "top", false, false, true, true)
-    dxDrawText(nameplayer, recintx+300, (recinty+10), x, y, tocolor(255, 255, 255, 255), 2, "default", "left", "top", false, false, true, true)
-	dxDrawText("( "..tostring(#pl).."/100 )", recintx+490, (recinty+10), x, y, tocolor(255, 255, 255, 255), 1.2, "default", "left", "top", false, false, true, true)
-    dxDrawText("Level: "..level, recintx+200, (recinty+40), x, y, tocolor(255, 255, 255, 255), 1, "default-bold", "left", "top", false, false, true, false)
-    dxDrawText("Money: "..money,recintx+200, (recinty+60), x, y, tocolor(255, 255, 255, 255), 1, "default-bold", "left", "top", false, false, true, false)
-    dxDrawText("City: "..zone, recintx+200, (recinty+80), x, y, tocolor(255, 255, 255, 255), 1, "default-bold", "left", "top", false, false, true, false)
-    dxDrawText("Ping: "..ping, recintx+200, (recinty+120), x, y, tocolor(255, 255, 255, 255), 1, "default-bold", "left", "top", false, false, true, false)
-    dxDrawText("Country: "..country, recintx+200, (recinty+100), x, y, tocolor(255, 255, 255, 255), 1, "default-bold", "left", "top", false, false, true, false)
-	dxDrawText("DayZ 0.9.0a", recintx+250, (recinty+173), x, y, tocolor(255, 255, 255, 255), 1.3, "default-bold", "left", "top", false, false, false, false)
-end
-es = false
-function tabular(key, keyState, arguments)
-if es == false then
-tickk = getTickCount()
-addEventHandler("onClientRender",root,performRender)
---showCursor(true)
-es = true
-elseif es == true then
-removeEventHandler("onClientRender",root,performRender)
---showCursor(false)
-es = false
-end
+font[1] = dxCreateFont("font.ttf", 10)
+font[2] = dxCreateFont("font2.ttf", 10)
+
+function getRankingPlayer (place)
+return playerRankingTable[place]["Player"]
 end
 
---addEventHandler("onClientRender",root, render)
-addCommandHandler("toggle",tabular)
-bindKey("tab","down","toggle","1")
- 
-function scrolling( _, _, side)
-    outputChatBox(side)
-    if side == "down" then
-        nbToSkip = nbToSkip + 1
-    elseif side == "up" then
-        nbToSkip = nbToSkip - 1
-    end
-    if nbToSkip < 0 then nbToSkip = 0 end
-    if nbToSkip >= #playersTable then nbToSkip = #playersTable-1 end
-    selectedPlayer = playersTable[nbToSkip+1]
+function getElementDataPosition(key,value)
+	if key and value then
+		local result = 1
+		for i,player in pairs(getElementsByType("player")) do
+			local data = tonumber(getElementData(player,key))
+			if data then
+				if data > value then 
+					result = result+1
+				end
+			end
+		end
+		return result
+	end
 end
 
+function positionGetElementData(key, positions)
+	if key and positions then
+		local Position = {}
+		for index,player in pairs(getElementsByType("player")) do
+			local data = tonumber(getElementData(player,key))
+			if data then
+				for i1=1, positions, 1 do
+					if Position[tonumber(i1)] then
+						if Position[tonumber(i1)]["Wert"] < tonumber(data) then
+							local Position_Cache1 = Position[tonumber(i1)]["Player"]
+							local Position_Cache2 = Position[tonumber(i1)]["Wert"]
+							local Position_Cache3
+							local Position_Cache4
+							for i2=i1, positions, 1 do
+								if Position[tonumber(i2)] then
+									Position_Cache3 = Position[tonumber(i2)]["Player"]
+									Position_Cache4 = Position[tonumber(i2)]["Wert"]
+									Position[tonumber(i2)]["Player"] = Position_Cache1
+									Position[tonumber(i2)]["Wert"] = Position_Cache2
+									Position_Cache1 = Position_Cache3
+									Position_Cache2 = Position_Cache4
+								else
+									Position[tonumber(i2)] = {}
+									Position[tonumber(i2)]["Player"] = Position_Cache1
+									Position[tonumber(i2)]["Wert"] = Position_Cache2
+									break
+								end
+							end
+							Position[tonumber(i1)] = {}
+							Position[tonumber(i1)]["Player"] = player
+							Position[tonumber(i1)]["Wert"] = data
+							break
+						end
+					else
+						Position[tonumber(i1)] = {}
+						Position[tonumber(i1)]["Player"] = player
+						Position[tonumber(i1)]["Wert"] = data
+						break
+					end
+				end
+			end
+		end
+		return Position
+	end
+end
 
 function math.round(number, decimals, method)
     decimals = decimals or 0
@@ -105,6 +86,124 @@ function math.round(number, decimals, method)
     else return tonumber(("%."..decimals.."f"):format(number)) end
 end
 
+function formatTimeFromMinutes(value)
+	if value then
+		local hours = math.floor(value/60)
+		local minutes = math.round(((value/60) - math.floor(value/60))*100/(100/60))
+		if minutes < 10 then minutes = "0"..minutes end
+		value = hours..":"..minutes
+		return value
+	end
+	return false
+end
 
-bindKey("mouse_wheel_up", "down", scrolling, "up")
-bindKey("mouse_wheel_down", "down", scrolling, "down")
+playerRankingTable = {}
+
+function checkTopPlayer()
+	playerRankingTable = positionGetElementData("daysalive", #getElementsByType("player"))
+end
+checkTopPlayer()
+setTimer(checkTopPlayer,10000,0)
+
+function onQuitGame( reason )
+    checkTopPlayer()
+end
+addEventHandler( "onClientPlayerQuit", getRootElement(), onQuitGame )
+
+
+local yA = 0
+function performRender()
+    local tick = getTickCount()
+    local endTime = tickk + 3000
+    local laufzeit = tick - tickk
+    local dauer = endTime - tickk
+    local progress = laufzeit/dauer
+	local x,y = guiGetScreenSize()
+	
+    local recintx, recinty, _ = interpolateBetween( 0, 0, 0, x*0.0225, y*0.1667, 0 , progress, eastype)
+	dxDrawImage(recintx, recinty, screenW * 0.9500, screenH * 0.5733, "icons/scoreboard.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
+	dxDrawText(serverName, screenW * 0.0250, screenH * 0.175, screenW * 0.9725, screenH * 0.2100, tocolor(255, 255, 255, 255), 1.00, font[1], "left", "top", false, false, true, false, false)
+	dxDrawText("Player", screenW * 0.0737, screenH * 0.2267, screenW * 0.3262, screenH * 0.2767, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	dxDrawText("#", screenW * 0.0300, screenH * 0.22, screenW * 0.0688, screenH * 0.2683, tocolor(255, 255, 255, 255), 1.50, font[2], "center", "top", false, false, true, false, false)
+	
+	playerInList = false
+		local playerAmount = #getElementsByType("player")
+		if playerAmount > 9 then
+			playerAmount = 9
+		end
+	for i = 1, playerAmount do
+		yA = 0.0466*(i-1)
+		local player = getRankingPlayer(i) or false
+		if not player then break end
+		r,g,b = 255,255,255
+		if getPlayerName(player) == getPlayerName(localPlayer) then
+			r,g,b = 50, 255, 50
+			playerInList = true
+		end
+	dxDrawText(i, screenW * 0.0300, screenH * 0.2750, screenW * 0.0688, screenH * 0.3167, tocolor(r,g,b, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	dxDrawText(string.gsub(getPlayerName(player),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+yA), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
+	local murders = getElementData(player,"murders")
+	dxDrawText(tostring(murders), screenW * 0.4750, screenH * 0.2750, screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+	local zombieskilled = getElementData(player,"zombieskilled")
+	dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * 0.2750, screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+	local headshots = getElementData(player,"headshots")
+	dxDrawText(tostring(headshots), screenW * 0.6913, screenH * 0.2750, screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+	local daysalive = getElementData(player,"daysalive")
+	dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * 0.2750, screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+	local totalkills = murders+zombieskilled
+	dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * 0.2750, screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+	end
+	if not playerInList then
+		--local murders = getElementDataPosition("murders",getElementData(localPlayer,"murders"))
+		--local zombieskilled = getElementDataPosition("zombieskilled",getElementData(localPlayer,"zombieskilled"))
+		--local totalkills = murders+zombieskilled-murders
+		--dxDrawText(tostring(totalkills), screenW * 0.0300, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.0688, screenH * 0.3167, tocolor(50, 255, 50, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		dxDrawText(string.gsub(getPlayerName(localPlayer),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
+		local murders = getElementData(localPlayer,"murders")
+		dxDrawText(tostring(murders), screenW * 0.4750, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local zombieskilled = getElementData(localPlayer,"zombieskilled")
+		dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local headshots = getElementData(localPlayer,"headshots")
+		dxDrawText(tostring(headshots), screenW * 0.6913, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local daysalive = getElementData(localPlayer,"daysalive")
+		dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+	
+		local totalkills = murders+zombieskilled
+		dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+
+	end
+end
+es = false
+function tabular(key, keyState, arguments)
+	if not es then
+		tickk = getTickCount()
+		addEventHandler("onClientRender",root,performRender)
+		--showCursor(true)
+		es = true
+	elseif es then
+		removeEventHandler("onClientRender",root,performRender)
+		--showCursor(false)
+		es = false
+	end
+end
+
+
+addCommandHandler("toggle",tabular)
+bindKey("tab","down","toggle","1")
+ 
+
+function math.round(number, decimals, method)
+    decimals = decimals or 0
+    local factor = 10 ^ decimals
+    if (method == "ceil" or method == "floor") then return math[method](number * factor) / factor
+    else return tonumber(("%."..decimals.."f"):format(number)) end
+end

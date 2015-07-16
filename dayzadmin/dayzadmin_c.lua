@@ -39,31 +39,70 @@ function onAdminPanelOpen()
 	guiSetEnabled(adminpanel.button[13],false)
 	guiSetEnabled(adminpanel.statbutton[1],false)
 	showCursor(true)
-	addEventHandler("onClientRender",root,onAdminPanelUpdateLiveMap)
 end
 addEvent("onAdminPanelOpen",true)
 addEventHandler("onAdminPanelOpen",root,onAdminPanelOpen)
 
-function onAdminPanelUpdateLiveMap()
+function onAdminPanelUpdateLiveMapPlayer()
 	for id, player in ipairs(getElementsByType("player")) do
-		if not adminpanel.image[player] then
-			adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "images/playerblip.png" or "images/playerblip.png", true, adminpanel.tab[5])
+		if playerBlipsVisible then
+			if not adminpanel.image[player] then
+				adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "images/playerblip.png" or "images/playerblip.png", true, adminpanel.tab[5])
+				adminpanel.label[player] = guiCreateLabel(0.488,0.488,0.1,0.03, getPlayerName(player), true, adminpanel.tab[5])
+			else
+				guiSetVisible(adminpanel.image[player],true)
+				guiSetVisible(adminpanel.label[player],true)
+			end
+			local x, y = getElementPosition(player)
+			local mX,mY = guiGetSize(adminpanel.map[1],false)
+			x = math.floor((x + 3000) * mX / 6000) + 10
+			y = math.floor((3000 - y) * mY / 6000) + 10
+			guiSetPosition(adminpanel.image[player], x, y, false)
+			guiSetPosition(adminpanel.label[player], x+10, y-10, false)
+		else
+			guiSetVisible(adminpanel.image[player],false)
+			guiSetVisible(adminpanel.label[player],false)
 		end
-		local x, y = getElementPosition(player)
-		local mX,mY = guiGetSize(adminpanel.map[1],false)
-		x = math.floor((x + 3000) * mX / 6000) + 10
-		y = math.floor((3000 - y) * mY / 6000) + 10
-		guiSetPosition(adminpanel.image[player], x, y, false)
 	end
+end
+
+function onAdminPanelUpdateLiveMapVehicles()
 	for id, vehicle in ipairs(getElementsByType("vehicle")) do
-		if not adminpanel.image[vehicle] then
-			adminpanel.image[vehicle] = guiCreateStaticImage(0.488,0.488,0.01,0.01, vehicle and "images/carblip.png", true, adminpanel.tab[5])
+		if vehicleBlipsVisible then
+			if not adminpanel.image[vehicle] then
+				adminpanel.image[vehicle] = guiCreateStaticImage(0.488,0.488,0.01,0.01, vehicle and "images/carblip.png", true, adminpanel.tab[5])
+			else
+				guiSetVisible(adminpanel.image[vehicle],true)
+			end
+			local x, y = getElementPosition(vehicle)
+			local mX,mY = guiGetSize(adminpanel.map[1],false)
+			x = math.floor((x + 3000) * mX / 6000) + 10
+			y = math.floor((3000 - y) * mY / 6000) + 10
+			guiSetPosition(adminpanel.image[vehicle], x, y, false)
+		else
+			guiSetVisible(adminpanel.image[vehicle],false)
 		end
-		local x, y = getElementPosition(vehicle)
-		local mX,mY = guiGetSize(adminpanel.map[1],false)
-		x = math.floor((x + 3000) * mX / 6000) + 10
-		y = math.floor((3000 - y) * mY / 6000) + 10
-		guiSetPosition(adminpanel.image[vehicle], x, y, false)
+	end
+end
+
+function onAdminPanelUpdateLiveMapLoot()
+	for id, loot in ipairs(getElementsByType("colshape")) do
+		if getElementData(loot,"itemloot") then
+			if lootBlipsVisible then
+				if not adminpanel.image[loot] then
+					adminpanel.image[loot] = guiCreateStaticImage(0.488,0.488,0.01,0.01, loot and "images/lootblip.png", true, adminpanel.tab[5])
+				else
+					guiSetVisible(adminpanel.image[loot],true)
+				end
+				local x, y = getElementPosition(loot)
+				local mX,mY = guiGetSize(adminpanel.map[1],false)
+				x = math.floor((x + 3000) * mX / 6000) + 10
+				y = math.floor((3000 - y) * mY / 6000) + 10
+				guiSetPosition(adminpanel.image[loot], x, y, false)
+			else
+				guiSetVisible(adminpanel.image[loot],false)
+			end
+		end
 	end
 end
 
@@ -73,7 +112,6 @@ function onAdminPanelClose()
 	guiSetVisible(adminpanel.statvwindow[1],false)
 	guiSetVisible(adminpanel.skinwindow[1],false)
 	showCursor(false)
-	removeEventHandler("onClientRender",root,onAdminPanelUpdateLiveMap)
 end
 addEvent("onAdminPanelClose",true)
 addEventHandler("onAdminPanelClose",root,onAdminPanelClose)
@@ -82,13 +120,17 @@ addEventHandler("onAdminPanelClose",root,onAdminPanelClose)
 function onPlayerMessageEditMemo(player,msg,msgType)
 	if msg then
 		if msgType == 0 then
-			guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[LOCAL]"..getPlayerName (player)..": "..msg)
-			guiSetProperty ( adminpanel.memo[1], "CaratIndex", tostring ( string.len ( guiGetText ( adminpanel.memo[1]) ) ) )
+			if localChatLogEnabled then
+				guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[LOCAL]"..getPlayerName (player)..": "..msg)
+				guiSetProperty ( adminpanel.memo[1], "CaratIndex", tostring ( string.len ( guiGetText ( adminpanel.memo[1]) ) ) )
+			end
 		elseif msgType == 2 then
-			guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[CAMP]"..getPlayerName (player)..": "..msg)
-			guiSetProperty ( adminpanel.memo[1], "CaratIndex", tostring ( string.len ( guiGetText ( adminpanel.memo[1]) ) ) )
+			if groupChatLogEnabled then
+				guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[CAMP]"..getPlayerName (player)..": "..msg)
+				guiSetProperty ( adminpanel.memo[1], "CaratIndex", tostring ( string.len ( guiGetText ( adminpanel.memo[1]) ) ) )
+			end
 		elseif msgType == 3 then
-			guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[ADMIN]"..getPlayerName (player)..": "..msg)
+			guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[GLOBAL MESSAGE]"..getPlayerName (player)..": "..msg)
 			guiSetProperty ( adminpanel.memo[1], "CaratIndex", tostring ( string.len ( guiGetText ( adminpanel.memo[1]) ) ) )
 		else
 			guiSetText ( adminpanel.memo[1], guiGetText (adminpanel.memo[1]).."[UNKNOWN]"..getPlayerName (player)..": "..msg)

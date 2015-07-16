@@ -118,7 +118,7 @@ addEvent("onAdminPanelSetPlayerStat",true)
 addEventHandler("onAdminPanelSetPlayerStat",root,onAdminPanelSetPlayerStat)
 
 function onAdminPanelSendGlobalMessage(message)
-	outputChatBox("[ADMIN]"..getPlayerName(source)..": "..message,root,255,0,0,true)
+	outputChatBox("[GLOBAL MESSAGE]"..getPlayerName(source)..": "..message,root,255,0,0,true)
 end
 addEvent("onAdminPanelSendGlobalMessage",true)
 addEventHandler("onAdminPanelSendGlobalMessage",root,onAdminPanelSendGlobalMessage)

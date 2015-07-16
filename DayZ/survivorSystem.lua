@@ -1138,10 +1138,9 @@ function playerRadioChat(playersource,cmd,...)
         destroyElement( chatSphere )
         for index, nearbyPlayer in ipairs( nearbyPlayers ) do
 			if getElementData(nearbyPlayer,"Radio Device") > 0 then
-				outputChatBox("[RADIO]"..string.gsub((getPlayerName(playersource).." : "..msg2), '#%x%x%x%x%x%x', ''),nearbyPlayer, 238,238,0,true ) -- Color changed from 60,200,40 to 238,238,0
+				outputChatBox("[RADIO]"..string.gsub((getPlayerName(playersource).." : "..msg2), '#%x%x%x%x%x%x', ''),nearbyPlayer, 238,238,0,true )
 			end
         end
-		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [RADIO]"..string.gsub((getPlayerName(source)..": "..msg2), '#%x%x%x%x%x%x', '').."\n","chat")
 	end
 end
 addCommandHandler( "radiochat", playerRadioChat )

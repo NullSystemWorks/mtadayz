@@ -580,12 +580,12 @@ function()
 	adminpanel.label[34] = guiCreateLabel(0.45, 0.87, 0.23, 0.03, "", true, adminpanel.tab[1])
 	
 	adminpanel.button[1] = guiCreateButton(0.69, 0.12, 0.09, 0.06, "Set Stat", true, adminpanel.tab[1])
-	adminpanel.button[2] = guiCreateButton(0.80, 0.12, 0.09, 0.06, "Kill", true, adminpanel.tab[1])
-	adminpanel.button[3] = guiCreateButton(0.90, 0.12, 0.09, 0.06, "Heal", true, adminpanel.tab[1])
-	adminpanel.button[4] = guiCreateButton(0.69, 0.32, 0.29, 0.05, "Warp to [PN]", true, adminpanel.tab[1])
+	adminpanel.button[2] = guiCreateButton(0.79, 0.12, 0.09, 0.06, "Kill", true, adminpanel.tab[1])
+	adminpanel.button[3] = guiCreateButton(0.89, 0.12, 0.09, 0.06, "Heal", true, adminpanel.tab[1])
+	adminpanel.button[4] = guiCreateButton(0.69, 0.32, 0.29, 0.06, "Warp to [PN]", true, adminpanel.tab[1])
 	adminpanel.button[5] = guiCreateButton(0.69, 0.20, 0.09, 0.06, "Set Skin", true, adminpanel.tab[1])
-	adminpanel.button[6] = guiCreateButton(0.80, 0.20, 0.09, 0.06, "Fix Veh.", true, adminpanel.tab[1])
-	adminpanel.button[7] = guiCreateButton(0.90, 0.20, 0.09, 0.06, "Give Veh.", true, adminpanel.tab[1])
+	adminpanel.button[6] = guiCreateButton(0.79, 0.20, 0.09, 0.06, "Fix Veh.", true, adminpanel.tab[1])
+	adminpanel.button[7] = guiCreateButton(0.89, 0.20, 0.09, 0.06, "Give Veh.", true, adminpanel.tab[1])
 	
 	adminpanel.label[32] = guiCreateLabel(0.71, 0.48, 0.25, 0.03, "Inventory", true, adminpanel.tab[1])
 	adminpanel.gridlist[2] = guiCreateGridList(0.69, 0.53, 0.29, 0.45, true, adminpanel.tab[1])
@@ -678,10 +678,10 @@ function()
 	guiLabelSetHorizontalAlign(adminpanel.label[70], "center", false)
 	adminpanel.checkbox[1] = guiCreateCheckBox(0.76, 0.10, 0.02, 0.03, "", false, true, adminpanel.tab[5])
 	adminpanel.checkbox[2] = guiCreateCheckBox(0.76, 0.15, 0.02, 0.03, "", false, true, adminpanel.tab[5])
-	adminpanel.checkbox[3] = guiCreateCheckBox(0.76, 0.21, 0.02, 0.03, "", false, true, adminpanel.tab[5])
+	adminpanel.checkbox[3] = guiCreateCheckBox(0.76, 0.20, 0.02, 0.03, "", false, true, adminpanel.tab[5])
 	adminpanel.label[71] = guiCreateLabel(0.80, 0.10, 0.19, 0.03, "Show Players", true, adminpanel.tab[5])
 	adminpanel.label[72] = guiCreateLabel(0.80, 0.15, 0.19, 0.03, "Show Vehicles", true, adminpanel.tab[5])
-	adminpanel.label[73] = guiCreateLabel(0.80, 0.21, 0.19, 0.03, "Show Loot", true, adminpanel.tab[5])
+	adminpanel.label[73] = guiCreateLabel(0.80, 0.20, 0.19, 0.03, "Show Loot", true, adminpanel.tab[5])
 	adminpanel.label[74] = guiCreateLabel(0.79, 0.54, 0.17, 0.03, "WARNING", true, adminpanel.tab[5])
 	guiSetFont(adminpanel.label[74], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[74], 245, 0, 0)
@@ -704,15 +704,13 @@ function()
 	guiSetFont(adminpanel.label[78], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[78], 255, 0, 0)
 	guiLabelSetHorizontalAlign(adminpanel.label[78], "center", false)
-	adminpanel.checkbox[4] = guiCreateCheckBox(0.72, 0.11, 0.02, 0.03, "", false, true, adminpanel.tab[8])
-	adminpanel.checkbox[5] = guiCreateCheckBox(0.72, 0.16, 0.02, 0.03, "", false, true, adminpanel.tab[8])
-	adminpanel.checkbox[6] = guiCreateCheckBox(0.72, 0.22, 0.02, 0.03, "", false, true, adminpanel.tab[8])
-	adminpanel.label[79] = guiCreateLabel(0.77, 0.11, 0.21, 0.03, "Show all [LOCAL] Chat", true, adminpanel.tab[8])
-	adminpanel.label[80] = guiCreateLabel(0.77, 0.16, 0.21, 0.03, "Show all [GROUP] Chat", true, adminpanel.tab[8])
-	adminpanel.label[81] = guiCreateLabel(0.77, 0.22, 0.21, 0.03, "Show all [RADIO] Chat", true, adminpanel.tab[8])
-	adminpanel.button[14] = guiCreateButton(0.72, 0.54, 0.25, 0.08, "Send global message", true, adminpanel.tab[8])
-	adminpanel.editbox[2] = guiCreateEdit(0.72, 0.45, 0.25, 0.07, "", true, adminpanel.tab[8])
+	adminpanel.checkbox[4] = guiCreateCheckBox(0.72, 0.10, 0.25, 0.05, "Show all [LOCAL] Chat", false, true, adminpanel.tab[8])
+	adminpanel.checkbox[5] = guiCreateCheckBox(0.72, 0.15, 0.25, 0.05, "Show all [GROUP] Chat", false, true, adminpanel.tab[8])
+	adminpanel.checkbox[6] = guiCreateCheckBox(0.72, 0.20, 0.25, 0.05, "Show all [RADIO] Chat", false, true, adminpanel.tab[8])
 	adminpanel.label[82] = guiCreateLabel(0.72, 0.40, 0.27, 0.03, "Global Message", true, adminpanel.tab[8])
+	adminpanel.button[14] = guiCreateButton(0.72, 0.55, 0.25, 0.08, "Send global message", true, adminpanel.tab[8])
+	adminpanel.editbox[2] = guiCreateEdit(0.72, 0.45, 0.25, 0.07, "", true, adminpanel.tab[8])
+	adminpanel.button[15] = guiCreateButton(0.72, 0.75, 0.25, 0.08, "Empy Chatlog", true, adminpanel.tab[8])
 	guiSetFont(adminpanel.label[82], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[82], 255, 0, 0)
 	guiLabelSetHorizontalAlign(adminpanel.label[82], "center", false)
@@ -803,8 +801,6 @@ function()
 			guiComboBoxAddItem(adminpanel.vehcombobox[1], value[12])
 		end
 	end
-
-	
 	
 	guiSetVisible(adminpanel.window[1],false)
 	guiSetVisible(adminpanel.statwindow[1],false)
@@ -817,6 +813,14 @@ function()
 	guiSetEnabled(adminpanel.statbutton[1],false)
 	guiSetEnabled(adminpanel.statvbutton[1],false)
 	guiSetEnabled(adminpanel.skinbutton[1],false)
+	guiSetEnabled(adminpanel.tab[2],false)
+	guiSetEnabled(adminpanel.tab[4],false)
+	guiSetEnabled(adminpanel.tab[6],false)
+	guiSetEnabled(adminpanel.tab[7],false)
+	
+	guiCheckBoxSetSelected(adminpanel.checkbox[1],false)
+	guiCheckBoxSetSelected(adminpanel.checkbox[2],false)
+	guiCheckBoxSetSelected(adminpanel.checkbox[3],false)
 	
 	-- Utility Functions
 	addEventHandler("onClientGUIChanged", adminpanel.editbox[1], 
@@ -918,24 +922,94 @@ function()
 		end
 	end, false)
 	
+	addEventHandler("onClientGUIClick", adminpanel.checkbox[1],
+	function()
+		if guiCheckBoxGetSelected(adminpanel.checkbox[1]) then
+			if not playerBlipsVisible then
+				playerBlipsVisible = true
+				setTimer(function() addEventHandler("onClientRender",root,onAdminPanelUpdateLiveMapPlayer) end,500,1)
+			end
+		else
+			if playerBlipsVisible then
+				playerBlipsVisible = false
+				setTimer(function() removeEventHandler("onClientRender",root, onAdminPanelUpdateLiveMapPlayer) end,1000,1)
+			end
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.checkbox[2],
+	function()
+		if guiCheckBoxGetSelected(adminpanel.checkbox[2]) then
+			if not vehicleBlipsVisible then
+				vehicleBlipsVisible = true
+				setTimer(function() addEventHandler("onClientRender",root,onAdminPanelUpdateLiveMapVehicles) end,500,1)
+			end
+		else
+			if vehicleBlipsVisible then
+				vehicleBlipsVisible = false
+				setTimer(function() removeEventHandler("onClientRender",root, onAdminPanelUpdateLiveMapVehicles) end,1000,1)
+			end
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.checkbox[3],
+	function()
+		if guiCheckBoxGetSelected(adminpanel.checkbox[3]) then
+			if not lootBlipsVisible then
+				lootBlipsVisible = true
+				setTimer(function() addEventHandler("onClientRender",root,onAdminPanelUpdateLiveMapLoot) end,500,1)
+			end
+		else
+			if lootBlipsVisible then
+				lootBlipsVisible = false
+				setTimer(function() removeEventHandler("onClientRender",root, onAdminPanelUpdateLiveMapLoot) end,1000,1)
+			end
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.checkbox[4],
+	function()
+		if guiCheckBoxGetSelected(adminpanel.checkbox[4]) then
+			if not localChatLogEnabled then
+				localChatLogEnabled = true
+			end
+		else
+			if localChatLogEnabled then
+				localChatLogEnabled = false
+			end
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.checkbox[5],
+	function()
+		if guiCheckBoxGetSelected(adminpanel.checkbox[5]) then
+			if not groupChatLogEnabled then
+				groupChatLogEnabled = true
+			end
+		else
+			if groupChatLogEnabled then
+				groupChatLogEnabled = false
+			end
+		end
+	end, false)
+	
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[1],populateStatsOnPlayerSelect,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[3],populateStatsOnVehicleSelect,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],checkIfRequirementsMet,false)
 	addEventHandler("onClientGUIClick",adminpanel.button[1],function() guiSetVisible(adminpanel.statwindow[1],true) guiBringToFront(adminpanel.statwindow[1],true) end, false)
-	
 	addEventHandler("onClientGUIClick",adminpanel.button[2],killPlayerOnButtonClick, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[3],healPlayerOnButtonClick, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[4],warpToPlayerOnButtonClick,false)
 	addEventHandler("onClientGUIClick",adminpanel.button[5],function() guiSetVisible(adminpanel.skinwindow[1],true) guiBringToFront(adminpanel.skinwindow[1],true) end, false)
 	addEventHandler("onClientGUIClick",adminpanel.skinbutton[2],function() guiSetVisible(adminpanel.skinwindow[1],false) end,false)
-	
 	addEventHandler("onClientGUIClick",adminpanel.statgridlist[1],checkIfStatSelected, false)
 	addEventHandler("onClientGUIClick",adminpanel.statbutton[2],function() guiSetVisible(adminpanel.statwindow[1],false) end, false)
-	
 	addEventHandler("onClientGUIClick",adminpanel.button[6], fixPlayerVehicleOnButtonClick,false)
-	
 	addEventHandler("onClientGUIClick",adminpanel.button[7], function() guiSetVisible(adminpanel.vehwindow[1],true) guiBringToFront(adminpanel.vehwindow[1],true) end,false)
 	addEventHandler("onClientGUIClick",adminpanel.vehbutton[2],function() guiSetVisible(adminpanel.vehwindow[1],false) end, false)
+	addEventHandler("onClientGUIClick",adminpanel.map[1], function() guiMoveToBack(adminpanel.map[1]) guiBringToFront(adminpanel.window[1]) end, false)
+	addEventHandler("onClientGUIClick",adminpanel.checkbox[6], function() outputChatBox("This feature is not available yet.",255,0,0) guiCheckBoxSetSelected(adminpanel.checkbox[6],false) end, false)
+	addEventHandler("onClientGUIClick",adminpanel.button[15], function() guiSetText(adminpanel.memo[1],"") end, false)
 	
 	guiSetInputMode("no_binds_when_editing")
 end)

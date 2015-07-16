@@ -196,8 +196,8 @@
 	<!-- Scoreboard -->
 	<script src="scoreboard/scoreboard_c.lua" type="client" />
 	<script src="scoreboard/scoreboard_s.lua" type="server" />
-	<file src="scoreboard/ranks/1.png" />
-	<file src="scoreboard/ranks/0.png" />
+	<file src="scoreboard/icons/scoreboard.png" />
+	<file src="scoreboard/font.ttf" />
 	
     <!-- Group System -->
 	<script src="group_system/group.lua" type="client"/>
@@ -321,7 +321,7 @@
 	<file src="images/items.png" />
 	<file src="images/scroll.png" />
 	
-	<file src="images/world.jpg" type="client"></file>
+	<file src="images/world.png" type="client"></file>
 	<file src="images/gps.png" type="client"></file>
 	<file src="images/player.png" type="client"></file>
 	<file src="images/blip/2.png" type="client"></file>
@@ -564,6 +564,7 @@
     <file src="items/backpack_os.dff" />
 	<file src="items/tent.txd" />
     <file src="items/tent.dff" />
+	<file src="items/tent.col" />
     <file src="items/wirefence.txd" />
     <file src="items/wirefence.dff" />
     <file src="items/katana.txd" />
@@ -572,17 +573,6 @@
     <file src="items/camera.dff" />
 	<file src="items/windscreenglass.txd" />
 	<file src="items/windscreenglass.dff" />
-	
-	<!-- DayZ Admin Panel -->
-	<!--
-	<script src="dayzadmin/dayzadmin_c.lua" type="client" cache="false" />
-	<script src="dayzadmin/dayzadmin_gui.lua" type="client" cache="false" />
-	<script src="dayzadmin/dayzadmin_s.lua" type="server" />
-	
-	<file src="dayzadmin/images/playerblip.png" />
-	<file src="dayzadmin/images/carblip.png" />
-	<file src="dayzadmin/images/map.png" />
-	-->
 	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
@@ -593,4 +583,5 @@
 	<include resource="login" />
 	<include resource="imageButton" />
 	<include resource="helpmanager" />
+	<include resource="dayzadmin" />
 </meta>

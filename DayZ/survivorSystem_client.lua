@@ -197,6 +197,8 @@ itemTXD = engineLoadTXD ("items/tent.txd");
 engineImportTXD (itemTXD, 3243);
 itemDFF = engineLoadDFF ("items/tent.dff", 3243);
 engineReplaceModel (itemDFF, 3243);
+itemCOL = engineLoadCOL("items/tent.col");
+engineReplaceCOL(itemCOL,3243);
 
 itemTXD = engineLoadTXD ("items/wirefence.txd");
 engineImportTXD (itemTXD, 983);
@@ -248,6 +250,7 @@ function getPointFromDistanceRotation(x, y, dist, angle)
     return x+dx, y+dy;
 end
 
+
 local enableBlips = true
 local renderNorthBlip = false
 local alwaysRenderMap = false
@@ -255,16 +258,15 @@ local worldmap
 local gpsborder
 local alpha = 255
 
-local worldW, worldH = 3072, 3072
+local worldW, worldH = 3200, 3200
 local blip = 12 
 
 local sx, sy = guiGetScreenSize()
 local rt = dxCreateRenderTarget(290, 175)
 local xFactor, yFactor = sx/1366, sy/768
-local yFactor = xFactor --otherwise the radar looses it's 2:3 ratio.
+local yFactor = xFactor
 
-
-function playerStatsClientSite()
+function playerDrawMapGPSCompass()
 	if getElementData(getLocalPlayer(),"logedin") then
 		toggleControl ("radar",false)
 		showPlayerHudComponent ("clock",false) 
@@ -275,18 +277,27 @@ function playerStatsClientSite()
 		showPlayerHudComponent ("ammo",false) 
 		showPlayerHudComponent ("breath",false) 
 		if getElementData(getLocalPlayer(),"Map") >= 1  then
-			toggleControl ("radar",true)
+			--toggleControl ("radar",true)
+			if not mapkeybound then
+				bindKey("F11","down",toggleMap)
+				mapkeybound = true
+			end
+		else
+			if mapkeybound then
+				unbindKey("F11","down",toggleMap)
+				mapkeybound = false
+			end
 		end
 		if getElementData(getLocalPlayer(),"GPS") >= 1  then
 			if (not isPlayerMapVisible()) then
 				local mW, mH = dxGetMaterialSize(rt)
 				local x, y = getElementPosition(localPlayer)
-				local X, Y = mW/2 -(x/(6000/worldW)), mH/2 +(y/(6000/worldH))
+				local X, Y = mW/2 -(x/(6000/(3200))), mH/2 +(y/(6000/(3072)))
 				local camX,camY,camZ = getElementRotation(getCamera())
 				dxSetRenderTarget(rt, true)
 				if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
 					dxDrawRectangle(0, 0, mW, mH, tocolor(124, 167, 209,alpha)) --render background
-					worldmap = dxDrawImage(X - worldW/2, mH/5 + (Y - worldH/2), worldW, worldH, "images/world.jpg", camZ, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, alpha))
+					worldmap = dxDrawImage(X - (3072)/2, mH/5 + (Y - 3072/2), 3072, 3072, "images/world.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
 				end
 				dxSetRenderTarget()
 				gpsborder = dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, "images/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
@@ -306,7 +317,7 @@ function playerStatsClientSite()
 					local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
 					local maxDist = getBlipVisibleDistance(v)
 					if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
-						local dist = actualDist/(6000/((worldW+worldH)/2))
+						local dist = actualDist/(6000/((3072+3072)/2))
 						local rot = findRotation(bx, by, x, y)-camZ
 						local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
 						local bpx = math.max(lB, math.min(rB, bpx))
@@ -334,13 +345,12 @@ function playerStatsClientSite()
 						dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, "images/blip/4.png", 0, 0, 0) --draw north (4) blip
 					end
 				end
-				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,255,255,alpha))
+				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
 			end
 		else
 			dxSetRenderTarget()
 		end
 		if getElementData(getLocalPlayer(),"Watch") >= 1 then
-			--showPlayerHudComponent("clock",true)
 			local hour, minutes = getTime()
 			if hour < 10 then
 				hour = "0"..hour
@@ -352,7 +362,7 @@ function playerStatsClientSite()
 			else
 				minutes = minutes
 			end
-			local sWidth,sHeight = guiGetScreenSize() -- The variables
+			local sWidth,sHeight = guiGetScreenSize()
 			dxDrawText(""..hour.."   ",sWidth*0.09625,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
 			dxDrawText(" : ",sWidth*0.118125,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
 			dxDrawText("   "..minutes,sWidth*0.12125,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
@@ -365,8 +375,44 @@ function playerStatsClientSite()
 		end
 	end
 end
-setTimer(playerStatsClientSite,1000,0)
-addEventHandler("onClientRender",getRootElement(),playerStatsClientSite)
+addEventHandler("onClientRender",root,playerDrawMapGPSCompass)
+
+local isMapShown = false
+
+function toggleMap()
+	if not isMapShown then
+		isMapShown = true
+		addEventHandler("onClientRender",root,drawTheMap)
+		alpha = 0
+	else
+		isMapShown = false
+		removeEventHandler("onClientRender",root,drawTheMap)
+		alpha = 255
+	end
+end
+
+function drawTheMap()
+	local x, y = getElementPosition(localPlayer)
+	local X, Y = sx/2 -(x/(6000/(worldW-200))), sy/2 + (y/(6000/(worldH-200)))
+	local camX,camY,camZ = getElementRotation(getCamera())
+	--dxSetRenderTarget(rt, true)
+	if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
+		dxDrawRectangle(0, 0, sx, sy, tocolor(176, 200, 210,255))
+		dxDrawImage(X - worldW/2, Y - worldH/2, worldW, worldH, "images/world.png", 0, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
+	end
+	--dxSetRenderTarget()
+	--dxDrawImage(sx * 0.000, sy * 0.0000, sx * 1.0000, sy * 1.0000, rt_map, 0, 0, 0, tocolor(255, 255, 255, alpha))
+	local col = tocolor(r, g, b, 190)
+	local bg = tocolor(r, g, b, 100)
+	local rx, ry, rz = getElementRotation(localPlayer)
+	local lB = (15)*xFactor
+	local rB = (15+sx/2)*xFactor
+	local tB = (sy/2)-(205)*yFactor
+	local bB = tB + (sy)*yFactor
+	local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
+	local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
+	dxDrawImage(sx * 0.5, sy * 0.5, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,255))
+end
 
 function hideGPSOnInventoryOpen()
 	alpha = 0
