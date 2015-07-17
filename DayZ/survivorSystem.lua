@@ -308,6 +308,8 @@ weaponAmmoTable = {
 },
 }
 
+version = "0.8.3.1a"
+
 function getWeaponAmmoType (weaponName,notOthers)
 	if not notOthers then
 		for i,weaponData in ipairs(weaponAmmoTable["others"]) do
