@@ -38,6 +38,7 @@ gameplayVariables = {}
 	gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix)
 	gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players - DEFAULT: true
 	gameplayVariables["respawnwarning"] = true -- Should the warning "BEWARE OF MASSIVE LAG" when items are being respawned be displayed? If set to true, warning will be displayed. - DEFAULT: true
+	gameplayVariables["maxslots"] = 30 -- Max slot amount in your server( Include VIP Slots ) - DEFAULT: 30
 	
 -- SERVER BACKUP
 	gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

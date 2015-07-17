@@ -11,7 +11,7 @@
  maxHealth = 12000
  maxFood = 100
  maxThirst = 100
- maxSlots = 30 -- You must put the number of slots of the best backpack of your server
+ maxSlots = gameplayVariables["maxslots"]
 
 addEventHandler("onElementDataChange",getRootElement(),
  function(data)
