@@ -15,6 +15,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ## [0.9.0a] - 2015-07-20
 ### ADDED: Revamped Vehicle HUD
 ### ADDED: Vehicles are now stored in a custom database (database/vehicles.db)
+### ADDED: Tents are now stored in a custom database (database/tents.db)
 ### ADDED: 16 new vehicles, 5 helicopters, 1 plane, 3 boats
 ### ADDED: Chance that vehicles will not spawn at designated spawn points (random, see editor_server.lua)
 ### ADDED: SUV has built-in GPS
@@ -25,15 +26,31 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Animals moving around
 ### ADDED: Wirefences now hurt the player (excluding owner of wirefence)
 ### ADDED: Configurable option for move while prone (check editor_server.lua)
-### ADDED: Area 69 and Carrier in San Fierro now require a keycard to get in (can be found by killing zombies, random chance)
+### ADDED: Area 69 and Carrier in San Fierro now require a keycard to get in (can be found by killing military and policeman zombies, random chance)
 ### ADDED: Add-on: Mod Manager
 ### ADDED: Icon for lootpiles
 ### ADDED: Heroes now take half damage from zombies and no damage from weak weapons (M1911, PDW etc).
+### ADDED: Sneaking instead of walking when pressing "walk" key
+### ADDED: Warning for respawning items is now configurable (editor_server.lua)
+### ADDED: Custom map (F11)
+### ADDED: DayZ Admin Panel as separate resource
+### ADDED: Max slots config for anticheat (for VIP systems)
+### ADDED: Async library to prevent abortion of script on infinite loop (pickups.lua)
+### ADDED: Extra SFX when receiving damage
+### ADDED: Backup command for vehicles
+### ADDED: Configurable option for ambience sound volume
 
+### CHANGED: New Login Panel
 ### CHANGED: All icons of HUD (thirst, hunger, ...)
 ### CHANGED: Spawnpoints for vehicles (editor_server.lua)
+### CHANGED: Loud weapons now attract zombies from a greater distance
+### CHANGED: Loot tables for all zombies
+### CHANGED: Scoreboard
+### CHANGED: Map of GPS now matches custom map
+### CHANGED: Disabled player voice
 
 ### REMOVED: Bikes having 1 slot for inventory
+### REMOVED: /svp command
 
 ### FIXED: "Disconnecting" icon not disappearing
 ### FIXED: Vehicles not respawning when in water
