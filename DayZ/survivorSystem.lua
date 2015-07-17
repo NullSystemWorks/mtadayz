@@ -656,6 +656,22 @@ function addPlayerStats (player,data,value)
 	end
 end
 
+function regenerateBlood()
+	for i,player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			blood = getElementData(player,"blood")
+			if blood ~= 12000 and blood >= (12000*75)/100 then
+				setElementData(player,"blood",blood+120)
+			elseif blood <= (12000*50)/100 and blood >= (12000*26)/100 then
+				setElementData(player,"blood",blood+60)
+			elseif blood <= (12000*25)/100 then
+				setElementData(player,"blood",blood+30)
+			end
+		end
+	end
+end
+setTimer(regenerateBlood,60000,0)
+
 function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
