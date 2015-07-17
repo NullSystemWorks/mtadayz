@@ -39,6 +39,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Extra SFX when receiving damage
 ### ADDED: Backup command for vehicles
 ### ADDED: Configurable option for ambience sound volume
+### ADDED: Version check to see if MTA DayZ is up to date, and if not, notify on server console
 
 ### CHANGED: New Login Panel
 ### CHANGED: All icons of HUD (thirst, hunger, ...)
