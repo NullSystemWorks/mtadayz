@@ -39,6 +39,7 @@
 	<file src="fonts/etelka_narrow.ttf" />
 	<file src="fonts/bitstream.ttf" />
 	<file src="fonts/tahomab.ttf" />
+	<file src="fonts/28dayslater.ttf" />
 	
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
@@ -176,6 +177,7 @@
 	<file src="images/buttArrowDown.png"/>
 	<file src="images/butoff.png"/>
 	<file src="images/butclick.png"/>
+	<file src="images/scoreboard.png" />
 	
 	<!-- Tools -->
     <script src="tools/jq_client.lua" type="client" cache="false" />
@@ -192,12 +194,6 @@
     <file src="shader/motion/motion.fx" />
     <script src="shader/blackwhite/blackwhite_c.lua" type="client" />
     <file src="shader/blackwhite/blackwhite.fx" />
-	
-	<!-- Scoreboard -->
-	<script src="scoreboard/scoreboard_c.lua" type="client" />
-	<script src="scoreboard/scoreboard_s.lua" type="server" />
-	<file src="scoreboard/icons/scoreboard.png" />
-	<file src="scoreboard/font.ttf" />
 	
     <!-- Group System -->
 	<script src="group_system/group.lua" type="client"/>

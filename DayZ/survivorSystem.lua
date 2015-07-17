@@ -942,6 +942,8 @@ function getPointFromDistanceRotation(x, y, dist, angle)
  
 end
 
+
+tent_counter = 0
 function onPlayerPitchATent (itemName)
 	setElementData(source,itemName,getElementData(source,itemName)-1)
 	setPedAnimation (source,"BOMBER","BOM_Plant",1300,false,false,nil,false)
@@ -966,6 +968,8 @@ function onPlayerPitchATent (itemName)
 			setElementData(tentCol,"vehicle",true)
 			setElementData(tentCol,"MAX_Slots",100)
 			triggerClientEvent(source,"refreshInventoryManual",source)
+			tent_counter = tent_counter+1
+			setElementID(tentCol,tostring(getPlayerName(source)).."_"..tent_counter)
 	end,1500,1)			
 end
 addEvent("onPlayerPitchATent",true)
@@ -1775,3 +1779,15 @@ function closeAreaDoorAfterHit()
 	moveObject(areaDoor_1,1000,217.39999389648,1875.9000244141,13.89999961853)
 end
 addEventHandler("onColShapeLeave",areaDoorCol,closeAreaDoorAfterHit)
+
+areaJumpPad = createMarker(268.6566,1880.3245,-31.3,"cylinder",1,255,0,0,255) -- To get out of the area
+function teleportJumpPadForArea(hitElement)
+	setElementPosition(hitElement,268,1875,18)
+end
+addEventHandler("onMarkerHit", areaJumpPad, teleportJumpPadForArea)
+
+function getServerDetails()
+	serverName = getServerName()
+	triggerClientEvent("getTheServerName",root,serverName)
+end
+setTimer(getServerDetails,1000,1)

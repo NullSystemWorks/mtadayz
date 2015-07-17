@@ -159,9 +159,8 @@ itemTableZombies = {
 }
 
 function createZombieTable (player)
-		--createtabel
-		setElementData(player,"playerZombies",{"no","no","no","no","no","no","no","no","no"})
-		setElementData(player,"spawnedzombies",0)
+	setElementData(player,"playerZombies",{"no","no","no","no","no","no","no","no","no"})
+	setElementData(player,"spawnedzombies",0)
 end
 
 function createZomieForPlayer (x,y,z)
@@ -171,13 +170,12 @@ function createZomieForPlayer (x,y,z)
 		local xL,yL,zL = getElementData(source,"lastzombiespawnposition")[1] or false,getElementData(source,"lastzombiespawnposition")[2] or false,getElementData(source,"lastzombiespawnposition")[3] or false
 		if xL then
 			if getDistanceBetweenPoints3D (x,y,z,xL,yL,zL) < 50 then
-				--outputChatBox("Server: canceled zombie create (reason: is near old position)")
 				return
 			end
 		end
 	end	
-	if getElementData(source,"spawnedzombies")+3 <= gameplayVariables["playerzombies"] then -- If spawned zombies + 3 lower or equal to 9 -> Create zombies -> Increase digit (default: 9) to let more zombies spawn. WARNING: THE HIGHER THE VALUE, THE MORE LAG CAN OCCUR!
-	for i = 1, gameplayVariables["amountzombies"] do --Amount of zombies to be spawned (default: 3) WARNING: THE HIGHER THE VALUE, THE MORE LAG CAN OCCUR!
+	if getElementData(source,"spawnedzombies")+3 <= gameplayVariables["playerzombies"] then
+	for i = 1, gameplayVariables["amountzombies"] do
 		counter = counter+1
 		local number1 = math.random(-50,50)
 		local number2 = math.random(-50,50)
@@ -194,11 +192,9 @@ function createZomieForPlayer (x,y,z)
 		setElementData(zombie,"owner",source)
 		call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
 		setPedAnimation (zombie, "RYDER", "RYD_Die_PT1", -1, true, true, true)
-		--outputChatBox("Server: zombie created (reason: )")
-		-------------------
 	end
 	setElementData(source,"lastzombiespawnposition",{x,y,z})
-	setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+3)
+	setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"])
 	end
 end
 addEvent("createZomieForPlayer",true)
@@ -210,7 +206,6 @@ for i,ped in ipairs(getElementsByType("ped")) do
 		goReturn = false
 		local zombieCreator = getElementData(ped,"owner")
 		if not isElement(zombieCreator) then 
-			--outputDebugString("test")
 			setElementData ( ped, "status", "dead" )	
 			setElementData ( ped, "target", nil )
 			setElementData ( ped, "leader", nil )
@@ -281,7 +276,6 @@ function destroyDeadZombie (ped,pedCol)
 end
 
 function zombieKilled (killer,headshot)
---outputChatBox("Server: destroyed zombie (reason: zombie died)")
 	if killer then
 		setElementData(killer,"zombieskilled",getElementData(killer,"zombieskilled")+1)
 	end	

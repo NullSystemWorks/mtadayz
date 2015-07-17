@@ -499,18 +499,15 @@ addEventHandler("onResourceStart",getResourceRootElement(getThisResource()), fun
 		addAccount("vehicleManager","ds4f9$")
 	end
 	vehicledatabase = dbConnect("sqlite", "database/vehicles.db","","","share=1")
-	--dbExec(vehicledatabase,"DROP TABLE vehicles") -- Debug
+	tentdatabase = dbConnect("sqlite", "database/tents.db","","","share=1")
 	local vehicle_table = dbExec(vehicledatabase, "CREATE TABLE IF NOT EXISTS vehicles (model INT, Veh_Health FLOAT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, fuel FLOAT, Tire_inVehicle INT, Engine_inVehicle INT, Parts_inVehicle INT, Scrap_inVehicle INT, Glass_inVehicle INT, Rotary_inVehicle INT, vehicle_name TEXT, ColSize FLOAT, ID INT)")
-	if vehicledatabase then
+	local tent_table = dbExec(tentdatabase, "CREATE TABLE IF NOT EXISTS tents (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, objectscale FLOAT, ColsphereSize FLOAT, Owner TEXT)")
+	if vehicledatabase and tentdatabase then
 		outputServerLog("[DayZ] CONNECTED TO VEHICLE DATABASE.")
+		outputServerLog("[DayZ] CONNECTED TO TENTS DATABASE.")
 	else
-		outputServerLog("[DayZ] FAILED TO CONNECT TO DATABASE 'vehicles'. CHECK IF IT EXISTS.")
-	end
-	if vehicle_table then
-		outputServerLog("[DayZ] Table 'vehicles' has been created.")
-	else
-		outputServerLog("[DayZ] Failed to create table 'vehicles'!")
-	end
+		outputServerLog("[DayZ] FAILED TO CONNECT TO DATABASE 'vehicles' and 'tents'. CHECK IF THEY EXIST.")
+	end	
 end)
 
 
@@ -610,6 +607,7 @@ end
 dayzVehicles = {}
 
 theItems = {}
+theTentItems = {}
 
 function saveVehiclesToDB()
     dbExec(vehicledatabase, "DROP TABLE vehicles")
@@ -665,6 +663,7 @@ addCommandHandler("backup",createBackupOfVehicles)
 function createBackupOfVehiclesOnInterval()
 	if gameplayVariables["backupenabled"] then
 		outputServerLog("[DayZ] CREATING BACKUP OF VEHICLES...")
+		saveVehiclesToDB()
 	end
 end
 setTimer(createBackupOfVehiclesOnInterval,gameplayVariables["backupinterval"],0)
@@ -718,6 +717,77 @@ function loadVehiclesOnServerStart()
 	outputServerLog("[DayZ] VEHICLES HAVE BEEN LOADED.")
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadVehiclesOnServerStart)
+
+
+function saveTentsToDB()
+    dbExec(tentdatabase, "DROP TABLE tents")
+    dbExec(tentdatabase, "CREATE TABLE IF NOT EXISTS tents (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, objectscale FLOAT, ColsphereSize FLOAT, Owner TEXT)")
+    for i, data in ipairs(itemsDataTable) do
+		dbExec(tentdatabase,'ALTER TABLE tents ADD "'..data[1]..'" INT')
+	end
+	for i, col in ipairs(getElementsByType("colshape")) do
+        local isTent = getElementData(col, "tent")
+        if isTent then
+            local theTent = getElementData(col,"parent")
+            local x,y,z = getElementPosition(theTent)
+            local rx,ry,rz = getElementRotation(theTent)
+            local model = getElementModel(theTent)
+            local MAX_Slots = getElementData(getElementData(theTent,"parent"),"MAX_Slots") or 100
+            local scale = getObjectScale(theTent)
+			local owner = getElementID(getElementData(theTent,"parent"))
+            dbExec(tentdatabase, "INSERT INTO tents (model, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, objectscale, ColSphereSize, Owner) VALUES(?,?,?,?,?,?,?,?,?,?,?)", model, x, y, z, rx, ry, rz, MAX_Slots, scale, 4, owner)
+            for key,item in ipairs(itemsDataTable) do
+				local itemAmount = getElementData(getElementData(theTent,"parent"), item[1]) or 0
+				dbExec(tentdatabase, 'UPDATE tents SET "'..item[1]..'"=? WHERE Owner=?',itemAmount,owner)
+			end
+        end
+    end
+	outputServerLog("[DayZ] TENTS HAVE BEEN SAVED TO DATABASE.")
+end
+addEventHandler("onResourceStop", getResourceRootElement(getThisResource()), saveTentsToDB)
+
+
+function createTentsFromDB(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, objectscale, ColSphereSize, Owner, theTentItems)
+	local tent = createObject(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ)
+    local tentCol = createColSphere(last_x, last_y, last_z, 4)
+    attachElements(tentCol, tent, 0, 0, 0)
+	setObjectScale(tent,objectscale)
+    setElementData(tentCol, "parent", tent)
+    setElementData(tent, "parent", tentCol)
+    setElementData(tentCol,"vehicle", true)
+	setElementData(tentCol,"tent",true)
+    setElementData(tentCol,"MAX_Slots",tonumber(MAX_Slots))
+	setElementID(tentCol, tostring(Owner))
+    for i, data in ipairs(theTentItems) do
+		if getElementID(tentCol) == tostring(data[1]) then
+			setElementData(tentCol, tostring(data[2]),tonumber(data[3]))
+		end
+	end
+end
+
+function loadTentsFromDB(q)
+    if (q) then
+        local p = dbPoll( q, -1 )
+        if (#p > 0) then
+            for _, d in pairs (p) do
+				for i,item in ipairs(itemsDataTable) do
+					if d[item[1]] then
+						table.insert(theTentItems,{d["Owner"],item[1],d[item[1]]})
+					end
+				end
+				createTentsFromDB( d["model"], d["last_x"], d["last_y"], d["last_z"], d["last_rX"], d["last_rY"], d["last_rZ"], d["MAX_Slots"], d["objectscale"],  d["ColSphereSize"], d["Owner"], theTentItems)
+			end
+        end
+    end
+end
+
+
+function loadTentsOnServerStart()
+	dbQuery(loadTentsFromDB, { }, tentdatabase, "SELECT * FROM tents")
+	outputServerLog("[DayZ] TENTS HAVE BEEN LOADED.")
+end
+addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadTentsOnServerStart)
+
 
 
 --[[

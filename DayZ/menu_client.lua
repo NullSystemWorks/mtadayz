@@ -342,12 +342,12 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 		end
 		if getElementData(source,"vehicle") then
 			if not getElementData(source,"deadVehicle") then
-			showClientMenuItem("Vehicle",(getVehicleName(getElementData(source,"parent")) or "Tent"),getElementData(source,"parent"))
-			setElementData(getLocalPlayer(),"currentCol",source)
-			setElementData(getLocalPlayer(),"loot",true)
-			setElementData(getLocalPlayer(),"lootname","Gear ("..(getVehicleName(getElementData(source,"parent")) or "Tent")..")")
-			--setNewbieInfo (true,"Gear","Press J to acess the gear menu!",source)
-			return
+				showClientMenuItem("Vehicle",(getVehicleName(getElementData(source,"parent")) or "Tent"),getElementData(source,"parent"))
+				setElementData(getLocalPlayer(),"currentCol",source)
+				setElementData(getLocalPlayer(),"loot",true)
+				setElementData(getLocalPlayer(),"lootname","Gear ("..(getVehicleName(getElementData(source,"parent")) or "Tent")..")")
+				--setNewbieInfo (true,"Gear","Press J to acess the gear menu!",source)
+				return
 			end
 		end
 		if getElementData(source,"itemloot") then

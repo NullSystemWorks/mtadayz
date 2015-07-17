@@ -292,7 +292,7 @@ function playerDrawMapGPSCompass()
 			if (not isPlayerMapVisible()) then
 				local mW, mH = dxGetMaterialSize(rt)
 				local x, y = getElementPosition(localPlayer)
-				local X, Y = mW/2 -(x/(6000/(3200))), mH/2 +(y/(6000/(3072)))
+				local X, Y = mW/2 -(x/(6000/(3072))), mH/2 +(y/(6000/(3072)))
 				local camX,camY,camZ = getElementRotation(getCamera())
 				dxSetRenderTarget(rt, true)
 				if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
@@ -2655,109 +2655,111 @@ function onQuitGame( reason )
 end
 addEventHandler( "onClientPlayerQuit", getRootElement(), onQuitGame )
 
-yA = 0
-local screenWidth,screenHeight = guiGetScreenSize()
-function scoreBoard ()
-	if getKeyState( "tab" ) == false then return end
-	if getElementData(getLocalPlayer(),"logedin") then
-		local offset = dxGetFontHeight(1.55,"default-bold")
-		--Background
-		dxDrawImage ( screenWidth*0.15 , screenHeight*0.2, screenWidth*0.7, screenHeight*0.2+yA, "images/window_bg.png",0,0,0,tocolor(255,255,255))
+function getTheServerName(name)
+	serverName = name
+end
+addEvent("getTheServerName",true)
+addEventHandler("getTheServerName",root,getTheServerName)
 
-		--Table Form
-		dxDrawRectangle ( screenWidth*0.15, screenHeight*0.2+offset*2, screenWidth*0.7, screenHeight*0.0025, tocolor ( 255, 255, 255, 220 ) )
+local yA = 0
+local recx, recy = 200, 200
+local recw, rech = 560, 200
+local eastype = "OutElastic"
+local screenW, screenH = guiGetScreenSize()
+local font = {}
+local serverName = ""
 
-		--Table Spalten
-		--Name
-		dxDrawText ("Name", screenWidth*0.175 , screenHeight*0.2+offset, screenWidth*0.175 , screenHeight*0.2+offset, tocolor ( 50, 255, 50, 200 ), 1.5, "default-bold" )
-		w1 = dxGetTextWidth("Name",1.5,"default-bold")
-		--Murders
-		dxDrawText ("Murders", screenWidth*0.3+w1*1.6, screenHeight*0.2+offset, screenWidth*0.3+w1*1.6 , screenHeight*0.2+offset, tocolor ( 50, 255, 50, 200 ), 1.5, "default-bold" )
-		w2 = dxGetTextWidth("Murders",1.5,"default-bold")
-		dxDrawRectangle ( screenWidth*0.3+w1*1.6-w2*0.1-(screenWidth*0.0025/2), screenHeight*0.2, screenWidth*0.0025, screenHeight*0.2+yA, tocolor ( 255, 255, 255, 220 ) )
-		dxDrawRectangle ( screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2), screenHeight*0.2, screenWidth*0.0025, screenHeight*0.2+yA, tocolor ( 255, 255, 255, 220 ) )
-		
-		--Zombies Killed
-		dxDrawText ("Zombies Killed", screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2)+w2*0.1, screenHeight*0.2+offset, screenWidth*0.3+w1*1.6 , screenHeight*0.2+offset, tocolor ( 50, 255, 50, 200 ), 1.5, "default-bold" )
-		w3 = dxGetTextWidth("Zombies Killed",1.5,"default-bold")
-		dxDrawRectangle ( screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2), screenHeight*0.2, screenWidth*0.0025, screenHeight*0.2+yA, tocolor ( 255, 255, 255, 220 ) )
-		
-		--Days Alive
-		dxDrawText ("Days Alive", screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2)+w2*0.1, screenHeight*0.2+offset, screenWidth*0.3+w1*1.6 , screenHeight*0.2+offset, tocolor ( 50, 255, 50, 200 ), 1.5, "default-bold" )
-		w4 = dxGetTextWidth("Days Alive",1.5,"default-bold")
-		dxDrawRectangle ( screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2)+w2*0.1+w4+w2*0.1, screenHeight*0.2, screenWidth*0.0025, screenHeight*0.2+yA, tocolor ( 255, 255, 255, 220 ) )
-		
-		--Player Amount
-		--dxDrawText ("Players:"..#getElementsByType("player"), screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2)+w2*0.1+w4+w2*0.1+w4/3, screenHeight*0.2+offset, screenWidth*0.8 , screenHeight*0.2+offset, tocolor ( 50, 255, 50, 200 ), 1.5, "default-bold" )
+font[1] = dxCreateFont("fonts/28dayslater.ttf", 10)
+font[2] = dxCreateFont("fonts/etelka.ttf", 10)
 
-		--Player
+local yA = 0
+function performRender()
+	if getElementData(localPlayer,"logedin") then
+		local tick = getTickCount()
+		local endTime = tickk + 3000
+		local laufzeit = tick - tickk
+		local dauer = endTime - tickk
+		local progress = laufzeit/dauer
+		local x,y = guiGetScreenSize()
+		
+		local recintx, recinty, _ = interpolateBetween( 0, 0, 0, x*0.0225, y*0.1667, 0 , progress, eastype)
+		dxDrawImage(recintx, recinty, screenW * 0.9500, screenH * 0.5733, "images/scoreboard.png", 0, 0, 0, tocolor(255, 255, 255, 255), true)
+		dxDrawText(serverName, screenW * 0.0250, screenH * 0.175, screenW * 0.9725, screenH * 0.2100, tocolor(255, 255, 255, 255), 1.00, font[1], "left", "top", false, false, true, false, false)
+		dxDrawText("Player", screenW * 0.0737, screenH * 0.2267, screenW * 0.3262, screenH * 0.2767, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText("#", screenW * 0.0300, screenH * 0.22, screenW * 0.0688, screenH * 0.2683, tocolor(255, 255, 255, 255), 1.50, font[2], "center", "top", false, false, true, false, false)
+		
 		playerInList = false
-		local playerAmount = #getElementsByType("player")
-		if playerAmount > 10 then
-			playerAmount = 10
-		end
+			local playerAmount = #getElementsByType("player")
+			if playerAmount > 9 then
+				playerAmount = 9
+			end
 		for i = 1, playerAmount do
-			yA = i*offset
-			local offset2 = dxGetFontHeight(1.5,"default-bold")
-			--Spiler Getten
+			yA = 0.0466*(i-1)
 			local player = getRankingPlayer(i) or false
 			if not player then break end
-			--Abfragen ob spieler == local Player
 			r,g,b = 255,255,255
-			if getPlayerName(player) == getPlayerName(getLocalPlayer()) then
+			if getPlayerName(player) == getPlayerName(localPlayer) then
 				r,g,b = 50, 255, 50
 				playerInList = true
 			end
-			--dxDrawImage(screenWidth*0.175 , screenHeight*0.2+offset*2+yA-offset2*0.1, screenWidth*0.65, offset2+offset2*0.1,"images/background_scoreboard.png", 0,0,0,tocolor(255,255,255,200), false)
-			--Position
-			dxDrawText (i, screenWidth*0.155 , screenHeight*0.2+offset*2+yA, screenWidth*0.175, screenHeight*0.2+offset+yA, tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Name
-			dxDrawText (string.gsub(getPlayerName(player), '#%x%x%x%x%x%x', '' ), screenWidth*0.175 , screenHeight*0.2+offset*2+yA, screenWidth*0.175, screenHeight*0.2+offset+yA, tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Murders
-			local murders = getElementData(player,"murders")
-			dxDrawText (murders, screenWidth*0.3+w1*1.6 , screenHeight*0.2+offset*2+yA, screenHeight*0.2+offset*2+yA, screenHeight*0.2+offset+yA, tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Bandit
-			--local bandit = getElementData(player,"bandit") 
-			--if bandit then
-			--	r1,g1,b1 = 255,0,0
-			--else
-			--	r1,g1,b1 = 0,255,0
-			--end
-			--dxDrawText ("☻◘☺", screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2)-w2/2,  screenHeight*0.2+offset*2+yA, screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2)-w2/2,  screenHeight*0.2+offset*2+yA, tocolor ( r1,g1,b1, 200 ), 1.5, "default-bold" )
-			--Zombies Killed
-			local zombieskilled = getElementData(player,"zombieskilled")
-			dxDrawText (zombieskilled, screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2)+w2*0.1 , screenHeight*0.2+offset*2+yA, screenWidth*0.175, screenHeight*0.2+offset+yA, tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Alive Time
-			local daysalive = getElementData(player,"daysalive") or 0
-			--formatTimeFromMinutes(alivetime)
-			dxDrawText (daysalive.." Day(s)", screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2)+w2*0.1 , screenHeight*0.2+offset*2+yA, screenWidth*0.175, screenHeight*0.2+offset+yA, tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
+		dxDrawText(i, screenW * 0.0300, screenH * 0.2750, screenW * 0.0688, screenH * 0.3167, tocolor(r,g,b, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(string.gsub(getPlayerName(player),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+yA), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
+		local murders = getElementData(player,"murders")
+		dxDrawText(tostring(murders), screenW * 0.4750, screenH * 0.2750, screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local zombieskilled = getElementData(player,"zombieskilled")
+		dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * 0.2750, screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local headshots = getElementData(player,"headshots")
+		dxDrawText(tostring(headshots), screenW * 0.6913, screenH * 0.2750, screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local daysalive = getElementData(player,"daysalive")
+		dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * 0.2750, screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+		local totalkills = murders+zombieskilled
+		dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * 0.2750, screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
 		end
-		playerLocalAdd = 0
 		if not playerInList then
-			playerLocalAdd = offset
-			r,g,b = 50, 255, 50
-			dxDrawRectangle ( screenWidth*0.15, screenHeight*0.2+offset*2+((playerAmount+2)*offset)-offset/2, screenWidth*0.7, screenHeight*0.0025, tocolor ( 255, 255, 255, 220 ) )
-			--Position
-			local rank = getElementDataPosition("daysalive",getElementData(getLocalPlayer(),"daysalive"))
-			dxDrawText (rank, screenWidth*0.155 , screenHeight*0.2+offset*2+((playerAmount+2)*offset), screenWidth*0.175, screenHeight*0.2+offset*2+((playerAmount+2)*offset), tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Name
-			dxDrawText (string.gsub(getPlayerName(getLocalPlayer()), '#%x%x%x%x%x%x', '' ), screenWidth*0.175 , screenHeight*0.2+offset*2+((playerAmount+2)*offset), screenWidth*0.175, screenHeight*0.2+offset+((playerAmount+2)*offset), tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Murders
-			local murders = getElementData(getLocalPlayer(),"murders")
-			dxDrawText (murders, screenWidth*0.3+w1*1.6 , screenHeight*0.2+offset*2+((playerAmount+2)*offset), screenWidth*0.175, screenHeight*0.2+offset+((playerAmount+2)*offset), tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Zombies Killed
-			local zombieskilled = getElementData(getLocalPlayer(),"zombieskilled")
-			dxDrawText (zombieskilled, screenWidth*0.3+w1*1.6+w2*1.1-(screenWidth*0.0025/2)+w2*0.1 , screenHeight*0.2+offset*2+((playerAmount+2)*offset), screenWidth*0.175, screenHeight*0.2+offset+((playerAmount+2)*offset), tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
-			--Alive Time
-			local daysalive = getElementData(getLocalPlayer(),"daysalive") or 0
-			--formatTimeFromMinutes(alivetime)
-			dxDrawText (daysalive.." Day(s)", screenWidth*0.3+w1*1.6+w2*1.1+w3+w2*0.1+(screenWidth*0.0025/2)+w2*0.1 , screenHeight*0.2+offset*2+((playerAmount+2)*offset), screenWidth*0.175, screenHeight*0.2+offset+((playerAmount+2)*offset), tocolor ( r,g,b, 200 ), 1.5, "default-bold" )
+			--local murders = getElementDataPosition("murders",getElementData(localPlayer,"murders"))
+			--local zombieskilled = getElementDataPosition("zombieskilled",getElementData(localPlayer,"zombieskilled"))
+			--local totalkills = murders+zombieskilled-murders
+			--dxDrawText(tostring(totalkills), screenW * 0.0300, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.0688, screenH * 0.3167, tocolor(50, 255, 50, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+			
+			dxDrawText(string.gsub(getPlayerName(localPlayer),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
+			local murders = getElementData(localPlayer,"murders")
+			dxDrawText(tostring(murders), screenW * 0.4750, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+			
+			local zombieskilled = getElementData(localPlayer,"zombieskilled")
+			dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+			
+			local headshots = getElementData(localPlayer,"headshots")
+			dxDrawText(tostring(headshots), screenW * 0.6913, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+			
+			local daysalive = getElementData(localPlayer,"daysalive")
+			dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
+			local totalkills = murders+zombieskilled
+			dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		end
-		yA = playerAmount*offset+playerLocalAdd
-	end	
+	end
 end
---addEventHandler ( "onClientRender", getRootElement(), scoreBoard )
 
+es = false
+function tabular(key, keyState, arguments)
+	if not es then
+		tickk = getTickCount()
+		addEventHandler("onClientRender",root,performRender)
+		--showCursor(true)
+		es = true
+	elseif es then
+		removeEventHandler("onClientRender",root,performRender)
+		--showCursor(false)
+		es = false
+	end
+end
+addCommandHandler("toggle",tabular)
+bindKey("tab","down","toggle","1")
 
 
 
