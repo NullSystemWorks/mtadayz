@@ -37,6 +37,9 @@ gameplayVariables = {}
 -- HEADSHOT MULTIPLIER
 	gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
 	gameplayVariables["headshotdamage_zombie"] = 1.5 -- Multiplier for damage on head shot (zombies). DEFAULT: 1.5, EXAMPLE: damage*1.5
+	
+-- SOUND VOLUME
+	gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds should be. Set to 0 to disable, max is 1.0. - DEFAULT: 0.8
 
 	
 -- WEAPON DAMAGE

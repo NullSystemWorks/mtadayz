@@ -529,7 +529,10 @@ local ambiencesounds = {
 
 function playAmbienceMusic()
 	if getElementData(localPlayer,"logedin") then
-		playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
+		ambiencesound = playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
+		if ambiencesound then
+			setSoundVolume(ambiencesound,gameplayVariables["ambiencesoundvolume"])
+		end
 	end
 end
 setTimer(playAmbienceMusic,65000,0)
