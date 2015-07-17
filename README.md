@@ -25,6 +25,8 @@
 * Test your code using a local server on your own PC or laptop.
 * If your code does not work, do not commit it.
 * Once you have solved an issue, close it in the issues tracker.
+* All commits must have your name in brackets!
+Example: [L] Fixed Issue #1
 
 ### Issues Tracker ###
 
