@@ -10,55 +10,78 @@
 
 ZombiePedSkins = {22,56,67,68,69,70,92,97,105,107,108,126,127,128,152,162,167,188,195,206,209,212,229,230,258,264,277,280 } --ALTERNATE SKIN LISTS FOR ZOMBIES (SHORTER LIST IS TEXTURED ZOMBIES ONLY)
 
-ZombieLootSkins = {
-["civilian"] = {22,56,67,68,69},
-["hunter"] = {70,92,97,105},
-["generic"] = {107,108,126,127,264,277,280},
-["medical"] = {128,152,162,167},
-["military"] = {188,195,206,209},
-["policeman"] = {212,229,230,258},
+ZombieTypes = {
+
+["zZombie_Base"] = {},
+["z_hunter"] = {},
+["z_teacher"] = {},
+["z_suit1"] = {},
+["z_suit2"] = {},
+["z_worker1"] = {},
+["z_worker2"] = {},
+["z_worker3"] = {},
+["z_villager1"] = {},
+["z_villager1"] = {},
+["z_villager1"] = {},
+["z_soldier"] = {},
+["z_soldier_heavy"] = {},
+["z_policeman"] = {},
+["z_priest"] = {},
+
+}
+
+local ZombieLoot = {
+{22,"civilian"},
+{56,"civilian"},
+{67,"civilian"},
+{68,"civilian"},
+{69,"civilian"},
+{70,"hunter"},
+{92,"hunter"},
+{97,"hunter"},
+{105,"hunter"},
+{107,"generic"},
+{108,"generic"},
+{126,"generic"},
+{127,"generic"},
+{264,"generic"},
+{277,"generic"},
+{280,"generic"},
+{128,"medical"},
+{152,"medical"},
+{162,"medical"},
+{167,"medical"},
+{188,"military"},
+{195,"military"},
+{206,"military"},
+{209,"military"},
+{212,"policeman"},
+{229,"policeman"},
+{230,"policeman"},
+{258,"policeman"}
 }
 
 setElementData(getRootElement(),"zombiestotal",0)
 setElementData(getRootElement(),"zombiesalive",0)
 createTeam("Zombies")
 
-local lootpileType = {
-
-["trash"] = {
-{"Empty Soda Can",2673,0.5,0,31.25},
-{"Empty Tin Can",2673,0.5,0,62.5},
-{"Broken Whiskey Bottle",2673,0.5,0,6.25},
-},
+local zombieLootType = {
 
 ["civilian"] = {
 {"Empty Soda Can",2673,0.5,0,8.82},
 {"Empty Tin Can",2673,0.5,0,8.82},
 {"Broken Whiskey Bottle",2673,0.5,0,8.82},
-{"Soda Bottle",2647,1,0,11.76},
-{"Milk",2856,1,0,8.82},
-{"Pizza",1582,1,0,4.90},
-{"Pasta Can",2770,1,0,4.90},
-{"Beans Can",2601,1,0,4.90},
-{"Burger",2768,1,0,4.90},
+{"Soda Can (Cola)",2647,1,0,11.76},
+{"Soda Can (Pepsi)",2856,1,0,8.82},
+{"Baked Beans",1582,1,0,4.90},
+{"Sardines",2770,1,0,4.90},
+{"Frank & Beans",2601,1,0,4.90},
+{"Pasta",2768,1,0,4.90},
 {".45 ACP Cartridge",3013,2,0,4.90},
 {"2Rnd. Slug",2358,2,0,4.90},
 {"12 Gauge Pellet",2358,2,0,4.90},
 {"Bandage",1578,0.5,0,5.88},
 {"Painkiller",2709,3,0,5.88},
-},
-
-["food"] = {
-{"Empty Soda Can",2673,0.5,0,12.87},
-{"Empty Tin Can",2673,0.5,0,12.87},
-{"Broken Whiskey Bottle",2673,0.5,0,12.87},
-{"Soda Bottle",2647,1,0,8.91},
-{"Milk",2856,1,0,12.87},
-{"Pizza",1582,1,0,8.91},
-{"Pasta Can",2770,1,0,8.91},
-{"Beans Can",2601,1,0,8.91},
-{"Burger",2768,1,0,8.91},
-{"Bandage",1578,0.5,0,3.96},
 },
 
 ["hunter"] = {
@@ -75,21 +98,25 @@ local lootpileType = {
 {"Empty Soda Can",2673,0.5,0,6},
 {"Empty Tin Can",2673,0.5,0,6},
 {"Broken Whiskey Bottle",2673,0.5,0,4},
-{"Soda Bottle",2647,1,0,6},
-{"Milk",2856,1,0,4},
-{"Pizza",1582,1,0,1},
-{"Pasta Can",2770,1,0,1},
-{"Beans Can",2601,1,0,1},
-{"Burger",2768,1,0,1},
+{"Soda Can (Cola)",2647,1,0,6},
+{"Soda Can (Pepsi)",2856,1,0,4},
+{"Baked Beans",1582,1,0,1},
+{"Sardines",2770,1,0,1},
+{"Frank & Beans",2601,1,0,1},
+{"Pasta",2768,1,0,1},
 {"Empty Water Bottle",2683,1,0,1},
 {"Water Bottle",2683,1,0,1},
 {"Bandage",1578,0.5,0,11},
-{".45 ACP Cartridge",3013,2,0,4},
+{".45 ACP Cartridge",3013,2,0,3},
+{"9.3x62mm Cartridge",2358,2,0,1},
+{".303 British Cartridge",2358,2,0,4},
+{"9x19mm SD Cartridge",3013,2,0,4},
 {"2Rnd. Slug",2358,2,0,5},
 {"12 Gauge Pellet",2358,2,0,5},
+{"9x18mm Cartridge",2358,2,0,9},
 {"1866 Slug",2358,2,0,2},
 {"Bolt",2041,2,0,4},
-{"Roadflare",324,1,90,7},
+{"Road Flare",324,1,90,7},
 {"Painkiller",2709,3,0,2},
 {"Heat Pack",1576,5,0,4},
 },
@@ -104,27 +131,27 @@ local lootpileType = {
 ["military"] = {
 {"Empty Tin Can",2673,0.5,0,17.82},
 {"Empty Soda Can",2673,0.5,0,8.91},
-{"Soda Bottle",2647,1,0,0.99},
-{"Milk",2856,1,0,0.99},
+{"Soda Can (Cola)",2647,1,0,0.99},
+{"Soda Can (Pepsi)",2856,1,0,0.99},
 {"Bandage",1578,0.5,0,3.96},
 {"Painkiller",2709,3,0,3.96},
 {"Morphine",1579,1,0,0.99},
-{"1866 Slug",2358,2,0,3.96},
-{"2Rnd. Slug",2358,2,0,3.96},
-{"12 Gauge Pellet",2358,2,0,3.96},
-{"9x18mm Cartridge",2358,2,0,1.98},
-{"5.45x39mm Cartridge",1271,2,0,3.96},
 {"5.56x45mm Cartridge",1271,2,0,3.96},
+{"9.3x62mm Cartridge",2358,2,0,3.96},
 {".45 ACP Cartridge",3013,2,0,4.95},
 {"9x19mm SD Cartridge",3013,2,0,0.99},
-{"9.3x62mm Cartridge",2358,2,0,3.96},
-{".303 British Cartridge",2358,2,0,1.98},
-{"9x19mm Cartridge",2041,2,0,3.96},
+{"5.45x39mm Cartridge",1271,2,0,3.96},
+{"12 Gauge Pellet",2358,2,0,3.96},
+{"1866 Slug",2358,2,0,3.96},
+{"2Rnd. Slug",2358,2,0,3.96},
+{"9x19mm Cartridge",2041,2,0,1.98},
 {"Bolt",2041,2,0,1.98},
-{"Roadflare",324,1,90,4},
+{"Road Flare",324,1,90,4},
 {"Wire Fence",933,0.25,0,1},
 {"Grenade",342,1,0,0.99},
 {"Heat Pack",1576,5,0,3.96},
+{"Area 69 Keybard",1581,1,0,7},
+{"San Fierro Carrier Keycard",1581,1,0,7},
 },
 
 ["policeman"] = {
@@ -133,30 +160,11 @@ local lootpileType = {
 {"9x18mm Cartridge",2358,2,0,9.38},
 {"1866 Slug",2358,2,0,9.38},
 {"12 Gauge Pellet",2358,2,0,16.63},
-{"Roadflare",324,1,90,9.38},
-},
-
-}
-
-
-itemTableZombies = {
-{"Empty Soda Can",2673,0.5,0,8.82},
-{"Empty Tin Can",2673,0.5,0,8.82},
-{"Broken Whiskey Bottle",2673,0.5,0,8.82},
-{"Soda Can (Cola)",2647,1,0,11.76},
-{"Soda Can (Pepsi)",2856,1,0,8.82},
-{"Baked Beans",1582,1,0,4.90},
-{"Sardines",2770,1,0,4.90},
-{"Frank & Beans",2601,1,0,4.90},
-{"Pasta",2768,1,0,4.90},
-{".45 ACP Cartridge",3013,2,0,4.90},
-{"2Rnd. Slug",2358,2,0,4.90},
-{"12 Gauge Pellet",2358,2,0,4.90},
-{"Bandage",1578,0.5,0,5.88},
-{"Painkiller",2709,3,0,5.88},
-{"Area 69 Keybard",1581,1,0,7},
+{"Road Flare",324,1,90,9.38},
 {"San Fierro Carrier Keycard",1581,1,0,7},
+},
 }
+
 
 function createZombieTable (player)
 	setElementData(player,"playerZombies",{"no","no","no","no","no","no","no","no","no"})
@@ -279,37 +287,42 @@ function zombieKilled (killer,headshot)
 	if killer then
 		setElementData(killer,"zombieskilled",getElementData(killer,"zombieskilled")+1)
 	end	
-		local skin = getElementModel(source)
-		local x,y,z = getElementPosition(source)
-		local ped = createPed(skin,x,y,z)
-		local pedCol = createColSphere(x,y,z,1.5)
-		killPed(ped)
-		setTimer(destroyDeadZombie,360000 ,1,ped,pedCol)
-		attachElements (pedCol,ped,0,0,0)
-		setElementData(pedCol,"parent",ped)
-		setElementData(pedCol,"playername","Zombie")
-		setElementData(pedCol,"deadman",true)
-		setElementData(ped,"deadzombie",true)
-		setElementData(pedCol,"deadman",true)
-		local time = getRealTime()
-		local hours = time.hour
-		local minutes = time.minute
-		setElementData(pedCol,"deadreason","Looks like it's finally dead. Estimated time of death: "..hours..":"..minutes.." o'clock.")
-		for i, item in ipairs(itemTableZombies) do
-			local value =  math.percentChance (item[5]/2.5,1)
-				setElementData(pedCol,item[1],value)
-			--weapon Ammo
-			local ammoData,weapID = getWeaponAmmoType (item[1],true)
-				if ammoData and value > 0 then
-					setElementData(pedCol,ammoData,1)
-				end
-			end
-		local zombieCreator = getElementData(source,"owner")
-		setElementData(zombieCreator,"spawnedzombies",getElementData(zombieCreator,"spawnedzombies")-1)
-		destroyElement(source)
-		if headshot == true then
-			setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
-		end	
+	local skin = getElementModel(source)
+	local x,y,z = getElementPosition(source)
+	local ped = createPed(skin,x,y,z)
+	local pedCol = createColSphere(x,y,z,1.5)
+	killPed(ped)
+	setTimer(destroyDeadZombie,360000 ,1,ped,pedCol)
+	attachElements (pedCol,ped,0,0,0)
+	setElementData(pedCol,"parent",ped)
+	setElementData(pedCol,"playername","Zombie")
+	setElementData(pedCol,"deadman",true)
+	setElementData(ped,"deadzombie",true)
+	setElementData(pedCol,"deadman",true)
+	local time = getRealTime()
+	local hours = time.hour
+	local minutes = time.minute
+	local loot_table = ""
+	setElementData(pedCol,"deadreason","Looks like it's finally dead. Estimated time of death: "..hours..":"..minutes.." o'clock.")
+	for i, id in ipairs(ZombieLoot) do
+		if skin == id[1] then
+			loot_table = tostring(id[2])
+		end
+	end
+	for i, item in ipairs(zombieLootType[loot_table]) do
+		local value =  math.percentChance(item[5],math.random(1,3))
+		setElementData(pedCol,item[1],value)
+		local ammoData,weapID = getWeaponAmmoType (item[1],true)
+		if ammoData and value > 0 then
+			setElementData(pedCol,ammoData,math.random(1,3))
+		end
+	end
+	local zombieCreator = getElementData(source,"owner")
+	setElementData(zombieCreator,"spawnedzombies",getElementData(zombieCreator,"spawnedzombies")-1)
+	destroyElement(source)
+	if headshot then
+		setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
+	end	
 end
 addEvent("onZombieGetsKilled",true)
 addEventHandler("onZombieGetsKilled",getRootElement(),zombieKilled)
