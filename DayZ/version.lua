@@ -9,6 +9,7 @@
 ]]
 
 local timer
+version = "0.9.0a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
@@ -17,7 +18,7 @@ function()
 end)
 
 function checkVersion()
-	callRemote("--WEBHOST--/dayz/version.php",onVersionReturn)
+	callRemote("http://mtadayz.heliohost.org/version.php",onVersionReturn)
 end
 
 function onVersionReturn(_version)
@@ -26,9 +27,10 @@ function onVersionReturn(_version)
 	end
 	
 	if _version ~= version then
-		outputServerLog("[DayZ] A new version of MTA DayZ is available! Current version: "..version.." | New version: ".._version)
-		outputServerLog("[DayZ] Download the new version at http://mtadayz.heliohost.org/forum/index.php?action=forum")
+		outputServerLog("[DayZ] A new version of MTA DayZ is available!")
+		outputServerLog("[DayZ] Current Version: "..version.." | New Version: ".._version)
+		outputServerLog("[DayZ] Download the new version at http://mtadayz.heliohost.org!")
 		return
 	end
-	outputServerLog("[DayZ] Gamemode is up-to-date.")
+	outputServerLog("[DayZ] MTA DayZ is up-to-date.")
 end

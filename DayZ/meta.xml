@@ -9,6 +9,7 @@
 <meta>
     <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.0a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
+	<script src="version.lua" type="server" />
 	<script src="library/slither.lua" type="shared" />
 	<script src="library/async.lua" type="shared" />
 	<script src="logsystem.lua" type="server" />
