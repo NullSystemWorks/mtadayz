@@ -1495,6 +1495,8 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		elseif gender == "female" then
 			playSFX("pain_a",1,52,false)
 		end
+		enableBlackWhite(true)
+		setTimer(function() enableBlackWhite(false) end,1000,1)
 		local number = math.random(1,7)
 		if number == 4 then
 			setElementData(getLocalPlayer(),"bleeding",getElementData(getLocalPlayer(),"bleeding") + math.floor(loss*10))
@@ -1524,9 +1526,6 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			setElementData(getLocalPlayer(),"pain",true)
 		end
 		damage = getWeaponDamage (weapon)
-		if damage <= 1000 then
-			damage = 0
-		end
 		if bodypart == 9 then
 			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
@@ -1536,7 +1535,15 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			playSound("sounds/brokenbone.mp3",false)
 		end
 		playRandomHitSound()
-		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-math.random(damage*0.75,damage*1.25))
+		damage = math.random(damage*0.75,damage*1.25)
+		if getElementData(localPlayer,"humanity") >= 5000 then
+			if damage <= 1000 then
+				damage = 0
+			end
+		end
+		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-damage)
+		enableBlackWhite(true)
+		setTimer(function() enableBlackWhite(false) end,1000,1)
 		if not getElementData(getLocalPlayer(),"bandit") then
 			setElementData(attacker,"humanity",getElementData(attacker,"humanity")-math.random(40,200))
 			if getElementData(attacker,"humanity") < 0 then
@@ -2443,7 +2450,7 @@ function showWhiteScreen ( attacker, weapon, bodypart )
 		showPlayerDamageScreen (0,"up")
 	--end
 end
-addEventHandler ( "onClientPlayerDamage", getLocalPlayer(), showWhiteScreen )
+--addEventHandler ( "onClientPlayerDamage", getLocalPlayer(), showWhiteScreen )
 
 --[[
 function destroyBlipGPS ()
