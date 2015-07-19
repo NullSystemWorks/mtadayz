@@ -933,6 +933,8 @@ languageTextTable = {
 		{"Compass",1,'compass.png',128,128,"Item","Passieve item zal worden \n geactiveerd wanneer het word opgepakt.","Kompas"},
 	},
 },
+
+-- Portuguese
 ["pt"] = {
 ["Weapons"] = {
 		["Primary Weapon"] = {

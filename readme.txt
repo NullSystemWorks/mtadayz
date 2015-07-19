@@ -19,7 +19,7 @@ The following resources should have startup set to 0:
 
 scoreboard, mapcycler, mapmanager, spawnmanager, votemanager
 
-Version 0.8.0 will hopefully be the last version to do that, but you must replace your current internal.db with the fresh one provided
+Version 0.9.0 will hopefully be the last version to do that, but you must replace your current internal.db with the fresh one provided
 in the download! It's located in the same directory as mtaserver.conf and acl.xml.
 
 And that's it! Start the server and MTA DayZ will start automatically. 
@@ -33,6 +33,8 @@ admin: Makes the player an admin
 supporter: Makes the player a supporter
 remove: Removes the player from being admin/supporter
 
+/backup
+Will create a backup of all vehicles (must be enabled in editor_server.lua)
 
 
 ## EXPORTED FUNCTIONS ##
