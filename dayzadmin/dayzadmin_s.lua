@@ -49,20 +49,25 @@ function getVehicleInfos(id)
 	end
 end
 
--- Check if the player can open the Admin Panel by lil_Toady
+-- Check if the player can use command /mute
 addEventHandler("onPlayerLogin", root, 
 function()
-	if (hasObjectPermissionTo(source, "general.adminpanel")) then
+	if (hasObjectPermissionTo(source, "command.mute")) then
 		initialiseAdminPanel(source)
 	end
 end)
 
 local PanelIsOpen = false
+local bindIsOn = false
 
 -- Second check, in case something goes wrong or player loses permission to open Admin Panel
 function openDayZAdminPanel (player,cmd)
-	if (hasObjectPermissionTo (player, "general.adminpanel")) then
+	if (hasObjectPermissionTo (player, "command.mute")) then
 		if not PanelIsOpen then
+			if not bindIsOn then
+				initialiseAdminPanel(player)
+				bindIsOn = true
+			end
 			triggerClientEvent (player, "onAdminPanelOpen", root)
 			PanelIsOpen = true
 		else

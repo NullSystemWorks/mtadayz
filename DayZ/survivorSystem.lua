@@ -655,17 +655,22 @@ function addPlayerStats (player,data,value)
 		end		
 	end
 end
-
 function regenerateBlood()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
 			blood = getElementData(player,"blood")
-			if blood ~= 12000 and blood >= (12000*75)/100 then
-				setElementData(player,"blood",blood+60)
-			elseif blood <= (12000*50)/100 and blood >= (12000*26)/100 then
-				setElementData(player,"blood",blood+30)
-			elseif blood <= (12000*25)/100 then
-				setElementData(player,"blood",blood+10)
+			if blood < 12000 then
+				if blood >= 11940 then
+					setElementData(player,"blood",12000)
+				elseif blood <= 11940 and blood >= (12000*75)/100 then
+					setElementData(player,"blood",blood+60)
+				elseif blood <= (12000*74)/100 and blood >= (12000*50)/100 then
+					setElementData(player,"blood",blood+30)
+				elseif blood <= (12000*49)/100 and blood >= (12000*0.001)/100 then
+					setElementData(player,"blood",blood+10)
+				elseif blood >= 12001 then
+					setElementData(player,"blood",12000)
+				end
 			end
 		end
 	end
@@ -1545,7 +1550,7 @@ function funcBindSit ( player, key, keyState )
 	end	
 end
 
---[[
+
 function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
@@ -1557,8 +1562,8 @@ function funcBindLie ( player, key, keyState )
 		lying = true
 	end
 end
-]]
 
+--[[
 function funcBindLie ( player, key, keyState )
 	if lying then
 		setPedAnimation(player,"ped","getup_front",-1,false)
@@ -1573,10 +1578,11 @@ function funcBindLie ( player, key, keyState )
 		setElementPosition(player,x,y,z) --Move the player up a little (due to a bug)
 	end
 	if gameplayVariables["enableprone"] then
-		outputChatBox("Attention! Moving while prone is currently bugged. Do not move while near buildings or objects! If you do that, you will fall through the map!",player,255,0,0,false)
-		triggerClientEvent(player,"onPlayerProne",player,lying)
+		outputChatBox("Attention! Moving while prone is currently disabled!",player,255,0,0,false)
+		--triggerClientEvent(player,"onPlayerProne",player,lying)
 	end
 end
+]]
 
 
 -- STAMINA SYSTEM (EVENTS)

@@ -2091,40 +2091,40 @@ function updateIcons ()
 		--bandit	
 		local humanity =  getElementData(getLocalPlayer(),"humanity")
 		local humanity_icon = "images/dayzicons/humanity/2500.png"
-		local number = 0
+		local h_number = 0
 		if humanity >= 5000 and humanity >= 3501 then
-			number = 5
+			h_number = 5
 		elseif humanity <= 3500 and humanity >= 2501 then
-			number = 4
+			h_number = 4
 		elseif humanity <= 2500 and humanity >= 1 then
-			number = 3
+			h_number = 3
 		elseif humanity <= 0 and humanity >= -1001 then
-			number = 2
+			h_number = 2
 		elseif humanity <= -1000 and humanity >= -2501 then
-			number = 1
+			h_number = 1
 		elseif humanity >= -2500 then
-			number = 0
+			h_number = 0
 		end
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.6, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/humanity/"..number..".png",0,0,0,tocolor(0,255,0))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.6, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/humanity/"..h_number..".png",0,0,0,tocolor(0,255,0))
 		--temperature
 		local temperature = math.round(getElementData(getLocalPlayer(),"temperature"),2)
 		r,g,b = 0,255,0
-		local number = 5
+		local t_number = 5
 		if temperature <= 37 then
 			value = (37-temperature)*42.5
 			r,g,b = 0,255-value,value
-			number = 3
+			t_number = 3
 		elseif temperature > 37 and temperature < 41 then
 			r,g,b = 0,255,0
-			number = 5
+			t_number = 5
 		elseif temperature == 41 then
 			number = 5
 			r,g,b = 255,0,0
 		end
 		if value > 215 then
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..number..".png",0,0,0,tocolor(r,g,b,fading))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..t_number..".png",0,0,0,tocolor(r,g,b,fading))
 		else
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..number..".png",0,0,0,tocolor(r,g,b))
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..t_number..".png",0,0,0,tocolor(r,g,b))
 		end
 		--thirsty
 		r,g,b = 0,255,0
@@ -2262,52 +2262,55 @@ function updateIcons ()
 			local glass = getElementData(getElementData(veh,"parent"),"Glass_inVehicle") or 0
 			local rotary = getElementData(getElementData(veh,"parent"),"Rotary_inVehicle") or 0
 			local offset = dxGetFontHeight(1.02,"default-bold")
+			local e_number = 0
 			--local w = dxGetTextWidth(engine.."/"..needengine.." Engine",1.02,"default-bold")
 			local enginetype = ""
 			if needrotary == 0 then
 				if engine == needengine then
 					r,g,b = 0,255,0
-					number = 1
+					e_number = 1
 					enginetype = "eng"
 				else
 					r,g,b = 255,0,0
-					number = 0
+					e_number = 0
 					enginetype = "eng"
 				end
 			else
 				if rotary == needrotary then
 					r,g,b = 0,255,0
-					number = 1
+					e_number = 1
 					enginetype = "mrot"
 				else
 					r,g,b = 255,0,0
-					number = 0
+					e_number = 0
 					enginetype = "mrot"
 				end
 			end
 			--dxDrawText (engine.."/"..needengine.." Engine" ,screenWidth*0.5-w/2 , screenHeight*0,screenWidth*0.5-w/2 , screenHeight*0,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
-			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/"..enginetype.."_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+			dxDrawImage(screenW * 0.4562, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/engine/"..enginetype.."_"..e_number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			--local w = dxGetTextWidth(tires.."/"..needtires.." Tires",1.02,"default-bold")
+			local tire_number = 0
 			if tires == needtires then
 				r,g,b = 0,255,0
-				number = 1
+				tire_number = 1
 			else
 				r,g,b = 255,0,0
-				number = 0
+				tire_number = 0
 			end
 			--dxDrawText (tires.."/"..needtires.." Tires",screenWidth*0.5-w/2 , screenHeight*0+offset,screenWidth*0.5-w/2 , screenHeight*0+offset,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
 			dxDrawText(tonumber(tires).."/"..tonumber(needtires), screenW * 0.5162, screenH * 0.1083, screenW * 0.5687, screenH * 0.1333, tocolor(73, 251, 3, 255), 1.00, "default-bold", "center", "top", false, false, false, false, false)
-			dxDrawImage(screenW * 0.5175, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/whl/whl_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+			dxDrawImage(screenW * 0.5175, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/whl/whl_"..tire_number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			--local w = dxGetTextWidth(parts.."/"..needparts.." Tank Parts",1.02,"default-bold")
+			local p_number = 0
 			if parts == needparts then
 				r,g,b = 0,255,0
-				number = 1
+				p_number = 1
 			else
 				r,g,b = 255,0,0
-				number = 0
+				p_number = 0
 			end
 			--dxDrawText (parts.."/"..needparts.." Tank Parts",screenWidth*0.5-w/2 , screenHeight*0+offset*2,screenWidth*0.5-w/2 , screenHeight*0+offset, tocolor (r,g,b, 220 ) , 1.02, "default-bold" )
-			dxDrawImage(screenW * 0.5787, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/tank/tank_"..number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+			dxDrawImage(screenW * 0.5787, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/tank/tank_"..p_number..".png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 			--local w = dxGetTextWidth("Fuel:"..math.floor(fuel).."/"..maxfuel,1.02,"default-bold")
 			--[[if fuel == maxfuel then
 				r,g,b = 0,255,0
@@ -2324,45 +2327,47 @@ function updateIcons ()
 				r,g,b = 50,200,0
 			end]]
 			-- a*100/b
+			local fuel_number = 0
 			if getElementModel(veh) ~= 509 then
 				if fuel == maxfuel then
-					number = 100
+					fuel_number = 100
 				elseif fuel >= (maxfuel*99)/100 then
-					number = 90
+					fuel_number = 90
 				elseif fuel >= (maxfuel*90)/100 then 
-					number = 90
+					fuel_number = 90
 				elseif fuel >= (maxfuel*80)/100 then
-					number = 80
+					fuel_number = 80
 				elseif fuel >= (maxfuel*70)/100 then
-					number = 70
+					fuel_number = 70
 				elseif fuel >= (maxfuel*60)/100 then
-					number = 60
+					fuel_number = 60
 				elseif fuel >= (maxfuel*50)/100 then
-					number = 50
+					fuel_number = 50
 				elseif fuel >= (maxfuel*40)/100 then
-					number = 40
+					fuel_number = 40
 				elseif fuel >= (maxfuel*30)/100 then
-					number = 30
+					fuel_number = 30
 				elseif fuel >= (maxfuel*20)/100 then
-					number = 20
+					fuel_number = 20
 				elseif fuel >= (maxfuel*1)/100 then
-					number = 10
+					fuel_number = 10
 				elseif fuel == (maxfuel*0)/100 then
-					number = 0
+					fuel_number = 0
 				end
 			
 			--dxDrawText ("Fuel:"..math.floor(fuel).."/"..maxfuel,screenWidth*0.5-w/2 , screenHeight*0+offset*3,screenWidth*0.5-w/2 , screenHeight*0+offset*2,tocolor ( r,g,b, 220 ), 1.02, "default-bold" )
-			dxDrawImage(screenW * 0.4975, screenH * -0.0983, screenW * 0.0200, screenH * 0.2750, "images/dayzicons/vehicle/fuel/"..number..".png", 270, 0, 0, tocolor(255, 255, 255, 255), false)
+			dxDrawImage(screenW * 0.4975, screenH * -0.0983, screenW * 0.0200, screenH * 0.2750, "images/dayzicons/vehicle/fuel/"..fuel_number..".png", 270, 0, 0, tocolor(255, 255, 255, 255), false)
 			end
 			local veh_health = getElementHealth(veh)
+			local health_number = 0
 			if veh_health <= 1000 and veh_health >= 510 then
-				number = 0
+				health_number = 0
 			elseif veh_health <= 500 and veh_health >= 310 then
-				number = 1
+				health_number = 1
 			elseif veh_health <= 300 and veh_health >= 0 then
-				number = 2
+				health_number = 2
 			end
-			dxDrawImage(screenW * 0.3950, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/hull/hull_"..number..".png", 0, 0, 0, tocolor(255,255,255,255), false)
+			dxDrawImage(screenW * 0.3950, screenH * 0.0767, screenW * 0.0488, screenH * 0.0317, "images/dayzicons/vehicle/hull/hull_"..health_number..".png", 0, 0, 0, tocolor(255,255,255,255), false)
 		end
 		if not playerTarget then return end
 		local x,y,z = getElementPosition(playerTarget)
@@ -2685,7 +2690,7 @@ end
 playerRankingTable = {}
 
 function checkTopPlayer()
-	playerRankingTable = positionGetElementData("daysalive", #getElementsByType("player"))
+	playerRankingTable = positionGetElementData("zombieskilled", #getElementsByType("player"))
 end
 checkTopPlayer()
 setTimer(checkTopPlayer,10000,0)
@@ -2742,22 +2747,22 @@ function performRender()
 				r,g,b = 50, 255, 50
 				playerInList = true
 			end
-		dxDrawText(i, screenW * 0.0300, screenH * 0.2750, screenW * 0.0688, screenH * 0.3167, tocolor(r,g,b, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(i, screenW * 0.0300, screenH * (0.2750+yA), screenW * 0.0688, screenH * 0.3167, tocolor(r,g,b, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		dxDrawText(string.gsub(getPlayerName(player),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+yA), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
 		local murders = getElementData(player,"murders")
-		dxDrawText(tostring(murders), screenW * 0.4750, screenH * 0.2750, screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(tostring(murders), screenW * 0.4750, screenH * (0.2750+yA), screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		
 		local zombieskilled = getElementData(player,"zombieskilled")
-		dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * 0.2750, screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(tostring(zombieskilled), screenW * 0.5875, screenH * (0.2750+yA), screenW * 0.6262, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		
 		local headshots = getElementData(player,"headshots")
-		dxDrawText(tostring(headshots), screenW * 0.6913, screenH * 0.2750, screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(tostring(headshots), screenW * 0.6913, screenH * (0.2750+yA), screenW * 0.7300, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		
 		local daysalive = getElementData(player,"daysalive")
-		dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * 0.2750, screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * (0.2750+yA), screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		
 		local totalkills = murders+zombieskilled
-		dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * 0.2750, screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * (0.2750+yA), screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		
 		end
 		if not playerInList then

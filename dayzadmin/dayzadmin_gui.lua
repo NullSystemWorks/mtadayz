@@ -671,7 +671,7 @@ function()
 
 	-- Live Map
 	adminpanel.tab[5] = guiCreateTab("Live Map", adminpanel.tabpanel[1])
-	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, "map.png", true, adminpanel.tab[5])
+	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, "images/map.png", true, adminpanel.tab[5])
 	adminpanel.label[70] = guiCreateLabel(0.79, 0.04, 0.17, 0.03, "Map Settings", true, adminpanel.tab[5])
 	guiSetFont(adminpanel.label[70], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[70], 245, 0, 0)
@@ -993,7 +993,7 @@ function()
 		end
 	end, false)
 	
-	addEventHandler("onClientGUIClick",adminpanel.gridlist[1],populateStatsOnPlayerSelect,false)
+	addEventHandler("onClientGUIClick",adminpanel.gridlist[1],function() guiGridListClear(adminpanel.gridlist[2]) populateStatsOnPlayerSelect() end,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[3],populateStatsOnVehicleSelect,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],checkIfRequirementsMet,false)
 	addEventHandler("onClientGUIClick",adminpanel.button[1],function() guiSetVisible(adminpanel.statwindow[1],true) guiBringToFront(adminpanel.statwindow[1],true) end, false)

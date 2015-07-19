@@ -117,7 +117,9 @@ local items =
 		"Toolbox",
 		"Watch",
 		"Radio Device",
-		"Compass"
+		"Compass",
+		"Area 69 Keycard",
+		"San Fierro Carrier Keycard",
 	},
 	
 	["Medical Items"] = {
@@ -132,6 +134,9 @@ local items =
 		"Tire",
 		"Engine",
 		"Tank Parts",
+		"Main Rotary Parts",
+		"Windscreen Glass",
+		"Scrap Metal",
 	},
 	
 	["Clothes"] = {

@@ -935,7 +935,7 @@ languageTextTable = {
 },
 
 -- Portuguese
-["pt"] = {
+["pt_BR"] = {
 ["Weapons"] = {
 		["Primary Weapon"] = {
 			{"M4",10, 'm4.png', 256, 128,"Rifle de Assalto","Munição: Cartucho 5.56x45mm","M4"},

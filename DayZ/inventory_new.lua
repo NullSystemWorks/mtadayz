@@ -101,7 +101,7 @@ function removeItemFromInventory (name)
 	end
 end
 
-local languages = {"en_US","de","cs","nl","pt"}
+local languages = {"en_US","de","cs","nl","pt_BR"}
 local languageCode = getLocalization()["code"]
 
 -- Option to change language via command?
@@ -114,10 +114,9 @@ function checkTheLanguage()
 		languageCode = "cs"
 	elseif languageCode == "nl" then
 		languageCode = "nl"
-	elseif languageCode == "pt" then
-		languageCode = "pt"
+	elseif languageCode == "pt_BR" then
+		languageCode = "pt_BR"
 	else
-		outputChatBox("No language defined, switching to en_US")
 		languageCode = "en_US"
 	end
 end
