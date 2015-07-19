@@ -1487,6 +1487,8 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	if getElementData(attacker,"zombie") then
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			damage_half = 2
+		else
+			damage_half = 1
 		end
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-(gameplayVariables["zombiedamage"]/damage_half))
 		local gender = getElementData(localPlayer,"gender")
@@ -1539,6 +1541,8 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			if damage <= 1000 then
 				damage = 0
+			else
+				damage = damage
 			end
 		end
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-damage)
@@ -1572,8 +1576,7 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			setControlState ("jump",true)
 		end
 		if loss >= 100 then
-			setElementData(getLocalPlayer(),"blood",49)
-			setElementData(getLocalPlayer(),"bleeding",50)
+			setElementData(getLocalPlayer(),"blood",1)
 		end
 		local number = math.random(1,11)
 		if number == 3 then
@@ -1588,22 +1591,6 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	end
 end
 addEventHandler ( "onClientPlayerDamage", getLocalPlayer (), playerGetDamageDayZ )
-
---[[
-function damageZombieOnVehicleHit(collider,force, bodyPart, x, y, z, nx, ny, nz)
-	if collider then
-		if (source == getPedOccupiedVehicle(localPlayer)) and (getElementType(collider) == "ped") then
-            setElementData(collider,"blood",getElementData(collider,"blood")-1000)
-			outputChatBox("Hit! :"..getElementData(collider,"blood"))
-			local pedX, pedY, pedZ = getElementPosition (collider)
-			local endX, endY, endZ = pedX-x, pedY-y, pedZ-z
-			--setElementVelocity ( collider, endX, endY, endZ )
-			triggerServerEvent("onZombieHitByVehicle",collider)
-		end
-    end
-end
-addEventHandler("onClientVehicleCollision", root,damageZombieOnVehicleHit)
-]]
 
 function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	if attacker and getElementType(attacker) == "player" then
@@ -1623,7 +1610,7 @@ function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 				damage = getWeaponDamage (weapon)
 				setElementHealth(source,100)
 				if bodypart == 9 then
-					damage = damage*2
+					damage = damage*gameplayVariables["headshotdamage_zombie"]
 					headshot = true
 				end
 				setElementData(source,"blood",getElementData(source,"blood")-damage)
