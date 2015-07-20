@@ -32,6 +32,9 @@
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" cache="false" />
 	
+	<!-- Cleanup script (remove in next update) -->
+	<script src="080cleanup.lua" type="server"/>
+	
 	<!-- Help File -->
 	<config src="help.xml" type="client" />
 	
