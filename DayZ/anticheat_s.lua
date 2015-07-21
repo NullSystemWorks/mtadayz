@@ -100,7 +100,7 @@ function checkLoss()
 				if not isLosingConnection then
 					isLosingConnection = true
 					triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
-					outputSideChat("Player "..getPlayerName(v).." is losing connection",root,255,0,0)
+					outputSideChat("Player "..string.gsub(getPlayerName(v), '#%x%x%x%x%x%x', '' ).." is losing connection",root,255,0,0)
 				end
 				lossCount[v] = lossCount[v] + 1
 				if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player

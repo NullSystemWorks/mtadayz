@@ -2,19 +2,19 @@
 
 addEventHandler("onPlayerJoin", root,
 	function()
-		outputSideChat("Player "..getPlayerName(source).." connected",root,255,255,255)
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." connected",root,255,255,255)
 	end
 )
 
 addEventHandler("onPlayerLogin", root,
 	function()
-		outputSideChat("Player "..getPlayerName(source).." has logged in",root,255,255,255)
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." has logged in",root,255,255,255)
 	end
 )
 
 addEventHandler("onPlayerQuit",root,
 	function()
-		outputSideChat("Player "..getPlayerName(source).. " disconnected",root,255,255,255)
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).. " disconnected",root,255,255,255)
 	end
 )
 

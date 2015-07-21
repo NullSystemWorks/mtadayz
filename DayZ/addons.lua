@@ -16,6 +16,12 @@ function addAddonInfo (name,description)
 	setGameType (addons)
 end
 
+function changeGameType()
+	setGameType("DayZ 0.9.0a")
+	
+end
+addEventHandler("onResourceStart",getResourceRootElement(getThisResource()),changeGameType)
+
 --night addon (Should be separate)
 --[[
 function nightAddon1 ()
@@ -37,6 +43,7 @@ if not gameplayVariables["autostartaddons"] then return end
 		local name = getResourceName(resourceValue)
 		if string.find(name,"addon_") then
 			startResource(resourceValue)
+			setGameType("DayZ 0.9.0a")
 		end
 	end
 end

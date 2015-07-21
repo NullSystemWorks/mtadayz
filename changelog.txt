@@ -52,6 +52,8 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### CHANGED: Map of GPS now matches custom map
 ### CHANGED: Disabled player voice
 
+### DEPRECATED: Prone has been disabled for now (due to its buggy nature)
+
 ### REMOVED: Bikes having 1 slot for inventory
 ### REMOVED: /svp command
 
