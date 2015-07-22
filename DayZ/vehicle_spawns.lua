@@ -1727,6 +1727,8 @@ function getVehicleFuelRemove (id,col)
 end
 
 function setVehiclesFuelPerMinute ()
+	if not gameplayVariables["fuelEnabled"] == true then return end --Disable fuel comsumption if setting is set to false.
+	
 	for i,veh in ipairs(getElementsByType("vehicle")) do
 		if getVehicleEngineState(veh) == true then
 			if getElementData(getElementData(veh,"parent"),"fuel") >= 0 then
