@@ -1356,14 +1356,14 @@ function insertIntoTableResidential()
 end
 
 function createPickupsOnServerStart()
-	iPickup = 0
-	async:iterate(1, 1, function()
-	for i,pos in ipairs(pickupPositions["residential"]) do
-		iPickup = iPickup + 1
-		createItemLoot("Residential",pos[1],pos[2],pos[3],iPickup)
-	end
-	end)
-	setTimer(createPickupsOnServerStart2,60000,1)
+        iPickup = 0
+        async:foreach(pickupPositions["Residential"],
+            function(pos)
+                iPickup = iPickup + 1
+                createItemLoot("Residential", pos[1], pos[2], pos[3], iPickup)
+            end
+        )
+    setTimer(createPickupsOnServerStart2, 60000, 1)
 end
 
 function insertIntoTableIndustrial()
