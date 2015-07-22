@@ -1584,11 +1584,13 @@ addEventHandler("onVehicleExplode", getRootElement(), notifyAboutExplosion)
 
 function respawnVehiclesInWater()
 	for i,veh in ipairs(getElementsByType("vehicle")) do
-		if isElementInWater(veh) and getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473 then
-			local col = getElementData(veh,"parent")
-			if col then
-				id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
-				respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+		if isElementInWater(veh) then
+			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473 then
+				local col = getElementData(veh,"parent")
+				if col then
+					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+				end
 			end
 		end
 	end

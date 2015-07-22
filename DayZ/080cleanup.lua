@@ -19,7 +19,7 @@ function onStart()
 		end
 		
 		--And now for the tents...
-		if (string.find(getAccountName(v), "tent_number") then
+		if (string.find(getAccountName(v), "tent_number")) then
 			outputDebugString("[Cleanup] Found old tent data, deleting...")
 			removeAccount(v)
 			accountsDeleted = accountsDeleted + 1
