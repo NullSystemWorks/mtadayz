@@ -272,6 +272,28 @@ function checkTheLanguage()
 end
 addEventHandler("onClientResourceStart",root,checkTheLanguage)
 
+local languageTable = {
+{"en","en_US"},
+{"de","de"},
+{"cs","cs"},
+{"nl","nl"},
+{"br","pt_BR"},
+}
+
+function changeLanguageOnCommand(playerSource,language)
+	if language then
+		for i, lang in ipairs(languageTable) do
+			if language == lang[1] then
+				languageCode = lang[2]
+				outputChatBox("New language: "..tostring(languageCode),0,255,0)
+			end
+		end
+	else
+		outputChatBox("Please specify a language. Possible values: en, de, cs, nl, br.",255,0,0)
+	end
+end
+addCommandHandler("language",changeLanguageOnCommand)
+
 function hideInventoryManual()
 	closeInventory()
 end

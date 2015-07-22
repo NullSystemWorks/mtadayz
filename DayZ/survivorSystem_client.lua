@@ -257,6 +257,8 @@ local alwaysRenderMap = false
 local worldmap
 local gpsborder
 local alpha = 255
+local font = {}
+font[1] = dxCreateFont("fonts/bitstream.ttf", 10)
 
 local worldW, worldH = 3200, 3200
 local blip = 12 
@@ -362,10 +364,12 @@ function playerDrawMapGPSCompass()
 			else
 				minutes = minutes
 			end
-			local sWidth,sHeight = guiGetScreenSize()
-			dxDrawText(""..hour.."   ",sWidth*0.09625,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-			dxDrawText(" : ",sWidth*0.118125,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-			dxDrawText("   "..minutes,sWidth*0.12125,sHeight*0.94333333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+			local screenW, screenH = guiGetScreenSize()
+			dxDrawText(hour..":"..minutes, (screenW * 0.8287) - 1, (screenH * 0.1667) - 1, (screenW * 0.9550) - 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
+			dxDrawText(hour..":"..minutes, (screenW * 0.8287) + 1, (screenH * 0.1667) - 1, (screenW * 0.9550) + 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
+			dxDrawText(hour..":"..minutes, (screenW * 0.8287) - 1, (screenH * 0.1667) + 1, (screenW * 0.9550) - 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
+			dxDrawText(hour..":"..minutes, (screenW * 0.8287) + 1, (screenH * 0.1667) + 1, (screenW * 0.9550) + 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
+			dxDrawText(hour..":"..minutes, screenW * 0.8287, screenH * 0.1667, screenW * 0.9550, screenH * 0.1983, tocolor(0, 255, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
 		end
 		if getElementData(getLocalPlayer(),"Compass") >= 1 then
 			local rx,ry,rz = getRotationOfCamera(localPlayer)
@@ -625,131 +629,102 @@ if getElementData(getLocalPlayer(),"logedin") then
     ammo = getPedTotalAmmo (getLocalPlayer())
     clip = getPedAmmoInClip (getLocalPlayer())
     weaponID = getPedWeapon(getLocalPlayer())
+	local divide = "|"
 	local sWidth,sHeight = guiGetScreenSize()
     if weaponID == 22 then
-		if getElementData(localPlayer,"currentweapon_2") == "M1911" then
-			weapName = "M1911"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_2") == "G17" then
-			weapName = "G17"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		divide = "|"
     elseif weaponID == 23 then
-        weapName = "M9 SD"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+	   weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		divide = "|"
     elseif weaponID == 24 then
-		if getElementData(localPlayer,"currentweapon_2") == "Desert Eagle" then
-			weapName = "Desert Eagle"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_2") == "Revolver" then
-			weapName = "Revolver"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		divide = "|"
     elseif weaponID == 25 then
-		if getElementData(localPlayer,"currentweapon_1") == "Winchester 1866" then
-			weapName = "Winchester 1866"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Crossbow" then
-			weapName = "Crossbow"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Blaze 95 Double Rifle" then
-			weapName = "Blaze 95 D. Rifle"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 26 then
-        weapName = "Sawn-Off Shotgun"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+       weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 27 then
-		if getElementData(localPlayer,"currentweapon_1") == "SPAZ-12 Combat Shotgun" then
-			weapName = "SPAZ-12 C. Shotgun"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Remington 870" then
-			weapName = "Remington 870"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 28 then
-        weapName = "PDW"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+        weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		divide = "|"
     elseif weaponID == 29 then
-		if getElementData(localPlayer,"currentweapon_2") == "MP5A5" then
-			weapName = "MP5A5"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_2") == "Bizon PP-19" then
-			weapName = "Bizon PP-19"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		divide = "|"
     elseif weaponID == 30 then
-        if getElementData(localPlayer,"currentweapon_1") == "AK-47" then
-			weapName = "AK-47"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "FN FAL" then
-			weapName = "FN FAL"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "G36C" then
-			weapName = "G36C"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Sa58V CCO" then
-			weapName = "Sa58V CCO"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+       weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 31 then
-		weapName = "M4"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+		weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 33 then
-		if getElementData(localPlayer,"currentweapon_1") == "Lee Enfield" then
-			weapName = "Lee Enfield"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Sporter 22" then
-			weapName = "Sporter 22"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "Mosin 9130" then
-			weapName = "Mosin 9130"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "SKS" then
-			weapName = "SKS"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 34 then
-		if getElementData(localPlayer,"currentweapon_1") == "CZ 550" then
-			weapName = "CZ 550"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "DMR" then
-			weapName = "DMR"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		elseif getElementData(localPlayer,"currentweapon_1") == "SVD Dragunov" then
-			weapName = "SVD Dragunov"
-			dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-		end
+		weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		divide = "|"
     elseif weaponID == 16 then
 		weapName = "Grenade"
-		dxDrawText(""..clip.." | "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
+		divide = "|"
     elseif weaponID == 43 then
         weapName = "Binoculars"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 44 then
         weapName = "NV Goggles"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 45 then
         weapName = "IR Goggles"
+		clip = ""
+		ammo = ""
     elseif weaponID == 46 then
         weapName = "Parachute"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 2 then
         weapName = "Golf Club"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 4 then
         weapName = "Hunting Knife"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 5 then
         weapName = "Baseball Bat"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 6 then
         weapName = "Shovel"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 8 then
         weapName = "Hatchet"
+		clip = ""
+		ammo = ""
+		divide = ""
     elseif weaponID == 0 then
         weapName = " "
+		clip = ""
+		ammo = ""
+		divide = ""
     end
- 		dxDrawText(""..weapName,sWidth*0.675,sHeight*0.05833333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.3,"clear-normal","left","top",false,false,false)
-        if isPedInVehicle (localPlayer) == false then return end
+ 		dxDrawText(""..weapName,sWidth*0.675,sHeight*0.05833333333,sWidth*0.37,sHeight*0.46666666666,tocolor(0,255,0,255),1.0,font[1],"left","top",false,false,false)
+		dxDrawText(""..clip.." "..divide.." "..ammo,sWidth*0.875,sHeight*0.09166666666,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),1.0,font[1],"left","top",false,false,false)
     end
 end
 addEventHandler("onClientRender",getRootElement(),WeaponHUD)
-addEventHandler("onClientPlayerSpawn",getRootElement(),WeaponHUD)
 
 function loadModels()
 	weapontxd1 = engineLoadTXD ("mods/weapons/fnfal.txd");

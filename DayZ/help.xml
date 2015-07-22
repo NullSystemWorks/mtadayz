@@ -14,4 +14,8 @@ F2 - Encampment Panel
 F5 - Open/Close Debug Window
 F11 - Open/Close Map (if available)
 
+- COMMANDS - 
+
+/language - Changes language of game (possible values: en (English), de (German), cs (Czech), nl (Dutch), br (Brazilian Portuguese)
+
 </help>

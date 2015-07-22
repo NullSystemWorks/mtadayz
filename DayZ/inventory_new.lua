@@ -101,7 +101,13 @@ function removeItemFromInventory (name)
 	end
 end
 
-local languages = {"en_US","de","cs","nl","pt_BR"}
+local languageTable = {
+{"en","en_US"},
+{"de","de"},
+{"cs","cs"},
+{"nl","nl"},
+{"br","pt_BR"},
+}
 local languageCode = getLocalization()["code"]
 
 -- Option to change language via command?
@@ -121,6 +127,18 @@ function checkTheLanguage()
 	end
 end
 addEventHandler("onClientResourceStart",root,checkTheLanguage)
+
+function changeLanguageOnCommand(playerSource,language)
+	if language then
+		for i, lang in ipairs(languageTable) do
+			if language == lang[1] then
+				languageCode = lang[2]
+			end
+		end
+	else
+	end
+end
+addCommandHandler("language",changeLanguageOnCommand)
 
 function placeItemsInInventory()
 	local loot = isPlayerInLoot()
