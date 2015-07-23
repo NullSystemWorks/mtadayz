@@ -62,7 +62,7 @@ local bindIsOn = false
 
 -- Second check, in case something goes wrong or player loses permission to open Admin Panel
 function openDayZAdminPanel (player,cmd)
-	if (hasObjectPermissionTo (player, "command.mute")) then
+	if (getElementData(player,"admin")) then
 		if not PanelIsOpen then
 			if not bindIsOn then
 				initialiseAdminPanel(player)
