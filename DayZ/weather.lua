@@ -10,18 +10,26 @@
 
 DaysPassed = 0
 Season = false
+local timeTimer = 10000
 local realtime = getRealTime()
 setTime(realtime.hour, realtime.minute)
-setMinuteDuration(2000)
 setFarClipDistance(1000)
 setFogDistance(100)
 
 function checkSetTime()
-	local hours,minute = getTime()
-    setTime(hours, minute)
-    setMinuteDuration(10000)
+	if gameplayVariables["realtime"] then
+		local realtime = getRealTime()
+		setTime(realtime.hour, realtime.minute)
+		setMinuteDuration(60000)
+		timeTimer = 60000
+	else
+		local hours,minute = getTime()
+		setTime(hours,minute)
+		setMinuteDuration(gameplayVariables["customtime"])
+		timeTimer = gameplayVariables["customtime"]
+	end
 end
-setTimer(checkSetTime,10000,0)
+setTimer(checkSetTime,timeTimer,0)
 
 function addDaysPassed()
 local hours,minute = getTime()

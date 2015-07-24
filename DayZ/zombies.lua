@@ -119,6 +119,7 @@ local zombieLootType = {
 {"Road Flare",324,1,90,7},
 {"Painkiller",2709,3,0,2},
 {"Heat Pack",1576,5,0,4},
+{"Assault Pack (ACU)",3026,1,0,6},
 },
 
 ["medical"] = {

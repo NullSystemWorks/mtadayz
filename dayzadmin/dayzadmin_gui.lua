@@ -165,6 +165,9 @@ items =
 		"Tire",
 		"Engine",
 		"Tank Parts",
+		"Main Rotary Parts",
+		"Windscreen Glass",
+		"Scrap Metal",
 	},
 	
 	["Clothes"] = {

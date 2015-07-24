@@ -40,12 +40,13 @@ local buildingClasses = {
 -- generic: 56.02%	~ 56%
 {"Lee Enfield",357,1,90,1.68},
 {"Revolver",348,1,90,1.12},
+{"Assault Pack (ACU)",3026,1,0,3.15},
 {"Czech Backpack",1239,1,0,0.28},
 {"British Assault Pack",1644,1,0,0.84},
 {"ALICE Pack",1248,1,0,0.84},
 {"Winchester 1866",349,1,90,0.28},
 {"Tent",1279,1,0,0.5},
--- military: 0.84% 	~ 1%
+-- food: 24.31% 	~ 24%
 -- trash: 14.01%	~ 14%
 {"Crossbow",349,1,90,0.28},
 {"Binoculars",369,1,0,1.68},
@@ -87,7 +88,7 @@ local buildingClasses = {
 -- generic: 17.65%	~ 18%
 -- trash: 28.43%	~ 28%
 -- military: 3.92%	~ 4%
--- Missing: Blueprint Parts (randomly generated)
+-- Blueprints + Parts: 10%
 {"Tire",1073,1,0,4.90},
 {"Tank Parts",1008,1,0.8,1.96},
 {"Engine",929,0.3,0,5.88},
@@ -124,8 +125,8 @@ local buildingClasses = {
 {"Lee Enfield",357,1,90,0.94},
 {"Revolver",348,1,90,0.94},
 {"Survival ACU",1239,1,0,0.94},
-{"British Assault Pack Backpack",1644,1,0,1.89},
-{"Alice Pack",1248,1,0,2.83},
+{"British Assault Pack",1644,1,0,1.89},
+{"ALICE Pack",1248,1,0,2.83},
 {"Winchester 1866",349,1,90,0.94},
 -- food: 28.3%		~ 28%
 -- trash: 14.15%	~ 14%
@@ -150,9 +151,9 @@ local buildingClasses = {
 {"Hunting Knife",335,1,90,1.91},
 {"GPS",2976,0.15,0,0.19},
 {"Map",1277,0.8,90,0.96},
-{"Assault Pack (ACU)",3026,1,0,1.15},
-{"British Assault Pack",1644,1,0,0.76},
-{"Backpack (Coyote)",1252,1,0,0.38},
+{"Assault Pack (ACU)",3026,1,0,3.15},
+{"British Assault Pack",1644,1,0,1.76},
+{"Backpack (Coyote)",1252,1,0,1.38},
 -- medical: 1.91%	~ 2%
 -- generic: 19.12%	~ 19%
 -- military: 47.8%	~ 48%
@@ -290,6 +291,9 @@ local buildingClasses = {
 {"Tire",1073,1,0,1},
 {"Engine",929,0.3,0,3.5},
 {"Tank Parts",1008,1,0.8,4},
+{"Windscreen Glass",3104,0.3,0,3.92},
+{"Main Rotary Parts",3104,0.3,0,0.98},
+{"Scrap Metal",929,0.3,0,3.92},
 {"Tent",1279,1,0,0.5},
 {"Survivor Clothing",1577,2,0},
 {"Civilian Clothing",1241,2,0,3.5},
@@ -401,6 +405,8 @@ local buildingClasses = {
 {"Toolbox",2969,0.5,0,3},
 {"Radio Device",2966,0.5,0,5},
 {"Compass",1579,1,0,1.40},
+{"Area 69 Keybard",1581,1,0,0},
+{"San Fierro Carrier Keycard",1581,1,0,0},
 
 {"Empty Soda Cans",2673,0.5,0,12},
 {"M136 Rocket Launcher",359,1,90,0},
@@ -1346,8 +1352,8 @@ function insertIntoTableResidential()
 	if value_generic <= 56 then
 		table.merge(buildingClasses["Residential"],lootpileType["generic"])
 	end
-	if value_military <= 1 then
-		table.merge(buildingClasses["Residential"],lootpileType["military"])
+	if value_military <= 24 then
+		table.merge(buildingClasses["Residential"],lootpileType["food"])
 	end
 	if value_trash <= 14 then
 		table.merge(buildingClasses["Residential"],lootpileType["trash"])

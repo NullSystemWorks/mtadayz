@@ -244,11 +244,11 @@ vehicleAddonsInfo = {
 {478,6,1,1,0,0,0,"V3S Civilian",5,200,160,"Walton"},
 
 -- AIRCRAFT
-{469,0,1,0,0,0,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
-{417,0,1,0,0,0,1,"UH-1H Huey",7,50,1000,"Leviathan"},
-{487,0,1,0,0,0,1,"Mi-17",7,20,1000,"Maverick"},
-{488,0,1,0,0,0,1,"MH6J",7,20,600,"News Chopper"},
-{511,2,1,0,0,0,2,"An-2 Biplane",7,100,400,"Beagle"},
+{469,0,0,0,0,0,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
+{417,0,0,0,0,0,1,"UH-1H Huey",7,50,1000,"Leviathan"},
+{487,0,0,0,0,0,1,"Mi-17",7,20,1000,"Maverick"},
+{488,0,0,0,0,0,1,"MH6J",7,20,600,"News Chopper"},
+{511,2,0,0,0,0,2,"An-2 Biplane",7,100,400,"Beagle"},
 
 -- BOATS
 {453,0,1,0,0,0,0,"Fishing Boat",4,400,100,"Reefer"},
@@ -510,6 +510,21 @@ addEventHandler("onResourceStart",getResourceRootElement(getThisResource()), fun
 	end	
 end)
 
+function addSlotToBikesEtc()
+	local fixTable = {
+	{469},
+	{417},
+	{487},
+	{488},
+	{511},
+	}
+	dbExec(vehicledatabase, 'UPDATE vehicles SET MAX_Slots=? WHERE model=?',1,509)
+	for i, veh in ipairs(fixTable) do
+		dbExec(vehicledatabase, 'UPDATE vehicles SET Engine_inVehicle=? WHERE model=?',0,veh[1])
+	end
+end
+addEventHandler("onResourceStart",getResourceRootElement(getThisResource()),addSlotToBikesEtc)
+
 
 function getVehicleAddonInfos (id)
 	for i,veh in ipairs(vehicleAddonsInfo) do
@@ -667,7 +682,6 @@ function createBackupOfVehiclesOnInterval()
 	end
 end
 setTimer(createBackupOfVehiclesOnInterval,gameplayVariables["backupinterval"],0)
-
 
 function createVehiclesFromDB(model, Veh_Health, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, fuel, Tire_inVehicle, Engine_inVehicle, Parts_inVehicle, Scrap_inVehicle, Glass_inVehicle, Rotary_inVehicle, vehicle_name, ColSize, ID, theItems)
 	local veh = createVehicle(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ)
@@ -876,7 +890,7 @@ local v_counter = 0
 			setElementData(vehCol,"parent",veh)
 			setElementData(veh,"parent",vehCol)
 			setElementData(vehCol,"vehicle",true)
-			setElementData(vehCol,"MAX_Slots",0)
+			setElementData(vehCol,"MAX_Slots",1)
 			--Engine + Tires
 			local tires,engine,parts,scrap,glass,rotary,name = getVehicleAddonInfos (getElementModel(veh))
 			setElementData(vehCol,"Tire_inVehicle",math.random(0,tires))
@@ -1689,7 +1703,7 @@ function onPlayerEnterDayzVehicle(veh,seat)
 	if not getElementData(col,"Parts_inVehicle") then
 		setElementData(col,"Parts_inVehicle",math.random(0,parts))
 	end
-	if (getElementData(col,"fuel") or 0) <= 1 then
+	if (getElementData(col,"fuel") or 0) < 0 then
 		if getElementModel(veh) ~= 509 then
 			triggerClientEvent (source, "displayClientInfo", source,"Vehicle","No tank left in this vehicle!",22,255,0)
 			setVehicleEngineState ( veh, false )
@@ -1733,7 +1747,7 @@ function setVehiclesFuelPerMinute ()
 	
 	for i,veh in ipairs(getElementsByType("vehicle")) do
 		if getVehicleEngineState(veh) == true then
-			if getElementData(getElementData(veh,"parent"),"fuel") >= 0 then
+			if getElementData(getElementData(veh,"parent"),"fuel") > 0 then
 				setElementData(getElementData(veh,"parent"),"fuel",getElementData(getElementData(veh,"parent"),"fuel")-getVehicleFuelRemove(getElementModel(veh),getElementData(veh,"parent")))
 			else
 				setVehicleEngineState ( veh, false )
@@ -1744,7 +1758,7 @@ end
 setTimer(setVehiclesFuelPerMinute,20000,0)
 
 function isVehicleReadyToStart2 (veh)
-	if getElementData(getElementData(veh,"parent"),"fuel") >= 1 then
+	if getElementData(getElementData(veh,"parent"),"fuel") > 0 then
 		local tires,engine,parts,scrap,glass,rotary = getVehicleAddonInfos (getElementModel(veh))
 		if (getElementData(getElementData(veh,"parent"),"Tire_inVehicle") or 0) > tonumber(tires) and (getElementData(getElementData(veh,"parent"),"Engine_inVehicle") or 0) > tonumber(engine) and (getElementData(getElementData(veh,"parent"),"Rotary_inVehicle") or 0) > tonumber(rotary) then 
 			setVehicleEngineState ( veh, true )
@@ -1819,7 +1833,7 @@ addEventHandler("onPlayerQuit",getRootElement(),debugFixxing)
 
 function setEngineStateByPlayer (playersource)
 	local veh = getPedOccupiedVehicle (playersource)
-	if getElementData(getElementData(veh,"parent"),"fuel") <= 1 then 
+	if getElementData(getElementData(veh,"parent"),"fuel") <= 0 then 
 		return
 	else
 		setVehicleEngineState (veh, not getVehicleEngineState(veh))

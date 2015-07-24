@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.0a"
+		dayzVersion = "MTA:DayZ 0.9.1.1a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -1551,7 +1551,8 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 			setControlState ("jump",true)
 		end
 		if loss >= 100 then
-			setElementData(getLocalPlayer(),"blood",1)
+			setElementData(getLocalPlayer(),"blood",49)
+			setElementData(localPlayer,"bleeding",50)
 		end
 		local number = math.random(1,11)
 		if number == 3 then
@@ -1611,14 +1612,14 @@ function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 					triggerServerEvent("onZombieGetsKilled",source,attacker)
 				end
 			elseif weapon == 49 then
-				damage = 100
+				damage = 700
 				setElementHealth(source,100)
 				setElementData(source,"blood",getElementData(source,"blood")-damage)
 				if getElementData(source,"blood") <= 0 then
 					triggerServerEvent("onZombieGetsKilled",source,attacker,headshot)
 				end
 			elseif weapon == 50 then
-				damage = 250
+				damage = 0
 				setElementHealth(source,100)
 				setElementData(source,"blood",getElementData(source,"blood")-damage)
 				if getElementData(source,"blood") <= 0 then

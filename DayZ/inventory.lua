@@ -550,6 +550,12 @@ if playerMovedInInventory then startRollMessage2("Inventory", "Abusing exploits 
 				if (itemName == "Tire" and tires > 0 and getElementData ( isPlayerInLoot(), "Tire_inVehicle") < tires) or ( itemName == "Engine" and engine > 0 and getElementData ( isPlayerInLoot(), "Engine_inVehicle") < engine) or ( itemName == "Parts" and parts > 0 and getElementData ( isPlayerInLoot(), "Parts_inVehicle") < parts) or ( itemName == "Scrap" and scrap > 0 and getElementData ( isPlayerInLoot(), "Scrap_inVehicle") < scrap) or ( itemName == "Glass" and glass > 0 and getElementData ( isPlayerInLoot(), "Glass_inVehicle") < glass) or ( itemName == "Rotary" and rotary > 0 and getElementData ( isPlayerInLoot(), "Rotary_inVehicle") < rotary) then
 					triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName.."_inVehicle", isPlayerInLoot())
 				else
+					if itemName == "Tire" then itemName = "Tire" end
+					if itemName == "Engine" then itemName = "Engine" end
+					if itemName == "Parts" then itemName = "Tank Parts" end
+					if itemName == "Scrap" then itemName = "Scrap Metal" end
+					if itemName == "Glass" then itemName = "Winscreen Glass" end
+					if itemName == "Rotary" then itemName = "Main Rotary Parts" end
 					if isToolbeltItem(itemName) or getLootCurrentSlots(getElementData(getLocalPlayer(), "currentCol")) + getItemSlots(itemName) <= getLootMaxAviableSlots(isPlayerInLoot()) then
 						triggerEvent("onPlayerMoveItemOutOFInventory", getLocalPlayer(), itemName, isPlayerInLoot())
 					else
@@ -650,9 +656,9 @@ local itemPlus = 1
 	if itemName == "Tire_inVehicle" then itemName = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName = "Engine" end
 	if itemName == "Parts_inVehicle" then itemName = "Tank Parts" end
-	if itemName == "Scrap Metal" then itemName = "Scrap" end
-	if itemName == "Windscreen Glass" then itemName = "Glass" end
-	if itemName == "Main Rotary Parts" then itemName = "Rotary" end
+	if itemName == "Scrap_inVehicle" then itemName = "Scrap Metal" end
+	if itemName == "Glass_inVehicle" then itemName = "Windscreen Glass" end
+	if itemName == "Rotary_inVehicle" then itemName = "Main Rotary Parts" end
 	setElementData(getLocalPlayer(),itemName,getElementData(getLocalPlayer(),itemName)-itemPlus)
 	if loot and getElementData(loot,"itemloot") then
 		triggerServerEvent("refreshItemLoot",getRootElement(),loot,getElementData(loot,"parent"))

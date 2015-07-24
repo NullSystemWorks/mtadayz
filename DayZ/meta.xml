@@ -176,6 +176,8 @@
 	<file src="icons/wirefence.png"/>
 	<file src="icons/wood.png"/>
 	<file src="icons/keycard.png" />
+	<file src="icons/glass.png" />
+	<file src="icons/rotary.png" />
 	
 	<file src="images/buttArrow.png"/>
 	<file src="images/buttArrowDown.png"/>
