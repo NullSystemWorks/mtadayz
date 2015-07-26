@@ -1227,14 +1227,14 @@ end
 
 function outputInfo3 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum: mtadayz.heliohost.org",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","Visit our forum: mta-dayz.org/forum",200,200,22)
 	end
 	setTimer(outputInfo4,infoTimer,1)
 end
 
 function outputInfo4 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.0a",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.1.1a",200,200,22)
 	end
 	setTimer(outputInfo5,infoTimer,1)
 end
