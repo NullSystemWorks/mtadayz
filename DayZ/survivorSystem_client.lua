@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.2a"
+		dayzVersion = "MTA:DayZ 0.9.2.1a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -432,7 +432,7 @@ function drawTheGPS()
 						bcR, bcG, bcB = getBlipColor(v)
 					end
 				local bS = getBlipSize(v)
-				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "image/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
+				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "images/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
 			end
 		end
 		if renderNorthBlip then
@@ -454,9 +454,20 @@ end
 
 function drawTheCompass()
 	local rx,ry,rz = getRotationOfCamera(localPlayer)
-	local screenW, screenH = guiGetScreenSize()
-	compass_border = dxDrawImage(screenW * 0.0375, screenH * 0.5767, screenW * 0.1625, screenH * 0.2150, "images/compassborder.png" )
-	compass_arrow = dxDrawImage(screenW * 0.0488, screenH * 0.5917, screenW * 0.1375, screenH * 0.1817, "images/compassarrow.png", rz )
+	local bX, bY, bX2, bY2 = 0, 0, 0, 0
+	local aX, aY, aY2, aY2 = 0, 0, 0, 0
+	if sx == 800 or sx == 1024 then
+		bX, bY, bX2, bY2 = 0.0375, 0.5767, 0.1625, 0.2150
+		aX, aY, aX2, aY2 = 0.0488, 0.5917, 0.1375, 0.1817	
+	elseif sx == 1280 or sx == 1366 then
+		bX, bY, bX2, bY2 = 0.0549, 0.4961, 0.1296, 0.2279
+		aX, aY, aX2, aY2 = 0.0644, 0.5130, 0.1098, 0.1914
+	else
+		bX, bY, bX2, bY2 = 0.0549, 0.4961, 0.1296, 0.2279
+		aX, aY, aX2, aY2 = 0.0644, 0.5130, 0.1098, 0.1914
+	end
+	dxDrawImage(sx * bX, sy * bY, sx * bX2, sy * bY2, "images/compassborder.png" )
+	dxDrawImage(sx * aX, sy * aY, sx * aX2, sy * aY2, "images/compassarrow.png", rz )
 end
 
 function hideGPSOnInventoryOpen()

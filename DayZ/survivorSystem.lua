@@ -1726,7 +1726,6 @@ function checkFenceOwner(element,ownerData)
 			if acc then
 				if acc ~= ownerData then
 					setElementData(element,"blood",getElementData(element,"blood") - gameplayVariables["loseWire"] )
-					triggerClientEvent("onPlayerDamageShader",client)
 				else
 				end
 			else
