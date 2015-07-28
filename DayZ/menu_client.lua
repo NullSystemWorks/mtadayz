@@ -130,7 +130,7 @@ if arg1 == "Player" then
 	if getElementData(arg2,"blood") < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
 		number = number+1
 		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Administer Blood Bag")
+		guiSetText(spalteGuiText[number],"Administer Blood Bag")	
 		setElementData(spalteGuiText[number],"usedItem","giveblood")
 		if number == 1 then
 			guiLabelSetColor (spalteGuiText[number],50,255,50)

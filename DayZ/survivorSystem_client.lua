@@ -291,12 +291,12 @@ function playerDrawMapGPSCompass()
 		end
 		if getElementData(getLocalPlayer(),"GPS") >= 1  then
 			if not gpskeybound then
-				bindKey("F10","down",toggleGPS)
+				addCommandHandler("gps",toggleGPS)
 				gpskeybound = true
 			end
 		else
 			if gpskeybound then
-				unbindKey("F10","down",toggleGPS)
+				removeCommandHandler("gps",toggleGPS)
 				dxSetRenderTarget()
 				gpskeybound = false
 			end
@@ -322,12 +322,12 @@ function playerDrawMapGPSCompass()
 		end
 		if getElementData(getLocalPlayer(),"Compass") >= 1 then
 			if not compasskeybound then
-				bindKey("F1","down",toggleCompass)
+				addCommandHandler("compass",toggleCompass)
 				compasskeybound = true
 			end
 		else
 			if compasskeybound then
-				unbindKey("F1","down",toggleCompass)
+				removeCommandHandler("compass",toggleCompass)
 				compasskeybound = false
 			end
 		end
