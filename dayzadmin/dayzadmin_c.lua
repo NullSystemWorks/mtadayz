@@ -46,24 +46,22 @@ addEventHandler("onAdminPanelOpen",root,onAdminPanelOpen)
 function onAdminPanelUpdateLiveMapPlayer()
 	for id, player in ipairs(getElementsByType("player")) do
 		if playerBlipsVisible then
-			if getElementData(player,"logedin") then
-				if not adminpanel.image[player] then
-					adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "images/playerblip.png" or "images/playerblip.png", true, adminpanel.tab[5])
-					adminpanel.label[player] = guiCreateLabel(0.488,0.488,0.1,0.03, getPlayerName(player), true, adminpanel.tab[5])
-				else
-					guiSetVisible(adminpanel.image[player],true)
-					guiSetVisible(adminpanel.label[player],true)
-				end
-				local x, y = getElementPosition(player)
-				local mX,mY = guiGetSize(adminpanel.map[1],false)
-				x = math.floor((x + 3000) * mX / 6000) + 10
-				y = math.floor((3000 - y) * mY / 6000) + 10
-				guiSetPosition(adminpanel.image[player], x, y, false)
-				guiSetPosition(adminpanel.label[player], x+10, y-10, false)
+			if not adminpanel.image[player] then
+				adminpanel.image[player] = guiCreateStaticImage(0.488,0.488,0.01,0.01, player == localPlayer and "images/playerblip.png" or "images/playerblip.png", true, adminpanel.tab[5])
+				adminpanel.label[player] = guiCreateLabel(0.488,0.488,0.1,0.03, getPlayerName(player), true, adminpanel.tab[5])
 			else
-				guiSetVisible(adminpanel.image[player],false)
-				guiSetVisible(adminpanel.label[player],false)
+				guiSetVisible(adminpanel.image[player],true)
+				guiSetVisible(adminpanel.label[player],true)
 			end
+			local x, y = getElementPosition(player)
+			local mX,mY = guiGetSize(adminpanel.map[1],false)
+			x = math.floor((x + 3000) * mX / 6000) + 10
+			y = math.floor((3000 - y) * mY / 6000) + 10
+			guiSetPosition(adminpanel.image[player], x, y, false)
+			guiSetPosition(adminpanel.label[player], x+10, y-10, false)
+		else
+			guiSetVisible(adminpanel.image[player],false)
+			guiSetVisible(adminpanel.label[player],false)
 		end
 	end
 end

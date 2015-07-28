@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.1.1a"
+		dayzVersion = "MTA:DayZ 0.9.2a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -279,7 +279,6 @@ function playerDrawMapGPSCompass()
 		showPlayerHudComponent ("ammo",false) 
 		showPlayerHudComponent ("breath",false) 
 		if getElementData(getLocalPlayer(),"Map") >= 1  then
-			--toggleControl ("radar",true)
 			if not mapkeybound then
 				bindKey("F11","down",toggleMap)
 				mapkeybound = true
@@ -291,66 +290,16 @@ function playerDrawMapGPSCompass()
 			end
 		end
 		if getElementData(getLocalPlayer(),"GPS") >= 1  then
-			if (not isPlayerMapVisible()) then
-				local mW, mH = dxGetMaterialSize(rt)
-				local x, y = getElementPosition(localPlayer)
-				local X, Y = mW/2 -(x/(6000/(3072))), mH/2 +(y/(6000/(3072)))
-				local camX,camY,camZ = getElementRotation(getCamera())
-				dxSetRenderTarget(rt, true)
-				if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
-					dxDrawRectangle(0, 0, mW, mH, tocolor(124, 167, 209,alpha)) --render background
-					worldmap = dxDrawImage(X - (3072)/2, mH/5 + (Y - 3072/2), 3072, 3072, "images/world.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
-				end
-				dxSetRenderTarget()
-				gpsborder = dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, "images/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
-				--dxDrawRectangle((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, tocolor(0, 0, 0, 175))
-				dxDrawImage((10+15)*xFactor, sy-((200+5))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
-				local col = tocolor(r, g, b, 190)
-				local bg = tocolor(r, g, b, 100)
-				local rx, ry, rz = getElementRotation(localPlayer)
-				local lB = (15)*xFactor
-				local rB = (15+290)*xFactor
-				local tB = sy-(205)*yFactor
-				local bB = tB + (175)*yFactor
-				local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
-				local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
-				for k, v in ipairs(getElementsByType("blip")) do
-					local bx, by = getElementPosition(v)
-					local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
-					local maxDist = getBlipVisibleDistance(v)
-					if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
-						local dist = actualDist/(6000/((3072+3072)/2))
-						local rot = findRotation(bx, by, x, y)-camZ
-						local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
-						local bpx = math.max(lB, math.min(rB, bpx))
-						local bpy = math.max(tB, math.min(bB, bpy))
-						local bid = getElementData(v, "customIcon") or getBlipIcon(v)
-						local _, _, _, bcA = getBlipColor(v)
-						local bcR, bcG, bcB = 255, 255, 255
-						if getBlipIcon(v) == 0 then
-							bcR, bcG, bcB = getBlipColor(v)
-						end
-						local bS = getBlipSize(v)
-						dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "image/blip/"..bid..".png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
-					end
-				end
-				if renderNorthBlip then
-					local rot = -camZ+180
-					local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.sqrt(toTop^2 + toRight^2), rot) --get position
-					local bpx = math.max(lB, math.min(rB, bpx))
-					local bpy = math.max(tB, math.min(bB, bpy)) --cap position to screen
-					local dist = getDistanceBetweenPoints2D(cX, cY, bpx, bpy) --get distance to the capped position
-					local bpx, bpy = getPointFromDistanceRotation(cX, cY, dist, rot) --re-calculate position based on new distance
-					if bpx and bpy then --if position was obtained successfully
-						local bpx = math.max(lB, math.min(rB, bpx))
-						local bpy = math.max(tB, math.min(bB, bpy)) --cap position just in case
-						dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, "images/blip/4.png", 0, 0, 0) --draw north (4) blip
-					end
-				end
-				dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
+			if not gpskeybound then
+				bindKey("F10","down",toggleGPS)
+				gpskeybound = true
 			end
 		else
-			dxSetRenderTarget()
+			if gpskeybound then
+				unbindKey("F10","down",toggleGPS)
+				dxSetRenderTarget()
+				gpskeybound = false
+			end
 		end
 		if getElementData(getLocalPlayer(),"Watch") >= 1 then
 			local hour, minutes = getTime()
@@ -372,16 +321,23 @@ function playerDrawMapGPSCompass()
 			dxDrawText(hour..":"..minutes, screenW * 0.8287, screenH * 0.1667, screenW * 0.9550, screenH * 0.1983, tocolor(0, 255, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
 		end
 		if getElementData(getLocalPlayer(),"Compass") >= 1 then
-			local rx,ry,rz = getRotationOfCamera(localPlayer)
-			local sWidth,sHeight = guiGetScreenSize()
-			compass_border = dxDrawImage(sWidth*0.065,sHeight*0.57,sWidth*0.16,sHeight*0.18, "images/compassborder.png" )
-			compass_arrow = dxDrawImage(sWidth*0.064,sHeight*0.58,sWidth*0.151,sHeight*0.16, "images/compassarrow.png", rz )
+			if not compasskeybound then
+				bindKey("F1","down",toggleCompass)
+				compasskeybound = true
+			end
+		else
+			if compasskeybound then
+				unbindKey("F1","down",toggleCompass)
+				compasskeybound = false
+			end
 		end
 	end
 end
 addEventHandler("onClientRender",root,playerDrawMapGPSCompass)
 
 local isMapShown = false
+local isGPSShown = false
+local isCompassShown = false
 
 function toggleMap()
 	if not isMapShown then
@@ -395,17 +351,34 @@ function toggleMap()
 	end
 end
 
+function toggleGPS()
+	if not isGPSShown then
+		isGPSShown = true
+		addEventHandler("onClientRender",root,drawTheGPS)
+	else
+		isGPSShown = false
+		removeEventHandler("onClientRender",root,drawTheGPS)
+	end
+end
+
+function toggleCompass()
+	if not isCompassShown then
+		isCompassShown = true
+		addEventHandler("onClientRender",root,drawTheCompass)
+	else
+		isCompassShown = false
+		removeEventHandler("onClientRender",root,drawTheCompass)
+	end
+end
+
 function drawTheMap()
 	local x, y = getElementPosition(localPlayer)
 	local X, Y = sx/2 -(x/(6000/(worldW-200))), sy/2 + (y/(6000/(worldH-200)))
 	local camX,camY,camZ = getElementRotation(getCamera())
-	--dxSetRenderTarget(rt, true)
 	if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
 		dxDrawRectangle(0, 0, sx, sy, tocolor(176, 200, 210,255))
 		dxDrawImage(X - worldW/2, Y - worldH/2, worldW, worldH, "images/world.png", 0, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
 	end
-	--dxSetRenderTarget()
-	--dxDrawImage(sx * 0.000, sy * 0.0000, sx * 1.0000, sy * 1.0000, rt_map, 0, 0, 0, tocolor(255, 255, 255, alpha))
 	local col = tocolor(r, g, b, 190)
 	local bg = tocolor(r, g, b, 100)
 	local rx, ry, rz = getElementRotation(localPlayer)
@@ -416,6 +389,74 @@ function drawTheMap()
 	local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
 	local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
 	dxDrawImage(sx * 0.5, sy * 0.5, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,255))
+end
+
+function drawTheGPS()
+	if (not isPlayerMapVisible()) then
+		local mW, mH = dxGetMaterialSize(rt)
+		local x, y = getElementPosition(localPlayer)
+		local X, Y = mW/2 -(x/(6000/(3072))), mH/2 +(y/(6000/(3072)))
+		local camX,camY,camZ = getElementRotation(getCamera())
+		dxSetRenderTarget(rt, true)
+		if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
+			dxDrawRectangle(0, 0, mW, mH, tocolor(124, 167, 209,alpha)) --render background
+			worldmap = dxDrawImage(X - 3072/2, mH/5 + (Y - 3072/2), 3072, 3072, "images/radarworld.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
+		end
+		dxSetRenderTarget()
+		gpsborder = dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, "images/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
+		--dxDrawRectangle((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, tocolor(0, 0, 0, 175))
+		dxDrawImage((10+15)*xFactor, sy-((200+5))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
+		local col = tocolor(r, g, b, 190)
+		local bg = tocolor(r, g, b, 100)
+		local rx, ry, rz = getElementRotation(localPlayer)
+		local lB = (15)*xFactor
+		local rB = (15+290)*xFactor
+		local tB = sy-(205)*yFactor
+		local bB = tB + (175)*yFactor
+		local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
+		local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
+		for k, v in ipairs(getElementsByType("blip")) do
+			local bx, by = getElementPosition(v)
+			local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
+			local maxDist = getBlipVisibleDistance(v)
+			if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
+				local dist = actualDist/(6000/((3072+3072)/2))
+				local rot = findRotation(bx, by, x, y)-camZ
+				local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
+				local bpx = math.max(lB, math.min(rB, bpx))
+				local bpy = math.max(tB, math.min(bB, bpy))
+				local bid = getElementData(v, "customIcon") or getBlipIcon(v)
+				local _, _, _, bcA = getBlipColor(v)
+				local bcR, bcG, bcB = 255, 255, 255
+					if getBlipIcon(v) == 0 then
+						bcR, bcG, bcB = getBlipColor(v)
+					end
+				local bS = getBlipSize(v)
+				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "image/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
+			end
+		end
+		if renderNorthBlip then
+			local rot = -camZ+180
+			local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.sqrt(toTop^2 + toRight^2), rot) --get position
+			local bpx = math.max(lB, math.min(rB, bpx))
+			local bpy = math.max(tB, math.min(bB, bpy)) --cap position to screen
+			local dist = getDistanceBetweenPoints2D(cX, cY, bpx, bpy) --get distance to the capped position
+			local bpx, bpy = getPointFromDistanceRotation(cX, cY, dist, rot) --re-calculate position based on new distance
+			if bpx and bpy then --if position was obtained successfully
+				local bpx = math.max(lB, math.min(rB, bpx))
+				local bpy = math.max(tB, math.min(bB, bpy)) --cap position just in case
+				dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, "images/blip/4.png", 0, 0, 0) --draw north (4) blip
+			end
+		end
+		dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
+	end
+end
+
+function drawTheCompass()
+	local rx,ry,rz = getRotationOfCamera(localPlayer)
+	local screenW, screenH = guiGetScreenSize()
+	compass_border = dxDrawImage(screenW * 0.0375, screenH * 0.5767, screenW * 0.1625, screenH * 0.2150, "images/compassborder.png" )
+	compass_arrow = dxDrawImage(screenW * 0.0488, screenH * 0.5917, screenW * 0.1375, screenH * 0.1817, "images/compassarrow.png", rz )
 end
 
 function hideGPSOnInventoryOpen()
@@ -874,10 +915,6 @@ end
 addEventHandler("onClientPlayerWeaponSwitch",localPlayer,onClientPlayerSkinChange)
 
 --SKIN REPLACEMENTS
-	local skin = engineLoadTXD ( "skins/22.txd" ) -- slashed 12 by Wall-E
-	engineImportTXD ( skin, 22 )
-	local skinDFF = engineLoadDFF("skins/22.dff")
-	engineReplaceModel(skinDFF,22)	
 	local skin = engineLoadTXD ( "skins/56.txd" ) --young and blue by Slothman
 	engineImportTXD ( skin, 56 )
 	local skinDFF = engineLoadDFF("skins/56.dff")
@@ -896,104 +933,14 @@ addEventHandler("onClientPlayerWeaponSwitch",localPlayer,onClientPlayerSkinChang
 	engineReplaceModel(skinDFF,69)
 	local skin = engineLoadTXD ( "skins/70.txd" ) --ultra gory scientist by 50p
 	engineImportTXD ( skin, 70 )
+	local skinDFF = engineLoadDFF("skins/70.dff")
+	engineReplaceModel(skinDFF,70)
 	local skin = engineLoadTXD ( "skins/84.txd" ) --guitar wolf (nonzombie) by Slothman
 	engineImportTXD ( skin, 84 )
 	local skin = engineLoadTXD ( "skins/92.txd" ) -- peeled flesh by xbost
+	engineImportTXD(skin, 92)
 	local skinDFF = engineLoadDFF("skins/92.dff")
 	engineReplaceModel(skinDFF,92)
-	--[[engineImportTXD ( skin, 92 )
-	local skin = engineLoadTXD ( "skins/zomb9.txd" ) -- NEW
-	engineImportTXD ( skin, 97 )
-	local skinDFF = engineLoadDFF ("skins/zomb9.dff", 97 ) -- NEW
-	engineReplaceModel (skinDFF, 97);
-	local skin = engineLoadTXD ( "skins/zomb8.txd" ) -- NEW
-	engineImportTXD ( skin, 105 )
-	local skinDFF = engineLoadDFF ("skins/zomb8.dff", 105 )
-	engineReplaceModel (skinDFF, 105);
-	local skin = engineLoadTXD ( "skins/zomb7.txd" ) -- NEW
-	engineImportTXD ( skin, 107 )
-	local skinDFF = engineLoadDFF ("skins/zomb7.dff", 107 )
-	engineReplaceModel (skinDFF, 107);
-	local skin = engineLoadTXD ( "skins/zomb6.txd" ) -- NEW
-	engineImportTXD ( skin, 108 )
-	local skinDFF = engineLoadDFF ("skins/zomb6.dff", 108 )
-	engineReplaceModel (skinDFF, 108);
-	local skin = engineLoadTXD ( "skins/zomb5.txd" ) -- NEW
-	engineImportTXD ( skin, 111 )
-	local skinDFF = engineLoadDFF ("skins/zomb5.dff", 111 )
-	engineReplaceModel (skinDFF, 111);
-	local skin = engineLoadTXD ( "skins/zomb4.txd" ) -- NEW
-	engineImportTXD ( skin, 126 )
-	local skinDFF = engineLoadDFF ("skins/zomb4.dff", 126 )
-	engineReplaceModel (skinDFF, 126);
-	local skin = engineLoadTXD ( "skins/zomb3.txd" ) -- NEW
-	engineImportTXD ( skin, 127 );
-	local skinDFF = engineLoadDFF ("skins/zomb3.dff", 127 )
-	engineReplaceModel (skinDFF, 127);
-	local skin = engineLoadTXD ( "skins/zomb2.txd" ) -- NEW
-	engineImportTXD ( skin, 128 )
-	local skinDFF = engineLoadDFF ("skins/zomb2.dff", 128 )
-	engineReplaceModel (skinDFF, 128);
-	local skin = engineLoadTXD ( "skins/zomb16.txd" ) -- NEW
-	engineImportTXD ( skin, 152 )
-	local skinDFF = engineLoadDFF ("skins/zomb16.dff", 152 )
-	engineReplaceModel (skinDFF, 152);
-	local skin = engineLoadTXD ( "skins/zomb15.txd" ) -- NEW
-	engineImportTXD ( skin, 162 )
-	local skinDFF = engineLoadDFF ("skins/zomb15.dff", 162 )
-	engineReplaceModel (skinDFF, 162);
-	local skin = engineLoadTXD ("skins/zomb14.txd" ) -- NEW
-	engineImportTXD ( skin, 167 )
-	local skinDFF = engineLoadDFF ("skins/zomb14.dff", 167 )
-	engineReplaceModel (skinDFF, 167);
-	local skin = engineLoadTXD ( "skins/zomb13.txd" ) -- NEW
-	engineImportTXD ( skin, 188 )
-	local skinDFF = engineLoadDFF ("skins/zomb13.dff", 188 )
-	engineReplaceModel (skinDFF, 188);
-	local skin = engineLoadTXD ( "skins/zomb12.txd" ) -- NEW
-	engineImportTXD ( skin, 192 )
-	local skinDFF = engineLoadDFF ("skins/zomb12.dff", 192 )
-	engineReplaceModel (skinDFF, 192);
-	local skin = engineLoadTXD ( "skins/zomb10.txd" ) -- NEW
-	engineImportTXD ( skin, 195 )
-	local skinDFF = engineLoadDFF ("skins/zomb10.dff", 195 )
-	engineReplaceModel (skinDFF, 105);
-	local skin = engineLoadTXD ( "skins/zomb1.txd" ) -- NEW
-	engineImportTXD ( skin, 206 )
-	local skinDFF = engineLoadDFF ("skins/zomb1.dff", 206 )
-	engineReplaceModel (skinDFF, 206);
-	local skin = engineLoadTXD ( "skins/ptyzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 209 )
-	local skinDFF = engineLoadDFF ("skins/ptyzomb.dff", 209 )
-	engineReplaceModel (skinDFF, 209);
-	local skin = engineLoadTXD ( "skins/rotzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 212 )
-	local skinDFF = engineLoadDFF ("skins/rotzomb.dff", 212 )
-	engineReplaceModel (skinDFF, 212);
-	local skin = engineLoadTXD ( "skins/oldzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 229 )
-	local skinDFF = engineLoadDFF ("skins/oldzomb.dff", 229 )
-	engineReplaceModel (skinDFF, 229);
-	local skin = engineLoadTXD ( "skins/fzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 230 )
-	local skinDFF = engineLoadDFF ("skins/fzomb.dff", 230 )
-	engineReplaceModel (skinDFF, 230);
-	local skin = engineLoadTXD ( "skins/forzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 258 )
-	local skinDFF = engineLoadDFF ("skins/forzomb.dff", 258 )
-	engineReplaceModel (skinDFF, 258);
-	local skin = engineLoadTXD ( "skins/fatzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 264 ) 
-	local skinDFF = engineLoadDFF ("skins/fatzomb.dff", 264 )
-	engineReplaceModel (skinDFF, 264);
-	local skin = engineLoadTXD ( "skins/ddzomb.txd" ) -- NEW
-	engineImportTXD ( skin, 274 )
-	local skinDFF = engineLoadDFF ("skins/ddzomb.dff", 274 )
-	engineReplaceModel (skinDFF, 274);
-	local skin = engineLoadTXD ( "skins/dsczomb.txd" )  -- NEW
-	engineImportTXD ( skin, 277 )
-	local skinDFF = engineLoadDFF ("skins/dsczomb.dff", 277 )
-	engineReplaceModel (skinDFF, 277); ]]
 	local skin = engineLoadTXD ( "skins/97.txd" ) -- easterboy by Slothman
 	engineImportTXD ( skin, 97 )
 	local skinDFF = engineLoadDFF("skins/97.dff")
@@ -1065,7 +1012,7 @@ addEventHandler("onClientPlayerWeaponSwitch",localPlayer,onClientPlayerSkinChang
 	local skin = engineLoadTXD ( "skins/230.txd" ) --will work for brains hobo by Slothman
 	engineImportTXD ( skin, 230 )
 	local skinDFF = engineLoadDFF("skins/230.dff")
-	engineReplaceModel(skinDFF,239)
+	engineReplaceModel(skinDFF,230)
 	local skin = engineLoadTXD ( "skins/258.txd" ) --bloody sided suburbanite by Slothman
 	engineImportTXD ( skin, 258 )
 	local skinDFF = engineLoadDFF("skins/258.dff")
@@ -1522,7 +1469,8 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		end
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-damage)
 		enableBlackWhite(true)
-		setTimer(function() enableBlackWhite(false) end,1000,1)
+		setElementData(localPlayer,"shotAt",true)
+		setTimer(function() enableBlackWhite(false) setElementData(localPlayer,"shotAt",false) end,30000,1)
 		if not getElementData(getLocalPlayer(),"bandit") then
 			setElementData(attacker,"humanity",getElementData(attacker,"humanity")-math.random(40,200))
 			if getElementData(attacker,"humanity") < 0 then
@@ -1545,6 +1493,7 @@ function playerGetDamageDayZ ( attacker, weapon, bodypart, loss )
 		end
 	elseif weapon == 54 or weapon == 63 or weapon == 49 or weapon == 51 then
 		setElementData(getLocalPlayer(),"blood",getElementData(getLocalPlayer(),"blood")-math.random(100,1000))
+		setTimer(function() setElementData(localPlayer,"shotAt",false) end,30000,1)
 		local number = math.random(1,5)
 		if loss > 30 then
 			setElementData(getLocalPlayer(),"brokenbone",true)
@@ -1630,6 +1579,13 @@ function pedGetDamageDayZ ( attacker, weapon, bodypart, loss )
 	end
 end
 addEventHandler ( "onClientPedDamage", getRootElement(), pedGetDamageDayZ )
+
+function onPlayerDamageShader()
+	enableBlackWhite(true)
+	setTimer(function() enableBlackWhite(false) end,1000,1)
+end
+addEvent("onPlayerDamageShader",true)
+addEventHandler("onPlayerDamageShader",root,onPlayerDamageShader)
 
 function checkStats()
 	if getElementData(getLocalPlayer(),"logedin") then
@@ -2382,10 +2338,10 @@ function showDayZDeathScreen()
 	deadBackground = guiCreateStaticImage(0,0,1,1,"images/dead.jpg",true)
 	deathText = guiCreateLabel(0,0.8,1,0.2,"You died! \n You will respawn in 5 seconds.",true)
 	guiLabelSetHorizontalAlign (deathText,"center")
-	setTimer(guiSetVisible,5000,1,false)
-	setTimer(guiSetVisible,5000,1,false)
-	setTimer(destroyElement,5000,1,deathText)
-	setTimer(destroyElement,5000,1,deadBackground)
+	setTimer(function() guiSetVisible(deathText,false) end,5000,1)
+	setTimer(function() guiSetVisible(deadBackground,false) end,5000,1)
+	setTimer(destroyElement,6000,1,deathText)
+	setTimer(destroyElement,6000,1,deadBackground)
 end
 
 --OnClientPlayerHit

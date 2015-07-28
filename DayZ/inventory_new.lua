@@ -107,6 +107,7 @@ local languageTable = {
 {"cs","cs"},
 {"nl","nl"},
 {"br","pt_BR"},
+{"zh","zh"},
 }
 local languageCode = getLocalization()["code"]
 
@@ -122,6 +123,8 @@ function checkTheLanguage()
 		languageCode = "nl"
 	elseif languageCode == "pt_BR" then
 		languageCode = "pt_BR"
+	elseif languageCode == "zh" then
+		languageCode = "zh"
 	else
 		languageCode = "en_US"
 	end
@@ -402,7 +405,9 @@ function closeInventory()
 	triggerEvent("showGPSOnInventoryClose",localPlayer)
 			unbindKey ( 'mouse1', 'down', checkOnButton )
 			unbindKey ( 'mouse1', 'up', testoLabClick )
-			destroyElement ( testoLab )
+			if isElement(testolab) then
+				destroyElement ( testoLab )
+			end
 			for i, label in ipairs ( itemLabels ) do
 				if isElement ( label ) then
 					destroyElement ( label )

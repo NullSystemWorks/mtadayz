@@ -529,6 +529,8 @@ vehicleInfo = {
 }
 
 local isItemSelected = false
+local playerBlipsVisible = false
+local vehicleBlipsVisible = false
 
 
 addEventHandler("onClientResourceStart",root,

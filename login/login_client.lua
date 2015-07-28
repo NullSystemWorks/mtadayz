@@ -52,6 +52,10 @@ function unmarkButton (b,s)
 end
 
 news = {
+"[07/28/15]\nVersion 0.9.2a is out!\n\n--- CHANGELOG ---\n[NEW]Language: Chinese\n[NEW]Toggleable GPS (F10)\n[NEW]New compass images\n[NEW]Toggleable Compass (F1)\n[FIX]Some zombies\n[FIX]GPS not showing correct position\n[FIX]Teleportation & Duping Bug\n[FIX]Not being able to administer \nblood bags\n\n\nThe complete changelog can be found at mta-dayz.org/forum!"
+}
+
+oldnews = {
 "[07/20/15]\nVersion 0.9.0 is out!\n\n--- CHANGELOG ---\n[NEW]Vehicles are saved in custom database\n[NEW]Revamped Vehicle HUD\n[NEW]Multi-Language Support*\n[NEW]Gender Selection\n[NEW]Keycards for Area 69 and San Fierro Carrier\n[NEW]Heroes take less damage from zombies and weapons\n[NEW]Added 16 cars, 5 helicopters, 1 plane & 3 boats\n[CHANGED]Icons for HUD\n\n\nThe complete changelog can be found at mtadayz.heliohost.org!\n\n\n*Languages available at time of release: English, German, Czech, Dutch, Portuguese"
 }
 
@@ -92,7 +96,7 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	background_news_label = guiCreateLabel(0.01, 0.01, 1, 0.1, "NEWS", true,background_news)
 	background_news_text = guiCreateLabel(0.01,0.1, 1, 0.9, news[1],true,background_news)
 	title_label = guiCreateLabel(0.29, 0.08, 0.43, 0.18, "MTA DayZ", true,background_front)
-	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.0a", true,background_front)
+	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.2a", true,background_front)
 	login_label = guiCreateLabel(0.05, 0.64, 0.20, 0.05, "LOGIN", true,background_front)
 	Login_Edit[1] = guiCreateEdit(0.05, 0.67, 0.25, 0.05, infoTable["account"], true,background_front)
 	Login_Edit[2] = guiCreateEdit(0.31, 0.67, 0.25, 0.05, infoTable["pass"], true,background_front)
@@ -200,6 +204,8 @@ addEventHandler("onClientResourceStart", resourceRoot,
 function hideLoginWindow(accountName, pass)
 	guiSetVisible(background_front,false)
 	showCursor(false)
+	destroyElement(label)
+	setElementData(getLocalPlayer(),"clickedButton",false)
 	toggleSavePassword(accountName, pass)
 end
 addEvent("onPlayerDoneLogin", true)
@@ -211,4 +217,5 @@ function toggleSavePassword(name, pass)
 	xmlNodeSetAttribute(confFile, "username", name)
 	xmlNodeSetAttribute(confFile, "pass", pass)
 	xmlSaveFile(confFile)
+	xmlUnloadFile(confFile)
 end

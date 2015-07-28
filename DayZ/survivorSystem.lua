@@ -873,11 +873,11 @@ function onPlayerGiveMedicObject(itemName,player)
 		if itemName == "bandage" then
 			setElementData(player,"bleeding",0)
 			setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")-1)
-			addPlayerStats (playersource,humanity,40)
+			addPlayerStats (playersource,"humanity",40)
 		elseif itemName == "giveblood" then
 			addPlayerStats (player,"blood",12000)
 			setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
-			addPlayerStats (playersource,humanity,250)
+			addPlayerStats (playersource,"humanity",250)
 		end
 	end,1500,1)	
 end
@@ -1726,6 +1726,7 @@ function checkFenceOwner(element,ownerData)
 			if acc then
 				if acc ~= ownerData then
 					setElementData(element,"blood",getElementData(element,"blood") - gameplayVariables["loseWire"] )
+					triggerClientEvent("onPlayerDamageShader",client)
 				else
 				end
 			else

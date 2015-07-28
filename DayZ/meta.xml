@@ -7,7 +7,7 @@
 #---------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.0a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.2a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 	<script src="version.lua" type="server" />
 	<script src="library/slither.lua" type="shared" />
@@ -48,6 +48,7 @@
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
 	<script src="anticheat_c.lua" type="client" cache="false" />
+	<script src="anticombatlog.lua" type="server" />
 	
 	<!-- Log System -->
 	<export function="saveLog" type="server" />
@@ -69,6 +70,14 @@
 	<export function="getPlayerZombiesKilled" type="server" />
 	<export function="getPlayerHumanity" type="server" />
 	<export function="getActualTime" type="server" />
+	
+	<export function="getPlayerCurrentSlots" type="client" />
+	<export function="getPlayerMaxAviableSlots" type="client" />
+	<export function="getItemSlots" type="client" />
+	<export function="isPlayerInLoot" type="client" />
+	<export function="getLootMaxAviableSlots" type="client" />
+	<export function="getLootCurrentSlots" type="client" />
+	<export function="isToolbeltItem" type="client" />
 	
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
@@ -323,8 +332,10 @@
 	<file src="images/scroll.png" />
 	
 	<file src="images/world.png" type="client"></file>
+	<file src="images/radarworld.png" type="client"></file>
 	<file src="images/gps.png" type="client"></file>
 	<file src="images/player.png" type="client"></file>
+	<file src="images/blip/0.png" type="client"></file>
 	<file src="images/blip/2.png" type="client"></file>
 	<file src="images/blip/4.png" type="client"></file>
 	

@@ -130,7 +130,7 @@ if arg1 == "Player" then
 	if getElementData(arg2,"blood") < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
 		number = number+1
 		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Administer Blood Bag")	
+		guiSetText(spalteGuiText[number],"Administer Blood Bag")
 		setElementData(spalteGuiText[number],"usedItem","giveblood")
 		if number == 1 then
 			guiLabelSetColor (spalteGuiText[number],50,255,50)
@@ -488,14 +488,14 @@ if ( keyState == "down" ) then
 		end
 		if itemName == "bandage" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
-				triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
-				disableMenu()
+			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
+			disableMenu()
 			return
 		end
 		if itemName == "giveblood" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
-				triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
-				disableMenu()
+			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
+			disableMenu()
 			return
 		end
 		if itemName == "dead" then

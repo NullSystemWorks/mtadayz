@@ -266,6 +266,8 @@ function checkTheLanguage()
 		languageCode = "nl"
 	elseif languageCode == "pt_BR" then
 		languageCode = "pt_BR"
+	elseif languageCode == "zh" then
+		languageCode = "zh"
 	else
 		languageCode = "en_US"
 	end
@@ -783,7 +785,7 @@ elseif itemName == "Backpack (Coyote)" then
 		if getElementData(loot,itemName) ~= "Backpack (Coyote)" then
 			itemName2 = itemName
 			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName,getElementData(loot,itemName)-1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
 			return
 		end
 	end
@@ -798,7 +800,7 @@ elseif itemName == "Czech Backpack" then
 		if getElementData(loot,itemName) ~= "Czech Backpack" then
 			itemName2 = itemName
 			setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-			setElementData(loot,itemName,getElementData(loot,itemName)-1)
+			setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
 			return
 		end
 	end
@@ -854,18 +856,22 @@ function getInventoryInfosForRightClickMenu(itemName)
 	end
 	for i,itemInfo in ipairs(languageTextTable[languageCode]["Items"]) do
 		if itemName == itemInfo[1] then
-			if #itemInfo >= 9 then
-				return itemName, itemInfo[9]
+			if not isPlayerInLoot() then
+				if #itemInfo >= 9 then
+					return itemName, itemInfo[9]
+				end
+				break
 			end
-			break
 		end
 	end
 	for i,itemInfo in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
 		if itemName == itemInfo[1] then
-			if #itemInfo >= 9 then
-				return itemName, itemInfo[9]
+			if not isPlayerInLoot() then
+				if #itemInfo >= 9 then
+					return itemName, itemInfo[9]
+				end
+				break
 			end
-			break
 		end
 	end
 	return itemName, false

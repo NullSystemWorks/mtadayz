@@ -8,7 +8,7 @@
 #---------------------------------------------------------------#
 ]]
 
-ZombiePedSkins = {22,56,67,68,69,70,92,97,105,107,108,126,127,128,152,162,167,188,195,206,209,212,229,230,258,264,277,280 } --ALTERNATE SKIN LISTS FOR ZOMBIES (SHORTER LIST IS TEXTURED ZOMBIES ONLY)
+ZombiePedSkins = {56,67,68,69,70,92,97,105,107,108,126,127,128,152,162,167,188,195,206,209,212,229,230,258,264,277,280 } --ALTERNATE SKIN LISTS FOR ZOMBIES (SHORTER LIST IS TEXTURED ZOMBIES ONLY)
 
 ZombieTypes = {
 
@@ -31,7 +31,6 @@ ZombieTypes = {
 }
 
 local ZombieLoot = {
-{22,"civilian"},
 {56,"civilian"},
 {67,"civilian"},
 {68,"civilian"},
@@ -240,8 +239,10 @@ end
 setTimer(zombieCheck1,20000,0)
 
 function botAttack (ped)
+	if ped then
+		setPedAnimation(ped,false)
+	end
 	call ( getResourceFromName ( "slothbot" ), "setBotFollow", ped, source)
-	setPedAnimation(ped,false)
 end
 addEvent("botAttack",true)
 addEventHandler("botAttack",getRootElement(),botAttack)

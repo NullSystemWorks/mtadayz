@@ -16,6 +16,7 @@ F11 - Open/Close Map (if available)
 
 - COMMANDS - 
 
-/language - Changes language of game (possible values: en (English), de (German), cs (Czech), nl (Dutch), br (Brazilian Portuguese)
+/language - Changes language of game (possible values: en (English), de (German), cs (Czech), nl (Dutch),
+br (Brazilian Portuguese), zh (Chinese))
 
 </help>
