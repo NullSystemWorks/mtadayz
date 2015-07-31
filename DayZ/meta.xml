@@ -48,7 +48,9 @@
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
 	<script src="anticheat_c.lua" type="client" cache="false" />
-	<script src="anticombatlog.lua" type="server" />
+	<!-- 
+	<script src="anticombatlog.lua" type="server" /> 
+	-->
 	
 	<!-- Log System -->
 	<export function="saveLog" type="server" />
