@@ -806,6 +806,7 @@ function onPlayerRequestChangingStats(itemName,itemInfo,data)
 			blood = 200
 		elseif itemName == "Can (Fruit)" then
 			blood = 200
+			addPlayerStats(source,"thirst",50)
 		elseif itemName == "Can (Chowder)" then
 			blood = 200
 		elseif itemName == "MRE" then
@@ -1234,7 +1235,7 @@ end
 
 function outputInfo4 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.1.1a",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.2.2a",200,200,22)
 	end
 	setTimer(outputInfo5,infoTimer,1)
 end
@@ -1695,12 +1696,13 @@ addEventHandler("onPlayerGhillieStateOff",root,onPlayerGhillieStateOff)
 addEvent( "onPlayerChopTree", true )
 
 removedTrees = {}
+removedTreesLOD = {}
 
 function onPlayerChopTree( worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
 	removeWorldModel( worldID, 3, worldX, worldY, worldZ, interior )
-	removedTrees["realmodel"] = worldID, 3, worldX, worldY, worldZ, interior
+	table.insert(removedTrees,{worldID, 3, worldX, worldY, worldZ, interior})
 	removeWorldModel( worldLODID, 3, worldX, worldY, worldZ, interior )
-	removedTrees["LODmodel"] = worldLODID, 3, worldX, worldY, worldZ, interior
+	table.insert(removedTreesLOD,{worldLODID, 3, worldX, worldY, worldZ, interior})
 
 	local _, _, rz = getElementRotation( client )
 	local tree = createObject( worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ )
@@ -1714,11 +1716,27 @@ addEventHandler( "onPlayerChopTree", root, onPlayerChopTree )
 addEvent("onServerRespawnTrees",true)
 
 function onServerRespawnTrees( worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
-	restoreWorldModel(removedTrees["realmodel"])
-	restoreWorldModel(removedTrees["LODmodel"])
-	outputChatBox("Trees have been respawned!",root,0,255,0,true)
+	removedTable = unpack(removedTrees)
+	removedTableLOD = unpack(removedTreesLOD)
+	if removedTable ~= nil then
+		restoreWorldModel(removedTable[1],removedTable[2],removedTable[3],removedTable[4],removedTable[5],removedTable[6])
+	end
+	if removedTableLOD ~= nil then
+		restoreWorldModel(removedTableLOD[1],removedTableLOD[2],removedTableLOD[3],removedTableLOD[4],removedTableLOD[5],removedTableLOD[6])
+	end
+	removedTrees = {}
+	removedTreesLOD = {}
 end
 addEventHandler("onServerRespawnTrees",root,onServerRespawnTrees)
+
+function setTotalKills()
+	setTimer(function(source)
+	local murders = getElementData(source,"murders")
+	local zombies = getElementData(source,"zombieskilled")
+	local kill = setElementData(source,"totalkills",getElementData(source,"murders")+getElementData(source,"zombieskilled"))
+	end,2000,1,source)
+end
+addEventHandler("onPlayerSpawn",root,setTotalKills)
 
 function checkFenceOwner(element,ownerData)
 	if getElementType(element) == "player" and element == client then
@@ -1813,3 +1831,9 @@ function getServerDetails()
 	triggerClientEvent("getTheServerName",root,serverName)
 end
 setTimer(getServerDetails,1000,1)
+
+function setPlayerSneak(number)
+	setPedWalkingStyle(source,number)
+end
+addEvent("setPlayerSneak",true)
+addEventHandler("setPlayerSneak",root,setPlayerSneak)

@@ -150,6 +150,8 @@ local buildingClasses = {
 {"Binoculars",369,1,0,1.15},
 {"Hunting Knife",335,1,90,1.91},
 {"GPS",2976,0.15,0,0.19},
+{"NV Goggles",368,1,90,0.11},
+{"IR Goggles",369,1,90,0.11},
 {"Map",1277,0.8,90,0.96},
 {"Assault Pack (ACU)",3026,1,0,3.15},
 {"British Assault Pack",1644,1,0,1.76},
@@ -1587,6 +1589,7 @@ function refreshItemLoots ()
 			destroyElement(loots)
 		end	
 	end
+	triggerEvent("onServerRespawnTrees",root)
 	insertIntoTableResidential()
 	createPickupsOnServerStart()
 	setTimer(refreshItemLootPoints,gameplayVariables["itemrespawntimer"],1)

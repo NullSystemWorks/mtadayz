@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.2.1a"
+		dayzVersion = "MTA:DayZ 0.9.2.2a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -1812,12 +1812,12 @@ local SneakEabled = false
 function setPlayerSneakOnWalk()
 	if getControlState("walk") then
 		if not SneakEnabled then
-			setPedWalkingStyle(localPlayer,69)
+			triggerServerEvent("setPlayerSneak",localPlayer,69)
 			SneakEnabled = true
 		end
 	else
 		if SneakEnabled then
-			setPedWalkingStyle(localPlayer,54)
+			triggerServerEvent("setPlayerSneak",localPlayer,54)
 			SneakEnabled = false
 		end
 	end
@@ -2633,7 +2633,7 @@ end
 playerRankingTable = {}
 
 function checkTopPlayer()
-	playerRankingTable = positionGetElementData("zombieskilled", #getElementsByType("player"))
+	playerRankingTable = positionGetElementData("totalkills", #getElementsByType("player"))
 end
 checkTopPlayer()
 setTimer(checkTopPlayer,10000,0)
@@ -2678,8 +2678,8 @@ function performRender()
 		
 		playerInList = false
 			local playerAmount = #getElementsByType("player")
-			if playerAmount > 9 then
-				playerAmount = 9
+			if playerAmount > 10 then
+				playerAmount = 10
 			end
 		for i = 1, playerAmount do
 			yA = 0.0466*(i-1)
@@ -2998,9 +2998,8 @@ function onClientChainsawRender()
 				startwoodtick = getTickCount()
 
 				triggerServerEvent( "onPlayerChopTree", localPlayer, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
-				startRollMessage2("Chopping", "You chopped down " .. anora .. " " .. treename, 0,255,0)
 				if getPlayerCurrentSlots() <= getPlayerMaxAviableSlots() then
-					setElementData(localPlayer,"Wood Pile",getElementData(localPlayer,"Wood Pile")+1)
+					setElementData(localPlayer,"Wood Pile",getElementData(localPlayer,"Wood Pile")+math.random(1,4))
 					startRollMessage2("Chopping", "You got 1 'Wood Pile'!", 0,255,0)
 				else
 					startRollMessage2("Inventory", "Inventory is full!", 255, 22, 0)

@@ -83,6 +83,6 @@ function adminSay(pla, cmd, ...)
 	local name = getPlayerName(pla)
 	repeat name = name:gsub("#%x%x%x%x%x%x", "")
 	until not name:find("#%x%x%x%x%x%x")
-	triggerClientEvent(root, "onSCMessageSend", root, "#32ff64"..name.."#32ff64: "..messageText)
+	triggerClientEvent(root, "onSCMessageSend", root, messageText)
 end
 addCommandHandler("sc", adminSay)

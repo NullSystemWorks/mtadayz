@@ -254,7 +254,6 @@ local gridlistItems = {}
 local buttonItems = {}
 local languageCode = getLocalization()["code"]
 
--- Option to change language via command?
 function checkTheLanguage()
 	if languageCode == "en_US" then
 		languageCode = "en_US"
@@ -280,6 +279,7 @@ local languageTable = {
 {"cs","cs"},
 {"nl","nl"},
 {"br","pt_BR"},
+{"zh","zh"},
 }
 
 function changeLanguageOnCommand(playerSource,language)
@@ -291,7 +291,7 @@ function changeLanguageOnCommand(playerSource,language)
 			end
 		end
 	else
-		outputChatBox("Please specify a language. Possible values: en, de, cs, nl, br.",255,0,0)
+		outputChatBox("Please specify a language. Possible values: en, de, cs, nl, br, zh.",255,0,0)
 	end
 end
 addCommandHandler("language",changeLanguageOnCommand)

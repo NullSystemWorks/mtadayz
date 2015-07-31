@@ -41,6 +41,8 @@ gameplayVariables = {}
 -- SOUND VOLUME
 	gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds should be. Set to 0 to disable, max is 1.0. - DEFAULT: 0.8
 
+-- BATTLDAYZ SETUP
+	gameplayVariables["combatlog"] = true -- Enable/Disable anti combat log - DEFAULT: true - USE AT YOUR OWN RISK!
 	
 -- WEAPON DAMAGE
 damageTable = {

@@ -119,3 +119,27 @@ end
 if gameplayVariables["packetlosskick"] then -- Check boolean to see if we want to kick on packet loss
 	setTimer(checkLoss,2000,0) -- Set timer to check every two seconds
 end
+
+function onQuitCheckForCombatLog(quitType)
+	if gameplayVariables["combatlog"] then
+		if quitType == "Quit" or quitType == "Unknown" then
+			local time = getRealTime()
+			local timeLeft = getElementData (source,"combattime")
+			if timeLeft then
+				if time.timestamp-timeLeft < 30 then
+					local playerAccount = getPlayerAccount(source)
+					if (playerAccount) then
+						setAccountData(playerAccount,"blood",-5) -- Kill the player for combat logging
+					end
+				end
+			end
+		end
+	end
+end
+addEventHandler ("onPlayerQuit",root,onQuitCheckForCombatLog)
+
+function protectedByBattlDayZ()
+	outputChatBox("This server is protected by BattlDayZ (V1), an anticheat system.",source,255,0,0)
+end
+addEventHandler("onPlayerLogin",root,protectedByBattlDayZ)
+

@@ -1,6 +1,6 @@
 --[[
 
-	Name: Server-Side Language Tables
+	Name: Client-Side Language Tables
 	Version: 0.1
 	Copyright: DayZ Gamemode. All rights reserved to Developers
 	Current Devs: Lawliet, CiBeR, Jboy
@@ -1250,7 +1250,7 @@ languageTextTable = {
 		{"Can (Milk)",1,'milkcan.png',128,128,"饮料", "尝一口感觉\n充满苏打,\n人工香料，防腐剂.", "罐头 (牛奶)"},
 	},
 
-	["items"] = {
+	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"物品", "一小堆新碎的\n可用于制造的木头\n壁炉和各种其他东西.","木头堆"},
 		{"Bandage",1, 'bandage.png', 128, 128, "物品", "绑住关节.\n用来止住伤口的血.","绷带","Bandage yourself"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "物品", "用手掰一下就发光\n 放在路边\n 可持续5分钟.","闪光弹","Place"},

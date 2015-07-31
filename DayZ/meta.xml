@@ -7,7 +7,7 @@
 #---------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.2a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.2.2a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 	<script src="version.lua" type="server" />
 	<script src="library/slither.lua" type="shared" />
@@ -31,10 +31,7 @@
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" cache="false" />
-	
-	<!-- Cleanup script (remove in next update) -->
-	<script src="080cleanup.lua" type="server"/>
-	
+		
 	<!-- Help File -->
 	<config src="help.xml" type="client" />
 	
@@ -48,7 +45,6 @@
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
 	<script src="anticheat_c.lua" type="client" cache="false" />
-	<script src="anticombatlog.lua" type="server" />
 	
 	<!-- Log System -->
 	<export function="saveLog" type="server" />
@@ -82,7 +78,7 @@
 	<!-- New Inventory -->
 	<script src="inventory_new.lua" type="client" cache="false" />
 	<file src="icons/ak47.png"/>
-	<file src="icons/baseball.png"/>
+	<file src="icons/bat.png"/>
 	<file src="icons/binoculars.png"/>
 	<file src="icons/bizon.png"/>
 	<file src="icons/crossbow.png"/>
@@ -226,6 +222,7 @@
 	<export function="getGroupRankCount" type="server"/>
 	<export function="getGroupBankAmount" type="server"/>
 	<export function="viewWindow" type="server"/>
+	
     
 	<!-- Bone Attachments -->
 	<script src="bone_attach/bone_attach.lua" />
@@ -398,8 +395,6 @@
 	<file src="mods/weapons/sks.dff" />
 	<file src="mods/weapons/knife.txd" />
 	<file src="mods/weapons/knife.dff" />
-	
-	
 	
 	<!-- Skins TXD -->
     <file src="skins/22.txd" />
