@@ -9,7 +9,7 @@
 ]]
 
 local timer
-version = "0.9.2.2a"
+version = "0.9.3a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()

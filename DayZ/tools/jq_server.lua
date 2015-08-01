@@ -71,10 +71,10 @@ function adminSay(pla, cmd, ...)
 		if v == "~" then
 			local messageText = table.concat(message2, "")
 			local color = getTextColorAtEnd(messageText)
-			if color and color == "#ffd000" then
-				message2[k] = "#32ff64"
+			if color and color == "#ffffff" then
+				message2[k] = "#ffffff"
 			else
-				message2[k] = "#ffd000"
+				message2[k] = "#ffffff"
 			end
 		end
 	end
@@ -83,6 +83,6 @@ function adminSay(pla, cmd, ...)
 	local name = getPlayerName(pla)
 	repeat name = name:gsub("#%x%x%x%x%x%x", "")
 	until not name:find("#%x%x%x%x%x%x")
-	triggerClientEvent(root, "onSCMessageSend", root, messageText)
+	triggerClientEvent(root, "onSCMessageSend", root, string.format("#%.2X%.2X%.2X", 255,255,255)..messageText)
 end
 addCommandHandler("sc", adminSay)

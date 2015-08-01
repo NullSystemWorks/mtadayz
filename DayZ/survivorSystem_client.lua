@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.2.2a"
+		dayzVersion = "MTA:DayZ 0.9.3a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -1675,6 +1675,8 @@ function checkCold()
 	if getElementData(getLocalPlayer(),"logedin") then
 		if getElementData(getLocalPlayer(),"temperature") <= 33 then
 			setElementData(getLocalPlayer(),"cold",true)
+		elseif getElementData(localPlayer,"temperature") > 33 then
+			setElementData(localPlayer,"cold",false)
 		end
 	end	
 end
@@ -1687,11 +1689,11 @@ function setCold()
 			createExplosion (x,y,z+15,8,false,0.5,false)
 			local x, y, z, lx, ly, lz = getCameraMatrix() -- Get the current location and lookat of camera
 			randomsound = math.random(0,99)
-			if randomsound >= 0 and randomsound <= 6 then
+			if randomsound >= 0 and randomsound <= 10 then
 				playSound("sounds/coughing.mp3",false)
 				setElementData(localPlayer,"volume",100)
 				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
-			elseif randomsound >= 7 and randomsound <= 13 then	
+			elseif randomsound >= 11 and randomsound <= 20 then	
 				setElementData(localPlayer,"volume",100)
 				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 				playSound("sounds/sneezing.mp3",false)
@@ -2016,20 +2018,22 @@ function updateIcons ()
 			fading2 = "down"
 		end
 		--sound
-		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/sound.png",0,0,0,tocolor(0,255,0))
+		dxDrawImage( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/background.png",0,0,0)
+		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/sound.png",0,0,0)
 		local sound = getElementData(getLocalPlayer(),"volume")/20
 		if sound > 0 then
 			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0)
 		end
 		--visibly
-		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/eye.png",0,0,0,tocolor(0,255,0))
+		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/background.png",0,0,0)
+		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/eye.png",0,0,0)
 		local sound = getElementData(getLocalPlayer(),"visibly")/20
 		if sound > 0 then
 			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, "images/dayzicons/level_"..sound..".png",0,0,0)
 		end
 		--brokenbone
 		if getElementData(getLocalPlayer(),"brokenbone") then
-			dxDrawImage ( screenWidth*0.9375 , screenHeight*0.55, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/brokenbone.png",0,0,0,tocolor(255,255,255))
+			dxDrawImage ( screenWidth*0.9375 , screenHeight*0.55, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/brokenbone.png",0,0,0)
 		end
 		--bandit	
 		local humanity =  getElementData(getLocalPlayer(),"humanity")
@@ -2048,25 +2052,30 @@ function updateIcons ()
 		elseif humanity >= -2500 then
 			h_number = 0
 		end
-			dxDrawImage ( screenWidth*0.94 , screenHeight*0.6, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/humanity/"..h_number..".png",0,0,0,tocolor(0,255,0))
+		dxDrawImage ( screenWidth*0.94 , screenHeight*0.63, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+		dxDrawImage ( screenWidth*0.943 , screenHeight*0.63, screenHeight*0.055, screenHeight*0.055, "images/dayzicons/humanity/"..h_number..".png",0,0,0)
 		--temperature
 		local temperature = math.round(getElementData(getLocalPlayer(),"temperature"),2)
 		r,g,b = 0,255,0
-		local t_number = 5
+		local t_number = 3
 		if temperature <= 37 then
 			value = (37-temperature)*42.5
 			r,g,b = 0,255-value,value
-			t_number = 3
+			t_number = 2
 		elseif temperature > 37 and temperature < 41 then
 			r,g,b = 0,255,0
-			t_number = 5
+			t_number = 3
 		elseif temperature == 41 then
-			number = 5
+			number = 4
 			r,g,b = 255,0,0
 		end
 		if value > 215 then
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/temperature_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..t_number..".png",0,0,0,tocolor(r,g,b,fading))
 		else
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/temperature_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/temperature/"..t_number..".png",0,0,0,tocolor(r,g,b))
 		end
 		--thirsty
@@ -2089,8 +2098,12 @@ function updateIcons ()
 			thirst_icon = "images/dayzicons/thirst/0.png"
 		end
 		if thirst_coloring < 15 then
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/thirst/thirst_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, thirst_icon,0,0,0,tocolor(r,g,b,fading))
 		else
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/thirst/thirst_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.775, screenHeight*0.065, screenHeight*0.065, thirst_icon,0,0,0,tocolor(r,g,b))
 		end
 		--blood
@@ -2112,14 +2125,17 @@ function updateIcons ()
 		elseif blood <= 2000 then
 			blood_icon = "images/dayzicons/blood/2000.png"
 		end	
+		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)	
+		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/blood/blood_border.png",0,0,0)			
 		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, blood_icon,0,0,0,tocolor(r,g,b))
 		if getElementData(getLocalPlayer(),"bleeding") > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
 		--food
 		r,g,b = 0,255,0
-		local food = getElementData(getLocalPlayer(),"food")*2.55
-		r,g,b = 255-food,food,0
+		local food = getElementData(localPlayer,"food")
+		local food_coloring = getElementData(getLocalPlayer(),"food")*2.55
+		r,g,b = 255-food_coloring,food_coloring,0
 		local food_icon = "images/dayzicons/hunger/100.png"
 		if food >= 100 and food <= 81 then
 			food_icon = "images/dayzicons/hunger/100.png"
@@ -2135,10 +2151,14 @@ function updateIcons ()
 			food_icon = "images/dayzicons/hunger/0.png"
 		end
 		if food < 15 then
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/hunger/food_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, food_icon,0,0,0,tocolor(r,g,b,fading))
 		else
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/background.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, "images/dayzicons/hunger/food_border.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.925, screenHeight*0.065, screenHeight*0.065, food_icon,0,0,0,tocolor(r,g,b))
-		end	
+		end		
 		--Nametags
 		local x,y,z = getElementPosition(getLocalPlayer())
 		for i,player in ipairs(getElementsByType("player")) do
@@ -2643,6 +2663,7 @@ function onQuitGame( reason )
 end
 addEventHandler( "onClientPlayerQuit", getRootElement(), onQuitGame )
 
+local serverName = ""
 function getTheServerName(name)
 	serverName = name
 end
@@ -2655,7 +2676,6 @@ local recw, rech = 560, 200
 local eastype = "OutElastic"
 local screenW, screenH = guiGetScreenSize()
 local font = {}
-local serverName = ""
 
 font[1] = dxCreateFont("fonts/28dayslater.ttf", 10)
 font[2] = dxCreateFont("fonts/etelka.ttf", 10)
@@ -3037,9 +3057,9 @@ end
 addEventHandler( "onClientPlayerWeaponSwitch", localPlayer, onClientPlayerWeaponSwitch )
 
 function playCampfireSound()
-	x = getElementData(source,"x")
-	y = getElementData(source,"y")
-	z = getElementData(source,"z")
+	local x = getElementData(source,"x")
+	local y = getElementData(source,"y")
+	local z = getElementData(source,"z")
 	campfiresound = playSound3D("sounds/campfire.mp3",x,y,z,true)
 end
 addEvent("playCampfireSound",true)
@@ -3050,7 +3070,6 @@ function stopCampfireSound()
 end
 addEvent("stopCampfireSound",true)
 addEventHandler("stopCampfireSound",root,stopCampfireSound)
-
 
 local PI = math.pi
 

@@ -1235,7 +1235,7 @@ end
 
 function outputInfo4 ()
 	for i, player in ipairs(getElementsByType("player")) do
-		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.2.2a",200,200,22)
+		triggerClientEvent (player, "displayClientInfo", player,"Info","MTA:DayZ 0.9.3a",200,200,22)
 	end
 	setTimer(outputInfo5,infoTimer,1)
 end
@@ -1830,7 +1830,7 @@ function getServerDetails()
 	serverName = getServerName()
 	triggerClientEvent("getTheServerName",root,serverName)
 end
-setTimer(getServerDetails,1000,1)
+setTimer(getServerDetails,1000,0)
 
 function setPlayerSneak(number)
 	setPedWalkingStyle(source,number)

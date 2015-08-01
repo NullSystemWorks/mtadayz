@@ -31,6 +31,7 @@
     <script src="addons.lua" type="server" />
 	<script src="treelist.lua" type="server" />
 	<script src="treelist.lua" type="client" cache="false" />
+	<script src="journal_c.lua" type="client" cache="false" />
 		
 	<!-- Help File -->
 	<config src="help.xml" type="client" />
@@ -41,6 +42,7 @@
 	<file src="fonts/bitstream.ttf" />
 	<file src="fonts/tahomab.ttf" />
 	<file src="fonts/28dayslater.ttf" />
+	<file src="fonts/needhelp.ttf" />
 	
 	<!-- Anti Cheat -->
 	<script src="anticheat_s.lua" type="server" />
@@ -190,6 +192,10 @@
 	<file src="images/butclick.png"/>
 	<file src="images/scoreboard.png" />
 	
+	<file src="images/journal/journal_page1.png" />
+	<file src="images/journal/journal_page2.png" />
+	<file src="images/journal/journal_page3.png" />
+	
 	<!-- Tools -->
     <script src="tools/jq_client.lua" type="client" cache="false" />
 	<script src="tools/jq_server.lua" type="server" />
@@ -243,10 +249,18 @@
     <file src="images/dead.jpg" />
 	<file src="images/nightvision.png" />
 	<file src="images/infravision.png" />
+	<file src="images/dayzicons/background.png" />
     <file src="images/dayzicons/eye.png" />
 	<file src="images/dayzicons/sound.png" />
 	<file src="images/dayzicons/brokenbone.png" />
 	<file src="images/dayzicons/medic.png" />
+	
+	<file src="images/dayzicons/level_1.png" />
+    <file src="images/dayzicons/level_2.png" />
+    <file src="images/dayzicons/level_3.png" />
+    <file src="images/dayzicons/level_4.png" />
+    <file src="images/dayzicons/level_5.png" />
+	<file src="images/dayzicons/brokenbone.png" />
 	
 	<file src="images/dayzicons/humanity/5.png" />
 	<file src="images/dayzicons/humanity/4.png" />
@@ -255,6 +269,7 @@
 	<file src="images/dayzicons/humanity/1.png" />
 	<file src="images/dayzicons/humanity/0.png" />
 	
+	<file src="images/dayzicons/blood/blood_border.png" />
 	<file src="images/dayzicons/blood/12000.png" />
 	<file src="images/dayzicons/blood/10000.png" />
 	<file src="images/dayzicons/blood/8000.png" />
@@ -262,6 +277,7 @@
 	<file src="images/dayzicons/blood/4000.png" />
 	<file src="images/dayzicons/blood/2000.png" />
     
+	<file src="images/dayzicons/hunger/food_border.png" />
     <file src="images/dayzicons/hunger/100.png" />
 	<file src="images/dayzicons/hunger/80.png" />
 	<file src="images/dayzicons/hunger/60.png" />
@@ -269,13 +285,14 @@
 	<file src="images/dayzicons/hunger/20.png" />
 	<file src="images/dayzicons/hunger/0.png" />
 	
-    <file src="images/dayzicons/temperature/5.png" />
+	<file src="images/dayzicons/temperature/temperature_border.png" />
 	<file src="images/dayzicons/temperature/4.png" />
 	<file src="images/dayzicons/temperature/3.png" />
 	<file src="images/dayzicons/temperature/2.png" />
 	<file src="images/dayzicons/temperature/1.png" />
 	<file src="images/dayzicons/temperature/0.png" />
 	
+	<file src="images/dayzicons/thirst/thirst_border.png" />
 	<file src="images/dayzicons/thirst/100.png" />
 	<file src="images/dayzicons/thirst/80.png" />
 	<file src="images/dayzicons/thirst/60.png" />
@@ -311,11 +328,6 @@
 	<file src="images/dayzicons/vehicle/whl/whl_0.png" />
 	<file src="images/dayzicons/vehicle/whl/whl_1.png" />
     
-	<file src="images/dayzicons/level_1.png" />
-    <file src="images/dayzicons/level_2.png" />
-    <file src="images/dayzicons/level_3.png" />
-    <file src="images/dayzicons/level_4.png" />
-    <file src="images/dayzicons/level_5.png" />
 	<file src="images/dayzicons/lc.png" />
 	<file src="images/dayzicons/loot.png" />
 	<file src="images/compassborder.png" />
@@ -523,6 +535,7 @@
 	<file src="sounds/crafting.mp3" />
 	<file src="sounds/sneezing.mp3" />
 	<file src="sounds/openinventory.mp3" />
+	<file src="sounds/journal.wav" />
 	
 	<!-- Item Textures -->
 	<file src="items/army_clothes.txd" />

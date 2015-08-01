@@ -32,10 +32,15 @@ function playerLosingConnection()
 	end
 end
 
-local combatloglabel = guiCreateLabel(0.82, 0.00, 0.27, 0.04, "No Combat", true)
-guiLabelSetColor(combatloglabel, 17, 249, 5)
-guiLabelSetHorizontalAlign(combatloglabel, "center", false)
-guiLabelSetVerticalAlign(combatloglabel, "center")
+function createLogLabel()
+	if gameplayVariables["combatlog"] then
+		local combatloglabel = guiCreateLabel(0.82, 0.00, 0.27, 0.04, "No Combat", true)
+		guiLabelSetColor(combatloglabel, 17, 249, 5)
+		guiLabelSetHorizontalAlign(combatloglabel, "center", false)
+		guiLabelSetVerticalAlign(combatloglabel, "center")
+	end
+end
+addEventHandler("onClientPlayerSpawn",root,createLogLabel)
 
 function onPlayerActivateCombatLog(attacker)
 	if gameplayVariables["combatlog"] then
