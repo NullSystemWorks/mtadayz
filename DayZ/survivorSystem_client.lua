@@ -11,7 +11,7 @@
 --version drawing
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.3a"
+		dayzVersion = "MTA:DayZ 0.9.3.1a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -296,6 +296,7 @@ function playerDrawMapGPSCompass()
 			end
 		else
 			if gpskeybound then
+				removeEventHandler("onClientRender",root,drawTheGPS)
 				removeCommandHandler("gps",toggleGPS)
 				dxSetRenderTarget()
 				gpskeybound = false
@@ -327,6 +328,7 @@ function playerDrawMapGPSCompass()
 			end
 		else
 			if compasskeybound then
+				removeEventHandler("onClientRender",root,drawTheCompass)
 				removeCommandHandler("compass",toggleCompass)
 				compasskeybound = false
 			end
@@ -388,6 +390,26 @@ function drawTheMap()
 	local bB = tB + (sy)*yFactor
 	local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
 	local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
+	for k, v in ipairs(getElementsByType("blip")) do
+			local bx, by = getElementPosition(v)
+			local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
+			local maxDist = getBlipVisibleDistance(v)
+			if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
+				local dist = actualDist/(6000/((3072+3072)/2))
+				local rot = findRotation(bx, by, x, y)-camZ
+				local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
+				local bpx = math.max(lB, math.min(rB, bpx))
+				local bpy = math.max(tB, math.min(bB, bpy))
+				local bid = getElementData(v, "customIcon") or getBlipIcon(v)
+				local _, _, _, bcA = getBlipColor(v)
+				local bcR, bcG, bcB = 255, 255, 255
+					if getBlipIcon(v) == 0 then
+						bcR, bcG, bcB = getBlipColor(v)
+					end
+				local bS = getBlipSize(v)
+				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, "images/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
+			end
+		end
 	dxDrawImage(sx * 0.5, sy * 0.5, (blip*2)*xFactor, (blip*2)*yFactor, "images/player.png", camZ-rz, 0, 0, tocolor(255,30,0,255))
 end
 
@@ -583,15 +605,30 @@ local ambiencesounds = {
 	"sounds/ambience/ambience_16.ogg",
 }
 
+local ambienceOn = true
+
 function playAmbienceMusic()
 	if getElementData(localPlayer,"logedin") then
-		ambiencesound = playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
-		if ambiencesound then
-			setSoundVolume(ambiencesound,gameplayVariables["ambiencesoundvolume"])
+		if ambienceOn then
+			ambiencesound = playSound(ambiencesounds[math.random(1,#ambiencesounds)],false)
+			if ambiencesound then
+				setSoundVolume(ambiencesound,gameplayVariables["ambiencesoundvolume"])
+			end
 		end
 	end
 end
 setTimer(playAmbienceMusic,65000,0)
+
+function toggleAmbience()
+	if ambienceOn then
+		ambienceOn = false
+		outputChatBox("Turned off ambience sounds.",255,0,0)
+	else
+		ambienceOn = true
+		outputChatBox("Turned on ambience sounds.",0,255,0)
+	end
+end
+addCommandHandler("ambience",toggleAmbience)
 
 function PlayCityAmbience()
 local x,y,z = getElementPosition(localPlayer)

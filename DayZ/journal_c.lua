@@ -109,6 +109,7 @@ function openWriteJournal(button, state)
 			isWriting = true
 			guiSetVisible(JournalTable.image[1],false)
 			unbindKey("1","down",showJournal)
+			guiSetInputEnabled(false)
 		end
 	else
 		outputDebugString("Error")
@@ -126,6 +127,7 @@ function closeWriteJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
 	bindKey("1","down",showJournal)
+	guiSetInputEnabled(true)
 end
 
 function writeIntoJournal()
@@ -141,18 +143,19 @@ function writeIntoJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
 	triggerEvent("saveJournalOnQuit",localPlayer)
 	bindKey("1","down",showJournal)
+	guiSetInputEnabled(true)
 end
 
 function saveJournalOnQuit()
-	if not fileExists("journal_"..getPlayerName(source)..".txt") then
-		fileCreate("journal_"..getPlayerName(source)..".txt")
-		local journalopen = fileOpen("journal_"..getPlayerName(source)..".txt")
+	if not fileExists("journal.txt") then
+		fileCreate("journal.txt")
+		local journalopen = fileOpen("journal.txt")
 		fileWrite(journalopen,guiGetText(JournalTable.label[4]))
 		fileClose(journalopen)
 	else
-		fileDelete("journal_"..getPlayerName(source)..".txt")
-		fileCreate("journal_"..getPlayerName(source)..".txt")
-		local journalopen = fileOpen("journal_"..getPlayerName(source)..".txt")
+		fileDelete("journal.txt")
+		fileCreate("journal.txt")
+		local journalopen = fileOpen("journal.txt")
 		fileWrite(journalopen,guiGetText(JournalTable.label[4]))
 		fileClose(journalopen)
 	end
@@ -161,8 +164,8 @@ addEvent("saveJournalOnQuit",true)
 addEventHandler("saveJournalOnQuit",root,saveJournalOnQuit)
 
 function loadJournalOnJoin()
-	if fileExists("journal_"..getPlayerName(localPlayer)..".txt") then
-		local journalfile = fileOpen("journal_"..getPlayerName(localPlayer)..".txt")
+	if fileExists("journal.txt") then
+		local journalfile = fileOpen("journal.txt")
 		local journalsize = fileGetSize(journalfile)
 		local journalread = fileRead(journalfile,journalsize)
 		guiSetText(JournalTable.label[4],journalread)
@@ -176,12 +179,12 @@ addEventHandler("onClientPlayerSpawn",root,loadJournalOnJoin)
 local spacer = "\n"
 local spacercount = 0
 
-function addJournalEntryOnDamage(attacker)
+function addJournalEntryOnDamage(attacker,weapon)
 	if attacker then
 		if getElementType(attacker) == "ped" then
 			spacercount = spacercount+1
 			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"")
+				guiSetText(JournalTable.label[3],"A zombie attacked me.")
 				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..""..spacer.."A zombie attacked me.")
@@ -189,23 +192,15 @@ function addJournalEntryOnDamage(attacker)
 		elseif getElementType(attacker) == "player" then
 			spacercount = spacercount+1
 			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"")
+				guiSetText(JournalTable.label[3],"Someone shot me!")
 				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Someone shot me!")
 			end
 		end
-	else
-		spacercount = spacercount+1
-		if spacercount == 16 then
-			guiSetText(JournalTable.label[3],"")
-			spacercount = 0
-		else
-			guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Hurt myself...")
-		end
 	end
 end
-addEventHandler("onClientPlayerDamage",root,addJournalEntryOnDamage)
+addEventHandler("onClientPlayerDamage",localPlayer,addJournalEntryOnDamage)
 
 local thirststatus = false
 local foodstatus = false
@@ -216,142 +211,159 @@ local coldstatus = false
 local murderstatus = false
 local loginstatus = false
 local humanitystatus = false
+local ghilliestatus = false
 
 function addJournalEntryOnStatus()
 	if getElementData(localPlayer,"logedin") then
-		if not loginstatus then
-			local hour,minutes = getTime()
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"Woke up at "..hour..":"..minutes..". It's not just a dream...")
-				loginstatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Woke up at "..hour..":"..minutes..". It's not just a dream...")
-				loginstatus = true
+		if getElementData(localPlayer,"logedin") then
+			if not loginstatus then
+				local hour,minutes = getTime()
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"Woke up at "..hour..":"..minutes..". It's not just a dream...")
+					loginstatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Woke up at "..hour..":"..minutes..". It's not just a dream...")
+					loginstatus = true
+				end
 			end
 		end
-	end
-	if getElementData(localPlayer,"thirst") < 20 then
-		if not thirststatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"I'm extremely thirsty.")
-				thirststatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm extremely thirsty.")
-				thirststatus = true
+		if getElementData(localPlayer,"thirst") < 20 then
+			if not thirststatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"I'm extremely thirsty.")
+					thirststatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm extremely thirsty.")
+					thirststatus = true
+				end
 			end
+		else
+			thirststatus = false
 		end
-	else
-		thirststatus = false
-	end
-	if getElementData(localPlayer,"food") < 20 then
-		if not foodstatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"I'm about to die of starvation...")
-				foodstatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm about to die of starvation...")
-				foodstatus = true
+		if getElementData(localPlayer,"food") < 20 then
+			if not foodstatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"I'm about to die of starvation...")
+					foodstatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm about to die of starvation...")
+					foodstatus = true
+				end
 			end
+		else
+			foodstatus = false
 		end
-	else
-		foodstatus = false
-	end
-	if getElementData(localPlayer,"blood") < 6000 then
-		if not bloodstatus1 then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"I feel dizzy.")
-				bloodstatus1 = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel dizzy.")
-				bloodstatus1 = true
+		if getElementData(localPlayer,"blood") < 6000 then
+			if not bloodstatus1 then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"I feel dizzy.")
+					bloodstatus1 = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel dizzy.")
+					bloodstatus1 = true
+				end
 			end
+		else
+			bloodstatus1 = false
 		end
-	else
-		bloodstatus1 = false
-	end
-	if getElementData(localPlayer,"blood") < 1000 then
-		if not bloodstatus2 then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"Can't...carry...on...like that...")
-				bloodstatus2 = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Can't...carry...on...like that...")
-				bloodstatus2 = true
+		if getElementData(localPlayer,"blood") < 1000 then
+			if not bloodstatus2 then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"Can't...carry...on...like that...")
+					bloodstatus2 = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Can't...carry...on...like that...")
+					bloodstatus2 = true
+				end
 			end
+		else
+			bloodstatus2 = false
 		end
-	else
-		bloodstatus2 = false
-	end
-	if getElementData(localPlayer,"brokenbone") then
-		if not bonestatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"Broke my leg. Damn.")
-				bonestatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my leg. Damn.")
-				bonestatus = true
+		if getElementData(localPlayer,"brokenbone") then
+			if not bonestatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"Broke my leg. Damn.")
+					bonestatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my leg. Damn.")
+					bonestatus = true
+				end
 			end
+		else
+			bonestatus = false
 		end
-	else
-		bonestatus = false
-	end
-	if getElementData(localPlayer,"cold") then
-		if not coldstatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"I'm shaking like crazy. Must be a cold...")
-				coldstatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm shaking like crazy. Must be a cold...")
-				coldstatus = true
+		if getElementData(localPlayer,"cold") then
+			if not coldstatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"I'm shaking like crazy. Must be a cold...")
+					coldstatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm shaking like crazy. Must be a cold...")
+					coldstatus = true
+				end
 			end
+		else
+			coldstatus = false
 		end
-	else
-		coldstatus = false
-	end
-	if getElementData(localPlayer,"murders") == 1 then
-		if not murderstatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"Killed a human today. It felt...good. Am I going crazy?")
-				murderstatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Killed a human today. It felt...good. Am I going crazy?")
-				murderstatus = true
+		if getElementData(localPlayer,"murders") == 1 then
+			if not murderstatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"Killed a human today. It felt...good. Am I going crazy?")
+					murderstatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Killed a human today. It felt...good. Am I going crazy?")
+					murderstatus = true
+				end
 			end
+		else
+			murderstatus = false
 		end
-	else
-		murderstatus = false
-	end
-	if getElementData(localPlayer,"humanity") == 5000 then
-		if not humanitystatus then
-			spacercount = spacercount+1
-			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"I feel like a hero for helping so many people.")
-				humanitystatus = true
-				spacercount = 0
-			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel like a hero for helping so many people.")
-				humanitystatus = true
+		if getElementData(localPlayer,"humanity") == 5000 then
+			if not humanitystatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"I feel like a hero for helping so many people.")
+					humanitystatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel like a hero for helping so many people.")
+					humanitystatus = true
+				end
 			end
+		else
+			humanitystatus = false
 		end
-	else
-		humanitystatus = false
+		if getElementData(localPlayer,"skin") == 285 then
+			if not ghilliestatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"All ghillied up.")
+					ghilliestatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."All ghillied up.")
+					ghilliestatus = true
+				end
+			end
+		else
+			ghilliestatus = false
+		end
 	end
 end
 setTimer(addJournalEntryOnStatus,10000,0)
-		
