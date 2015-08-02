@@ -193,8 +193,7 @@
 	<file src="images/scoreboard.png" />
 	
 	<file src="images/journal/journal_page1.png" />
-	<file src="images/journal/journal_page2.png" />
-	<file src="images/journal/journal_page3.png" />
+
 	
 	<!-- Tools -->
     <script src="tools/jq_client.lua" type="client" cache="false" />

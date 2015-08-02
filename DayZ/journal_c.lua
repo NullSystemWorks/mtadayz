@@ -182,6 +182,7 @@ function addJournalEntryOnDamage(attacker)
 			spacercount = spacercount+1
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"")
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..""..spacer.."A zombie attacked me.")
 			end
@@ -189,6 +190,7 @@ function addJournalEntryOnDamage(attacker)
 			spacercount = spacercount+1
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"")
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Someone shot me!")
 			end
@@ -197,6 +199,7 @@ function addJournalEntryOnDamage(attacker)
 		spacercount = spacercount+1
 		if spacercount == 16 then
 			guiSetText(JournalTable.label[3],"")
+			spacercount = 0
 		else
 			guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Hurt myself...")
 		end
@@ -222,6 +225,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"Woke up at "..hour..":"..minutes..". It's not just a dream...")
 				loginstatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Woke up at "..hour..":"..minutes..". It's not just a dream...")
 				loginstatus = true
@@ -234,6 +238,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"I'm extremely thirsty.")
 				thirststatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm extremely thirsty.")
 				thirststatus = true
@@ -248,6 +253,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"I'm about to die of starvation...")
 				foodstatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm about to die of starvation...")
 				foodstatus = true
@@ -262,6 +268,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"I feel dizzy.")
 				bloodstatus1 = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel dizzy.")
 				bloodstatus1 = true
@@ -276,6 +283,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"Can't...carry...on...like that...")
 				bloodstatus2 = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Can't...carry...on...like that...")
 				bloodstatus2 = true
@@ -290,6 +298,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"Broke my leg. Damn.")
 				bonestatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my leg. Damn.")
 				bonestatus = true
@@ -304,6 +313,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"I'm shaking like crazy. Must be a cold...")
 				coldstatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I'm shaking like crazy. Must be a cold...")
 				coldstatus = true
@@ -318,6 +328,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"Killed a human today. It felt...good. Am I going crazy?")
 				murderstatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Killed a human today. It felt...good. Am I going crazy?")
 				murderstatus = true
@@ -332,6 +343,7 @@ function addJournalEntryOnStatus()
 			if spacercount == 16 then
 				guiSetText(JournalTable.label[3],"I feel like a hero for helping so many people.")
 				humanitystatus = true
+				spacercount = 0
 			else
 				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."I feel like a hero for helping so many people.")
 				humanitystatus = true
