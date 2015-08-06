@@ -173,7 +173,7 @@ addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), lo
 function saveTentsToDB()
     dbExec(tentdatabase, "DROP TABLE tents")
     dbExec(tentdatabase, "CREATE TABLE IF NOT EXISTS tents (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, objectscale FLOAT, ColsphereSize FLOAT, Owner TEXT)")
-    for i, data in ipairs(vehicleDataTable) do
+    for i, data in ipairs(tentTable) do
 		dbExec(tentdatabase,'ALTER TABLE tents ADD "'..data[1]..'" INT')
 	end
 	for i, col in ipairs(getElementsByType("colshape")) do
@@ -187,7 +187,7 @@ function saveTentsToDB()
             local scale = getObjectScale(theTent)
 			local owner = getElementID(getElementData(theTent,"parent"))
             dbExec(tentdatabase, "INSERT INTO tents (model, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, objectscale, ColSphereSize, Owner) VALUES(?,?,?,?,?,?,?,?,?,?,?)", model, x, y, z, rx, ry, rz, MAX_Slots, scale, 4, owner)
-            for key,item in ipairs(vehicleDataTable) do
+            for key,item in ipairs(tentTable) do
 				local itemAmount = getElementData(getElementData(theTent,"parent"), item[1]) or 0
 				dbExec(tentdatabase, 'UPDATE tents SET "'..item[1]..'"=? WHERE Owner=?',itemAmount,owner)
 			end
@@ -220,7 +220,7 @@ function loadTentsFromDB(q)
         local p = dbPoll( q, -1 )
         if (#p > 0) then
             for _, d in pairs (p) do
-				for i,item in ipairs(vehicleDataTable) do
+				for i,item in ipairs(tentTable) do
 					if d[item[1]] then
 						table.insert(theTentItems,{d["Owner"],item[1],d[item[1]]})
 					end

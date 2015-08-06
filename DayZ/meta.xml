@@ -16,10 +16,10 @@
 	<script src="tools/exports.lua" type="server" />
 	<script src="tools/async/slither.lua" type="shared" />
 	<script src="tools/async/async.lua" type="shared" />
-	<script src="tools/sidenotifications/textlib.lua" type="client" cache="false" />
-	<script src="tools/sidenotifications/jq_client.lua" type="client" cache="false" />
+	<script src="tools/sidenotifications/textlib.lua" type="client" />
+	<script src="tools/sidenotifications/jq_client.lua" type="client" />
 	<script src="tools/sidenotifications/jq_server.lua" type="server" />
-	<script src="tools/shaders/blackwhite/blackwhite_c.lua" type="client" cache="false" />
+	<script src="tools/shaders/blackwhite/blackwhite_c.lua" type="client"/>
 	<file src="tools/shaders/blackwhite/blackwhite.fx" />
 	<script src="tools/bone_attach/bone_attach.lua" type="server" />
     <script src="tools/bone_attach/bone_attach_c.lua" type="client" />
@@ -39,12 +39,14 @@
 	<script src="tables/table_functions.lua" type="shared" />
 	
 	<!-- configs folder -->
-    <script src="configs/cfgBaseDefines.lua" type="shared" />
+    <script src="configs/cfgBaseDefines.lua" type="shared" cache="false" />
     <script src="configs/cfgServer.lua" type="server" />
 	<script src="configs/cfgLoot.lua" type="server" />
 	<script src="configs/cfgVehicles.lua" type="server" />
 	<script src="configs/cfgWorld.lua" type="server" />
-	<script src="configs/cfgClient.lua" type="client" />
+	<script src="configs/cfgNutritions.lua" type="shared" cache="false" />
+	<script src="configs/cfgClient.lua" type="client" cache="false" />
+	<script src="addons.lua" type="server" />
 		
 	<!-- init folder -->
 	<script src="init/loot/world_loot.lua" type="server" />

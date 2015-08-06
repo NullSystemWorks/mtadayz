@@ -120,6 +120,7 @@ playerDataTable = {
 -- [[ Items ]] --
 {"Wood Pile"},
 {"Bandage"},
+{"Antibiotics"},
 {"Road Flare"},
 {"Empty Gas Canister"},
 {"Full Gas Canister"},

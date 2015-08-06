@@ -1,4 +1,4 @@
-# CHANGELOG #
+﻿# CHANGELOG #
 This changelog lists all changes made to MTA DayZ. It adheres to the following features description.
 
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
@@ -10,6 +10,95 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: For all bugs
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
 
+
+# - #
+## [0.9.4a] - 2015-08-06
+### MAJOR RESTRUCTURING OF CODE BASE! ###
+### ADDED: Dynamic Weather System
+### ADDED: Part 1 of new Nutrition System
+### ADDED: Helicrash sites now have 6 loot spots
+### ADDED: Antibiotics as an additional mean of curing a cold
+### CHANGED: Binoculars image will now fill out entire screen
+### CHANGED: Scoreboard now shows 9 players again
+### CHANGED: Chopping trees grants 1 Wood Pile
+### FIXED: Vehicles not respawning at initial spawnpositions
+### FIXED: Bug with British Assault Pack (II)
+### FIXED: Temperature not decreasing at night (or cold weather)
+### FIXED: Temperature increasing beyond 37° when running or in vehicle
+
+# - # 
+## [0.9.3.1a] - 2015-08-02
+### ADDED: Blips on map
+### ADDED: Toggleable ambience sounds (/ambience)
+### ADDED: Ghillie Suit entry in Journal
+### CHANGED: Sealed off Carrier and Area 69 for real
+### FIXED: Bug where Carrier door wouldn't properly close
+### FIXED: Journal being updated for everyone on damage
+
+# - #
+## [0.9.3a] - 2015-08-02
+### ADDED: Journal (Key: 1)
+### CHANGED: Icons for HUD
+### CHANGED: Made anti combat log more strict
+
+# - #
+## [0.9.2.2a] - 2015-07-31
+### ADDED: Anti combat logging
+### ADDED: NV and IR Goggles to military loot points
+### CHANGED: Increased players shown on scoreboard to 10
+### CHANGED: Scoreboard now ranks total kills
+### CHANGED: Can (Fruit) restores 50% thirst
+### CHANGED: Chopping a tree grants 1-4 Wood Piles
+### FIXED: Trees not respawning
+### FIXED: Not being able to change language to chinese (zh) 
+
+# - #
+## [0.9.2.1a] - 2015-07-28
+### FIXED: dxDrawImage spam when having GPS activated
+### FIXED: Grayscale shader being applied to everyone when remote player is damaged by wire fence
+### FIXED: bone_attach error spam
+### FIXED: Compass getting an "egg"-like form on certain widescreen resolutions
+
+# - #
+## [0.9.2a] - 2015-07-28
+### ADDED: Chinese language (zh)
+### ADDED: Toggleable GPS (/gps) and Compass (/compass)
+### ADDED: Exported functions
+### CHANGED: Images for compass
+### CHANGED: Screen is now turned grayscale when being damaged by wire fence
+### FIXED: zombies.dcp spam on server console
+### FIXED: Teleportation Bug
+### FIXED: Textureless zombie
+### FIXED: Fire zombie being on fire
+### FIXED: Not being able to give blood bags
+### FIXED: Not receiving any humanity upon giving bandages or blood bags
+### FIXED: Bug with British Assault Pack
+### FIXED: Infinite road flare bug
+
+# - #
+## [0.9.1.1a] - 2015-07-23
+### ADDED: Some zombies have 6.00% chance to drop Assault Pack (ACU)
+### ADDED: Config for time (check editor_server.lua)
+### ADDED: [DayZ Admin] Some missing items to inventory editor
+### CHANGED: Fixed console spam when running over zombies
+### CHANGED: Increased damage zombies receive when rammed by vehicle
+### CHANGED: Tweaked loot tables a bit
+### FIXED: Not being able to drop Main Rotary Parts etc.
+### FIXED: Some names for backpacks
+### FIXED: Image paths for some items
+### FIXED: Not being able to repair bikes
+### FIXED: Respawning with Main Rotary Parts etc.
+### FIXED: Not being able to fly some helis
+### FIXED: Surviving fall from great heights
+
+# - #
+## [0.9.1a] - 2015-07-22
+### ADDED: /language command to change language of game at any time*
+### CHANGED: Move time display to another location and added black outline
+### CHANGED: Streamlined weapon HUD code
+### CHANGED: Improved use of async for items respawning
+### FIXED: Bug where vehicles would respawn after 30 minutes
+### FIXED: [DayZ Admin] Bug where items would duplicate on gridlist
 
 # - #
 ## [0.9.0a] - 2015-07-20

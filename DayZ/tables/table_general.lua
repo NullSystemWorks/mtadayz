@@ -247,10 +247,12 @@ otherLootItems = {
 ["hospital"] = {
 {"Heat Pack",1576,1,0},
 {"Bandage",1578,0.5,0},
+{"Antibiotics",1580,0.5,0},
 {"Blood Bag",1580,1,0},
 {"Morphine",1579,1,0},
 {"Blood Bag",1580,1,0},
 {"Blood Bag",1580,1,0},
 {"Painkiller",1580,1,0},
+{"Antibiotics",1580,0.5,0},
 },
 }

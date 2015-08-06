@@ -105,6 +105,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Item", "A small pile of freshly chopped\nwood that can be used for making\na fireplace and various other things.","Wood Pile"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services standard first aid dressing.\nUsed to stop bleeding of wounds.","Bandage","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Hand operated flare commonly found\n in roadside emergency kits. Will burn\n for approximately five minutes.","Road Flare","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\nrefuelling vehicles and powering generators.\nIt's empty.","Empty Gas Canister"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerry Can that can be used for\nrefuelling vehicles and powering generators.","Full Gas Canister"},
@@ -336,6 +337,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Item", "Ein Stapel Holz, kann für ein\nFeuer verwendet werden.","Holzstapel"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services Standard Erste Hilfe Verbandszeug.\nWird zum Stoppen von Blutungen verwendet.","Wundverband","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "So etwas findet man häufig in Notfallkästen.\nBrennt für etwa 5 Minuten.","Leuchtfeuer","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Kanister zum Auffüllen des Tanks\nbei Fahrzeugen. Ist leer.","Leerer Benzinkanister"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Kanister zum Auffüllen des Tanks\nbei Fahrzeugen.","Voller Benzinkanister"},
@@ -566,6 +568,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Předmět", "Čerstvě nasbíraná hromádka\ndříví, lze použít například\nk založení ohniště.","Dříví"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Předmět", "Obvaz pro zastavení krvácení.","Obvaz","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Předmět", "Ručně aktivovatelná světlice, většinou\nse nachází ve vojenských výbavách.\nHoří kolem 5ti minut.","Světlice","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Předmět", "20L kanistr k uskladnění paliv.\nSlouží k přečerpávání paliva do vozidel.\nTento kanistr je prázdný.","Prázdný kanistr"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Předmět", "20L kanistr k uskladnění paliv.\nSlouží k přečerpávání paliva do vozidel.","Plný kanistr benzínu"},
@@ -796,6 +799,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Item", "Een kleine stapel van vers gehakte \n hout dat gebruikt kan worden voor het maken van \n een haard en diverse andere dingen.","Houtstapel"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Item", "Joint Services standaard eerste hulp dressing. \n gebruikt om het bloeden van wonden te stoppen.","Verband","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Handbediende flare vaak gevonden\n in de berm noodpakketten. Zal branden\n Voor ongeveer 5 minuten.","Road Flare","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerrycan die kunnen worder gebruik om de \n voertuigen te tanken en generatoren aan te drijven \n Bevat Niets.","Lege Brandstoffles"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "20L Jerrycan die kunnen worder gebruik om de \n voertuigen te tanken en generatoren aan te drijven","Volle Brandstoffles"},
@@ -1026,6 +1030,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Item", "Uma pilha pequena, fresca e picada de\nmadeira que pode ser usada para fazer\numa fogueira e várias outras coisas.","Pilha de Madeira"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Item", "Curativo de primeiros socorros padrão.\nUsada para parar o sangramento.","Bandagem","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Item", "Chama de mão comumente encontrada\nem kits de emergência na estrada. Irá queimar\npor aproximadamente cinco minutos.","Sinalizador","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Item", "Galão de Gasolina de 20L que pode ser usado para\nabastecer veículos e ligar geradores.\nEstá vazio.","Galão de Gasolina [Vazio]"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Item", "Galão de Gasolina de 20L que pode ser usado para\nabastecer veículos e ligar geradores.\nEstá cheio.","Galão de Gasolina"},
@@ -1254,6 +1259,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"物品", "一小堆新碎的\n可用于制造的木头\n壁炉和各种其他东西.","木头堆"},
 		{"Bandage",1, 'bandage.png', 128, 128, "物品", "绑住关节.\n用来止住伤口的血.","绷带","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "物品", "用手掰一下就发光\n 放在路边\n 可持续5分钟.","闪光弹","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"物品", "可以装入20L汽油\n给车加油和提供动力.\n它是空的.","空油管"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"物品", "可以装入20L汽油\n给车加油和提供动力.","满油管"},
@@ -1479,6 +1485,7 @@ languageTextTable = {
 	["Items"] = {
 		{"Wood Pile",2, 'wood.png',128,128,"Artículo", "Una pequeña pila de madera recién\ncortada que se puede utilizar para hacer\nuna chimenea y varias otras cosas.","Pila de Madera"},
 		{"Bandage",1, 'bandage.png', 128, 128, "Artículo", "Vendaje de primeros auxilios estándar.\nUtilizado para detener el sangrado de heridas.","Vendaje","Bandage yourself"},
+		{"Antibiotics",1, 'antibiotics.png', 128, 128, "Item", "Azithromycin is a broad spectrum \nantibiotic used to treat or prevent certain \nbacterial infections.","Antibiotics","Use"},
 		{"Road Flare",1, 'roadflare.png', 128, 128, "Artículo", "Bengala comunmente encontrada\n en kits de emergencia en carretera. Estara prendida\npor aproximadamente cinco minutos.","Bengala","Place"},
 		{"Empty Gas Canister",3, 'canister.png', 128, 128,"Artículo", "Bidón de 20L que se puede utilizar para\nreabastecimiento de combustible de vehículos y encender los generadores.\nEsta vacia","Bidón de Gasolina Vacío"},
 		{"Full Gas Canister",3, 'canister.png', 128, 128,"Artículo", "Bidón de 20L que se puede utilizar para\nreabastecimiento de combustible de vehículos y encender los generadores.","Bidón de Gasolina Lleno"},

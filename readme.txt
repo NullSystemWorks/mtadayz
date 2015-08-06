@@ -26,7 +26,7 @@ And that's it! Start the server and MTA DayZ will start automatically.
 
 
 ## COMMANDS ##
-As of Version 0.9.0, the following commands are available for admins:
+As of Version 0.9.4, the following commands are available for admins:
 
 /add <admin/supporter/remove> <Player>
 admin: Makes the player an admin
@@ -54,16 +54,12 @@ getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
 setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
 
 
-## editor_server.lua & editor_client.lua ##
-Both files contain settings with which you can customize your server. More will be added over time. 
-
-
 ## FAQ ##
 Q: Help! Vehicles won't spawn/appear!
 A: Check the vehicles database. Does it contain any entries? If not, delete the vehicleManager from the console (delaccount vehicleManager) and restart the server.
 
 Q: Error/Warning X is appearing in the server console!
-A: Please post your server log in the forum: http://mtadayz.heliohost.org/forum
+A: Please post your server log in the forum: http://mta-dayz.org/forum
 
 Q: What just happened?! I have been kicked when I tried to enter my Rhino!
 A: The anticheat measures prevent players who are not admins (ACL-wise) from entering vehicles which do not normally spawn via the MTA DayZ script.
@@ -85,6 +81,6 @@ So, instead of hindering us in our progress and development, just apply, become 
 won't help anyone. If you want to add something to make your server unique, why not tell us? We might listen if you can give us a good reason.
 
 Q: There is a question I have that does not appear in the FAQ!
-A: Go to the forum http://mtadayz.heliohost.org/forum, and ask there. We'll answer. Eventually.
+A: Go to the forum http://mta-dayz.org/forum, and ask there. We'll answer. Eventually.
 
 

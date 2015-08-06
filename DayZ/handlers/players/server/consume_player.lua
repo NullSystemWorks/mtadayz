@@ -53,55 +53,44 @@ function addPlayerStats (player,data,value)
 			setElementData(player,data,5000)
 		else
 			setElementData(player,data,current+value)
-		end		
+		end
+	--[[
+	elseif data == "calories" then
+		local current = getElementData(player,data)
+		if current + value > 3610 then
+			setElementData(player,data,3610)
+		else
+			setElementData(player,data,current+value)
+		end
+	]]
 	end
 end
 
 function onPlayerRequestChangingStats(itemName,itemInfo,data)
-	if data == "food" then
-		if itemName == "Baked Beans" then
-			blood = 200
-		elseif itemName == "Pasta" then
-			blood = 200
-		elseif itemName == "Sardines" then
-			blood = 200
-		elseif itemName == "Frank & Beans" then
-			blood = 200
-		elseif itemName == "Can (Corn)" then
-			blood = 200
-		elseif itemName == "Can (Peas)" then
-			blood = 200
-		elseif itemName == "Can (Pork)" then
-			blood = 200
-		elseif itemName == "Can (Stew)" then
-			blood = 200
-		elseif itemName == "Can (Ravioli)" then
-			blood = 200
-		elseif itemName == "Can (Fruit)" then
-			blood = 200
-			addPlayerStats(source,"thirst",50)
-		elseif itemName == "Can (Chowder)" then
-			blood = 200
-		elseif itemName == "MRE" then
-			blood = 800
-		elseif itemName == "Pistachios" then
-			blood = 100
-		elseif itemName == "Trail Mix" then
-			blood = 100
-		elseif itemName == "Cooked Meat" then
-			blood = 1500
+	for i, value in ipairs(gameplayVariables["nutritions"]) do
+		if itemName == value[1] then
+			bloodRegen = value[2]
+			calorieGain = value[3]/10
+			foodGain = value[4]/10
+			waterGain = value[5]/10
+			temperatureGain = value[6]
 		end
+	end
+	if data == "food" then
 		setPedAnimation (source,"FOOD","EAT_Burger",4000,false,false,nil,false)
-		setElementData(source,itemName,getElementData(source,itemName)-1)
-		addPlayerStats (source,"blood",blood)
-		addPlayerStats (source,data,gameplayVariables["foodrestore"])
 	elseif data == "thirst" then
-		setElementData(source,itemName,getElementData(source,itemName)-1)
-		addPlayerStats (source,data,gameplayVariables["thirstrestore"])
 		setPedAnimation (source,"VENDING","VEND_Drink2_P",4000,false,false,nil,false) 
 		if itemName == "Water Bottle" then
 			setElementData(source,"Empty Water Bottle",(getElementData(source,"Empty Water Bottle") or 0)+1)
 		end
+	end
+	setElementData(source,itemName,getElementData(source,itemName)-1)
+	addPlayerStats (source,"blood",bloodRegen)
+	--addPlayerStats (source,"calories",calorieGain)
+	addPlayerStats (source,"food",foodGain)
+	addPlayerStats (source,"thirst",waterGain)
+	if getElementData(source,"temperature") <= 35 then
+		setElementData(source,"temperature",getElementData(source,"temperature")+temperatureGain)
 	end
 	triggerClientEvent (source, "displayClientInfo", source,"Food",shownInfos["youconsumed"].." "..itemName,22,255,0)
 	triggerClientEvent(source,"refreshInventoryManual",source)
@@ -126,6 +115,9 @@ function onPlayerUseMedicObject(itemName)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Painkiller" then
 			setElementData(playersource,"pain",false)
+			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
+		elseif itemName == "Antibiotics" then
+			setElementData(playersource,"cold",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Morphine" then
 			setElementData(playersource,"brokenbone",false)
