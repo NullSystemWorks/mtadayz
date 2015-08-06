@@ -1,219 +1,325 @@
 <!--
-#---------------------------------------------------------------#
-----*			DayZ MTA Script meta.xml					*----
-----* This Script is owned by Marwin, you are allowed to use or own it.
-----* Owner: Marwin
-----* Developers: L, CiBeR, Jboy							*----
-#---------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+----*					MTA DayZ: meta.xml								*----
+----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
+
+----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
+----* 																	*----
+#-----------------------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.2.2a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.4a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 	<script src="version.lua" type="server" />
-	<script src="library/slither.lua" type="shared" />
-	<script src="library/async.lua" type="shared" />
 	<script src="logsystem.lua" type="server" />
-    <script src="editor_server.lua" type="server" />
-    <script src="editor_client.lua" type="client" cache="false" />
-    <script src="pickups.lua" type="server" />
-    <script src="spawn.lua" type="server" />
-    <script src="vehicle_spawns.lua" type="server" />
-    <script src="survivorSystem.lua" type="server" />
-    <script src="zombies.lua" type="server" />
-    <script src="animals.lua" type="server" />
-    <script src="weather.lua" type="server" />
-    <script src="login.lua" type="server" />
-	<script src="inventory.lua" type="client" cache="false" />
-	<script src="menu_client.lua" type="client" cache="false" />
-	<script src="survivorSystem_client.lua" type="client" cache="false" />
-    <script src="animals_client.lua" type="client" cache="false" />
-	<script src="textlib.lua" type="client" cache="false"/>
-    <script src="addons.lua" type="server" />
-	<script src="treelist.lua" type="server" />
-	<script src="treelist.lua" type="client" cache="false" />
-	<script src="journal_c.lua" type="client" cache="false" />
-		
-	<!-- Help File -->
-	<config src="help.xml" type="client" />
+	<script src="utilities.lua" type="shared" />
+	<script src="tools/exports.lua" type="server" />
+	<script src="tools/async/slither.lua" type="shared" />
+	<script src="tools/async/async.lua" type="shared" />
+	<script src="tools/sidenotifications/textlib.lua" type="client" cache="false" />
+	<script src="tools/sidenotifications/jq_client.lua" type="client" cache="false" />
+	<script src="tools/sidenotifications/jq_server.lua" type="server" />
+	<script src="tools/shaders/blackwhite/blackwhite_c.lua" type="client" cache="false" />
+	<file src="tools/shaders/blackwhite/blackwhite.fx" />
+	<script src="tools/bone_attach/bone_attach.lua" type="server" />
+    <script src="tools/bone_attach/bone_attach_c.lua" type="client" />
+    <script src="tools/bone_attach/attach_func.lua" type="server" />
+    <script src="tools/bone_attach/attach_func.lua" type="client" />
+    <script src="tools/bone_attach/bone_pos_rot.lua" type="client" />
 	
-	<!-- Fonts -->
+	<!-- tables folder -->
+	<script src="tables/table_animals.lua" type="shared" />
+	<script src="tables/table_general.lua" type="shared" />
+	<script src="tables/table_loot.lua" type="shared" />
+	<script src="tables/table_player.lua" type="shared" />
+	<script src="tables/table_tents.lua" type="shared" />
+	<script src="tables/table_trees.lua" type="shared" />
+	<script src="tables/table_vehicles.lua" type="shared" />
+	<script src="tables/table_zombies.lua" type="shared" />
+	<script src="tables/table_functions.lua" type="shared" />
+	
+	<!-- configs folder -->
+    <script src="configs/cfgBaseDefines.lua" type="shared" />
+    <script src="configs/cfgServer.lua" type="shared" />
+	<script src="configs/cfgLoot.lua" type="shared" />
+	<script src="configs/cfgVehicles.lua" type="shared" />
+	<script src="configs/cfgClient.lua" type="client" />
+		
+	<!-- init folder -->
+	<script src="init/loot/world_loot.lua" type="server" />
+	<script src="init/loot/other_loot.lua" type="server" />
+	<script src="init/vehicles/vehicles_init.lua" type="server" />
+	<script src="init/players/login_init.lua" type="server" />
+	<script src="init/players/spawn_init.lua" type="server" />
+	<script src="init/permissions/permissions_init.lua" type="server" />
+	<script src="init/animals/animals_init.lua" type="server" />
+
+	<!-- handlers folder -->
+	<script src="handlers/world/client/tree_chop.lua" type="client" cache="false" />
+	<script src="handlers/world/server/tree_chop.lua" type="server" />
+	<script src="handlers/world/server/loot.lua" type="server" />
+	<script src="handlers/world/server/objects.lua" type="server" />
+	<script src="handlers/world/server/chat.lua" type="server" />
+	<script src="handlers/world/server/weather.lua" type="server" />
+	
+	<script src="handlers/players/client/animations_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/crafting_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/damage_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/fpm_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/pingkick_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/status_player.lua" type="client" cache="false" />
+	
+	<script src="handlers/players/server/actions_player.lua" type="server" />
+	<script src="handlers/players/server/animations_player.lua" type="server" />
+	<script src="handlers/players/server/backpack_player.lua" type="server" />
+	<script src="handlers/players/server/consume_player.lua" type="server" />
+	<script src="handlers/players/server/damage_player.lua" type="server" />
+	<script src="handlers/players/server/loot_player.lua" type="server" />
+	<script src="handlers/players/server/pingkick_player.lua" type="server" />
+	<script src="handlers/players/server/skins_player.lua" type="server" />
+	<script src="handlers/players/server/status_player.lua" type="server" />
+	
+	<script src="handlers/vehicles/server/actions_vehicles.lua" type="server" />
+	
+	<script src="handlers/zombies/client/damage_zombies.lua" type="client" cache="false" />
+	<script src="handlers/zombies/client/movement_zombies.lua" type="client" cache="false" />
+	<script src="handlers/zombies/server/damage_zombies.lua" type="server" />
+	<script src="handlers/zombies/server/general_zombies.lua" type="server" />
+	<script src="handlers/zombies/server/kill_zombies.lua" type="server" />
+	
+	<script src="handlers/animals/client/damage_animals.lua" type="client" cache="false" />
+	<script src="handlers/animals/client/movement_animals.lua" type="client" cache="false" />
+	<script src="handlers/animals/server/kill_animals.lua" type="server" />
+	
+	<!-- gui folder -->
+	<script src="gui/gear/functions_gear.lua" type="client" cache="false" />
+	<script src="gui/gear/hud_gear.lua" type="client" cache="false" />
+	<script src="gui/gear/language_gear.lua" type="shared" cache="false" />
+	<script src="gui/gear/sidemenu_gear.lua" type="client" cache="false" />
+	<script src="gui/gear/ui_gear.lua" type="client" cache="false" />
+	<file src="gui/gear/icons/ak47.png"/>
+	<file src="gui/gear/icons/bat.png"/>
+	<file src="gui/gear/icons/binoculars.png"/>
+	<file src="gui/gear/icons/bizon.png"/>
+	<file src="gui/gear/icons/crossbow.png"/>
+	<file src="gui/gear/icons/crowbar.png"/>
+	<file src="gui/gear/icons/cz550.png"/>
+	<file src="gui/gear/icons/dmr.png"/>
+	<file src="gui/gear/icons/m4.png"/>
+	<file src="gui/gear/icons/enfield.png"/>
+	<file src="gui/gear/icons/fnfal.png"/>
+	<file src="gui/gear/icons/g17.png"/>
+	<file src="gui/gear/icons/g36c.png"/>
+	<file src="gui/gear/icons/gas.png"/>
+	<file src="gui/gear/icons/grenade.png"/>
+	<file src="gui/gear/icons/hatchet.png"/>
+	<file src="gui/gear/icons/knife.png"/>
+	<file src="gui/gear/icons/m9sd.png"/>
+	<file src="gui/gear/icons/m1911.png"/>
+	<file src="gui/gear/icons/machete.png"/>
+	<file src="gui/gear/icons/mp5a5.png"/>
+	<file src="gui/gear/icons/parachute.png"/>
+	<file src="gui/gear/icons/pdw.png"/>
+	<file src="gui/gear/icons/remington.png"/>
+	<file src="gui/gear/icons/revolver.png"/>
+	<file src="gui/gear/icons/sa58v.png"/>
+	<file src="gui/gear/icons/sawn.png"/>
+	<file src="gui/gear/icons/shovel.png"/>
+	<file src="gui/gear/icons/spaz.png"/>
+	<file src="gui/gear/icons/svd.png"/>
+	<file src="gui/gear/icons/winchester.png"/>
+	<file src="gui/gear/icons/9x18.png"/>
+	<file src="gui/gear/icons/9x19.png"/>
+	<file src="gui/gear/icons/9x19sd.png"/>
+	<file src="gui/gear/icons/45acp.png"/>
+	<file src="gui/gear/icons/ak.png"/>
+	<file src="gui/gear/icons/arrow.png"/>
+	<file src="gui/gear/icons/british.png"/>
+	<file src="gui/gear/icons/m4mag.png"/>
+	<file src="gui/gear/icons/shotgun.png"/>
+	<file src="gui/gear/icons/sniper.png"/>
+	<file src="gui/gear/icons/bakedbeans.png"/>
+	<file src="gui/gear/icons/bottle.png"/>
+	<file src="gui/gear/icons/chowder.png"/>
+	<file src="gui/gear/icons/cola.png"/>
+	<file src="gui/gear/icons/cookedmeat.png"/>
+	<file src="gui/gear/icons/corn.png"/>
+	<file src="gui/gear/icons/dew.png"/>
+	<file src="gui/gear/icons/frankbeans.png"/>
+	<file src="gui/gear/icons/fruit.png"/>
+	<file src="gui/gear/icons/milkcan.png"/>
+	<file src="gui/gear/icons/pasta.png"/>
+	<file src="gui/gear/icons/peas.png"/>
+	<file src="gui/gear/icons/pepsi.png"/>
+	<file src="gui/gear/icons/pork.png"/>
+	<file src="gui/gear/icons/ravioli.png"/>
+	<file src="gui/gear/icons/rawmeat.png"/>
+	<file src="gui/gear/icons/sardines.png"/>
+	<file src="gui/gear/icons/stew.png"/>
+	<file src="gui/gear/icons/pistachios.png"/>
+	<file src="gui/gear/icons/trailmix.png"/>
+	<file src="gui/gear/icons/mre.png"/>
+	<file src="gui/gear/icons/acu.png"/>
+	<file src="gui/gear/icons/alice.png"/>
+	<file src="gui/gear/icons/antibiotics.png"/>
+	<file src="gui/gear/icons/bandage.png"/>
+	<file src="gui/gear/icons/bloodbag.png"/>
+	<file src="gui/gear/icons/blueprint.png"/>
+	<file src="gui/gear/icons/britishpack.png"/>
+	<file src="gui/gear/icons/canister.png"/>
+	<file src="gui/gear/icons/chest.png"/>
+	<file src="gui/gear/icons/clothes.png"/>
+	<file src="gui/gear/icons/compass.png"/>
+	<file src="gui/gear/icons/coyote.png"/>
+	<file src="gui/gear/icons/czech.png"/>
+	<file src="gui/gear/icons/czechpouch.png"/>
+	<file src="gui/gear/icons/emptybottle.png"/>
+	<file src="gui/gear/icons/emptysoda.png"/>
+	<file src="gui/gear/icons/engine.png"/>
+	<file src="gui/gear/icons/engine_part.png"/>
+	<file src="gui/gear/icons/flashlight.png"/>
+	<file src="gui/gear/icons/ghillie.png"/>
+	<file src="gui/gear/icons/gps.png"/>
+	<file src="gui/gear/icons/heatpack.png"/>
+	<file src="gui/gear/icons/map.png"/>
+	<file src="gui/gear/icons/matchbox.png"/>
+	<file src="gui/gear/icons/morphine.png"/>
+	<file src="gui/gear/icons/nvgoggles.png"/>
+	<file src="gui/gear/icons/painkillers.png"/>
+	<file src="gui/gear/icons/parts.png"/>
+	<file src="gui/gear/icons/radio.png"/>
+	<file src="gui/gear/icons/roadflare.png"/>
+	<file src="gui/gear/icons/survival.png"/>
+	<file src="gui/gear/icons/tent.png"/>
+	<file src="gui/gear/icons/toolbox.png"/>
+	<file src="gui/gear/icons/trashtincan.png"/>
+	<file src="gui/gear/icons/watch.png"/>
+	<file src="gui/gear/icons/wheel.png"/>
+	<file src="gui/gear/icons/wirefence.png"/>
+	<file src="gui/gear/icons/wood.png"/>
+	<file src="gui/gear/icons/keycard.png" />
+	<file src="gui/gear/icons/glass.png" />
+	<file src="gui/gear/icons/rotary.png" />
+	<file src="gui/gear/inventory/buttArrow.png"/>
+	<file src="gui/gear/inventory/buttArrowDown.png"/>
+	<file src="gui/gear/inventory/butoff.png"/>
+	<file src="gui/gear/inventory/butclick.png"/>
+	<file src="gui/gear/inventory/inventory1.png" />
+	<file src="gui/gear/inventory/inventory2.png" />
+	<file src="gui/gear/inventory/inventory3.png" />
+	<file src="gui/gear/inventory/primary.png" />
+	<file src="gui/gear/inventory/secondary.png" />
+	<file src="gui/gear/inventory/items.png" />
+	<file src="gui/gear/items/scrollmenu_1.png" />
+	<file src="gui/gear/items/scrollmenu_2.png" />
+	<file src="gui/gear/items/scrollmenu_3.png" />
+    <file src="gui/gear/items/white.png" />
+    <file src="gui/gear/items/window_bg.png" />
+	<file src="gui/gear/items/compassborder.png" />
+    <file src="gui/gear/items/compassarrow.png" />
+	<file src="gui/gear/items/world.png" />
+	<file src="gui/gear/items/radarworld.png" />
+	<file src="gui/gear/items/gps.png" />
+	<file src="gui/gear/items/player.png" />
+	<file src="gui/gear/items/blip/0.png" />
+	<file src="gui/gear/items/blip/2.png" />
+	<file src="gui/gear/items/blip/4.png" />
+	<file src="gui/gear/items/nightvision.png" />
+	<file src="gui/gear/items/infravision.png" />
+	<file src="gui/gear/items/loot.png" />
+	<file src="gui/gear/items/binoculars.png" />
+	
+	<script src="gui/journal/journal.lua" type="client" cache="false" />
+	<file src="gui/journal/images/journal_page1.png" />
+	
+	<script src="gui/scoreboard/scoreboard.lua" type="client" cache="false" />
+	<file src="gui/scoreboard/scoreboard.png" />
+	
+	<script src="gui/status/player_status.lua" type="client" cache="false" />
+	<file src="gui/status/misc/background.png" />
+    <file src="gui/status/misc/eye.png" />
+	<file src="gui/status/misc/sound.png" />
+	<file src="gui/status/misc/brokenbone.png" />
+	<file src="gui/status/misc/medic.png" />
+	<file src="gui/status/misc/level_1.png" />
+    <file src="gui/status/misc/level_2.png" />
+    <file src="gui/status/misc/level_3.png" />
+    <file src="gui/status/misc/level_4.png" />
+    <file src="gui/status/misc/level_5.png" />
+	<file src="gui/status/misc/lc.png" />
+	<file src="gui/status/misc/dead.jpg" />
+	<file src="gui/status/blood/blood_border.png" />
+	<file src="gui/status/blood/12000.png" />
+	<file src="gui/status/blood/10000.png" />
+	<file src="gui/status/blood/8000.png" />
+	<file src="gui/status/blood/6000.png" />
+	<file src="gui/status/blood/4000.png" />
+	<file src="gui/status/blood/2000.png" />	
+	<file src="gui/status/humanity/5.png" />
+	<file src="gui/status/humanity/4.png" />
+	<file src="gui/status/humanity/3.png" />
+	<file src="gui/status/humanity/2.png" />
+	<file src="gui/status/humanity/1.png" />
+	<file src="gui/status/humanity/0.png" />
+	<file src="gui/status/hunger/food_border.png" />
+    <file src="gui/status/hunger/100.png" />
+	<file src="gui/status/hunger/80.png" />
+	<file src="gui/status/hunger/60.png" />
+	<file src="gui/status/hunger/40.png" />
+	<file src="gui/status/hunger/20.png" />
+	<file src="gui/status/hunger/0.png" />
+	<file src="gui/status/temperature/temperature_border.png" />
+	<file src="gui/status/temperature/4.png" />
+	<file src="gui/status/temperature/3.png" />
+	<file src="gui/status/temperature/2.png" />
+	<file src="gui/status/temperature/1.png" />
+	<file src="gui/status/temperature/0.png" />
+	<file src="gui/status/thirst/thirst_border.png" />
+	<file src="gui/status/thirst/100.png" />
+	<file src="gui/status/thirst/80.png" />
+	<file src="gui/status/thirst/60.png" />
+	<file src="gui/status/thirst/40.png" />
+	<file src="gui/status/thirst/20.png" />
+	<file src="gui/status/thirst/0.png" />
+	<file src="gui/status/vehicle/engine/eng_0.png" />
+	<file src="gui/status/vehicle/engine/eng_1.png" />
+	<file src="gui/status/vehicle/engine/mrot_0.png" />
+	<file src="gui/status/vehicle/engine/mrot_1.png" />
+	<file src="gui/status/vehicle/fuel/0.png" />
+	<file src="gui/status/vehicle/fuel/10.png" />
+	<file src="gui/status/vehicle/fuel/20.png" />
+	<file src="gui/status/vehicle/fuel/30.png" />
+	<file src="gui/status/vehicle/fuel/40.png" />
+	<file src="gui/status/vehicle/fuel/50.png" />
+	<file src="gui/status/vehicle/fuel/60.png" />
+	<file src="gui/status/vehicle/fuel/70.png" />
+	<file src="gui/status/vehicle/fuel/80.png" />
+	<file src="gui/status/vehicle/fuel/90.png" />
+	<file src="gui/status/vehicle/fuel/100.png" />
+	<file src="gui/status/vehicle/hull/hull_0.png" />
+	<file src="gui/status/vehicle/hull/hull_1.png" />
+	<file src="gui/status/vehicle/hull/hull_2.png" />
+	<file src="gui/status/vehicle/tank/tank_0.png" />
+	<file src="gui/status/vehicle/tank/tank_1.png" />
+	<file src="gui/status/vehicle/whl/whl_0.png" />
+	<file src="gui/status/vehicle/whl/whl_1.png" />
+	
+	<!-- BattlDayZ (V1) -->
+	<script src="battldayz/battldayz_server.lua" type="server" />
+	<script src="battldayz/battldayz_client.lua" type="client" cache="false" />
+	
+	<!-- fonts folder -->
 	<file src="fonts/etelka.ttf" />
 	<file src="fonts/etelka_narrow.ttf" />
 	<file src="fonts/bitstream.ttf" />
 	<file src="fonts/tahomab.ttf" />
 	<file src="fonts/28dayslater.ttf" />
 	<file src="fonts/needhelp.ttf" />
+	<file src="fonts/zeppelin.ttf" />
 	
-	<!-- Anti Cheat -->
-	<script src="anticheat_s.lua" type="server" />
-	<script src="anticheat_c.lua" type="client" cache="false" />
-	
-	<!-- Log System -->
-	<export function="saveLog" type="server" />
-	<export function="returnLog" type="server" />
-	
-	<!-- Language Files -->
-	<script src="language_c.lua" type="client" cache="false" />
-	<script src="language_s.lua" type="server" />
-	
-	<!-- Exports -->
-	<script src="exports_s.lua" type="server" />
-	<export function="setPlayerBlood" type="server" />
-	<export function="setPlayerMurders" type="server" />
-	<export function="setPlayerZombiesKilled" type="server" />
-	<export function="setPlayerHumanity" type="server" />
-	
-	<export function="getPlayerBlood" type="server" />
-	<export function="getPlayerMurders" type="server" />
-	<export function="getPlayerZombiesKilled" type="server" />
-	<export function="getPlayerHumanity" type="server" />
-	<export function="getActualTime" type="server"  />
-	
-	<export function="getPlayerCurrentSlots" type="client" />
-	<export function="getPlayerMaxAviableSlots" type="client" />
-	<export function="getItemSlots" type="client" />
-	<export function="isPlayerInLoot" type="client" />
-	<export function="getLootMaxAviableSlots" type="client" />
-	<export function="getLootCurrentSlots" type="client" />
-	<export function="isToolbeltItem" type="client" />
-	
-	<!-- New Inventory -->
-	<script src="inventory_new.lua" type="client" cache="false" />
-	<file src="icons/ak47.png"/>
-	<file src="icons/bat.png"/>
-	<file src="icons/binoculars.png"/>
-	<file src="icons/bizon.png"/>
-	<file src="icons/crossbow.png"/>
-	<file src="icons/crowbar.png"/>
-	<file src="icons/cz550.png"/>
-	<file src="icons/dmr.png"/>
-	<file src="icons/m4.png"/>
-	<file src="icons/enfield.png"/>
-	<file src="icons/fnfal.png"/>
-	<file src="icons/g17.png"/>
-	<file src="icons/g36c.png"/>
-	<file src="icons/gas.png"/>
-	<file src="icons/grenade.png"/>
-	<file src="icons/hatchet.png"/>
-	<file src="icons/knife.png"/>
-	<file src="icons/m9sd.png"/>
-	<file src="icons/m1911.png"/>
-	<file src="icons/machete.png"/>
-	<file src="icons/mp5a5.png"/>
-	<file src="icons/parachute.png"/>
-	<file src="icons/pdw.png"/>
-	<file src="icons/remington.png"/>
-	<file src="icons/revolver.png"/>
-	<file src="icons/sa58v.png"/>
-	<file src="icons/sawn.png"/>
-	<file src="icons/shovel.png"/>
-	<file src="icons/spaz.png"/>
-	<file src="icons/svd.png"/>
-	<file src="icons/winchester.png"/>
-	
-	<file src="icons/9x18.png"/>
-	<file src="icons/9x19.png"/>
-	<file src="icons/9x19sd.png"/>
-	<file src="icons/45acp.png"/>
-	<file src="icons/ak.png"/>
-	<file src="icons/arrow.png"/>
-	<file src="icons/british.png"/>
-	<file src="icons/m4mag.png"/>
-	<file src="icons/shotgun.png"/>
-	<file src="icons/sniper.png"/>
-	
-	<file src="icons/bakedbeans.png"/>
-	<file src="icons/bottle.png"/>
-	<file src="icons/chowder.png"/>
-	<file src="icons/cola.png"/>
-	<file src="icons/cookedmeat.png"/>
-	<file src="icons/corn.png"/>
-	<file src="icons/dew.png"/>
-	<file src="icons/frankbeans.png"/>
-	<file src="icons/fruit.png"/>
-	<file src="icons/milkcan.png"/>
-	<file src="icons/pasta.png"/>
-	<file src="icons/peas.png"/>
-	<file src="icons/pepsi.png"/>
-	<file src="icons/pork.png"/>
-	<file src="icons/ravioli.png"/>
-	<file src="icons/rawmeat.png"/>
-	<file src="icons/sardines.png"/>
-	<file src="icons/stew.png"/>
-	<file src="icons/pistachios.png"/>
-	<file src="icons/trailmix.png"/>
-	<file src="icons/mre.png"/>
-	
-	<file src="icons/acu.png"/>
-	<file src="icons/alice.png"/>
-	<file src="icons/antibiotics.png"/>
-	<file src="icons/bandage.png"/>
-	<file src="icons/bloodbag.png"/>
-	<file src="icons/blueprint.png"/>
-	<file src="icons/britishpack.png"/>
-	<file src="icons/canister.png"/>
-	<file src="icons/chest.png"/>
-	<file src="icons/clothes.png"/>
-	<file src="icons/compass.png"/>
-	<file src="icons/coyote.png"/>
-	<file src="icons/czech.png"/>
-	<file src="icons/czechpouch.png"/>
-	<file src="icons/emptybottle.png"/>
-	<file src="icons/emptysoda.png"/>
-	<file src="icons/engine.png"/>
-	<file src="icons/engine_part.png"/>
-	<file src="icons/flashlight.png"/>
-	<file src="icons/ghillie.png"/>
-	<file src="icons/gps.png"/>
-	<file src="icons/heatpack.png"/>
-	<file src="icons/map.png"/>
-	<file src="icons/matchbox.png"/>
-	<file src="icons/morphine.png"/>
-	<file src="icons/nvgoggles.png"/>
-	<file src="icons/painkillers.png"/>
-	<file src="icons/parts.png"/>
-	<file src="icons/radio.png"/>
-	<file src="icons/roadflare.png"/>
-	<file src="icons/survival.png"/>
-	<file src="icons/tent.png"/>
-	<file src="icons/toolbox.png"/>
-	<file src="icons/trashtincan.png"/>
-	<file src="icons/watch.png"/>
-	<file src="icons/wheel.png"/>
-	<file src="icons/wirefence.png"/>
-	<file src="icons/wood.png"/>
-	<file src="icons/keycard.png" />
-	<file src="icons/glass.png" />
-	<file src="icons/rotary.png" />
-	
-	<file src="images/buttArrow.png"/>
-	<file src="images/buttArrowDown.png"/>
-	<file src="images/butoff.png"/>
-	<file src="images/butclick.png"/>
-	<file src="images/scoreboard.png" />
-	
-	<file src="images/journal/journal_page1.png" />
-
-	
-	<!-- Tools -->
-    <script src="tools/jq_client.lua" type="client" cache="false" />
-	<script src="tools/jq_server.lua" type="server" />
-	<file src="tools/images/c_info/rand.png" />
-    <file src="tools/images/background.png" />
-    <file src="tools/images/imageHolder.png" />
-    <file src="tools/images/flags/died.png" />
-    <file src="tools/images/flags/join.png" />
-    <file src="tools/images/flags/quit.png" />
-	
-	<!-- Shader -->
-    <script src="shader/motion/motion_c.lua" type="client" />
-    <file src="shader/motion/motion.fx" />
-    <script src="shader/blackwhite/blackwhite_c.lua" type="client" />
-    <file src="shader/blackwhite/blackwhite.fx" />
-	
-    <!-- Group System -->
-	<script src="group_system/group.lua" type="client"/>
-	<script src="group_system/group.slua" type="server"/>
+	<!-- group folder -->
+	<script src="group/group.lua" type="client"/>
+	<script src="group/group.slua" type="server"/>
 	<export function="removeRank" type="server"/>
 	<export function="isRank" type="server"/>
 	<export function="getGroupMembers" type="server"/>
@@ -228,251 +334,209 @@
 	<export function="getGroupBankAmount" type="server"/>
 	<export function="viewWindow" type="server"/>
 	
-    
-	<!-- Bone Attachments -->
-	<script src="bone_attach/bone_attach.lua" />
-    <script src="bone_attach/bone_attach_c.lua" type="client" />
-    <script src="bone_attach/attach_func.lua" />
-    <script src="bone_attach/attach_func.lua" type="client" />
-    <script src="bone_attach/bone_pos_rot.lua" type="client" />
+	<!-- Help File -->
+	<config src="help.xml" type="client" />
 	
-	<!-- Addon: Exported Functions -->
-    <export function="addAddonInfo" type="server" />
-    <export function="addDayZInfoBox" type="client" />
-    
-    <!-- Images -->
-    <file src="images/scrollmenu_1.png" />
-	<file src="images/scrollmenu_2.png" />
-    <file src="images/white.png" />
-    <file src="images/window_bg.png" />
-    <file src="images/dead.jpg" />
-	<file src="images/nightvision.png" />
-	<file src="images/infravision.png" />
-	<file src="images/dayzicons/background.png" />
-    <file src="images/dayzicons/eye.png" />
-	<file src="images/dayzicons/sound.png" />
-	<file src="images/dayzicons/brokenbone.png" />
-	<file src="images/dayzicons/medic.png" />
+	<!-- Exports -->
+	<export function="saveLog" type="server" />
+	<export function="returnLog" type="server" />
+	<export function="setPlayerBlood" type="server" />
+	<export function="setPlayerMurders" type="server" />
+	<export function="setPlayerZombiesKilled" type="server" />
+	<export function="setPlayerHumanity" type="server" />
+	<export function="getPlayerBlood" type="server" />
+	<export function="getPlayerMurders" type="server" />
+	<export function="getPlayerZombiesKilled" type="server" />
+	<export function="getPlayerHumanity" type="server" />
+	<export function="getActualTime" type="server"  />
+	<export function="getPlayerCurrentSlots" type="client" />
+	<export function="getPlayerMaxAviableSlots" type="client" />
+	<export function="getItemSlots" type="client" />
+	<export function="isPlayerInLoot" type="client" />
+	<export function="getLootMaxAviableSlots" type="client" />
+	<export function="getLootCurrentSlots" type="client" />
+	<export function="isToolbeltItem" type="client" />
+    <export function="addAddonInfo" type="server" />    
+   	
+	<!-- models folder -->
+    <file src="models/players/txd/ghilliesuit.txd" />
+    <file src="models/players/dff/ghilliesuit.dff" />
+    <file src="models/players/txd/civilian_male.txd" />
+    <file src="models/players/dff/civilian_male.dff" />
+	<file src="models/players/txd/bandit1_male.txd" />
+	<file src="models/players/dff/bandit1_male.dff" />
+	<file src="models/players/txd/bandit2_male.txd" />
+	<file src="models/players/dff/bandit2_male.dff" />
+	<file src="models/players/txd/bandit3_male.txd" />
+    <file src="models/players/dff/bandit3_male.dff" />
+    <file src="models/players/txd/standard_male.txd" />
+    <file src="models/players/dff/standard_male.dff" />
+	<file src="models/players/txd/civilian_female.txd" />
+    <file src="models/players/dff/civilian_female.dff" />
+	<file src="models/players/txd/bandit1_female.txd" />
+	<file src="models/players/dff/bandit1_female.dff" />
+	<file src="models/players/txd/bandit2_female.txd" />
+    <file src="models/players/dff/bandit2_female.dff" />
+    <file src="models/players/txd/standard_female.txd" />
+    <file src="models/players/dff/standard_female.dff" />
+    <file src="models/players/txd/hero_male.txd" />
+    <file src="models/players/dff/hero_male.dff" />
+	<file src="models/players/txd/army_male.txd" />
+	<file src="models/players/dff/army_male.dff" />
+    <file src="models/animals/txd/bear.txd" />
+    <file src="models/animals/dff/bear.dff" />
+    <file src="models/animals/txd/fox.txd" />
+    <file src="models/animals/dff/fox.dff" />
+	<file src="models/animals/txd/cow1.txd" />
+	<file src="models/animals/dff/cow1.dff" />
+	<file src="models/animals/txd/cow2.txd" />
+	<file src="models/animals/dff/cow2.dff" />
+	<file src="models/animals/txd/goat.txd" />
+	<file src="models/animals/dff/goat.dff" />
+    <file src="models/animals/txd/wolf.txd" />
+    <file src="models/animals/dff/wolf.dff" />
+	<file src="models/weapons/txd/fnfal.txd" />
+	<file src="models/weapons/dff/fnfal.dff" />
+	<file src="models/weapons/txd/g36c.txd" />
+	<file src="models/weapons/dff/g36c.dff" />
+	<file src="models/weapons/txd/crossbow.txd" />
+	<file src="models/weapons/dff/crossbow.dff" />
+	<file src="models/weapons/txd/bizon.txd" />
+	<file src="models/weapons/dff/bizon.dff" />
+	<file src="models/weapons/txd/dmr.txd" />
+	<file src="models/weapons/dff/dmr.dff" />
+	<file src="models/weapons/txd/dragunov.txd" />
+	<file src="models/weapons/dff/dragunov.dff" />
+	<file src="models/weapons/txd/revolver.txd" />
+	<file src="models/weapons/dff/revolver.dff" />
+	<file src="models/weapons/txd/sa58v.txd" />
+	<file src="models/weapons/dff/sa58v.dff" />
+	<file src="models/weapons/txd/remington.txd" />
+	<file src="models/weapons/dff/remington.dff" />
+	<file src="models/weapons/txd/m1911.txd" />
+	<file src="models/weapons/dff/m1911.dff" />
+	<file src="models/weapons/txd/sks.txd" />
+	<file src="models/weapons/dff/sks.dff" />
+	<file src="models/weapons/txd/binoculars.txd" />
+	<file src="models/weapons/dff/binoculars.dff" />
+	<file src="models/weapons/txd/hatchet.txd" />
+	<file src="models/weapons/dff/hatchet.dff" />
+    <file src="models/zombies/txd/22.txd" />
+    <file src="models/zombies/txd/56.txd" />
+    <file src="models/zombies/txd/67.txd" />
+    <file src="models/zombies/txd/68.txd" />
+    <file src="models/zombies/txd/69.txd" />
+    <file src="models/zombies/txd/70.txd" />
+    <file src="models/zombies/txd/84.txd" />
+    <file src="models/zombies/txd/92.txd" />
+    <file src="models/zombies/txd/97.txd" />
+    <file src="models/zombies/txd/105.txd" />
+    <file src="models/zombies/txd/107.txd" />
+    <file src="models/zombies/txd/108.txd" />
+    <file src="models/zombies/txd/111.txd" />
+    <file src="models/zombies/txd/126.txd" />
+    <file src="models/zombies/txd/127.txd" />
+    <file src="models/zombies/txd/128.txd" />
+    <file src="models/zombies/txd/152.txd" />
+    <file src="models/zombies/txd/162.txd" />
+    <file src="models/zombies/txd/167.txd" />
+    <file src="models/zombies/txd/188.txd" />
+    <file src="models/zombies/txd/192.txd" />
+    <file src="models/zombies/txd/195.txd" />
+    <file src="models/zombies/txd/206.txd" />
+    <file src="models/zombies/txd/209.txd" />
+    <file src="models/zombies/txd/212.txd" />
+    <file src="models/zombies/txd/229.txd" />
+    <file src="models/zombies/txd/230.txd" />
+    <file src="models/zombies/txd/258.txd" />
+    <file src="models/zombies/txd/264.txd" />
+    <file src="models/zombies/txd/274.txd" />
+    <file src="models/zombies/txd/277.txd" />
+    <file src="models/zombies/txd/280.txd" />
+    <file src="models/zombies/txd/287.txd" />
+	<file src="models/zombies/dff/22.dff" />
+    <file src="models/zombies/dff/56.dff" />
+    <file src="models/zombies/dff/67.dff" />
+    <file src="models/zombies/dff/68.dff" />
+    <file src="models/zombies/dff/69.dff" />
+    <file src="models/zombies/dff/70.dff" />
+    <file src="models/zombies/dff/92.dff" />
+    <file src="models/zombies/dff/97.dff" />
+    <file src="models/zombies/dff/105.dff" />
+    <file src="models/zombies/dff/107.dff" />
+    <file src="models/zombies/dff/108.dff" />
+    <file src="models/zombies/dff/126.dff" />
+    <file src="models/zombies/dff/127.dff" />
+    <file src="models/zombies/dff/128.dff" />
+    <file src="models/zombies/dff/152.dff" />
+    <file src="models/zombies/dff/162.dff" />
+    <file src="models/zombies/dff/167.dff" />
+    <file src="models/zombies/dff/188.dff" />
+    <file src="models/zombies/dff/195.dff" />
+    <file src="models/zombies/dff/206.dff" />
+    <file src="models/zombies/dff/209.dff" />
+    <file src="models/zombies/dff/212.dff" />
+    <file src="models/zombies/dff/229.dff" />
+    <file src="models/zombies/dff/230.dff" />
+    <file src="models/zombies/dff/258.dff" />
+    <file src="models/zombies/dff/264.dff" />
+    <file src="models/zombies/dff/277.dff" />
+    <file src="models/zombies/dff/280.dff" />
+	<file src="models/items/txd/army_clothes.txd" />
+	<file src="models/items/dff/army_clothes.dff" />
+	<file src="models/items/txd/sniper_clothes.txd" />
+	<file src="models/items/dff/sniper_clothes.dff" />
+	<file src="models/items/txd/civilian_clothes.txd" />
+	<file src="models/items/dff/civilian_clothes.dff" />
+	<file src="models/items/txd/standard_clothes.txd" />
+	<file src="models/items/dff/standard_clothes.dff" />
+	<file src="models/items/txd/beans_can.txd" />
+    <file src="models/items/dff/beans_can.dff" />
+    <file src="models/items/txd/first_aid_kit.txd" />
+    <file src="models/items/dff/first_aid_kit.dff" />
+	<file src="models/items/txd/heat_pack.txd" />
+    <file src="models/items/dff/heat_pack.dff" />
+	<file src="models/items/txd/pain_killers.txd" />
+    <file src="models/items/dff/pain_killers.dff" />
+    <file src="models/items/txd/pasta_can.txd" />
+    <file src="models/items/dff/pasta_can.dff" />
+	<file src="models/items/txd/pistol_ammo.txd" />
+    <file src="models/items/dff/pistol_ammo.dff" />
+    <file src="models/items/txd/shotgun_ammo.txd" />
+    <file src="models/items/dff/shotgun_ammo.dff" />
+    <file src="models/items/txd/backpack_small.txd" />
+    <file src="models/items/dff/backpack_small.dff" />
+	<file src="models/items/txd/smg_ammo.txd" />
+    <file src="models/items/dff/smg_ammo.dff" />
+    <file src="models/items/txd/sniper_ammo.txd" />
+    <file src="models/items/dff/sniper_ammo.dff" />
+	<file src="models/items/txd/soda_can.txd" />
+    <file src="models/items/dff/soda_can.dff" />
+    <file src="models/items/txd/water_bottle.txd" />
+    <file src="models/items/dff/water_bottle.dff" />
+    <file src="models/items/txd/assault_ammo.txd" />
+    <file src="models/items/dff/assault_ammo.dff" />
+    <file src="models/items/txd/backpack_alice.txd" />
+    <file src="models/items/dff/backpack_alice.dff" />
+	<file src="models/items/txd/backpack_czech.txd" />
+    <file src="models/items/dff/backpack_czech.dff" />
+    <file src="models/items/txd/backpack_coyote.txd" />
+    <file src="models/items/dff/backpack_coyote.dff" />
+	<file src="models/items/txd/backpack_ghillie.txd" />
+    <file src="models/items/dff/backpack_ghillie.dff" />
+	<file src="models/items/txd/backpack_os.txd" />
+    <file src="models/items/dff/backpack_os.dff" />
+	<file src="models/items/txd/tent.txd" />
+    <file src="models/items/dff/tent.dff" />
+	<file src="models/items/dff/tent.col" />
+    <file src="models/items/txd/wirefence.txd" />
+    <file src="models/items/dff/wirefence.dff" />
+	<file src="models/items/txd/windscreenglass.txd" />
+	<file src="models/items/dff/windscreenglass.dff" />
+	<script src="models/loadskins.lua" type="client" cache="false" />
+	<script src="models/weaponswitch.lua" type="client" cache="false" />
 	
-	<file src="images/dayzicons/level_1.png" />
-    <file src="images/dayzicons/level_2.png" />
-    <file src="images/dayzicons/level_3.png" />
-    <file src="images/dayzicons/level_4.png" />
-    <file src="images/dayzicons/level_5.png" />
-	<file src="images/dayzicons/brokenbone.png" />
-	
-	<file src="images/dayzicons/humanity/5.png" />
-	<file src="images/dayzicons/humanity/4.png" />
-	<file src="images/dayzicons/humanity/3.png" />
-	<file src="images/dayzicons/humanity/2.png" />
-	<file src="images/dayzicons/humanity/1.png" />
-	<file src="images/dayzicons/humanity/0.png" />
-	
-	<file src="images/dayzicons/blood/blood_border.png" />
-	<file src="images/dayzicons/blood/12000.png" />
-	<file src="images/dayzicons/blood/10000.png" />
-	<file src="images/dayzicons/blood/8000.png" />
-	<file src="images/dayzicons/blood/6000.png" />
-	<file src="images/dayzicons/blood/4000.png" />
-	<file src="images/dayzicons/blood/2000.png" />
-    
-	<file src="images/dayzicons/hunger/food_border.png" />
-    <file src="images/dayzicons/hunger/100.png" />
-	<file src="images/dayzicons/hunger/80.png" />
-	<file src="images/dayzicons/hunger/60.png" />
-	<file src="images/dayzicons/hunger/40.png" />
-	<file src="images/dayzicons/hunger/20.png" />
-	<file src="images/dayzicons/hunger/0.png" />
-	
-	<file src="images/dayzicons/temperature/temperature_border.png" />
-	<file src="images/dayzicons/temperature/4.png" />
-	<file src="images/dayzicons/temperature/3.png" />
-	<file src="images/dayzicons/temperature/2.png" />
-	<file src="images/dayzicons/temperature/1.png" />
-	<file src="images/dayzicons/temperature/0.png" />
-	
-	<file src="images/dayzicons/thirst/thirst_border.png" />
-	<file src="images/dayzicons/thirst/100.png" />
-	<file src="images/dayzicons/thirst/80.png" />
-	<file src="images/dayzicons/thirst/60.png" />
-	<file src="images/dayzicons/thirst/40.png" />
-	<file src="images/dayzicons/thirst/20.png" />
-	<file src="images/dayzicons/thirst/0.png" />
-	
-	<file src="images/dayzicons/vehicle/engine/eng_0.png" />
-	<file src="images/dayzicons/vehicle/engine/eng_1.png" />
-	
-	<file src="images/dayzicons/vehicle/engine/mrot_0.png" />
-	<file src="images/dayzicons/vehicle/engine/mrot_1.png" />
-	
-	<file src="images/dayzicons/vehicle/fuel/0.png" />
-	<file src="images/dayzicons/vehicle/fuel/10.png" />
-	<file src="images/dayzicons/vehicle/fuel/20.png" />
-	<file src="images/dayzicons/vehicle/fuel/30.png" />
-	<file src="images/dayzicons/vehicle/fuel/40.png" />
-	<file src="images/dayzicons/vehicle/fuel/50.png" />
-	<file src="images/dayzicons/vehicle/fuel/60.png" />
-	<file src="images/dayzicons/vehicle/fuel/70.png" />
-	<file src="images/dayzicons/vehicle/fuel/80.png" />
-	<file src="images/dayzicons/vehicle/fuel/90.png" />
-	<file src="images/dayzicons/vehicle/fuel/100.png" />
-	
-	<file src="images/dayzicons/vehicle/hull/hull_0.png" />
-	<file src="images/dayzicons/vehicle/hull/hull_1.png" />
-	<file src="images/dayzicons/vehicle/hull/hull_2.png" />
-	
-	<file src="images/dayzicons/vehicle/tank/tank_0.png" />
-	<file src="images/dayzicons/vehicle/tank/tank_1.png" />
-	
-	<file src="images/dayzicons/vehicle/whl/whl_0.png" />
-	<file src="images/dayzicons/vehicle/whl/whl_1.png" />
-    
-	<file src="images/dayzicons/lc.png" />
-	<file src="images/dayzicons/loot.png" />
-	<file src="images/compassborder.png" />
-    <file src="images/compassarrow.png" />
-	<file src="images/inventory1.png" />
-	<file src="images/inventory2.png" />
-	<file src="images/inventory3.png" />
-	<file src="images/primary.png" />
-	<file src="images/secondary.png" />
-	<file src="images/items.png" />
-	<file src="images/scroll.png" />
-	
-	<file src="images/world.png" type="client"></file>
-	<file src="images/radarworld.png" type="client"></file>
-	<file src="images/gps.png" type="client"></file>
-	<file src="images/player.png" type="client"></file>
-	<file src="images/blip/0.png" type="client"></file>
-	<file src="images/blip/2.png" type="client"></file>
-	<file src="images/blip/4.png" type="client"></file>
-	
-	<!-- Mods (Weapons & Playerskins & Animals) -->
-    <file src="mods/playerskins/sniper.txd" />
-    <file src="mods/playerskins/sniper.dff" />
-    <file src="mods/playerskins/civilian.txd" />
-    <file src="mods/playerskins/civilian.dff" />
-	<file src="mods/playerskins/bandit2.txd" />
-	<file src="mods/playerskins/bandit2.dff" />
-	<file src="mods/playerskins/bandit3.txd" />
-    <file src="mods/playerskins/bandit3.dff" />
-    <file src="mods/playerskins/standart.txd" />
-    <file src="mods/playerskins/standart.dff" />
-	<file src="mods/playerskins/civilian_female.txd" />
-    <file src="mods/playerskins/civilian_female.dff" />
-	<file src="mods/playerskins/bandit_female1.txd" />
-	<file src="mods/playerskins/bandit_female1.dff" />
-	<file src="mods/playerskins/bandit_female2.txd" />
-    <file src="mods/playerskins/bandit_female2.dff" />
-    <file src="mods/playerskins/femalestandard.txd" />
-    <file src="mods/playerskins/femalestandard.dff" />
-    <file src="mods/playerskins/hero.txd" />
-    <file src="mods/playerskins/hero.dff" />
-	<file src="mods/playerskins/army.txd" />
-	<file src="mods/playerskins/army.dff" />
-    <file src="mods/animals/bear.txd" />
-    <file src="mods/animals/bear.dff" />
-    <file src="mods/animals/fox.txd" />
-    <file src="mods/animals/fox.dff" />
-	<file src="mods/animals/cow1.txd" />
-	<file src="mods/animals/cow1.dff" />
-	<file src="mods/animals/cow2.txd" />
-	<file src="mods/animals/cow2.dff" />
-	<file src="mods/animals/goat.txd" />
-	<file src="mods/animals/goat.dff" />
-    <file src="mods/animals/wolf.txd" />
-    <file src="mods/animals/wolf.dff" />
-	<file src="mods/weapons/fnfal.txd" />
-	<file src="mods/weapons/fnfal.dff" />
-	<file src="mods/weapons/g36c.txd" />
-	<file src="mods/weapons/g36c.dff" />
-	<file src="mods/weapons/crossbow.txd" />
-	<file src="mods/weapons/crossbow.dff" />
-	<file src="mods/weapons/bizon.txd" />
-	<file src="mods/weapons/bizon.dff" />
-	<file src="mods/weapons/dmr.txd" />
-	<file src="mods/weapons/dmr.dff" />
-	<file src="mods/weapons/dragunov.txd" />
-	<file src="mods/weapons/dragunov.dff" />
-	<file src="mods/weapons/revolver.txd" />
-	<file src="mods/weapons/revolver.dff" />
-	<file src="mods/weapons/sa58v.txd" />
-	<file src="mods/weapons/sa58v.dff" />
-	<file src="mods/weapons/remington.txd" />
-	<file src="mods/weapons/remington.dff" />
-	<file src="mods/weapons/m1911.txd" />
-	<file src="mods/weapons/m1911.dff" />
-	<file src="mods/weapons/sks.txd" />
-	<file src="mods/weapons/sks.dff" />
-	<file src="mods/weapons/knife.txd" />
-	<file src="mods/weapons/knife.dff" />
-	
-	<!-- Skins TXD -->
-    <file src="skins/22.txd" />
-    <file src="skins/56.txd" />
-    <file src="skins/67.txd" />
-    <file src="skins/68.txd" />
-    <file src="skins/69.txd" />
-    <file src="skins/70.txd" />
-    <file src="skins/84.txd" />
-    <file src="skins/92.txd" />
-    <file src="skins/97.txd" />
-    <file src="skins/105.txd" />
-    <file src="skins/107.txd" />
-    <file src="skins/108.txd" />
-    <file src="skins/111.txd" />
-    <file src="skins/126.txd" />
-    <file src="skins/127.txd" />
-    <file src="skins/128.txd" />
-    <file src="skins/152.txd" />
-    <file src="skins/162.txd" />
-    <file src="skins/167.txd" />
-    <file src="skins/188.txd" />
-    <file src="skins/192.txd" />
-    <file src="skins/195.txd" />
-    <file src="skins/206.txd" />
-    <file src="skins/209.txd" />
-    <file src="skins/212.txd" />
-    <file src="skins/229.txd" />
-    <file src="skins/230.txd" />
-    <file src="skins/258.txd" />
-    <file src="skins/264.txd" />
-    <file src="skins/274.txd" />
-    <file src="skins/277.txd" />
-    <file src="skins/280.txd" />
-    <file src="skins/287.txd" />
-	
-	<!-- Skin DFF -->
-	<file src="skins/22.dff" />
-    <file src="skins/56.dff" />
-    <file src="skins/67.dff" />
-    <file src="skins/68.dff" />
-    <file src="skins/69.dff" />
-    <file src="skins/70.dff" />
-    <file src="skins/92.dff" />
-    <file src="skins/97.dff" />
-    <file src="skins/105.dff" />
-    <file src="skins/107.dff" />
-    <file src="skins/108.dff" />
-    <file src="skins/126.dff" />
-    <file src="skins/127.dff" />
-    <file src="skins/128.dff" />
-    <file src="skins/152.dff" />
-    <file src="skins/162.dff" />
-    <file src="skins/167.dff" />
-    <file src="skins/188.dff" />
-    <file src="skins/195.dff" />
-    <file src="skins/206.dff" />
-    <file src="skins/209.dff" />
-    <file src="skins/212.dff" />
-    <file src="skins/229.dff" />
-    <file src="skins/230.dff" />
-    <file src="skins/258.dff" />
-    <file src="skins/264.dff" />
-    <file src="skins/277.dff" />
-    <file src="skins/280.dff" />
-	
-	<!-- Sounds -->	
+	<!-- sounds folder -->	
 	<file src="sounds/zombies/zgroan (1).ogg" />
 	<file src="sounds/zombies/zgroan (2).ogg" />
 	<file src="sounds/zombies/zgroan (3).ogg" />
@@ -509,7 +573,6 @@
 	<file src="sounds/zombies/zgroan (34).ogg" />
 	<file src="sounds/zombies/zgroan (35).ogg" />
 	<file src="sounds/zombies/zgroan (36).ogg" />
-	
 	<file src="sounds/ambience/ambience_1.ogg" />
 	<file src="sounds/ambience/ambience_2.ogg" />
 	<file src="sounds/ambience/ambience_3.ogg" />
@@ -527,72 +590,15 @@
 	<file src="sounds/ambience/ambience_15.ogg" />
 	<file src="sounds/ambience/ambience_16.ogg" />
 	<file src="sounds/ambience/helicopter.mp3" />
-	<file src="sounds/cough.mp3" />
-	<file src="sounds/campfire.mp3" />
-	<file src="sounds/coughing.mp3" />
-	<file src="sounds/bonecrack.mp3" />
-	<file src="sounds/crafting.mp3" />
-	<file src="sounds/sneezing.mp3" />
-	<file src="sounds/openinventory.mp3" />
-	<file src="sounds/journal.wav" />
-	
-	<!-- Item Textures -->
-	<file src="items/army_clothes.txd" />
-	<file src="items/army_clothes.dff" />
-	<file src="items/sniper_clothes.txd" />
-	<file src="items/sniper_clothes.dff" />
-	<file src="items/civilian_clothes.txd" />
-	<file src="items/civilian_clothes.dff" />
-	<file src="items/standard_clothes.txd" />
-	<file src="items/standard_clothes.dff" />
-	<file src="items/beans_can.txd" />
-    <file src="items/beans_can.dff" />
-    <file src="items/first_aid_kit.txd" />
-    <file src="items/first_aid_kit.dff" />
-	<file src="items/heat_pack.txd" />
-    <file src="items/heat_pack.dff" />
-	<file src="items/pain_killers.txd" />
-    <file src="items/pain_killers.dff" />
-    <file src="items/pasta_can.txd" />
-    <file src="items/pasta_can.dff" />
-	<file src="items/pistol_ammo.txd" />
-    <file src="items/pistol_ammo.dff" />
-    <file src="items/shotgun_ammo.txd" />
-    <file src="items/shotgun_ammo.dff" />
-    <file src="items/backpack_small.txd" />
-    <file src="items/backpack_small.dff" />
-	<file src="items/smg_ammo.txd" />
-    <file src="items/smg_ammo.dff" />
-    <file src="items/sniper_ammo.txd" />
-    <file src="items/sniper_ammo.dff" />
-	<file src="items/soda_can.txd" />
-    <file src="items/soda_can.dff" />
-    <file src="items/water_bottle.txd" />
-    <file src="items/water_bottle.dff" />
-    <file src="items/assault_ammo.txd" />
-    <file src="items/assault_ammo.dff" />
-    <file src="items/backpack_alice.txd" />
-    <file src="items/backpack_alice.dff" />
-	<file src="items/backpack_czech.txd" />
-    <file src="items/backpack_czech.dff" />
-    <file src="items/backpack_coyote.txd" />
-    <file src="items/backpack_coyote.dff" />
-	<file src="items/backpack_ghillie.txd" />
-    <file src="items/backpack_ghillie.dff" />
-	<file src="items/backpack_os.txd" />
-    <file src="items/backpack_os.dff" />
-	<file src="items/tent.txd" />
-    <file src="items/tent.dff" />
-	<file src="items/tent.col" />
-    <file src="items/wirefence.txd" />
-    <file src="items/wirefence.dff" />
-    <file src="items/katana.txd" />
-    <file src="items/katana.dff" />
-    <file src="items/camera.txd" />
-    <file src="items/camera.dff" />
-	<file src="items/windscreenglass.txd" />
-	<file src="items/windscreenglass.dff" />
-	
+	<file src="sounds/status/cough.mp3" />
+	<file src="sounds/items/campfire.mp3" />
+	<file src="sounds/status/coughing.mp3" />
+	<file src="sounds/status/bonecrack.mp3" />
+	<file src="sounds/status/crafting.mp3" />
+	<file src="sounds/status/sneezing.mp3" />
+	<file src="sounds/status/openinventory.mp3" />
+	<file src="sounds/status/journal.wav" />
+
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	

@@ -1,0 +1,28 @@
+<!--
+#---------------------------------------------------------------#
+----*			DayZ MTA Script meta.xml					*----
+----* This Script is owned by Marwin, you are allowed to use or own it.
+----* Owner: Marwin
+----* Developers: L, CiBeR, Jboy							*----
+#---------------------------------------------------------------#
+-->
+<meta>
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.2a" type="gamemode" />
+    <!-- Group System 
+	<script src="group.lua" type="client"/>
+	<script src="group.slua" type="server"/>
+	<export function="removeRank" type="server"/>
+	<export function="isRank" type="server"/>
+	<export function="getGroupMembers" type="server"/>
+	<export function="getPlayerGroup" type="server"/>
+	<export function="getPlayerGroupRank" type="server"/>
+	<export function="getPlayerWarningLevel" type="server"/>
+	<export function="getPlayerJoinDate" type="server"/>
+	<export function="outputGroupMessage" type="server"/>
+	<export function="checkGroupAccess" type="server"/>
+	<export function="getPermissionCount" type="server"/>
+	<export function="getGroupRankCount" type="server"/>
+	<export function="getGroupBankAmount" type="server"/>
+	<export function="viewWindow" type="server"/>
+	-->
+</meta>

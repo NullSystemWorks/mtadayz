@@ -1,15 +1,15 @@
 --[[
-#---------------------------------------------------------------#
-----*			DayZ MTA Script version.lua			    	*----
-----* This Script is owned by Marwin, you are not allowed to use or own it.
-----* Owner: Marwin W., Germany, Lower Saxony, Otterndorf
-----* Skype: xxmavxx96
-----* Developers: L, CiBeR,	Jboy							*----
-#---------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
+----*					MTA DayZ: version.lua						*----
+----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
+
+----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
+----* Type: SERVER														*----
+#-----------------------------------------------------------------------------#
 ]]
 
 local timer
-version = "0.9.3.1a"
+version = "0.9.4a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
