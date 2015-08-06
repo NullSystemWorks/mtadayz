@@ -8,24 +8,24 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-local citysounds = {"sounds/ambience/helicopter.mp3"}
+local citysounds = {":DayZ/sounds/ambience/helicopter.mp3"}
 local ambiencesounds = {
-	"sounds/ambience/ambience_1.ogg",
-	"sounds/ambience/ambience_2.ogg",
-	"sounds/ambience/ambience_3.ogg",
-	"sounds/ambience/ambience_4.ogg",
-	"sounds/ambience/ambience_5.ogg",
-	"sounds/ambience/ambience_6.ogg",
-	"sounds/ambience/ambience_7.ogg",
-	"sounds/ambience/ambience_8.ogg",
-	"sounds/ambience/ambience_9.ogg",
-	"sounds/ambience/ambience_10.ogg",
-	"sounds/ambience/ambience_11.ogg",
-	"sounds/ambience/ambience_12.ogg",
-	"sounds/ambience/ambience_13.ogg",
-	"sounds/ambience/ambience_14.ogg",
-	"sounds/ambience/ambience_15.ogg",
-	"sounds/ambience/ambience_16.ogg",
+	":DayZ/sounds/ambience/ambience_1.ogg",
+	":DayZ/sounds/ambience/ambience_2.ogg",
+	":DayZ/sounds/ambience/ambience_3.ogg",
+	":DayZ/sounds/ambience/ambience_4.ogg",
+	":DayZ/sounds/ambience/ambience_5.ogg",
+	":DayZ/sounds/ambience/ambience_6.ogg",
+	":DayZ/sounds/ambience/ambience_7.ogg",
+	":DayZ/sounds/ambience/ambience_8.ogg",
+	":DayZ/sounds/ambience/ambience_9.ogg",
+	":DayZ/sounds/ambience/ambience_10.ogg",
+	":DayZ/sounds/ambience/ambience_11.ogg",
+	":DayZ/sounds/ambience/ambience_12.ogg",
+	":DayZ/sounds/ambience/ambience_13.ogg",
+	":DayZ/sounds/ambience/ambience_14.ogg",
+	":DayZ/sounds/ambience/ambience_15.ogg",
+	":DayZ/sounds/ambience/ambience_16.ogg",
 }
 
 local ambienceOn = true
@@ -46,7 +46,7 @@ function PlayCityAmbience()
 local x,y,z = getElementPosition(localPlayer)
 local city = getZoneName(x,y,z)
 	if city == "Los Santos" or city == "Las Venturas" or city == "San Fierro" then
-		playSound("sounds/ambience4.mp3",false)
+		playSound(":DayZ/sounds/ambience/helicopter.mp3",false)
 	else return end
 end
 setTimer(PlayCityAmbience,300000,0)
@@ -64,42 +64,42 @@ addCommandHandler("ambience",toggleAmbience)
 
 -- PLAY ZOMBIE SOUNDS
 local zombiesounds = {
-	"sounds/zombies/zgroan (1).ogg", 
-	"sounds/zombies/zgroan (2).ogg",
-	"sounds/zombies/zgroan (3).ogg", 
-	"sounds/zombies/zgroan (4).ogg", 
-	"sounds/zombies/zgroan (5).ogg", 
-	"sounds/zombies/zgroan (6).ogg", 
-	"sounds/zombies/zgroan (7).ogg",
-	"sounds/zombies/zgroan (8).ogg",
-	"sounds/zombies/zgroan (9).ogg",
-	"sounds/zombies/zgroan (10).ogg",
-	"sounds/zombies/zgroan (11).ogg", 
-	"sounds/zombies/zgroan (12).ogg",
-	"sounds/zombies/zgroan (13).ogg", 
-	"sounds/zombies/zgroan (14).ogg", 
-	"sounds/zombies/zgroan (15).ogg", 
-	"sounds/zombies/zgroan (16).ogg", 
-	"sounds/zombies/zgroan (17).ogg",
-	"sounds/zombies/zgroan (18).ogg",
-	"sounds/zombies/zgroan (19).ogg",
-	"sounds/zombies/zgroan (20).ogg", 
-	"sounds/zombies/zgroan (21).ogg", 
-	"sounds/zombies/zgroan (22).ogg",
-	"sounds/zombies/zgroan (23).ogg", 
-	"sounds/zombies/zgroan (24).ogg", 
-	"sounds/zombies/zgroan (25).ogg", 
-	"sounds/zombies/zgroan (26).ogg", 
-	"sounds/zombies/zgroan (27).ogg",
-	"sounds/zombies/zgroan (28).ogg",
-	"sounds/zombies/zgroan (29).ogg",
-	"sounds/zombies/zgroan (30).ogg", 
-	"sounds/zombies/zgroan (31).ogg", 
-	"sounds/zombies/zgroan (32).ogg",
-	"sounds/zombies/zgroan (33).ogg", 
-	"sounds/zombies/zgroan (34).ogg", 
-	"sounds/zombies/zgroan (35).ogg", 
-	"sounds/zombies/zgroan (36).ogg", 
+	":DayZ/sounds/zombies/zgroan (1).ogg", 
+	":DayZ/sounds/zombies/zgroan (2).ogg",
+	":DayZ/sounds/zombies/zgroan (3).ogg", 
+	":DayZ/sounds/zombies/zgroan (4).ogg", 
+	":DayZ/sounds/zombies/zgroan (5).ogg", 
+	":DayZ/sounds/zombies/zgroan (6).ogg", 
+	":DayZ/sounds/zombies/zgroan (7).ogg",
+	":DayZ/sounds/zombies/zgroan (8).ogg",
+	":DayZ/sounds/zombies/zgroan (9).ogg",
+	":DayZ/sounds/zombies/zgroan (10).ogg",
+	":DayZ/sounds/zombies/zgroan (11).ogg", 
+	":DayZ/sounds/zombies/zgroan (12).ogg",
+	":DayZ/sounds/zombies/zgroan (13).ogg", 
+	":DayZ/sounds/zombies/zgroan (14).ogg", 
+	":DayZ/sounds/zombies/zgroan (15).ogg", 
+	":DayZ/sounds/zombies/zgroan (16).ogg", 
+	":DayZ/sounds/zombies/zgroan (17).ogg",
+	":DayZ/sounds/zombies/zgroan (18).ogg",
+	":DayZ/sounds/zombies/zgroan (19).ogg",
+	":DayZ/sounds/zombies/zgroan (20).ogg", 
+	":DayZ/sounds/zombies/zgroan (21).ogg", 
+	":DayZ/sounds/zombies/zgroan (22).ogg",
+	":DayZ/sounds/zombies/zgroan (23).ogg", 
+	":DayZ/sounds/zombies/zgroan (24).ogg", 
+	":DayZ/sounds/zombies/zgroan (25).ogg", 
+	":DayZ/sounds/zombies/zgroan (26).ogg", 
+	":DayZ/sounds/zombies/zgroan (27).ogg",
+	":DayZ/sounds/zombies/zgroan (28).ogg",
+	":DayZ/sounds/zombies/zgroan (29).ogg",
+	":DayZ/sounds/zombies/zgroan (30).ogg", 
+	":DayZ/sounds/zombies/zgroan (31).ogg", 
+	":DayZ/sounds/zombies/zgroan (32).ogg",
+	":DayZ/sounds/zombies/zgroan (33).ogg", 
+	":DayZ/sounds/zombies/zgroan (34).ogg", 
+	":DayZ/sounds/zombies/zgroan (35).ogg", 
+	":DayZ/sounds/zombies/zgroan (36).ogg", 
 } 
 local zedSound = false
 
@@ -133,7 +133,7 @@ function playCampfireSound()
 	local x = getElementData(source,"x")
 	local y = getElementData(source,"y")
 	local z = getElementData(source,"z")
-	campfiresound = playSound3D("sounds/campfire.mp3",x,y,z,true)
+	campfiresound = playSound3D(":DayZ/sounds/items/campfire.mp3",x,y,z,true)
 end
 addEvent("playCampfireSound",true)
 addEventHandler("playCampfireSound",root,playCampfireSound)

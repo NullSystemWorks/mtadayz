@@ -14,7 +14,6 @@ local timeTimer = 10000
 local realtime = getRealTime()
 setTime(realtime.hour, realtime.minute)
 setFarClipDistance(1000)
-setFogDistance(100)
 
 function checkSetTime()
 	if gameplayVariables["realtime"] then
@@ -129,7 +128,7 @@ setTimer(setTheWeather,math.random(1800000,3600000),0)
 local initializeWeather = false
 
 if not initializeWeather then
-	setWeather(math.random(0,9))
+	setWeather(math.random(14,16))
 	initializeWeather = true
 end
 
@@ -137,7 +136,7 @@ function setTheWeather()
 local number = math.random(0,18)
 	setWeatherBlended(number)
 end
-setTimer(setTheWeather,900000,0) --900000
+setTimer(setTheWeather,1800000,0)
 
 function setNight (hour,minutes)
 	if gameplayVariables["enablenight"] then

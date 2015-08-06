@@ -10,7 +10,7 @@
 
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.3.1a"
+		dayzVersion = "MTA:DayZ 0.9.4a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -62,6 +62,12 @@ function setPlayerBleeding()
 				setElementData(localPlayer,"bleeding",0)
 			end
 		end
+	end
+end
+setTimer(setPlayerBleeding,30000,0)
+
+function setPlayerDeath()
+	if getElementData(localPlayer,"logedin") then
 		if getElementData(localPlayer,"blood") <= 0 then
 			if not getElementData(localPlayer,"isDead") then
 				triggerServerEvent("kilLDayZPlayer",localPlayer,false,false)
@@ -69,7 +75,7 @@ function setPlayerBleeding()
 		end
 	end
 end
-setTimer(setPlayerBleeding,30000,0)
+setTimer(setPlayerDeath,1000,0)
 
 function setPlayerBrokenbone()
 	if getElementData(localPlayer,"logedin") then

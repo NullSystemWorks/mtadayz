@@ -39,7 +39,6 @@ function createHeliCrashSite()
 				setElementData(heliLoot,ammoData,math.random(1,2))
 			end
 		end
-		outputServerLog("Helicrashsite created at X:"..tostring(x2)..", Y: "..tostring(y2).." Z: "..tostring(z2))
 	end
 	setTimer(createHeliCrashSite,3600000,1)
 end

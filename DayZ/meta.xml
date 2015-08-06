@@ -40,9 +40,10 @@
 	
 	<!-- configs folder -->
     <script src="configs/cfgBaseDefines.lua" type="shared" />
-    <script src="configs/cfgServer.lua" type="shared" />
-	<script src="configs/cfgLoot.lua" type="shared" />
-	<script src="configs/cfgVehicles.lua" type="shared" />
+    <script src="configs/cfgServer.lua" type="server" />
+	<script src="configs/cfgLoot.lua" type="server" />
+	<script src="configs/cfgVehicles.lua" type="server" />
+	<script src="configs/cfgWorld.lua" type="server" />
 	<script src="configs/cfgClient.lua" type="client" />
 		
 	<!-- init folder -->
@@ -537,6 +538,7 @@
 	<script src="models/weaponswitch.lua" type="client" cache="false" />
 	
 	<!-- sounds folder -->	
+	<script src="sounds/sounds.lua" type="client" cache="false" />
 	<file src="sounds/zombies/zgroan (1).ogg" />
 	<file src="sounds/zombies/zgroan (2).ogg" />
 	<file src="sounds/zombies/zgroan (3).ogg" />

@@ -30,6 +30,7 @@ function regenerateBlood()
 end
 setTimer(regenerateBlood,60000,0)
 
+--[[
 function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -70,6 +71,28 @@ function checkTemperature()
 	end	
 end
 setTimer(checkTemperature,60000,0)
+]]
+
+function checkTemperature()
+	for i,player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			local value = 0
+			for k,v in ipairs(gameplayVariables["weather"]) do
+				local weatherID = getWeather()
+				if weatherID == v[1] then
+					value = v[2]
+				else
+				end
+			end
+			local hour, minutes = getTime()
+			if hour >= 21 and hour <= 8 then
+				value = value-0.05
+			end
+			addPlayerStats(player,"temperature",value)
+		end
+	end
+end
+setTimer(checkTemperature,30000,0)
 
 function checkTemperature2()
 	for i,player in ipairs(getElementsByType("player")) do
@@ -79,10 +102,14 @@ function checkTemperature2()
 				value = value+gameplayVariables["temperaturewater"]
 			end	
 			if getControlState (player,"sprint") then
-				value = value+gameplayVariables["temperaturesprint"]
+				if getElementData(player,"temperature") <= 37 then
+					value = value+gameplayVariables["temperaturesprint"]
+				end
 			end
 			if isPedInVehicle(player) then
-				value = value+0.008
+				if getElementData(player,"temperature") <= 37 then
+					value = value+0.008
+				end
 			end
 			addPlayerStats (player,"temperature",value)
 		end	
