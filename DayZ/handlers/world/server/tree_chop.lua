@@ -23,6 +23,11 @@ function onPlayerChopTree( worldID, worldX, worldY, worldZ, worldRX, worldRY, wo
 	setTimer( setElementCollisionsEnabled, 1000, 1, tree, false )
 	moveObject( tree, 4000, worldX, worldY, worldZ, 0, 87, 0, "OutBounce" )
 	setTimer( destroyElement, 4000, 1, tree )
+
+	local x, y, z = getElementPosition(source)
+	local item, itemString = getItemTablePosition("Wood Pile")
+  
+	createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
 end
 addEvent( "onPlayerChopTree", true )
 addEventHandler( "onPlayerChopTree", root, onPlayerChopTree )
