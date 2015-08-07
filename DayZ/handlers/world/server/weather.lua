@@ -126,6 +126,7 @@ setTimer(setTheWeather,math.random(1800000,3600000),0)
 ]]
 
 local initializeWeather = false
+local weatherRandomizer = 1800000
 
 if not initializeWeather then
 	setWeather(math.random(14,16))
@@ -134,9 +135,17 @@ end
 
 function setTheWeather()
 local number = math.random(0,18)
+weatherRandomizer = math.random(600000,1800000)
 	setWeatherBlended(number)
+	if number == 8 then
+		setFarClipDistance(400)
+	elseif number == 9 then
+		setFarClipDistance(200)
+	else
+		setFarClipDistance(900)
+	end
 end
-setTimer(setTheWeather,1800000,0)
+setTimer(setTheWeather,weatherRandomizer,0)
 
 function setNight (hour,minutes)
 	if gameplayVariables["enablenight"] then

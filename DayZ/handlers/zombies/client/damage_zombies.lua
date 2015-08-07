@@ -30,6 +30,8 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 					headshot = true
 				end
 				setElementData(source,"blood",getElementData(source,"blood")-damage)
+				local soundnumber =  math.random(0,6)
+				playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
 				if getElementData(source,"blood") <= 0 then
 					triggerServerEvent("onZombieGetsKilled",source,attacker,headshot)
 				end

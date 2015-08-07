@@ -1,0 +1,16 @@
+<meta>
+	<info name="Speedometer" longname="Speedometer" description="A speedometer drawn by dx-functions, including altimeter and odometer" author="driver2" type="script" version="1.0" />
+
+	<script src="defaultSettings.lua" type="client" />
+	<script src="Settings.lua" type="client" />
+	<script src="util.lua" type="client" />
+	<script src="Draw.lua" type="client" />
+	<script src="xml.lua" type="client" />
+	<script src="odometer.lua" type="client" />
+	<script src="client.lua" type="client" />
+
+	<file src="vehicles.xml" />
+	<file src="bg.png" />
+	<file src="border.png" />
+	<file src="center.png" />
+</meta>

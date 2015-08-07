@@ -231,11 +231,21 @@ function freecamMouse (cX,cY,aX,aY)
 		elseif rotY > -PI/15 then
 			rotY = -PI/15
 		end
+		if rotX < -PI / 4 then
+			rotX = -PI / 4
+		elseif rotX > -PI/15 then
+			rotX = -PI/15
+		end			
 	else
 		if rotY < -PI / 4 then
 			rotY = -PI / 4
 		elseif rotY > PI / 3.5 then
 			rotY = PI / 3.5
+		end
+		if rotX < -PI / 2 then
+			rotX = -PI / 2
+		elseif rotX > PI / 2 then
+			rotX = PI / 2
 		end
 	end
 end

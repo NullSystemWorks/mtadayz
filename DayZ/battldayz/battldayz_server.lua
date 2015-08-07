@@ -144,3 +144,8 @@ function protectedByBattlDayZ()
 end
 addEventHandler("onPlayerLogin",root,protectedByBattlDayZ)
 
+function onCombatNotifyServer(player)
+	outputDebugString("[BattlDayZ] "..getPlayerName(player).." is in combat")
+end
+addEvent("onCombatNotifyServer",true)
+addEventHandler("onCombatNotifyServer",root,onCombatNotifyServer)

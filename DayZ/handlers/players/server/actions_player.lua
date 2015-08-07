@@ -11,7 +11,8 @@
 tent_counter = 0
 function onPlayerPitchATent (itemName)
 	setElementData(source,itemName,getElementData(source,itemName)-1)
-	setPedAnimation (source,"BOMBER","BOM_Plant",1300,false,false,nil,false)
+	triggerClientEvent("onPlayerActionPlaySound",source,"tent")
+	setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	local source = source
 	setTimer( function ()		
 			local x,y,z = getElementPosition(source)
@@ -78,6 +79,7 @@ addEvent("removeWirefence",true)
 addEventHandler("removeWirefence",getRootElement(),removeWirefence)
 
 function removeTent (object)
+	setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	local x,y,z = getElementPosition(getElementData(object,"parent"))
 	local item,itemString = getItemTablePosition("Tent")
 	local itemPickup = createItemPickup(item,x,y,z+1,itemString)

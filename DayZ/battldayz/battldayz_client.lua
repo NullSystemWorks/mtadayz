@@ -33,22 +33,25 @@ function playerLosingConnection()
 	end
 end
 
+combatloglabel = guiCreateLabel(0.82, 0.00, 0.27, 0.04, "No Combat", true)
+guiSetVisible(combatloglabel,false)
+
 function createLogLabel()
 	if gameplayVariables["combatlog"] then
-		combatloglabel = guiCreateLabel(0.82, 0.00, 0.27, 0.04, "No Combat", true)
+		guiSetVisible(combatloglabel,true)
 		guiLabelSetColor(combatloglabel, 17, 249, 5)
 		guiLabelSetHorizontalAlign(combatloglabel, "center", false)
 		guiLabelSetVerticalAlign(combatloglabel, "center")
 	end
 end
-addEventHandler("onClientPlayerSpawn",root,createLogLabel)
+addEventHandler("onClientPlayerSpawn",localPlayer,createLogLabel)
 
 function onPlayerActivateCombatLog(attacker)
 	if gameplayVariables["combatlog"] then
 		if attacker and attacker == "player" then
 			local time = getRealTime()
 			setElementData (source,"combattime",time.timestamp)
-			outputDebugString("[BattlDayZ] "..getPlayerName(source).." is in combat")
+			triggerServerEvent("onCombatNotifyServer",root,source)
 			guiSetText(combatloglabel,"Combat")
 			guiLabelSetColor(combatloglabel,255,0,0)
 			setTimer(function(source)

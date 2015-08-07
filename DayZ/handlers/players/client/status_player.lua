@@ -103,7 +103,8 @@ function setPlayerCold()
 			local x, y, z, lx, ly, lz = getCameraMatrix()
 			randomsound = math.random(0,99)
 			if randomsound >= 0 and randomsound <= 10 then
-				playSound(":DayZ/sounds/status/coughing.mp3",false)
+				local getnumber = math.random(0,2)
+				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
 				setElementData(localPlayer,"volume",100)
 				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 			elseif randomsound >= 11 and randomsound <= 20 then	
@@ -277,3 +278,18 @@ function updatePlayTime()
 	end	
 end
 setTimer(updatePlayTime,60000,0)
+
+function onPlayerActionPlaySound(item)
+	if item == "meat" then
+		local number = math.random(0,1)
+		playSound(":DayZ/sounds/items/cook_"..number..".ogg",false)
+	elseif item == "water" then
+		playSound(":DayZ/sounds/items/fillwater.ogg",false)
+	elseif item == "tent" then
+		playSound(":DayZ/sounds/items/tentunpack.ogg",false)
+	elseif item == "repair" then
+		playSound(":DayZ/sounds/items/repair.ogg",false)
+	end
+end
+addEvent("onPlayerActionPlaySound",true)
+addEventHandler("onPlayerActionPlaySound",root,onPlayerActionPlaySound)

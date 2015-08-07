@@ -77,9 +77,9 @@ function onPlayerRequestChangingStats(itemName,itemInfo,data)
 		end
 	end
 	if data == "food" then
-		setPedAnimation (source,"FOOD","EAT_Burger",4000,false,false,nil,false)
+		setPedAnimation (source,"FOOD","EAT_Burger",6000,false,false,nil,false)
 	elseif data == "thirst" then
-		setPedAnimation (source,"VENDING","VEND_Drink2_P",4000,false,false,nil,false) 
+		setPedAnimation (source,"VENDING","VEND_Drink2_P",6000,false,false,nil,false) 
 		if itemName == "Water Bottle" then
 			setElementData(source,"Empty Water Bottle",(getElementData(source,"Empty Water Bottle") or 0)+1)
 		end
@@ -100,7 +100,7 @@ addEventHandler("onPlayerRequestChangingStats",getRootElement(),onPlayerRequestC
 
 function onPlayerUseMedicObject(itemName)
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",4000,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	setTimer( function ()
 		if itemName == "Bandage" then
 			setElementData(playersource,"bleeding",0)
@@ -134,7 +134,7 @@ addEventHandler("onPlayerUseMedicObject",getRootElement(),onPlayerUseMedicObject
 
 function onPlayerGiveMedicObject(itemName,player)
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",4000,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	setTimer( function ()
 		if itemName == "bandage" then
 			setElementData(player,"bleeding",0)
@@ -152,6 +152,7 @@ addEventHandler("onPlayerGiveMedicObject",getRootElement(),onPlayerGiveMedicObje
 
 function onPlayerRefillWaterBottle (itemName)
 	if isElementInWater(source) then
+		triggerClientEvent("onPlayerActionPlaySound",playersource,"water")
 		setElementData(source,"Water Bottle",getElementData(source,"Water Bottle")+1)
 		setElementData(source,itemName,getElementData(source,itemName)-1)
 		triggerClientEvent(source,"refreshInventoryManual",source)
@@ -165,7 +166,8 @@ addEventHandler("onPlayerRefillWaterBottle",getRootElement(),onPlayerRefillWater
 
 function addPlayerCookMeat ()
 	local playersource = source
-	setPedAnimation (playersource,"BOMBER","BOM_Plant",1300,false,false,nil,false)
+	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
+	triggerClientEvent("onPlayerActionPlaySound",playersource,"meat")
 	local meat = getElementData(playersource,"Raw Meat")
 	setTimer(function()
 			setElementData(playersource,"Raw Meat",0)

@@ -136,6 +136,7 @@ local itemPlus = 1
 					addingfuel = getVehicleMaxFuel(loot)-getElementData(loot,"fuel")
 				end
 				setElementData(loot,"fuel",getElementData(loot,"fuel")+addingfuel)
+				playSound(":DayZ/sounds/items/refuel.ogg",false)
 			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)-itemPlus)
 			setElementData(localPlayer,"Empty Gas Canister",(getElementData(localPlayer,"Empty Gas Canister") or 0)+itemPlus) 
 			triggerEvent ("displayClientInfo", localPlayer,"Vehicle","Filled gas into vehicle!",22,255,0) 
@@ -350,10 +351,17 @@ local fireCounter = 0
 function playerUseItem(itemName,itemInfo)
 	if itemInfo == "Drink" then
 		if getElementData(localPlayer,itemName) >= 1 then
+			if itemName == "Water Bottle" then
+				playSound(":DayZ/sounds/items/drink_0.ogg",false)
+			else
+				playSound(":DayZ/sounds/items/drinksoda.ogg",false)
+			end
 			triggerServerEvent("onPlayerRequestChangingStats",localPlayer,itemName,itemInfo,"thirst")
 		end
 	elseif itemInfo == "Eat" then
 		if getElementData(localPlayer,itemName) >= 1 then
+			local number = math.random(0,3)
+			playSound(":DayZ/sounds/items/eat_"..number..".ogg",false)
 			triggerServerEvent("onPlayerRequestChangingStats",localPlayer,itemName,itemInfo,"food")
 		end
 	elseif itemInfo == "Put clothes on" then
@@ -361,6 +369,7 @@ function playerUseItem(itemName,itemInfo)
 	elseif itemName == "Empty Water Bottle" then
 		triggerServerEvent("onPlayerRefillWaterBottle",localPlayer,itemName)		
 	elseif itemName == "Tent" then
+		playSound(":DayZ/sounds/items/tentunpack.ogg",false)
 		triggerServerEvent("onPlayerPitchATent",localPlayer,itemName)
 	elseif itemInfo == "Build a wire fence"	then
 		triggerServerEvent("onPlayerBuildAWireFence",localPlayer,itemName)
@@ -377,10 +386,14 @@ function playerUseItem(itemName,itemInfo)
     elseif itemInfo == "Heat" then
         triggerServerEvent("onPlayerUseMedicObject",localPlayer,itemName)
     elseif itemInfo == "Painkiller" then
+		local number = math.random(0,3)
+		playSound(":DayZ/sounds/items/painkiller_"..number..".ogg",false)
         triggerServerEvent("onPlayerUseMedicObject",localPlayer,itemName)
     elseif itemInfo == "Morphine" then
         triggerServerEvent("onPlayerUseMedicObject",localPlayer,itemName)
     elseif itemName == "Bandage" then
+		local number = math.random(0,1)
+		playSound(":DayZ/sounds/items/bandage_"..number..".ogg",false)
         triggerServerEvent("onPlayerUseMedicObject",localPlayer,itemName)  
 	elseif itemName == "Blood Bag" then
 		triggerServerEvent("onPlayerUseMedicObject",localPlayer,itemName)
