@@ -66,4 +66,4 @@ function playSoundOnWeaponFire(weapon)
 		--playSFX("genrl",136,24,false)
 	end 
 end
-addEventHandler ( "onClientPlayerWeaponFire", localPlayer, playSoundOnWeaponFire )
+addEventHandler ( "onClientPlayerWeaponFire", root, playSoundOnWeaponFire )
