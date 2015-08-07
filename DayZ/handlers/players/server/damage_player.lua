@@ -205,3 +205,13 @@ function weaponDelete(dataName,oldValue)
 	end
 end
 addEventHandler("onElementDataChange",getRootElement(),weaponDelete)
+
+function onPlayerChangeStatus(status,value)
+	if status == "humanity" then
+		setElementData(source,status,getElementData(source,status)+value)
+	elseif status == "isInBuilding" then
+		setElementData(source,status,value)
+	end
+end
+addEvent("onPlayerChangeStatus",true)
+addEventHandler("onPlayerChangeStatus",root,onPlayerChangeStatus)

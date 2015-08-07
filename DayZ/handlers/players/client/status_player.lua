@@ -118,9 +118,9 @@ setTimer(setPlayerCold,40000,0)
 
 function isPlayerInBuilding(x,y,z)
 	if isInBuilding(x,y,z) then
-		setElementData(source,"isInBuilding",true)
+		triggerServerEvent("onPlayerChangeStatus",source,"isInBuilding",true)
 	else
-		setElementData(source,"isInBuilding",false)
+		triggerServerEvent("onPlayerChangeStatus",source,"isInBuilding",false)
 	end
 end
 addEvent("isPlayerInBuilding",true)

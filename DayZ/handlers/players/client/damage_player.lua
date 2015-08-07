@@ -81,12 +81,12 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
 		if not getElementData(localPlayer,"bandit") then
-			setElementData(attacker,"humanity",getElementData(attacker,"humanity")-math.random(40,200))
+			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",-math.random(40,200))
 			if getElementData(attacker,"humanity") < 0 then
 				setElementData(attacker,"bandit",true)
 			end
 		else
-			setElementData(attacker,"humanity",getElementData(attacker,"humanity")+math.random(40,200))
+			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",math.random(400,200))
 			if getElementData(attacker,"humanity") > 5000 then
 				setElementData(attacker,"humanity",5000)
 			end
