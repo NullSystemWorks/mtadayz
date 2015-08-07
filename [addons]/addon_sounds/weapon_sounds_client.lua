@@ -5,14 +5,11 @@ function playSoundOnWeaponFire(weapon)
 	local x2,y2,z2 = getElementPosition(source)
 	if weapon == 22 then
 		if getElementData(localPlayer,"currentweapon_2") == "M1911" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) < 20 then
-				local distance = getDistanceBetweenPoints3D(x,y,z,x2,y2,z2)
-				outputChatBox("Distance: "..tostring(distance))
+			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
 				playSound3D("sounds/M1911.wav",x2,y2,z2,false)
 			else
-				local distance = getDistanceBetweenPoints3D(x,y,z,x2,y2,z2)
-				outputChatBox("Distance (2): "..tostring(distance))
-				playSound3D("sounds/M1911.wav",x,y,z)
+				local sound = playSound("sounds/M1911.wav",false)
+				setSoundMaxDistance(sound,0)
 			end
 		elseif getElementData(localPlayer,"currentweapon_2") == "G17" then
 			playSound("sounds/G17.wav",false)
@@ -71,3 +68,12 @@ function playSoundOnWeaponFire(weapon)
 	end 
 end
 addEventHandler ( "onClientPlayerWeaponFire", root, playSoundOnWeaponFire )
+
+function onPlayerShootCompare(x,y,z,x2,y2,z2) -- Shooter, hit
+	if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
+		playSound3D("sounds/M1911.wav",x,y,z)
+	else
+		local sound = playSound("sounds/M1911.wav",false)
+		setSoundMaxDistance(sound,0)
+	end
+end
