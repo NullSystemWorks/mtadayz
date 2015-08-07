@@ -34,12 +34,6 @@ function chopTree()
 				startwoodtick = getTickCount()
 
 				triggerServerEvent( "onPlayerChopTree", localPlayer, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
-				if getPlayerCurrentSlots() <= getPlayerMaxAviableSlots() then
-					setElementData(localPlayer,"Wood Pile",getElementData(localPlayer,"Wood Pile")+1)
-					startRollMessage2("Chopping", "You got 1 'Wood Pile'!", 0,255,0)
-				else
-					startRollMessage2("Inventory", "Inventory is full!", 255, 22, 0)
-				end
 			end
 		end
 	end
