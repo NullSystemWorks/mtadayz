@@ -119,10 +119,8 @@ setTimer(setPlayerCold,40000,0)
 function isPlayerInBuilding(x,y,z)
 	if isInBuilding(x,y,z) then
 		triggerServerEvent("onPlayerChangeStatus",source,"isInBuilding",true)
-		outputChatBox("Player :"..getPlayerName(source).." is in a building",root)
 	else
 		triggerServerEvent("onPlayerChangeStatus",source,"isInBuilding",false)
-		outputChatBox("Player :"..getPlayerName(source).." is not in a building",root)
 	end
 end
 addEvent("isPlayerInBuilding",true)
