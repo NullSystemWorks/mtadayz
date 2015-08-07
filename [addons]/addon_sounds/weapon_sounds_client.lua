@@ -5,12 +5,14 @@ function playSoundOnWeaponFire(weapon)
 	local x2,y2,z2 = getElementPosition(source)
 	if weapon == 22 then
 		if getElementData(localPlayer,"currentweapon_2") == "M1911" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
+			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) < 20 then
 				local distance = getDistanceBetweenPoints3D(x,y,z,x2,y2,z2)
 				outputChatBox("Distance: "..tostring(distance))
-				playSound3D("sounds/M1911.wav",x,y,z,false)
+				playSound3D("sounds/M1911.wav",x2,y2,z2,false)
 			else
-				playSound("sounds/M1911.wav",false)
+				local distance = getDistanceBetweenPoints3D(x,y,z,x2,y2,z2)
+				outputChatBox("Distance (2): "..tostring(distance))
+				playSound3D("sounds/M1911.wav",x,y,z)
 			end
 		elseif getElementData(localPlayer,"currentweapon_2") == "G17" then
 			playSound("sounds/G17.wav",false)
