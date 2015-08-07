@@ -136,7 +136,7 @@ function drawTheMap()
 	local camX,camY,camZ = getElementRotation(getCamera())
 	if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
 		dxDrawRectangle(0, 0, sx, sy, tocolor(176, 200, 210,255))
-		dxDrawImage(X - worldW/2, Y - worldH/2, worldW, worldH, ":DayZ/gui/items/world.png", 0, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
+		dxDrawImage(X - worldW/2, Y - worldH/2, worldW, worldH, ":DayZ/gui/gear/items/world.png", 0, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
 	end
 	local col = tocolor(r, g, b, 190)
 	local bg = tocolor(r, g, b, 100)

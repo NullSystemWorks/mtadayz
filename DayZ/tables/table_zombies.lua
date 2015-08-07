@@ -128,8 +128,8 @@ zombieLootType = {
 {"Wire Fence",933,0.25,0,1},
 {"Grenade",342,1,0,0.99},
 {"Heat Pack",1576,5,0,3.96},
-{"Area 69 Keybard",1581,1,0,7},
-{"San Fierro Carrier Keycard",1581,1,0,7},
+{"Area 69 Keycard",1581,1,0,3.50},
+{"San Fierro Carrier Keycard",1581,1,0,3.50},
 },
 
 ["policeman"] = {

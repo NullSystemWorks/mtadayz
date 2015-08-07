@@ -8,15 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function getVehicleMaxFuel(loot)
-	local modelID = getElementModel(getElementData(loot,"parent"))
-	for i,vehicle in ipairs(vehicleFuelTable) do
-		if modelID == vehicle[1] then
-			 return vehicle[2]
-		end
-	end
-	return false
-end
 
 function onPlayerEnterDayzVehicle(veh,seat)
 	local col = getElementData(veh,"parent")
@@ -58,8 +49,10 @@ function onPlayerEnterDayzVehicle(veh,seat)
 	if id == 490 then
 		setElementData(source,"GPS",getElementData(source,"GPS")+1)
 	end
-	bindKey(source,"k","down",setEngineStateByPlayer)
-	outputChatBox("Press 'K' to turn the engine on/off!",source)
+	if getElementModel(veh) ~= 509 then
+		bindKey(source,"k","down",setEngineStateByPlayer)
+		outputChatBox("Press 'K' to turn the engine on/off!",source)
+	end
 end
 addEventHandler ( "onPlayerVehicleEnter", getRootElement(), onPlayerEnterDayzVehicle )
 
@@ -90,15 +83,17 @@ function setVehiclesFuelPerMinute ()
 	if not gameplayVariables["fuelEnabled"] == true then return end
 	for i,veh in ipairs(getElementsByType("vehicle")) do
 		if getVehicleEngineState(veh) == true then
-			if getElementData(getElementData(veh,"parent"),"fuel") > 0 then
-				setElementData(getElementData(veh,"parent"),"fuel",getElementData(getElementData(veh,"parent"),"fuel")-getVehicleFuelRemove(getElementModel(veh),getElementData(veh,"parent")))
-			else
-				setVehicleEngineState ( veh, false )
+			if getElementModel(veh) ~= 509 then 
+				if getElementData(getElementData(veh,"parent"),"fuel") > 0 then
+					setElementData(getElementData(veh,"parent"),"fuel",getElementData(getElementData(veh,"parent"),"fuel")-getVehicleFuelRemove(getElementModel(veh),getElementData(veh,"parent")))
+				else
+					setVehicleEngineState ( veh, false )
+				end
 			end
 		end
 	end
 end
-setTimer(setVehiclesFuelPerMinute,20000,0)
+setTimer(setVehiclesFuelPerMinute,10000,0)
 
 function isVehicleReadyToStart2 (veh)
 	if getElementData(getElementData(veh,"parent"),"fuel") > 0 then

@@ -36,6 +36,8 @@ gameplayVariables["respawnwarning"] = true -- Should the warning "BEWARE OF MASS
 gameplayVariables["fuelEnabled"] = true -- Is the vehicle fuel enabled? - DEFAULT: true
 gameplayVariables["realtime"] = false -- Enables/Disables real time use. When disabled, gameplayVariables["customtime"] is in effect - DEFAULT: false
 gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (in ms)? Example: 10000ms (10s) realtime = 1 minute gametime - DEFAULT: 10000
+gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true 
+	
 	
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

@@ -146,7 +146,11 @@ end
 addEventHandler("onPlayerSpawn",root,setTotalKills)
 
 function getServerDetails()
-	serverName = getServerName()
-	triggerClientEvent("getTheServerName",root,serverName)
+	for i, player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			serverName = getServerName()
+			triggerClientEvent("getTheServerName",root,serverName)
+		end
+	end
 end
-setTimer(getServerDetails,1000,0)
+setTimer(getServerDetails,3000,0)

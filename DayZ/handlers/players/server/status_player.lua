@@ -81,14 +81,22 @@ function checkTemperature()
 				local weatherID = getWeather()
 				if weatherID == v[1] then
 					value = v[2]
-				else
 				end
 			end
 			local hour, minutes = getTime()
 			if hour >= 21 and hour <= 8 then
 				value = value-0.05
 			end
-			addPlayerStats(player,"temperature",value)
+			local x,y,z = getElementPosition(player)
+			triggerClientEvent("isPlayerInBuilding",player,x,y,z)
+			if not getElementData(player,"isInBuilding") then
+				addPlayerStats(player,"temperature",value)
+			else
+				if getElementData(player,"temperature") < 37 then
+					value = 0.02
+					addPlayerStats(player,"temperature",value)
+				end
+			end
 		end
 	end
 end

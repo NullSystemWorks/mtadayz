@@ -41,7 +41,7 @@ spalteGuiText[2] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[2],true,spalteGui
 spalteGuiText[3] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[3],true,spalteGuiImage[3])
 spalteGuiText[4] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[4],true,spalteGuiImage[4])
 
---guiLabelSetColor (spalteGuiText[1],108,166,63)
+--guiLabelSetColor (spalteGuiText[1],113,238,17)
 
 guiSetVisible(spalteGuiImage[1],false)
 guiSetVisible(spalteGuiImage[2],false)
@@ -62,7 +62,7 @@ if arg1 == "Take" then
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Take "..arg2)
 	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],108,166,63)
+		guiLabelSetColor (spalteGuiText[number],113,238,17)
 		setElementData(spalteGuiText[number],"markedMenuItem",true)
 	end
 	setElementData(spalteGuiText[number],"usedItem",arg2)
@@ -76,7 +76,7 @@ if arg1 == "Helicrashsite" then
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Gear (Helicrash)")
 	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],108,166,63)
+		guiLabelSetColor (spalteGuiText[number],113,238,17)
 		setElementData(spalteGuiText[number],"markedMenuItem",true)
 	end
 	setElementData(spalteGuiText[number],"usedItem","helicrashsite")
@@ -86,7 +86,7 @@ if arg1 == "Hospitalbox" then
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Gear (Hospitalbox)")
 	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],108,166,63)
+		guiLabelSetColor (spalteGuiText[number],113,238,17)
 		setElementData(spalteGuiText[number],"markedMenuItem",true)
 	end
 	setElementData(spalteGuiText[number],"usedItem","hospitalbox")
@@ -95,7 +95,7 @@ if arg1 == "Vehicle" then
 	number = number+1
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Gear ("..arg2..")")
-	guiLabelSetColor (spalteGuiText[number],108,166,63)
+	guiLabelSetColor (spalteGuiText[number],113,238,17)
 	setElementData(spalteGuiText[number],"markedMenuItem",true)
 	setElementData(spalteGuiText[number],"usedItem","vehicle")
 	if getElementData(getElementData(arg3,"parent"),"tent") then
@@ -103,7 +103,7 @@ if arg1 == "Vehicle" then
 		guiSetVisible(spalteGuiImage[number],true)
 		guiSetText(spalteGuiText[number],"Remove Tent")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],108,166,63)
+			guiLabelSetColor (spalteGuiText[number],113,238,17)
 			setElementData(spalteGuiText[number],"markedMenuItem",true)
 		end
 			setElementData(spalteGuiText[number],"usedItem","tent")
@@ -123,7 +123,7 @@ if arg1 == "Player" then
 		number = number+1
 		guiSetVisible(spalteGuiImage[number],true)
 		guiSetText(spalteGuiText[number],"Give Bandage")
-		guiLabelSetColor (spalteGuiText[1],108,166,63)
+		guiLabelSetColor (spalteGuiText[1],113,238,17)
 		setElementData(spalteGuiText[1],"markedMenuItem",true)
 		setElementData(spalteGuiText[number],"usedItem","bandage")
 	end	
@@ -133,7 +133,7 @@ if arg1 == "Player" then
 		guiSetText(spalteGuiText[number],"Administer Blood Bag")	
 		setElementData(spalteGuiText[number],"usedItem","giveblood")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],108,166,63)
+			guiLabelSetColor (spalteGuiText[number],113,238,17) -- 113,238,17
 			setElementData(spalteGuiText[number],"markedMenuItem",true)
 		end
 	end
@@ -143,7 +143,7 @@ if arg1 == "Dead" then
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Gear ("..arg2..")")
 	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],108,166,63)
+		guiLabelSetColor (spalteGuiText[number],113,238,17)
 		setElementData(spalteGuiText[number],"markedMenuItem",true)
 	end
 	setElementData(spalteGuiText[number],"usedItem","dead")
@@ -157,7 +157,7 @@ if arg1 == "Fireplace" then
 	number = number+1
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Cook Meat")
-	guiLabelSetColor (spalteGuiText[number],108,166,63)
+	guiLabelSetColor (spalteGuiText[number],113,238,17)
 	setElementData(spalteGuiText[number],"markedMenuItem",true)
 	setElementData(spalteGuiText[number],"usedItem","fireplace")
 	end
@@ -168,7 +168,7 @@ if arg1 == "patrol" then
 		guiSetVisible(spalteGuiImage[number],true)
 		guiSetText(spalteGuiText[number],"Refill (Empty Gas Canister)")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],108,166,63)
+			guiLabelSetColor (spalteGuiText[number],113,238,17)
 			setElementData(spalteGuiText[number],"markedMenuItem",true)
 		end
 			setElementData(spalteGuiText[number],"usedItem","patrolstation")
@@ -180,7 +180,7 @@ if arg1 == "Wirefence" then
 		guiSetVisible(spalteGuiImage[number],true)
 		guiSetText(spalteGuiText[number],"Remove Wirefence")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],108,166,63)
+			guiLabelSetColor (spalteGuiText[number],113,238,17)
 			setElementData(spalteGuiText[number],"markedMenuItem",true)
 		end
 			setElementData(spalteGuiText[number],"usedItem","wirefence")
@@ -191,7 +191,7 @@ if arg1 == "Gear" then
 	guiSetVisible(spalteGuiImage[number],true)
 	guiSetText(spalteGuiText[number],"Gear")
 	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],108,166,63)
+		guiLabelSetColor (spalteGuiText[number],113,238,17)
 		setElementData(spalteGuiText[number],"markedMenuItem",true)
 	end
 	setElementData(spalteGuiText[number],"usedItem","itemloot")
@@ -209,24 +209,24 @@ if arg == "up" then
 	if getElementData(spalteGuiText[1],"markedMenuItem") then
 		setElementData(spalteGuiText[1],"markedMenuItem",false)
 		setElementData(spalteGuiText[2],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[2],108,166,63)
+		guiLabelSetColor (spalteGuiText[2],113,238,17)
 		guiLabelSetColor (spalteGuiText[1],255,255,255)
 	elseif getElementData(spalteGuiText[2],"markedMenuItem") then
 		setElementData(spalteGuiText[2],"markedMenuItem",false)
 		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],108,166,63)
+		guiLabelSetColor (spalteGuiText[1],113,238,17)
 		guiLabelSetColor (spalteGuiText[2],255,255,255)
 	end
 elseif arg == "down" then
 	if getElementData(spalteGuiText[1],"markedMenuItem") then
 		setElementData(spalteGuiText[1],"markedMenuItem",false)
 		setElementData(spalteGuiText[2],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[2],108,166,63)
+		guiLabelSetColor (spalteGuiText[2],113,238,17)
 		guiLabelSetColor (spalteGuiText[1],255,255,255)
 	elseif getElementData(spalteGuiText[2],"markedMenuItem") then
 		setElementData(spalteGuiText[2],"markedMenuItem",false)
 		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],108,166,63)
+		guiLabelSetColor (spalteGuiText[1],113,238,17)
 		guiLabelSetColor (spalteGuiText[2],255,255,255)
 	end
 end
@@ -275,7 +275,7 @@ if getElementData(source,"parent") == getLocalPlayer() then return end
 		isInFirePlace = false
 		setElementData(spalteGuiText[2],"markedMenuItem",false)
 		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],108,166,63)
+		guiLabelSetColor (spalteGuiText[1],113,238,17)
 		guiLabelSetColor (spalteGuiText[2],255,255,255)
 		if getElementData(source,"player") then
 			showClientMenuItem("Player",getElementData(source,"parent"))

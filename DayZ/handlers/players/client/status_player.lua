@@ -10,7 +10,7 @@
 
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.4a"
+		dayzVersion = "MTA:DayZ 0.9.4.1a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -115,6 +115,16 @@ function setPlayerCold()
 	end
 end
 setTimer(setPlayerCold,40000,0)
+
+function isPlayerInBuilding(x,y,z)
+	if isInBuilding(x,y,z) then
+		setElementData(source,"isInBuilding",true)
+	else
+		setElementData(source,"isInBuilding",false)
+	end
+end
+addEvent("isPlayerInBuilding",true)
+addEventHandler("isPlayerInBuilding",root,isPlayerInBuilding)
 
 function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then

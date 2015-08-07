@@ -140,7 +140,7 @@ function onPlayerGiveMedicObject(itemName,player)
 			setElementData(player,"bleeding",0)
 			setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")-1)
 			addPlayerStats (playersource,"humanity",40)
-		elseif itemName == "Blood Bag" then
+		elseif itemName == "giveblood" then
 			addPlayerStats (player,"blood",12000)
 			setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
 			addPlayerStats (playersource,"humanity",250)

@@ -17,6 +17,16 @@ function getVehicleAddonInfos (id)
 	end
 end
 
+function getVehicleMaxFuel(loot)
+	local modelID = getElementModel(getElementData(loot,"parent"))
+	for i,vehicle in ipairs(vehicleFuelTable) do
+		if modelID == vehicle[1] then
+			 return vehicle[2]
+		end
+	end
+	return false
+end
+
 -- // Players // --
 function getWeaponAmmoFromID(weaponID)
 	for i,weaponData in ipairs(weaponAmmoTable["others"]) do
