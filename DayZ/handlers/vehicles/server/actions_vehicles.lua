@@ -182,3 +182,39 @@ function setEngineStateByPlayer (playersource)
 		triggerClientEvent (playersource, "displayClientInfo", playersource,"Vehicle","Engine stopped!",255,22,0)
 	end
 end
+
+function takeVehicleComponent(veh,action,itemName)
+	if getElementData(source,"Toolbox") > 0 then
+		setPedAnimation (source,"BOMBER","BOM_Plant",3000,false,false,nil,false)
+		setTimer(function(source,veh,action)
+			if action == "takewheel" then
+				local col = getElementData(veh,"parent")
+				setElementData(col,"Tire_inVehicle",getElementData(col,"Tire_inVehicle")-1)
+				setElementData(source,"Tire",getElementData(source,"Tire")+1)
+				triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You took a wheel out.",0,255,0)
+			elseif action == "takeengine" then
+				local col = getElementData(veh,"parent")
+				setElementData(col,"Engine_inVehicle",getElementData(col,"Engine_inVehicle")-1)
+				setElementData(source,"Engine",getElementData(source,"Engine")+1)
+				triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You took the engine out.",0,255,0)
+			elseif action == "siphon" then
+				local col = getElementData(veh,"parent")
+				local fuel = getElementData(col,"fuel")
+				if fuel > 20 then
+					setElementData(source,"hasFuel",20)
+					setElementData(col,"fuel",getElementData(col,"fuel")-20)
+				else
+					setElementData(source,"hasFuel",getElementData(source,"hasFuel")+fuel)
+					setElementData(col,"fuel",0)
+				end
+				setElementData(source,"Full Gas Canister",getElementData(source,"Full Gas Canister")+1)
+				setElementData(source,"Empty Gas Canister",getElementData(source,"Empty Gas Canister")-1)
+				triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You siphoned some fuel.",0,255,0)
+			end
+		end,3000,1,source,veh,action)
+	else
+		triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You need a toolbox!",255,0,0)
+	end
+end
+addEvent("takeVehicleComponent",true)
+addEventHandler("takeVehicleComponent",root,takeVehicleComponent)

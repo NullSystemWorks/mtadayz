@@ -127,15 +127,16 @@ local itemPlus = 1
 	if loot then
 		if not getElementData(loot,"itemloot") and getElementType(getElementData(loot,"parent")) == "vehicle" then
 			if itemName == "Full Gas Canister" then
-				if getElementData(loot,"fuel")+20 < getVehicleMaxFuel(loot) then
-					addingfuel = 20
-				elseif getElementData(loot,"fuel")+20 > getVehicleMaxFuel(loot)+15 then
+				if getElementData(loot,"fuel")+getElementData(localPlayer,"hasFuel") < getVehicleMaxFuel(loot) then
+					addingfuel = getElementData(localPlayer,"hasFuel")
+				elseif getElementData(loot,"fuel")+getElementData(localPlayer,"hasFuel") > getVehicleMaxFuel(loot)+15 then
 					triggerEvent ("displayClientInfo", localPlayer,"Vehicle","The tank is full!",255,22,0) 
 					return
 				else
-					addingfuel = getVehicleMaxFuel(loot)-getElementData(loot,"fuel")
+					addingfuel = getVehicleMaxFuel(loot)-(getElementData(loot,"fuel")+getElementData(localPlayer,"hasFuel"))
 				end
 				setElementData(loot,"fuel",getElementData(loot,"fuel")+addingfuel)
+				setElementData(localPlayer,"hasFuel",getElementData(localPlayer,"hasFuel")-addingfuel)
 				playSound(":DayZ/sounds/items/refuel.ogg",false)
 			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)-itemPlus)
 			setElementData(localPlayer,"Empty Gas Canister",(getElementData(localPlayer,"Empty Gas Canister") or 0)+itemPlus) 
