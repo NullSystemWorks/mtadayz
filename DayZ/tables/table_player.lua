@@ -46,6 +46,7 @@ playerDataTable = {
 {"headshots"},
 {"murders"},
 {"banditskilled"},
+{"hasFuel"},
 -- [[ Weapons ]] --
 {"M4"},
 {"CZ 550"},

@@ -9,225 +9,430 @@
 ]]
 
 
---Create Scroll Menü
-local spalten = {}
-local spalteGuiImage = {}
-local spalteGuiText = {}
+local row = {}
+local rowImage = {}
+local rowText = {}
 local font = {}
+local number = 0
+local moveDown = 0
+local options = {}
+font[1] = guiCreateFont(":DayZ/fonts/etelka.ttf", 10)
 
-local optionsTable = {
-["player"] = {
-{"Give Painkillers"},
-{"Give Bandage"},
-{"Give Morphine"},
-{"Administer Blood Bag"},
-},
-}
+for i = 1, 7 do
+	number = i
+	moveDown = moveDown+0.025
+	row[number] = ""
+	if number == 1 then
+		rowImage[1] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_1.png",true)
+	else
+		rowImage[number] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_3.png",true)
+	end
+	rowText[number] = guiCreateLabel(0.05,0.05,0.995,0.95,row[number],true,rowImage[number])
+	guiLabelSetColor(rowText[number],113,238,17)
+	guiLabelSetColor(rowText[1],255,255,255)
+	guiSetFont(rowText[number],font[1])
+	guiSetVisible(rowImage[number],false)
+	if number == 7 then number = 0 end
+end
 
-font[1] = guiCreateFont("fonts/etelka.ttf", 10)
 
-spalten[1] = ""
-spalten[2] = ""
-spalten[3] = ""
-spalten[4] = ""
-
-spalteGuiImage[1] = guiCreateStaticImage(0,0.45,0.4,0.1,":DayZ/gui/gear/items/scrollmenu_3.png",true)
-spalteGuiImage[2] = guiCreateStaticImage(0,0.475,0.4,0.1,":DayZ/gui/gear/items/scrollmenu_3.png",true)
-spalteGuiImage[3] = guiCreateStaticImage(0,0.5,0.4,0.1,":DayZ/gui/gear/items/scrollmenu_3.png",true)
-spalteGuiImage[4] = guiCreateStaticImage(0,0.525,0.4,0.1,":DayZ/gui/gear/items/scrollmenu_3.png",true)
-
-spalteGuiText[1] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[1],true,spalteGuiImage[1])
-spalteGuiText[2] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[2],true,spalteGuiImage[2])
-spalteGuiText[3] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[3],true,spalteGuiImage[3])
-spalteGuiText[4] = guiCreateLabel(0.05,0.05,0.995,0.95,spalten[4],true,spalteGuiImage[4])
-
---guiLabelSetColor (spalteGuiText[1],113,238,17)
-
-guiSetVisible(spalteGuiImage[1],false)
-guiSetVisible(spalteGuiImage[2],false)
-guiSetVisible(spalteGuiImage[3],false)
-guiSetVisible(spalteGuiImage[4],false)
-
-guiSetFont(spalteGuiText[1],font[1])
-guiSetFont(spalteGuiText[2],font[1])
-guiSetFont(spalteGuiText[3],font[1])
-guiSetFont(spalteGuiText[4],font[1])
-
-------------------------------------------------------------------------------
---MENU
 function showClientMenuItem(arg1,arg2,arg3,arg4)
 local number = 0
-if arg1 == "Take" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Take "..arg2)
-	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],113,238,17)
-		setElementData(spalteGuiText[number],"markedMenuItem",true)
-	end
-	setElementData(spalteGuiText[number],"usedItem",arg2)
-end
-if arg1 == "stop" then
-	disableMenu()
-	refreshLoot(false)
-end
-if arg1 == "Helicrashsite" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Gear (Helicrash)")
-	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],113,238,17)
-		setElementData(spalteGuiText[number],"markedMenuItem",true)
-	end
-	setElementData(spalteGuiText[number],"usedItem","helicrashsite")
-end
-if arg1 == "Hospitalbox" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Gear (Hospitalbox)")
-	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],113,238,17)
-		setElementData(spalteGuiText[number],"markedMenuItem",true)
-	end
-	setElementData(spalteGuiText[number],"usedItem","hospitalbox")
-end
-if arg1 == "Vehicle" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Gear ("..arg2..")")
-	guiLabelSetColor (spalteGuiText[number],113,238,17)
-	setElementData(spalteGuiText[number],"markedMenuItem",true)
-	setElementData(spalteGuiText[number],"usedItem","vehicle")
-	if getElementData(getElementData(arg3,"parent"),"tent") then
+	if arg1 == "Take" then
 		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Remove Tent")
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Take "..arg2)
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],113,238,17)
-			setElementData(spalteGuiText[number],"markedMenuItem",true)
+			guiLabelSetColor (rowText[number],255,255,255)
+			setElementData(rowText[number],"markedMenuItem",true)
 		end
-			setElementData(spalteGuiText[number],"usedItem","tent")
-		return
+		setElementData(rowText[number],"usedItem",arg2)
 	end
-	--2
-	if getElementHealth(arg3) < 1000 and getElementHealth(arg3) >= 50 and getElementData(getLocalPlayer(),"Toolbox") >= 1 then
-		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Repair ("..arg2..")")
-		setElementData(spalteGuiText[number],"usedItem","repairvehicle")
+	if arg1 == "stop" then
+		disableMenu()
+		refreshLoot(false)
 	end
-end
-if arg1 == "Player" then
-	--1
-	if getElementData(arg2,"bleeding") > 0 and getElementData(getLocalPlayer(),"Bandage") >= 1 then
+	if arg1 == "Helicrashsite" then
 		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Give Bandage")
-		guiLabelSetColor (spalteGuiText[1],113,238,17)
-		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		setElementData(spalteGuiText[number],"usedItem","bandage")
-	end	
-	if getElementData(arg2,"blood") < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
-		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Administer Blood Bag")	
-		setElementData(spalteGuiText[number],"usedItem","giveblood")
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Gear (Helicrash)")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],113,238,17) -- 113,238,17
-			setElementData(spalteGuiText[number],"markedMenuItem",true)
+			guiLabelSetColor (rowText[number],255,255,255)
+			setElementData(rowText[number],"markedMenuItem",true)
 		end
+		setElementData(rowText[number],"usedItem","helicrashsite")
 	end
-end
-if arg1 == "Dead" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Gear ("..arg2..")")
-	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],113,238,17)
-		setElementData(spalteGuiText[number],"markedMenuItem",true)
-	end
-	setElementData(spalteGuiText[number],"usedItem","dead")
-	number = number+1
-	setElementData(spalteGuiText[number],"usedItem","deadreason")
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Check Body")
-end
-if arg1 == "Fireplace" then
-	if getElementData(getLocalPlayer(),"Raw Meat") >= 1 then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Cook Meat")
-	guiLabelSetColor (spalteGuiText[number],113,238,17)
-	setElementData(spalteGuiText[number],"markedMenuItem",true)
-	setElementData(spalteGuiText[number],"usedItem","fireplace")
-	end
-end
-if arg1 == "patrol" then
-	if getElementData(getLocalPlayer(),"Empty Gas Canister") >= 1 then
+	if arg1 == "Hospitalbox" then
 		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Refill (Empty Gas Canister)")
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Gear (Hospitalbox)")
 		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],113,238,17)
-			setElementData(spalteGuiText[number],"markedMenuItem",true)
+			guiLabelSetColor (rowText[number],255,255,255)
+			setElementData(rowText[number],"markedMenuItem",true)
 		end
-			setElementData(spalteGuiText[number],"usedItem","patrolstation")
-	end	
-end
-if arg1 == "Wirefence" then
-	if getElementData(getLocalPlayer(),"Toolbox") >= 1 then
-		number = number+1
-		guiSetVisible(spalteGuiImage[number],true)
-		guiSetText(spalteGuiText[number],"Remove Wirefence")
-		if number == 1 then
-			guiLabelSetColor (spalteGuiText[number],113,238,17)
-			setElementData(spalteGuiText[number],"markedMenuItem",true)
-		end
-			setElementData(spalteGuiText[number],"usedItem","wirefence")
-	end	
-end
-if arg1 == "Gear" then
-	number = number+1
-	guiSetVisible(spalteGuiImage[number],true)
-	guiSetText(spalteGuiText[number],"Gear")
-	if number == 1 then
-		guiLabelSetColor (spalteGuiText[number],113,238,17)
-		setElementData(spalteGuiText[number],"markedMenuItem",true)
+		setElementData(rowText[number],"usedItem","hospitalbox")
 	end
-	setElementData(spalteGuiText[number],"usedItem","itemloot")
-end
+	if arg1 == "Vehicle" then
+		number = number+1
+		options[1] = 1
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Gear ("..getElementData(getElementData(arg3,"parent"),"vehicle_name")..")")
+		guiLabelSetColor (rowText[number],255,255,255)
+		setElementData(rowText[number],"markedMenuItem",true)
+		setElementData(rowText[number],"usedItem","vehicle")
+		if getElementData(getElementData(arg3,"parent"),"tent") then
+			number = number+1
+			options = 1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Remove Tent")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255)
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
+				setElementData(rowText[number],"usedItem","tent")
+			return
+		end
+		--2
+		if getElementHealth(arg3) < 1000 and getElementHealth(arg3) >= 50 and getElementData(getLocalPlayer(),"Toolbox") >= 1 then
+			number = number+1
+			options[2] = 2
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Repair ("..getElementData(getElementData(arg3,"parent"),"vehicle_name")..")")
+			setElementData(rowText[number],"usedItem","repairvehicle")
+		end
+		--3
+		if getElementData(getElementData(arg3,"parent"),"Tire_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
+			number = number+1
+			options[3] = 3
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Take Wheel of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
+			setElementData(rowText[number],"usedItem","takewheel")
+		end
+		if getElementData(getElementData(arg3,"parent"),"Engine_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
+			number = number+1
+			options[4] = 4
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Take Engine of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
+			setElementData(rowText[number],"usedItem","takeengine")
+		end
+		if getElementData(getElementData(arg3,"parent"),"fuel") > 0 and getElementData(localPlayer,"Empty Gas Canister") > 0 then
+			number = number+1
+			options[5] = 5
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Siphon fuel")
+			setElementData(rowText[number],"usedItem","siphon")
+		end
+	end
+	if arg1 == "Player" then
+		--1
+		if getElementData(arg2,"bleeding") > 0 and getElementData(getLocalPlayer(),"Bandage") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Give Bandage")
+			guiLabelSetColor (rowText[1],255,255,255)
+			setElementData(rowText[1],"markedMenuItem",true)
+			setElementData(rowText[number],"usedItem","bandage")
+		end	
+		if getElementData(arg2,"blood") < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Administer Blood Bag")	
+			setElementData(rowText[number],"usedItem","giveblood")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255) -- 113,238,17
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
+		end
+	end
+	if arg1 == "Dead" then
+		number = number+1
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Gear ("..arg2..")")
+		if number == 1 then
+			guiLabelSetColor (rowText[number],255,255,255)
+			setElementData(rowText[number],"markedMenuItem",true)
+		end
+		setElementData(rowText[number],"usedItem","dead")
+		number = number+1
+		setElementData(rowText[number],"usedItem","deadreason")
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Check Body")
+	end
+	if arg1 == "Fireplace" then
+		if getElementData(getLocalPlayer(),"Raw Meat") >= 1 then
+		number = number+1
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Cook Meat")
+		guiLabelSetColor (rowText[number],255,255,255)
+		setElementData(rowText[number],"markedMenuItem",true)
+		setElementData(rowText[number],"usedItem","fireplace")
+		end
+	end
+	if arg1 == "patrol" then
+		if getElementData(getLocalPlayer(),"Empty Gas Canister") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Refill (Empty Gas Canister)")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255)
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
+				setElementData(rowText[number],"usedItem","patrolstation")
+		end	
+	end
+	if arg1 == "Wirefence" then
+		if getElementData(getLocalPlayer(),"Toolbox") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Remove Wirefence")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255)
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
+				setElementData(rowText[number],"usedItem","wirefence")
+		end	
+	end
+	if arg1 == "Gear" then
+		number = number+1
+		guiSetVisible(rowImage[number],true)
+		guiSetText(rowText[number],"Gear")
+		if number == 1 then
+			guiLabelSetColor (rowText[number],255,255,255)
+			setElementData(rowText[number],"markedMenuItem",true)
+		end
+		setElementData(rowText[number],"usedItem","itemloot")
+	end
 end
 addEvent("showClientMenuItem",true)
 addEventHandler("showClientMenuItem",getLocalPlayer(),showClientMenuItem)
 
+--[[
 function PlayerScrollMenu (key,keyState,arg)
+	if ( keyState == "down" ) then
+		if not guiGetVisible(rowImage[2]) then -- Check if there is more than one option available (for example, "Gear (Vehicle)" and "Repair Vehicle")
+			return
+		end
+		if arg == "up" then
+			if number == 1 then
+				number = 7
+				guiLabelSetColor (rowText[number],255,255,255)
+				guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
+				guiLabelSetColor (rowText[1],113,238,17)
+				guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			else
+				number = number-1
+				guiLabelSetColor (rowText[number],255,255,255)
+				guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
+				guiLabelSetColor (rowText[number+1],113,238,17)
+				guiStaticImageLoadImage(rowImage[number+1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			end
+		elseif arg == "down" then
+			if number == 7 then
+				if getElementData(rowText[7],"markedMenuItem") then
+					number = 1
+					guiLabelSetColor (rowText[number],255,255,255)
+					guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
+					guiLabelSetColor (rowText[7],113,238,17)
+					guiStaticImageLoadImage(rowImage[7],":DayZ/gui/gear/items/scrollmenu_3.png")
+					setElementData(rowText[7],"markedMenuItem",false)
+					outputChatBox("rowText: "..tostring(getElementData(rowText[7],"markedMenuItem")))
+					setElementData(rowText[number],"markedMenuItem",true)
+					outputChatBox("rowText: "..tostring(getElementData(rowText[number],"markedMenuItem")))
+				end
+			else
+				number = number+1
+				if getElementData(rowText[number],"markedMenuItem") then
+					guiLabelSetColor (rowText[number],255,255,255)
+					guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
+					setElementData(rowText[number-1],"markedMenuItem",false)
+					outputChatBox("rowText: "..tostring(getElementData(rowText[number-1],"markedMenuItem")))
+					guiLabelSetColor (rowText[number-1],113,238,17)
+					guiStaticImageLoadImage(rowImage[number-1],":DayZ/gui/gear/items/scrollmenu_3.png")
+				end
+			end
+		end
+	end
+end
+bindKey ( "mouse_wheel_up", "down", PlayerScrollMenu, "up" )
+bindKey ( "mouse_wheel_down", "down", PlayerScrollMenu, "down" )
+]]
+
+function PlayerScrollMenu (key,keyState,arg)
+local number = 1
 if ( keyState == "down" ) then
-if not guiGetVisible(spalteGuiImage[2]) then
+if not guiGetVisible(rowImage[2]) then
 	return
 end
 if arg == "up" then
-	if getElementData(spalteGuiText[1],"markedMenuItem") then
-		setElementData(spalteGuiText[1],"markedMenuItem",false)
-		setElementData(spalteGuiText[2],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[2],113,238,17)
-		guiLabelSetColor (spalteGuiText[1],255,255,255)
-	elseif getElementData(spalteGuiText[2],"markedMenuItem") then
-		setElementData(spalteGuiText[2],"markedMenuItem",false)
-		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],113,238,17)
-		guiLabelSetColor (spalteGuiText[2],255,255,255)
+	if getElementData(rowText[1],"markedMenuItem") then
+		if guiGetVisible(rowImage[6]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[6],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[6],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[6],":DayZ/gui/gear/items/scrollmenu_1.png")
+		elseif guiGetVisible(rowImage[5]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[5],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[5],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_1.png")
+		elseif guiGetVisible(rowImage[4]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[4],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[4],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_1.png")
+		elseif guiGetVisible(rowImage[3]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[3],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[3],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_1.png")
+		elseif guiGetVisible(rowImage[2]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[2],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[2],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[2],"markedMenuItem") then
+		if guiGetVisible(rowImage[1]) then
+			setElementData(rowText[2],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[2],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[3],"markedMenuItem") then
+		if guiGetVisible(rowImage[2]) then
+			setElementData(rowText[3],"markedMenuItem",false)
+			setElementData(rowText[2],"markedMenuItem",true)
+			guiLabelSetColor (rowText[3],113,238,17)
+			guiLabelSetColor (rowText[2],255,255,255)
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[3],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[3],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[4],"markedMenuItem") then
+		if guiGetVisible(rowImage[3]) then
+			setElementData(rowText[4],"markedMenuItem",false)
+			setElementData(rowText[3],"markedMenuItem",true)
+			guiLabelSetColor (rowText[4],113,238,17)
+			guiLabelSetColor (rowText[3],255,255,255)
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[4],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[4],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[5],"markedMenuItem") then
+		if guiGetVisible(rowImage[5]) then
+			setElementData(rowText[5],"markedMenuItem",false)
+			setElementData(rowText[4],"markedMenuItem",true)
+			guiLabelSetColor (rowText[5],113,238,17)
+			guiLabelSetColor (rowText[4],255,255,255)
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[5],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[5],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
 	end
 elseif arg == "down" then
-	if getElementData(spalteGuiText[1],"markedMenuItem") then
-		setElementData(spalteGuiText[1],"markedMenuItem",false)
-		setElementData(spalteGuiText[2],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[2],113,238,17)
-		guiLabelSetColor (spalteGuiText[1],255,255,255)
-	elseif getElementData(spalteGuiText[2],"markedMenuItem") then
-		setElementData(spalteGuiText[2],"markedMenuItem",false)
-		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],113,238,17)
-		guiLabelSetColor (spalteGuiText[2],255,255,255)
+	if getElementData(rowText[1],"markedMenuItem") then
+		if guiGetVisible(rowImage[2]) then
+			setElementData(rowText[1],"markedMenuItem",false)
+			setElementData(rowText[2],"markedMenuItem",true)
+			guiLabelSetColor (rowText[1],113,238,17)
+			guiLabelSetColor (rowText[2],255,255,255)
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[2],"markedMenuItem") then
+		if guiGetVisible(rowImage[3]) then
+			setElementData(rowText[2],"markedMenuItem",false)
+			setElementData(rowText[3],"markedMenuItem",true)
+			guiLabelSetColor (rowText[2],113,238,17)
+			guiLabelSetColor (rowText[3],255,255,255)
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[2],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[2],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[2],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[3],"markedMenuItem") then
+		if guiGetVisible(rowImage[4]) then
+			setElementData(rowText[3],"markedMenuItem",false)
+			setElementData(rowText[4],"markedMenuItem",true)
+			guiLabelSetColor (rowText[3],113,238,17)
+			guiLabelSetColor (rowText[4],255,255,255)
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[3],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[3],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[3],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[4],"markedMenuItem") then
+		if guiGetVisible(rowImage[5]) then
+			setElementData(rowText[4],"markedMenuItem",false)
+			setElementData(rowText[5],"markedMenuItem",true)
+			guiLabelSetColor (rowText[4],113,238,17)
+			guiLabelSetColor (rowText[5],255,255,255)
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[4],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[4],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[4],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
+	elseif getElementData(rowText[5],"markedMenuItem") then
+		if guiGetVisible(rowImage[6]) then
+			setElementData(rowText[5],"markedMenuItem",false)
+			setElementData(rowText[6],"markedMenuItem",true)
+			guiLabelSetColor (rowText[5],113,238,17)
+			guiLabelSetColor (rowText[6],255,255,255)
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[6],":DayZ/gui/gear/items/scrollmenu_1.png")
+		else
+			setElementData(rowText[5],"markedMenuItem",false)
+			setElementData(rowText[1],"markedMenuItem",true)
+			guiLabelSetColor (rowText[5],113,238,17)
+			guiLabelSetColor (rowText[1],255,255,255)
+			guiStaticImageLoadImage(rowImage[5],":DayZ/gui/gear/items/scrollmenu_3.png")
+			guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+		end
 	end
 end
 end
@@ -236,24 +441,38 @@ bindKey ( "mouse_wheel_up", "down", PlayerScrollMenu, "up" )
 bindKey ( "mouse_wheel_down", "down", PlayerScrollMenu, "down" )
 
 function disableMenu()
-guiSetVisible(spalteGuiImage[1],false)
-guiSetVisible(spalteGuiImage[2],false)
-guiSetVisible(spalteGuiImage[3],false)
-guiSetVisible(spalteGuiImage[4],false)
-setElementData(spalteGuiText[1],"markedMenuItem",false)
-setElementData(spalteGuiText[2],"markedMenuItem",false)
-setElementData(spalteGuiText[3],"markedMenuItem",false)
-setElementData(spalteGuiText[4],"markedMenuItem",false)
-setNewbieInfo (false,"","")
+	guiSetVisible(rowImage[1],false)
+	guiSetVisible(rowImage[2],false)
+	guiSetVisible(rowImage[3],false)
+	guiSetVisible(rowImage[4],false)
+	guiSetVisible(rowImage[5],false)
+	guiSetVisible(rowImage[6],false)
+	guiSetVisible(rowImage[7],false)
+	setElementData(rowText[1],"markedMenuItem",false)
+	setElementData(rowText[2],"markedMenuItem",false)
+	setElementData(rowText[3],"markedMenuItem",false)
+	setElementData(rowText[4],"markedMenuItem",false)
+	setElementData(rowText[5],"markedMenuItem",false)
+	setElementData(rowText[6],"markedMenuItem",false)
+	setElementData(rowText[7],"markedMenuItem",false)
+	guiLabelSetColor(rowText[1],255,255,255)
+	guiLabelSetColor(rowText[2],113,238,17)
+	guiLabelSetColor(rowText[3],113,238,17)
+	guiLabelSetColor(rowText[4],113,238,17)
+	guiLabelSetColor(rowText[5],113,238,17)
+	guiLabelSetColor(rowText[6],113,238,17)
+	guiLabelSetColor(rowText[7],113,238,17)
+	local number = 2
+	guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
+	setTimer(function()	
+		guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_3.png")
+		number = number+1
+	end,2000,6)
+	setNewbieInfo (false,"","")
 end
 addEvent("disableMenu",true)
 addEventHandler("disableMenu",getLocalPlayer(),disableMenu)
 
-
-------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------
---TAKE OBJECT FUNCTIONS
 
 function getPlayerInCol(tab)
 	for theKey,thePlayer in ipairs(tab) do
@@ -266,17 +485,19 @@ end
 
 isInFirePlace = false
 function onPlayerTargetPickup (theElement)
-if theElement == getLocalPlayer() then
-if getElementData(source,"parent") == getLocalPlayer() then return end
+	if theElement == getLocalPlayer() then
+		if getElementData(source,"parent") == getLocalPlayer() then 
+			return 
+		end
 		local player = getPlayerInCol(getElementsWithinColShape ( source, "player" ))
 		if getPedOccupiedVehicle(getLocalPlayer()) then
 			return
 		end
 		isInFirePlace = false
-		setElementData(spalteGuiText[2],"markedMenuItem",false)
-		setElementData(spalteGuiText[1],"markedMenuItem",true)
-		guiLabelSetColor (spalteGuiText[1],113,238,17)
-		guiLabelSetColor (spalteGuiText[2],255,255,255)
+		setElementData(rowText[2],"markedMenuItem",false)
+		setElementData(rowText[1],"markedMenuItem",true)
+		guiLabelSetColor (rowText[1],255,255,255)
+		guiLabelSetColor (rowText[2],113,238,17)
 		if getElementData(source,"player") then
 			showClientMenuItem("Player",getElementData(source,"parent"))
 			setElementData(getLocalPlayer(),"currentCol",source)
@@ -427,7 +648,7 @@ setTimer(fireRaiseTemperature,10000,0)
 unbindKey("mouse3","both")
 function onPlayerPressMiddleMouse (key,keyState)
 if ( keyState == "down" ) then
-	if not guiGetVisible(spalteGuiText[1]) then return end
+	if not guiGetVisible(rowText[1]) then return end
 		local itemName = getMenuMarkedItem()
 		if itemName == "helicrashsite" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
@@ -473,6 +694,42 @@ if ( keyState == "down" ) then
 			triggerServerEvent("repairVehicle",getLocalPlayer(),getElementData(col,"parent"))
 			disableMenu()
 			return
+		end
+		if itemName == "takewheel" then
+			if getPlayerCurrentSlots() + getItemSlots("Tire") <= getPlayerMaxAviableSlots() then
+				local col = getElementData(getLocalPlayer(),"currentCol")
+				itemName2 = "Tire"
+				triggerServerEvent("takeVehicleComponent",getLocalPlayer(),getElementData(col,"parent"),itemName,itemName2)
+				disableMenu()
+				return
+			else
+				triggerEvent ("displayClientInfo",getLocalPlayer(),"Vehicle","Not enough slots to take off the wheel!",255,0,0)
+				return
+			end
+		end
+		if itemName == "takeengine" then
+			if getPlayerCurrentSlots() + getItemSlots("Engine") <= getPlayerMaxAviableSlots() then
+				local col = getElementData(getLocalPlayer(),"currentCol")
+				itemName2 = "Engine"
+				triggerServerEvent("takeVehicleComponent",getLocalPlayer(),getElementData(col,"parent"),itemName,itemName2)
+				disableMenu()
+				return
+			else
+				triggerEvent ("displayClientInfo",getLocalPlayer(),"Vehicle","Not enough slots to take off the engine!",255,0,0)
+				return
+			end
+		end
+		if itemName == "siphon" then
+			if getElementData(localPlayer,"Empty Gas Canister") > 0 then
+				local col = getElementData(getLocalPlayer(),"currentCol")
+				itemName2 = "Fuel"
+				triggerServerEvent("takeVehicleComponent",getLocalPlayer(),getElementData(col,"parent"),itemName,itemName2)
+				disableMenu()
+				return
+			else
+				triggerEvent ("displayClientInfo",getLocalPlayer(),"Vehicle","You need an empty gas canister!",255,0,0)
+				return
+			end
 		end
 		if itemName == "tent" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
@@ -547,7 +804,7 @@ bindKey ( "mouse3", "down", onPlayerPressMiddleMouse )
 bindKey ( "-", "down", onPlayerPressMiddleMouse )
 
 function getMenuMarkedItem() 
-	for i,guiItem in ipairs(spalteGuiText) do
+	for i,guiItem in ipairs(rowText) do
 		if getElementData(guiItem,"markedMenuItem") then
 			return getElementData(guiItem,"usedItem") 
 		end
