@@ -411,6 +411,13 @@ function playerUseItem(itemName,itemInfo)
 		checkComponents()
 	elseif itemInfo == "Activate" then
 		triggerServerEvent("onPlayerActivateKeycard",localPlayer,itemName)
+	elseif itemInfo == "Test Blood" then
+		closeInventory()
+		activateBloodTest()
+		setElementData(localPlayer, "Blood Test Kit", getElementData(localPlayer, "Blood Test Kit")-1)
+	elseif itemInfo == "Transfusion" then
+		closeInventory()
+		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
 	end
 end
 

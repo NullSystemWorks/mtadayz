@@ -47,6 +47,8 @@ playerDataTable = {
 {"murders"},
 {"banditskilled"},
 {"hasFuel"},
+{"bloodtype"},
+{"bloodtypediscovered"},
 -- [[ Weapons ]] --
 {"M4"},
 {"CZ 550"},
@@ -130,6 +132,9 @@ playerDataTable = {
 {"Painkiller"},
 {"Morphine"},
 {"Blood Bag"},
+{"Blood Bag (Empty)"},
+{"Transfusion Kit"},
+{"Blood Test Kit"},
 {"Wire Fence"},
 {"Raw Meat"},
 {"Tire"},

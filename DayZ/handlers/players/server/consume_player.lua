@@ -123,8 +123,9 @@ function onPlayerUseMedicObject(itemName)
 			setElementData(playersource,"brokenbone",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Blood Bag" then
-			addPlayerStats (playersource,"blood",12000)
+			addPlayerStats (playersource,"blood",4000)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
+			setElementData(playersource,"Blood Bag (Empty)",getElementData(playersource,"Blood Bag (Empty)")+1)
 		end
 	end,1500,1)	
 	triggerClientEvent(playersource,"refreshInventoryManual",playersource)
@@ -135,20 +136,49 @@ addEventHandler("onPlayerUseMedicObject",getRootElement(),onPlayerUseMedicObject
 function onPlayerGiveMedicObject(itemName,player)
 	local playersource = source
 	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
-	setTimer( function ()
+	setTimer( function (player,playersource,itemName)
 		if itemName == "bandage" then
 			setElementData(player,"bleeding",0)
 			setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")-1)
 			addPlayerStats (playersource,"humanity",40)
 		elseif itemName == "giveblood" then
-			addPlayerStats (player,"blood",12000)
-			setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
-			addPlayerStats (playersource,"humanity",250)
+			if getElementData(player,"bloodtype") == getElementData(playersource,"bloodtype") or getElementData(player,"bloodtype") == "AB" then
+				addPlayerStats (player,"blood",12000)
+				setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
+				setElementData(playersource,"Blood Bag (Empty)",getElementData(playersource,"Blood Bag (Empty)")+1)
+				addPlayerStats (playersource,"humanity",250)
+			else
+				setElementData(player,"blood",getElementData(player,"blood")-2000)
+				setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
+				setElementData(playersource,"Blood Bag (Empty)",getElementData(playersource,"Blood Bag (Empty)")+1)
+				triggerClientEvent(playersource,"displayClientInfo",playersource,"BloodType","Your blood type is incompatible with "..getPlayerName(player).."!",255,0,0)
+				triggerClientEvent(player,"displayClientInfo",player,"BloodType","Your blood type is incompatible with "..getPlayerName(playersource).."!",255,0,0)
+			end
 		end
-	end,1500,1)	
+	end,1500,1,player,playersource,itemName)	
 end
 addEvent("onPlayerGiveMedicObject",true)
 addEventHandler("onPlayerGiveMedicObject",getRootElement(),onPlayerGiveMedicObject)
+
+function onPlayerTransfuseBlood()
+	if getElementData(source,"Transfusion Kit") > 0 then
+		if getElementData(source,"Blood Bag (Empty)") > 0 then
+			setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
+			setElementData(source,"Blood Bag",getElementData(source,"Blood Bag")+1)
+			setElementData(source,"Blood Bag (Empty)",getElementData(source,"Blood Bag (Empty)")-1)
+			setElementData(source,"blood",getElementData(source,"blood")-4000)
+			triggerClientEvent(source,"displayClientInfo",source,"BloodTransfusion","You transfused some blood into the blood bag.",0,255,0)
+		else
+			triggerClientEvent(source,"displayClientInfo",source,"BloodType","You need Blood Bag (Empty) for that!",255,0,0)
+			return
+		end
+	else
+		triggerClientEvent(source,"displayClientInfo",source,"BloodType","You need a Transfusion Kit!",255,0,0)
+		return
+	end
+end
+addEvent("onPlayerTransfuseBlood",true)
+addEventHandler("onPlayerTransfuseBlood",root,onPlayerTransfuseBlood)
 
 function onPlayerRefillWaterBottle (itemName)
 	if isElementInWater(source) then

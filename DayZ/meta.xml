@@ -203,6 +203,8 @@
 	<file src="gui/gear/icons/keycard.png" />
 	<file src="gui/gear/icons/glass.png" />
 	<file src="gui/gear/icons/rotary.png" />
+	<file src="gui/gear/icons/bloodtest.png" />
+	<file src="gui/gear/icons/transfusion.png" />
 	<file src="gui/gear/inventory/buttArrow.png"/>
 	<file src="gui/gear/inventory/buttArrowDown.png"/>
 	<file src="gui/gear/inventory/butoff.png"/>
@@ -213,6 +215,7 @@
 	<file src="gui/gear/inventory/primary.png" />
 	<file src="gui/gear/inventory/secondary.png" />
 	<file src="gui/gear/inventory/items.png" />
+	<file src="gui/gear/items/debug.png" />
 	<file src="gui/gear/items/scrollmenu_1.png" />
 	<file src="gui/gear/items/scrollmenu_2.png" />
 	<file src="gui/gear/items/scrollmenu_3.png" />
@@ -257,7 +260,10 @@
 	<file src="gui/status/blood/8000.png" />
 	<file src="gui/status/blood/6000.png" />
 	<file src="gui/status/blood/4000.png" />
-	<file src="gui/status/blood/2000.png" />	
+	<file src="gui/status/blood/2000.png" />
+	<file src="gui/status/blood/bloodtest.png" />
+	<file src="gui/status/blood/drop.png" />
+	<file src="gui/status/blood/substance.png" />
 	<file src="gui/status/humanity/5.png" />
 	<file src="gui/status/humanity/4.png" />
 	<file src="gui/status/humanity/3.png" />

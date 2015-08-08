@@ -38,7 +38,7 @@ function playerLogin(username, pass, player)
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
-			if data[1] == "brokenbone" or data[1] == "gender" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
+			if data[1] == "brokenbone" or data[1] == "gender" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
 				elementData = elementData
 			else
 				elementData = 0
@@ -137,6 +137,10 @@ function playerRegister(username, pass, player)
 			setElementData(player,data[1],2500)	
 		elseif data[1] == "gender" then
 			setElementData(player,data[1],gender)
+		elseif data[1] == "bloodtype" then
+			determineBloodType(player)
+		elseif data[1] == "bloodtypediscovered" then
+			setElementData(player,"bloodtypediscovered","?")
 		else
 			setElementData(player,data[1],0)
 		end	
@@ -191,3 +195,27 @@ function saveAllAccounts() -- Save in the database
 	outputServerLog("[DayZ] All accounts have been saved.")
 end
 addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), saveAllAccounts)
+
+--[[
+We determine the blood type using real world statistics
+
+Breakdown:
+
+0: 39%
+A: 32%
+B: 23%
+AB: 6%
+]]
+
+function determineBloodType(player)
+local bloodType = math.random(0,99)
+	if bloodType >= 0 and bloodType <= 6 then -- 6%
+		setElementData(player,"bloodtype","AB")
+	elseif bloodType >= 7 and bloodType <= 30 then -- 23%
+		setElementData(player,"bloodtype","B")
+	elseif bloodType >= 31 and bloodType <= 63 then -- 32%
+		setElementData(player,"bloodtype","A")
+	elseif bloodType >= 64 and bloodType <= 99 then -- 39%
+		setElementData(player,"bloodtype","0")
+	end
+end

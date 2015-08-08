@@ -72,9 +72,13 @@ function spawnDayZPlayer(player)
 		elseif data[1] =="currentweapon_3" then
 			setElementData(player,data[1],false)	
 		elseif data[1] =="bandit" then
-			setElementData(player,data[1],false)	
+			setElementData(player,data[1],false)
 		elseif data[1] =="humanity" then
-			setElementData(player,data[1],2500)	
+			setElementData(player,data[1],2500)
+		elseif data[1] == "bloodtype" then
+			determineBloodType(player)
+		elseif data[1] == "bloodtypediscovered" then
+			setElementData(player,"bloodtypediscovered","?")
 		else
 			setElementData(player,data[1],0)
 		end

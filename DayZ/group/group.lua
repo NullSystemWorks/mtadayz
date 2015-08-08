@@ -623,6 +623,7 @@ function updateGPS()
 end
 setTimer(updateGPS,10000,0)
 
+--[[
 function openGroupVault()
 	local r = getPlayerRotation ( localPlayer )
 	x = x - math.sin ( math.rad ( r ) ) * 20
@@ -638,3 +639,4 @@ function openGroupVault()
 			outputChatBox("Destroyed") 
 		end,10000,1)
 end
+]]

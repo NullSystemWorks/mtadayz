@@ -447,8 +447,8 @@ statsLabel = {}
 statsFont = guiCreateFont(":DayZ/fonts/bitstream.ttf",8)
 
 
-statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,":DayZ/gui/gear/items/scrollmenu_2.png",true)
-guiSetAlpha(statsWindows,0.8)
+statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,":DayZ/gui/gear/items/debug.png",true)
+guiSetAlpha(statsWindows,0.9)
 guiSetVisible(statsWindows,false)
 --Zombies  Killed
 statsLabel["zombieskilled"] = guiCreateLabel(0,0.05,1,0.15,"Zombies killed: 0",true,statsWindows)
@@ -471,7 +471,7 @@ guiLabelSetHorizontalAlign (statsLabel["banditskilled"],"center")
 guiSetFont (statsLabel["banditskilled"], statsFont )
 setElementData(statsLabel["banditskilled"],"identifikation","banditskilled")
 --Blood
-statsLabel["blood"] = guiCreateLabel(0,0.45,1,0.15,"Blood: 12000",true,statsWindows)
+statsLabel["blood"] = guiCreateLabel(0,0.45,1,0.15,"Blood: 12000 (Type: ?)",true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["blood"],"center")
 guiSetFont (statsLabel["blood"], statsFont )
 setElementData(statsLabel["blood"],"identifikation","blood")
@@ -528,30 +528,31 @@ addEventHandler("hideDebugMonitor",root,hideDebugMonitor)
 
 function refreshDebugMonitor()
 	if getElementData(getLocalPlayer(),"logedin") then
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["zombieskilled"],"identifikation"))
-		guiSetText(statsLabel["zombieskilled"],"Zombies killed: "..value)
+		local zombieskilled = getElementData(getLocalPlayer(),getElementData(statsLabel["zombieskilled"],"identifikation"))
+		guiSetText(statsLabel["zombieskilled"],"Zombies killed: "..zombieskilled)
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["headshots"],"identifikation"))
-		guiSetText(statsLabel["headshots"],"Headshots: "..value)
+		local headshots = getElementData(getLocalPlayer(),getElementData(statsLabel["headshots"],"identifikation"))
+		guiSetText(statsLabel["headshots"],"Headshots: "..headshots)
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["banditskilled"],"identifikation"))
-		guiSetText(statsLabel["banditskilled"],"Bandits killed: "..value)
+		local banditskilled = getElementData(getLocalPlayer(),getElementData(statsLabel["banditskilled"],"identifikation"))
+		guiSetText(statsLabel["banditskilled"],"Bandits killed: "..banditskilled)
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["murders"],"identifikation"))
-		guiSetText(statsLabel["murders"],"Murders: "..value)
+		local murders = getElementData(getLocalPlayer(),getElementData(statsLabel["murders"],"identifikation"))
+		guiSetText(statsLabel["murders"],"Murders: "..murders)
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["blood"],"identifikation"))
-		guiSetText(statsLabel["blood"],"Blood: "..value)
+		local blood = getElementData(getLocalPlayer(),getElementData(statsLabel["blood"],"identifikation"))
+		local bloodtype = getElementData(localPlayer,"bloodtypediscovered")
+		guiSetText(statsLabel["blood"],"Blood: "..blood.." (Type: "..tostring(bloodtype)..")")
 		
-		local value = getElementData(getRootElement(),"zombiesalive") or 0
-		local value2 = getElementData(getRootElement(),"zombiestotal") or 0
-		guiSetText(statsLabel["zombies"],"Zombies (Alive/Total): "..value.."/"..value2)
+		local zombiesalive = getElementData(getRootElement(),"zombiesalive") or 0
+		local zombiestotal = getElementData(getRootElement(),"zombiestotal") or 0
+		guiSetText(statsLabel["zombies"],"Zombies (Alive/Total): "..zombiesalive.."/"..zombiestotal)
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["temperature"],"identifikation"))
-		guiSetText(statsLabel["temperature"],"Temperature: "..math.round(value,2).."°C")
+		local temperature = getElementData(getLocalPlayer(),getElementData(statsLabel["temperature"],"identifikation"))
+		guiSetText(statsLabel["temperature"],"Temperature: "..math.round(temperature,2).."°C")
 		
-		local value = getElementData(getLocalPlayer(),getElementData(statsLabel["humanity"],"identifikation"))
-		guiSetText(statsLabel["humanity"],"Humanity: "..math.round(value,2))
+		local humanity = getElementData(getLocalPlayer(),getElementData(statsLabel["humanity"],"identifikation"))
+		guiSetText(statsLabel["humanity"],"Humanity: "..math.round(humanity,2))
 		
 		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
 	end			

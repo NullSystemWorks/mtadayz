@@ -99,7 +99,7 @@ function onStartCraftingTimer()
 		craftingBar = guiCreateProgressBar(0.35,0.9,0.3,0.05,true)
 		guiProgressBarSetProgress(craftingBar,0)
 		craftingTimer = setTimer(increaseTimer,craftingTime,0)
-		craftingsound = playSound("sounds/crafting.mp3",false)
+		craftingsound = playSound(":DayZ/sounds/status/crafting.mp3",false)
 		isCrafting = true
 		
 	end

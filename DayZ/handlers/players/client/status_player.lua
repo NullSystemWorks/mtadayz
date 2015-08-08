@@ -293,3 +293,118 @@ function onPlayerActionPlaySound(item)
 end
 addEvent("onPlayerActionPlaySound",true)
 addEventHandler("onPlayerActionPlaySound",root,onPlayerActionPlaySound)
+
+local bloodTest = {}
+local number = 0
+local vialsLeft = 3
+local handFont = guiCreateFont(":DayZ/fonts/needhelp.ttf",17)
+
+bloodTest["testsheet"] = guiCreateStaticImage(0.13, 0.20, 0.71, 0.61, ":DayZ/gui/status/blood/bloodtest.png", true)
+bloodTest["drop1"] = guiCreateStaticImage(0.162, 0.182, 0.13, 0.17, ":DayZ/gui/status/blood/drop.png", true, bloodTest["testsheet"])
+guiSetProperty(bloodTest["drop1"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+bloodTest["drop2"] = guiCreateStaticImage(0.338, 0.182, 0.13, 0.17, ":DayZ/gui/status/blood/drop.png", true, bloodTest["testsheet"])
+guiSetProperty(bloodTest["drop2"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+bloodTest["drop3"] = guiCreateStaticImage(0.512, 0.182, 0.13, 0.17, ":DayZ/gui/status/blood/drop.png", true, bloodTest["testsheet"])
+guiSetProperty(bloodTest["drop3"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+bloodTest["drop4"] = guiCreateStaticImage(0.69, 0.182, 0.13, 0.17, ":DayZ/gui/status/blood/drop.png", true, bloodTest["testsheet"])
+guiSetProperty(bloodTest["drop4"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+bloodTest["tested"] = guiCreateLabel(0.16, 0.45, 0.33, 0.09, getPlayerName(localPlayer), true, bloodTest["testsheet"])
+guiLabelSetColor(bloodTest["tested"], 0, 0, 0)
+guiLabelSetHorizontalAlign(bloodTest["tested"], "center", false)
+guiLabelSetVerticalAlign(bloodTest["tested"], "center")
+bloodTest["instructions"] = guiCreateLabel(0.16, 0.68, 0.33, 0.09, "Click the circles to \ndetermine your blood type!", true, bloodTest["testsheet"])
+guiLabelSetColor(bloodTest["instructions"], 0, 0, 0)
+guiLabelSetVerticalAlign(bloodTest["instructions"], "center")
+bloodTest["substance"] = guiCreateStaticImage(0.69, 0.49, 0.22, 0.37, ":DayZ/gui/status/blood/substance.png", true, bloodTest["testsheet"])
+bloodTest["substanceleft"] = guiCreateLabel(0.30, 0.42, 0.56, 0.46, vialsLeft, true, bloodTest["substance"])
+guiSetFont(bloodTest["substanceleft"], "default-bold-small")
+guiLabelSetHorizontalAlign(bloodTest["substanceleft"], "center", false)
+guiLabelSetVerticalAlign(bloodTest["substanceleft"], "center")    
+bloodTest["close"] = guiCreateLabel(0.11, 0.83, 0.23, 0.07, "Close", true, bloodTest["testsheet"])
+guiLabelSetVerticalAlign(bloodTest["close"], "center")
+guiLabelSetColor(bloodTest["close"],0,0,0)
+guiSetFont(bloodTest["tested"],handFont)
+guiSetFont(bloodTest["instructions"],handFont)
+guiSetFont(bloodTest["close"],handFont)
+
+guiSetVisible(bloodTest["testsheet"],false)
+
+function activateBloodTest()
+	if guiGetVisible(bloodTest["testsheet"]) then
+		guiSetVisible(bloodTest["testsheet"],false)
+		showCursor(false)
+		removeEventHandler("onClientMouseEnter",bloodTest["close"],colorSelected)
+		removeEventHandler("onClientMouseLeave",bloodTest["close"],colorDeselected)
+	else
+		guiSetVisible(bloodTest["testsheet"],true)
+		showCursor(not isCursorShowing())
+		addEventHandler("onClientMouseEnter",bloodTest["close"],colorSelected,false)
+		addEventHandler("onClientMouseLeave",bloodTest["close"],colorDeselected,false)
+		vialsLeft = 3
+		guiSetProperty(bloodTest["drop1"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+		guiSetProperty(bloodTest["drop2"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+		guiSetProperty(bloodTest["drop3"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+		guiSetProperty(bloodTest["drop4"], "ImageColours", "tl:FF86787C tr:FF86787C bl:FF86787C br:FF86787C")
+	end
+end
+
+function colorSelected()
+	guiLabelSetColor(bloodTest["close"],255,0,0)
+end
+
+function colorDeselected (b,s)
+	guiLabelSetColor(bloodTest["close"],0,0,0)
+end
+
+function closeBloodTest()
+	guiSetVisible(bloodTest["testsheet"],false)
+	showCursor(not isCursorShowing())
+	removeEventHandler("onClientMouseEnter",bloodTest["close"],colorSelected)
+	removeEventHandler("onClientMouseLeave",bloodTest["close"],colorDeselected)
+end
+
+function assignTypeToDrop()
+	local bloodstring = ""
+	for i = 1, 4 do
+		if i == 1 then
+			bloodstring = "0"
+			setElementData(bloodTest["drop1"],"bloodtype",bloodstring)
+		elseif i == 2 then
+			bloodstring = "A"
+			setElementData(bloodTest["drop2"],"bloodtype",bloodstring)
+		elseif i == 3 then
+			bloodstring = "B"
+			setElementData(bloodTest["drop3"],"bloodtype",bloodstring)
+		elseif i == 4 then
+			bloodstring = "AB"
+			setElementData(bloodTest["drop4"],"bloodtype",bloodstring)
+		end
+		addEventHandler("onClientGUIClick",bloodTest["drop"..i],checkBloodType, false)
+	end
+	addEventHandler("onClientGUIClick",bloodTest["close"],closeBloodTest,false)
+end
+addEventHandler("onClientPlayerSpawn",localPlayer,assignTypeToDrop)
+
+function checkBloodType(button, state)
+	if button == "left" then
+		if vialsLeft > 0 then
+			if getElementData(source,"bloodtype") == getElementData(localPlayer,"bloodtype") then
+				guiSetProperty(source, "ImageColours", "tl:FF00FF00 tr:FF00FF00 bl:FF00FF00 br:FF00FF00")
+				setElementData(localPlayer,"bloodtypediscovered",getElementData(localPlayer,"bloodtype"))
+				vialsLeft = 0
+				guiSetText(bloodTest["substanceleft"],vialsLeft)
+			else
+				if vialsLeft == 0 then
+					triggerEvent("displayClientInfo",localPlayer,"Blood","No more test substance left!",255,0,0)
+					return
+				else
+					guiSetProperty(source, "ImageColours", "tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000")
+					vialsLeft = vialsLeft-1
+					guiSetText(bloodTest["substanceleft"],vialsLeft)
+				end
+			end
+		else
+			triggerEvent("displayClientInfo",localPlayer,"Blood","No more test substance left!",255,0,0)
+		end
+	end
+end
