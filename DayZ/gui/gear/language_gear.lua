@@ -57,9 +57,9 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Item", "Equip to use.","Parachute"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "You shouldn't have this.","Tear Gas",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extremely deadly and extremely noisy.","Grenade",},
-			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Click item to equip.","Binoculars"}
+			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "You shouldn't have this.","Tear Gas"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extremely deadly and extremely noisy.","Grenade"},
+			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Click item to equip.","Binoculars"},
 		},
 
 	},
@@ -80,7 +80,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Food", "Canned Baked Beans used for sustainment.\nLasts well over five years if stored \ncorrectly.","Baked Beans",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Food", "Canned Baked Beans used for sustainment.\nLasts well over five years if stored \ncorrectly.","Baked Beans"},
 		{"Pasta",1,'pasta.png',128,128,"Food", "Canned Pasta used for sustainment.\nLasts well over five years if stored \ncorrectly.","Pasta"},
 		{"Sardines",1,'sardines.png',128,128,"Food", "Canned Sardines used for sustainment.\nLasts well over five years if stored \ncorrectly.","Sardines"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"Food","Canned Frank & Beans used for sustainment.\nLasts well over five years if stored \ncorrectly.","Frank & Beans"},
@@ -289,9 +289,9 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Item", "Ausrüsten um diesen Gegenstand\nzu benutzen.","Fallschirm"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Das solltest du nicht haben.","Tränengas",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extrem tödlich und extrem laut.","Granate",},
-			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Zum Ausrüsten auf Icon klicken.","Fernglas"}
+			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Das solltest du nicht haben.","Tränengas"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extrem tödlich und extrem laut.","Granate"},
+			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Zum Ausrüsten auf Icon klicken.","Fernglas"},
 		},
 
 	},
@@ -312,7 +312,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Nahrung", "Gebackene Bohnen, perfekt zum Überleben.\nKönnen unter den richtigen\nLagerbedingungen über 5 Jahre halten.","Gebackene Bohnen",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Nahrung", "Gebackene Bohnen, perfekt zum Überleben.\nKönnen unter den richtigen\nLagerbedingungen über 5 Jahre halten.","Gebackene Bohnen"},
 		{"Pasta",1,'pasta.png',128,128,"Nahrung", "Pasta, perfekt zum Überleben.\nKönnen unter den richtigen\nLagerbedingungen über 5 Jahre halten.","Pasta"},
 		{"Sardines",1,'sardines.png',128,128,"Nahrung", "Sardinen, perfekt zum Überleben.\nKönnen unter den richtigen\nLagerbedingungen über 5 Jahre halten.","Sardinen"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"Nahrung","Würstchen & Bohnen, perfekt zum Überleben.\nKönnen unter den richtigen\nLagerbedingungen über 5 Jahre halten.","Würstchen & Bohnen"},
@@ -520,9 +520,9 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Předmět", "Nasaď na záda pro použití.","Padák"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Předmět", "Toto by jsi neměl mít.","Dýmovnice",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Předmět", "Extrémně smrtící a extrémně hlučný.","Granát",},
-			{"Binoculars",1, 'binoculars.png', 128, 128,"Předmět", "Klikni pro nasazení.","Dalekohled"}
+			{"Tear Gas",1, 'gas.png', 128, 128,"Předmět", "Toto by jsi neměl mít.","Dýmovnice"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Předmět", "Extrémně smrtící a extrémně hlučný.","Granát"},
+			{"Binoculars",1, 'binoculars.png', 128, 128,"Předmět", "Klikni pro nasazení.","Dalekohled"},
 		},
 
 	},
@@ -543,7 +543,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Jídlo", "Pečené fazole v plechovce.\nDobře skladované mohou vydržet\npřes 5 let.","Pečené fazole",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Jídlo", "Pečené fazole v plechovce.\nDobře skladované mohou vydržet\npřes 5 let.","Pečené fazole"},
 		{"Pasta",1,'pasta.png',128,128,"Jídlo", "Těstoviny v plechovce.\nDobře skladované mohou vydržet\npřes 5 let.","Těstoviny"},
 		{"Sardines",1,'sardines.png',128,128,"Jídlo", "Sardinky v plechovce.\nDobře skladované mohou vydržet\npřes 5 let.","Sardinky"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"Jídlo","Frank & Beans v plechovce.\nDobře skladované mohou vydržet\npřes 5 let.","Frank & Beans"},
@@ -751,9 +751,9 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Item", "Rust je ermee uit om het te gebruiken.","Parachute"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Normaal zou je dit niet hebben.","Traangas",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Uiterst dodelijk en zeer luidruchtig.","Granaat",},
-			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Klik op het item om het te gebruiken.","Verrekijker"}
+			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Normaal zou je dit niet hebben.","Traangas"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Uiterst dodelijk en zeer luidruchtig.","Granaat"},
+			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Klik op het item om het te gebruiken.","Verrekijker"},
 		},
 
 	},
@@ -774,7 +774,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Voedsel", "Ingeblikte Gebakken Bonen gebruikt voor langdurig opslag.\nBlijf tot wel 5 Jaar eetbaar als het \nCorrect word opgeslagen.","Gebakken Bonen",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Voedsel", "Ingeblikte Gebakken Bonen gebruikt voor langdurig opslag.\nBlijf tot wel 5 Jaar eetbaar als het \nCorrect word opgeslagen.","Gebakken Bonen"},
 		{"Pasta",1,'pasta.png',128,128,"Voedsel", "Ingeblikte Pasta gebruikt voor langdurig opslag.\nBlijf tot wel 5 Jaar eetbaar als het \nCorrect word opgeslagen.","Pasta"},
 		{"Sardines",1,'sardines.png',128,128,"Voedsel", "Ingeblikte Sardines gebruikt voor langdurig opslag.\nBlijf tot wel 5 Jaar eetbaar als het \nCorrect word opgeslagen.","Sardines"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"Voedsel","Ingeblikte Frank & Beans gebruikt voor langdurig opslag.\nBlijf tot wel 5 Jaar eetbaar als het \nCorrect word opgeslagen.","Frank & Beans"},
@@ -982,8 +982,8 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Item", "Equipe para usar.","Paraquedas"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Você não deveria ter isso.","Gás Lacrimogêneo",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extremamente mortal e barulhento.","Granada",},
+			{"Tear Gas",1, 'gas.png', 128, 128,"Item", "Você não deveria ter isso.","Gás Lacrimogêneo"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extremamente mortal e barulhento.","Granada"},
 			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Clique no item para equipá-lo.","Binóculo"},
 		},
 
@@ -1211,8 +1211,8 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"物品", "装备然后打开它.","降落伞"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"物品", "你怎么获得它的.","催泪瓦斯",},
-			{"Grenade",5, 'grenade.png', 128, 128,"物品", "很要命也很吵boomshakalaka.","手榴弹",},
+			{"Tear Gas",1, 'gas.png', 128, 128,"物品", "你怎么获得它的.","催泪瓦斯"},
+			{"Grenade",5, 'grenade.png', 128, 128,"物品", "很要命也很吵boomshakalaka.","手榴弹"},
 			{"Binoculars",1, 'binoculars.png', 128, 128,"物品", "点击然后使用他.","望远镜"}
 		},
 
@@ -1234,7 +1234,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"食物", "里面是煮好的豆子.\5年保质期。 \ncorrectly.","烘豆罐头",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"食物", "里面是煮好的豆子.\5年保质期。 \ncorrectly.","烘豆罐头"},
 		{"Pasta",1,'pasta.png',128,128,"食物", "里面是面食.\5年保质期。 \ncorrectly.","面食罐头"},
 		{"Sardines",1,'sardines.png',128,128,"食物", "里面是沙丁鱼.\5年保质期。 \ncorrectly.","沙丁鱼罐头"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"食物","Canned Frank & Beans used for sustainment.\5年保质期。 \ncorrectly.","Frank & Beans"},
@@ -1437,8 +1437,8 @@ languageTextTable = {
 
 		["Specially Weapon"] = {
 			{"Parachute",1, 'parachute.png', 128,128,"Artículo", "Equipar para usar.","Paracaídas"},
-			{"Tear Gas",1, 'gas.png', 128, 128,"Artículo", "No deberias tener esto.","Gas Lacrimógeno",},
-			{"Grenade",5, 'grenade.png', 128, 128,"Artículo", "Extremadamente mortal y ruidoso.","Granada",},
+			{"Tear Gas",1, 'gas.png', 128, 128,"Artículo", "No deberias tener esto.","Gas Lacrimógeno"},
+			{"Grenade",5, 'grenade.png', 128, 128,"Artículo", "Extremadamente mortal y ruidoso.","Granada"},
 			{"Binoculars",1, 'binoculars.png', 128, 128,"Artículo", "Has clic en el artículo para equipar","Binoculares"},
 		},
 
@@ -1460,7 +1460,7 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Comida", "Lata de Frijoles Horneados usados como sustento.\nDura más de cinco años si se almacena \ncorrectamente.","Frijoles Horneados",},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Comida", "Lata de Frijoles Horneados usados como sustento.\nDura más de cinco años si se almacena \ncorrectamente.","Frijoles Horneados"},
 		{"Pasta",1,'pasta.png',128,128,"Comida", "Lata de Pasta usado como sustento sustento.\nDura más de cinco años si se almacena \ncorrectamente.","Pasta"},
 		{"Sardines",1,'sardines.png',128,128,"Comida", "Lata de Sardinas usado como sustento.\nDura más de cinco años si se almacena \ncorrectamente.","Sardinas"},
 		{"Frank & Beans",1,'frankbeans.png',128,128,"Comida","Enlatados Frank & Beans usado como sustento.\nDura más de cinco años si se almacena \ncorrectamente.","Frank & Beans"},
