@@ -9,7 +9,8 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### REMOVED: For deprecated features removed in the release it's mentioned in
 ### FIXED: For all bugs
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
-
+### LANGUAGE: French is now available.
+### LANGUAGE: Romanian is now available.
 
 # - #
 ## [0.9.4a] - 2015-08-06
