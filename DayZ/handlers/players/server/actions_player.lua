@@ -156,3 +156,11 @@ function getServerDetails()
 	end
 end
 setTimer(getServerDetails,3000,0)
+
+function antiWaterGlitch()
+   if isElementInWater(source) then
+      local x, y, z = getElementPosition(source)
+      setElementPosition(source, x, y, 0)
+   end
+end
+addEventHandler("onPlayerQuit", root, antiWaterGlitch)
