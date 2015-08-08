@@ -1708,10 +1708,10 @@ languageTextTable = {
 	},
 
 	["Food"] = {
-		{"Baked Beans",1,'bakedbeans.png',128,128,"Nourriture", "Le 'Baked Beans' est utilisé pour le maintien en\nbonne santé.\nIl a une longue durée de vie, si stocké correctement.","Baked Beans"},
-		{"Pasta",1,'pasta.png',128,128,"Nourriture", "Le 'Canned Pasta' est utilisé pour le maintien en\nbonne santé.\nIl a une longue durée de vie, si stocké correctement.","Pasta"},
-		{"Sardines",1,'sardines.png',128,128,"Nourriture", "Le 'Canned Sardines' est utilisé pour le maintien en\nbonne santé.\nIl a une longue durée de vie, si stocké correctement.","Sardines"},
-		{"Frank & Beans",1,'frankbeans.png',128,128,"Nourriture","Le 'Frank & Beans' est utilisé pour le maintien en\nbonne santé.\nIl a une longue durée de vie, si stocké correctement.","Frank & Beans"},
+		{"Baked Beans",1,'bakedbeans.png',128,128,"Nourriture", "Le 'Baked Beans' est utilisé pour le maintien en\nbonne santé. Il a une longue durée\nde vie, si stocké correctement.","Baked Beans"},
+		{"Pasta",1,'pasta.png',128,128,"Nourriture", "Le 'Canned Pasta' est utilisé pour le maintien en\nbonne santé. Il a une longue durée\nde vie, si stocké correctement.","Pasta"},
+		{"Sardines",1,'sardines.png',128,128,"Nourriture", "Le 'Canned Sardines' est utilisé pour le maintien\nen bonne santé. Il a une longue durée\nde vie, si stocké correctement.","Sardines"},
+		{"Frank & Beans",1,'frankbeans.png',128,128,"Nourriture","Le 'Frank & Beans' est utilisé pour le maintien en\nbonne santé. Il a une longue durée\nde vie, si stocké correctement.","Frank & Beans"},
 		{"Can (Corn)",1,'corn.png',128,128,"Nourriture", "Une boîte de maïs propre.","Can (Corn)"},
 		{"Can (Peas)",1,'peas.png',128,128,"Nourriture", "Une boîte de petits pois propre.","Can (Peas)"},
 		{"Can (Pork)",1,'pork.png',128,128,"Nourriture", "Une boîte de porc propre.", "Can (Pork)"},
