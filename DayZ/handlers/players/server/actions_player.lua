@@ -138,14 +138,16 @@ end
 addEvent("onPlayerPlaceRoadflare",true)
 addEventHandler("onPlayerPlaceRoadflare",getRootElement(),onPlayerPlaceRoadflare)
 
-function setTotalKills()
-	setTimer(function(source)
-	local murders = getElementData(source,"murders")
-	local zombies = getElementData(source,"zombieskilled")
-	local kill = setElementData(source,"totalkills",getElementData(source,"murders")+getElementData(source,"zombieskilled"))
-	end,2000,1,source)
+function updateTotalKills()
+	for i, players in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			local zombieskilled = getElementData(player,"zombieskilled")
+			local murders = getElementData(player,"murders")
+			setElementData(player,"totalkills",zombieskilled+murder)
+		end
+	end
 end
-addEventHandler("onPlayerSpawn",root,setTotalKills)
+setTimer(updateTotalKills,3000,0)
 
 function getServerDetails()
 	for i, player in ipairs(getElementsByType("player")) do

@@ -365,9 +365,21 @@ function groupMemberLogin()
 		myGang[source] = GAC[GetAccount(source)][1]
 		setElementData(source, "Group", GAC[GetAccount(source)][1])
 		setPlayerTeam(source,playerTeam)
+		local date, time = getTheTime()
+		local date = date.." - "..time
+		GAC[GetAccount(source)][5] = date
 	end
 end
 addEventHandler("onPlayerLogin", root, groupMemberLogin)
+
+function groupMemberQuit()
+	if (GAC[GetAccount(source)]) then
+		local date, time = getTheTime()
+		local date = date.." - "..time
+		GAC[GetAccount(source)][5] = date
+	end
+end
+addEventHandler("onPlayerQuit", root, groupMemberQuit)
 
 function getGroupMembers(group)
 	local temp = {}
@@ -665,7 +677,7 @@ function printManagment(player)
 	for ind, data in pairs(GAC) do
 		if (data[1] == group) then
 			local rank, warning, joined, lastTime = GAC[ind][2], GAC[ind][3],GAC[ind][4], GAC[ind][5]
-			triggerClientEvent(client, "groupSystem.addToList", client, tostring(ind), rank, warning, joined, lastTime, "N/A", getAccountPlayer(getAccount(ind)), getGroupBankAmount(group))
+			triggerClientEvent(client, "groupSystem.addToList", client, tostring(ind), rank, warning, joined, lastTime, getPlayerName(client), getAccountPlayer(getAccount(ind)), getGroupBankAmount(group))
 		end
 	end
 end

@@ -164,7 +164,7 @@ function performRender()
 			
 			local daysalive = getElementData(localPlayer,"daysalive")
 			dxDrawText(tostring(daysalive), screenW * 0.7963, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.8350, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
-		
+			
 			local totalkills = getElementData(localPlayer,"totalkills")
 			dxDrawText(tostring(totalkills), screenW * 0.9025, screenH * (0.2750+(0.0466*9+0.005)), screenW * 0.9413, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		end

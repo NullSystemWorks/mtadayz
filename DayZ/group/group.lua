@@ -43,7 +43,7 @@ function makeGUI()
 	adminPanel = guiCreateTab("Management", mainPanel)
 
 	adminMembsList = guiCreateGridList(0.01, 0.08, 0.95, 0.50, true, adminPanel)
-	guiGridListAddColumn(adminMembsList, "Last Nick", 0.2)
+	guiGridListAddColumn(adminMembsList, "Name", 0.2)
 	guiGridListAddColumn(adminMembsList, "Account", 0.2)
 	guiGridListAddColumn(adminMembsList, "Rank", 0.2)
 	guiGridListAddColumn(adminMembsList, "Last Time Online", 0.2)
@@ -65,6 +65,9 @@ function makeGUI()
 	messageCloseButton = guiCreateButton(0.36, 0.89, 0.24, 0.08, "Close", true, messageWindow)
 	messageSaveButton = guiCreateButton(0.02, 0.89, 0.24, 0.08, "Save", true, messageWindow)
 	guiSetVisible(messageWindow, false)
+	
+	messageOTD = guiCreateLabel(0.01,0.83,0.95, 0.30, "Message of the Day:\n",true,adminPanel)
+	guiLabelSetHorizontalAlign(messageOTD,"left",true)
 	
 	inviteWindow = guiCreateWindow(0.32, 0.15, 0.38, 0.69, "Invite Player", true)
 	guiWindowSetSizable(inviteWindow, false)
@@ -471,6 +474,7 @@ function viewWindow(group, rank, datejoined, msg, perms, money)
 		--guiSetEnabled(groupBankWithdrawButton, boolean(perms[16]))
 	end
 	guiSetText(messageMemo, tostring(msg))
+	guiSetText(messageOTD,"Message of the Day:\n"..tostring(msg))
 end
 addEvent("groupSystem.done", true)
 addEventHandler("groupSystem.done", root, viewWindow)
@@ -479,9 +483,9 @@ function printManagment()
 	triggerServerEvent("groupSystem.print", root)
 end
 
-function addToList(account, rank, warning, joined, lastTime, lastNick, online)
+function addToList(account, rank, warning, joined, lastTime, nick, online)
 	local row = guiGridListAddRow(adminMembsList)
-	guiGridListSetItemText(adminMembsList, row, 1, tostring(lastNick), false, false)
+	guiGridListSetItemText(adminMembsList, row, 1, tostring(nick), false, false)
 	guiGridListSetItemText(adminMembsList, row, 2, tostring(account), false, false)
 	guiGridListSetItemText(adminMembsList, row, 3, tostring(rank), false, false)
 	guiGridListSetItemText(adminMembsList, row, 4, tostring(lastTime), false, false)
@@ -506,6 +510,7 @@ addEventHandler("groupSystem.addToList", root, addToList)
 
 function saveMessage()
 	local message = guiGetText(messageMemo)
+	guiSetText(messageOTD,"Message of the Day:\n"..tostring(message))
 	triggerServerEvent("groupSystem.updateMessage", root, message)
 end
 
