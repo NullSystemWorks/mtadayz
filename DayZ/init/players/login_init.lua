@@ -46,6 +46,10 @@ function playerLogin(username, pass, player)
 		end
 		setElementData(player,data[1],elementData)
 	end
+	if not getElementData(player,"bloodtype") then
+		determineBloodType(player)
+		setElementData(player,"bloodtypediscovered","?")
+	end
 	setElementData(player,"logedin",true)
 	--Weapons
 	--Old Weapons

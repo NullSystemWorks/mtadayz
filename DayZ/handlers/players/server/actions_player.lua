@@ -139,11 +139,11 @@ addEvent("onPlayerPlaceRoadflare",true)
 addEventHandler("onPlayerPlaceRoadflare",getRootElement(),onPlayerPlaceRoadflare)
 
 function updateTotalKills()
-	for i, players in ipairs(getElementsByType("player")) do
+	for i, player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
 			local zombieskilled = getElementData(player,"zombieskilled")
 			local murders = getElementData(player,"murders")
-			setElementData(player,"totalkills",zombieskilled+murder)
+			setElementData(player,"totalkills",zombieskilled+murders)
 		end
 	end
 end

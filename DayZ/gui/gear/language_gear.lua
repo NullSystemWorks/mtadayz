@@ -1721,9 +1721,9 @@ languageTextTable = {
 		{"Can (Chowder)",1,'chowder.png',128,128,"Nourriture", "Une boîte de ragoût de palourdes propre.", "Can (Chowder)"},
 		{"MRE",1,'mre.png', 128, 128,"Nourriture", "Repas prêt à être mangé.","MRE"},
 		{"Pistachios",1,'pistachios.png', 128, 128,"Nourriture", "Un paquet de pistaches, grillées et salées.","Pistachios"},
-		{"Trail Mix",1,'trailmix.png', 128, 128,"Nourriture", "Contient douze différents fruits et noix.","Mix de fruits"},
+		{"Trail Mix",1,'trailmix.png', 128, 128,"Nourriture", "Contient douze différents fruits et noix.","Fruit Mix"},
 		{"Cooked Meat",1, 'cookedmeat.png',128,128,"Nourriture", "Viande qui a été cuite sur un feu.","Cooked Meat"},
-		{"Water Bottle",1, 'bottle.png', 128, 128,"Boisson", "Une bouteille d'eau qui a été filtré\net peut être consommé.","Bouteille d'eau"},
+		{"Water Bottle",1, 'bottle.png', 128, 128,"Boisson", "Une bouteille d'eau qui a été filtré\net peut être consommé.","Water Bottle"},
 		{"Soda Can (Pepsi)",1,'pepsi.png', 128, 128,"Boisson", "Une boisson gazeuse et savoureuse\net pleine de sucre, parfums artificiels\net conservateurs.","Soda Can (Pepsi)"},
 		{"Soda Can (Cola)",1,'cola.png', 128, 128,"Boisson", "Une boisson gazeuse et savoureuse\net pleine de sucre, parfums artificiels\net conservateurs.","Soda Can (Cola)"},
 		{"Soda Can (Mountain Dew)",1,'dew.png', 128, 128,"Boisson", "Une boisson gazeuse et savoureuse\net pleine de sucre, parfums artificiels\net conservateurs.", "Soda Can (Mountain Dew)"},
@@ -1744,8 +1744,8 @@ languageTextTable = {
 		{"Blood Bag",1, 'bloodbag.png', 128, 85, "Item", "Sac de sang utilisée pour administrer\nune transfusion sanguine.","Blood Bag","Use"},
 		{"Blood Test Kit",1, 'bloodtest.png', 128, 85, "Item", "Used to determine RH and blood type.","Blood Test Kit","Test Blood"},
 		{"Transfusion Kit",1, 'transfusion.png', 128, 85, "Item", "A blood transfusion kit that is required to \nperform blood transfusions and fill blood bags.","Transfusion Kit","Transfusion"},
-		{"Blood Bag (Empty)",1, 'bloodbag.png', 128, 85, "Item", "Sac de sangs pour administrer une transfusion\nde sangs. C'est vide.","Sac de sangs (Vide)"},
-		{"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Barbelé en grosses bobines qui peuvent être\nétendus comme un accordéon avec\npiquets en acier pour former des\nobstacles de fils militaire.","Wire Fence","Build a wire fence"}, 
+		{"Blood Bag (Empty)",1, 'bloodbag.png', 128, 85, "Item", "Bag of blood used for administering\na blood transfusion. It's empty.","Blood Bag (Empty)"},
+		{"Wire Fence", 1, 'wirefence.png', 128, 128, "Item", "Barbelé en grosses bobines qui peuvent être\nétendus comme un accordéon avec piquets en acier\npour former des obstacles de fils militaire.","Wire Fence","Build a wire fence"}, 
 		{"Raw Meat", 1, 'rawmeat.png', 128, 128,"Item", "Viande crue vidée de l'animal.\nVous pouvez cuir la viande dans un feu.","Viande crue"}, 
 		{"Tire", 2, 'wheel.png', 128, 128,"Item", "Une roue de voiture qui pourrait servir à\nréparer un véhicule endommagé.","Rouge"}, 
 		{"Engine", 5, 'engine.png', 128,128,"Item", "Un moteur de voiture qui pourrait servir à\nréparer un véhicule endommagé.","Moteur"}, 
@@ -1754,7 +1754,7 @@ languageTextTable = {
 		{"Scrap Metal", 3, 'parts.png', 128,128,"Item", "Du métal pouvant servir à réparer un véhicule.","Métal"},
 		{"Windscreen Glass", 2, 'glass.png', 128, 128,"Item", "Un pare-brise d'un véhicule.","Pare-brise"}, 	
 		{"Tent", 3, 'tent.png', 128, 128, "Item", "Une tente de camping qui peut être montée,\nce qui vous permet d'avoir un stockage étendu\nen sécurité.","Tente","Pitch a tent"}, 
-		{"Camouflage Clothing",1,'clothes.png',128,128,"Item","Une tenue de camouflage pour l'armée.","Vêtements camo","Put clothes on"},
+		{"Camouflage Clothing",1,'clothes.png',128,128,"Item","Une tenue de camouflage pour l'armée.","Vêtements de camouflage","Put clothes on"},
 		{"Civilian Clothing",1,'clothes.png',128,128,"Item","Une tenue qui semble convenir pour un civil.","Vêtements civils","Put clothes on"},
 		{"Civilian Clothing (Female)",1,'clothes.png',128,128,"Item","Une tenue féminine qui semble adapter pour une civile.","Vêtements civils (F)","Put clothes on"},
 		{"Survivor Clothing (Female)",1,'clothes.png',128,128,"Item","Mmh.. C'est des vêtements de fille !","Vêtements de survivant (F)","Put clothes on"},
@@ -1840,14 +1840,14 @@ languageTextTable = {
 		{"Gun Powder",1,'parts.png',128,128,"Composant","Composant universel pour les munitions.","Poudre à canon"}, 
 		{"Mechanical Supplies",1,'parts.png',128,128,"Composant","Composant universel utilisé pour l'électricité.","Mechanical Supplies"},
 		{"Cables",1,'parts.png',128,128,"Composant","Composant universel utilisé pour l'électricité.","Câbles"},
-		{"Nails",1,'parts.png',128,128,"Composant","Composant universel utilisé pour\ndifférentes choses.","Clous"},
+		{"Nails",1,'parts.png',128,128,"Composant","Composant universel utilisé pour différentes choses.","Clous"},
 		{"Sheet",1,'parts.png',128,128,"Composant","Une feuille. Vous vous attendiez à quoi ?","Feuille"},
-		{"Barbed Wire",1,'parts.png',128,128,"Composant","Utilisé pour les items tactiques comme le\nWire Fence.","Fil de fer"},
-		{"Duct Tape",1,'parts.png',128,128,"Composant","Composant universel utilisé pour l'électronique.","Ruban adhésif"},
-		{"Glue",1,'parts.png',128,128,"Composant","Composant universel utilisé pour l'électronique.","Colle"},
-		{"Drugs",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels médicaux.","Drogue"},
-		{"Bandaid",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels médicaux.","Pansement"},
-		{"Vitamins",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels médicaux.","Vitamine"},
+		{"Barbed Wire",1,'parts.png',128,128,"Composant","Utilisé pour les items tactiques comme le Wire Fence.","Fil de fer"},
+		{"Duct Tape",1,'parts.png',128,128,"Composant","Composant universel utilisé pour\nl'électronique.","Ruban adhésif"},
+		{"Glue",1,'parts.png',128,128,"Composant","Composant universel utilisé pour\nl'électronique.","Colle"},
+		{"Drugs",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels\nmédicaux.","Drogue"},
+		{"Bandaid",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels\nmédicaux.","Pansement"},
+		{"Vitamins",1,'parts.png',128,128,"Composant","Peut être utilisé comme matériels\nmédicaux.","Vitamine"},
 		{"Tissue",1,'parts.png',128,128,"Composant","Peut être utilisé pour les objets médicaux.","Tissu"},
 		{"Small Box",1,'parts.png',128,128,"Composant","Une petite boite.","Petite boîte"},
 		{"String",1,'parts.png',128,128,"Composant","De la longue ficelle.","Ficelle"},
@@ -1860,14 +1860,14 @@ languageTextTable = {
 		{"Hand Saw",1,'parts.png',128,128,"Composant","Couramment utilisés dans les chantiers.","Scie"},
 		{"Metal Plate",1,'parts.png',128,128,"Composant","Une plaque de métal lourde.","Plaque métallique"},
 		{"Metallic Stick",1,'parts.png',128,128,"Composant","Une baguette métallique trop courte\npour être utilisée comme une arme.","Bâton métallique"},
-		{"Small Casing",1,'parts.png',128,128,"Composant","Une petite caisse servant à fabriquer\ndivers objets.","Petite caisse"},
+		{"Small Casing",1,'parts.png',128,128,"Composant","Une petite caisse servant à stocker divers objets.","Petite caisse"},
 	},
 
 	["Toolbelt"] = {
 		{"NV Goggles", 1,'nvgoggles.png',128,128,"Item", "Cliquez sur 'N' pour l'activer.","NV Goggles"},
 		{"IR Goggles", 1,'nvgoggles.png',128,128,"Item", "Cliquez sur 'I' pour l'activer.","IR Goggles"},
 		{"Map", 1,'map.png',128,128,"Item", "Cliquez sur 'F11' pour l'afficher.","Carte"},
-		{"Box of Matches", 1, 'matchbox.png',100,100,"Item", "Utilisez des 'Wood Pile' pour faire un feu.","Boîte d'allumettes", "Make a Fire"},
+		{"Box of Matches", 1, 'matchbox.png',100,100,"Item", "Utilisez des 'Wood Pile' pour\nfaire un feu.","Boîte d'allumettes", "Make a Fire"},
 		{"Watch", 1,'watch.png',128,128,"Item", "S'active automatiquement lors du ramassage.","Montre"},
 		{"GPS", 1,'gps.png',128,128,"Item", "S'active automatiquement lors du ramassage.","GPS"},
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Utilisée pour réparer les voitures\nde toutes sortes.","Boîte à outils"},
@@ -1877,7 +1877,7 @@ languageTextTable = {
 },
 
 ["ro"] = {
-	["Weapons"] = {
+["Weapons"] = {
 		["Primary Weapon"] = {
 			{"M4",10, 'm4.png', 256, 128,"Pușcă de asalt", "Muniție: Cartuș 5.56x45mm","M4"},
 			{"CZ 550",10, 'cz550.png', 256,128,"Pușcă cu lunetă", "Muniție: Cartuș 9.3x62mm","CZ 550"},
@@ -1922,6 +1922,7 @@ languageTextTable = {
 			{"Grenade",5, 'grenade.png', 128, 128,"Item", "Extrem de periculoasă și de zgomotoasă.","Grenadă"},
 			{"Binoculars",1, 'binoculars.png', 128, 128,"Item", "Click pentru a echipa.","Binoclu"},
 		},
+
 	},
 
 	["Ammo"] = {
