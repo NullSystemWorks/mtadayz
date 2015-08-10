@@ -32,60 +32,49 @@ function getTeamMemberOnline ()
 	end
 end
 
-function getPlayerWildcard(namePart)
-	namePart = string.lower(namePart)
-	
-	local bestaccuracy = 0
-	local foundPlayer, b, e
-	for _,player in ipairs(getElementsByType("player")) do
-		b,e = string.find(string.lower(string.gsub(getPlayerName(player), "#%x%x%x%x%x%x", "")), namePart)
-		if b and e then
-			if e-b > bestaccuracy then
-				bestaccuracy = e-b
-				foundPlayer = player
-			end
-		end
-	end
-	
-	if (foundPlayer) then
-		return foundPlayer
-	else
-		return false
-	end
-end
-
 function setGroup (playersource,command,teamName,targetString)
-	if (isObjectInACLGroup("user." ..getAccountName(getPlayerAccount(playersource)), aclGetGroup("Admin")))  then
+	if (isObjectInACLGroup("user." ..getAccountName(getPlayerAccount(playersource)), aclGetGroup("Admin"))) then
 		local foundTargetPlayer = getPlayerWildcard(targetString)
-		if (foundTargetPlayer) then
-			if teamName ~= "admin" or teamName ~= "supporter" or teamName ~= "remove" then 
-				outputChatBox ("Correct names are admin, supporter and remove!",playersource,255,0,0,true)	
-				return
-			end
-			if teamName == "remove" then
-				value = false
+		if teamName == "admin" or teamName == "supporter" or teamName == "remove" then
+			if (foundTargetPlayer) then
+				if teamName == "remove" then
+					value = false
+					account = getPlayerAccount(foundTargetPlayer)
+					setAccountData(account,"admin",value)
+					setAccountData(account,"supporter",value)
+					setElementData(foundTargetPlayer,"admin",value)
+					setElementData(foundTargetPlayer,"supporter",value)
+				else
+					value = true
+				end
 				account = getPlayerAccount(foundTargetPlayer)
-				setAccountData(account,"admin",value)
-				setAccountData(account,"supporter",value)
-				setElementData(foundTargetPlayer,"admin",value)
-				setElementData(foundTargetPlayer,"supporter",value)
+				accountname = getAccountName(account)
+				setAccountData(account,teamName,value)
+				setElementData(foundTargetPlayer,teamName,value)
+				if value == true then
+					outputChatBox ("#FFFFFF"..getPlayerName (foundTargetPlayer).." #FF0000 has been promoted to "..teamName.."!",getRootElement(),27, 89, 224,true)
+				else
+					outputChatBox ("#FFFFFF"..getPlayerName (foundTargetPlayer).." #FF0000 lost his status...",getRootElement(),27, 89, 224,true)
+				end
 			else
-				value = true
-			end
-			account = getPlayerAccount(foundTargetPlayer)
-			accountname = getAccountName(account)
-			setAccountData(account,teamName,value)
-			setElementData(foundTargetPlayer,teamName,value)
-			if value == true then
-				outputChatBox ("#FFFFFF"..getPlayerName (foundTargetPlayer).." #FF0000 has been promoted to "..teamName.."!",getRootElement(),27, 89, 224,true)
-			else
-				outputChatBox ("#FFFFFF"..getPlayerName (foundTargetPlayer).." #FF0000 lost his status...",getRootElement(),27, 89, 224,true)
+				outputChatBox ("#FFFFFFCan't find player! Did you input the correct name?",playersource,27, 89, 224,true)		
 			end
 		else
-			outputChatBox ("#FFFFFFCan't find player! Did you input the correct name?",playersource,27, 89, 224,true)		
+			outputChatBox ("Correct names are admin, supporter and remove!",playersource,255, 0, 0,true)
 		end
 	else
 		outputChatBox ("#FFFFFFYou are not an admin!",playersource,27, 89, 224,true)		
 	end
 end
 addCommandHandler("add",setGroup)
+function getPlayerWildcard(name)
+    local name = name and name:gsub("#%x%x%x%x%x%x", ""):lower() or nil
+    if name then
+        for _, player in ipairs(getElementsByType("player")) do
+            local name_ = getPlayerName(player):gsub("#%x%x%x%x%x%x", ""):lower()
+            if name_:find(name, 1, true) then
+                return player
+            end
+        end
+    end
+end
