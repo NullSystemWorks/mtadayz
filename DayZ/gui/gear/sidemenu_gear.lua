@@ -18,22 +18,25 @@ local moveDown = 0
 local options = {}
 font[1] = guiCreateFont(":DayZ/fonts/etelka.ttf", 10)
 
-for i = 1, 7 do
-	number = i
-	moveDown = moveDown+0.025
-	row[number] = ""
-	if number == 1 then
-		rowImage[1] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_1.png",true)
-	else
-		rowImage[number] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_3.png",true)
+function initSideMenu()
+	for i = 1, 7 do
+		number = i
+		moveDown = moveDown+0.025
+		row[number] = ""
+		if number == 1 then
+			rowImage[1] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_1.png",true)
+		else
+			rowImage[number] = guiCreateStaticImage(0,0.400+moveDown,0.3,0.03,":DayZ/gui/gear/items/scrollmenu_3.png",true)
+		end
+		rowText[number] = guiCreateLabel(0.05,0.05,0.995,0.95,row[number],true,rowImage[number])
+		guiLabelSetColor(rowText[number],113,238,17)
+		guiLabelSetColor(rowText[1],255,255,255)
+		guiSetFont(rowText[number],font[1])
+		guiSetVisible(rowImage[number],false)
+		if number == 7 then number = 0 end
 	end
-	rowText[number] = guiCreateLabel(0.05,0.05,0.995,0.95,row[number],true,rowImage[number])
-	guiLabelSetColor(rowText[number],113,238,17)
-	guiLabelSetColor(rowText[1],255,255,255)
-	guiSetFont(rowText[number],font[1])
-	guiSetVisible(rowImage[number],false)
-	if number == 7 then number = 0 end
 end
+addEventHandler("onClientResourceStart",getResourceRootElement(getThisResource()),initSideMenu)
 
 
 function showClientMenuItem(arg1,arg2,arg3,arg4)
@@ -462,12 +465,6 @@ function disableMenu()
 	guiLabelSetColor(rowText[5],113,238,17)
 	guiLabelSetColor(rowText[6],113,238,17)
 	guiLabelSetColor(rowText[7],113,238,17)
-	local number = 2
-	guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_1.png")
-	setTimer(function()	
-		guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_3.png")
-		number = number+1
-	end,2000,6)
 	setNewbieInfo (false,"","")
 end
 addEvent("disableMenu",true)

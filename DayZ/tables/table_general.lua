@@ -254,5 +254,9 @@ otherLootItems = {
 {"Blood Bag",1580,1,0},
 {"Painkiller",1580,1,0},
 {"Antibiotics",1580,0.5,0},
+{"Blood Bag (Empty)",1580,1,0},
+{"Transfusion Kit",1580,1,0},
+{"Blood Test Kit",1580,1,0},
+{"Blood Test Kit",1580,1,0},
 },
 }
