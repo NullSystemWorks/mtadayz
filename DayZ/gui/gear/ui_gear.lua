@@ -813,7 +813,7 @@ function renderDisplay ( )
 	
 	--dxDrawRectangle (bX, bY-300, 350, 550, tocolor ( 0,0,0, 200 ) )
 	dxDrawImage(bX,bY-300,400,550,":DayZ/gui/gear/inventory/inventory3.png")
-	dxDrawText (getPlayerName(localPlayer), bX+20, bY-290, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1.5, 'verdana' )
+	dxDrawText (getPlayerName(localPlayer):gsub("#%x%x%x%x%x%x", ""), bX+20, bY-290, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1.5, 'verdana' )
 	dxDrawText ( 'Food/Drinks', bX+20, bY-260, screenWidth, screenHeight, tocolor ( 203,199,182,255), 1, 'verdana' )
 	dxDrawImage (bX+20, bY-240, 45, 45, ':DayZ/gui/gear/inventory/items.png') 
 	dxDrawImage (bX+70, bY-240, 45, 45, ':DayZ/gui/gear/inventory/items.png') 
