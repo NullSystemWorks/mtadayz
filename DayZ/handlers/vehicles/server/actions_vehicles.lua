@@ -200,11 +200,9 @@ function takeVehicleComponent(veh,action,itemName)
 			elseif action == "siphon" then
 				local col = getElementData(veh,"parent")
 				local fuel = getElementData(col,"fuel")
-				if fuel > 20 then
-					setElementData(source,"hasFuel",20)
+				if fuel >= 20 then
 					setElementData(col,"fuel",getElementData(col,"fuel")-20)
 				else
-					setElementData(source,"hasFuel",getElementData(source,"hasFuel")+fuel)
 					setElementData(col,"fuel",0)
 				end
 				setElementData(source,"Full Gas Canister",getElementData(source,"Full Gas Canister")+1)
@@ -218,3 +216,32 @@ function takeVehicleComponent(veh,action,itemName)
 end
 addEvent("takeVehicleComponent",true)
 addEventHandler("takeVehicleComponent",root,takeVehicleComponent)
+
+function respawnVehiclesInWater()
+	for i,veh in ipairs(getElementsByType("vehicle")) do
+		if isElementInWater(veh) then
+			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473 then
+				local col = getElementData(veh,"parent")
+				if col then
+					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+				end
+			end
+		end
+	end
+end
+setTimer(respawnVehiclesInWater,1800000,0)
+
+function notifyAboutExplosion()
+	local col = getElementData(source,"parent")
+	local x1,y1,z1 = getElementPosition(source)
+	id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+    setTimer(respawnDayZVehicle,1800000,1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
+	setElementData(col,"deadVehicle",true)
+	setElementData(source,"isExploded",true)
+	createExplosion (x1+4,y1+1,z1,4)
+	createExplosion (x1+2,y1-4,z1,4)
+	createExplosion (x1-1,y1+5,z1,4)
+	createExplosion (x1-4,y1,z1-2,4)
+end
+addEventHandler("onVehicleExplode", getRootElement(), notifyAboutExplosion)

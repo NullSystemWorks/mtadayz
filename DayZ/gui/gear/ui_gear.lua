@@ -369,6 +369,7 @@ function testoLabClick (but, state, x, y)
 	clicked = false
 end
 
+-- Source of the bug!
 addEventHandler( "onClientMouseWheel", root,
     function ( up_down )
         if up_down == 1 then
