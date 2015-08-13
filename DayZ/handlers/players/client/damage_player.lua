@@ -327,3 +327,22 @@ function playSoundOnWeaponFire(weapon)
 	end 
 end
 addEventHandler ( "onClientPlayerWeaponFire", root, playSoundOnWeaponFire )
+
+function rangeFinder()
+local w, h = guiGetScreenSize ()
+local tx, ty, tz = getWorldFromScreenPosition ( w/2, h/2, 500 )
+local px, py, pz = getPedBonePosition(localPlayer,8)
+hit, x, y, z, elementHit = processLineOfSight ( px, py, pz, tx, ty, tz )
+	if getPedWeapon(localPlayer) == 43 and getElementData(localPlayer,"Range Finder") and getElementData(localPlayer, "Range Finder") >= 1 then
+		if getControlState("aim_weapon") then
+			if x and y and z then
+				local distance = getDistanceBetweenPoints3D(px,py,pz,x,y,z)
+				dxDrawText(tostring(math.floor(distance)).."m",w/2-50,h/2,w,h,tocolor(0,255,0,255),1.5,"clear")
+			else
+				local distance = 500
+				dxDrawText(">"..tostring(math.floor(distance)).."m",w/2-50,h/2,w,h,tocolor(0,255,0,255),1.5,"clear")
+			end
+		end
+	end
+end
+addEventHandler("onClientRender",root,rangeFinder)

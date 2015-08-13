@@ -44,9 +44,19 @@ function spawnDayZPlayer(player)
 		if data[1] =="Bandage" then
 			setElementData(player,data[1],2)	
 		elseif data[1] =="Painkiller" then
-			setElementData(player,data[1],1)		
-		elseif data[1] =="MAX_Slots" then
-			setElementData(player,data[1],8)	
+			setElementData(player,data[1],1)
+		elseif data[1] == "MAX_Slots" then
+			setElementData(player,data[1],8)
+		elseif data[1] =="Item_Slots" then
+			setElementData(player,data[1],12)
+		elseif data[1] == "Weapon_Slots" then
+			setElementData(player,data[1],1)
+		elseif data[1] =="Backpack_Slots" then
+			setElementData(player,data[1],8)
+		elseif data[1] == "Backpack_Item_Slots" then
+			setElementData(player,data[1],8)
+		elseif data[1] =="Back_Weapon_Slots" then
+			setElementData(player,data[1],0)
 		elseif data[1] =="skin" then
 			setElementData(player,data[1],skin)
 		elseif data[1] =="blood" then
@@ -75,6 +85,8 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],false)
 		elseif data[1] =="humanity" then
 			setElementData(player,data[1],2500)
+		elseif data[1] =="gender" then
+			setElementData(player,data[1],gender)
 		elseif data[1] == "bloodtype" then
 			determineBloodType(player)
 		elseif data[1] == "bloodtypediscovered" then

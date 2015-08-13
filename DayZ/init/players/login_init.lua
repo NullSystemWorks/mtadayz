@@ -55,17 +55,17 @@ function playerLogin(username, pass, player)
 	--Old Weapons
 	local weapon = getElementData(player,"currentweapon_1")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(player,weapID,getElementData(player,ammoData), true )
 	end
 	local weapon = getElementData(player,"currentweapon_2")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(player,weapID,getElementData(player,ammoData), false )
 	end
 	local weapon = getElementData(player,"currentweapon_3")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(player,weapID,getElementData(player,ammoData), false )
 	end
 	setElementModel(player, getElementData(player,"skin"))
@@ -109,8 +109,18 @@ function playerRegister(username, pass, player)
 			setElementData(player,data[1],2)
 		elseif data[1] =="Painkiller" then
 			setElementData(player,data[1],1)
-		elseif data[1] =="MAX_Slots" then
+		elseif data[1] == "MAX_Slots" then
 			setElementData(player,data[1],8)
+		elseif data[1] =="Item_Slots" then
+			setElementData(player,data[1],12)
+		elseif data[1] == "Weapon_Slots" then
+			setElementData(player,data[1],1)
+		elseif data[1] =="Backpack_Slots" then
+			setElementData(player,data[1],8)
+		elseif data[1] == "Backpack_Item_Slots" then
+			setElementData(player,data[1],8)
+		elseif data[1] =="Back_Weapon_Slots" then
+			setElementData(player,data[1],0)
 		elseif data[1] =="skin" then
 			setElementData(player,data[1],skin)
 		elseif data[1] =="blood" then

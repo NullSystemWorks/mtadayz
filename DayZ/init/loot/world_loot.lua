@@ -56,7 +56,7 @@ function createItemLoot (lootPlace,x,y,z,id)
 		local value =  math.percentChance(item[5],math.random(1,5))
 		setElementData(col,item[1],value)
 		--weapon Ammo
-		local ammoData,weapID = getWeaponAmmoType (item[1],true)
+		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
 		if ammoData and value > 0 then
 			setElementData(col,ammoData,math.random(1,3))
 		end

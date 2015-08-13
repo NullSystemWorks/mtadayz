@@ -84,6 +84,7 @@ weaponAmmoTable = {
 {"Hunting Knife",4},
 {"Hatchet",8},
 {"Binoculars",43},
+{"Range Finder",43},
 {"Baseball Bat",5},
 {"Shovel",6},
 {"Golf Club",2},

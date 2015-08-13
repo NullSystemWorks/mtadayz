@@ -10,7 +10,7 @@
 
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.4.2a"
+		dayzVersion = "MTA:DayZ 0.9.5a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -363,25 +363,29 @@ function closeBloodTest()
 	removeEventHandler("onClientMouseLeave",bloodTest["close"],colorDeselected)
 end
 
+local bloodTypeSpawn = false
 function assignTypeToDrop()
-	local bloodstring = ""
-	for i = 1, 4 do
-		if i == 1 then
-			bloodstring = "0"
-			setElementData(bloodTest["drop1"],"bloodtype",bloodstring)
-		elseif i == 2 then
-			bloodstring = "A"
-			setElementData(bloodTest["drop2"],"bloodtype",bloodstring)
-		elseif i == 3 then
-			bloodstring = "B"
-			setElementData(bloodTest["drop3"],"bloodtype",bloodstring)
-		elseif i == 4 then
-			bloodstring = "AB"
-			setElementData(bloodTest["drop4"],"bloodtype",bloodstring)
+	if not bloodTypeSpawn then
+		local bloodstring = ""
+		for i = 1, 4 do
+			if i == 1 then
+				bloodstring = "0"
+				setElementData(bloodTest["drop1"],"bloodtype",bloodstring)
+			elseif i == 2 then
+				bloodstring = "A"
+				setElementData(bloodTest["drop2"],"bloodtype",bloodstring)
+			elseif i == 3 then
+				bloodstring = "B"
+				setElementData(bloodTest["drop3"],"bloodtype",bloodstring)
+			elseif i == 4 then
+				bloodstring = "AB"
+				setElementData(bloodTest["drop4"],"bloodtype",bloodstring)
+			end
+			addEventHandler("onClientGUIClick",bloodTest["drop"..i],checkBloodType, false)
 		end
-		addEventHandler("onClientGUIClick",bloodTest["drop"..i],checkBloodType, false)
+		addEventHandler("onClientGUIClick",bloodTest["close"],closeBloodTest,false)
+		bloodTypeSpawn = true
 	end
-	addEventHandler("onClientGUIClick",bloodTest["close"],closeBloodTest,false)
 end
 addEventHandler("onClientPlayerSpawn",localPlayer,assignTypeToDrop)
 

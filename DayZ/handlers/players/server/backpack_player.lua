@@ -62,7 +62,7 @@ elementWeaponBack = {}
 function weaponSwitchBack ( previousWeaponID, currentWeaponID )
 	local weapon1 = getElementData(source,"currentweapon_1")
 	if not weapon1 then return end
-	local ammoData1,weapID1 = getWeaponAmmoType(weapon1)
+	local ammoData1,weapID1 = getWeaponAmmoFromName(weapon1)
 	local x,y,z = getElementPosition(source)
 	local rx,ry,rz = getElementRotation(source)
 	if previousWeaponID == weapID1 then

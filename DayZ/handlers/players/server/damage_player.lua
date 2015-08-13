@@ -12,102 +12,26 @@ setWeaponProperty ("m4","poor","maximum_clip_ammo",30)
 setWeaponProperty ("m4","std","maximum_clip_ammo",30)
 setWeaponProperty ("m4","pro","maximum_clip_ammo",30)
 
-function getWeaponAmmoType (weaponName,notOthers)
-	if not notOthers then
-		for i,weaponData in ipairs(weaponAmmoTable["others"]) do
-			if weaponName == weaponData[1] then
-				return weaponData[1],weaponData[2]
-			end
-		end
-	end	
-	for i,weaponData in ipairs(weaponAmmoTable[".45 ACP Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return ".45 ACP Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9x19mm SD Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9x19mm SD Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9x19mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9x19mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9x18mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9x18mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.45x39mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "5.45x39mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.56x45mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "5.56x45mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["1866 Slug"]) do
-        if weaponName == weaponData[1] then
-            return "1866 Slug",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["12 Gauge Pellet"]) do
-        if weaponName == weaponData[1] then
-            return "12 Gauge Pellet",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["2Rnd. Slug"]) do
-        if weaponName == weaponData[1] then
-            return "2Rnd. Slug",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9.3x62mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9.3x62mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable[".303 British Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return ".303 British Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["M136 Rocket"]) do
-        if weaponName == weaponData[1] then
-            return "M136 Rocket",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["Bolt"]) do
-		if weaponName == weaponData[1] then
-			return "Bolt",weaponData[2]
-		end
-	end
-	return false
-end
-
 function rearmPlayerWeapon (weaponName,slot)
 	takeAllWeapons (source)
 	--Rearm
-	local ammoData,weapID = getWeaponAmmoType (weaponName)
+	local ammoData,weapID = getWeaponAmmoFromName (weaponName)
 	if getElementData(source,ammoData) <= 0 then triggerClientEvent (source, "displayClientInfo", source,"Rearm",shownInfos["nomag"],255,22,0) return end
 	setElementData(source,"currentweapon_"..slot,weaponName)
 	--Old Weapons
 	local weapon = getElementData(source,"currentweapon_1")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(source,weapID,getElementData(source,ammoData), true )
 	end
 	local weapon = getElementData(source,"currentweapon_2")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(source,weapID,getElementData(source,ammoData), false )
 	end
 	local weapon = getElementData(source,"currentweapon_3")
 	if weapon then
-		local ammoData,weapID = getWeaponAmmoType (weapon)
+		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(source,weapID,getElementData(source,ammoData), false )
 	end
 	if elementWeaponBack[source] then
@@ -115,10 +39,22 @@ function rearmPlayerWeapon (weaponName,slot)
 		destroyElement(elementWeaponBack[source])
 		elementWeaponBack[source] = false
 	end	
-	setElementModel(source, getElementData(source,"skin"))
+	--setElementModel(source, getElementData(source,"skin"))
 end
 addEvent("onPlayerRearmWeapon",true)
 addEventHandler("onPlayerRearmWeapon",getRootElement(),rearmPlayerWeapon)
+
+function onPlayerTakeWeapon(itemName,slot,action)
+	if action == "toCarry" then
+		local ammoData,weapID = getWeaponAmmoFromName(itemName)
+		takeWeapon(source,weapID)
+	elseif action == "toHold" then
+		local ammoData,weapID = getWeaponAmmoFromName(itemName)
+		giveWeapon(source,weapID,getElementData(source,ammoData),false)
+	end
+end
+addEvent("onPlayerTakeWeapon",true)
+addEventHandler("onPlayerTakeWeapon",root,onPlayerTakeWeapon)
 
 weaponIDtoObjectID = {
 {30,355},
@@ -150,7 +86,7 @@ function weaponDelete(dataName,oldValue)
 		local weapon3 = getElementData(source,"currentweapon_3")
 		if dataName == weapon1 or dataName == weapon2 or dataName == weapon3 then
 			if getElementData (source,dataName) == 0 then
-				local ammoData,weapID = getWeaponAmmoType(dataName)
+				local ammoData,weapID = getWeaponAmmoFromName(dataName)
 				takeWeapon (source,weapID)
 				if dataName == weapon1 then
 					setElementData(source,"currentweapon_1",false)
@@ -164,9 +100,9 @@ function weaponDelete(dataName,oldValue)
 		local weapon1 = getElementData(source,"currentweapon_1")
 		local weapon2 = getElementData(source,"currentweapon_2")
 		local weapon3 = getElementData(source,"currentweapon_3")
-		local ammoData1,weapID1 = getWeaponAmmoType(weapon1)
-		local ammoData2,weapID2 = getWeaponAmmoType(weapon2)
-		local ammoData3,weapID3 = getWeaponAmmoType(weapon3)
+		local ammoData1,weapID1 = getWeaponAmmoFromName(weapon1)
+		local ammoData2,weapID2 = getWeaponAmmoFromName(weapon2)
+		local ammoData3,weapID3 = getWeaponAmmoFromName(weapon3)
 		if dataName == ammoData1 then
 			if not oldValue then return end
 			local newammo = oldValue - getElementData (source,dataName)

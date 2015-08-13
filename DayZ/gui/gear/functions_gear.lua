@@ -30,6 +30,23 @@ addEventHandler("refreshLootManual", localPlayer, refreshLootManual)
 function getPlayerMaxAviableSlots()
 	return getElementData(localPlayer, "MAX_Slots")
 end
+--[[
+function getPlayerMaxAviableSlots()
+	return getElementData(localPlayer, "Item_Slots")
+end
+]]
+
+function getPlayerMaxAvailableWeaponSlots()
+	return getElementData(localPlayer,"Weapon_Slots")
+end
+
+function getPlayerMaxAvailableBackpackSlots()
+	return getElementData(localPlayer,"Backpack_Item_Slots")
+end
+
+function getPlayerMaxAvailableWeaponBackpackSlots()
+	return getElementData(localPlayer,"Backpack_Weapon_Slots")
+end
 
 function getLootMaxAviableSlots(loot)
 	if isElement ( loot ) then
@@ -209,110 +226,19 @@ function onPlayerMoveItemInInventory(itemName,loot)
 	elseif itemName == "Bolt" then
 		itemPlus = 7
 	elseif itemName == "Assault Pack (ACU)" then
-		if getElementData(localPlayer,"MAX_Slots") == 12 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 12 then
-			if getElementData(loot,itemName) ~= "Assault Pack (ACU)" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",12)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0
+		itemPlus = 1
 	elseif itemName == "Czech Vest Pouch" then
-		if getElementData(localPlayer,"MAX_Slots") == 13 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 13 then
-			if getElementData(loot,itemName) ~= "Czech Vest Pouch" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",13)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0
+		itemPlus = 1
 	elseif itemName == "ALICE Pack" then
-		if getElementData(localPlayer,"MAX_Slots") == 16 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 16 then
-			if getElementData(loot,itemName) ~= "ALICE Pack" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",16)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0	
+		itemPlus = 1	
 	elseif itemName == "Survival ACU" then
-		if getElementData(localPlayer,"MAX_Slots") == 17 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 17 then
-			if getElementData(loot,itemName) ~= "Survival ACU" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",17)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0
+		itemPlus = 1
 	elseif itemName == "British Assault Pack" then
-		if getElementData(localPlayer,"MAX_Slots") == 18 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 18 then
-			if getElementData(loot,itemName) ~= "British Assault Pack" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",18)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0	
+		itemPlus = 1
 	elseif itemName == "Backpack (Coyote)" then
-		if getElementData(localPlayer,"MAX_Slots") == 24 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 24 then
-			if getElementData(loot,itemName) ~= "Backpack (Coyote)" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",24)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0
+		itemPlus = 1
 	elseif itemName == "Czech Backpack" then
-		if getElementData(localPlayer,"MAX_Slots") == 30 then
-			setElementData(localPlayer,itemName,getElementData(localPlayer,itemName)+1)
-		end
-		if getElementData(localPlayer,"MAX_Slots") > 30 then
-			if getElementData(loot,itemName) ~= "Czech Backpack" then
-				itemName2 = itemName
-				setElementData(localPlayer,itemName2,getElementData(localPlayer,itemName2)+1)
-				setElementData(loot,itemName2,getElementData(loot,itemName2)-1)
-				return
-			end
-		end
-		setElementData(localPlayer,"MAX_Slots",30)
-		setElementData(loot,itemName,getElementData(loot,itemName)-1)
-		itemPlus = 0
+		itemPlus = 1
 	end
 	if not getElementData(localPlayer, itemName) then
 		setElementData(localPlayer, itemName, itemPlus)
@@ -334,6 +260,60 @@ function onPlayerMoveItemInInventory(itemName,loot)
 end
 addEvent("onPlayerMoveItemInInventory", true)
 addEventHandler("onPlayerMoveItemInInventory", getRootElement(), onPlayerMoveItemInInventory)
+
+function onPlayerMoveItemIntoBackpack(itemName, itemType, itemSize)
+	local itemPlus = 1
+	if itemName == ".45 ACP Cartridge" then
+		itemPlus = 7
+	elseif itemName == "9x19mm SD Cartridge" then
+		itemPlus = 15
+	elseif itemName == "9x19mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "9x18mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "5.45x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "5.56x45mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "1866 Slug" then
+		itemPlus = 7
+	elseif itemName == "2Rnd. Slug" then
+		itemPlus = 2
+	elseif itemName == "12 Gauge Pellet" then
+		itemPlus = 7
+	elseif itemName == "9.3x62mm Cartridge" then
+		itemPlus = 5
+	elseif itemName == ".303 British Cartridge" then
+		itemPlus = 10
+	elseif itemName == "M136 Rocket" then
+		itemPlus = 0
+	elseif itemName == "Bolt" then
+		itemPlus = 7
+	elseif itemName == "Assault Pack (ACU)" then
+		itemPlus = 1
+	elseif itemName == "Czech Vest Pouch" then
+		itemPlus = 1
+	elseif itemName == "ALICE Pack" then
+		itemPlus = 1	
+	elseif itemName == "Survival ACU" then
+		itemPlus = 1
+	elseif itemName == "British Assault Pack" then
+		itemPlus = 1
+	elseif itemName == "Backpack (Coyote)" then
+		itemPlus = 1
+	elseif itemName == "Czech Backpack" then
+		itemPlus = 1
+	end
+	if itemType == "weapon" then
+		setElementData(localPlayer,"Weapon_Slots",getElementData(localPlayer,"Weapon_Slots")-1)
+		setElementData(localPlayer,"Backpack_Weapon_Slots",getElementData(localPlayer,"Backpack_Weapon_Slots")+1)
+	elseif itemType == "item" then
+		setElementData(localPlayer,"Item_Slots",getElementData(localPlayer,"Item_Slots")-itemSize)
+		setElementData(localPlayer,"Backpack_Item_Slots",getElementData(localPlayer,"Backpack_Item_Slots")+itemSize)
+	end
+end
+addEvent("onPlayerMoveItemIntoBackpack", true)
+addEventHandler("onPlayerMoveItemIntoBackpack", getRootElement(), onPlayerMoveItemIntoBackpack)
 
 function onClientOpenInventoryStopMenu()
   triggerEvent("disableMenu", localPlayer)
@@ -400,11 +380,13 @@ function playerUseItem(itemName,itemInfo)
     elseif itemInfo == "Use Googles" then
         triggerServerEvent("onPlayerChangeView",localPlayer,itemName)  
     elseif itemInfo == "Equip Primary Weapon" then
+		isCarryingWeapon = false
+		isHoldingWeapon = true
         triggerServerEvent("onPlayerRearmWeapon",localPlayer,itemName,1)
     elseif itemInfo == "Equip Secondary Weapon" then
         triggerServerEvent("onPlayerRearmWeapon",localPlayer,itemName,2)
     elseif itemInfo == "Equip Special Weapon" then
-        triggerServerEvent("onPlayerRearmWeapon",localPlayer,itemName,3)
+        triggerServerEvent("onPlayerRearmWeapon",localPlayer,itemName,2)
 	elseif itemInfo == "Craft" then
 		setElementData(localPlayer,"selectedBlueprint",itemName)
 		checkComponents()
@@ -417,6 +399,8 @@ function playerUseItem(itemName,itemInfo)
 	elseif itemInfo == "Transfusion" then
 		closeInventory()
 		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
+	elseif itemInfo == "Equip Backpack" then
+		triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 	end
 end
 

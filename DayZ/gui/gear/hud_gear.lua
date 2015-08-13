@@ -388,7 +388,11 @@ function WeaponHUD()
 			weapName = "Grenade"
 			divide = "|"
 		elseif weaponID == 43 then
-			weapName = "Binoculars"
+			if getElementData(localPlayer,"currentweapon_2") == "Range Finder" then
+				weapName = "Range Finder"
+			else
+				weapName = "Binoculars"
+			end
 			clip = ""
 			ammo = ""
 			divide = ""

@@ -138,6 +138,40 @@ end
 addEvent("onPlayerPlaceRoadflare",true)
 addEventHandler("onPlayerPlaceRoadflare",getRootElement(),onPlayerPlaceRoadflare)
 
+function onPlayerEquipBackpack(itemName)
+	local backpack_item = 0
+	local backpack_weapons = 0
+	if itemName == "Assault Pack (ACU)" then
+		backpack_item = 12
+		backpack_weapons = 1
+	elseif itemName == "Czech Vest Pouch" then
+		backpack_item = 13
+		backpack_weapons = 1
+	elseif itemName == "ALICE Pack" then
+		backpack_item = 16
+		backpack_weapons = 1
+	elseif itemName == "Survival ACU" then
+		backpack_item = 17
+		backpack_weapons = 1
+	elseif itemName == "British Assault Pack" then
+		backpack_item = 18
+		backpack_weapons = 1
+	elseif itemName == "Backpack (Coyote)" then
+		backpack_item = 24
+		backpack_weapons = 2
+	elseif itemName == "Czech Backpack" then
+		backpack_item = 30
+		backpack_weapons = 6
+	end
+	setElementData(source,itemName,getElementData(source,itemName)-1)
+	setElementData(source,"Backpack_Slots",backpack_item)
+	setElementData(source,"Backpack_Item_Slots",backpack_item)
+	setElementData(source,"Backpack_Weapon_Slots",backpack_weapons)
+	setElementData(source,"MAX_Slots",backpack_item)
+end
+addEvent("onPlayerEquipBackpack",true)
+addEventHandler("onPlayerEquipBackpack",root,onPlayerEquipBackpack)
+
 function updateTotalKills()
 	for i, player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then

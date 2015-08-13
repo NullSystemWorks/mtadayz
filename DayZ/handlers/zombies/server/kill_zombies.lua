@@ -42,7 +42,7 @@ function killZombie(killer,headshot)
 	for i, item in ipairs(zombieLootType[loot_table]) do
 		local value = math.percentChance(item[5],math.random(1,3))
 		setElementData(pedCol,item[1],value)
-		local ammoData,weapID = getWeaponAmmoType (item[1],true)
+		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
 		if ammoData and value > 0 then
 			setElementData(pedCol,ammoData,math.random(1,3))
 		end
