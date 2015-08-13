@@ -146,6 +146,18 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
+		if getElementData(playersource,"brokenbone") == true and getElementData(getLocalPlayer(),"Morphine") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Give Morphine")	
+			setElementData(rowText[number],"usedItem","morphine")
+		end
+		if getElementData(getLocalPlayer(),"cold") == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Give Antibiotics")	
+			setElementData(rowText[number],"usedItem","antibiotics")
+		end
 	end
 	if arg1 == "Dead" then
 		number = number+1
@@ -741,6 +753,18 @@ if ( keyState == "down" ) then
 			return
 		end
 		if itemName == "bandage" then
+			local col = getElementData(getLocalPlayer(),"currentCol")
+			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
+			disableMenu()
+			return
+		end
+		if itemName == "morphine" then
+			local col = getElementData(getLocalPlayer(),"currentCol")
+			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
+			disableMenu()
+			return
+		end
+		if itemName == "antibiotics" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
 			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
 			disableMenu()
