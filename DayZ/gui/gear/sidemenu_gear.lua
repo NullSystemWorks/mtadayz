@@ -151,12 +151,20 @@ local number = 0
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Morphine")	
 			setElementData(rowText[number],"usedItem","morphine")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255) -- 113,238,17
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
 		end
 		if getElementData(arg2,"cold") == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Antibiotics")	
 			setElementData(rowText[number],"usedItem","antibiotics")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255) -- 113,238,17
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
 		end
 	end
 	if arg1 == "Dead" then
