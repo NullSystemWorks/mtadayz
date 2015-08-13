@@ -146,13 +146,13 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
-		if getElementData(playersource,"brokenbone") == true and getElementData(getLocalPlayer(),"Morphine") >= 1 then
+		if getElementData(arg2,"brokenbone") == true and getElementData(getLocalPlayer(),"Morphine") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Morphine")	
 			setElementData(rowText[number],"usedItem","morphine")
 		end
-		if getElementData(getLocalPlayer(),"cold") == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
+		if getElementData(arg2,"cold") == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Antibiotics")	
