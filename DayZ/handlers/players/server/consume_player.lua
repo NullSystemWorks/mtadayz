@@ -154,6 +154,12 @@ function onPlayerGiveMedicObject(itemName,player)
 				triggerClientEvent(playersource,"displayClientInfo",playersource,"BloodType","Your blood type is incompatible with "..getPlayerName(player).."!",255,0,0)
 				triggerClientEvent(player,"displayClientInfo",player,"BloodType","Your blood type is incompatible with "..getPlayerName(playersource).."!",255,0,0)
 			end
+		elseif itemName == "morphine" then
+			setElementData(player,"brokenbone",false)
+			setElementData(playersource,"Morphine",getElementData(playersource,"Morphine")-1)
+		elseif itemName == "antibiotics" then
+			setElementData(player,"cold",false)
+			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		end
 	end,1500,1,player,playersource,itemName)	
 end
