@@ -1300,15 +1300,11 @@ function showWeaponSelect (button)
 		end
 	elseif string.find(button.name, 'arrowRev' ) then
 		if loot then
-			stopAdditWeaponSelection ()
-			stopMainWeaponSelection ()
 			if inventory [selectedItemLabel+itOff][2] > 0 then
 				moveItemInInventory ()
 			end
 		end
 	elseif string.find(button.name, 'arrow' ) then
-		stopAdditWeaponSelection ()
-		stopMainWeaponSelection ()
 		if inventory [selectedItemLabel+itOff][3] > 0 then
 			moveItemOutOfInventory ( inventory [selectedItemLabel+itOff][1] )
 		end

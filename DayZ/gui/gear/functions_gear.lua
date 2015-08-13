@@ -400,7 +400,9 @@ function playerUseItem(itemName,itemInfo)
 		closeInventory()
 		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
 	elseif itemInfo == "Equip Backpack" then
-		triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+		if getPlayerCurrentSlots() < getPlayerMaxAviableSlots() then
+			triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+		end
 	end
 end
 
