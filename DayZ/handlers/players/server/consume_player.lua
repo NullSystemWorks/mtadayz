@@ -159,7 +159,7 @@ function onPlayerGiveMedicObject(itemName,player)
 			setElementData(playersource,"Morphine",getElementData(playersource,"Morphine")-1)
 		elseif itemName == "antibiotics" then
 			setElementData(player,"cold",false)
-			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
+			setElementData(playersource,itemName,getElementData(playersource,"Antibiotics")-1)
 		end
 	end,1500,1,player,playersource,itemName)	
 end
