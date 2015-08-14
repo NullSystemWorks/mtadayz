@@ -7,7 +7,8 @@
 ----* Type: CLIENT														*----
 #-----------------------------------------------------------------------------#
 ]]
-
+local numhit = 0
+local maxhit = 15 -- 15 = About 5 strokes of axe
 local length = 3
 function checkIfWeaponIsHatchet(prevSlot,newSlot)
 	if getPedWeapon(localPlayer,newSlot) == 8 then
@@ -28,12 +29,15 @@ function chopTree()
 		local hit, hitX, hitY, hitZ, hitElement, normalX, normalY, normalZ, material, lighting, piece, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID = processLineOfSight( x, y, z, tx, ty, tz, true, false, false, true, true, false, false, false, localPlayer, true, false )
 		if worldID and not startwoodtick and treelist[worldID] then
 			local treename = treelist[worldID].name
-			local interior = getElementInterior( localPlayer )
-
-			if not startwoodtick then
-				startwoodtick = getTickCount()
-
-				triggerServerEvent( "onPlayerChopTree", localPlayer, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
+			local interior = getElementInterior(localPlayer)
+			numhit = numhit+1
+			if numhit == maxhit then
+				if not startwoodtick then
+					numhit = numhit-maxhit
+					startwoodtick = getTickCount()
+					playSound3D(":DayZ/sounds/items/choopwood.ogg", x, y, z, true) 
+					triggerServerEvent( "onPlayerChopTree", localPlayer, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID, interior )
+				end
 			end
 		end
 	end

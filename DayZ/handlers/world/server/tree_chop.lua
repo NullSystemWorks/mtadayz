@@ -26,8 +26,19 @@ function onPlayerChopTree( worldID, worldX, worldY, worldZ, worldRX, worldRY, wo
 
 	local x, y, z = getElementPosition(source)
 	local item, itemString = getItemTablePosition("Wood Pile")
-  
-	createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+  	local numberWood = math.random(1,3)
+  	
+  	if numberWood == 1 then
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+	elseif numberWood == 2 then
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+	elseif numberWood == 3 then
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+	end
+
 end
 addEvent( "onPlayerChopTree", true )
 addEventHandler( "onPlayerChopTree", root, onPlayerChopTree )
