@@ -508,24 +508,32 @@ end
 addEvent("onClientPlayerDayZLogin", true)
 addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 
+local isVisible = false
 function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
-		local visible = guiGetVisible(statsWindows)
-		guiSetVisible(statsWindows,not visible)
+		if not isVisible then
+			guiSetVisible(statsWindows,true)
+			isVisible = true
+		else
+			guiSetVisible(statsWindows,false)
+			isVisible = false
+		end
 	else
-		guiSetVisible(statsWindow,false)
+		guiSetVisible(statsWindows,false)
 	end
 end
 bindKey("F5","down",showDebugMonitorOnF5)
 
 function showDebugMonitor()
 	guiSetVisible(statsWindows,true)
+	isVisible = true
 end
 addEvent("showDebugMonitor",true)
 addEventHandler("showDebugMonitor",root,showDebugMonitor)
 
 function hideDebugMonitor()
 	guiSetVisible(statsWindows,false)
+	isVisible = false
 end
 addEvent("hideDebugMonitor",true)
 addEventHandler("hideDebugMonitor",root,hideDebugMonitor)
@@ -561,7 +569,7 @@ function refreshDebugMonitor()
 		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
 	end			
 end
-setTimer(refreshDebugMonitor,2000,0)
+addEventHandler("onClientRender",root,refreshDebugMonitor)
 
 local binoculars = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/binoculars.png",true)
 guiSetVisible(binoculars,false)

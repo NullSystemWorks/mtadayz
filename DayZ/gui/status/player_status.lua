@@ -169,6 +169,9 @@ function updateStatusIcons()
 		if getElementData(localPlayer,"bleeding") > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
+		if getElementData(localPlayer,"infection") or getElementData(localPlayer,"sepsis") > 0 then
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/blood/infection.png",0,0,0)
+		end
 		local x,y,z = getElementPosition(localPlayer)
 		for i,player in ipairs(getElementsByType("player")) do
 			setPlayerNametagShowing ( player, false )
@@ -178,13 +181,15 @@ function updateStatusIcons()
 				if pdistance <= 2 then
 					local sx,sy = getScreenFromWorldPosition ( px, py, pz+0.95, 0.06 )
 					if sx and sy then
-					if getElementData(player,"bandit") then
-						text = string.gsub(getPlayerName(player), '#%x%x%x%x%x%x', '' ).." (Bandit)"
-					else
-						text = string.gsub(getPlayerName(player), '#%x%x%x%x%x%x', '' )
-					end
-					local w = dxGetTextWidth(text,1.02,"default-bold")
-					dxDrawText (text, sx-(w/2), sy, sx-(w/2), sy, tocolor ( 100, 255, 100, 200 ), 1.02, "default-bold" )
+						if getElementData(player,"bandit") then
+							text = string.gsub(getPlayerName(player), '#%x%x%x%x%x%x', '' ).." (Bandit)"
+						else
+							text = string.gsub(getPlayerName(player), '#%x%x%x%x%x%x', '' )
+						end
+						local w = dxGetTextWidth(text,1.02,"default-bold")
+						if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
+							dxDrawText (text, sx-(w/2), sy, sx-(w/2), sy, tocolor ( 100, 255, 100, 200 ), 1.02, "default-bold" )
+						end
 					end
 				end
 			end		
@@ -343,7 +348,9 @@ function updateStatusIcons()
 			text = string.gsub(getPlayerName(playerTarget), '#%x%x%x%x%x%x', '' )
 		end
 		local w = dxGetTextWidth(text,distance*0.033,"default-bold")
-		dxDrawText (text,x-(w/2),y,x-(w/2), y, tocolor ( 100, 255, 100, 200 ), distance*0.033, "default-bold" )
+		if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
+			dxDrawText (text,x-(w/2),y,x-(w/2), y, tocolor ( 100, 255, 100, 200 ), distance*0.033, "default-bold" )
+		end
 	end	
 end
 addEventHandler ("onClientRender",root,updateStatusIcons)

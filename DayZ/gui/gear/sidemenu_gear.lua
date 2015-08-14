@@ -15,7 +15,6 @@ local rowText = {}
 local font = {}
 local number = 0
 local moveDown = 0
-local options = {}
 font[1] = guiCreateFont(":DayZ/fonts/etelka.ttf", 10)
 
 function initSideMenu()
@@ -77,15 +76,18 @@ local number = 0
 	end
 	if arg1 == "Vehicle" then
 		number = number+1
-		options[1] = 1
 		guiSetVisible(rowImage[number],true)
-		guiSetText(rowText[number],"Gear ("..getElementData(getElementData(arg3,"parent"),"vehicle_name")..")")
+		if getElementData(getElementData(arg3,"parent"),"vehicle_name") then
+			name = getElementData(getElementData(arg3,"parent"),"vehicle_name")
+		else
+			name = "Tent"
+		end
+		guiSetText(rowText[number],"Gear ("..name..")")
 		guiLabelSetColor (rowText[number],255,255,255)
 		setElementData(rowText[number],"markedMenuItem",true)
 		setElementData(rowText[number],"usedItem","vehicle")
 		if getElementData(getElementData(arg3,"parent"),"tent") then
 			number = number+1
-			options = 1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Remove Tent")
 			if number == 1 then
@@ -98,7 +100,6 @@ local number = 0
 		--2
 		if getElementHealth(arg3) < 1000 and getElementHealth(arg3) >= 50 and getElementData(getLocalPlayer(),"Toolbox") >= 1 then
 			number = number+1
-			options[2] = 2
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Repair ("..getElementData(getElementData(arg3,"parent"),"vehicle_name")..")")
 			setElementData(rowText[number],"usedItem","repairvehicle")
@@ -106,21 +107,18 @@ local number = 0
 		--3
 		if getElementData(getElementData(arg3,"parent"),"Tire_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
 			number = number+1
-			options[3] = 3
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Take Wheel of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
 			setElementData(rowText[number],"usedItem","takewheel")
 		end
 		if getElementData(getElementData(arg3,"parent"),"Engine_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
 			number = number+1
-			options[4] = 4
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Take Engine of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
 			setElementData(rowText[number],"usedItem","takeengine")
 		end
 		if getElementData(getElementData(arg3,"parent"),"fuel") > 0 and getElementData(localPlayer,"Empty Gas Canister") > 0 then
 			number = number+1
-			options[5] = 5
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Siphon fuel")
 			setElementData(rowText[number],"usedItem","siphon")
@@ -580,10 +578,15 @@ function onPlayerTargetPickup (theElement)
 		end
 		if getElementData(source,"vehicle") then
 			if not getElementData(source,"deadVehicle") then
-				showClientMenuItem("Vehicle",(getVehicleName(getElementData(source,"parent")) or "Tent"),getElementData(source,"parent"))
+				if getElementData(source,"vehicle_name") then
+					name = getElementData(source,"vehicle_name")
+				else
+					name = "Tent"
+				end
+				showClientMenuItem("Vehicle",name,getElementData(source,"parent"))
 				setElementData(getLocalPlayer(),"currentCol",source)
 				setElementData(getLocalPlayer(),"loot",true)
-				setElementData(getLocalPlayer(),"lootname","Gear ("..(getVehicleName(getElementData(source,"parent")) or "Tent")..")")
+				setElementData(getLocalPlayer(),"lootname","Gear ("..name..")")
 				--setNewbieInfo (true,"Gear","Press J to acess the gear menu!",source)
 				return
 			end
@@ -700,7 +703,12 @@ if ( keyState == "down" ) then
 		end
 		if itemName == "vehicle" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
-			local gearName = "Gear ("..(getVehicleName(getElementData(col,"parent")) or "Tent")..")"
+			if getElementData(getElementData(col,"parent"),"vehicle_name") then
+				name = getElementData(getElementData(col,"parent"),"vehicle_name")
+			else
+				name = "Tent"
+			end
+			local gearName = "Gear ("..name..")"
 			refreshLoot(col,gearName)
 			showInventoryManual()
 			disableMenu()

@@ -22,7 +22,16 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		else
 			damage_half = 1
 		end
-		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-(gameplayVariables["zombiedamage"]/damage_half))
+		if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
+			multiplier = 1
+		elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
+			multiplier = 1.5
+		elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
+			multiplier = 3
+		else
+			multiplier = 1
+		end
+		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-((gameplayVariables["zombiedamage"]*multiplier)/damage_half))
 		local gender = getElementData(localPlayer,"gender")
 		if gender == "male" then
 			playSFX("pain_a",2,53,false)
@@ -31,9 +40,13 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		end
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
-		local number = math.random(1,7)
-		if number == 4 then
+		local number = math.random(1,40)
+		if number >= 1 and number <= 15 then
 			setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding") + math.floor(loss*10))
+		elseif number == 20 then
+			setElementData(localPlayer,"sepsis",1)
+		elseif number == 25 then
+			setElementData(localPlayer,"infection",true)
 		end
 	end
 	if weapon == 49 then
@@ -333,7 +346,7 @@ local w, h = guiGetScreenSize ()
 local tx, ty, tz = getWorldFromScreenPosition ( w/2, h/2, 500 )
 local px, py, pz = getPedBonePosition(localPlayer,8)
 hit, x, y, z, elementHit = processLineOfSight ( px, py, pz, tx, ty, tz )
-	if getPedWeapon(localPlayer) == 43 and getElementData(localPlayer,"Range Finder") and getElementData(localPlayer, "Range Finder") >= 1 then
+	if getPedWeapon(localPlayer) == 43 and getElementData(localPlayer, "currentweapon_2") == "Range Finder" then
 		if getControlState("aim_weapon") then
 			if x and y and z then
 				local distance = getDistanceBetweenPoints3D(px,py,pz,x,y,z)

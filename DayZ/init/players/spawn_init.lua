@@ -127,7 +127,6 @@ end
 function kilLDayZPlayer (killer,headshot,weapon)
 	pedCol = false
 	local account = getPlayerAccount(source)
-	--if getElementData(source,"isInEvent") then removePlayerEvent(source) return end
 	if not account then return end
 	killPed(source)
 	triggerClientEvent(source,"hideInventoryManual",source)
@@ -147,7 +146,25 @@ function kilLDayZPlayer (killer,headshot,weapon)
 				setElementData(pedCol,"playername",getPlayerName(source))
 				setElementData(pedCol,"deadman",true)
 				setElementData(pedCol,"MAX_Slots",getElementData(source,"MAX_Slots"))
-				setElementData(pedCol,"deadreason",getPlayerName(source).." is dead.")
+				local hours, minutes = getTime()
+				if hours < 10 then
+					hour = "0"..hours
+				else
+					hours = hours
+				end
+				if minutes < 10 then
+					minutes  = "0"..minutes
+				else
+					minutes = minutes
+				end
+				if getElementData(source,"gender") == "male" then
+					genderstring = "His"
+					genderstring2 = "he"
+				else
+					genderstring = "Her"
+					genderstring2 = "she"
+				end
+				setElementData(pedCol,"deadreason",genderstring.." name was "..tostring(getPlayerName(source))..", it appears "..genderstring2.." died at "..hours..":"..minutes..".")
 			end	
 		end
 	end

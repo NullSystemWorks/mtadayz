@@ -117,7 +117,8 @@ function onPlayerUseMedicObject(itemName)
 			setElementData(playersource,"pain",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Antibiotics" then
-			setElementData(playersource,"cold",false)
+			setElementData(playersource,"sepsis",0)
+			setElementData(playersource,"infection",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Morphine" then
 			setElementData(playersource,"brokenbone",false)
@@ -157,9 +158,12 @@ function onPlayerGiveMedicObject(itemName,player)
 		elseif itemName == "morphine" then
 			setElementData(player,"brokenbone",false)
 			setElementData(playersource,"Morphine",getElementData(playersource,"Morphine")-1)
+			addPlayerStats (playersource,"humanity",50)
 		elseif itemName == "antibiotics" then
-			setElementData(player,"cold",false)
+			setElementData(player,"sepsis",0)
+			setElementData(player,"infection",false)
 			setElementData(playersource,itemName,getElementData(playersource,"Antibiotics")-1)
+			addPlayerStats (playersource,"humanity",20)
 		end
 	end,1500,1,player,playersource,itemName)	
 end

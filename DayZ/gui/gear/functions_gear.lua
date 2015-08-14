@@ -400,8 +400,48 @@ function playerUseItem(itemName,itemInfo)
 		closeInventory()
 		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
 	elseif itemInfo == "Equip Backpack" then
-		if getPlayerCurrentSlots() <= getPlayerMaxAviableSlots() then
-			triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+		if itemName == "Assault Pack (ACU)" then
+			if getPlayerCurrentSlots() <= 12 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "Czech Vest Pouch" then
+			if getPlayerCurrentSlots() <= 13 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "ALICE Pack" then
+			if getPlayerCurrentSlots() <= 16 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "Survival ACU" then
+			if getPlayerCurrentSlots() <= 17 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "British Assault Pack" then
+			if getPlayerCurrentSlots() <= 18 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "Backpack (Coyote)" then
+			if getPlayerCurrentSlots() <= 24 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
+		elseif itemName == "Czech Backpack" then
+			if getPlayerCurrentSlots() <= 30 then
+				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
+			else
+				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+			end
 		end
 	end
 end

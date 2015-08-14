@@ -45,6 +45,7 @@
 	<script src="configs/cfgVehicles.lua" type="server" />
 	<script src="configs/cfgWorld.lua" type="server" />
 	<script src="configs/cfgNutritions.lua" type="shared" cache="false" />
+	<script src="configs/cfgDifficulty.lua" type="shared" cache="false" />
 	<script src="configs/cfgClient.lua" type="client" cache="false" />
 	<script src="addons.lua" type="server" />
 		
@@ -280,6 +281,7 @@
 	<file src="gui/status/blood/bloodtest.png" />
 	<file src="gui/status/blood/drop.png" />
 	<file src="gui/status/blood/substance.png" />
+	<file src="gui/status/blood/infection.png" />
 	<file src="gui/status/humanity/5.png" />
 	<file src="gui/status/humanity/4.png" />
 	<file src="gui/status/humanity/3.png" />
@@ -328,6 +330,11 @@
 	<file src="gui/status/vehicle/tank/tank_1.png" />
 	<file src="gui/status/vehicle/whl/whl_0.png" />
 	<file src="gui/status/vehicle/whl/whl_1.png" />
+	
+	<script src="gui/crosshair/crosshair.lua" type="client" cache="false" />
+	<file src="gui/crosshair/texreplace.fx" />
+	<file src="gui/crosshair/normal.png" />
+	<file src="gui/crosshair/hardcore.png" />
 	
 	<!-- BattlDayZ (V1) -->
 	<script src="battldayz/battldayz_server.lua" type="server" />

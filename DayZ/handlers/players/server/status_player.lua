@@ -30,49 +30,6 @@ function regenerateBlood()
 end
 setTimer(regenerateBlood,60000,0)
 
---[[
-function checkTemperature()
-	for i,player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			local value = 0
-			-- Winter
-			if getWeather == 1 then
-				value = -0.6
-			elseif getWeather == 4 then
-				value = -0.4
-			elseif getWeather == 15 then
-				value = -1.0
-			-- Spring
-			elseif getWeather == 2 then
-				value = 0
-			elseif getWeather == 16 then
-				value = -0.3
-			elseif getWeather == 5 then
-				value = 0.01
-			-- Summer
-			elseif getWeather == 0 then
-				value = 0
-			elseif getWeather == 18 then
-				value = 0.02
-			-- Autumn
-			elseif getWeather == 7 then
-				value = -0.05
-			elseif getWeather == 9 then
-				value = -0.1
-			else
-				value = 0
-			end
-			local hour, minutes = getTime()
-			if hour >= 21 and hour <= 8 then
-				value = value-0.05
-			end
-			addPlayerStats (player,"temperature",value)
-		end
-	end	
-end
-setTimer(checkTemperature,60000,0)
-]]
-
 function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -171,3 +128,28 @@ function checkHumanity()
 	end
 end
 setTimer(checkHumanity,60000,0)
+
+function checkInfection()
+	for i,player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			if getElementData(player,"infection") then
+				addPlayerStats(player,"blood",-3)
+			end
+		end
+	end
+end
+setTimer(checkInfection,1000,0)
+
+function onPlayerHasContractedSepsis(level,loss)
+	if getElementData(source,"sepsis") == level then
+		addPlayerStats(source,"blood",loss)
+	end
+end
+addEvent("onPlayerHasContractedSepsis",true)
+addEventHandler("onPlayerHasContractedSepsis",root,onPlayerHasContractedSepsis)
+
+function onPlayerTransmitSepsis()
+	setElementData(source,"sepsis",1)
+end
+addEvent("onPlayerTransmitSepsis",true)
+addEventHandler("onPlayerTransmitSepsis",root,onPlayerTransmitSepsis)

@@ -47,6 +47,7 @@ playerDataTable = {
 {"pain"},
 {"cold"},
 {"infection"},
+{"sepsis"},
 {"humanity"},
 {"zombieskilled"},
 {"headshots"},

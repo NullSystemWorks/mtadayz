@@ -412,3 +412,90 @@ function checkBloodType(button, state)
 		end
 	end
 end
+
+function infectionSigns()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"infection") then
+			local x,y,z = getElementPosition(localPlayer)
+			createExplosion (x,y,z+15,8,false,0.5,false)
+			local x, y, z, lx, ly, lz = getCameraMatrix()
+			local randomsound = math.random(0,50)
+			if randomsound >= 0 and randomsound <= 20 then
+				local getnumber = math.random(0,2)
+				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
+				setElementData(localPlayer,"volume",100)
+				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+			elseif randomsound >= 21 and randomsound <= 40 then	
+				setElementData(localPlayer,"volume",100)
+				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+				playSound(":DayZ/sounds/status/sneezing.mp3",false)
+			end
+		end
+	end
+end
+setTimer(infectionSigns,10000,0)
+
+local sepsisTimer = 10000
+function checkSepsis()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"sepsis") == 1 then
+			timer = 900000
+			setTimer(function(timer)
+				setElementData(localPlayer,"sepsis",2)
+				if isTimer(theSepsis) then killTimer(theSepsis) end
+			end,timer,1)
+		elseif getElementData(localPlayer,"sepsis") == 2 then
+			timer = 450000
+			setTimer(function(timer)
+				setElementData(localPlayer,"sepsis",3)
+				if isTimer(theSepsis) then killTimer(theSepsis) end
+			end,timer,1)
+			timer = 1000
+			if not isTimer(theSepsis) then
+				theSepsis1= setTimer(function(timer)
+					oldBlood = getElementData(localPlayer,"blood")
+					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-1)
+				end,timer,0)
+			end
+		elseif getElementData(localPlayer,"sepsis") == 3 then
+			timer = 450000
+			setTimer(function(timer)
+				setElementData(localPlayer,"sepsis",4)
+				if isTimer(theSepsis) then killTimer(theSepsis) end
+			end,timer,1)
+			timer = 1000
+			if not isTimer(theSepsis2) then
+				theSepsis = setTimer(function(timer)
+					oldBlood = getElementData(localPlayer,"blood")
+					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-2)
+				end,timer,0)
+			end
+		elseif getElementData(localPlayer,"sepsis") == 4 then
+			timer = 1000
+			if not isTimer(theSepsis) then
+				theSepsis = setTimer(function(timer)
+					oldBlood = getElementData(localPlayer,"blood")
+					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-3)
+				end,timer,0)
+			end
+		end
+	end
+end
+setTimer(checkSepsis,sepsisTimer,0)
+
+function transmitSepsis()
+	for i,player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			if getElementData(localPlayer,"sepsis") == 4 then
+				local x1,y1,z1 = getElementPosition(localPlayer)
+				local x2,y2,z2 = getElementPosition(player)
+				if getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2) <= 5 then
+					if getElementData(player,"sepsis") == 0 then
+						triggerServerEvent("onPlayerTransmitSepsis",player)
+					end
+				end
+			end
+		end
+	end
+end
+setTimer(transmitSepsis,30000,0)
