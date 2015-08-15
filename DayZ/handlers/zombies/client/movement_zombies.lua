@@ -87,7 +87,9 @@ function checkZombiePlayerStealth()
             local xZ,yZ,zZ = getElementPosition(ped)
             if getDistanceBetweenPoints3D (x,y,z,xZ,yZ,zZ) <= sound+visibly then
                 if getElementData ( ped, "leader" ) == nil then
-                    triggerServerEvent("botAttack",localPlayer,ped)
+					if not getElementData(ped,"deadzombie") then
+						triggerServerEvent("botAttack",localPlayer,ped)
+					end
                 end
             else
 				if getElementData ( ped, "target" ) == localPlayer then

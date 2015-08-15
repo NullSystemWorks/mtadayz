@@ -1,24 +1,3 @@
---local root = getRootElement()
-
-addEventHandler("onPlayerJoin", root,
-	function()
-		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." connected",root,255,255,255)
-	end
-)
-
-addEventHandler("onPlayerLogin", root,
-	function()
-		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." has logged in",root,255,255,255)
-	end
-)
-
-addEventHandler("onPlayerQuit",root,
-	function()
-		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).. " disconnected",root,255,255,255)
-	end
-)
-
-
 --[[
 +----------------------------------------------------------------------------
 |   Dx Side Chat Script
@@ -85,4 +64,21 @@ function adminSay(pla, cmd, ...)
 	until not name:find("#%x%x%x%x%x%x")
 	triggerClientEvent(root, "onSCMessageSend", root, string.format("#%.2X%.2X%.2X", 255,255,255)..messageText)
 end
-addCommandHandler("sc", adminSay)
+
+addEventHandler("onPlayerJoin", root,
+	function()
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." connected",root,255,255,255)
+	end
+)
+
+addEventHandler("onPlayerLogin", root,
+	function()
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).." has logged in",root,255,255,255)
+	end
+)
+
+addEventHandler("onPlayerQuit",root,
+	function()
+		outputSideChat("Player "..string.gsub(getPlayerName(source), '#%x%x%x%x%x%x', '' ).. " disconnected",root,255,255,255)
+	end
+)

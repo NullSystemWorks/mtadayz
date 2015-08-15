@@ -185,6 +185,9 @@ function savePlayerAccount() -- Save in the database
 		if getElementData(source,"logedin") then
 			destroyElement(getElementData(source,"playerCol"))
 		end
+		if getElementData(source,"sepsis") == 4 then
+			setAccountData(account,"infection",true)
+		end
 	end	
 	setElementData(source,"logedin",false)
 	outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
@@ -204,6 +207,9 @@ function saveAllAccounts() -- Save in the database
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
 			setAccountData(account,"gender",gender)
+			if getElementData(player,"sepsis") == 4 then
+				setAccountData(account,"infection",true)
+			end
 		end
 	end
 	outputServerLog("[DayZ] All accounts have been saved.")
