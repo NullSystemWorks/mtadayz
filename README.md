@@ -5,7 +5,7 @@
 ### What is this repository for? ###
 
 * Continuing the development of MTA DayZ for MTA:SA 1.5+
-* Current Version: 0.9.1a
+* Current Version: 0.9.5
 * We are working on: Version 1.0.0b
 * **RELEASE DATE** for Version 1.0.0b: **??/??/????**
 * Check "Issues" frequently to see what else there is to do
