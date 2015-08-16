@@ -30,6 +30,12 @@ engineImportTXD(animalTXD, 16)
 animalDFF = engineLoadDFF(":DayZ/models/animals/dff/cow2.dff", 16)
 engineReplaceModel(animalDFF, 16)
 
+-- // Vehicles // --
+vehicleTXD = engineLoadTXD(":DayZ/models/vehicles/txd/uaz.txd")
+engineImportTXD(vehicleTXD,470)
+vehicleDFF = engineLoadDFF(":DayZ/models/vehicles/dff/uaz.dff", 470)
+engineReplaceModel(vehicleDFF,470)
+
 
 -- // Player Skins // --
 -- Standard (Male)

@@ -427,6 +427,8 @@
 	<file src="models/animals/dff/goat.dff" />
     <file src="models/animals/txd/wolf.txd" />
     <file src="models/animals/dff/wolf.dff" />
+	<file src="models/vehicles/txd/uaz.txd" />
+    <file src="models/vehicles/dff/uaz.dff" />
 	<file src="models/weapons/txd/fnfal.txd" />
 	<file src="models/weapons/dff/fnfal.dff" />
 	<file src="models/weapons/txd/g36c.txd" />

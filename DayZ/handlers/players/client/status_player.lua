@@ -176,8 +176,12 @@ function setVolume()
 		value = value+getElementData(localPlayer,"shooting")
 	end
 	if isPedInVehicle (localPlayer) then
-		value = 100
-	end	
+		if getVehicleEngineState(getPedOccupiedVehicle(localPlayer)) then
+			value = 100
+		else
+			value = 0
+		end
+	end
 	if value > 100 then
 		value = 100
 	end
