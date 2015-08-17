@@ -95,11 +95,12 @@ buildingClasses = {
 {"Engine",929,0.3,0,5.88},
 {"Windscreen Glass",3104,0.3,0,3.92},
 {"Main Rotary Parts",3104,0.3,0,0.98},
+{"Empty Gas Canister",1650,1,0,3.92},
 {"Scrap Metal",929,0.3,0,3.92},
 {"Hatchet",339,1,90,10.78},
 {"Hunting Knife",335,1,90,6.86},
 {"Toolbox",2969,0.5,0,1.96},
-{"Wire Fence",933,0.25,0,5.88},
+{"Wire Fence",933,0.25,0,0.98},
 },
 
 ["Farm"] = {
@@ -129,6 +130,7 @@ buildingClasses = {
 {"British Assault Pack",1644,1,0,1.89},
 {"ALICE Pack",1248,1,0,2.83},
 {"Winchester 1866",349,1,90,0.94},
+{"Tent",1279,1,0,0.94},
 -- food: 28.3%		~ 28%
 -- trash: 14.15%	~ 14%
 {"Crossbow",349,1,90,0.94},
