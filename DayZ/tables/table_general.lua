@@ -93,6 +93,36 @@ weaponAmmoTable = {
 },
 }
 
+weaponMagSize = {
+-- {currentweapon_number,weaponName,GTA weaponName,magSize}
+{2,"M1911","colt 45",7},
+{2,"Desert Eagle","deagle",7},
+{2,"Revolver","deagle",6},
+{2,"M9 SD","silenced",15},
+{2,"PDW","uzi",30},
+{2,"G17","colt 45",17},
+{2,"MP5A5","mp5",30},
+{2,"Bizon PP-19","mp5",64},
+{1,"AK-47","ak-47",30},
+{1,"FN FAL","ak-47",20},
+{1,"G36C","ak-47",30},
+{1,"Sa58V CCO","ak-47",30},
+{1,"M4","m4",30},
+{1,"Winchester 1866","shotgun",15},
+{1,"Sawn-Off Shotgun","sawed-off",2},
+{1,"Blaze 95 Double Rifle","sawed-off",2},
+{1,"SPAZ-12 Combat Shotgun","combat shotgun",8},
+{1,"Remington 870","combat shotgun",8},
+{1,"CZ 550","sniper",5},
+{1,"DMR","sniper",20},
+{1,"SVD Dragunov","sniper",10},
+{1,"Lee Enfield","rifle",10},
+{1,"Sporter 22","rifle",10},
+{1,"Mosin 9130","rifle",10},
+{1,"SKS","rifle",10},
+{1,"Crossbow","shotgun",1},
+}
+
 hospitalPacks = {
 {-2670.87890625,636.8984375,14.453125},
 {-2637.0556640625,635.03125,14.453125},
@@ -251,13 +281,12 @@ otherLootItems = {
 {"Antibiotics",1580,0.5,0},
 {"Blood Bag",1580,1,0},
 {"Morphine",1579,1,0},
-{"Blood Bag",1580,1,0},
-{"Blood Bag",1580,1,0},
 {"Painkiller",1580,1,0},
 {"Antibiotics",1580,0.5,0},
 {"Blood Bag (Empty)",1580,1,0},
 {"Transfusion Kit",1580,1,0},
 {"Blood Test Kit",1580,1,0},
 {"Blood Test Kit",1580,1,0},
+{"Epi-Pen",1579,1,0},
 },
 }

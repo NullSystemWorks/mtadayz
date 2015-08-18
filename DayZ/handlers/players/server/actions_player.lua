@@ -200,3 +200,14 @@ function antiWaterGlitch()
    end
 end
 addEventHandler("onPlayerQuit", root, antiWaterGlitch)
+
+function changeWeaponMagSize()
+	for i, data in ipairs(weaponMagSize) do	
+		if getElementData(source,"currentweapon_"..data[1]) == data[2] then
+			setWeaponProperty(data[3],"poor","maximum_clip_ammo",data[4])
+			setWeaponProperty(data[3],"std","maximum_clip_ammo",data[4])
+			setWeaponProperty(data[3],"pro","maximum_clip_ammo",data[4])
+		end
+	end
+end
+addEventHandler("onPlayerWeaponSwitch",root,changeWeaponMagSize)

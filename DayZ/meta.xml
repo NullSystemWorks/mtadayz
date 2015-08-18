@@ -207,6 +207,7 @@
 	<file src="gui/gear/icons/bloodtest.png" />
 	<file src="gui/gear/icons/transfusion.png" />
 	<file src="gui/gear/icons/rangefinder.png" />
+	<file src="gui/gear/icons/epipen.png" />
 	<file src="gui/gear/inventory/buttArrow.png"/>
 	<file src="gui/gear/inventory/buttArrowDown.png"/>
 	<file src="gui/gear/inventory/butoff.png"/>
@@ -251,6 +252,7 @@
 	<file src="gui/gear/items/infravision.png" />
 	<file src="gui/gear/items/loot.png" />
 	<file src="gui/gear/items/binoculars.png" />
+	<file src="gui/gear/items/rangefinder.png" />
 	
 	<script src="gui/journal/journal.lua" type="client" cache="false" />
 	<file src="gui/journal/images/journal_page1.png" />
@@ -271,6 +273,8 @@
     <file src="gui/status/misc/level_5.png" />
 	<file src="gui/status/misc/lc.png" />
 	<file src="gui/status/misc/dead.jpg" />
+	<file src="gui/status/misc/hourglass.png" />
+	<file src="gui/status/misc/circle.png" />
 	<file src="gui/status/blood/blood_border.png" />
 	<file src="gui/status/blood/12000.png" />
 	<file src="gui/status/blood/10000.png" />

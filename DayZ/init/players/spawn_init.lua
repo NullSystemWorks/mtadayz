@@ -71,6 +71,8 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],false)
 		elseif data[1] =="infection" then
 			setElementData(player,data[1],false)
+		elseif data[1] =="unconscious" then
+			setElementData(player,data[1],false)
 		elseif data[1] =="food" then
 			setElementData(player,data[1],100)
 		elseif data[1] =="thirst" then

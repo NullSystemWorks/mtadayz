@@ -70,14 +70,6 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		end
 	end
 	if weapon and weapon > 1 and attacker and getElementType(attacker) == "player" then
-		local number = math.random(1,8)
-		if number >= 6 or number <= 8 then
-			setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding") + math.floor(loss*10))
-		end
-		local number = math.random(1,7)
-		if number == 2 then
-			setElementData(localPlayer,"pain",true)
-		end
 		damage = getWeaponDamage(weapon)
 		if bodypart == 9 then
 			damage = damage*gameplayVariables["headshotdamage_player"]
@@ -87,7 +79,6 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 			setElementData(localPlayer,"brokenbone",true)
 			playSound("sounds/brokenbone.mp3",false)
 		end
-		damage = math.random(damage*0.75,damage*1.25)
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			if damage <= 1000 then
 				damage = 0
@@ -98,6 +89,19 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-damage)
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
+		if damage >= 6000 then
+			setElementData(localPlayer,"unconscious",true)
+		end
+		local number = math.random(1,8)
+		if number >= 6 or number <= 8 then
+			if damage > 0 then
+				setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding") + math.floor(loss*10))
+			end
+		end
+		local number = math.random(1,7)
+		if number == 2 then
+			setElementData(localPlayer,"pain",true)
+		end
 		if not getElementData(localPlayer,"bandit") then
 			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",-math.random(40,200))
 			if getElementData(attacker,"humanity") < 0 then
@@ -152,8 +156,6 @@ function onPlayerDamageShader()
 end
 addEvent("onPlayerDamageShader",true)
 addEventHandler("onPlayerDamageShader",root,onPlayerDamageShader)
-
-bindKey("z", "down", "chatbox", "radiochat" )
 
 function abortAllStealthKills(targetPlayer)
     cancelEvent()
@@ -260,12 +262,21 @@ function playSoundOnWeaponFire(weapon)
 				setSoundMaxDistance(sound,0)
 			end
 	elseif weapon == 29 then
-		if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 15 then
-				playSound3D(":DayZ/sounds/weapons/MP5A5.wav",x2,y2,z2,false)
+		if getElementData(localPlayer,"currentweapon_2") == "Bizon PP-19" then
+			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 0 then
+				playSound3D(":DayZ/sounds/weapons/Silenced.wav",x2,y2,z2,false)
+			else
+				local sound = playSound(":DayZ/sounds/weapons/Silenced.wav",false)
+				setSoundMaxDistance(sound,0)
+			end
+		else
+			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 15 then
+				playSound3D(":DayZ/sounds/weapons/Silenced.wav",x2,y2,z2,false)
 			else
 				local sound = playSound(":DayZ/sounds/weapons/MP5A5.wav",false)
 				setSoundMaxDistance(sound,0)
 			end
+		end
 	elseif weapon == 30 then
 		if getElementData(localPlayer,"currentweapon_1") == "FN FAL" then
 			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
@@ -346,6 +357,31 @@ function playSoundOnWeaponFire(weapon)
 end
 addEventHandler ( "onClientPlayerWeaponFire", root, playSoundOnWeaponFire )
 
+local binoculars = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/binoculars.png",true)
+local rangefinder = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/rangefinder.png",true)
+guiSetVisible(binoculars,false)
+guiSetVisible(rangefinder,false)
+
+function isPlayerUsingBinoculars(button, press)
+	if getPedWeapon(localPlayer) == 43 then
+		if getElementData(localPlayer,"currentweapon_2") == "Binoculars" then
+			visible = binoculars
+		else
+			visible = rangefinder
+		end
+		if button == "mouse2" then
+			if press then
+				guiSetVisible(visible,true)
+				showChat(false)
+			else
+				guiSetVisible(visible,false)
+				showChat(true)
+			end
+		end
+	end
+end
+addEventHandler("onClientKey",root,isPlayerUsingBinoculars)
+
 function rangeFinder()
 local w, h = guiGetScreenSize ()
 local tx, ty, tz = getWorldFromScreenPosition ( w/2, h/2, 500 )
@@ -364,3 +400,27 @@ hit, x, y, z, elementHit = processLineOfSight ( px, py, pz, tx, ty, tz )
 	end
 end
 addEventHandler("onClientRender",root,rangeFinder)
+
+function weaponBurstFire(weapon)
+	if weapon == 30 then
+		if getElementData(source,"currentweapon_1") == "FN FAL" then
+			setTimer(function()
+				setControlState("fire",true)
+				setControlState("fire",false)
+				setControlState("fire",true)
+				setControlState("fire",false)
+			end,200,1)
+		end	
+	elseif weapon == 33 then
+		setTimer(function()
+			setControlState("fire",true)
+			setControlState("fire",false)
+		end,100,1)
+	elseif weapon == 34 then
+		setTimer(function()
+			setControlState("fire",true)
+			setControlState("fire",false)
+		end,100,1)
+	end
+end
+addEventHandler("onClientPlayerWeaponFire",localPlayer,weaponBurstFire)

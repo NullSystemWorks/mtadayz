@@ -60,7 +60,7 @@ function playerRadioChat(playersource,cmd,...)
         end
 	end
 end
-addCommandHandler( "radiochat", playerRadioChat )
+--addCommandHandler( "radiochat", playerRadioChat )
  
 function blockChatMessage(m,mt)
     if mt == 1 then

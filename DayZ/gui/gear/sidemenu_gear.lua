@@ -164,6 +164,16 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
+		if getElementData(arg2,"unconscious") == true and getElementData(getLocalPlayer(),"Epi-Pen") >= 1 then
+			number = number+1
+			guiSetVisible(rowImage[number],true)
+			guiSetText(rowText[number],"Inject Epi-Pen")	
+			setElementData(rowText[number],"usedItem","epipen")
+			if number == 1 then
+				guiLabelSetColor (rowText[number],255,255,255)
+				setElementData(rowText[number],"markedMenuItem",true)
+			end
+		end
 	end
 	if arg1 == "Dead" then
 		number = number+1
@@ -226,57 +236,6 @@ local number = 0
 end
 addEvent("showClientMenuItem",true)
 addEventHandler("showClientMenuItem",getLocalPlayer(),showClientMenuItem)
-
---[[
-function PlayerScrollMenu (key,keyState,arg)
-	if ( keyState == "down" ) then
-		if not guiGetVisible(rowImage[2]) then -- Check if there is more than one option available (for example, "Gear (Vehicle)" and "Repair Vehicle")
-			return
-		end
-		if arg == "up" then
-			if number == 1 then
-				number = 7
-				guiLabelSetColor (rowText[number],255,255,255)
-				guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
-				guiLabelSetColor (rowText[1],113,238,17)
-				guiStaticImageLoadImage(rowImage[1],":DayZ/gui/gear/items/scrollmenu_3.png")
-			else
-				number = number-1
-				guiLabelSetColor (rowText[number],255,255,255)
-				guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
-				guiLabelSetColor (rowText[number+1],113,238,17)
-				guiStaticImageLoadImage(rowImage[number+1],":DayZ/gui/gear/items/scrollmenu_3.png")
-			end
-		elseif arg == "down" then
-			if number == 7 then
-				if getElementData(rowText[7],"markedMenuItem") then
-					number = 1
-					guiLabelSetColor (rowText[number],255,255,255)
-					guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
-					guiLabelSetColor (rowText[7],113,238,17)
-					guiStaticImageLoadImage(rowImage[7],":DayZ/gui/gear/items/scrollmenu_3.png")
-					setElementData(rowText[7],"markedMenuItem",false)
-					outputChatBox("rowText: "..tostring(getElementData(rowText[7],"markedMenuItem")))
-					setElementData(rowText[number],"markedMenuItem",true)
-					outputChatBox("rowText: "..tostring(getElementData(rowText[number],"markedMenuItem")))
-				end
-			else
-				number = number+1
-				if getElementData(rowText[number],"markedMenuItem") then
-					guiLabelSetColor (rowText[number],255,255,255)
-					guiStaticImageLoadImage(rowImage[number],":DayZ/gui/gear/items/scrollmenu_1.png")
-					setElementData(rowText[number-1],"markedMenuItem",false)
-					outputChatBox("rowText: "..tostring(getElementData(rowText[number-1],"markedMenuItem")))
-					guiLabelSetColor (rowText[number-1],113,238,17)
-					guiStaticImageLoadImage(rowImage[number-1],":DayZ/gui/gear/items/scrollmenu_3.png")
-				end
-			end
-		end
-	end
-end
-bindKey ( "mouse_wheel_up", "down", PlayerScrollMenu, "up" )
-bindKey ( "mouse_wheel_down", "down", PlayerScrollMenu, "down" )
-]]
 
 function PlayerScrollMenu (key,keyState,arg)
 local number = 1
@@ -787,6 +746,12 @@ if ( keyState == "down" ) then
 			return
 		end
 		if itemName == "giveblood" then
+			local col = getElementData(getLocalPlayer(),"currentCol")
+			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
+			disableMenu()
+			return
+		end
+		if itemName == "epipen" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
 			triggerServerEvent("onPlayerGiveMedicObject",getLocalPlayer(),itemName,getElementData(col,"parent"))
 			disableMenu()

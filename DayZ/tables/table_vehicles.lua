@@ -84,6 +84,7 @@ vehicleDataTable = {
 {"Wood Pile"},
 {"Bandage"},
 {"Antibiotics"},
+{"Epi-Pen"},
 {"Road Flare"},
 {"Empty Gas Canister"},
 {"Full Gas Canister"},

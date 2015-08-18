@@ -164,6 +164,10 @@ function onPlayerGiveMedicObject(itemName,player)
 			setElementData(player,"infection",false)
 			setElementData(playersource,itemName,getElementData(playersource,"Antibiotics")-1)
 			addPlayerStats (playersource,"humanity",20)
+		elseif itemName == "epipen" then
+			setElementData(player,"unconscious",false)
+			setElementData(playersource,itemName,getElementData(playersource,"Epi-Pen")-1)
+			addPlayerStats (playersource,"humanity",25)
 		end
 	end,1500,1,player,playersource,itemName)	
 end

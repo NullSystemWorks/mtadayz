@@ -142,31 +142,31 @@ function drawTheMap()
 	local bg = tocolor(r, g, b, 100)
 	local rx, ry, rz = getElementRotation(localPlayer)
 	local lB = (15)*xFactor
-	local rB = (15+sx/2)*xFactor
-	local tB = (sy/2)-(205)*yFactor
+	local rB = (15+sx)*xFactor
+	local tB = sy-(205)*yFactor
 	local bB = tB + (sy)*yFactor
 	local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
 	local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
 	for k, v in ipairs(getElementsByType("blip")) do
-			local bx, by = getElementPosition(v)
-			local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
-			local maxDist = getBlipVisibleDistance(v)
-			if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
-				local dist = actualDist/(6000/(((worldW-200)+(worldH-200))/2))
-				local rot = findRotation(bx, by, x, y)-camZ
-				local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
-				local bpx = math.max(lB, math.min(rB, bpx))
-				local bpy = math.max(tB, math.min(bB, bpy))
-				local bid = getElementData(v, "customIcon") or getBlipIcon(v)
-				local _, _, _, bcA = getBlipColor(v)
-				local bcR, bcG, bcB = 255, 255, 255
-					if getBlipIcon(v) == 0 then
-						bcR, bcG, bcB = getBlipColor(v)
-					end
-				local bS = getBlipSize(v)
-				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
-			end
+		local bx, by = getElementPosition(v)
+		local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
+		local maxDist = getBlipVisibleDistance(v)
+		if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
+			local dist = actualDist/(6000/((3072+3072)/2))
+			local rot = findRotation(bx, by, x, y)-camZ
+			local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
+			local bpx = math.max(lB, math.min(rB, bpx))
+			local bpy = math.max(tB, math.min(bB, bpy))
+			local bid = getElementData(v, "customIcon") or getBlipIcon(v)
+			local _, _, _, bcA = getBlipColor(v)
+			local bcR, bcG, bcB = 255, 255, 255
+				if getBlipIcon(v) == 0 then
+					bcR, bcG, bcB = getBlipColor(v)
+				end
+			local bS = getBlipSize(v)
+			dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
 		end
+	end
 	dxDrawImage(sx * 0.5, sy * 0.5, (blip*2)*xFactor, (blip*2)*yFactor, ":DayZ/gui/gear/items/player.png", camZ-rz, 0, 0, tocolor(255,30,0,255))
 end
 
@@ -178,7 +178,7 @@ function drawTheGPS()
 		local camX,camY,camZ = getElementRotation(getCamera())
 		dxSetRenderTarget(rt, true)
 		if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
-			dxDrawRectangle(0, 0, mW, mH, tocolor(124, 167, 209,alpha)) --render background
+			dxDrawRectangle(0, 0, mW, mH, tocolor(176, 200, 210,alpha)) --render background
 			worldmap = dxDrawImage(X - 3072/2, mH/5 + (Y - 3072/2), 3072, 3072, ":DayZ/gui/gear/items/radarworld.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
 		end
 		dxSetRenderTarget()
@@ -570,21 +570,3 @@ function refreshDebugMonitor()
 	end			
 end
 addEventHandler("onClientRender",root,refreshDebugMonitor)
-
-local binoculars = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/binoculars.png",true)
-guiSetVisible(binoculars,false)
-
-function isPlayerUsingBinoculars(button, press)
-	if getPedWeapon(localPlayer) == 43 then
-		if button == "mouse2" then
-			if press then
-				guiSetVisible(binoculars,true)
-				showChat(false)
-			else
-				guiSetVisible(binoculars,false)
-				showChat(true)
-			end
-		end
-	end
-end
-addEventHandler("onClientKey",root,isPlayerUsingBinoculars)

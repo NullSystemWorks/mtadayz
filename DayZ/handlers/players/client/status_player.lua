@@ -503,3 +503,109 @@ function transmitSepsis()
 	end
 end
 setTimer(transmitSepsis,30000,0)
+
+local isHourGlassActive = false
+function setPlayerUnconsciousWhenLowBlood()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"blood") < 3000 and not getElementData(localPlayer,"unconscious") then
+			local number = math.random(1,100)
+			if number == 1 then
+				if not isHourGlassActive then
+					addEventHandler("onClientRender",root,drawHourGlass)
+					isHourGlassActive = true
+					setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+					toggleAllControls(false,true,true)
+					enableBlackWhite(true)
+					unbindKey("J","down",initInventory)
+					triggerServerEvent("unbindFuncKeys",localPlayer)
+					setElementData(localPlayer,"unconscious",true)
+					startRollMessage2("Status","You are unconscious!",255,0,0)
+				end
+			end
+		end
+	end
+end
+setTimer(setPlayerUnconsciousWhenLowBlood,1000,0)
+
+function setPlayerUnconscious()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"unconscious") then
+			if not isHourGlassActive then
+				addEventHandler("onClientRender",root,drawHourGlass)
+				isHourGlassActive = true
+				setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+				toggleAllControls(false,true,true)
+				enableBlackWhite(true)
+				unbindKey("J","down",initInventory)
+				triggerServerEvent("unbindFuncKeys",localPlayer)
+				startRollMessage2("Status","You are unconscious!",255,0,0)
+			end
+		else
+			if isHourGlassActive then
+				removeEventHandler("onClientRender",root,drawHourGlass)
+				isHourGlassActive = false
+				setPedAnimation(localPlayer,"ped","getup_front",-1,false)
+				setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
+				toggleAllControls(true,true,true)
+				enableBlackWhite(false)
+				bindKey("J","down",initInventory)
+				triggerServerEvent("bindFuncKeys",localPlayer)
+				startRollMessage2("Status","You are awake.",0,255,0)
+			end
+		end
+	end
+end
+setTimer(setPlayerUnconscious,3000,0)
+
+function wakePlayerFromUnconsciousness()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"unconscious") then
+			local number = math.random(1,100)
+			if number >= 1 and number <= 25 then
+				removeEventHandler("onClientRender",root,drawHourGlass)
+				toggleAllControls(true,true,true)
+				enableBlackWhite(false)
+				setPedAnimation(localPlayer,"ped","getup_front",-1,false)
+				setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
+				bindKey("J","down",initInventory)
+				triggerServerEvent("bindFuncKeys",localPlayer)
+				startRollMessage2("Status","You are awake.",0,255,0)
+				isHourGlassActive = false
+				setElementData(localPlayer,"unconscious",false)
+			end
+		end
+	end
+end
+setTimer(wakePlayerFromUnconsciousness,60000,0)
+
+function removeUnconsciousHandlerOnDeath()
+	if getElementData(localPlayer,"isDead") then
+		if isHourGlassActive then
+			removeEventHandler("onClientRender",root,drawHourGlass)
+			toggleAllControls(true,true,true)
+			enableBlackWhite(false)
+			bindKey("J","down",initInventory)
+			triggerServerEvent("bindFuncKeys",localPlayer)
+			isHourGlassActive = false
+		end
+	end
+end
+setTimer(removeUnconsciousHandlerOnDeath,4000,0)
+
+local hourglassrotation = 0
+local w, h = guiGetScreenSize()
+function drawHourGlass()
+	if hourglassrotation == 180 then
+		if not hourglass then
+			hourglass = setTimer(function() hourglassrotation = hourglassrotation+4 killTimer(hourglass) hourglass = false end,1000,1)
+		end
+	elseif hourglassrotation == 360 then
+		if not hourglass2 then
+			hourglass2 = setTimer(function() hourglassrotation = 0 killTimer(hourglass2) hourglass2 = false end,1000,1)
+		end
+	else
+		hourglassrotation = hourglassrotation+4
+	end
+	dxDrawImage(w * 0.3900, h * 0.3217, w * 0.2500, h * 0.3333, ":DayZ/gui/status/misc/circle.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
+	dxDrawImage(w * 0.4363, h * 0.3567, w * 0.1563, h * 0.2583, ":DayZ/gui/status/misc/hourglass.png", hourglassrotation, 0, 0, tocolor(255, 255, 255, 255), false)
+end

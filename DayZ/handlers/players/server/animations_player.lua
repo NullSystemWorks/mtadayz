@@ -39,8 +39,21 @@ addEvent("onPlayerGhillieStateOff",true)
 addEventHandler("onPlayerGhillieStateOff",root,onPlayerGhillieStateOff)
 
 local handsUp = false
-local siting = false
+local sitting = false
 local lying = false
+local saluting = false
+
+function funcBindSit ( player, key, keyState )
+	if sitting then
+		setPedAnimation (player,false)
+		sitting = false
+	else
+		if isPedInVehicle (player) then return end
+		setPedAnimation (player,"BEACH","ParkSit_M_loop",-1,false)
+		sitting = true
+	end	
+end
+
 
 function funcBindHandsup ( player, key, keyState )
 	if handsUp then
@@ -48,22 +61,10 @@ function funcBindHandsup ( player, key, keyState )
 		handsUp = false
 	else
 		if isPedInVehicle (player) then return end
-		setPedAnimation (player,"BEACH","ParkSit_M_loop",-1,false)
+		setPedAnimation (player,"SHOP","SHP_Rob_HandsUp",-1,false)
 		handsUp = true
 	end	
 end
-
-function funcBindSit ( player, key, keyState )
-	if siting then
-		setPedAnimation (player,false)
-		siting = false
-	else
-		if isPedInVehicle (player) then return end
-		setPedAnimation (player,"SHOP","SHP_Rob_HandsUp",-1,false)
-		siting = true
-	end	
-end
-
 
 function funcBindLie ( player, key, keyState )
 	if lying then
@@ -74,6 +75,18 @@ function funcBindLie ( player, key, keyState )
 		if isPedInVehicle(player) then return end
 		setPedAnimation (player,"ped","FLOOR_hit_f", -1,false)
 		lying = true
+	end
+end
+
+function funcBindSalute ( player, key, keyState )
+	if saluting then
+		setPedAnimation (player,false)
+		saluting = false
+	else
+		if isPedInVehicle(player) then return end
+		setPedAnimation(player,"GHANDS","gsign5LH",-1,false)
+		setTimer(function() setPedAnimation (player,false) end,2100,1)
+		saluting = true
 	end
 end
 
@@ -99,9 +112,10 @@ end
 ]]
 
 function bindTheKeys()
-  bindKey(source,",","down",funcBindHandsup)
-  bindKey(source,".","down",funcBindSit)
-  bindKey(source,"l","down",funcBindLie)
+	bindKey(source,",","down",funcBindSalute)
+	bindKey(source,".","down",funcBindHandsup)
+	bindKey(source,"z","down",funcBindSit)
+	bindKey(source,"l","down",funcBindLie)
 end
 addEventHandler("onPlayerLogin", root, bindTheKeys)
 
@@ -109,12 +123,35 @@ addEventHandler("onResourceStart",resourceRoot,
 function()
 	for k,v in ipairs(getElementsByType("player")) do
 		if not isGuestAccount(getPlayerAccount(v)) then
-			bindKey(v,",","down",funcBindHandsup)
-			bindKey(v,".","down",funcBindSit)
+			bindKey(v,",","down",funcBindSalute)
+			bindKey(v,".","down",funcBindHandsup)
+			bindKey(v,"z","down",funcBindSit)
 			bindKey(v,"l","down",funcBindLie)
 		end
 	end
 end)
+
+function unbindFuncKeys()
+	unbindKey(source,",","down",funcBindSalute)
+	unbindKey(source,".","down",funcBindHandsup)
+	unbindKey(source,"z","down",funcBindSit)
+	unbindKey(source,"l","down",funcBindLie)
+end
+addEvent("unbindFuncKeys",true)
+addEventHandler("unbindFuncKeys",root,unbindFuncKeys)
+
+function bindFuncKeys()
+	bindKey(source,",","down",funcBindSalute)
+	bindKey(source,".","down",funcBindHandsup)
+	bindKey(source,"z","down",funcBindSit)
+	bindKey(source,"l","down",funcBindLie)
+	handsUp = false
+	sitting = false
+	lying = false
+	saluting = false
+end
+addEvent("bindFuncKeys",true)
+addEventHandler("bindFuncKeys",root,bindFuncKeys)
 
 function setPlayerSneak(number)
 	setPedWalkingStyle(source,number)
