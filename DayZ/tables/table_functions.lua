@@ -174,16 +174,97 @@ function getWeaponAmmoFromName(weaponName)
 	end
 end
 
+function getTheWeaponNameFromID(weaponID)
+    for i,weaponData in ipairs(weaponAmmoTable["others"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1],weaponData[2]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable[".45 ACP Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["9x19mm SD Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["9x19mm Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["9x18mm Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["5.45x39mm Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["5.56x45mm Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["1866 Slug"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["12 Gauge Pellet"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["2Rnd. Slug"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["9.3x62mm Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable[".303 British Cartridge"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+    for i,weaponData in ipairs(weaponAmmoTable["M136 Rocket"]) do
+        if weaponID == weaponData[2] then
+            return weaponData[1]
+        end
+    end
+	for i,weaponData in ipairs(weaponAmmoTable["Bolt"]) do
+		if weaponID == weaponData[2] then
+			return weaponData[1]
+		end
+	end
+end
+
 function getWeaponDamage(weapon)
-	for i,weapon2 in ipairs(damageTable) do
-		local t,weapon1 = getWeaponAmmoFromName(weapon2[1])
-		if weapon1 == weapon then
-			if getElementData(localPlayer,"humanity") == 5000 then
-				if weapon2[1] == "M1911" or weapon2[1] == "M9 SD" or weapon2[1] == "PDW" then
-					return weapon2[2]*1.3
+	local weapon_1 = getElementData(localPlayer,"currentweapon_1")
+	local weapon_2 = getElementData(localPlayer,"currentweapon_2")
+	for i,weap in ipairs(damageTable) do
+		if weapon == 25 or weapon == 26 or weapon == 27 or weapon == 30 or weapon == 31 or weapon == 33 or weapon == 34 then
+			if weap[1] == weapon_1 then
+				return weap[2]
+			end
+		else
+			if weap[1] == weapon_2 then
+				if getElementData(localPlayer,"humanity") >= 5000 then
+					if weapon_2 == "M1911" or weapon_2 == "M9 SD" or weapon_2 == "PDW" then
+						return weap[2]*1.3
+					else
+						return weap[2]
+					end
 				end
-			end	
-			return weapon2[2]
+			end
 		end
 	end
 end

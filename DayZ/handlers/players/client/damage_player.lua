@@ -71,13 +71,17 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 	end
 	if weapon and weapon > 1 and attacker and getElementType(attacker) == "player" then
 		damage = getWeaponDamage(weapon)
+		local x1,y1,z1 = getElementPosition(localPlayer)
+		local x2,y2,z2 = getElementPosition(attacker)
+		local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
+		damage = damage-(distance*5)
 		if bodypart == 9 then
 			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
 		end
 		if bodypart == 7 or bodypart == 8 then
 			setElementData(localPlayer,"brokenbone",true)
-			playSound("sounds/brokenbone.mp3",false)
+			playSound(":DayZ/sounds/status/bonecrack.mp3",false)
 		end
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			if damage <= 1000 then
@@ -86,14 +90,14 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 				damage = damage
 			end
 		end
-		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-damage)
+		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(damage))
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
 		if damage >= 6000 then
 			setElementData(localPlayer,"unconscious",true)
 		end
 		local number = math.random(1,8)
-		if number >= 6 or number <= 8 then
+		if number >= 6 and number <= 8 then
 			if damage > 0 then
 				setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding") + math.floor(loss*10))
 			end
@@ -102,13 +106,28 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		if number == 2 then
 			setElementData(localPlayer,"pain",true)
 		end
+		--[[
+			// 
+			We check how many murders the attacked one (localPlayer) has
+			Subtract 200 humanity from attacker for killing localPlayer
+			But remove 50 from the initial 200 for every murder the localPlayer has
+			This means the more murders the localPlayer has, the more humanity his 
+			killer can get, even if the localPlayer is not a bandit yet
+			//
+		]]
+		local myKills = 200 - ((getElementData(localPlayer,"murders") / 3) * 150)
+		local rawDamage = math.floor(math.sqrt((damage/55.55)))
+		local humanityHit = -(myKills * rawDamage)
+		if humanityHit > -800 then
+			humanityHit = -800
+		end
 		if not getElementData(localPlayer,"bandit") then
-			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",-math.random(40,200))
+			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",math.floor(humanityHit))
 			if getElementData(attacker,"humanity") < 0 then
 				setElementData(attacker,"bandit",true)
 			end
 		else
-			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",math.random(400,200))
+			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",math.floor(humanityHit))
 			if getElementData(attacker,"humanity") > 5000 then
 				setElementData(attacker,"humanity",5000)
 			end

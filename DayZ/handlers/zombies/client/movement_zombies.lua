@@ -33,7 +33,7 @@ end
 function getWeaponNoiseFactor(weapon)
     for i,weapon2 in ipairs(weaponNoiseTable) do
         if weapon == weapon2[1] then
-            return weapon2[4]
+            return weapon2[3]
         end
     end
 	return 5

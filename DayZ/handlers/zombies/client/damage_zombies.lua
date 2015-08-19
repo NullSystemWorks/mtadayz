@@ -25,12 +25,16 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 					end
 				elseif weapon ~= 0 then
 					damage = getWeaponDamage(weapon)
+					local x1,y1,z1 = getElementPosition(source)
+					local x2,y2,z2 = getElementPosition(attacker)
+					local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
+					damage = damage-(distance*5)
 					setElementHealth(source,100)
 					if bodypart == 9 then
 						damage = damage*gameplayVariables["headshotdamage_zombie"]
 						headshot = true
 					end
-					setElementData(source,"blood",getElementData(source,"blood")-damage)
+					setElementData(source,"blood",getElementData(source,"blood")-math.floor(damage))
 					local soundnumber =  math.random(0,6)
 					playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
 					if getElementData(source,"blood") <= 0 then
