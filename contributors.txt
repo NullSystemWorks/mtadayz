@@ -1,4 +1,4 @@
-# - DEVELOPERS - #
+﻿# - DEVELOPERS - #
 
 L			(mtadayz-dev)
 .:CiBeR:.		(CiBeR96)
@@ -13,4 +13,4 @@ imCEASER		(Translation: Portuguese)
 Bastard			(Translation: Dutch)
 monaguilloX		(Translation: Spanish)
 Rémi Gaffet		(Translation: French)
-AlYnZyX		(Translation: Romanian)
+AlYnZyX			(Translation: Romanian)

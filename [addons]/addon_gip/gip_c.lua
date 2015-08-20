@@ -48,6 +48,7 @@ local items =
 		"Crossbow",
 		"Desert Eagle",
 		"Binoculars",
+		"Range Finder",
 		"Tear Gas",
 		"Grenade",
 		"Satchel",
@@ -66,7 +67,7 @@ local items =
 		"9x19mm SD Cartridge",
 		"9.3x62mm Cartridge",
 		".45 ACP Cartridge",
-		"Gauge 12 Pellet",
+		"12 Gauge Pellet",
 		"2Rnd. Slug",
 		"1866 Slug",
 		".303 British Cartridge",
@@ -128,6 +129,10 @@ local items =
 		"Heat Pack",
 		"Blood Bag",
 		"Painkiller",
+		"Blood Bag (Empty)",
+		"Blood Test Kit",
+		"Blood Transfusion Kit",
+		"Epi-Pen",
 	},
 	
 	["Car Parts"] = {

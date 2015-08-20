@@ -81,6 +81,7 @@ items =
 		"Crossbow",
 		"Desert Eagle",
 		"Binoculars",
+		"Range Finder",
 		"Tear Gas",
 		"Grenade",
 		"Satchel",
@@ -99,7 +100,7 @@ items =
 		"9x19mm SD Cartridge",
 		"9.3x62mm Cartridge",
 		".45 ACP Cartridge",
-		"Gauge 12 Pellet",
+		"12 Gauge Pellet",
 		"2Rnd. Slug",
 		"1866 Slug",
 		".303 British Cartridge",
@@ -159,6 +160,11 @@ items =
 		"Heat Pack",
 		"Blood Bag",
 		"Painkiller",
+		"Antibiotics",
+		"Epi-Pen",
+		"Blood Bag (Empty)",
+		"Blood Test Kit",
+		"Blood Transfusion Kit",
 	},
 	
 	["Car Parts"] = {
@@ -321,7 +327,7 @@ playerDataTable = {
 {"Tear Gas"},
 {"Grenade"},
 {"Binoculars"},
-
+{"Range Finder"},
 -- [[ Ammo ]] --
 {".45 ACP Cartridge"},
 {"9x19mm SD Cartridge"},
@@ -335,7 +341,6 @@ playerDataTable = {
 {"9.3x62mm Cartridge"},
 {".303 British Cartridge"},
 {"Bolt"},
-
 -- [[ Food / Drinks ]] --
 {"Baked Beans"},
 {"Pasta"},
@@ -356,11 +361,11 @@ playerDataTable = {
 {"Soda Can (Cola)"},
 {"Soda Can (Mountain Dew)"},
 {"Can (Milk)"},
-
 -- [[ Items ]] --
-
 {"Wood Pile"},
 {"Bandage"},
+{"Antibiotics"},
+{"Epi-Pen"},
 {"Road Flare"},
 {"Empty Gas Canister"},
 {"Full Gas Canister"},
@@ -369,11 +374,17 @@ playerDataTable = {
 {"Painkiller"},
 {"Morphine"},
 {"Blood Bag"},
+{"Blood Bag (Empty)"},
+{"Transfusion Kit"},
+{"Blood Test Kit"},
 {"Wire Fence"},
 {"Raw Meat"},
 {"Tire"},
 {"Engine"},
 {"Tank Parts"},
+{"Scrap Metal"},
+{"Main Rotary Parts"},
+{"Windscreen Glass"},
 {"Tent"},
 {"Box of Matches"},
 {"Watch"},
@@ -388,6 +399,8 @@ playerDataTable = {
 {"Camouflage Clothing"},
 {"Civilian Clothing"},
 {"Survivor Clothing"},
+{"Survivor Clothing (Female)"},
+{"Civilian Clothing (Female)"},
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
@@ -398,9 +411,8 @@ playerDataTable = {
 {"Backpack (Coyote)"},
 {"Czech Backpack"},
 {"Survival ACU"},
-{"Area 69 Keycard"},
 {"San Fierro Carrier Keycard"},
-
+{"Area 69 Keycard"},
 -- [[ Blueprints ]] --
 {"M4 Blueprint"},
 {"CZ 550 Blueprint"},

@@ -67,6 +67,7 @@ function setGroup (playersource,command,teamName,targetString)
 	end
 end
 addCommandHandler("add",setGroup)
+
 function getPlayerWildcard(name)
     local name = name and name:gsub("#%x%x%x%x%x%x", ""):lower() or nil
     if name then

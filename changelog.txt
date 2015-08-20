@@ -13,6 +13,89 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### LANGUAGE: Romanian is now available.
 
 # - #
+## [0.9.5a] - 2015-08-19
+### ADDED: New status effects: Sepsis, Infection & Unconsciousness
+### ADDED: New Items: Range Finder, Epi-Pen
+### ADDED: Crosshair integration
+### ADDED: Difficulty options (Normal, Veteran & Hardcore)
+### ADDED: Viral zombie (24000 blood, greenish skin)
+### ADDED: Empty Gas Canister to industrial loot table
+### ADDED: Tent to supermarket loot table
+### ADDED: Range Finder to military loot table
+### ADDED: Salute animation (key: , [COMMA])
+### ADDED: Can give Morphine, Antibiotics and Epi-Pens to other players
+### CHANGED: Completely new inventory UI (rightclick to use/equip items)
+### CHANGED: Holding weapons will free up 10 slots, while carrying them takes 10
+### CHANGED: Humanity Calculation
+### CHANGED: Wood Piles from chopping trees are dropped on the ground
+### CHANGED: Weapon damage tweaks
+### CHANGED: Weapon magazine sizes tweaks
+### CHANGED: Burst Fire for FN FAL
+### CHANGED: DMR + Bizon PP-19 are now silent
+### CHANGED: Decreased chance for wire fence to spawn
+### CHANGED: Increased Bi-2 Airplane spawn chance to 35%
+### CHANGED: Key for sitting is 'z'
+### CHANGED: Patriot model is now an UAZ
+### CHANGED: Volume is 0 when in a vehicle and engine is turned off
+### REMOVED: Radiochat binding + radio chat itself
+### REMOVED: Randomized damage (uses distance calculation now)
+### FIXED: Not being able to access tents
+### FIXED: Debug monitor appearing when opening inventory
+### FIXED: Heroes bleeding when hit by a weapon that does less than 1000 damage
+### FIXED: Using the wrong items in inventory once you have more than 11
+
+
+# - #
+## [0.9.4.3a] - 2015-08-12
+### FIXED: Not being able to refuel vehicles
+### FIXED: Vehicles not respawning after they blew up
+### FIXED: Being able to access a blown up vehicle's inventory
+### FIXED: Huey (Leviathan) spawnins inside a fence in one case
+### FIXED: /add not working
+
+# - #
+## [0.9.4.2.1a] - 2015-08-10
+### FIXED: Massive lag occuring when sitting in a vehicle
+
+# - #
+## [0.9.4.2a] - 2015-08-09
+### ADDED: Blood types
+### ADDED: Blood Test Kits to determine blood type
+### ADDED: Blood Transfusion Kits for empty blood bags (-4000 blood)
+### ADDED: You can now give blood bags to yourself (+4000 blood)
+### ADDED: Giving incompatible blood results in recipient receiving damage (2000 blood)
+### ADDED: French (fr) and Romanian (ro) language
+### ADDED: More trees to chop
+### ADDED: Tons of new sounds for practically everything
+### ADDED: Reworked side menu
+### ADDED: Ability to take wheels and engines off of vehicles (toolbox needed)
+### ADDED: Siphon fuel from vehicles (Empty Gas Canister needed)
+### ADDED: Weapon Sounds with distance calculation
+### ADDED: Better Sky
+### CHANGED: [Group] Management Tab now shows last time online
+### CHANGED: [Group] Message of the Day added, allows 3 lines of text
+### FIXED: Scoreboard not updating
+### FIXED: Blood bags healing 12000 blood for yourself
+### FIXED: Players spawning underwater when logging off while in water
+
+# - #
+## [0.9.4.1a] - 2015-08-07
+### ADDED: Option to disable ping kick (cfgServer)
+### CHANGED: Adjusted values for temperature decrease when cold or rainy weather
+### CHANGED: Decreases chance of zombies dropping keycards (3.50%)
+### CHANGED: Being inside a building or taking shelter won't decrease temperature
+### CHANGED: Color of sidemenu
+### FIXED: Not being able to give players blood bags
+### FIXED: Being able to give zombies blood bags
+### FIXED: Zombies not dropping Area 69 Keycard
+### FIXED: Bike stopping to work after 20 seconds
+### FIXED: getServerName spam when not logged in
+### FIXED: Not being able to refill a vehicle's tank
+### FIXED: Being able to turn off bike's engine on/off
+### FIXED: Client/Player mismatch spam for humanity
+### FIXED: [DayZ Admin] Icons for players and vehicles not showing on Live Map
+
+# - #
 ## [0.9.4a] - 2015-08-06
 ### MAJOR RESTRUCTURING OF CODE BASE! ###
 ### ADDED: Dynamic Weather System

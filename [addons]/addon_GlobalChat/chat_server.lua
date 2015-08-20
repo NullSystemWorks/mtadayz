@@ -65,13 +65,14 @@ function playeGlobalChat ( playersource, cmd, ... )
 		if #onlySpecCharMsg > 15 then --check if there are more than 10 special characters used
 			outputChatBox ( "Do not spam the chat with special characters!", playersource, 255, 0, 0 )
 			return
-		end]]
+		end
 		
 		local var, spacesCount = string.gsub( msg, " ", "") --get the count of spaces
 		if ( #msg / spacesCount ) > 20 and #msg > 20 then --check if there is at least one space per 20 or less characters
 			outputChatBox ( "Do not spam the chat with long words!", playersource, 255, 0, 0 )
 			return
 		end
+		]]
 		
 		if playerTickTable[playersource] then --check if a table entry for the player exists
 			local tick = getTickCount ( ) --get the current tick count in ms
