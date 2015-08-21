@@ -114,7 +114,7 @@ end
 function bindTheKeys()
 	bindKey(source,",","down",funcBindSalute)
 	bindKey(source,".","down",funcBindHandsup)
-	bindKey(source,"z","down",funcBindSit)
+	bindKey(source,"2","down",funcBindSit)
 	bindKey(source,"l","down",funcBindLie)
 end
 addEventHandler("onPlayerLogin", root, bindTheKeys)
@@ -125,7 +125,7 @@ function()
 		if not isGuestAccount(getPlayerAccount(v)) then
 			bindKey(v,",","down",funcBindSalute)
 			bindKey(v,".","down",funcBindHandsup)
-			bindKey(v,"z","down",funcBindSit)
+			bindKey(v,"2","down",funcBindSit)
 			bindKey(v,"l","down",funcBindLie)
 		end
 	end
@@ -134,7 +134,7 @@ end)
 function unbindFuncKeys()
 	unbindKey(source,",","down",funcBindSalute)
 	unbindKey(source,".","down",funcBindHandsup)
-	unbindKey(source,"z","down",funcBindSit)
+	unbindKey(source,"2","down",funcBindSit)
 	unbindKey(source,"l","down",funcBindLie)
 end
 addEvent("unbindFuncKeys",true)
@@ -143,7 +143,7 @@ addEventHandler("unbindFuncKeys",root,unbindFuncKeys)
 function bindFuncKeys()
 	bindKey(source,",","down",funcBindSalute)
 	bindKey(source,".","down",funcBindHandsup)
-	bindKey(source,"z","down",funcBindSit)
+	bindKey(source,"2","down",funcBindSit)
 	bindKey(source,"l","down",funcBindLie)
 	handsUp = false
 	sitting = false

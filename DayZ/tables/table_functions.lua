@@ -263,6 +263,8 @@ function getWeaponDamage(weapon)
 					else
 						return weap[2]
 					end
+				else
+					return weap[2]
 				end
 			end
 		end
