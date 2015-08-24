@@ -122,6 +122,14 @@ end
 addEventHandler("onVehicleExplode", getRootElement(), notifyAboutExplosion2)
 
 function destroyDeadPlayer (ped,pedCol)
+	local x,y,z = getElementPosition(ped)
+	local tCol = createColCircle(x,y,z,20)
+	for i, v in ipairs(getElementsByType("player")) do
+		local detection = isElementWithinColShape(ped, tCol)
+			if detection then
+				setTimer(destroyDeadPlayer,300000,1,ped,pedCol) --If player found exit loop and re-check in 5 minutes.
+			return end
+	end
 	destroyElement(ped)
 	destroyElement(pedCol)
 end
@@ -142,7 +150,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 				ped = createPed(skin,x,y,z,rotZ)
 				pedCol = createColSphere(x,y,z,1.5)
 				killPed(ped)
-				setTimer(destroyDeadPlayer,3600000*0.75,1,ped,pedCol) -- 3600000*0.75
+				setTimer(destroyDeadPlayer,600000,1,ped,pedCol) -- 3600000*0.75
 				attachElements (pedCol,ped,0,0,0)
 				setElementData(pedCol,"parent",ped)
 				setElementData(pedCol,"playername",getPlayerName(source))
