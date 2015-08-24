@@ -132,6 +132,7 @@ function destroyDeadPlayer (ped,pedCol)
 	end
 	destroyElement(ped)
 	destroyElement(pedCol)
+	destroyElement(tCol)
 end
 
 function kilLDayZPlayer (killer,headshot,weapon)
