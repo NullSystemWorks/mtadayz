@@ -248,7 +248,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	setElementData(source,"isDead",true)
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
 	destroyElement(getElementData(source,"playerCol"))
-	setTimer(spawnDayZPlayer,5000,1,source)
+	setTimer(spawnDayZPlayer,30000,1,source)
 end
 addEvent("kilLDayZPlayer",true)
 addEventHandler("kilLDayZPlayer",getRootElement(),kilLDayZPlayer)
