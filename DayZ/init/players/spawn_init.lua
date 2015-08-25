@@ -179,6 +179,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 			end	
 		end
 	end
+	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	if killer then
 		if not getElementData(source,"bandit") then
 			local value = getElementData(source,"humanity")
@@ -252,7 +253,6 @@ function kilLDayZPlayer (killer,headshot,weapon)
 		end
 	end
 	setTimer(setElementPosition,500,1,source,6000,6000,0)
-	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	setAccountData(account,"isDead",true)
 	setElementData(source,"isDead",true)
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
