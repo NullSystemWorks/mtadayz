@@ -542,8 +542,7 @@
     <file src="models/items/dff/pistol_ammo.dff" />
     <file src="models/items/txd/shotgun_ammo.txd" />
     <file src="models/items/dff/shotgun_ammo.dff" />
-    <file src="models/items/txd/backpack_small.txd" />
-    <file src="models/items/dff/backpack_small.dff" />
+
 	<file src="models/items/txd/smg_ammo.txd" />
     <file src="models/items/dff/smg_ammo.dff" />
     <file src="models/items/txd/sniper_ammo.txd" />
@@ -554,16 +553,22 @@
     <file src="models/items/dff/water_bottle.dff" />
     <file src="models/items/txd/assault_ammo.txd" />
     <file src="models/items/dff/assault_ammo.dff" />
+	<file src="models/items/txd/backpack_patrol.txd" />
+    <file src="models/items/dff/backpack_patrol.dff" />
+	<file src="models/items/txd/backpack_british.txd" />
+    <file src="models/items/dff/backpack_british.dff" />
+	<file src="models/items/txd/backpack_pouch.txd" />
+    <file src="models/items/dff/backpack_pouch.dff" />
+	<file src="models/items/txd/backpack_survival.txd" />
+    <file src="models/items/dff/backpack_survival.dff" />
+	<file src="models/items/txd/backpack_assault.txd" />
+    <file src="models/items/dff/backpack_assault.dff" />
     <file src="models/items/txd/backpack_alice.txd" />
     <file src="models/items/dff/backpack_alice.dff" />
 	<file src="models/items/txd/backpack_czech.txd" />
     <file src="models/items/dff/backpack_czech.dff" />
     <file src="models/items/txd/backpack_coyote.txd" />
     <file src="models/items/dff/backpack_coyote.dff" />
-	<file src="models/items/txd/backpack_ghillie.txd" />
-    <file src="models/items/dff/backpack_ghillie.dff" />
-	<file src="models/items/txd/backpack_os.txd" />
-    <file src="models/items/dff/backpack_os.dff" />
 	<file src="models/items/txd/tent.txd" />
     <file src="models/items/dff/tent.dff" />
 	<file src="models/items/dff/tent.col" />

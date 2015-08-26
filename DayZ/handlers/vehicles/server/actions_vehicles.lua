@@ -111,7 +111,7 @@ function repairVehicle (veh)
 	local tires,engine,parts,scrap,glass,rotary,name = getVehicleAddonInfos (getElementModel(veh))
 	if getElementData(source,"Toolbox") and getElementData(source,"Toolbox") > 0 and getElementData(source,"Scrap Metal") and getElementData(source,"Scrap Metal") > 0 then
 		local health = math.floor(getElementHealth(veh))
-		repairTimer[veh] = setTimer(fixVehicleDayZ,(1000-health)*120,1,veh,source)
+		repairTimer[veh] = setTimer(fixVehicleDayZ,(1000-health)*120,1,veh,source,name)
 		setElementFrozen (veh,true)
 		setElementData(veh,"repairer",source)
 		setElementData(source,"repairingvehicle",veh)
@@ -125,7 +125,7 @@ end
 addEvent("repairVehicle",true)
 addEventHandler("repairVehicle",getRootElement(),repairVehicle)
 
-function fixVehicleDayZ(veh,player)
+function fixVehicleDayZ(veh,player,name)
 	local scrap = getElementData(player,"Scrap Metal")
 	if scrap then
 		setElementHealth(veh,getElementHealth(veh)+200)
@@ -139,7 +139,7 @@ function fixVehicleDayZ(veh,player)
 		repairTimer[veh] = nil
 		setElementData(veh,"repairer",nil)
 		setElementData(player,"repairingvehicle",nil)
-		triggerClientEvent (player, "displayClientInfo", player,"Vehicle","You finished repairing "..getVehicleName(veh),0,255,0)
+		triggerClientEvent (player, "displayClientInfo", player,"Vehicle","You finished repairing "..name,0,255,0)
 	end
 end
 

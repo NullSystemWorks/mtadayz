@@ -19,21 +19,23 @@ function addBackpackToPlayer(dataName,oldValue)
 		end
 		local x,y,z = getElementPosition(source)
 		local rx,ry,rz = getElementRotation(source)
-		if newValue == 12 then
-			elementBackpack[source] = createObject(3026,x,y,z) -- acu
+		if newValue == 8 then
+			elementBackpack[source] = createObject(3026,x,y,z) -- Patrol Pack
+		elseif newValue == 12 then
+			elementBackpack[source] = createObject(1644,x,y,z) -- Assault Pack (ACU)
 		elseif newValue == 13 then
-			elementBackpack[source] = createObject(1248,x,y,z) -- ALICE
+			elementBackpack[source] = createObject(1248,x,y,z) -- Czech Vest Pouch
 		elseif newValue == 16 then
-			elementBackpack[source] = createObject(3026,x,y,z) -- Placeholder
+			elementBackpack[source] = createObject(2382,x,y,z) -- ALICE Pack
 		elseif newValue == 17 then
-			elementBackpack[source] = createObject(1644,x,y,z) -- OS
+			elementBackpack[source] = createObject(1314,x,y,z) -- Survival ACU
 		elseif newValue == 18 then
-			elementBackpack[source] = createObject(1275,x,y,z) -- Ghillie
+			elementBackpack[source] = createObject(1318,x,y,z) -- British Assault Pack
 		elseif newValue == 24 then
-			elementBackpack[source] = createObject(1252,x,y,z) -- Coyote
+			elementBackpack[source] = createObject(1252,x,y,z) -- Backpack (Coyote)
 		elseif newValue == 30 then
-			elementBackpack[source] = createObject(1575,x,y,z) -- Czech
-		elseif newValue == 8 then
+			elementBackpack[source] = createObject(1575,x,y,z) -- Czech Backpack
+		elseif newValue > 30 then
 			return
 		end
 		if newValue == 30 then
