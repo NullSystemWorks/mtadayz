@@ -33,6 +33,9 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 					if bodypart == 9 then
 						damage = damage*gameplayVariables["headshotdamage_zombie"]
 						headshot = true
+						if isPedHeadless(source) and weapon == 8 then
+							setPedHeadless(source,false)
+						end
 					end
 					setElementData(source,"blood",getElementData(source,"blood")-math.floor(damage))
 					local soundnumber =  math.random(0,6)
