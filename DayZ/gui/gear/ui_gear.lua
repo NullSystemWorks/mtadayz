@@ -1316,6 +1316,10 @@ addEventHandler ( 'imageButtonClicked', root, showWeaponSelect)
 
 function moveItemInInventory()
 	local itemName = inventory [selectedItemLabel+itOff][1]
+	if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(itemName) > getElementData(localPlayer,"MAX_Slots") then
+		startRollMessage2("Inventory","Inventory is full!",255,0,0)
+		return
+	end
 	if isPlayerInLoot() then
 		if getElementData(isPlayerInLoot(), itemName) and getElementData(isPlayerInLoot(), itemName) >= 1 then
 			if isCarryingWeapon then
@@ -1344,7 +1348,7 @@ function moveItemInInventory()
 				end
 			elseif isHoldingWeapon then
 				if not isToolbeltItem(itemName) then
-					if getPlayerCurrentSlots()-10 + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then
+					if getPlayerCurrentSlots() + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then
 						if not playerMovedInInventory then
 							triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
 							playerMovedInInventory = true

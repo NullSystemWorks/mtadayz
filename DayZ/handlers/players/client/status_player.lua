@@ -64,7 +64,7 @@ function setPlayerBleeding()
 		end
 	end
 end
-setTimer(setPlayerBleeding,30000,0)
+setTimer(setPlayerBleeding,1000,0)
 
 function setPlayerDeath()
 	if getElementData(localPlayer,"logedin") then
@@ -153,7 +153,7 @@ Volume (Noise):
 ]]
 
 function setVolume()
-	value = 0
+	local value = 0
 	local block, animation = getPedAnimation(localPlayer)
 	if getPedMoveState (localPlayer) == "stand" then
 		value = 0
@@ -176,8 +176,12 @@ function setVolume()
 		value = value+getElementData(localPlayer,"shooting")
 	end
 	if isPedInVehicle (localPlayer) then
-		if getVehicleEngineState(getPedOccupiedVehicle(localPlayer)) then
-			value = 100
+		if getPedOccupiedVehicle(localPlayer) ~= 509 then
+			if getVehicleEngineState(getPedOccupiedVehicle(localPlayer)) then
+				value = 100
+			else
+				value = 0
+			end
 		else
 			value = 0
 		end
@@ -204,7 +208,7 @@ Visibility:
 
 ]]
 function setVisibility()
-	value = 0
+	local value = 0
 	local block, animation = getPedAnimation(localPlayer)
 	if getPedMoveState (localPlayer) == "stand" then
 		value = 40

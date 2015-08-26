@@ -11,7 +11,7 @@
 tent_counter = 0
 function onPlayerPitchATent (itemName)
 	setElementData(source,itemName,getElementData(source,itemName)-1)
-	triggerClientEvent("onPlayerActionPlaySound",source,"tent")
+	triggerClientEvent(source,"onPlayerActionPlaySound",source,"tent")
 	setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	local source = source
 	setTimer( function ()		

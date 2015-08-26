@@ -115,7 +115,7 @@ function repairVehicle (veh)
 		setElementFrozen (veh,true)
 		setElementData(veh,"repairer",source)
 		setElementData(source,"repairingvehicle",veh)
-		triggerClientEvent("onPlayerActionPlaySound",source,"repair")
+		triggerClientEvent(source,"onPlayerActionPlaySound",source,"repair")
 		setPedAnimation (source,"SCRATCHING","sclng_r",-1,false)
 		triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You started to repair "..name,0,255,0)
 	else

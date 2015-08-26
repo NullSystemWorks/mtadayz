@@ -26,7 +26,7 @@ function showJournal()
 	if getElementData(localPlayer,"logedin") then
 		if not isJournalOpen then
 			isJournalOpen = true
-			showCursor(not isCursorShowing())
+			showCursor(true)
 			playSound(":DayZ/sounds/status/journal.wav",false)
 			guiSetVisible(JournalTable.image[1],true)
 			guiSetText(JournalTable.label[1],"Day "..getElementData(localPlayer,"daysalive"))
@@ -37,15 +37,17 @@ function showJournal()
 			addEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal,false)
+			unbindKey("J","down",initInventory)
 		else
 			isJournalOpen = false
-			showCursor(not isCursorShowing())
+			showCursor(false)
 			guiSetVisible(JournalTable.image[1],false)
 			removeEventHandler("onClientMouseEnter",JournalTable.label[5],writeSelected)
 			removeEventHandler("onClientMouseLeave",JournalTable.label[5],writeDeselected)
 			removeEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal)
 			removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 			removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
+			bindKey("J","down",initInventory)
 		end
 	end
 end
@@ -118,7 +120,7 @@ end
 
 function closeWriteJournal()
 	guiSetVisible(JournalTable.window[1],false) 
-	showCursor(not isCursorShowing()) 
+	showCursor(false) 
 	isWriting = false
 	isJournalOpen = false
 	removeEventHandler("onClientMouseEnter",JournalTable.label[5],writeSelected)
@@ -127,13 +129,14 @@ function closeWriteJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
 	bindKey("1","down",showJournal)
-	guiSetInputEnabled(true)
+	bindKey("J","down",initInventory)
+	guiSetInputEnabled(false)
 end
 
 function writeIntoJournal()
 	guiSetText(JournalTable.label[4],guiGetText(JournalTable.memo[1]))
 	guiSetVisible(JournalTable.window[1],false)
-	showCursor(not isCursorShowing()) 
+	showCursor(false) 
 	isWriting = false
 	isJournalOpen = false
 	removeEventHandler("onClientMouseEnter",JournalTable.label[5],writeSelected)
@@ -143,7 +146,8 @@ function writeIntoJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
 	triggerEvent("saveJournalOnQuit",localPlayer)
 	bindKey("1","down",showJournal)
-	guiSetInputEnabled(true)
+	guiSetInputEnabled(false)
+	bindKey("J","down",initInventory)
 end
 
 function saveJournalOnQuit()

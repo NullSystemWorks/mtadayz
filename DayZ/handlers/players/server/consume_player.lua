@@ -196,7 +196,7 @@ addEventHandler("onPlayerTransfuseBlood",root,onPlayerTransfuseBlood)
 
 function onPlayerRefillWaterBottle (itemName)
 	if isElementInWater(source) then
-		triggerClientEvent("onPlayerActionPlaySound",playersource,"water")
+		triggerClientEvent(source,"onPlayerActionPlaySound",playersource,"water")
 		setElementData(source,"Water Bottle",getElementData(source,"Water Bottle")+1)
 		setElementData(source,itemName,getElementData(source,itemName)-1)
 		triggerClientEvent(source,"refreshInventoryManual",source)
@@ -211,7 +211,7 @@ addEventHandler("onPlayerRefillWaterBottle",getRootElement(),onPlayerRefillWater
 function addPlayerCookMeat ()
 	local playersource = source
 	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
-	triggerClientEvent("onPlayerActionPlaySound",playersource,"meat")
+	triggerClientEvent(source,"onPlayerActionPlaySound",playersource,"meat")
 	local meat = getElementData(playersource,"Raw Meat")
 	setTimer(function()
 			setElementData(playersource,"Raw Meat",0)
