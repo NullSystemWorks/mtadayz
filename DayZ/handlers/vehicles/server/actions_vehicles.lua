@@ -171,6 +171,7 @@ addEventHandler("onPlayerQuit",getRootElement(),debugFixxing)
 
 function setEngineStateByPlayer (playersource)
 	local veh = getPedOccupiedVehicle (playersource)
+	if (getPedOccupiedVehicleSeat(playersource) ~= 0) then return end
 	if getElementData(getElementData(veh,"parent"),"fuel") <= 0 then 
 		return
 	else
