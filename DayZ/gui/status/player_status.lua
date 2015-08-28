@@ -12,6 +12,7 @@ local fading = 0
 local fading2 = "up"
 local screenWidth,screenHeight = guiGetScreenSize()
 local playerTarget = false
+local value = 0
 
 function updateStatusIcons()
 	if getElementData(localPlayer,"logedin") then
