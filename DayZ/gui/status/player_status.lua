@@ -71,8 +71,8 @@ function updateStatusIcons()
 		elseif temperature >= 37 and temperature <= 41 then
 			r,g,b = 0,255,0
 			t_number = 3
-		elseif temperature <= 41 then
-			number = 4
+		elseif temperature >= 41 then
+			t_number = 4
 			r,g,b = 255,0,0
 		end
 		if value > 215 then
