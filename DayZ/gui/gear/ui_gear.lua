@@ -829,6 +829,7 @@ function itemLabelClicked(button)
 			end
 		end
 	end
+	guiMoveToBack(source)
 end
 
 function changeWeaponStatus()
@@ -1261,44 +1262,8 @@ end
 mainWeapSelectionLabels = {}
 additWeapSelectionLabels = {}
 
-function showWeaponSelect (button)
-	if button.name == 'mainWeap' then
-		if not mainWeaponSelection then
-			stopAdditWeaponSelection ()
-			if #inventoryWeap.main > 1 or selectedMainWeapon == 0 then
-				mainWeaponSelection = true
-				yOff = 35
-				for i = 1, #inventoryWeap.main do
-					yOff = yOff+35
-					local createdLabel = guiCreateLabel ( bX+125, bY-240+yOff, 170, 32, '', false )
-					setElementData ( createdLabel, 'mainWeapSelection', true )
-					setElementData ( createdLabel, 'id', i )
-					addEventHandler ( "onClientGUIClick", createdLabel, weapSelectionLabelClicked, false )
-					table.insert ( mainWeapSelectionLabels, createdLabel )
-				end
-			end
-		else
-			stopMainWeaponSelection ()
-		end
-	elseif button.name == 'secWeap' then
-		if not additWeaponSelection then
-			stopMainWeaponSelection ()
-			if #inventoryWeap.addit > 1 or selectedAdditWeapon == 0 then
-				additWeaponSelection = true
-				yOff = 35
-				for i = 1, #inventoryWeap.addit do
-					yOff = yOff+35
-					local createdLabel = guiCreateLabel ( bX+125, bY-160+yOff, 170, 32, '', false )
-					setElementData ( createdLabel, 'additWeapSelection', true )
-					setElementData ( createdLabel, 'id', i )
-					addEventHandler ( "onClientGUIClick", createdLabel, weapSelectionLabelClicked, false )
-					table.insert ( additWeapSelectionLabels, createdLabel )
-				end
-			end
-		else
-			stopAdditWeaponSelection()
-		end
-	elseif string.find(button.name, 'arrowRev' ) then
+function moveItemsBetweenInventory(button)
+	if string.find(button.name, 'arrowRev' ) then
 		if loot then
 			if inventory [selectedItemLabel+itOff][2] > 0 then
 				moveItemInInventory ()
@@ -1312,7 +1277,7 @@ function showWeaponSelect (button)
 end
 
 addEvent ( "imageButtonClicked", true )
-addEventHandler ( 'imageButtonClicked', root, showWeaponSelect)
+addEventHandler ( 'imageButtonClicked', root, moveItemsBetweenInventory)
 
 function moveItemInInventory()
 	local itemName = inventory [selectedItemLabel+itOff][1]
