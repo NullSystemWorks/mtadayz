@@ -791,7 +791,11 @@ function getInventoryInfosForRightClickMenu(itemName)
 		if itemName == itemInfo[1] then
 			if not isPlayerInLoot() then
 				if #itemInfo >= 9 then
-					return itemName, itemInfo[9], ""
+					if itemName == "Box of Matches" then
+						return itemName, itemInfo[9], "Create a fire"
+					else
+						return itemName, itemInfo[9], ""
+					end
 				end
 				break
 			end
@@ -1281,9 +1285,11 @@ addEventHandler ( 'imageButtonClicked', root, moveItemsBetweenInventory)
 
 function moveItemInInventory()
 	local itemName = inventory [selectedItemLabel+itOff][1]
-	if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(itemName) > getElementData(localPlayer,"MAX_Slots") then
-		startRollMessage2("Inventory","Inventory is full!",255,0,0)
-		return
+	if not isToolbeltItem(itemName) then
+		if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(itemName) > getElementData(localPlayer,"MAX_Slots") then
+			startRollMessage2("Inventory","Inventory is full!",255,0,0)
+			return
+		end
 	end
 	if isPlayerInLoot() then
 		if getElementData(isPlayerInLoot(), itemName) and getElementData(isPlayerInLoot(), itemName) >= 1 then

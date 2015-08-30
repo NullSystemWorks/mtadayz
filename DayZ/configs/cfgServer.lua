@@ -38,7 +38,6 @@ gameplayVariables["realtime"] = false -- Enables/Disables real time use. When di
 gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (in ms)? Example: 10000ms (10s) realtime = 1 minute gametime - DEFAULT: 10000
 gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true 
 	
-	
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.
 gameplayVariables["backupinterval"] = 3600000 -- Number of milliseconds that should elapse before backup. Minimum: 50. - 1000 milliseconds = 1 second. - DEFAULT: 3600000ms (= 1 hour)

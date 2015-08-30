@@ -29,7 +29,8 @@ function killZombie(killer,headshot)
 	setElementData(pedCol,"deadman",true)
 	setElementData(ped,"deadzombie",true)
 	setElementData(pedCol,"deadman",true)
-	local time = getRealTime()
+	setElementData(pedCol,"MAX_Slots",12)
+	local time = getTime()
 	local hours = time.hour
 	local minutes = time.minute
 	local loot_table = ""
@@ -40,11 +41,11 @@ function killZombie(killer,headshot)
 		end
 	end
 	for i, item in ipairs(zombieLootType[loot_table]) do
-		local value = math.percentChance(item[5],math.random(1,3))
+		local value = math.percentChance(item[2],math.random(0,1))
 		setElementData(pedCol,item[1],value)
 		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
 		if ammoData and value > 0 then
-			setElementData(pedCol,ammoData,math.random(1,3))
+			setElementData(pedCol,ammoData,math.random(0,1))
 		end
 	end
 	local zombieCreator = getElementData(source,"owner")

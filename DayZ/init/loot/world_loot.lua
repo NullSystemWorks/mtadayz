@@ -53,12 +53,12 @@ function createItemLoot (lootPlace,x,y,z,id)
 	setElementData(col,"MAX_Slots",20)
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do
-		local value =  math.percentChance(item[5],math.random(1,5))
+		local value =  math.percentChance(item[5],math.random(2,5))
 		setElementData(col,item[1],value)
 		--weapon Ammo
 		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
 		if ammoData and value > 0 then
-			setElementData(col,ammoData,math.random(1,3))
+			setElementData(col,ammoData,math.random(0,3))
 		end
 	end
 	--itemLoot
@@ -149,14 +149,12 @@ function insertIntoTableResidential()
 end
 
 function createPickupsOnServerStart()
-        iPickup = 0
-        async:foreach(pickupPositions["Residential"],
-            function(pos)
-                iPickup = iPickup + 1
-                createItemLoot("Residential", pos[1], pos[2], pos[3], iPickup)
-            end
-        )
-    setTimer(createPickupsOnServerStart2, 60000, 1)
+	iPickup = 0
+	async:foreach(pickupPositions["residential"], function(pos)
+		iPickup = iPickup + 1
+		createItemLoot("Residential", pos[1], pos[2], pos[3], iPickup)
+	end)
+	setTimer(createPickupsOnServerStart2, 60000, 1)
 end
 
 function insertIntoTableIndustrial()
@@ -260,5 +258,5 @@ function createPickupsOnServerStart5()
 	end
 end
 
-setTimer(insertIntoTableResidential,5000,1)
-setTimer(createPickupsOnServerStart,30000,1)
+insertIntoTableResidential()
+setTimer(createPickupsOnServerStart,2000,1)

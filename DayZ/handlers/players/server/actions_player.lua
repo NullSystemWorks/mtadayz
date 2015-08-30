@@ -102,8 +102,8 @@ function onPlayerMakeAFire (itemName)
 	local vz = pz + 2
 	local vrot = prot+90
 	--local x,y = getPointFromDistanceRotation(x,y,5,0)
-	local wood = createObject(1463,vx,vy,pz-0.75,xr,yr,vrot)
-	setObjectScale(wood,0.55)
+	local wood = createObject(2694,vx,vy,pz-0.75,xr,yr,vrot)
+	setObjectScale(wood,1.5)
 	setElementCollisionsEnabled(wood, false)
 	setElementFrozen (wood,true)
 	local fire = createObject(3525,vx,vy,pz-0.75,xr,yr,vrot)

@@ -135,6 +135,10 @@ function performRender()
 			end
 		dxDrawText(i, screenW * 0.0300, screenH * (0.2750+yA), screenW * 0.0688, screenH * 0.3167, tocolor(r,g,b, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		dxDrawText(string.gsub(getPlayerName(player),'#%x%x%x%x%x%x', ''), screenW * 0.08, screenH * (0.2750+yA), screenW * 0.3262, screenH * 0.3233, tocolor(r,g,b, 255), 1.00, font[2], "left", "top", false, false, true, false, false)
+		
+		local ping = getPlayerPing(player)
+		dxDrawText(tostring(ping), screenW * 0.3625, screenH * (0.2750+yA), screenW * 0.4014, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
+		
 		local murders = getElementData(player,"murders")
 		dxDrawText(tostring(murders), screenW * 0.4750, screenH * (0.2750+yA), screenW * 0.5138, screenH * 0.3183, tocolor(255, 255, 255, 255), 1.00, font[2], "center", "top", false, false, true, false, false)
 		

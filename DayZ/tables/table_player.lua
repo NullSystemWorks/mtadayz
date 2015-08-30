@@ -172,6 +172,8 @@ playerDataTable = {
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
+{"Empty Tin Can"},
+{"Broken Whiskey Bottle"},
 {"Assault Pack (ACU)"},
 {"ALICE Pack"},
 {"British Assault Pack"},
