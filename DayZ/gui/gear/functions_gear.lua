@@ -112,33 +112,33 @@ end
 
 function onPlayerMoveItemOutOFInventory (itemName,loot)
 local itemPlus = 1
-	if itemName == ".45 ACP Cartridge" then
+	if itemName == "11.43x23mm Cartridge" then
 		itemPlus = 7
-	elseif itemName == "9x19mm SD Cartridge" then
-		itemPlus = 15
-	elseif itemName == "9x19mm Cartridge" then
-		itemPlus = 30
 	elseif itemName == "9x18mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "5.45x39mm Cartridge" then
-		itemPlus = 30
-	elseif itemName == "5.56x45mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "1866 Slug" then
-		itemPlus = 7
-	elseif itemName == "2Rnd. Slug" then
-		itemPlus = 2
-	elseif itemName == "12 Gauge Pellet" then
-		itemPlus = 7
-	elseif itemName == "9.3x62mm Cartridge" then
-		itemPlus = 5
+		itemPlus = 8
+	elseif itemName == "9x19mm Cartridge" then
+		itemPlus = 17
 	elseif itemName == ".303 British Cartridge" then
 		itemPlus = 10
-	elseif itemName == "M136 Rocket" then
-		itemPlus = 0
+	elseif itemName == "5.45x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x51mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "5.56x45mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == ".308 Winchester Cartridge" then
+		itemPlus = 8
+	elseif itemName == "7.62x54mm Cartridge" then
+		itemPlus = 10
+	elseif itemName == "1866 Slug" then
+		itemPlus = 15
+	elseif itemName == "12 Gauge Pellet" then
+		itemPlus = 7
 	elseif itemName == "Bolt" then
 		itemPlus = 7
-	elseif itemName == "M4" or itemName == "Mosin 9130" or itemName == "Sporter 22" or itemName == "SKS" or itemName == "Blaze 95 Double Rifle" or itemName == "DMR" or itemName == "SVD Dragunov" or itemName == "Crossbow" or itemName == "Bizon PP-19" or itemName == "FN FAL" or itemName == "G36C" or itemName == "Sa58V CCO" or itemName == "AK-47" or itemName == "CZ 550" or itemName == "Winchester 1866" or itemName == "SPAZ-12 Combat Shotgun" or itemName == "Sawn-Off Shotgun" or itemName == "Heat-Seeking RPG" or itemName == "M136 Rocket Launcher" or itemName == "Lee Enfield" then
+	elseif itemName == "Lee Enfield" or itemName == "AK-74" or itemName == "AKS-74U" or itemName == "RPK" or itemName == "AKM" or itemName == "Sa58V CCO" or itemName == "Sa58V RCO" or itemName == "FN FAL" or itemName == "M24" or itemName == "DMR" or itemName == "M40A3" or itemName == "G36A CAMO" or itemName == "G36C" or itemName == "G36C CAMO" or itemName == "G36K CAMO" or itemName == "L85A2 RIS Holo" or itemName == "M16A2" or itemName == "M16A2 M203" or itemName == "M16A2" or itemName == "M16A4" or itemName == "CZ 550" or itemName == "SVD Dragunov" or itemName == "Mosin-Nagant" or itemName == "Winchester 1866" or itemName == "Double-barreled Shotgun" or itemName == "M1014" or itemName == "Remington 870" or itemName == "Compound Crossbow" or itemName == "Hatchet" or itemName == "Bizon PP-19 SD" or itemName == "MP5A5" then
 		triggerServerEvent("removeBackWeaponOnDrop",localPlayer)
 	end
 	if loot then
@@ -199,30 +199,30 @@ end
 
 function onPlayerMoveItemInInventory(itemName,loot)
 	local itemPlus = 1
-	if itemName == ".45 ACP Cartridge" then
+	if itemName == "11.43x23mm Cartridge" then
 		itemPlus = 7
-	elseif itemName == "9x19mm SD Cartridge" then
-		itemPlus = 15
-	elseif itemName == "9x19mm Cartridge" then
-		itemPlus = 30
 	elseif itemName == "9x18mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "5.45x39mm Cartridge" then
-		itemPlus = 30
-	elseif itemName == "5.56x45mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "1866 Slug" then
-		itemPlus = 7
-	elseif itemName == "2Rnd. Slug" then
-		itemPlus = 2
-	elseif itemName == "12 Gauge Pellet" then
-		itemPlus = 7
-	elseif itemName == "9.3x62mm Cartridge" then
-		itemPlus = 5
+		itemPlus = 8
+	elseif itemName == "9x19mm Cartridge" then
+		itemPlus = 17
 	elseif itemName == ".303 British Cartridge" then
 		itemPlus = 10
-	elseif itemName == "M136 Rocket" then
-		itemPlus = 0
+	elseif itemName == "5.45x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x51mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "5.56x45mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == ".308 Winchester Cartridge" then
+		itemPlus = 8
+	elseif itemName == "7.62x54mm Cartridge" then
+		itemPlus = 10
+	elseif itemName == "1866 Slug" then
+		itemPlus = 15
+	elseif itemName == "12 Gauge Pellet" then
+		itemPlus = 7
 	elseif itemName == "Bolt" then
 		itemPlus = 7
 	elseif itemName == "Assault Pack (ACU)" then
@@ -263,30 +263,30 @@ addEventHandler("onPlayerMoveItemInInventory", getRootElement(), onPlayerMoveIte
 
 function onPlayerMoveItemIntoBackpack(itemName, itemType, itemSize)
 	local itemPlus = 1
-	if itemName == ".45 ACP Cartridge" then
+	if itemName == "11.43x23mm Cartridge" then
 		itemPlus = 7
-	elseif itemName == "9x19mm SD Cartridge" then
-		itemPlus = 15
-	elseif itemName == "9x19mm Cartridge" then
-		itemPlus = 30
 	elseif itemName == "9x18mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "5.45x39mm Cartridge" then
-		itemPlus = 30
-	elseif itemName == "5.56x45mm Cartridge" then
-		itemPlus = 20
-	elseif itemName == "1866 Slug" then
-		itemPlus = 7
-	elseif itemName == "2Rnd. Slug" then
-		itemPlus = 2
-	elseif itemName == "12 Gauge Pellet" then
-		itemPlus = 7
-	elseif itemName == "9.3x62mm Cartridge" then
-		itemPlus = 5
+		itemPlus = 8
+	elseif itemName == "9x19mm Cartridge" then
+		itemPlus = 17
 	elseif itemName == ".303 British Cartridge" then
 		itemPlus = 10
-	elseif itemName == "M136 Rocket" then
-		itemPlus = 0
+	elseif itemName == "5.45x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x39mm Cartridge" then
+		itemPlus = 30
+	elseif itemName == "7.62x51mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == "5.56x45mm Cartridge" then
+		itemPlus = 20
+	elseif itemName == ".308 Winchester Cartridge" then
+		itemPlus = 8
+	elseif itemName == "7.62x54mm Cartridge" then
+		itemPlus = 10
+	elseif itemName == "1866 Slug" then
+		itemPlus = 15
+	elseif itemName == "12 Gauge Pellet" then
+		itemPlus = 7
 	elseif itemName == "Bolt" then
 		itemPlus = 7
 	elseif itemName == "Assault Pack (ACU)" then

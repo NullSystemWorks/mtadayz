@@ -82,6 +82,7 @@ function checkTemperature2()
 end
 setTimer(checkTemperature2,10000,0)
 
+--[[
 function setHunger()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -114,6 +115,7 @@ function checkThirsty()
 	end
 end
 setTimer(checkThirsty,10000,0)
+]]
 
 function checkHumanity()
 	for i,player in ipairs(getElementsByType("player")) do

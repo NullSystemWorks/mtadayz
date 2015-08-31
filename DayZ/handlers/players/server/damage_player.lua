@@ -69,6 +69,7 @@ weaponIDtoObjectID = {
 {2,333},
 {5,336},
 {6,337},
+{8,339},
 }
 
 function getWeaponObjectID (weaponID)

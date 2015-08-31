@@ -10,7 +10,7 @@
 
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.5a"
+		dayzVersion = "MTA:DayZ 0.9.6a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -613,3 +613,99 @@ function drawHourGlass()
 	dxDrawImage(w * 0.3900, h * 0.3217, w * 0.2500, h * 0.3333, ":DayZ/gui/status/misc/circle.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 	dxDrawImage(w * 0.4363, h * 0.3567, w * 0.1563, h * 0.2583, ":DayZ/gui/status/misc/hourglass.png", hourglassrotation, 0, 0, tocolor(255, 255, 255, 255), false)
 end
+
+local backpackLoadTable = {}
+local ammoLoadTable = {}
+local itemLoadTable = {}
+local weaponLoadTable = {}
+local mps = 0
+local ammoLoad = 0
+local itemLoad = 0
+local weaponLoad = 0
+local playerSpeed = 0
+local playerHunger = 0
+local playerThirst = 0
+function getPlayerLoad()
+	if getElementData(localPlayer,"logedin") then
+		backpackLoadTable = {}
+		ammoLoadTable = {}
+		itemLoadTable = {}
+		weaponLoadTable = {}
+		ammoLoad = 0
+		itemLoad = 0
+		weaponLoad = 0
+		for i, ammo in ipairs(languageTextTable[languageCode]["Ammo"]) do
+			if getElementData(localPlayer,ammo[1]) and getElementData(localPlayer,ammo[1]) > 0 then
+				table.insert(ammoLoadTable,{ammo[2],getElementData(localPlayer,ammo[1])})
+			end
+		end
+		for i, food in ipairs(languageTextTable[languageCode]["Food"]) do
+			if getElementData(localPlayer,food[1]) and getElementData(localPlayer,food[1]) > 0 then
+				table.insert(itemLoadTable,{food[2],getElementData(localPlayer,food[1])})
+			end
+		end
+		for i, item in ipairs(languageTextTable[languageCode]["Items"]) do
+			if getElementData(localPlayer,item[1]) and getElementData(localPlayer,item[1]) > 0 then
+				if not isToolbeltItem(item[1]) then
+					table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
+				end
+			end
+		end
+		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
+			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
+				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
+			end
+		end
+		for i, load in ipairs(ammoLoadTable) do
+			ammoLoad = ammoLoad+(load[1]*load[2])
+		end
+		for i, load in ipairs(itemLoadTable) do
+			itemLoad = itemLoad+(load[1]*load[2])
+		end
+		for i, load in ipairs(weaponLoadTable) do
+			weaponLoad = weaponLoad+(load[1]*load[2])
+		end
+		local myLoad = (ammoLoad*0.2)+(itemLoad*0.1)+(weaponLoad*0.5)
+		
+		if not isPedInVehicle(localPlayer) then
+			local speedx, speedy, speedz = getElementVelocity (localPlayer)
+			local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
+			mps = actualspeed * 50
+		else
+			playerSpeed = 20
+		end
+		playerSpeed = math.floor(mps*3.5)
+		
+		local hunger = (math.abs((((12000 - getElementData(localPlayer,"blood")) / 12000) * 5) + playerSpeed + myLoad) * 3)
+		playerHunger = 0
+		playerHunger = math.round(playerHunger+(hunger/80),2)
+		
+		local thirst = 2
+		thirst = (playerSpeed+4)*3
+		playerThirst = 0
+		playerThirst = math.round(playerThirst+(thirst/120)*(getElementData(localPlayer,"temperature")/37),2)
+	end
+end
+addEventHandler("onClientRender",root,getPlayerLoad)
+
+function setPlayerHunger()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"food") > 0 then
+			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-playerHunger)
+		else
+			setElementData(localPlayer,"food",0)
+		end
+	end
+end
+setTimer(setPlayerHunger,30000,0)
+
+function setPlayerThirst()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"thirst") > 0 then
+			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-playerThirst)
+		else
+			setElementData(localPlayer,"thirst",0)
+		end
+	end
+end
+setTimer(setPlayerThirst,30000,0)

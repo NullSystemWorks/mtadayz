@@ -9,118 +9,136 @@
 ]]
 
 weaponAmmoTable = {
-[".45 ACP Cartridge"] = {
+
+["11.43x23mm Cartridge"] = {
 {"M1911",22},
-{"Desert Eagle",24},
 {"Revolver",24},
 },
 
-["9x19mm SD Cartridge"] = {
-{"M9 SD",23},
+["9x18mm Cartridge"] = {
+{"Makarov PM",22},
+{"Bizon PP-19 SD",29},
 },
 
 ["9x19mm Cartridge"] = {
-{"PDW",28},
 {"G17",22},
+{"M9",22},
+{"Makarov SD",23},
+{"PDW",28},
+{"MP5A5",29},
 },
 
-["9x18mm Cartridge"] = {
-{"MP5A5",29},
-{"Bizon PP-19",29},
+[".303 British Cartridge"] = {
+{"Lee Enfield",33},
 },
 
 ["5.45x39mm Cartridge"] = {
-{"AK-47",30},
-{"FN FAL",30},
-{"G36C",30},
+{"AK-74",30},
+{"AKS-74U",30},
+{"RPK",30},
+},
+
+["7.62x39mm Cartridge"] = {
+{"AKM",30},
 {"Sa58V CCO",30},
+{"Sa58V RCO",30},
+},
+
+["7.62x51mm Cartridge"] = {
+{"FN FAL",30},
+{"M24",34},
+{"DMR",34},
+{"M40A3",34},
 },
 
 ["5.56x45mm Cartridge"] = {
-{"M4",31},
+{"G36A CAMO",31},
+{"G36C",31},
+{"G36C CAMO",31},
+{"G36K CAMO",31},
+{"L85A2 RIS Holo",31},
+{"M16A2",31},
+{"M16A2 M203",31},
+{"M4A1",31},
+{"M16A4",31},
+},
+
+[".308 Winchester Cartridge"] = {
+{"CZ 550",34},
+},
+
+["7.62x54mm Cartridge"] = {
+{"SVD Dragunov",34},
+{"Mosin-Nagant",33},
 },
 
 ["1866 Slug"] = {
 {"Winchester 1866",25},
 },
 
-["2Rnd. Slug"] = {
-{"Sawn-Off Shotgun",26},
-{"Blaze 95 Double Rifle",25},
-},
-
 ["12 Gauge Pellet"] = {
-{"SPAZ-12 Combat Shotgun",27},
+{"Double-barreled Shotgun",25},
+{"M1014",27},
 {"Remington 870",27},
 },
 
-["9.3x62mm Cartridge"] = {
-{"CZ 550",34},
-{"DMR",34},
-{"SVD Dragunov",34},
-},
-
-[".303 British Cartridge"] = {
-{"Lee Enfield",33},
-{"Sporter 22",33},
-{"Mosin 9130",33},
-{"SKS",33},
-},
-
-["M136 Rocket"] = {
-{"Heat-Seeking RPG",36},
-{"M136 Rocket Launcher",35},
-},
-
 ["Bolt"] = {
-{"Crossbow",25},
+{"Compound Crossbow",25},
 },
 
 ["others"] = {
+{"Baseball Bat",5},
+{"Crowbar",2},
+{"Hatchet",8},
+{"Machete",8},
 {"Parachute",46},
-{"Satchel",39},
-{"Tear Gas",17},
 {"Grenade",16},
 {"Hunting Knife",4},
-{"Hatchet",8},
 {"Binoculars",43},
 {"Range Finder",43},
-{"Baseball Bat",5},
 {"Shovel",6},
-{"Golf Club",2},
-{"Machete",8},
-{"Crowbar",2},
 },
 }
 
 weaponMagSize = {
 -- {currentweapon_number,weaponName,GTA weaponName,magSize}
 {2,"M1911","colt 45",7},
-{2,"Desert Eagle","deagle",7},
 {2,"Revolver","deagle",6},
-{2,"M9 SD","silenced",15},
-{2,"PDW","uzi",30},
+{2,"Makarov PM","colt 45",8},
+{2,"Bizon PP-19 SD","mp5",64},
 {2,"G17","colt 45",17},
+{2,"M9","colt 45",15},
+{2,"Makarov SD","silenced",8},
+{2,"PDW","uzi",30},
 {2,"MP5A5","mp5",30},
-{2,"Bizon PP-19","mp5",64},
-{1,"AK-47","ak-47",30},
-{1,"FN FAL","ak-47",20},
-{1,"G36C","ak-47",30},
-{1,"Sa58V CCO","ak-47",30},
-{1,"M4","m4",30},
-{1,"Winchester 1866","shotgun",15},
-{1,"Sawn-Off Shotgun","sawed-off",2},
-{1,"Blaze 95 Double Rifle","sawed-off",2},
-{1,"SPAZ-12 Combat Shotgun","combat shotgun",8},
-{1,"Remington 870","combat shotgun",8},
-{1,"CZ 550","sniper",5},
-{1,"DMR","sniper",20},
-{1,"SVD Dragunov","sniper",10},
 {1,"Lee Enfield","rifle",10},
-{1,"Sporter 22","rifle",10},
-{1,"Mosin 9130","rifle",10},
-{1,"SKS","rifle",10},
-{1,"Crossbow","shotgun",1},
+{1,"AK-74","ak-47",30},
+{1,"AKS-74U","ak-47",30},
+{1,"RPK","ak-47",30},
+{1,"AKM","ak-47",30},
+{1,"Sa58V CCO","ak-47",30},
+{1,"Sa58V RCO","ak-47",30},
+{1,"FN FAL","ak-47",20},
+{1,"M24","sniper",5},
+{1,"DMR","sniper",20},
+{1,"M40A3","sniper",5},
+{1,"G36A CAMO","m4",30},
+{1,"G36C","m4",30},
+{1,"G36C CAMO","m4",30},
+{1,"G36K CAMO","m4",30},
+{1,"L85A2 RIS Holo","m4",30},
+{1,"M16A2","m4",30},
+{1,"M16A2 M203","m4",30},
+{1,"M4A1","m4",30},
+{1,"M16A4","m4",30},
+{1,"CZ 550","sniper",5},
+{1,"SVD Dragunov","sniper",10},
+{1,"Mosin-Nagant","rifle",5},
+{1,"Winchester 1866","shotgun",15},
+{1,"Double-barreled Shotgun","shotgun",2},
+{1,"M1014","combat shotgun",8},
+{1,"Remington 870","combat shotgun",8},
+{1,"Compound Crossbow","shotgun",1},
 }
 
 hospitalPacks = {

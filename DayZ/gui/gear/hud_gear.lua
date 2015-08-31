@@ -410,11 +410,6 @@ function WeaponHUD()
 			clip = ""
 			ammo = ""
 			divide = ""
-		elseif weaponID == 2 then
-			weapName = "Golf Club"
-			clip = ""
-			ammo = ""
-			divide = ""
 		elseif weaponID == 4 then
 			weapName = "Hunting Knife"
 			clip = ""

@@ -76,9 +76,17 @@ function weaponSwitchBack ( previousWeaponID, currentWeaponID )
 		elementWeaponBack[source] = createObject(getWeaponObjectID(weapID1),x,y,z)
 		setObjectScale(elementWeaponBack[source],0.875)
 		if elementBackpack[source] then
-			attachElementToBone(elementWeaponBack[source],source,3,0.19,-0.31,-0.1,0,270,-90)
+			if weapID1 == 8 then
+				attachElementToBone(elementWeaponBack[source],source,3,0.19,-0.25,-0.1,0,0,90)
+			else
+				attachElementToBone(elementWeaponBack[source],source,3,0.19,-0.31,-0.1,0,270,-90)
+			end
 		else
-			attachElementToBone(elementWeaponBack[source],source,3,0.19,-0.11,-0.1,0,270,10)
+			if weapID1 == 8 then
+				attachElementToBone(elementWeaponBack[source],source,3,-0.19,-0.11,-0.1,0,0,90)
+			else
+				attachElementToBone(elementWeaponBack[source],source,3,0.19,-0.11,-0.1,0,270,10)
+			end
 		end
 	elseif currentWeaponID == weapID1 then
 		detachElementFromBone(elementWeaponBack[source])
