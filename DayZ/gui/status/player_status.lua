@@ -170,7 +170,7 @@ function updateStatusIcons()
 		if getElementData(localPlayer,"bleeding") > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
-		if getElementData(localPlayer,"infection") or getElementData(localPlayer,"sepsis") > 0 then
+		if getElementData(localPlayer,"infection") or getElementData(localPlayer,"sepsis") and getElementData(localPlayer,"sepsis") > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/blood/infection.png",0,0,0)
 		end
 		local x,y,z = getElementPosition(localPlayer)

@@ -30,9 +30,7 @@ function killZombie(killer,headshot)
 	setElementData(ped,"deadzombie",true)
 	setElementData(pedCol,"deadman",true)
 	setElementData(pedCol,"MAX_Slots",12)
-	local time = getTime()
-	local hours = time.hour
-	local minutes = time.minute
+	local hours,minutes = getTime()
 	local loot_table = ""
 	setElementData(pedCol,"deadreason","Looks like it's finally dead. Estimated time of death: "..hours..":"..minutes)
 	for i, id in ipairs(ZombieLoot) do
