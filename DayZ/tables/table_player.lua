@@ -105,6 +105,7 @@ playerDataTable = {
 {"Binoculars"},
 {"Range Finder"},
 {"Shovel"},
+{"Flashlight"},
 -- [[ Ammo ]] --
 {"11.43x23mm Cartridge"},
 {"9x18mm Cartridge"},

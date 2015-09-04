@@ -88,7 +88,7 @@ function refreshItemLoot (col,place)
 		if getElementData(col,item[1]) and getElementData(col,item[1]) > 0 then
 			if counter == 3 then
 				break
-			end	
+			end
 			counter = counter + 1
 			local x,y,z = getElementPosition(col)
 			obejctItem[counter] = createObject(item[2],x+math.random(-1,1),y+math.random(-1,1),z-0.875,item[4])

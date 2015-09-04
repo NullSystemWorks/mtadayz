@@ -260,6 +260,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Used to repair cars\nof all kinds.","Toolbox"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Item", "Press 'Z' to activate.","Radio Device"},
 		{"Compass",1,'compass.png',128,128,"Item","Passive item, will be\nactivated when picking up.","Compass"},
+		{"Flashlight",1,'compass.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 
 },

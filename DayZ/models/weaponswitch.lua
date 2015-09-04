@@ -23,6 +23,14 @@ local getSlot = getPedWeaponSlot(localPlayer)
 			else
 				return
 			end
+		elseif getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
+			if not loaded then
+				engineImportTXD(flashlightTexture,346)
+				engineReplaceModel (flashlightModel,346)
+				loaded = true
+			else
+				return
+			end
 		elseif getElementData(localPlayer,"currentweapon_2") == "Revolver" then
 			if not loaded then
 				engineImportTXD(weaponTXD[2], 348)
@@ -69,7 +77,6 @@ local getSlot = getPedWeaponSlot(localPlayer)
 				engineReplaceModel(weaponDFF[7],347)
 				loaded = true
 			else
-				outputChatBox(tostring(loaded))
 				return
 			end
 		elseif getElementData(localPlayer,"currentweapon_2") == "PDW" then
@@ -106,10 +113,8 @@ local getSlot = getPedWeaponSlot(localPlayer)
 			if not loaded then
 				engineImportTXD(weaponTXD[10], 357)
 				engineReplaceModel(weaponDFF[10],357)
-				outputChatBox("Lee Enfield")
 				loaded = true
 			else
-				outputChatBox("loaded = true")
 				return
 			end
 		elseif getElementData(localPlayer,"currentweapon_1") == "AK-74" then

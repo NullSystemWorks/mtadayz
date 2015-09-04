@@ -97,6 +97,7 @@ weaponAmmoTable = {
 {"Binoculars",43},
 {"Range Finder",43},
 {"Shovel",6},
+{"Flashlight",22},
 },
 }
 

@@ -793,6 +793,8 @@ function getInventoryInfosForRightClickMenu(itemName)
 				if #itemInfo >= 9 then
 					if itemName == "Box of Matches" then
 						return itemName, itemInfo[9], "Create a fire"
+					elseif itemName == "Flashlight" then
+						return itemName, itemInfo[9], "Equip Flashlight"
 					else
 						return itemName, itemInfo[9], ""
 					end
@@ -1407,5 +1409,5 @@ function weapSelectionLabelClicked ()
 		end
 	end
 end
-
-bindKey("J", "down", initInventory)
+addCommandHandler("Open Inventory",initInventory)
+bindKey("J", "down", "Open Inventory")

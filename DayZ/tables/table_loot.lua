@@ -584,7 +584,7 @@ lootpileType = {
 },
 
 ["BlueprintParts"] = {
-{"M4 Blueprint",2976,2969,0.5,0,3},
+{"M4 Blueprint",2969,0.5,0,3},
 {"CZ 550 Blueprint",2969,0.5,0,3},
 {"Winchester '66 Blueprint",2969,0.5,0,3},
 {"SPAZ-12 C. Shtgn. Blueprint",2969,0.5,0,3},

@@ -50,6 +50,7 @@
 	<script src="addons.lua" type="server" />
 		
 	<!-- init folder -->
+	<!-- <script src="init/database/db_init.lua" type="server" /> -->
 	<script src="init/loot/world_loot.lua" type="server" />
 	<script src="init/loot/other_loot.lua" type="server" />
 	<script src="init/vehicles/vehicles_init.lua" type="server" />
@@ -72,6 +73,19 @@
 	<script src="handlers/players/client/fpm_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/pingkick_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/status_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
+	
+	
+	<!-- Flashlight -->
+	<script src="handlers/players/client/flashlight/c_shader_light.lua" type="client" cache="false" />
+	<script src="handlers/players/client/flashlight/s_shader_light.lua" type="server"/>
+	<file src="handlers/players/client/flashlight/shaders/shader_light.fx" type="client" />
+	<file src="handlers/players/client/flashlight/shaders/mta-helper.fx" type="client" />
+	<file src="handlers/players/client/flashlight/textures/cubebox.dds" type="client" />
+	<file src="handlers/players/client/flashlight/shaders/shader_jaroovka.fx" type="client" />
+	<file src="handlers/players/client/flashlight/shaders/shader_null.fx" type="client" />
+	<file src="handlers/players/client/flashlight/shaders/flash_light_rays.fx" type="client" />
+	<file src="handlers/players/client/flashlight/sounds/switch.wav" type="client" />
 	
 	<script src="handlers/players/server/actions_player.lua" type="server" />
 	<script src="handlers/players/server/animations_player.lua" type="server" />
@@ -82,6 +96,7 @@
 	<script src="handlers/players/server/pingkick_player.lua" type="server" />
 	<script src="handlers/players/server/skins_player.lua" type="server" />
 	<script src="handlers/players/server/status_player.lua" type="server" />
+	<script src="handlers/players/server/reload_player.lua" type="server" />
 	
 	<script src="handlers/vehicles/server/actions_vehicles.lua" type="server" />
 	
@@ -508,6 +523,8 @@
 	<file src="models/weapons/dff/binoculars.dff" />
 	<file src="models/weapons/txd/hatchet.txd" />
 	<file src="models/weapons/dff/hatchet.dff" />
+	<file src="models/weapons/txd/flashlight.txd" />
+	<file src="models/weapons/dff/flashlight.dff" />
 	
     <file src="models/zombies/txd/22.txd" />
     <file src="models/zombies/txd/56.txd" />
@@ -809,27 +826,40 @@
 	<file src="sounds/status/crafting.mp3" />
 	<file src="sounds/status/sneezing.mp3" />
 	<file src="sounds/status/journal.wav" />
-	<file src="sounds/weapons/M1911.wav" />
-	<file src="sounds/weapons/DesertEagle.wav" />
-	<file src="sounds/weapons/M9SD.wav" />
-	<file src="sounds/weapons/Shotgun.wav" />
-	<file src="sounds/weapons/Sawed-Off.wav" />
-	<file src="sounds/weapons/Combat Shotgun.wav" />
-	<file src="sounds/weapons/UZI_Tec9.wav" />
-	<file src="sounds/weapons/MP5A5.wav" />
-	<file src="sounds/weapons/M4.wav" />
-	<file src="sounds/weapons/Rifle.wav" />
-	<file src="sounds/weapons/Sniper.wav" />
-	<file src="sounds/weapons/AK-47.wav" />
-	<file src="sounds/weapons/Blaze95.wav" />
-	<file src="sounds/weapons/CZ550.wav" />
-	<file src="sounds/weapons/FNFAL.wav" />
-	<file src="sounds/weapons/G17.wav" />
-	<file src="sounds/weapons/Mosin9130.wav" />
-	<file src="sounds/weapons/Revolver.wav" />
-	<file src="sounds/weapons/SKS.wav" />
-	<file src="sounds/weapons/Sporter22.wav" />
-	<file src="sounds/weapons/Silenced.wav" />
+	<file src="sounds/weapons/fire/AK74.wav" />
+	<file src="sounds/weapons/fire/AKM.wav" />
+	<file src="sounds/weapons/fire/Bizon.wav" />
+	<file src="sounds/weapons/fire/Crossbow.wav" />
+	<file src="sounds/weapons/fire/CZ550.wav" />
+	<file src="sounds/weapons/fire/DMR.wav" />
+	<file src="sounds/weapons/fire/Double.wav" />
+	<file src="sounds/weapons/fire/Dragunov.wav" />
+	<file src="sounds/weapons/fire/Enfield.wav" />
+	<file src="sounds/weapons/fire/FNFAL.wav" />
+	<file src="sounds/weapons/fire/G17.wav" />
+	<file src="sounds/weapons/fire/G36C.wav" />
+	<file src="sounds/weapons/fire/M4A1.wav" />
+	<file src="sounds/weapons/fire/M16A2.wav" />
+	<file src="sounds/weapons/fire/M1014.wav" />
+	<file src="sounds/weapons/fire/M1911.wav" />
+	<file src="sounds/weapons/fire/Makarov.wav" />
+	<file src="sounds/weapons/fire/MakarovSD.wav" />
+	<file src="sounds/weapons/fire/Mosin.wav" />
+	<file src="sounds/weapons/fire/MP5A5.wav" />
+	<file src="sounds/weapons/fire/PDW.wav" />
+	<file src="sounds/weapons/fire/Revolver.wav" />
+	<file src="sounds/weapons/fire/Winchester.wav" />
+	<file src="sounds/weapons/reload/22.wav" />
+	<file src="sounds/weapons/reload/23.wav" />
+	<file src="sounds/weapons/reload/24.wav" />
+	<file src="sounds/weapons/reload/25.wav" />
+	<file src="sounds/weapons/reload/26.wav" />
+	<file src="sounds/weapons/reload/27.wav" />
+	<file src="sounds/weapons/reload/29.wav" />
+	<file src="sounds/weapons/reload/30.wav" />
+	<file src="sounds/weapons/reload/31.wav" />
+	<file src="sounds/weapons/reload/33.wav" />
+	<file src="sounds/weapons/reload/34.wav" />
 	
 	<!-- Better Sky -->
 	<script src="handlers/world/client/sky/c_main.lua" type="client" />

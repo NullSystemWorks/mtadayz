@@ -414,33 +414,11 @@ function loadTheSkins()
 		weaponTXD[i] = engineLoadTXD(":DayZ/models/weapons/txd/"..skin[1]..".txd")
 		weaponDFF[i] = engineLoadDFF(":DayZ/models/weapons/dff/"..skin[1]..".dff", 0)
 	end
+	flashlightTexture = engineLoadTXD(":DayZ/models/weapons/txd/flashlight.txd")
+	flashlightModel = engineLoadDFF(":DayZ/models/weapons/dff/flashlight.dff",0)
 end
 addEventHandler("onClientResourceStart",getResourceRootElement(getThisResource()),loadTheSkins)
 
---[[
-weaponTXD1 = engineLoadTXD(":DayZ/models/weapons/txd/fnfal.txd")
-weaponDFF1 = engineLoadDFF(":DayZ/models/weapons/dff/fnfal.dff", 0)
-weaponTXD2 = engineLoadTXD(":DayZ/models/weapons/txd/g36c.txd")
-weaponDFF2 = engineLoadDFF(":DayZ/models/weapons/dff/g36c.dff", 0)
-weaponTXD3 = engineLoadTXD(":DayZ/models/weapons/txd/crossbow.txd")
-weaponDFF3 = engineLoadDFF(":DayZ/models/weapons/dff/crossbow.dff", 0)
-weaponTXD4 = engineLoadTXD(":DayZ/models/weapons/txd/dmr.txd")
-weaponDFF4 = engineLoadDFF(":DayZ/models/weapons/dff/dmr.dff", 0)
-weaponTXD5 = engineLoadTXD(":DayZ/models/weapons/txd/dragunov.txd")
-weaponDFF5 = engineLoadDFF(":DayZ/models/weapons/dff/dragunov.dff", 0)
-weaponTXD6 = engineLoadTXD(":DayZ/models/weapons/txd/bizon.txd")
-weaponDFF6 = engineLoadDFF(":DayZ/models/weapons/dff/bizon.dff", 0)
-weaponTXD7 = engineLoadTXD(":DayZ/models/weapons/txd/remington.txd")
-weaponDFF7 = engineLoadDFF(":DayZ/models/weapons/dff/remington.dff", 0)
-weaponTXD8 = engineLoadTXD(":DayZ/models/weapons/txd/revolver.txd")
-weaponDFF8 = engineLoadDFF(":DayZ/models/weapons/dff/revolver.dff", 0)
-weaponTXD9 = engineLoadTXD(":DayZ/models/weapons/txd/m1911.txd")
-weaponDFF9 = engineLoadDFF(":DayZ/models/weapons/dff/m1911.dff", 0)
-weaponTXD10 = engineLoadTXD(":DayZ/models/weapons/txd/ak74.txd")
-weaponDFF10 = engineLoadDFF(":DayZ/models/weapons/dff/ak74.dff", 0)
-weaponTXD11 = engineLoadTXD(":DayZ/models/weapons/txd/sa58v.txd")
-weaponDFF11 = engineLoadDFF(":DayZ/models/weapons/dff/sa58v.dff", 0)
-]]
 
 -- // Zombies // --
 local skin = engineLoadTXD(":DayZ/models/zombies/txd/56.txd")
