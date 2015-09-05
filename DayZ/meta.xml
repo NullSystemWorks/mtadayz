@@ -861,6 +861,11 @@
 	<file src="sounds/weapons/reload/33.wav" />
 	<file src="sounds/weapons/reload/34.wav" />
 	
+	<!-- Night -->
+	<script src="handlers/world/client/night/c_night.lua" type="client" cache="false" />
+	<file src="handlers/world/client/night/mta-helper.fx" type="client" />
+	<file src="handlers/world/client/night/night.fx" type="client" />
+	
 	<!-- Better Sky -->
 	<script src="handlers/world/client/sky/c_main.lua" type="client" />
 	<script src="handlers/world/client/sky/c_helper_functions.lua" type="client" />
@@ -875,6 +880,7 @@
 	<file src="handlers/world/client/sky/tex/clouds_storm.dds" type="client" />
 	<file src="handlers/world/client/sky/tex/clouds_cloudy.dds" type="client" />
 	<file src="handlers/world/client/sky/tex/clouds_normal.jpg" type="client" />
+	<file src="handlers/world/client/sky/tex/clouds_night.dds" type="client" />
 	<file src="handlers/world/client/sky/tex/moon/0.png" type="client" />
 	<file src="handlers/world/client/sky/tex/moon/1.png" type="client" />
 	<file src="handlers/world/client/sky/tex/moon/10.png" type="client" />
@@ -902,7 +908,7 @@
 	<export function="getDynamicMoonVector" type="client" />
 	<export function="getMoonPhaseValue" type="client" />
 	<export function="isDynamicSkyEnabled" type="client" />
-
+	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	

@@ -42,6 +42,7 @@ function startDynamicSky()
 	textureTable.cloudstorm = dxCreateTexture(":DayZ/handlers/world/client/sky/tex/clouds_storm.dds", "dxt5")
 	textureTable.cloudcloudy = dxCreateTexture(":DayZ/handlers/world/client/sky/tex/clouds_cloudy.dds", "dxt5")
 	textureTable.normal = dxCreateTexture ( ":DayZ/handlers/world/client/sky/tex/clouds_normal.jpg", "dxt5" ) 
+	textureTable.cloudnight = dxCreateTexture(":DayZ/handlers/world/client/sky/tex/clouds_night.dds", "dxt5")
 	textureTable.skybox = dxCreateTexture ( ":DayZ/handlers/world/client/sky/tex/skybox.dds", "dxt5" )
 	moonPhase = getCurrentMoonPhase()
 	textureTable.moon = dxCreateTexture ( ":DayZ/handlers/world/client/sky/tex/moon/"..toint( 20 - toint( moonPhase * 20 ) )..".png" )
@@ -244,14 +245,19 @@ function renderTime()
 			dxSetShaderValue ( shaderTable.skyboxStratos, "gAlphaMult", 0 ) 
 		end
 	end
-	if thisWeather == 8 then
-		dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudstorm )
-	elseif thisWeather == 16 then
-		dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudrain )
-	elseif thisWeather == 9 then
-		dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudcloudy)
+	local hours,minutes = getTime()
+	if hours == 21 or hours == 22 or hours == 23 or hours == 0 or hours == 1 or hours == 2 or hours == 3 or hours == 4 then
+		dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudnight )
 	else
-		dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloud)
+		if thisWeather == 8 then
+			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudstorm )
+		elseif thisWeather == 16 then
+			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudrain )
+		elseif thisWeather == 9 then
+			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudcloudy)
+		else
+			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloud)
+		end
 	end
 	
 	if (thisWeather~=oldWeather) then
@@ -281,9 +287,9 @@ function renderTime()
 		dawn_aspect = -6 * (((( ho - 20 ) * 60 ) + mi + se/60 ) / 1440 ) + 1
 	end
 	
-	dxSetShaderValue ( shaderTable.skyboxTropos, "gDayTime", dawn_aspect )
+	--dxSetShaderValue ( shaderTable.skyboxTropos, "gDayTime", dawn_aspect )
 	dxSetShaderValue ( shaderTable.skyboxBottom, "gDayTime", dawn_aspect )
-	dxSetShaderValue ( shaderTable.skyboxStratos, "gDayTime", dawn_aspect )	
+	dxSetShaderValue ( shaderTable.skyboxStratos, "gDayTime", dawn_aspect )
 	oldWeather = thisWeather
 end
 
