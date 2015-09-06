@@ -68,6 +68,7 @@
 	<script src="handlers/world/server/weather.lua" type="server" />
 	
 	<script src="handlers/players/client/animations_player.lua" type="client" cache="false" />
+	<script src="handlers/players/client/actions_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/crafting_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/damage_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/fpm_player.lua" type="client" cache="false" />
