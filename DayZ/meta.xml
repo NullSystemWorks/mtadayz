@@ -352,9 +352,13 @@
 	<file src="gui/status/vehicle/whl/whl_1.png" />
 	
 	<script src="gui/crosshair/crosshair.lua" type="client" cache="false" />
-	<file src="gui/crosshair/texreplace.fx" />
-	<file src="gui/crosshair/normal.png" />
-	<file src="gui/crosshair/hardcore.png" />
+	<file src="gui/crosshair/rifle.png" />
+	<file src="gui/crosshair/shotgun.png" />
+	<file src="gui/crosshair/dot.png" />
+	<file src="gui/crosshair/pistol.png" />
+	<file src="gui/crosshair/hunting.png" />
+	<file src="gui/crosshair/mp.png" />
+	<file src="gui/crosshair/none.png" />
 	
 	<!-- BattlDayZ (V1) -->
 	<script src="battldayz/battldayz_server.lua" type="server" />

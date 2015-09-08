@@ -8,9 +8,9 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgDifficulty loaded")
-
 gameplayVariables["difficulty"] = "normal" -- // Possible values: "normal", "veteran", "hardcore" - See below for description
+
+outputDebugString("[DayZ] cfgDifficulty loaded (Difficulty: "..tostring(gameplayVariables["difficulty"])..")")
 
 --[[
 DIFFICULTIES

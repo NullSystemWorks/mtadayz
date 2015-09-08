@@ -15,6 +15,7 @@ local rowText = {}
 local font = {}
 local number = 0
 local moveDown = 0
+local playerPickedUpItem = false
 font[1] = guiCreateFont(":DayZ/fonts/etelka.ttf", 10)
 
 function initSideMenu()
@@ -781,24 +782,30 @@ if ( keyState == "down" ) then
 				disableMenu()
 			return
 		end
-			if isToolbeltItem(itemName) then
-				local col = getElementData(getLocalPlayer(),"currentCol")
-				triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
-				disableMenu()
-				return
-			end	
-			if itemName == "Assault Pack (ACU)" or itemName == "ALICE Pack" or itemName == "Czech Backpack" or itemName == "Backpack (Coyote)" or itemName == "British Assault Pack" or itemName == "Czech Vest Pouch" or itemName == "Survival ACU" then
-				local col = getElementData(getLocalPlayer(),"currentCol")
-				triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
-				disableMenu()
-				return
-			end	
-			if getPlayerCurrentSlots() + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then	
-				local col = getElementData(getLocalPlayer(),"currentCol")
-				triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
-				disableMenu()
-			else
-				startRollMessage2("Inventory", "Inventory is full!", 255, 22, 0 )
+			if not playerPickedUpItem then
+				if isToolbeltItem(itemName) then
+					local col = getElementData(getLocalPlayer(),"currentCol")
+					triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
+					disableMenu()
+					return
+				end	
+				if itemName == "Assault Pack (ACU)" or itemName == "ALICE Pack" or itemName == "Czech Backpack" or itemName == "Backpack (Coyote)" or itemName == "British Assault Pack" or itemName == "Czech Vest Pouch" or itemName == "Survival ACU" then
+					local col = getElementData(getLocalPlayer(),"currentCol")
+					triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
+					disableMenu()
+					return
+				end
+				if getPlayerCurrentSlots() + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then	
+					local col = getElementData(getLocalPlayer(),"currentCol")
+					triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
+					disableMenu()
+				else
+					startRollMessage2("Inventory", "Inventory is full!", 255, 22, 0 )
+				end
+				playerPickedUpItem = true
+				setTimer(function()
+					playerPickedUpItem = false
+				end,10000,1)
 			end
 	end
 end
