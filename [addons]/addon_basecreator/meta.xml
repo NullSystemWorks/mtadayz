@@ -1,0 +1,5 @@
+<meta>
+	<info name="MTA:DayZ Base Creator Addon" author="CiBeR" type="script" version="0.1" description="Base Creator Addon" />
+	<script src="client.lua" type="client" />
+	<script src="server.lua" type="server" />
+</meta>
