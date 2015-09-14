@@ -26,7 +26,6 @@ end
 addEvent("onPlayerIsLosingConnection",true)
 addEventHandler("onPlayerIsLosingConnection",root,onPlayerIsLosingConnection)
 
-
 function playerLosingConnection()
 	if clientLosingConnection then
 		dxDrawImage(screenW * 0.8400, screenH * 0.8433, screenW * 0.0700, screenH * 0.0900, "/gui/status/misc/lc.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)

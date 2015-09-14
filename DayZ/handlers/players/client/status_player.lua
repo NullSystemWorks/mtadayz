@@ -239,6 +239,9 @@ function setVisibility()
 	if block == "ped" or block == "SHOP" or block == "BEACH" then
 		value = 0
 	end
+	if value > 100 then
+		value = 100
+	end
 	setElementData(localPlayer,"visibly",value)
 end
 setTimer(setVisibility,100,0)

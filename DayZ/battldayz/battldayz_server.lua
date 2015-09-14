@@ -3,7 +3,8 @@
 ----*					MTA DayZ: battldayz_server.lua					*----
 ----* Original Author: CiBeR96											*----
 
-----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
+----* 				This gamemode is being developed by 				*----
+----*				L, CiBeR96, 1B0Y, Remi & Renkon						*----
 ----* Type: SERVER														*----
 #-----------------------------------------------------------------------------#
 ]]
@@ -15,50 +16,73 @@ maxThirst = 100
 maxSlots = gameplayVariables["maxslots"]
 
 addEventHandler("onElementDataChange",getRootElement(),
- function(data)
-  if getElementType(source) == "player" then
-    if data == "blood" then
-        checkHealth(source)
-    elseif data == "food" then
-        checkFood(source)
-    elseif data == "thirst" then
-        checkThirst(source)
-    elseif data == "MAX_Slots" then
-        checkSlots(source)
-    else
-    end
-  end
-end)
+	function(data)
+		if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 0 then 
+			return 
+		end
+		if getElementType(source) == "player" then
+			if data == "blood" then
+				checkHealth(source)
+			elseif data == "food" then
+				checkFood(source)
+			elseif data == "thirst" then
+				checkThirst(source)
+			elseif data == "MAX_Slots" then
+				checkSlots(source)
+			end
+		end
+	end
+)
 
 function checkHealth(source)
-    local vHealth = getElementData(source, "blood") or 0
+	local vHealth = getElementData(source, "blood") or 0
     if vHealth > maxHealth and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "blood", 1000)
-        kickPlayer(source, "[AC] : Health Hack")
+		if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+			setElementData(source,"blood",-1)
+			banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Health Hack",gameplayVariables["bantime"])
+		elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+			setElementData(source, "blood", 1)
+			kickPlayer(source, "[BattlDayZ]: Health Hack")
+		end
     end
 end
 
 function checkFood(source)
     local vFood = getElementData(source, "food") or 0
     if vFood > maxFood and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "food", 30)
-        kickPlayer(source, "[AC] : Food Hack")
+        if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+			setElementData(source,"food",0)
+			banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Food Hack",gameplayVariables["bantime"])
+		elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+			setElementData(source, "food", 1)
+			kickPlayer(source, "[BattlDayZ]: Food Hack")
+		end
     end
 end
 
 function checkThirst(source)
     local vThirst = getElementData(source, "thirst") or 0
     if vThirst > maxThirst and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "thirst", 30)
-        kickPlayer(source, "[AC] : Thirst Hack")
-    end
+		if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+			setElementData(source,"thirst",0)
+			banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Thirst Hack",gameplayVariables["bantime"])
+		elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+			setElementData(source, "thirst", 1)
+			kickPlayer(source, "[BattlDayZ]: Thirst Hack")
+		end
+	end
 end
 
 function checkSlots(source)
     local vSlots = getElementData(source, "MAX_Slots") or 0
     if vSlots > maxSlots and not hasObjectPermissionTo ( source, "command.mute" ) then
-        setElementData(source, "MAX_Slots", 8)
-        kickPlayer(source, "[AC] : Slots Hack")
+        if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+			setElementData(source,"MAX_Slots",8)
+			banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Backpack Hack",gameplayVariables["bantime"])
+		elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+			setElementData(source, "MAX_Slots", 8)
+			kickPlayer(source, "[BattlDayZ]: Backpack Hack")
+		end
     end
 end
 
@@ -66,7 +90,11 @@ function detectVehicleCheat(theVehicle, seat, jacked)
 	if theVehicle then
 		if ( getElementModel(theVehicle) == 432 or getElementModel(theVehicle) == 425 or getElementModel(theVehicle) == 501 or getElementModel(theVehicle) == 564 or getElementModel(theVehicle) == 594 or getElementModel(theVehicle) == 601 or getElementModel(theVehicle) == 447 or getElementModel(theVehicle) == 520 ) then
 			if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "command.mute" ) then
-				kickPlayer(source, "[AC] : Vehicle Hack")
+				if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+					banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Vehicle Hack",gameplayVariables["bantime"])
+				elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+					kickPlayer(source, "[BattlDayZ]: Vehicle Hack")
+				end
 			end
 		end
 	end
@@ -82,7 +110,11 @@ WeaponID = {
 function detectWeaponCheat(previousWeaponID, currentWeaponID)
   if ( WeaponID[currentWeaponID] ) then
     if not hasObjectPermissionTo ( source, "command.mute" ) then
-        kickPlayer(source, "[AC] : Weapon Hack")
+        if gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 2 then
+			banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Weapon Hack",gameplayVariables["bantime"])
+		elseif gameplayVariables["securitylevel"] and gameplayVariables["securitylevel"] == 1 then
+			kickPlayer(source, "[BattlDayZ]: Weapon Hack")
+		end
     end
   end
 end
@@ -106,7 +138,7 @@ function checkLoss()
 				lossCount[v] = lossCount[v] + 1
 				if lossCount[v] >= gameplayVariables["packetlossmax"] then -- If counter is equal to gameplayVariables["packetlossmax"] or higher then reset counter and kick player
 					lossCount[v] = nil
-					kickPlayer(v, "[AC] : Packet Loss")
+					kickPlayer(v, "[BattlDayZ]: Packet Loss detected")
 				end
 			else -- If packet loss was corrected then reset counter
 				lossCount[v] = 0
@@ -139,7 +171,7 @@ addEventHandler ("onPlayerQuit",root,onQuitCheckForCombatLog)
 
 function protectedByBattlDayZ()
 	setTimer(function(source) 
-		outputChatBox("This server is protected by BattlDayZ (V1), an anticheat system.",source,255,0,0)
+		outputChatBox("This server is protected by BattlDayZ (V1.1), an anticheat system.",source,255,0,0)
 	end,2000,1,source)
 end
 addEventHandler("onPlayerLogin",root,protectedByBattlDayZ)
