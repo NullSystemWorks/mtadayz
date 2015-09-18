@@ -104,6 +104,7 @@ bindKey ("F6", "down", togPanel)
 tempOb = {}
 dep = 5
 multip = 1
+local health = 0
 
 --[[
 function updatePos()
@@ -202,10 +203,11 @@ function checkClick(bt, state)
 		local x, y, z = getElementPosition(tempOb[localPlayer])
 		local rx, ry, rz = getElementRotation(tempOb[localPlayer])
 		local model = getElementModel(tempOb[localPlayer])
+		outputChatBox("Health = "..tostring(health))
 		removeEventHandler("onClientRender", root, updatePos)
 		destroyElement(tempOb[localPlayer])
 		tempOb[localPlayer] = nil
-		triggerServerEvent("addon.basecreator:newObject", localPlayer, model, x, y, z, rx, ry, rz )
+		triggerServerEvent("addon.basecreator:newObject", localPlayer, model, x, y, z, rx, ry, rz, health )
 		active = false
 		removeEventHandler("onClientClick", root, checkClick)
 		removeEventHandler("onClientKey",root,setRotationOfObject)
@@ -218,7 +220,7 @@ function handleObSpawn(_, state, x, y)
 	if state == "up" and not tempOb[localPlayer] then
 		local theObjectName = guiGridListGetItemText ( baseCPanel.gridlist[gridlistnumber], guiGridListGetSelectedItem ( baseCPanel.gridlist[gridlistnumber] ), 1 )
 		if theObjectName then
-			for i, item in ipairs(objectTable)do
+			for i, item in ipairs(objectTable) do
 				if item[1] == theObjectName then
 					if getElementData(localPlayer,item[5]) and getElementData(localPlayer,item[5]) >= item[9] then
 						if getElementData(localPlayer,item[6]) and getElementData(localPlayer,item[6]) >= item[10] then
@@ -227,9 +229,10 @@ function handleObSpawn(_, state, x, y)
 									local id = item[2]
 									local pX,pY,pZ = getElementPosition(localPlayer)
 									tempOb[localPlayer] = createObject(id, pX+2, pY+2, pZ, 0, 0, 0)
+									health = item[3]
 									if tempOb[localPlayer] then
 										addEventHandler("onClientRender", root, updatePos)
-										addEventHandler ( "onClientClick", root, checkClick )
+										addEventHandler("onClientClick", root, checkClick)
 										addEventHandler("onClientKey",root,setRotationOfObject)
 										addEventHandler("onClientClick", root, handleObDelete)
 										active = true
@@ -306,3 +309,21 @@ addEventHandler("setTheObjectUnbreakable",root,setTheObjectUnbreakable)
 addEventHandler ( "onClientGUIClick", baseCPanel.button[1], handleObSpawn, false )
 addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObSpawn, false )
 --addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObDelete, false )
+
+function setObjectDamage(weapon,_,_,hitX,hitY,hitZ,hitElement)
+	if weapon ~= 0 then
+		if hitElement and getElementType(hitElement) == "object" then
+			for i, object in ipairs(objectTable) do
+				if getElementModel(hitElement) == object[2] then
+					setElementData(hitElement,"object.health",getElementData(hitElement,"object.health")-1)
+					triggerServerEvent("onObjectDamage",root,hitElement,getElementData(hitElement,"object.health"),getElementData(hitElement,"bc.ID"))
+					outputChatBox("Health = "..tostring(getElementData(hitElement,"object.health")))
+				end
+			end
+			if getElementData(hitElement,"object.health") <= 0 then
+				triggerServerEvent("onObjectDestroy",root,hitElement,getElementData(hitElement,"bc.ID"))
+			end
+		end
+	end
+end
+addEventHandler("onClientPlayerWeaponFire",root,setObjectDamage)
