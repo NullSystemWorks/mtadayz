@@ -178,14 +178,14 @@ function getWeaponDamage(weapon)
 	local weapon_1 = getElementData(localPlayer,"currentweapon_1")
 	local weapon_2 = getElementData(localPlayer,"currentweapon_2")
 	for i,weap in ipairs(damageTable) do
-		if weapon == 25 or weapon == 26 or weapon == 27 or weapon == 30 or weapon == 31 or weapon == 33 or weapon == 34 then
+		if weapon == 25 or weapon == 26 or weapon == 27 or weapon == 30 or weapon == 31 or weapon == 33 or weapon == 34 or weapon == 8 then
 			if weap[1] == weapon_1 then
 				return weap[2]
 			end
 		else
 			if weap[1] == weapon_2 then
 				if getElementData(localPlayer,"humanity") >= 5000 then
-					if weapon_2 == "M1911" or weapon_2 == "M9 SD" or weapon_2 == "PDW" then
+					if weapon_2 == "M1911" or weapon_2 == "Makarov SD" or weapon_2 == "PDW" then
 						return weap[2]*1.3
 					else
 						return weap[2]

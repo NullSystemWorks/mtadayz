@@ -41,6 +41,7 @@
 	<!-- configs folder -->
     <script src="configs/cfgBaseDefines.lua" type="shared" cache="false" />
     <script src="configs/cfgServer.lua" type="server" />
+	<script src="configs/cfgSecurity.lua" type="shared" />
 	<script src="configs/cfgLoot.lua" type="server" />
 	<script src="configs/cfgVehicles.lua" type="server" />
 	<script src="configs/cfgWorld.lua" type="server" />

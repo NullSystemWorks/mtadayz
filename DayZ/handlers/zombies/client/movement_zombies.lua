@@ -107,9 +107,9 @@ end
 setTimer(checkZombiePlayerStealth,500,0)
 
 function zombieSpawning()
-	local x, y, z = getElementPosition(getLocalPlayer())
-	local material,hitX, hitY, hitZ = isObjectAroundPlayer2 ( getLocalPlayer(), 30, 3 )
-	if material == 0 and not isInBuilding(x,y,z) then
+	if getElementData(localPlayer,"logedin") then
+		local x, y, z = getElementPosition(getLocalPlayer())
+		local material,hitX, hitY, hitZ = isObjectAroundPlayer2 ( getLocalPlayer(), 30, 3 )
 		triggerServerEvent("createZomieForPlayer",getLocalPlayer(),hitX, hitY, hitZ)
 	end
 end

@@ -659,6 +659,16 @@ function getPlayerLoad()
 				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
 			end
 		end
+		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Secondary Weapon"]) do
+			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
+				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
+			end
+		end
+		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Specially Weapon"]) do
+			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
+				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
+			end
+		end
 		for i, load in ipairs(ammoLoadTable) do
 			ammoLoad = ammoLoad+(load[1]*load[2])
 		end

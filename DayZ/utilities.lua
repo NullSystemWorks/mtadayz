@@ -54,7 +54,7 @@ function isObjectAroundPlayer2 ( thePlayer, distance, height )
 			material_value = material_value+1
 		end
 		if material_value > 40 then
-			return 0,hitX, hitY, hitZ
+			return material,hitX, hitY, hitZ
 		end
 	end
 	return false

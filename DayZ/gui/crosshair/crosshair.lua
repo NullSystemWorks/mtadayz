@@ -9,6 +9,12 @@ showPlayerHudComponent("crosshair", false)
 
 local crosshairTable = {
 
+{0,"dot"},
+{2,"dot"},
+{4,"dot"},
+{5,"dot"},
+{6,"dot"},
+{8,"dot"},
 {22,"pistol"},
 {23,"pistol"},
 {24,"pistol"},
@@ -21,6 +27,9 @@ local crosshairTable = {
 {31,"rifle"},
 {33,"hunting"},
 {34,"none"},
+{43,"none"},
+{16,"dot"},
+{17,"dot"},
 }
 
 function setCrossHairSize(weapon)

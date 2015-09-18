@@ -35,14 +35,14 @@ end
 addCommandHandler("Reload weapon", function()
 	setTimer(function()
 		local playerWeapon = getPedWeapon(localPlayer)
-		if playerWeapon == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
+		if playerWeapon == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" or playerWeapon == 33 or playerWeapon == 34 then
 			return 
 		end
+		reloadWeapon()
 		local x,y,z = getElementPosition(localPlayer)
 		local sound = playSound3D(":DayZ/sounds/weapons/reload/"..playerWeapon..".wav",x,y,z)
 		setSoundMaxDistance(sound,5)
 		setSoundVolume(sound,0.5)
-		reloadWeapon()
 	end, 50, 1)
 end)
 bindKey("r", "down", "Reload weapon")

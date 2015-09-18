@@ -283,7 +283,7 @@ buildingClasses = {
 {"Hatchet",339,1,90},
 {"Machete",339,1,90},
 {"Parachute",371,1,90},
-{"Grenade",242,1,90},
+{"Grenade",342,1,90},
 {"Hunting Knife",335,1,90},
 {"Binoculars",369,1,90},
 {"Range Finder",369,1,90},
