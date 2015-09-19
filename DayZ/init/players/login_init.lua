@@ -109,6 +109,8 @@ function playerRegister(username, pass, player)
 			setElementData(player,data[1],2)
 		elseif data[1] =="Painkiller" then
 			setElementData(player,data[1],1)
+		elseif data[1] == "Flashlight" then
+			setElementData(player,data[1],1)
 		elseif data[1] == "MAX_Slots" then
 			setElementData(player,data[1],8)
 		elseif data[1] =="Item_Slots" then
