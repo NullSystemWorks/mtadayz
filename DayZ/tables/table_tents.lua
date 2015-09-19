@@ -235,4 +235,12 @@ tentTable = {
 {"Metal Plate"},
 {"Metallic Stick"},
 {"Small Casing"},
+{"DIY (Wood)"},
+{"DIY (Metal)"},
+{"Log"},
+{"Stone"},
+{"Plank"},
+{"RSJ"},
+{"Metal Sheet"},
+{"Metal Sheet (Rusted)"},
 }

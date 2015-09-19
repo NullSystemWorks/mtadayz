@@ -20,6 +20,7 @@ baseCPanel = {
 
 objectTable = {
 -- Hatchet is a dummy item, in case you need less parts than expected
+-- DIY (Wood) or DIY (Metal) must always be the first item that is needed
 {"Wooden Base", 3260, 30, "Wood", "DIY (Wood)","Log","Stone","Hatchet",1,1,2,0},
 {"Wood Fence", 1460, 30, "Wood", "DIY (Wood)", "Log","Stone","Hatchet",1,1,1,0},
 {"Wooden Door", 3093, 30, "Wood", "DIY (Wood)", "Log", "Stone","Hatchet",1,1,1,0},
@@ -203,7 +204,6 @@ function checkClick(bt, state)
 		local x, y, z = getElementPosition(tempOb[localPlayer])
 		local rx, ry, rz = getElementRotation(tempOb[localPlayer])
 		local model = getElementModel(tempOb[localPlayer])
-		outputChatBox("Health = "..tostring(health))
 		removeEventHandler("onClientRender", root, updatePos)
 		destroyElement(tempOb[localPlayer])
 		tempOb[localPlayer] = nil
@@ -212,6 +212,7 @@ function checkClick(bt, state)
 		removeEventHandler("onClientClick", root, checkClick)
 		removeEventHandler("onClientKey",root,setRotationOfObject)
 		removeEventHandler("onClientClick", root, handleObDelete)
+		takeItemsFromPlayer(model)
 	end
 end
 
@@ -305,10 +306,15 @@ end
 addEvent("setTheObjectUnbreakable",true)
 addEventHandler("setTheObjectUnbreakable",root,setTheObjectUnbreakable)
 
---[[Events]]--
-addEventHandler ( "onClientGUIClick", baseCPanel.button[1], handleObSpawn, false )
-addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObSpawn, false )
---addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObDelete, false )
+function takeItemsFromPlayer(theModel)
+	for i, item in ipairs(objectTable) do
+		if theModel == item[2] then
+			setElementData(localPlayer,item[6],getElementData(localPlayer,item[6])-item[10])
+			setElementData(localPlayer,item[7],getElementData(localPlayer,item[7])-item[11])
+			setElementData(localPlayer,item[8],getElementData(localPlayer,item[8])-item[12])
+		end
+	end
+end
 
 function setObjectDamage(weapon,_,_,hitX,hitY,hitZ,hitElement)
 	if weapon ~= 0 then
@@ -327,3 +333,8 @@ function setObjectDamage(weapon,_,_,hitX,hitY,hitZ,hitElement)
 	end
 end
 addEventHandler("onClientPlayerWeaponFire",root,setObjectDamage)
+
+--[[Events]]--
+addEventHandler ( "onClientGUIClick", baseCPanel.button[1], handleObSpawn, false )
+addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObSpawn, false )
+--addEventHandler ( "onClientGUIClick", baseCPanel.button[2], handleObDelete, false )

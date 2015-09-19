@@ -460,6 +460,15 @@ buildingClasses = {
 {"Empty Soda Can",2673,0.5,0},
 {"Empty Tin Can",2673,0.5,0},
 {"Broken Whiskey Bottle",2673,0.5,0},
+
+{"DIY (Wood)",2969,0.5,0},
+{"DIY (Metal)",2969,0.5,0},
+{"Log",2969,0.5,0},
+{"Stone",2969,0.5,0},
+{"Plank",2969,0.5,0},
+{"RSJ",2969,0.5,0},
+{"Metal Sheet",2969,0.5,0},
+{"Metal Sheet (Rusted)",2969,0.5,0},
 },
 
 }
@@ -584,6 +593,7 @@ lootpileType = {
 },
 
 ["BlueprintParts"] = {
+--[[
 {"M4 Blueprint",2969,0.5,0,3},
 {"CZ 550 Blueprint",2969,0.5,0,3},
 {"Winchester '66 Blueprint",2969,0.5,0,3},
@@ -673,6 +683,15 @@ lootpileType = {
 {"Metal Plate",2969,0.5,0,3},
 {"Metallic Stick",2969,0.5,0,3},
 {"Small Casing",2969,0.5,0,3},
+]]
+{"DIY (Wood)",2969,0.5,0,3},
+{"DIY (Metal)",2969,0.5,0,3},
+{"Log",2969,0.5,0,3},
+{"Stone",2969,0.5,0,3},
+{"Plank",2969,0.5,0,3},
+{"RSJ",2969,0.5,0,3},
+{"Metal Sheet",2969,0.5,0,3},
+{"Metal Sheet (Rusted)",2969,0.5,0,3},
 },
 
 ["other"] = {

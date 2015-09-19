@@ -637,36 +637,13 @@ function getPlayerLoad()
 		ammoLoad = 0
 		itemLoad = 0
 		weaponLoad = 0
-		for i, ammo in ipairs(languageTextTable[languageCode]["Ammo"]) do
-			if getElementData(localPlayer,ammo[1]) and getElementData(localPlayer,ammo[1]) > 0 then
-				table.insert(ammoLoadTable,{ammo[2],getElementData(localPlayer,ammo[1])})
-			end
-		end
-		for i, food in ipairs(languageTextTable[languageCode]["Food"]) do
-			if getElementData(localPlayer,food[1]) and getElementData(localPlayer,food[1]) > 0 then
-				table.insert(itemLoadTable,{food[2],getElementData(localPlayer,food[1])})
-			end
-		end
-		for i, item in ipairs(languageTextTable[languageCode]["Items"]) do
-			if getElementData(localPlayer,item[1]) and getElementData(localPlayer,item[1]) > 0 then
-				if not isToolbeltItem(item[1]) then
-					table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
-				end
-			end
-		end
-		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
-			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
-				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
-			end
-		end
-		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Secondary Weapon"]) do
-			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
-				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
-			end
-		end
-		for i, weap in ipairs(languageTextTable[languageCode]["Weapons"]["Specially Weapon"]) do
-			if getElementData(localPlayer,weap[1]) and getElementData(localPlayer,weap[1]) > 0 then
-				table.insert(weaponLoadTable,{weap[2],getElementData(localPlayer,weap[1])})
+		for i, item in ipairs(itemWeightTable) do
+			if item[3] == "Weapon" then
+				table.insert(weaponLoadTable,{item[2],getElementData(localPlayer,item[1])})
+			elseif item[3] == "Ammo" then
+				table.insert(ammoLoadTable,{item[2],getElementData(localPlayer,item[1])})
+			elseif item[3] == "Item" then
+				table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
 			end
 		end
 		for i, load in ipairs(ammoLoadTable) do

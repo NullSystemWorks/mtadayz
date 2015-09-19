@@ -119,6 +119,51 @@ addCommandHandler("language",changeLanguageOnCommand)
 
 function getPlayerCurrentSlots()
 local current_SLOTS = 0
+	for id,item in ipairs(itemWeightTable) do
+		if getElementData(localPlayer, item[1]) and getElementData(localPlayer, item[1]) >= 1 then
+			current_SLOTS = current_SLOTS + item[2] * getElementData(localPlayer, item[1])
+		end
+	end
+	if isCarryingWeapon then
+		setElementData(localPlayer,"CURRENT_Slots",math.floor(current_SLOTS))
+		--current_SLOTS = math.floor(current_SLOTS)
+	elseif isHoldingWeapon then
+		setElementData(localPlayer,"CURRENT_Slots",math.floor(current_SLOTS)-10)
+		--current_SLOTS = math.floor(current_SLOTS)-10
+	else
+		setElementData(localPlayer,"CURRENT_Slots",math.floor(current_SLOTS))
+		--current_SLOTS = math.floor(current_SLOTS)
+	end
+	return getElementData(localPlayer,"CURRENT_Slots") --math.floor(current_SLOTS)
+end
+
+function getLootCurrentSlots(loot)
+	if isElement ( loot ) then
+		local current_SLOTS = 0
+		for id,item in ipairs(itemWeightTable) do
+			if getElementData(loot, item[1]) and getElementData(loot, item[1]) >= 1 then
+				current_SLOTS = current_SLOTS + item[2] * getElementData(loot, item[1])
+			end
+		end
+		return math.floor(current_SLOTS)
+	else
+		return false
+	end
+end
+
+function getItemSlots(theItem)
+local current_SLOTS = 0
+	for id,item in ipairs(itemWeightTable) do
+		if theItem == item[1] then
+			return item[2]
+		end
+	end
+	return false
+end
+
+--[[
+function getPlayerCurrentSlots()
+local current_SLOTS = 0
 	for id,item in ipairs(languageTextTable[languageCode]["Weapons"]["Primary Weapon"]) do
 		if getElementData(localPlayer, item[1]) and getElementData(localPlayer, item[1]) >= 1 then
 			current_SLOTS = current_SLOTS + item[2] * getElementData(localPlayer, item[1])
@@ -158,6 +203,7 @@ local current_SLOTS = 0
 	end
 return getElementData(localPlayer,"CURRENT_Slots") --math.floor(current_SLOTS)
 end
+
 
 function getLootCurrentSlots(loot)
 	if isElement ( loot ) then
@@ -232,15 +278,16 @@ local current_SLOTS = 0
 	end
 return false
 end
+]]
 
-function isToolbeltItem(itema)
+function isToolbeltItem(theItem)
 local current_SLOTS = 0
-	for id,item in ipairs(languageTextTable[languageCode]["Toolbelt"]) do
-		if itema == item[1] then
+	for id,item in ipairs(itemWeightTable) do
+		if theItem == item[1] and item[2] == 0 then
 			return true
 		end
 	end
-return false
+	return false
 end
 
 function getThisItemInLoot (name)
@@ -385,7 +432,7 @@ function placeItemsInInventory()
 		end
 		for i, weap in ipairs ( languageTextTable[languageCode]["Ammo"] ) do
 			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
-				if weap[1] == ".45 ACP Cartridge" or weap[1] == "9x19mm SD Cartridge" or weap[1] == "9x19mm Cartridge" or weap[1] == "9x18mm Cartridge" then
+				if weap[1] == "11.43x23mm Cartridge" or weap[1] == "9x19mm Cartridge" or weap[1] == "9x18mm Cartridge" then
 					table.insert(ammoInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]})
 				else
 					table.insert(itemsInventory, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]})
