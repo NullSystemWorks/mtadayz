@@ -75,11 +75,6 @@ every 24-48 hours to prevent possible, yet undetected memory leaks.
 Q: I want to help developing! How and where can I apply?
 A: Send a private message to Lawliet on the MTA forum. Read this topic before you apply: https://forum.multitheftauto.com/viewtopic.php?f=108&t=88188
 
-Q: Pfft, this gamemode is compiled! I want it decompiled/I'm going to decompile it/I'm going to destroy all your work!
-A: To be honest, if you really wish to decompile it...feel free to do so. The gamemode will be, once we have version 1.0.0, open source anyway.
-So, instead of hindering us in our progress and development, just apply, become a part of the team, and help us that way. Decompiling it
-won't help anyone. If you want to add something to make your server unique, why not tell us? We might listen if you can give us a good reason.
-
 Q: There is a question I have that does not appear in the FAQ!
 A: Go to the forum http://mta-dayz.org/forum, and ask there. We'll answer. Eventually.
 
