@@ -34,6 +34,7 @@ local removables = {
 }
 
 function night_init()
+	if not gameplayVariables["enablenight"] then return end
 	if getVersion ().sortable < '1.1.0' then
 		outputChatBox('Night shader is not compatible with this client.')
 		return false
