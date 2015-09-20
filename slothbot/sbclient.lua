@@ -986,6 +986,7 @@ function Streamin ()
 	if getElementData (source, "slothbot") == true then
 		local theweapon = getElementData ( source, "BotWeapon" )		
 		triggerServerEvent ( "StreamWeapon", source, theweapon)
+		setPedVoice(source, "PED_TYPE_DISABLED", "")
 	end		
 end
 addEventHandler( "onClientElementStreamIn", getRootElement(), Streamin )
