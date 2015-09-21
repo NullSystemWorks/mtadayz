@@ -70,7 +70,7 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		end
 	end
 	if weapon and weapon > 1 and attacker and getElementType(attacker) == "player" then
-		damage = getWeaponDamage(weapon)
+		damage = getWeaponDamage(weapon,attacker)
 		local x1,y1,z1 = getElementPosition(localPlayer)
 		local x2,y2,z2 = getElementPosition(attacker)
 		local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
