@@ -76,6 +76,7 @@
 	<script src="handlers/players/client/pingkick_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/status_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
+	<script src="handlers/world/client/lights.lua" type="client" cache="false" />
 	
 	
 	<!-- Flashlight -->

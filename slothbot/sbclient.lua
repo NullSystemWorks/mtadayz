@@ -983,9 +983,10 @@ end
 
 --this is to correct the problem that unstreamed peds loose all but 1 bullet for the local player
 function Streamin ()
-	if getElementData (source, "slothbot") == true then
+	if getElementData (source, "zombie") then
 		local theweapon = getElementData ( source, "BotWeapon" )		
 		triggerServerEvent ( "StreamWeapon", source, theweapon)
+		setPedVoice(source, "PED_TYPE_DISABLED", "")
 	end		
 end
 addEventHandler( "onClientElementStreamIn", getRootElement(), Streamin )
