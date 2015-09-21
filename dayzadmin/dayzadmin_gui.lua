@@ -56,56 +56,70 @@ adminpanel = {
 items = 
 {
 	["Weapons"] = {
-		"M4",
-		"AK-47",
-		"Lee Enfield",
-		"CZ 550",
-		"MP5A5",
-		"PDW",
-		"SPAZ-12 Combat Shotgun",
-		"Sawn-Off Shotgun",
-		"Winchester 1866",
-		"M9 SD",
 		"M1911",
-		"Blaze 95 Double Rifle",
-		"Remington 870",
-		"Sporter 22",
 		"Revolver",
-		"Bizon PP-19",
-		"FN FAL",
-		"G36C",
+		"Makarov PM",
+		"Bizon PP-19 SD",
+		"G17",
+		"M9",
+		"Makarov SD",
+		"PDW",
+		"MP5A5",
+		"Lee Enfield",
+		"AK-74",
+		"AKS-74U",
+		"RPK",
+		"AKM",
 		"Sa58V CCO",
+		"Sa58V RCO",
+		"FN FAL",
+		"M24",
 		"DMR",
+		"M40A3",
+		"G36A CAMO",
+		"G36C",
+		"G36C CAMO",
+		"G36K CAMO",
+		"L85A2 RIS Holo",
+		"M16A2",
+		"M16A2 M203",
+		"M4A1",
+		"M16A4",
+		"CZ 550",
 		"SVD Dragunov",
-		"SKS",
-		"Crossbow",
-		"Desert Eagle",
+		"Mosin-Nagant",
+		"Winchester 1866",
+		"Double-barreled Shotgun",
+		"M1014",
+		"Remington 870",
+		"Compound Crossbow",
+		"Baseball Bat",
+		"Crowbar",
+		"Hatchet",
+		"Machete",
+		"Parachute",
+		"Grenade",
+		"Hunting Knife",
 		"Binoculars",
 		"Range Finder",
-		"Tear Gas",
-		"Grenade",
-		"Satchel",
-		"Baseball Bat",
 		"Shovel",
-		"Golf Club",
-		"Hunting Knife",
-		"Hatchet"
+		"Flashlight",
 	},
 	
 	["Ammo"] = {
-		"5.56x45mm Cartridge",
-		"5.45x39mm Cartridge",
+		"11.43x23mm Cartridge",
 		"9x18mm Cartridge",
 		"9x19mm Cartridge",
-		"9x19mm SD Cartridge",
-		"9.3x62mm Cartridge",
-		".45 ACP Cartridge",
-		"12 Gauge Pellet",
-		"2Rnd. Slug",
-		"1866 Slug",
 		".303 British Cartridge",
+		"5.45x39mm Cartridge",
+		"7.62x39mm Cartridge",
+		"7.62x51mm Cartridge",
+		"5.56x45mm Cartridge",
+		".308 Winchester Cartridge",
+		"7.62x54mm Cartridge",
+		"1866 Slug",
+		"12 Gauge Pellet",
 		"Bolt",
-		
 	},
 	
 	["Food/Drinks"] = {
@@ -186,7 +200,7 @@ items =
 	["Blueprints"] = {
 		"M4 Blueprint",
 		"CZ 550 Blueprint",
-		"Winchester '66 Blueprint",
+		"Winchester 1866 Blueprint",
 		"SPAZ-12 C. Shtgn. Blueprint",
 		"Sawn-Off Shtgn. Blueprint",
 		"AK-47 Blueprint",
@@ -199,8 +213,8 @@ items =
 		"Remington 870 Blueprint",
 		"FN FAL Blueprint",
 		"G36C Blueprint",
-		"Sa58V Blueprint",
-		"SVD Blueprint",
+		"Sa58V CCO Blueprint",
+		"SVD Dragunov Blueprint",
 		"DMR Blueprint",
 		"M1911 Blueprint",
 		"M9 SD Blueprint",
@@ -215,8 +229,10 @@ items =
 		"Baseball Bat Blueprint",
 		"Shovel Blueprint",
 		"Golf Club Blueprint",
+		"Machete Blueprint",
 		"Crowbar Blueprint",
 		"Parachute Blueprint",
+		"Tear Gas Blueprint",
 		"Grenade Blueprint",
 		"Binoculars Blueprint",
 		".45 ACP Cartridge Blueprint",
@@ -231,6 +247,7 @@ items =
 		"9.3x62mm Cartridge Blueprint",
 		".303 British Cartridge Blueprint",
 		"Bolt Blueprint",
+		"Medic Kit Blueprint",
 		"Wire Fence Blueprint",
 		"Tent Blueprint",
 		"Camouflage Clthng. Blueprint",
@@ -274,6 +291,14 @@ items =
 		"Metal Plate",
 		"Metallic Stick",
 		"Small Casing",
+		"DIY (Wood)",
+		"DIY (Metal)",
+		"Log",
+		"Stone",
+		"Plank",
+		"RSJ",
+		"Metal Sheet",
+		"Metal Sheet (Rusted)",
 	},
 	
 	["Other"] = {
@@ -290,56 +315,67 @@ items =
 
 playerDataTable = {
 -- [[ Weapons ]] --
-{"M4"},
-{"CZ 550"},
-{"Winchester 1866"},
-{"SPAZ-12 Combat Shotgun"},
-{"Sawn-Off Shotgun"},
-{"AK-47"},
-{"Lee Enfield"},
-{"Sporter 22"},
-{"Mosin 9130"},
-{"Crossbow"},
-{"SKS"},
-{"Blaze 95 Double Rifle"},
-{"Remington 870"},
-{"FN FAL"},
-{"G36C"},
-{"Sa58V CCO"},
-{"SVD Dragunov"},
-{"DMR"},
 {"M1911"},
-{"M9 SD"},
-{"PDW"},
-{"G17"},
-{"MP5A5"},
-{"Desert Eagle"},
-{"Bizon PP-19"},
 {"Revolver"},
-{"Hunting Knife"},
-{"Hatchet"},
+{"Makarov PM"},
+{"Bizon PP-19 SD"},
+{"G17"},
+{"M9"},
+{"Makarov SD"},
+{"PDW"},
+{"MP5A5"},
+{"Lee Enfield"},
+{"AK-74"},
+{"AKS-74U"},
+{"RPK"},
+{"AKM"},
+{"Sa58V CCO"},
+{"Sa58V RCO"},
+{"FN FAL"},
+{"M24"},
+{"DMR"},
+{"M40A3"},
+{"G36A CAMO"},
+{"G36C"},
+{"G36C CAMO"},
+{"G36K CAMO"},
+{"L85A2 RIS Holo"},
+{"M16A2"},
+{"M16A2 M203"},
+{"M4A1"},
+{"M16A4"},
+{"CZ 550"},
+{"SVD Dragunov"},
+{"Mosin-Nagant"},
+{"Winchester 1866"},
+{"Double-barreled Shotgun"},
+{"M1014"},
+{"Remington 870"},
+{"Compound Crossbow"},
 {"Baseball Bat"},
-{"Shovel"},
-{"Golf Club"},
-{"Machete"},
 {"Crowbar"},
+{"Hatchet"},
+{"Machete"},
 {"Parachute"},
-{"Tear Gas"},
 {"Grenade"},
+{"Hunting Knife"},
 {"Binoculars"},
 {"Range Finder"},
+{"Shovel"},
+{"Flashlight"},
 -- [[ Ammo ]] --
-{".45 ACP Cartridge"},
-{"9x19mm SD Cartridge"},
-{"9x19mm Cartridge"},
+{"11.43x23mm Cartridge"},
 {"9x18mm Cartridge"},
-{"5.45x39mm Cartridge"},
-{"5.56x45mm Cartridge"},
-{"1866 Slug"},
-{"2Rnd. Slug"},
-{"12 Gauge Pellet"},
-{"9.3x62mm Cartridge"},
+{"9x19mm Cartridge"},
 {".303 British Cartridge"},
+{"5.45x39mm Cartridge"},
+{"7.62x39mm Cartridge"},
+{"7.62x51mm Cartridge"},
+{"5.56x45mm Cartridge"},
+{".308 Winchester Cartridge"},
+{"7.62x54mm Cartridge"},
+{"1866 Slug"},
+{"12 Gauge Pellet"},
 {"Bolt"},
 -- [[ Food / Drinks ]] --
 {"Baked Beans"},
@@ -369,7 +405,6 @@ playerDataTable = {
 {"Road Flare"},
 {"Empty Gas Canister"},
 {"Full Gas Canister"},
-{"Medic Kit"},
 {"Heat Pack"},
 {"Painkiller"},
 {"Morphine"},
@@ -404,6 +439,8 @@ playerDataTable = {
 {"Ghillie Suit"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
+{"Empty Tin Can"},
+{"Broken Whiskey Bottle"},
 {"Assault Pack (ACU)"},
 {"ALICE Pack"},
 {"British Assault Pack"},
@@ -504,6 +541,15 @@ playerDataTable = {
 {"Metal Plate"},
 {"Metallic Stick"},
 {"Small Casing"},
+
+{"DIY (Wood)"},
+{"DIY (Metal)"},
+{"Log"},
+{"Stone"},
+{"Plank"},
+{"RSJ"},
+{"Metal Sheet"},
+{"Metal Sheet (Rusted)"},
 }
 
 vehicleInfo = {
@@ -612,7 +658,8 @@ function()
 	-- Vehicles
 	adminpanel.tab[2] = guiCreateTab("Vehicles", adminpanel.tabpanel[1])
 	adminpanel.gridlist[3] = guiCreateGridList(0.02, 0.07, 0.26, 0.91, true, adminpanel.tab[2])
-	adminpanel.column[2] = guiGridListAddColumn(adminpanel.gridlist[3], "Vehicles", 0.9)
+	adminpanel.column[2] = guiGridListAddColumn(adminpanel.gridlist[3], "Vehicles", 0.7)
+	adminpanel.column[8] = guiGridListAddColumn(adminpanel.gridlist[3], "ID", 0.2)
 	adminpanel.label[36] = guiCreateLabel(0.02, 0.03, 0.26, 0.04, "List of Vehicles", true, adminpanel.tab[2])
 	guiLabelSetHorizontalAlign(adminpanel.label[36], "center", false)
 	adminpanel.label[37] = guiCreateLabel(0.31, 0.07, 0.15, 0.03, "Vehicle Details:", true, adminpanel.tab[2])
@@ -642,17 +689,15 @@ function()
 	adminpanel.label[59] = guiCreateLabel(0.45, 0.59, 0.23, 0.03, "", true, adminpanel.tab[2])
 	adminpanel.label[60] = guiCreateLabel(0.45, 0.65, 0.23, 0.03, "", true, adminpanel.tab[2])
 	adminpanel.label[61] = guiCreateLabel(0.45, 0.70, 0.23, 0.03, "", true, adminpanel.tab[2])
-	adminpanel.button[8] = guiCreateButton(0.69, 0.12, 0.09, 0.06, "Set Stat", true, adminpanel.tab[2])
+	adminpanel.button[8] = guiCreateButton(0.70, 0.12, 0.09, 0.06, "Set Stat", true, adminpanel.tab[2])
 	adminpanel.button[9] = guiCreateButton(0.80, 0.12, 0.09, 0.06, "Blow", true, adminpanel.tab[2])
 	adminpanel.button[10] = guiCreateButton(0.90, 0.12, 0.09, 0.06, "Fix", true, adminpanel.tab[2])
-	adminpanel.button[11] = guiCreateButton(0.69, 0.32, 0.29, 0.05, "Warp to [VN]", true, adminpanel.tab[2])
+	adminpanel.button[11] = guiCreateButton(0.69, 0.32, 0.29, 0.05, "Warp to Vehicle", true, adminpanel.tab[2])
 	adminpanel.gridlist[4] = guiCreateGridList(0.69, 0.53, 0.29, 0.45, true, adminpanel.tab[2])
-	guiGridListAddColumn(adminpanel.gridlist[4], "Item", 0.5)
-	guiGridListAddColumn(adminpanel.gridlist[4], "Amount", 0.5)
+	adminpanel.column[9] = guiGridListAddColumn(adminpanel.gridlist[4], "Item", 0.7)
+	adminpanel.column[10] = guiGridListAddColumn(adminpanel.gridlist[4], "", 0.2)
 	adminpanel.label[62] = guiCreateLabel(0.71, 0.48, 0.25, 0.03, "Inventory", true, adminpanel.tab[2])
 	guiLabelSetHorizontalAlign(adminpanel.label[62], "center", false)
-	adminpanel.label[63] = guiCreateLabel(0.31, 0.75, 0.13, 0.03, "Occupants:", true, adminpanel.tab[2])
-	adminpanel.label[64] = guiCreateLabel(0.45, 0.75, 0.23, 0.03, "", true, adminpanel.tab[2])
 
 	-- Inventory Editor
 	adminpanel.tab[3] = guiCreateTab("Inventory Editor", adminpanel.tabpanel[1])
@@ -660,19 +705,20 @@ function()
 	adminpanel.column[3] = guiGridListAddColumn(adminpanel.gridlist[5], "Players", 0.9)
 	adminpanel.label[65] = guiCreateLabel(0.02, 0.03, 0.25, 0.03, "List of Players", true, adminpanel.tab[3])
 	guiLabelSetHorizontalAlign(adminpanel.label[65], "center", false)
-	adminpanel.gridlist[6] = guiCreateGridList(0.72, 0.07, 0.26, 0.91, true, adminpanel.tab[3])
-	adminpanel.column[4] = guiGridListAddColumn(adminpanel.gridlist[6], "Vehicles", 0.9)
-	adminpanel.label[66] = guiCreateLabel(0.73, 0.03, 0.25, 0.03, "List of Vehicles", true, adminpanel.tab[3])
+	adminpanel.gridlist[6] = guiCreateGridList(0.30, 0.07, 0.27, 0.30, true, adminpanel.tab[3])
+	adminpanel.column[4] = guiGridListAddColumn(adminpanel.gridlist[6], "Items", 0.7)
+	adminpanel.column[7] = guiGridListAddColumn(adminpanel.gridlist[6],"",0.2)
+	adminpanel.label[66] = guiCreateLabel(0.31, 0.03, 0.25, 0.03, "Inventory", true, adminpanel.tab[3])
 	guiLabelSetHorizontalAlign(adminpanel.label[66], "center", false)
-	adminpanel.button[12] = guiCreateButton(0.30, 0.90, 0.15, 0.08, "Give Player", true, adminpanel.tab[3])
-	adminpanel.combobox[1] = guiCreateComboBox(0.36, 0.12, 0.28, 0.32, "", true, adminpanel.tab[3])
-	adminpanel.label[67] = guiCreateLabel(0.38, 0.08, 0.25, 0.03, "Category", true, adminpanel.tab[3])
+	adminpanel.button[12] = guiCreateButton(0.30, 0.50, 0.15, 0.08, "Give Player", true, adminpanel.tab[3])
+	adminpanel.button[13] = guiCreateButton(0.30, 0.39, 0.15, 0.08, "Take Item from Player", true, adminpanel.tab[3]) 
+	adminpanel.combobox[1] = guiCreateComboBox(0.58, 0.07, 0.18, 0.29, "", true, adminpanel.tab[3])
+	adminpanel.label[67] = guiCreateLabel(0.55, 0.03, 0.25, 0.03, "Category", true, adminpanel.tab[3])
 	guiLabelSetHorizontalAlign(adminpanel.label[67], "center", false)
-	adminpanel.combobox[2] = guiCreateComboBox(0.36, 0.50, 0.28, 0.32, "", true, adminpanel.tab[3])
-	adminpanel.label[68] = guiCreateLabel(0.38, 0.47, 0.25, 0.03, "Item", true, adminpanel.tab[3])
+	adminpanel.combobox[2] = guiCreateComboBox(0.78, 0.07, 0.18, 0.29, "", true, adminpanel.tab[3])
+	adminpanel.label[68] = guiCreateLabel(0.76, 0.03, 0.25, 0.03, "Item", true, adminpanel.tab[3])
 	guiLabelSetHorizontalAlign(adminpanel.label[68], "center", false)
-	adminpanel.editbox[1] = guiCreateEdit(0.47, 0.84, 0.07, 0.07, "", true, adminpanel.tab[3])
-	adminpanel.button[13] = guiCreateButton(0.55, 0.90, 0.15, 0.08, "Give Vehicle", true, adminpanel.tab[3])
+	adminpanel.editbox[1] = guiCreateEdit(0.49, 0.44, 0.07, 0.07, "", true, adminpanel.tab[3])
 	
 	for key, value in pairs (items) do
 		if type(value) == "table" then
@@ -828,7 +874,7 @@ function()
 	guiSetEnabled(adminpanel.statbutton[1],false)
 	guiSetEnabled(adminpanel.statvbutton[1],false)
 	guiSetEnabled(adminpanel.skinbutton[1],false)
-	guiSetEnabled(adminpanel.tab[2],false)
+	--guiSetEnabled(adminpanel.tab[2],false)
 	guiSetEnabled(adminpanel.tab[4],false)
 	guiSetEnabled(adminpanel.tab[6],false)
 	guiSetEnabled(adminpanel.tab[7],false)
@@ -886,8 +932,22 @@ function()
 		local item = guiComboBoxGetItemText(adminpanel.combobox[2], guiComboBoxGetSelected(adminpanel.combobox[2]))
 		local giver = getPlayerName(localPlayer)
 		if (getPlayerFromName(playerName)) then
-			triggerServerEvent("onAdminPanelEditInventory", localPlayer, playerName, item, tonumber(guiGetText(adminpanel.editbox[1])))
+			triggerServerEvent("onAdminPanelEditInventory", localPlayer, playerName, item, tonumber(guiGetText(adminpanel.editbox[1])),"give")
 			isItemSelected = false
+		else
+			outputChatBox("Player disconnected or changed name!", 255, 0, 0)
+		end
+	end, false)
+	
+	addEventHandler ( "onClientGUIClick", adminpanel.button[13], 
+	function()
+		local playerName = guiGridListGetItemText(adminpanel.gridlist[5], guiGridListGetSelectedItem(adminpanel.gridlist[5]), 1)
+		local item = guiGridListGetItemText(adminpanel.gridlist[6], guiGridListGetSelectedItem(adminpanel.gridlist[6]), 1)
+		local taker = getPlayerName(localPlayer)
+		if (getPlayerFromName(playerName)) then
+			triggerServerEvent("onAdminPanelEditInventory", localPlayer, playerName, item, tonumber(guiGetText(adminpanel.editbox[1])),"take")
+			guiGridListClear(adminpanel.gridlist[6])
+			setTimer(showPlayerInventory,100,1)
 		else
 			outputChatBox("Player disconnected or changed name!", 255, 0, 0)
 		end
@@ -1009,12 +1069,15 @@ function()
 	end, false)
 	
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[1],function() guiGridListClear(adminpanel.gridlist[2]) populateStatsOnPlayerSelect() end,false)
+	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],function() guiGridListClear(adminpanel.gridlist[6]) showPlayerInventory() end,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[3],populateStatsOnVehicleSelect,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],checkIfRequirementsMet,false)
 	addEventHandler("onClientGUIClick",adminpanel.button[1],function() guiSetVisible(adminpanel.statwindow[1],true) guiBringToFront(adminpanel.statwindow[1],true) end, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[2],killPlayerOnButtonClick, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[3],healPlayerOnButtonClick, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[4],warpToPlayerOnButtonClick,false)
+	addEventHandler("onClientGUIClick",adminpanel.button[11],warpToVehicleOnButtonClick,false)
+	addEventHandler("onClientGUIClick",adminpanel.button[9],killVehicleOnButtonClick, false)
 	addEventHandler("onClientGUIClick",adminpanel.button[5],function() guiSetVisible(adminpanel.skinwindow[1],true) guiBringToFront(adminpanel.skinwindow[1],true) end, false)
 	addEventHandler("onClientGUIClick",adminpanel.skinbutton[2],function() guiSetVisible(adminpanel.skinwindow[1],false) end,false)
 	addEventHandler("onClientGUIClick",adminpanel.statgridlist[1],checkIfStatSelected, false)
@@ -1032,6 +1095,8 @@ end)
 function checkIfRequirementsMet()
 	if guiGetText(adminpanel.editbox[1]) ~= "" and isItemSelected and guiGridListGetItemText(adminpanel.gridlist[5], guiGridListGetSelectedItem(adminpanel.gridlist[5]), 1) ~= "" then
 		guiSetEnabled(adminpanel.button[12], true)
+	elseif guiGetText(adminpanel.editbox[1]) ~= "" and guiGridListGetItemText(adminpanel.gridlist[5], guiGridListGetSelectedItem(adminpanel.gridlist[5]), 1) ~= "" and guiGridListGetItemText(adminpanel.gridlist[6], guiGridListGetSelectedItem(adminpanel.gridlist[6]), 1) ~= "" then
+		guiSetEnabled(adminpanel.button[13],true)
 	end
 end
 
