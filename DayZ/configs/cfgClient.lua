@@ -15,7 +15,7 @@ gameplayVariables["ping"] = 600 -- Checks if ping is over the set amount. DEFAUL
 gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: math.random(400,900), for consistent damage, remove math.random(400,900) and insert value (EXAMPLE: 1000)
 
 -- MISC
-gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: true - SET TO false to disable - remember you need to set it in editor_server.lua too.
+gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
 
 -- HEADSHOT MULTIPLIER
 gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
@@ -23,6 +23,3 @@ gameplayVariables["headshotdamage_zombie"] = 1.5 -- Multiplier for damage on hea
 	
 -- SOUND VOLUME
 gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds should be. Set to 0 to disable, max is 1.0. - DEFAULT: 0.8
-
--- BATTLDAYZ SETUP
-gameplayVariables["combatlog"] = true -- Enable/Disable anti combat log output - DEFAULT: true

@@ -30,9 +30,10 @@ function onAdminPanelOpen()
 	-- Populate the vehicle gridlists
 	for id, vehicle in ipairs(getElementsByType("vehicle")) do
 		local row = guiGridListAddRow(adminpanel.gridlist[3])
-		local row2 = guiGridListAddRow(adminpanel.gridlist[6])
-		guiGridListSetItemText (adminpanel.gridlist[3], row, adminpanel.column[2], getVehicleName(vehicle),false,false)
-		guiGridListSetItemText (adminpanel.gridlist[6], row, adminpanel.column[4], getVehicleName(vehicle),false,false)
+		if getElementData(vehicle,"parent") then
+			guiGridListSetItemText (adminpanel.gridlist[3], row, adminpanel.column[2], tostring(getElementData(getElementData(vehicle,"parent"),"vehicle_name")),false,false)
+			guiGridListSetItemText (adminpanel.gridlist[3], row, adminpanel.column[8], getElementID(getElementData(vehicle,"parent")),false,false)
+		end
 	end
 	guiSetVisible(adminpanel.window[1],true)
 	guiSetEnabled(adminpanel.button[12],false)
@@ -191,9 +192,45 @@ end
 -- For Tab: "Vehicles"
 function populateStatsOnVehicleSelect()
 -- Trigger a server event that pulls all vehicle elements from the table in vehicle_spawns (vehTable) so we can use that to get the necessary data
-local vehicleName = guiGridListGetItemText (adminpanel.gridlist[3], guiGridListGetSelectedItem (adminpanel.gridlist[3]),1)
-	if guiGridListGetItemText(adminpanel.gridlist[3], guiGridListGetSelectedItem(adminpanel.gridlist[3]), 1) ~= "" then
-		outputChatBox("This feature is currently not working.",255,0,0,true)
+local vehicleID = guiGridListGetItemText (adminpanel.gridlist[3], guiGridListGetSelectedItem (adminpanel.gridlist[3]),2)
+	if guiGridListGetItemText(adminpanel.gridlist[3], guiGridListGetSelectedItem(adminpanel.gridlist[3]), 2) ~= "" then
+		guiSetText(adminpanel.label[50],tostring(getElementHealth(getElementData(getElementByID(vehicleID),"parent"))).."%")
+		guiSetText(adminpanel.label[51],tostring(getElementData(getElementByID(vehicleID),"MAX_Slots")))
+		guiSetText(adminpanel.label[52],tostring(getElementData(getElementByID(vehicleID),"Tire_inVehicle")))
+		guiSetText(adminpanel.label[53],tostring(getElementData(getElementByID(vehicleID),"Engine_inVehicle")))
+		guiSetText(adminpanel.label[54],tostring(getElementData(getElementByID(vehicleID),"Parts_inVehicle")))
+		guiSetText(adminpanel.label[55],tostring(getElementData(getElementByID(vehicleID),"Glass_inVehicle")))
+		guiSetText(adminpanel.label[56],tostring(getElementData(getElementByID(vehicleID),"Rotary_inVehicle")))
+		guiSetText(adminpanel.label[57],tostring(getElementModel(getElementData(getElementByID(vehicleID),"parent"))))
+		guiSetText(adminpanel.label[58],tostring(getElementData(getElementByID(vehicleID),"fuel")))
+		guiSetText(adminpanel.label[59],tostring(getElementData(getElementByID(vehicleID),"maxfuel")))
+		local x,y,z = getElementPosition(getElementData(getElementByID(vehicleID),"parent"))
+		local rX,rY,rZ = getElementRotation(getElementData(getElementByID(vehicleID),"parent"))
+		guiSetText(adminpanel.label[60],"X: "..tostring(math.floor(x)).." , Y: "..tostring(math.floor(y)).." Z: "..tostring(math.floor(z)))
+		guiSetText(adminpanel.label[61],tostring(rX)..", "..tostring(rY)..", "..tostring(rZ))
+		guiGridListClear(adminpanel.gridlist[4])
+		for i, data in ipairs (playerDataTable) do
+			if getElementData(getElementByID(vehicleID),data[1]) and getElementData(getElementByID(vehicleID),data[1]) > 0 then
+				local row = guiGridListAddRow(adminpanel.gridlist[4])
+				guiGridListSetItemText (adminpanel.gridlist[4], row, adminpanel.column[9], tostring(data[1]),false,false)
+				guiGridListSetItemText (adminpanel.gridlist[4], row, adminpanel.column[10], getElementData(getElementByID(vehicleID),data[1]),false,false)
+			end
+		end
+		guiSetText(adminpanel.button[11],"Warp to "..tostring(getElementData(getElementByID(vehicleID),"vehicle_name")))
+	end
+end
+
+-- For Tab: "Inventory Editor"
+function showPlayerInventory()
+local playerName = guiGridListGetItemText (adminpanel.gridlist[5], guiGridListGetSelectedItem (adminpanel.gridlist[5]),1)
+	if guiGridListGetItemText(adminpanel.gridlist[5], guiGridListGetSelectedItem(adminpanel.gridlist[5]), 1) ~= "" then
+		for i, data in ipairs (playerDataTable) do
+			if getElementData(getPlayerFromName(playerName),data[1]) and getElementData(getPlayerFromName(playerName),data[1]) > 0 then
+				local row = guiGridListAddRow(adminpanel.gridlist[6])
+				guiGridListSetItemText (adminpanel.gridlist[6], row, adminpanel.column[4], tostring(data[1]),false,false)
+				guiGridListSetItemText (adminpanel.gridlist[6], row, adminpanel.column[7], getElementData(getPlayerFromName(playerName),data[1]),false,false)
+			end
+		end
 	end
 end
 
@@ -230,8 +267,24 @@ function warpToPlayerOnButtonClick()
 local playerName = guiGridListGetItemText (adminpanel.gridlist[1], guiGridListGetSelectedItem (adminpanel.gridlist[1]),1)
 	if guiGridListGetItemText(adminpanel.gridlist[1], guiGridListGetSelectedItem(adminpanel.gridlist[1]), 1) ~= "" then
 		local x,y,z = getElementPosition(getPlayerFromName(playerName))
-		setElementPosition(source,x,y+2,z+1)
+		setElementPosition(localPlayer,x,y+2,z+1)
 		outputChatBox("You have been warped to "..playerName,0,255,0)
+	end
+end
+
+function warpToVehicleOnButtonClick()
+local vehicleID = guiGridListGetItemText (adminpanel.gridlist[3], guiGridListGetSelectedItem (adminpanel.gridlist[3]),2)
+	if guiGridListGetItemText(adminpanel.gridlist[3], guiGridListGetSelectedItem(adminpanel.gridlist[3]), 2) ~= "" then
+		local x,y,z = getElementPosition(getElementData(getElementByID(vehicleID),"parent"))
+		setElementPosition(localPlayer,x,y+2,z+1)
+		outputChatBox("You have been warped to the "..tostring(getElementData(getElementByID(vehicleID),"vehicle_name")),0,255,0)
+	end
+end
+
+function killVehicleOnButtonClick()
+local vehicleID = guiGridListGetItemText (adminpanel.gridlist[3], guiGridListGetSelectedItem (adminpanel.gridlist[3]),2)
+	if guiGridListGetItemText(adminpanel.gridlist[3], guiGridListGetSelectedItem(adminpanel.gridlist[3]), 2) ~= "" then
+		triggerServerEvent("onAdminPanelKillVehicle",localPlayer, vehicleID)
 	end
 end
 

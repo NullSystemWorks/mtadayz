@@ -24,7 +24,7 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 						triggerServerEvent("onZombieGetsKilled",source,attacker)
 					end
 				elseif weapon ~= 0 then
-					damage = getWeaponDamage(weapon)
+					damage = getWeaponDamage(weapon,attacker)
 					local x1,y1,z1 = getElementPosition(source)
 					local x2,y2,z2 = getElementPosition(attacker)
 					local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)

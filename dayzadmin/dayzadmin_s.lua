@@ -89,30 +89,59 @@ addEventHandler("onPlayerChat", root,
 
 addEvent("onAdminPanelEditInventory",true)
 addEventHandler("onAdminPanelEditInventory", root,
-function(pName, item, quantity)
-	local theTime = getRealTime()
-	local hour = theTime.hour
-	local minute = theTime.minute
-	local seconds = theTime.second
-	if hour < 10 then
-		hour = "0"..hour
-	else
-		hour = theTime.hour
+function(pName, item, quantity, action)
+	if action == "give" then
+		local theTime = getRealTime()
+		local hour = theTime.hour
+		local minute = theTime.minute
+		local seconds = theTime.second
+		if hour < 10 then
+			hour = "0"..hour
+		else
+			hour = theTime.hour
+		end
+		if minute < 10 then
+			minute  = "0"..minute
+		else
+			minute = theTime.minute
+		end
+		if seconds < 10 then
+			minute = "0"..seconds
+		else
+			seconds = theTime.second
+		end
+		setElementData(getPlayerFromName(pName), item, quantity)
+		outputChatBox("Given "..quantity.." "..item.." to "..pName, source, 255, 255, 0)
+		outputChatBox(getAccountName(getPlayerAccount(client)).." gave you "..quantity.." "..item, getPlayerFromName(pName), 255, 255, 0)
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." got an item via DayZ Admin Panel: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
+	elseif action == "take" then
+		local theTime = getRealTime()
+		local hour = theTime.hour
+		local minute = theTime.minute
+		local seconds = theTime.second
+		if hour < 10 then
+			hour = "0"..hour
+		else
+			hour = theTime.hour
+		end
+		if minute < 10 then
+			minute  = "0"..minute
+		else
+			minute = theTime.minute
+		end
+		if seconds < 10 then
+			minute = "0"..seconds
+		else
+			seconds = theTime.second
+		end
+		if getElementData(getPlayerFromName(pName),item) < quantity then
+			quantity = getElementData(getPlayerFromName(pName),item)
+		end
+		setElementData(getPlayerFromName(pName), item, getElementData(getPlayerFromName(pName),item)-quantity)
+		outputChatBox("Taken "..quantity.." "..item.." from "..pName, source, 255, 255, 0)
+		outputChatBox(getAccountName(getPlayerAccount(client)).." took "..quantity.." "..item.." from you.", getPlayerFromName(pName), 255, 255, 0)
+		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." gave away an item via DayZ Admin Panel: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
 	end
-	if minute < 10 then
-		minute  = "0"..minute
-	else
-		minute = theTime.minute
-	end
-	if seconds < 10 then
-		minute = "0"..seconds
-	else
-		seconds = theTime.second
-	end
-	setElementData(getPlayerFromName(pName), item, quantity)
-	outputChatBox("Given "..quantity.." "..item.." to "..pName, source, 255, 255, 0)
-	outputChatBox(getAccountName(getPlayerAccount(client)).." gave you "..quantity.." "..item, getPlayerFromName(pName), 255, 255, 0)
-	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." got an item via DayZ Admin Panel: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
 end)
 
 function onAdminPanelSetPlayerStat(name, stat, value)
@@ -208,3 +237,11 @@ function onAdminPanelSpawnVehicle(player,vehicle,x,y,z)
 end
 addEvent("onAdminPanelSpawnVehicle",true)
 addEventHandler("onAdminPanelSpawnVehicle",root,onAdminPanelSpawnVehicle)
+
+function onAdminPanelKillVehicle(id)
+	if id then
+		setElementHealth(getElementData(getElementByID(id),"parent"),0)
+	end
+end
+addEvent("onAdminPanelKillVehicle",true)
+addEventHandler("onAdminPanelKillVehicle",root,onAdminPanelKillVehicle)

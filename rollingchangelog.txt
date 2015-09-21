@@ -1,0 +1,15 @@
+﻿# CHANGELOG #
+This changelog lists all changes made to MTA DayZ, but have yet to be released. It adheres to the following features description.
+
+## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
+
+### ADDED: For new features
+### CHANGED: For changes in existing features
+### DEPRECATED: For once-stable removed in upcoming releases
+### REMOVED: For deprecated features removed in the release it's mentioned in
+### FIXED: For all bugs
+### SECURITY: To invite users to upgrade in case of vulnerabilities
+
+## [0.9.7a] - NOT YET RELEASED
+
+
