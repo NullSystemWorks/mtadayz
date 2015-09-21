@@ -9,7 +9,10 @@
 ]]
 
 function getRankingPlayer (place)
+if place then
 return playerRankingTable[place]["Player"]
+else return 0
+end
 end
 
 function getElementDataPosition(key,value)
