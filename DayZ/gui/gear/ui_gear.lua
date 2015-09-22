@@ -85,6 +85,8 @@ function checkTheLanguage()
 		languageCode = "fr"
 	elseif languageCode == "ro" then
 		languageCode = "ro"
+	elseif languageCode == "pl" then
+		languageCode = "pl"
 	else
 		languageCode = "en_US"
 	end
@@ -101,6 +103,7 @@ local languageTable = {
 {"es","es"},
 {"fr","fr"},
 {"ro","ro"},
+{"pl","pl"},
 }
 
 function changeLanguageOnCommand(playerSource,language)
@@ -112,7 +115,7 @@ function changeLanguageOnCommand(playerSource,language)
 			end
 		end
 	else
-		outputChatBox("Please specify a language. Possible values: en, de, cs, nl, br, zh, es, fr, ro.",255,0,0)
+		outputChatBox("Please specify a language. Possible values: en, de, cs, nl, br, zh, es, fr, ro, pl.",255,0,0)
 	end
 end
 addCommandHandler("language",changeLanguageOnCommand)
