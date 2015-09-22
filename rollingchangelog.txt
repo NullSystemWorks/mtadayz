@@ -11,5 +11,9 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
 
 ## [0.9.7a] - NOT YET RELEASED
-
+### FIXED: Black & White shader not loading(CiBeR96)
+### CHANGED: Added Flashlight to Spanish Language(CiBeR96)
+### FIXED: Fixed Polish Language Typo(CiBeR96)
+### ADDED: Polish Language (CiBeR96//Author: KaSkA3eR)
+### FIXED: Ammo bug (L)
 

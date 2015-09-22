@@ -448,11 +448,13 @@ end
 
 function onWeaponFireDeductAmmo(weapon)
 	if source == localPlayer then
-		local ammoName = getWeaponAmmoFromID(weapon)
-		if getElementData(localPlayer,"Bolt") > 0 then
-			if getElementData(localPlayer,"currentweapon_1") == "Crossbow" then
-				setElementData(localPlayer,"Bolt",getElementData(localPlayer,"Bolt")-1)
-			end
+		local weapon_1 = getElementData(source,"currentweapon_1")
+		local weapon_2 = getElementData(source,"currentweapon_2")
+		local ammoName
+		if weapon == 25 or weapon == 26 or weapon == 27 or weapon == 30 or weapon == 31 or weapon == 33 or weapon == 34 then
+			ammoName = getWeaponAmmoFromName(weapon_1)
+		else
+			ammoName = getWeaponAmmoFromName(weapon_2)
 		end
 		if getElementData(localPlayer,ammoName) > 0 then
 			setElementData(localPlayer,ammoName,getElementData(localPlayer,ammoName)-1)
