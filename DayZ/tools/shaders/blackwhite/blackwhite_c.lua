@@ -10,7 +10,7 @@ end
 function enableBlackWhite(enable)
 	if enable then
 		if isEnabled then return end
-		screenShader2 = dxCreateShader( "shader/blackwhite/blackwhite.fx" )
+		screenShader2 = dxCreateShader( "tools/shaders/blackwhite/blackwhite.fx" )
 		screenSrc2 = dxCreateScreenSource( w, h )
 		if screenShader2 and screenSrc2 then
 			dxSetShaderValue( screenShader2, "BlackWhiteTexture", screenSrc2 )
