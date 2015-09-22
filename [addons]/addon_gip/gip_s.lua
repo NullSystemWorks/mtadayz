@@ -83,7 +83,7 @@ function(pName, item, quantity)
 	else
 		seconds = theTime.second
 	end
-	setElementData(getPlayerFromName(pName), item, quantity)
+	setElementData(getPlayerFromName(pName), item, getElementData(getPlayerFromName(pName),item)+quantity)
 	outputChatBox("Given "..quantity.." "..item.." to "..pName, source, 255, 255, 0)
 	outputChatBox(getAccountName(getPlayerAccount(client)).." gave you "..quantity.." "..item, getPlayerFromName(pName), 255, 255, 0)
 	exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] "..getAccountName(getPlayerAccount(getPlayerFromName(pName))).." got an item via GIP: "..item.."(x"..quantity..") by "..getAccountName(getPlayerAccount(client)).."\n","admin")
