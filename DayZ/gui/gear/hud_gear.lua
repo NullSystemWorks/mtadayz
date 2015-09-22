@@ -341,49 +341,61 @@ function setClientNight (hour,minutes)
 	end
 end
 
+local sWidth,sHeight = guiGetScreenSize()
 function WeaponHUD()
-	if getElementData(getLocalPlayer(),"logedin") then
-		ammo = getPedTotalAmmo (getLocalPlayer())
-		clip = getPedAmmoInClip (getLocalPlayer())
-		weaponID = getPedWeapon(getLocalPlayer())
+	if getElementData(localPlayer,"logedin") then
+		ammo = getPedTotalAmmo (localPlayer) - getPedAmmoInClip (localPlayer)
+		clip = getPedAmmoInClip (localPlayer)
+		weaponID = getPedWeapon(localPlayer)
 		local divide = "|"
-		local sWidth,sHeight = guiGetScreenSize()
 		if weaponID == 22 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 23 then
 		   weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 24 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 25 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 26 then
 		   weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 27 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 28 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 29 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 30 then
 		   weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 31 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 33 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 34 then
 			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
 			divide = "|"
+			magsLeft()
 		elseif weaponID == 16 then
 			weapName = "Grenade"
 			divide = "|"
@@ -441,6 +453,12 @@ function WeaponHUD()
     end
 end
 addEventHandler("onClientRender",getRootElement(),WeaponHUD)
+
+function magsLeft()
+	dxDrawText(math.floor(getPedTotalAmmo (localPlayer) / getWeaponProperty(getPedWeapon( localPlayer ), "pro", "maximum_clip_ammo")) or 0,sWidth*0.9399999999,sHeight*0.093,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),.6,font[1],"left","top",false,false,false)
+	dxDrawText(math.floor(getPedTotalAmmo (localPlayer) / getWeaponProperty(getPedWeapon( localPlayer ), "std", "maximum_clip_ammo")) or 0,sWidth*0.9399999999,sHeight*0.093,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),.6,font[1],"left","top",false,false,false)
+	dxDrawText(math.floor(getPedTotalAmmo (localPlayer) / getWeaponProperty(getPedWeapon( localPlayer ), "poor", "maximum_clip_ammo")) or 0,sWidth*0.9399999999,sHeight*0.093,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),.6,font[1],"left","top",false,false,false)
+end
 
 statsLabel = {}
 statsFont = guiCreateFont(":DayZ/fonts/bitstream.ttf",8)

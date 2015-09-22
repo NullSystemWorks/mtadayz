@@ -111,7 +111,7 @@ function openWriteJournal(button, state)
 			isWriting = true
 			guiSetVisible(JournalTable.image[1],false)
 			unbindKey("1","down",showJournal)
-			guiSetInputEnabled(false)
+			guiSetInputEnabled(true)
 		end
 	else
 		outputDebugString("Error")
