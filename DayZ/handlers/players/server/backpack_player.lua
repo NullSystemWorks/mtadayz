@@ -109,7 +109,7 @@ addEvent("removeBackWeaponOnDrop",true)
 addEventHandler("removeBackWeaponOnDrop",getRootElement(),removeBackWeaponOnDrop)
 
 function removeAttachedOnDeath ()
-	if elementBackpack[source] then
+	if elementBackpack[source] and getElementData(source,"MAX_Slots") ~= 8 then
 		detachElementFromBone(elementBackpack[source])
 		destroyElement(elementBackpack[source])
 	end
