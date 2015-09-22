@@ -285,7 +285,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Przedmiot", "Używane do naprawy\nsamochodów.","Narzędzia"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Przedmiot", "Naciśnij Z aby użyć","Radio"},
 		{"Compass",1,'compass.png',128,128,"Przedmiot","Pasywny przedmiot, zostanie\naktywowany gdy go podniesiesz.","Kompas"},
-		{"Flashlight",1,'compass.png',128,128,"Przedmiot","Latarka","Latarka","Equip SEcondary Weapon"},
+		{"Flashlight",1,'compass.png',128,128,"Przedmiot","Latarka","Latarka","Equip Secondary Weapon"},
 	},
 
 },
@@ -2090,6 +2090,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Artículo", "Usado para reparar vehiculos\nde cualquier tipo.","Caja de Herramientas"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Artículo", "Presiona 'Z' para activar.","Dispositivo de Radio"},
 		{"Compass",1,'compass.png',128,128,"Artículo","Artículo pasivo, sera\nactivado cuando se recoja.","Brújula"},
+		{"Flashlight",1,'compass.png',128,128,"Artículo","Usado para Iluminar","Linterna","Equip Secondary Weapon"},
 	},
 },
 	
