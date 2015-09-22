@@ -26,7 +26,15 @@ local function reloadWeapon()
 		end
 	end
 	
+
+
 	triggerServerEvent("relWep", resourceRoot)
+
+	local playerWeapon = getPedWeapon(localPlayer)
+	local x,y,z = getElementPosition(localPlayer)
+	local sound = playSound3D(":DayZ/sounds/weapons/reload/"..playerWeapon..".wav",x,y,z)
+	setSoundMaxDistance(sound,5)
+	setSoundVolume(sound,0.5)
 end
 
 -- The jump task is not instantly detectable and bindKey works quicker than getControlState
@@ -34,15 +42,21 @@ end
 -- We work around this by adding an unnoticable delay to foil this exploit.
 addCommandHandler("Reload weapon", function()
 	setTimer(function()
+		if getPedControlState(localPlayer, "aim_weapon") then return end
 		local playerWeapon = getPedWeapon(localPlayer)
 		if playerWeapon == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" or playerWeapon == 33 or playerWeapon == 34 then
 			return 
 		end
+		if getPedTotalAmmo (localPlayer) - getPedAmmoInClip (localPlayer) <= 0 then
+			triggerEvent("onRollMessageStart", localPlayer, "No ammo left to reload!", 255, 0, 0)
+			return
+		end
+		if 	getPedAmmoInClip (localPlayer) == getWeaponProperty(getPedWeapon( localPlayer ), "pro", "maximum_clip_ammo")or
+			getPedAmmoInClip (localPlayer) == getWeaponProperty(getPedWeapon( localPlayer ), "std", "maximum_clip_ammo")or
+			getPedAmmoInClip (localPlayer) == getWeaponProperty(getPedWeapon( localPlayer ), "poor", "maximum_clip_ammo")then
+			return
+		end
 		reloadWeapon()
-		local x,y,z = getElementPosition(localPlayer)
-		local sound = playSound3D(":DayZ/sounds/weapons/reload/"..playerWeapon..".wav",x,y,z)
-		setSoundMaxDistance(sound,5)
-		setSoundVolume(sound,0.5)
 	end, 50, 1)
 end)
 bindKey("r", "down", "Reload weapon")
