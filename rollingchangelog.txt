@@ -16,4 +16,5 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### FIXED: Fixed Polish Language Typo(CiBeR96)
 ### ADDED: Polish Language (CiBeR96//Author: KaSkA3eR)
 ### FIXED: Ammo bug (L)
+### FIXED: Patrol Pack bug (Loki)
 
