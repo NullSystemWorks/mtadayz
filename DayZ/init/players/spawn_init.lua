@@ -183,12 +183,6 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	if killer then
-		if not getElementData(source,"bandit") then
-			local value = getElementData(source,"humanity")
-			addPlayerStats (killer,"humanity",-value)
-		else
-			addPlayerStats (killer,"humanity",1500)
-		end
 		setElementData(killer,"murders",getElementData(killer,"murders")+1)
 		if getElementData(killer,"humanity") <= 0 then
 			setElementData(killer,"bandit",true)
@@ -204,28 +198,28 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	if pedCol then
 		for i,data in ipairs(playerDataTable) do
 			local plusData = getElementData(source,data[1])
-			if data[1] == ".45 ACP Cartridge" then
+			if data[1] == "11.43x23mm Cartridge" then
 				plusData = math.floor(getElementData(source,data[1])/7)
-			elseif data[1] == "9x19mm SD Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/15)
-			elseif data[1] == "9x19mm Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/30)
 			elseif data[1] == "9x18mm Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/20)
-			elseif data[1] == "5.45x39mm Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/30)
-			elseif data[1] == "5.56x45mm Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/20)
-			elseif data[1] == "9.3x62mm Cartridge" then
-				plusData = math.floor(getElementData(source,data[1])/5)
+				plusData = math.floor(getElementData(source,data[1])/8)
+			elseif data[1] == "9x19mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/17)
 			elseif data[1] == ".303 British Cartridge" then
 				plusData = math.floor(getElementData(source,data[1])/10)
+			elseif data[1] == "5.45x39mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/30)
+			elseif data[1] == "7.62x39mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/30)
+			elseif data[1] == "7.62x51mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/20)
+			elseif data[1] == "5.56x45mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/20)
+			elseif data[1] == "7.62x54mm Cartridge" then
+				plusData = math.floor(getElementData(source,data[1])/10)
 			elseif data[1] == "1866 Slug" then
-				plusData = math.floor(getElementData(source,data[1])/7)
+				plusData = math.floor(getElementData(source,data[1])/15)
 			elseif data[1] == "Gauge 12 Pellet" then
 				plusData = math.floor(getElementData(source,data[1])/7)
-			elseif data[1] == "2Rnd. Slug" then
-				plusData = math.floor(getElementData(source,data[1])/2)
 			elseif data[1] == "Bolt" then
 				plusData = math.floor(getElementData(source,data[1])/7)
 			end
