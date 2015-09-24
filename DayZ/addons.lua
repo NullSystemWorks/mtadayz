@@ -20,20 +20,6 @@ function changeGameType()
 end
 addEventHandler("onResourceStart",root,changeGameType)
 
---night addon (Should be separate)
---[[
-function nightAddon1 ()
-	if gameplayVariables["enablenight"] then 
-		addAddonInfo ("Night","Night time with fading effect.")
-	end
-end
-
-function nightAddon () 
-	setTimer(nightAddon1,10000,1)
-end
-nightAddon () 
-]]
-
 -- [[ Automatically start all resources with "addon_" in name ]] --
 function loadAddons( res )
 if not gameplayVariables["autostartaddons"] then return end
@@ -41,7 +27,6 @@ if not gameplayVariables["autostartaddons"] then return end
 		local name = getResourceName(resourceValue)
 		if string.find(name,"addon_") then
 			startResource(resourceValue)
-			setGameType("DayZ 0.9.0a")
 		end
 	end
 end
