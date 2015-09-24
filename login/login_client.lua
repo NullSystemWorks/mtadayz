@@ -209,6 +209,7 @@ function hideLoginWindow(accountName, pass)
 	destroyElement(label)
 	setElementData(getLocalPlayer(),"clickedButton",false)
 	toggleSavePassword(accountName, pass)
+	removeEventHandler("onClientRender",root,dayR)
 end
 addEvent("onPlayerDoneLogin", true)
 addEventHandler("onPlayerDoneLogin", getRootElement(), hideLoginWindow)
@@ -221,3 +222,40 @@ function toggleSavePassword(name, pass)
 	xmlSaveFile(confFile)
 	xmlUnloadFile(confFile)
 end
+local sourceX, sourceY = 1440, 900
+local ft = dxCreateFont(":DayZ/fonts/28dayslater.ttf")
+ 
+ local texts = { }
+ 
+function dxDrawTextPerLetter ( text, left, top, right, bottom, color, scale, font, alignX, alignY, clip, wordBreak, postGUI, colorCoded, subPixelPositioning, delay )
+    if ( not texts [ text ] ) then
+        texts [ text ] =
+            {
+                index = 1,
+                lastUpdate = getTickCount ( )
+            }
+    end
+    if ( texts [ text ] ) then
+        dxDrawText ( text:sub ( 1, texts [ text ].index ), left, top, right, bottom, color or tocolor ( 255, 255, 255, 255 ), scale or 1, font or "default", alignX or "left", alignY or "top", clip, wordBreak, postGUI, colorCoded, subPixelPositioning )
+        if ( getTickCount ( ) - texts [ text ].lastUpdate >= ( delay or 60 ) ) then
+            texts [ text ].index = ( texts [ text ].index + 1 )
+            texts [ text ].lastUpdate = getTickCount ( )
+        end
+    end
+end
+local rColor = {
+{255,0,0},
+{66,0,66},
+{0,255,66},
+{0,255,0},
+{255,255,0},
+{0,255,255},
+{255,255,66}
+}
+local r,g,b = unpack(rColor[math.random(1,#rColor)])
+
+function dayR( )
+		dxDrawTextPerLetter ( "MTA DayZ", ( 40 / sourceX ) * sx, ( 850 / sourceY ) * sy, ( 187 / sourceX ) * sx, ( 324 / sourceY ) * sy, tocolor(r, g, b, 255), 2.00, ft, "left", "top", false, false, true, false, false,200 )
+        dxDrawText( "MTA DayZ", ( 40 / sourceX ) * sx, ( 850 / sourceY ) * sy, ( 187 / sourceX ) * sx, ( 324 / sourceY ) * sy, tocolor(0, 0, 0, 150), 2.00, ft, "left", "top", false, false, true, false, false )
+end
+addEventHandler ( "onClientRender", root, dayR)

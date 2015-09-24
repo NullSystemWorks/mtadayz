@@ -508,7 +508,7 @@ guiLabelSetHorizontalAlign (statsLabel["humanity"],"center")
 guiSetFont (statsLabel["humanity"], statsFont )
 setElementData(statsLabel["humanity"],"identifikation","humanity")
 --Name
-statsLabel["name"] = guiCreateLabel(0,0.85,1,0.15,"Name: "..getPlayerName(getLocalPlayer()),true,statsWindows)
+statsLabel["name"] = guiCreateLabel(0,0.85,1,0.15,"Name: "..getPlayerName(getLocalPlayer()):gsub("#%x%x%x%x%x%x", ""),true,statsWindows)
 guiLabelSetHorizontalAlign (statsLabel["name"],"center")
 guiSetFont (statsLabel["name"], statsFont )
 setElementData(statsLabel["name"],"identifikation","name")
