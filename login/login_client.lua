@@ -52,10 +52,11 @@ function unmarkButton (b,s)
 end
 
 news = {
-"[08/19/15]\nVersion 0.9.5a is out!\n\n--- CHANGELOG ---\n[NEW]Language: Romanian (ro)\n[NEW]Status Effects: Sepsis, Infection & Unconsciousness\n[NEW]Items: Epi-Pen, Range Finder\n[NEW]Reworked inventory UI (rightclick to use items!)\n[NEW]Crosshair integration (please remove addon_crosshair if you have it)\n[NEW]Difficulty options (Normal, Veteran, Hardcore)\n[NEW]Salute animation (press , [Comma])\n[CHANGE]Weapon damage + magazine sizes\n[FIX]Not being able to access tents\n\n\n\nThe complete changelog can be found at mta-dayz.org/forum!"
+"[09/19/15]\nVersion 0.9.6a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ"
 }
 
 oldnews = {
+"[08/19/15]\nVersion 0.9.5a is out!\n\n--- CHANGELOG ---\n[NEW]Language: Romanian (ro)\n[NEW]Status Effects: Sepsis, Infection & Unconsciousness\n[NEW]Items: Epi-Pen, Range Finder\n[NEW]Reworked inventory UI (rightclick to use items!)\n[NEW]Crosshair integration (please remove addon_crosshair if you have it)\n[NEW]Difficulty options (Normal, Veteran, Hardcore)\n[NEW]Salute animation (press , [Comma])\n[CHANGE]Weapon damage + magazine sizes\n[FIX]Not being able to access tents\n\n\n\nThe complete changelog can be found at mta-dayz.org/forum!",
 "[08/06/15]\nVersion 0.9.4a is out!\n\n--- CHANGELOG ---\n[NEW]Major restructuring of code base\n[NEW]Language: Spanish (es)\n[NEW]Helicrash sites now have 6 loot points\n[NEW]Dynamic Weather System\n[NEW]Binoculars image will fill out entire screen now\n[FIX]Vehicles not respawning at their initial spawnpoints\n[FIX]Bug with British Assault Pack\n[FIX]Temperature not decreasing when it's cold or night\n[FIX]Temperature increasing too fast (and beyond 37°) when sprinting or in vehicle\n\n\nThe complete changelog can be found at mta-dayz.org/forum!",
 "[07/28/15]\nVersion 0.9.2a is out!\n\n--- CHANGELOG ---\n[NEW]Language: Chinese\n[NEW]Toggleable GPS (/gps)\n[NEW]New compass images\n[NEW]Toggleable Compass (/compass)\n[FIX]Some zombies\n[FIX]GPS not showing correct position\n[FIX]Teleportation & Duping Bug\n[FIX]Not being able to administer \nblood bags\n\n\nThe complete changelog can be found at mta-dayz.org/forum!",
 "[07/20/15]\nVersion 0.9.0 is out!\n\n--- CHANGELOG ---\n[NEW]Vehicles are saved in custom database\n[NEW]Revamped Vehicle HUD\n[NEW]Multi-Language Support*\n[NEW]Gender Selection\n[NEW]Keycards for Area 69 and San Fierro Carrier\n[NEW]Heroes take less damage from zombies and weapons\n[NEW]Added 16 cars, 5 helicopters, 1 plane & 3 boats\n[CHANGED]Icons for HUD\n\n\nThe complete changelog can be found at mtadayz.heliohost.org!\n\n\n*Languages available at time of release: English, German, Czech, Dutch, Portuguese"
@@ -255,7 +256,9 @@ local rColor = {
 local r,g,b = unpack(rColor[math.random(1,#rColor)])
 
 function dayR( )
+	if ft then
 		dxDrawTextPerLetter ( "MTA DayZ", ( 40 / sourceX ) * sx, ( 850 / sourceY ) * sy, ( 187 / sourceX ) * sx, ( 324 / sourceY ) * sy, tocolor(r, g, b, 255), 2.00, ft, "left", "top", false, false, true, false, false,200 )
         dxDrawText( "MTA DayZ", ( 40 / sourceX ) * sx, ( 850 / sourceY ) * sy, ( 187 / sourceX ) * sx, ( 324 / sourceY ) * sy, tocolor(0, 0, 0, 150), 2.00, ft, "left", "top", false, false, true, false, false )
+	end
 end
 addEventHandler ( "onClientRender", root, dayR)
