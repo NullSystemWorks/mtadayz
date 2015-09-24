@@ -18,3 +18,4 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### FIXED: Ammo bug (L)
 ### FIXED: Patrol Pack bug (Loki)
 ### CHANGED: Moved warning ([PLAYERNAME]'s Account was buggy and has been reset.) to side chat(CiBeR96)
+### ADDED: Nice MTA DayZ DX to Login(CiBeR96)
