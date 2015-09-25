@@ -131,12 +131,13 @@ function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then
 		if getElementData(localPlayer,"pain") then
 			setCameraShakeLevel(gameplayVariables["painshakelevel"])
+			setTimer(setCameraShakeLevel,15000,1,0)
 		else
 			setCameraShakeLevel(0)
 		end
 	end
 end
-setTimer(setPlayerPain,6000,0)
+setTimer(setPlayerPain,90000,0)
 --[[ 
 Volume (Noise):
 
