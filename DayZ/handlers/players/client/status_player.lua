@@ -130,12 +130,9 @@ addEventHandler("isPlayerInBuilding",root,isPlayerInBuilding)
 function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then
 		if getElementData(localPlayer,"pain") then
-			local x,y,z = getElementPosition(localPlayer)
-			createExplosion (x,y,z+15,8,false,1.0,false)
-			local x, y, z, lx, ly, lz = getCameraMatrix()
-			x, lx = x + 1, lx + 1
-			setCameraMatrix(x,y,z,lx,ly,lz)
-			setCameraTarget (localPlayer)
+			setCameraShakeLevel(gameplayVariables["painshakelevel"])
+		else
+			setCameraShakeLevel(0)
 		end
 	end
 end
