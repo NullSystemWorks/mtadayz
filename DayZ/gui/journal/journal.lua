@@ -51,7 +51,8 @@ function showJournal()
 		end
 	end
 end
-bindKey("1","down",showJournal)
+addCommandHandler("Show Journal",showJournal)
+bindKey("5","down","Show Journal")
 
 function writeSelected()
 	guiLabelSetColor(JournalTable.label[5],255,0,0)

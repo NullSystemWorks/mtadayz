@@ -4,11 +4,9 @@
 J - Open Inventory
 L - Prone
 O - First Person Mode / Third Person Mode
-X - Global Chat (if available)
-Z - Radio Chat (if available)
-2 - Sit Down
-, - Salute
-. - Hands Up
+1 - Salute
+2 - Hands Up
+3 - Sit Down
 -/Middle Mouse - Interact with left side menu
 Tab - Open Scoreboard
 F2 - Encampment Panel
@@ -22,6 +20,7 @@ br (Brazilian Portuguese), zh (Chinese), es (Spanish))
 /ambience - Turn ambience on/off
 /gps - Turn gps on/off (if available)
 /compass - Turn compass on/off (if available)
+/ambience - Turns ambience on/off
 
 What does that "No Combat" in the upper right corner mean?
 

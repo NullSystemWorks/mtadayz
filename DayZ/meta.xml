@@ -77,6 +77,7 @@
 	<script src="handlers/players/client/status_player.lua" type="client" cache="false" />
 	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
 	<script src="handlers/world/client/lights.lua" type="client" cache="false" />
+	<script src="handlers/world/client/chat.lua" type="client" cache="false" />
 	
 	
 	<!-- Flashlight -->
@@ -374,6 +375,7 @@
 	<file src="fonts/28dayslater.ttf" />
 	<file src="fonts/needhelp.ttf" />
 	<file src="fonts/zeppelin.ttf" />
+	<file src="fonts/lucida.ttf" />
 	
 	<!-- group folder -->
 	<script src="group/group.lua" type="client"/>

@@ -182,9 +182,9 @@ function drawTheGPS()
 			worldmap = dxDrawImage(X - 3072/2, mH/5 + (Y - 3072/2), 3072, 3072, ":DayZ/gui/gear/items/radarworld.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
 		end
 		dxSetRenderTarget()
-		gpsborder = dxDrawImage((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, ":DayZ/gui/gear/items/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
+		gpsborder = dxDrawImage((990)*xFactor, sy-((300+10))*yFactor, (300)*xFactor, (200)*yFactor, ":DayZ/gui/gear/items/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
 		--dxDrawRectangle((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, tocolor(0, 0, 0, 175))
-		dxDrawImage((10+15)*xFactor, sy-((200+5))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
+		dxDrawImage((5+1000)*xFactor, sy-((300+10))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
 		local col = tocolor(r, g, b, 190)
 		local bg = tocolor(r, g, b, 100)
 		local rx, ry, rz = getElementRotation(localPlayer)
@@ -211,7 +211,7 @@ function drawTheGPS()
 						bcR, bcG, bcB = getBlipColor(v)
 					end
 				local bS = getBlipSize(v)
-				dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
+				--dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
 			end
 		end
 		if renderNorthBlip then
@@ -224,10 +224,10 @@ function drawTheGPS()
 			if bpx and bpy then --if position was obtained successfully
 				local bpx = math.max(lB, math.min(rB, bpx))
 				local bpy = math.max(tB, math.min(bB, bpy)) --cap position just in case
-				dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, ":DayZ/gui/gear/items/blip/4.png", 0, 0, 0) --draw north (4) blip
+				--dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, ":DayZ/gui/gear/items/blip/4.png", 0, 0, 0) --draw north (4) blip
 			end
 		end
-		dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, ":DayZ/gui/gear/items/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
+		--dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, ":DayZ/gui/gear/items/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
 	end
 end
 

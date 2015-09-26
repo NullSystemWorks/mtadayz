@@ -1,19 +1,11 @@
---[[
-#-----------------------------------------------------------------------------#
-----*					MTA DayZ: chat.lua								*----
-----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
+local voiceChannel = 1
 
-----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
-----* Type: SERVER														*----
-#-----------------------------------------------------------------------------#
-]]
-
-local chatRadius = 20
-local chatEadioRadius = 250
- 
-function sendMessageToNearbyPlayers( message, messageType )
-cancelEvent()
-    if (messageType == 0) then
+function broadcast(text, type, channel)
+	if isPlayerMuted(source) then
+		outputChat("#ff0000You are Muted!", source, "System", type, 4)
+		return
+	end
+	if channel == 1 then
 		local theTime = getRealTime()
 		local hour = theTime.hour
 		local minute = theTime.minute
@@ -34,63 +26,135 @@ cancelEvent()
 			seconds = theTime.second
 		end
 		local posX, posY, posZ = getElementPosition( source )
+		local chatRadius = 40
         local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
         local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
         destroyElement( chatSphere )
         for index, nearbyPlayer in ipairs( nearbyPlayers ) do
-            outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true )
-        end
-		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', '').."\n","chat")
-	end
-end
-addEventHandler( "onPlayerChat", getRootElement(), sendMessageToNearbyPlayers )
-
-function playerRadioChat(playersource,cmd,...)
-	if cmd == "radiochat" then
-		local msg2 = table.concat({...}, " ")
-		if (getElementData(playersource,"Radio Device") or 0) <= 0 then outputChatBox(shownInfos["noradio"],playersource) return end
-        local posX, posY, posZ = getElementPosition( playersource )
-        local chatSphere = createColSphere( posX, posY, posZ, chatEadioRadius )
-        local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
-        destroyElement( chatSphere )
-        for index, nearbyPlayer in ipairs( nearbyPlayers ) do
-			if getElementData(nearbyPlayer,"Radio Device") > 0 then
-				outputChatBox("[RADIO]"..string.gsub((getPlayerName(playersource).." : "..msg2), '#%x%x%x%x%x%x', ''),nearbyPlayer, 238,238,0,true )
+			outputChat(text, nearbyPlayer, getPlayerName(source), type, channel)
+		end
+	elseif channel == 2 then
+		outputChat(text, root, getPlayerName(source), type, channel)
+	elseif channel == 3 then
+		if not getElementData(source, "Group") then return end
+		for i, p in pairs(getElementsByType("player")) do 
+			if getElementData(p, "Group") == getElementData(source, "Group") then
+				outputChat(text, p, getPlayerName(source), type, channel)
 			end
+		end
+	elseif channel == 4 then
+		outputChat(text, source, "System", type, channel)
+	end
+end
+addEvent("sendText", true)
+addEventHandler("sendText", root, broadcast)
+
+--Commands
+function executeCommand(command, args)
+	if not hasObjectPermissionTo(source, "command."..command[1], true) then return end
+	executeCommandHandler(command[1], source, args)
+end
+addEvent("executeCommand", true)
+addEventHandler("executeCommand", root, executeCommand)
+
+--Output
+function outputChat(msg, toElement, playerName, type, channel)
+	triggerLatentClientEvent(toElement, "receiveChat", root, playerName, msg, type, channel)
+end
+addEvent("outputChat")
+addEventHandler("outputChat", root, outputChat)
+
+--Private Message
+function private(p, c, t, ...)
+	if t == nil then return end
+	player = findPlayer(t)
+	if not player then 
+		outputChat("#ff0000Error: Player not found!", p, "", "PM", true, false)
+		return 
+	end
+	local message = #{...}>0 and table.concat({...},' ') or nil
+	if not message then return end
+	outputChat(getPlayerName(player).."#ffffff: "..message, p, "", "PM", true, false)
+	outputChat(getPlayerName(player).."#ffffff: "..message, player, "", "PM", true, false)
+end
+addCommandHandler("pm", private)
+
+--Find a Player
+function findPlayer(name)
+    local name = name:lower()
+    for i, p in ipairs(getElementsByType("player")) do
+        local fullname = string.gsub(getPlayerName(p), '#%x%x%x%x%x%x', ''):lower()
+        if string.find(fullname, name, 1, true) then
+            return p
         end
-	end
+    end
+    return false
 end
---addCommandHandler( "radiochat", playerRadioChat )
- 
-function blockChatMessage(m,mt)
-    if mt == 1 then
-		cancelEvent()
-	end
+
+--Clean text
+function clean(text)
+	cleanText = string.gsub(text, '#%x%x%x%x%x%x', '')
+	return cleanText
 end
-addEventHandler( "onPlayerChat", getRootElement(), blockChatMessage )
+
+function setVoiceChannel(channel)
+	voiceChannel = channel
+end
+addEvent("setVoiceChannel",true)
+addEventHandler("setVoiceChannel",root,setVoiceChannel)
 
 local nearbyPlayers = {}
- 
-addEventHandler( 'onPlayerVoiceStart', root,
-    function()
-          local chatRadius = 20
-          local posX, posY, posZ = getElementPosition( source )
-          local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
-          nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
-          destroyElement( chatSphere )
-          local empty = exports.voice:getNextEmptyChannel ( )
-          exports.voice:setPlayerChannel(source, empty)
-           for index, player in ipairs (nearbyPlayers) do
-                  exports.voice:setPlayerChannel(player, empty)
-           end
-    end)
-	
-addEventHandler("onPlayerVoiceStop",root,
-    function()
-         exports.voice:setPlayerChannel(source)
-         for index, player in ipairs (nearbyPlayers) do
-                  exports.voice:setPlayerChannel(player)
-         end
-          nearbyPlayers = {}
-    end)
+function onPlayerVoiceChatStart()
+	if voiceChannel == 1 then -- local voice chat
+		local chatRadius = 20
+		local posX, posY, posZ = getElementPosition(source)
+		local chatSphere = createColSphere(posX,posY,posZ, chatRadius)
+		nearbyPlayers = getElementsWithinColShape(chatSphere, "player")
+		destroyElement(chatSphere)
+		local empty = exports.voice:getNextEmptyChannel()
+		exports.voice:setPlayerChannel(source,empty)
+		for index, player in ipairs(nearbyPlayers) do
+			exports.voice:setPlayerChannel(player,empty)
+		end
+	elseif voiceChannel == 2 then -- global voice chat
+		local empty = exports.voice:getNextEmptyChannel()
+		exports.voice:setPlayerChannel(source,empty)
+		for index, player in pairs(getElementsByType("player")) do
+			exports.voice:setPlayerChannel(player,empty)
+		end
+	elseif voiceChannel == 3 then -- group voice chat
+		local empty = exports.voice:getNextEmptyChannel()
+		exports.voice:setPlayerChannel(source,empty)
+		local group = getElementData(source,"Group")
+		for index, player in ipairs(getElementsByType("player")) do
+			if getElementData(player,"Group") and getElementData(player,"Group") == group then
+				exports.voice:setPlayerChannel(player,empty)
+			end
+		end
+	end
+end
+addEventHandler("onPlayerVoiceStart",root,onPlayerVoiceChatStart)
 
+function onPlayerVoiceChatStop()
+	if voiceChannel == 1 then
+		exports.voice:setPlayerChannel(source)
+		for index, player in ipairs (nearbyPlayers) do
+			exports.voice:setPlayerChannel(player)
+		end
+		nearbyPlayers = {}
+	elseif voiceChannel == 2 then
+		exports.voice:setPlayerChannel(source)
+		for index, player in ipairs (getElementsByType("player")) do
+			exports.voice:setPlayerChannel(player)
+		end
+	elseif voiceChannel == 3 then
+		local group = getElementData(source,"Group")
+		for index, player in ipairs(getElementsByType("player")) do
+			if getElementData(player,"Group") and getElementData(player,"Group") == group then
+				exports.voice:setPlayerChannel(player)
+			end
+		end
+    end
+end
+addEventHandler("onPlayerVoiceStop",root,onPlayerVoiceChatStop)
+    

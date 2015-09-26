@@ -674,7 +674,7 @@ function getPlayerLoad()
 		playerThirst = math.round(playerThirst+(thirst/120)*(getElementData(localPlayer,"temperature")/37),2)
 	end
 end
-addEventHandler("onClientRender",root,getPlayerLoad)
+setTimer(getPlayerLoad,30000,0)
 
 function setPlayerHunger()
 	if getElementData(localPlayer,"logedin") then
@@ -685,7 +685,7 @@ function setPlayerHunger()
 		end
 	end
 end
-setTimer(setPlayerHunger,30000,0)
+setTimer(setPlayerHunger,30100,0)
 
 function setPlayerThirst()
 	if getElementData(localPlayer,"logedin") then
@@ -696,4 +696,4 @@ function setPlayerThirst()
 		end
 	end
 end
-setTimer(setPlayerThirst,30000,0)
+setTimer(setPlayerThirst,30100,0)
