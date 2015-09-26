@@ -60,6 +60,9 @@ addEventHandler("executeCommand", root, executeCommand)
 --Output
 function outputChat(msg, toElement, playerName, type, channel)
 	triggerLatentClientEvent(toElement, "receiveChat", root, playerName, msg, type, channel)
+	if channel == 2 then
+	outputServerLog(""..playerName..": "..msg.."    " )
+	end
 end
 addEvent("outputChat")
 addEventHandler("outputChat", root, outputChat)
@@ -74,8 +77,8 @@ function private(p, c, t, ...)
 	end
 	local message = #{...}>0 and table.concat({...},' ') or nil
 	if not message then return end
-	outputChat(getPlayerName(player).."#ffffff: "..message, p, "", "PM", true, false)
-	outputChat(getPlayerName(player).."#ffffff: "..message, player, "", "PM", true, false)
+	outputChat(getPlayerName(player).."#ffffff: "..message, p, "#ffffff", "PM", true, false)
+	outputChat(getPlayerName(player).."#ffffff: "..message, player, "#ffffff", "PM", true, false)
 end
 addCommandHandler("pm", private)
 
