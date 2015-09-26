@@ -1,0 +1,7 @@
+<meta>
+	<info author="Blue" version="1.0.0" type="script" name="Dead Streets" description="Disabled Streetlights" />
+	<file src="shader/texreplace.fx"/>
+	<script src="shader.lua" type="client"/>
+	<file src="generic/shad_exp.png"/>
+	<file src="generic/coronastar.png"/>
+</meta>

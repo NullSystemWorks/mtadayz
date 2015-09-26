@@ -23,3 +23,5 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### ADDED: Arma II chatbox style (L)
 ### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal) (L)
 ### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender (L)
+### ADDED: Server Console Output on Global Chat (Bluethefurry)
+### ADDED: "Dead Night" Addon (Bluethefurry)
