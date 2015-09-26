@@ -21,4 +21,5 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### ADDED: Nice MTA DayZ DX to Login(CiBeR96)
 ### CHANGED: Pain now uses setCameraShakeLevel(150) & Added config gameplayVariables["painshakelevel"](CiBeR96)
 ### ADDED: Arma II chatbox style (L)
-### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal)
+### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal) (L)
+### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender (L)
