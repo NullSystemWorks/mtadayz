@@ -109,7 +109,7 @@ function checkBuggedAccount()
 		if getElementData(player,"logedin") then
 			if getElementModel(player) == 0 then
 				spawnDayZPlayer(player)
-				outputSideChat(getPlayerName(player).."'s Account was buggy and has been reset."),root,22,255,22)
+				outputSideChat(getPlayerName(player).."'s Account was buggy and has been reset.",root,22,255,22)
 			end
 		end
 	end	

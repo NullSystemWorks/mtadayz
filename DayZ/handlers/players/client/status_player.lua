@@ -130,16 +130,14 @@ addEventHandler("isPlayerInBuilding",root,isPlayerInBuilding)
 function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then
 		if getElementData(localPlayer,"pain") then
-			local x,y,z = getElementPosition(localPlayer)
-			createExplosion (x,y,z+15,8,false,1.0,false)
-			local x, y, z, lx, ly, lz = getCameraMatrix()
-			x, lx = x + 1, lx + 1
-			setCameraMatrix(x,y,z,lx,ly,lz)
-			setCameraTarget (localPlayer)
+			setCameraShakeLevel(gameplayVariables["painshakelevel"])
+			setTimer(setCameraShakeLevel,15000,1,0)
+		else
+			setCameraShakeLevel(0)
 		end
 	end
 end
-setTimer(setPlayerPain,6000,0)
+setTimer(setPlayerPain,90000,0)
 --[[ 
 Volume (Noise):
 
@@ -676,7 +674,7 @@ function getPlayerLoad()
 		playerThirst = math.round(playerThirst+(thirst/120)*(getElementData(localPlayer,"temperature")/37),2)
 	end
 end
-addEventHandler("onClientRender",root,getPlayerLoad)
+setTimer(getPlayerLoad,30000,0)
 
 function setPlayerHunger()
 	if getElementData(localPlayer,"logedin") then
@@ -687,7 +685,7 @@ function setPlayerHunger()
 		end
 	end
 end
-setTimer(setPlayerHunger,30000,0)
+setTimer(setPlayerHunger,30100,0)
 
 function setPlayerThirst()
 	if getElementData(localPlayer,"logedin") then
@@ -698,4 +696,4 @@ function setPlayerThirst()
 		end
 	end
 end
-setTimer(setPlayerThirst,30000,0)
+setTimer(setPlayerThirst,30100,0)
