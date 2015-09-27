@@ -10,7 +10,8 @@ to make this gamemode even better.
 ### What should I do? ###
 Generally, there is always something to do. You can either take a look at the issues list on GitHub, or go the forum (mta-dayz.org/forum) and check out the
 bug reports and suggestions. Note that you have to fork the repository first. Edit whatever you want, and make a pull request. If the developers deems your
-changes appropriate, the pull request will be accepted, and you will be marked as a collaborator. 
+changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
+Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### Contact ###
 If you wish to contact us, you can do so at our HipChat room: https://mtadayz.hipchat.com/chat/room/1819442
