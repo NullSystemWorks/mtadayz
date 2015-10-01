@@ -582,4 +582,4 @@ function refreshDebugMonitor()
 		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
 	end			
 end
-addEventHandler("onClientRender",root,refreshDebugMonitor)
+setTimer(refreshDebugMonitor,1000,0)
