@@ -61,7 +61,7 @@ function night_init()
 	end
 
 	addEventHandler('onClientHUDRender', root, night_render)
-	nightTimer = setTimer(night_check, 1000, 0)
+	nightTimer = setTimer(night_check, 60000, 0)
 end
 
 function night_check()
