@@ -86,6 +86,23 @@ function checkSlots(source)
     end
 end
 
+function banTeleport()
+	if isObjectInACLGroup ( "user." ..getAccountName(getPlayerAccount(source)), aclGetGroup ( "Everyone" ) ) and not hasObjectPermissionTo ( source, "command.mute" ) then
+		banPlayer(source,false,false,true,"BattlDayZ","[BattlDayZ] Teleport Hack",gameplayVariables["bantime"])
+	end
+end
+addEvent("bantp",true)
+addEventHandler("bantp",getRootElement(),banTeleport)
+
+function logged()
+	if hasObjectPermissionTo(source, "command.mute") then
+		triggerClientEvent(source,"startANTItp",source,1)
+	else
+		triggerClientEvent(source,"startANTItp",source,2)
+	end
+end
+addEventHandler("onPlayerLogin",getRootElement(),logged)
+
 function detectVehicleCheat(theVehicle, seat, jacked)
 	if theVehicle then
 		if ( getElementModel(theVehicle) == 432 or getElementModel(theVehicle) == 425 or getElementModel(theVehicle) == 501 or getElementModel(theVehicle) == 564 or getElementModel(theVehicle) == 594 or getElementModel(theVehicle) == 601 or getElementModel(theVehicle) == 447 or getElementModel(theVehicle) == 520 ) then

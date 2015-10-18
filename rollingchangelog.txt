@@ -25,3 +25,4 @@ This changelog lists all changes made to MTA DayZ, but have yet to be released. 
 ### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender (L)
 ### ADDED: Server Console Output on Global Chat (Bluethefurry)
 ### ADDED: "Dead Night" Addon (Bluethefurry)
+### ADDED: Anti-teleport detection method to BattlDayZ (Neves768)
