@@ -13,7 +13,7 @@ local clientLosingConnection = false
 function onPlayerIsLosingConnection(isLosingConnection)
 	if isLosingConnection then
 		if not clientLosingConnection then
-			addEventHandler("onClientRender",root,playerLosingConnection)a
+			addEventHandler("onClientRender",root,playerLosingConnection)
 			clientLosingConnection = true
 		end
 	else
