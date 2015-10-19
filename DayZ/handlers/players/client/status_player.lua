@@ -256,7 +256,7 @@ function debugJump2()
 	setElementData(localPlayer,"jumping",false)
 end
 
-local SneakEabled = false
+local SneakEnabled = false
 function setPlayerSneakOnWalk()
 	if getControlState("walk") then
 		if not SneakEnabled then
