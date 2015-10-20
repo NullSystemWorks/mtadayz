@@ -65,3 +65,38 @@ function onPlayerActivateCombatLog(attacker)
 end
 addEventHandler("onClientPlayerDamage",root,onPlayerActivateCombatLog)    
 
+haspermission = false
+ANTI_TP_enabled = true
+playerCoords = {0,0,0} -- Current player's position
+playerCoordsCheck = {0,0,0} -- Previous player's position
+function ANTIteleport() -- Tested and working!
+	if ANTI_TP_enabled and not haspermission and getElementData(getLocalPlayer(),"playerCol") then
+		local x,y,z = getElementPosition(getLocalPlayer())
+		--outputChatBox(getGroundPosition(x,y,z)..":"..z)
+		
+		playerCoords[1],playerCoords[2],playerCoords[3] = x,y,z
+		if not run then -- It's to avoid detection on the first time
+			playerCoordsCheck[1],playerCoordsCheck[2],playerCoordsCheck[3] = x,y,z
+			run = true
+		end
+		
+		coords = playerCoords[1]+playerCoords[2]+playerCoords[3]
+		coords2 = playerCoordsCheck[1]+playerCoordsCheck[2]+playerCoordsCheck[3]
+		if (coords+4 < coords2) or (coords > coords2+4) then
+			triggerServerEvent("bantp",getLocalPlayer())
+			removeEventHandler("onClientRender",getRootElement(),ANTIteleport)
+		end
+		--outputChatBox(coords..":---:"..coords2)		
+		playerCoordsCheck[1],playerCoordsCheck[2],playerCoordsCheck[3] = x,y,z
+	end
+end
+
+function initTPsys(isadmin)
+if isadmin == 1 then
+	haspermission = true
+elseif isadmin == 2 then
+	addEventHandler("onClientRender",getRootElement(),ANTIteleport)
+end
+end
+addEvent("startANTItp",true)
+addEventHandler("startANTItp",getRootElement(),initTPsys)
