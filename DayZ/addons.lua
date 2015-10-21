@@ -12,34 +12,34 @@
 addons = "DayZ 0.9.5a // "
 function addAddonInfo (name,description)
 	addons = addons.." "..name.." | "
-	setGameType (addons)
+	setGameType(addons)
 end
 
 function changeGameType()
-	setGameType("DayZ 0.9.5a")	
+	setGameType("DayZ 0.9.5a")
 end
-addEventHandler("onResourceStart",root,changeGameType)
+addEventHandler("onResourceStart", root, changeGameType)
 
 -- [[ Automatically start all resources with "addon_" in name ]] --
-function loadAddons( res )
+function loadAddons(res)
 if not gameplayVariables["autostartaddons"] then return end
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
-		if string.find(name,"addon_") then
+		if string.find(name, "addon_") then
 			startResource(resourceValue)
 		end
 	end
 end
-addEventHandler ( "onResourceStart", getResourceRootElement(getThisResource()), loadAddons )
+addEventHandler("onResourceStart", resourceRoot, loadAddons)
 
 -- [[ Stops all resources with "addon_" in name ]] --
-function unloadAddons ( res )
+function unloadAddons(res)
 if not gameplayVariables["autostartaddons"] then return end
 	for resourceKey, resourceValue in ipairs(getResources()) do
 		local name = getResourceName(resourceValue)
-		if string.find(name,"addon_") then
+		if string.find(name, "addon_") then
 			stopResource(resourceValue)
 		end
 	end
 end
-addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), unloadAddons )
+addEventHandler("onResourceStop", resourceRoot, unloadAddons)
