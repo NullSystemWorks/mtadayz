@@ -70,14 +70,14 @@ ANTI_TP_enabled = true
 playerCoords = {0,0,0} -- Current player's position
 playerCoordsCheck = {0,0,0} -- Previous player's position
 function ANTIteleport() -- Tested and working!
-	if ANTI_TP_enabled and not haspermission and getElementData(getLocalPlayer(),"playerCol") then
+	if ANTI_TP_enabled and not haspermission and getElementData(getLocalPlayer(),"playerCol") and not getElementData(getLocalPlayer(),"isDead") then
 		local x,y,z = getElementPosition(getLocalPlayer())
 		--outputChatBox(getGroundPosition(x,y,z)..":"..z)
 		
 		playerCoords[1],playerCoords[2],playerCoords[3] = x,y,z
-		if not run then -- It's to avoid detection on the first time
+		if not runn_ed then -- It's to avoid detection on the first time
 			playerCoordsCheck[1],playerCoordsCheck[2],playerCoordsCheck[3] = x,y,z
-			run = true
+			runn_ed = true
 		end
 		
 		coords = playerCoords[1]+playerCoords[2]+playerCoords[3]
@@ -91,12 +91,22 @@ function ANTIteleport() -- Tested and working!
 	end
 end
 
-function initTPsys(isadmin)
-if isadmin == 1 then
-	haspermission = true
-elseif isadmin == 2 then
-	addEventHandler("onClientRender",getRootElement(),ANTIteleport)
+function onkilled()
+	removeEventHandler("onClientRender",getRootElement(),ANTIteleport)
+	playerCoords = {0,0,0}
+	playerCoordsCheck = {0,0,0}
+	runn_ed = false
 end
+addEventHandler("onClientPlayerWasted",getLocalPlayer(),onkilled)
+
+function initTPsys(isadmin)
+	if isadmin == 1 then
+		haspermission = true
+	--[[elseif isadmin == 2 then
+		addEventHandler("onClientRender",getRootElement(),ANTIteleport)]]
+	else
+		addEventHandler("onClientRender",getRootElement(),ANTIteleport)
+	end
 end
 addEvent("startANTItp",true)
 addEventHandler("startANTItp",getRootElement(),initTPsys)
