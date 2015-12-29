@@ -33,6 +33,13 @@ gameplayVariables["realtime"] = false -- Enables/Disables real time use. When di
 gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (in ms)? Example: 10000ms (10s) realtime = 1 minute gametime - DEFAULT: 10000
 gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true
 gameplayVariables["maxzombiesglobal"] = 600 -- Not in use
+gameplayVariables["assaultpack_slots"] = 12 -- Slots for Assault Pack (ACU) - DEFAULT: 12
+gameplayVariables["czechvest_slots"] = 13 -- Slots for Czech Vest Pouch - DEFAULT: 13
+gameplayVariables["alice_slots"] = 16 -- Slots for ALICE Pack - DEFAULT: 16
+gameplayVariables["survival_slots"] = 17 -- Slots for Survival ACU - DEFAULT: 17
+gameplayVariables["britishassault_slots"] = 18 -- Slots for British Assault Pack - DEFAULT: 18
+gameplayVariables["coyote_slots"] = 24 -- Slots for Backpack (Coyote) - DEFAULT: 24
+gameplayVariables["czech_slots"] = 30 -- Slots for Czech Backpack - DEFAULT: 30
 	
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

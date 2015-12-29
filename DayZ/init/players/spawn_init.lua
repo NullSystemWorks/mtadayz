@@ -232,19 +232,19 @@ function kilLDayZPlayer (killer,headshot,weapon)
 		setElementData(pedCol,skin,1)
 		--Backpack
 		local backpackSlots = getElementData(source,"MAX_Slots")
-		if backpackSlots == 12 then
+		if backpackSlots == gameplayVariables["assaultpack_slots"] then
 			setElementData(pedCol,"Assault Pack (ACU)",1)
-		elseif backpackSlots == 13 then
+		elseif backpackSlots == gameplayVariables["czechvest_slots"] then
 			setElementData(pedCol,"Czech Vest Pouch",1)
-		elseif backpackSlots == 16 then
+		elseif backpackSlots == gameplayVariables["alice_slots"] then
 			setElementData(pedCol,"ALICE Pack",1)
-		elseif backpackSlots == 17 then
+		elseif backpackSlots == gameplayVariables["survival_slots"] then
 			setElementData(pedCol,"Survival ACU",1)
-		elseif backpackSlots == 18 then
+		elseif backpackSlots == gameplayVariables["britishassault_slots"] then
 			setElementData(pedCol,"British Assault Pack",1)
-		elseif backpackSlots == 24 then
+		elseif backpackSlots == gameplayVariables["coyote_slots"] then
 			setElementData(pedCol,"Backpack (Coyote)",1)
-		elseif backpackSlots == 30 then
+		elseif backpackSlots == gameplayVariables["czech_slots"] then
 			setElementData(pedCol,"Czech Backpack",1)
 		end
 	end

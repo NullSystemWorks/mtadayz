@@ -21,24 +21,24 @@ function addBackpackToPlayer(dataName,oldValue)
 		local rx,ry,rz = getElementRotation(source)
 		if newValue == 8 then
 			elementBackpack[source] = createObject(3026,x,y,z) -- Patrol Pack
-		elseif newValue == 12 then
+		elseif newValue == gameplayVariables["assaultpack_slots"] then
 			elementBackpack[source] = createObject(1644,x,y,z) -- Assault Pack (ACU)
-		elseif newValue == 13 then
+		elseif newValue == gameplayVariables["czechvest_slots"] then
 			elementBackpack[source] = createObject(1248,x,y,z) -- Czech Vest Pouch
-		elseif newValue == 16 then
+		elseif newValue == gameplayVariables["alice_slots"] then
 			elementBackpack[source] = createObject(2382,x,y,z) -- ALICE Pack
-		elseif newValue == 17 then
+		elseif newValue == gameplayVariables["survival_slots"] then
 			elementBackpack[source] = createObject(1314,x,y,z) -- Survival ACU
-		elseif newValue == 18 then
+		elseif newValue == gameplayVariables["britishassault_slots"] then
 			elementBackpack[source] = createObject(1318,x,y,z) -- British Assault Pack
-		elseif newValue == 24 then
+		elseif newValue == gameplayVariables["coyote_slots"] then
 			elementBackpack[source] = createObject(1252,x,y,z) -- Backpack (Coyote)
-		elseif newValue == 30 then
+		elseif newValue == gameplayVariables["czech_slots"] then
 			elementBackpack[source] = createObject(1575,x,y,z) -- Czech Backpack
-		elseif newValue > 30 then
+		elseif newValue > gameplayVariables["czech_slots"] then
 			return
 		end
-		if newValue == 30 then
+		if newValue == gameplayVariables["czech_slots"] then
 			attachElementToBone(elementBackpack[source],source,3,0,-0.16,0.05,270,0,180)
 		else
 			attachElementToBone(elementBackpack[source],source,3,0,-0.225,0.05,90,0,0)
