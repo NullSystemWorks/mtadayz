@@ -142,26 +142,26 @@ function onPlayerEquipBackpack(itemName)
 	local backpack_item = 0
 	local backpack_weapons = 0
 	if itemName == "Assault Pack (ACU)" then
-		backpack_item = 12
-		backpack_weapons = 1
+		backpack_item = gameplayVariables["assaultpack_slots"]
+		backpack_weapons = gameplayVariables["assaultpack_gunslots"]
 	elseif itemName == "Czech Vest Pouch" then
-		backpack_item = 13
-		backpack_weapons = 1
+		backpack_item = gameplayVariables["czechvest_slots"]
+		backpack_weapons = gameplayVariables["czechvest_gunslots"]
 	elseif itemName == "ALICE Pack" then
-		backpack_item = 16
-		backpack_weapons = 1
+		backpack_item = gameplayVariables["alice_slots"]
+		backpack_weapons = gameplayVariables["alice_gunslots"]
 	elseif itemName == "Survival ACU" then
-		backpack_item = 17
-		backpack_weapons = 1
+		backpack_item = gameplayVariables["survival_slots"]
+		backpack_weapons = gameplayVariables["survival_gunslots"]
 	elseif itemName == "British Assault Pack" then
-		backpack_item = 18
-		backpack_weapons = 1
+		backpack_item = gameplayVariables["britishassault_slots"]
+		backpack_weapons = gameplayVariables["britishassault_gunslots"]
 	elseif itemName == "Backpack (Coyote)" then
-		backpack_item = 24
-		backpack_weapons = 2
+		backpack_item = gameplayVariables["coyote_slots"]
+		backpack_weapons = gameplayVariables["coyote_gunslots"]
 	elseif itemName == "Czech Backpack" then
-		backpack_item = 30
-		backpack_weapons = 6
+		backpack_item = gameplayVariables["czech_slots"]
+		backpack_weapons = gameplayVariables["czech_gunslots"]
 	end
 	setElementData(source,itemName,getElementData(source,itemName)-1)
 	setElementData(source,"Backpack_Slots",backpack_item)

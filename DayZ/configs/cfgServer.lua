@@ -33,13 +33,22 @@ gameplayVariables["realtime"] = false -- Enables/Disables real time use. When di
 gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (in ms)? Example: 10000ms (10s) realtime = 1 minute gametime - DEFAULT: 10000
 gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true
 gameplayVariables["maxzombiesglobal"] = 600 -- Not in use
+
+-- BACKPACK SETTINGS | Use common sense when changing the weapon slots! Nobody likes backpacks with 3 item slots and 500 weapon slots.
 gameplayVariables["assaultpack_slots"] = 12 -- Slots for Assault Pack (ACU) - DEFAULT: 12
+gameplayVariables["assaultpack_gunslots"] = 1 -- Weapon slots for Assault Pack (ACU) - DEFAULT: 1
 gameplayVariables["czechvest_slots"] = 13 -- Slots for Czech Vest Pouch - DEFAULT: 13
+gameplayVariables["czechvest_gunslots"] = 1 -- Weapon slots for Czech Vest Pouch - DEFAULT: 1
 gameplayVariables["alice_slots"] = 16 -- Slots for ALICE Pack - DEFAULT: 16
+gameplayVariables["alice_gunslots"] = 1 -- Weapon slots for ALICE Pack - DEFAULT: 1
 gameplayVariables["survival_slots"] = 17 -- Slots for Survival ACU - DEFAULT: 17
+gameplayVariables["survival_gunslots"] = 1 -- Weapon slots for Survival ACU - DEFAULT: 1
 gameplayVariables["britishassault_slots"] = 18 -- Slots for British Assault Pack - DEFAULT: 18
+gameplayVariables["britishassault_gunslots"] = 1 -- Weapon slots for British Assault Pack - DEFAULT: 1
 gameplayVariables["coyote_slots"] = 24 -- Slots for Backpack (Coyote) - DEFAULT: 24
+gameplayVariables["coyote_gunslots"] = 2 -- Weapon slots for Backpack (Coyote) - DEFAULT: 2
 gameplayVariables["czech_slots"] = 30 -- Slots for Czech Backpack - DEFAULT: 30
+gameplayVariables["czech_gunslots"] = 6 -- Weapon slots for Czech Backpack - DEFAULT: 6
 	
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.
