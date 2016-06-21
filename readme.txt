@@ -8,6 +8,9 @@ Once you have moved the contents of mtadayz.zip to the resources folder, open ac
     <object name="resource.DayZ"></object>
     <object name="resource.login"></object>
     <object name="resource.slothbot"></object>
+    <object name="user.[YOUR_NAME]"></object>
+    
+    You need edit "[YOUR_NAME]" per your nickname in game for playing with your admin rights.
     
 Now open mtaserver.conf, scroll down and add these lines:
 
