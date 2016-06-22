@@ -4,6 +4,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
 
 ### ADDED: For new features
+### ADDED: Addon "Antiglitch"
 ### CHANGED: For changes in existing features
 ### DEPRECATED: For once-stable removed in upcoming releases
 ### REMOVED: For deprecated features removed in the release it's mentioned in

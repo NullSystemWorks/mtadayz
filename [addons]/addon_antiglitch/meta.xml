@@ -1,0 +1,7 @@
+<meta>
+    <info type="map" name="Antiglitch" author="PicardRemi" version="1.0.20"></info>
+    <map src="addon_antiglitch.map" dimension="0"></map>
+
+    <script src="mapEditorScriptingExtension_s.lua" type="server"></script>
+    <script src="mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
+</meta>
