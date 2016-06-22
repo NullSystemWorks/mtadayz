@@ -183,16 +183,6 @@ function updateTotalKills()
 end
 setTimer(updateTotalKills,3000,0)
 
-function getServerDetails()
-	for i, player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			serverName = getServerName()
-			triggerClientEvent("getTheServerName",root,serverName)
-		end
-	end
-end
-setTimer(getServerDetails,3000,0)
-
 function antiWaterGlitch()
    if isElementInWater(source) then
       local x, y, z = getElementPosition(source)
