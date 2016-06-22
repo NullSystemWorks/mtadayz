@@ -545,6 +545,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Kann zum Reparieren aller\nmöglichen Fahrzeuge verwendet werden.","Werkzeugkasten"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Item", "Drücke 'Z' zum Aktivieren.","Radio"},
 		{"Compass",1,'compass.png',128,128,"Item","Zeigt dir die Himmelsrichtungen an.","Kompass"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 
 },
@@ -803,6 +804,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Předmět", "Nařadí sloužící k\nopravě různých druhů vozidel.","Nářadí"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Předmět", "Stiskni 'Z' pro aktivac.","Vysílačka"},
 		{"Compass",1,'compass.png',128,128,"Předmět","Pasivní předmět, je\naktivován sebráním.","Kompas"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 },
 
@@ -1061,6 +1063,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Gebruikt om auto's te repareren \n van alle soorten.","Gereedschapskist"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Item", "Press 'Z' to activate.","Radio Device"},
 		{"Compass",1,'compass.png',128,128,"Item","Passieve item zal worden \n geactiveerd wanneer het word opgepakt.","Kompas"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 },
 
@@ -1575,6 +1578,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"物品", "用来修理\n各种汽车.","工具箱"}, 
 		{"Radio Device", 1,'radio.png',128,128,"物品", "按 'Z' 使用.","无线电"},
 		{"Compass",1,'compass.png',128,128,"物品","Passive 物品, 只要\n打开就能用.","指南针"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 },
 ["es"] = {
@@ -2088,6 +2092,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Utilisée pour réparer les voitures\nde toutes sortes.","Boîte à outils"},
 		{"Radio Device", 1,'radio.png',128,128,"Item", "Cliquez sur 'Z' pour l'utiliser.","Radio Device"},
 		{"Compass",1,'compass.png',128,128,"Item","S'active automatiquement lors du ramassage.","Boussole"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Une lampe torche.","Lampe torche","Equip Secondary Weapon"},
 	},
 },
 
@@ -2340,6 +2345,7 @@ languageTextTable = {
 		{"Toolbox", 1,'toolbox.png',128,128,"Item", "Folosită pentru a repara mașini.","Trusă cu scule"}, 
 		{"Radio Device", 1,'radio.png',128,128,"Item", "Apasă 'Z' pentru a comunica.","Device radio"},
 		{"Compass",1,'compass.png',128,128,"Item","Va fi activată când va fi ridicată.","Busolă"},
+		{"Flashlight",1,'flashlight.png',128,128,"Item","Flashlight","Flashlight","Equip Secondary Weapon"},
 	},
 },
 -- Polish (PL)
