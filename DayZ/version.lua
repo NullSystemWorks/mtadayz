@@ -8,8 +8,9 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+--[[
 local timer
-version = "0.9.6a"
+version = "0.9.7a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
@@ -33,4 +34,4 @@ function onVersionReturn(_version)
 		return
 	end
 	outputServerLog("[DayZ] MTA DayZ is up-to-date.")
-end
+end --]]

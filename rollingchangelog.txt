@@ -1,29 +1,4 @@
 ﻿# CHANGELOG #
 This changelog lists all changes made to MTA DayZ, but have yet to be released. It adheres to the following features description.
 
-## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
-
-### ADDED: For new features
-### CHANGED: For changes in existing features
-### DEPRECATED: For once-stable removed in upcoming releases
-### REMOVED: For deprecated features removed in the release it's mentioned in
-### FIXED: For all bugs
-### SECURITY: To invite users to upgrade in case of vulnerabilities
-
-## [0.9.7a] - NOT YET RELEASED
-### FIXED: Black & White shader not loading(CiBeR96)
-### CHANGED: Added Flashlight to Spanish Language(CiBeR96)
-### FIXED: Fixed Polish Language Typo(CiBeR96)
-### ADDED: Polish Language (CiBeR96//Author: KaSkA3eR)
-### FIXED: Ammo bug (L)
-### FIXED: Patrol Pack bug (Loki)
-### CHANGED: Moved warning ([PLAYERNAME]'s Account was buggy and has been reset.) to side chat(CiBeR96)
-### ADDED: Nice MTA DayZ DX to Login(CiBeR96)
-### CHANGED: Pain now uses setCameraShakeLevel(150) & Added config gameplayVariables["painshakelevel"](CiBeR96)
-### ADDED: Arma II chatbox style (L)
-### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal) (L)
-### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender (L)
-### ADDED: Server Console Output on Global Chat (Bluethefurry)
-### ADDED: "Dead Night" Addon (Bluethefurry)
-### ADDED: Anti-teleport detection method to BattlDayZ (Neves768)
-### FIXED: Anti-teleport detection(Neves768)
+## [0.9.8a] - DATE OF RELEASE (YYYY-MM-DD)

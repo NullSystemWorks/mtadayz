@@ -123,7 +123,7 @@ local infoTable = {
 "Press - to interact with the left side menu",
 "Encountered a bug? Please report it to the development team!",
 "Visit our forum: mta-dayz.org/forum",
-"MTA:DayZ 0.9.5a",
+"MTA:DayZ 0.9.7a",
 }
 
 function outputInfo()
