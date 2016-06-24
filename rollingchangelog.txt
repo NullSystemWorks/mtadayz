@@ -2,3 +2,5 @@
 This changelog lists all changes made to MTA DayZ, but have yet to be released. It adheres to the following features description.
 
 ## [0.9.8a] - DATE OF RELEASE (YYYY-MM-DD)
+### FIXED : The player don't get damage if are submerged for along time. (PicardRemi)
+### ADDED : gameplayVariables["waterdamage"] in cfgClient.lua, damage received by a player when it is under water. (PicardRemi)

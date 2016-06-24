@@ -288,6 +288,20 @@ function updatePlayTime()
 end
 setTimer(updatePlayTime,60000,0)
 
+function playerBloodInWater()
+	if getElementData(localPlayer, "logedin") then
+		local posX, posY, posZ = getElementPosition(localPlayer)
+		if posZ <= -4 then
+			if isElementInWater(localPlayer) then
+				local pBlood = getElementData(localPlayer,"blood")
+				setElementData(localPlayer,"blood", pBlood - gameplayVariables["waterdamage"])
+				setElementData(localPlayer,"pain",true)
+			end
+		end
+	end
+end
+setTimer(playerBloodInWater,4000,0)
+
 function onPlayerActionPlaySound(item)
 	if item == "meat" then
 		local number = math.random(0,1)

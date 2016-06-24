@@ -13,6 +13,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Arma II chatbox style
 ### ADDED: Server Console Output on Global Chat
 ### ADDED: "Dead Night" Addon
+### ADDED : gameplayVariables["waterdamage"] in cfgClient.lua, damage received by a player when it is under water
 ### ADDED: Anti-teleport detection method to BattlDayZ
 ### CHANGED: For changes in existing features
 ### CHANGED: Added Flashlight to Spanish Language
@@ -29,6 +30,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: Ammo bug
 ### FIXED: Patrol Pack bug
 ### FIXED: Black & White shader not loading
+### FIXED : The player don't get damage if are submerged for along time
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
 ### LANGUAGE: Romanian is now available.
 
