@@ -14,7 +14,7 @@ changes appropriate, the pull request will be accepted, and you will be marked a
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### Contact ###
-If you wish to contact us, you can do so at our HipChat room: https://mtadayz.hipchat.com/chat/room/1819442
+If you wish to contact us, you can do so at our HipChat room: https://www.hipchat.com/gv0SKgXiJ
 It's public and accessible for everyone - you don't need an account (although creating one is beneficial in case we wish to contact you).
 Furthermore, you can try our forum: https://mta-dayz.org/forum/
 
