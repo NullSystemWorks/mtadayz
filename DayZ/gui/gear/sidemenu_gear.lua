@@ -189,6 +189,10 @@ local number = 0
 		setElementData(rowText[number],"usedItem","deadreason")
 		guiSetVisible(rowImage[number],true)
 		guiSetText(rowText[number],"Check Body")
+
+		setElementData(rowText[3],"usedItem","hidebody")
+  		guiSetVisible(rowImage[3],true)
+  		guiSetText(rowText[3],"Hide Body")
 	end
 	if arg1 == "Fireplace" then
 		if getElementData(getLocalPlayer(),"Raw Meat") >= 1 then
@@ -680,6 +684,11 @@ if ( keyState == "down" ) then
 			disableMenu()
 			return
 		end
+		if itemName == "hidebody" then
+	        triggerServerEvent("onPlayerHideBody",getLocalPlayer())
+	        disableMenu()
+	        return
+	    end
 		if itemName == "takewheel" then
 			if getPlayerCurrentSlots() + getItemSlots("Tire") <= getPlayerMaxAviableSlots() then
 				local col = getElementData(getLocalPlayer(),"currentCol")

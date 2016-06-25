@@ -9,7 +9,7 @@
 * @version		1.0
 ]]--
 
-local maxDarkness = 0.05 -- [1] = lightest || [0] = darkest
+local maxDarkness = 0.11 -- [1] = lightest || [0] = darkest
 local speed = 0.003 -- 0.001
 
 -- Default variables you shouldn't alter.
@@ -61,7 +61,7 @@ function night_init()
 	end
 
 	addEventHandler('onClientHUDRender', root, night_render)
-	nightTimer = setTimer(night_check, 60000, 0)
+	nightTimer = setTimer(night_check, 4000, 0)
 end
 
 function night_check()

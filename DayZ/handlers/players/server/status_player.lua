@@ -155,3 +155,27 @@ function onPlayerTransmitSepsis()
 end
 addEvent("onPlayerTransmitSepsis",true)
 addEventHandler("onPlayerTransmitSepsis",root,onPlayerTransmitSepsis)
+
+function onPlayerHideBody()
+    local col = getElementData(source,"currentCol")
+    if getElementData(source, "Shovel") > 0 then
+        if isElement (col) then
+          setPedAnimation(source,"BOMBER","BOM_Plant",-1,false,false,nil,false)
+            if getElementData(col,"deadman") or getElementData(col,"deadzombie") then
+                setElementData(source,"loot",false)
+                setElementData(source,"currentCol",false)
+                triggerClientEvent(source, "displayClientInfo", source, "Info","You hide the body", 22, 255, 0)
+                setTimer(function(colision)
+                    if isElement (getElementData(colision,"parent")) then
+                        destroyElement(getElementData(colision,"parent"))
+                    end
+                    destroyElement(colision)
+                end,2000,1,col)
+            end 
+        end
+    else
+      triggerClientEvent(source, "displayClientInfo", source, "Info", "You must have a shovel !", 255, 51, 51)
+    end
+end
+addEvent("onPlayerHideBody",true)
+addEventHandler("onPlayerHideBody",getRootElement(),onPlayerHideBody)
