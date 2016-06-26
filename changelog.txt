@@ -23,7 +23,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal)
 ### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender
 ### CHANGED: The night is far less dark
-### CHANGED: The timer "night_check" is now set to 4 seconds.
+### CHANGED: The timer "night_check" is now set to 1 seconds
 ### DEPRECATED: For once-stable removed in upcoming releases
 ### REMOVED: For deprecated features removed in the release it's mentioned in
 ### FIXED: For all bugs
@@ -34,6 +34,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: Patrol Pack bug
 ### FIXED: Black & White shader not loading
 ### FIXED : The player don't get damage if are submerged for along time
+### FIXED : "NV Goggles" and "IR Goggles" do not work properly at night
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
 ### LANGUAGE: Romanian is now available.
 
