@@ -36,6 +36,8 @@ function spawnDayZPlayer(player)
 	setAccountData(account,"isDead",false)
 	setElementData(player,"isDead",false)
 	setElementData(player,"logedin",true)
+	setElementData(player,"bleeding", 0)
+	setElementData(player,"unconscious",false)
 	setElementData(player,"admin",getAccountData(account,"admin") or false)
 	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
 	----------------------------------
@@ -143,43 +145,41 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	if not account then return end
 	killPed(source)
 	triggerClientEvent(source,"hideInventoryManual",source)
-	if getElementData(source,"alivetime") > 10 then 
-		if not isElementInWater(source) then
+	if not isElementInWater(source) then
+		local x,y,z = getElementPosition(source)
+		if getDistanceBetweenPoints3D (x,y,z,6000,6000,0) > 200 then
 			local x,y,z = getElementPosition(source)
-			if getDistanceBetweenPoints3D (x,y,z,6000,6000,0) > 200 then
-				local x,y,z = getElementPosition(source)
-				local rotX,rotY,rotZ = getElementRotation(source)
-				local skin = getElementModel(source)
-				ped = createPed(skin,x,y,z,rotZ)
-				pedCol = createColSphere(x,y,z,1.5)
-				killPed(ped)
-				setTimer(destroyDeadPlayer,600000,1,ped,pedCol) -- 3600000*0.75
-				attachElements (pedCol,ped,0,0,0)
-				setElementData(pedCol,"parent",ped)
-				setElementData(pedCol,"playername",getPlayerName(source))
-				setElementData(pedCol,"deadman",true)
-				setElementData(pedCol,"MAX_Slots",getElementData(source,"MAX_Slots"))
-				local hours, minutes = getTime()
-				if hours < 10 then
-					hour = "0"..hours
-				else
-					hours = hours
-				end
-				if minutes < 10 then
-					minutes  = "0"..minutes
-				else
-					minutes = minutes
-				end
-				if getElementData(source,"gender") == "male" then
-					genderstring = "His"
-					genderstring2 = "he"
-				else
-					genderstring = "Her"
-					genderstring2 = "she"
-				end
-				setElementData(pedCol,"deadreason",genderstring.." name was "..tostring(getPlayerName(source))..", it appears "..genderstring2.." died at "..hours..":"..minutes..".")
-			end	
-		end
+			local rotX,rotY,rotZ = getElementRotation(source)
+			local skin = getElementModel(source)
+			ped = createPed(skin,x,y,z,rotZ)
+			pedCol = createColSphere(x,y,z,1.5)
+			killPed(ped)
+			setTimer(destroyDeadPlayer,600000,1,ped,pedCol) -- 3600000*0.75
+			attachElements (pedCol,ped,0,0,0)
+			setElementData(pedCol,"parent",ped)
+			setElementData(pedCol,"playername",getPlayerName(source))
+			setElementData(pedCol,"deadman",true)
+			setElementData(pedCol,"MAX_Slots",getElementData(source,"MAX_Slots"))
+			local hours, minutes = getTime()
+			if hours < 10 then
+				hour = "0"..hours
+			else
+				hours = hours
+			end
+			if minutes < 10 then
+				minutes  = "0"..minutes
+			else
+				minutes = minutes
+			end
+			if getElementData(source,"gender") == "male" then
+				genderstring = "His"
+				genderstring2 = "he"
+			else
+				genderstring = "Her"
+				genderstring2 = "she"
+			end
+			setElementData(pedCol,"deadreason",genderstring.." name was "..tostring(getPlayerName(source))..", it appears "..genderstring2.." died at "..hours..":"..minutes..".")
+		end	
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	if killer then
