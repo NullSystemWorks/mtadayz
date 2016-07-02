@@ -134,9 +134,10 @@ if not initializeWeather then
 end
 
 function setTheWeather()
-local number = math.random(0,18)
-weatherRandomizer = math.random(600000,1800000)
+	local number = math.random(0,18)
+	weatherRandomizer = math.random(600000,1800000)
 	setWeatherBlended(number)
+	
 	if number == 8 then
 		setFarClipDistance(400)
 	elseif number == 9 then
@@ -146,37 +147,3 @@ weatherRandomizer = math.random(600000,1800000)
 	end
 end
 setTimer(setTheWeather,weatherRandomizer,0)
-
-function setNight (hour,minutes)
-	if gameplayVariables["enablenight"] then
-		if hour == 21 then
-			setSkyGradient(0, 100/minutes, 196/minutes, 136/minutes, 170/minutes, 212/minutes)
-			setFarClipDistance(120+(880-minutes*14.6))
-			setFogDistance(-150+(250-minutes*4.16))
-		elseif hour == 7 then
-			setSkyGradient( 0, 1.6*minutes, 196*3.26, 136*2.26, 170*2.83, 212*3.53 )
-			setFarClipDistance(120+(minutes*14.6))
-			setFogDistance(-150+(minutes*4.16))
-		elseif hour == 22 or hour == 23 then
-			setSkyGradient( 0, 0, 0, 0, 0, 0 )
-			setFarClipDistance(120)
-			setFogDistance(-150)
-		elseif hour >= 0 and hour <= 7 then
-			setSkyGradient( 0, 0, 0, 0, 0, 0 )
-			setFarClipDistance(120)
-			setFogDistance(-150)
-		else
-			setSkyGradient(0, 100, 196, 136, 170, 212)
-			setFarClipDistance(1000)
-			setFogDistance(100)
-		end
-	end
-end
-
-function setNightTime()
-	if not true then return end
-	local hour, minutes = getTime()
-	setNight (hour,minutes)
-end
---setTimer(setNightTime,60000,0)
---setNightTime()

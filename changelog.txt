@@ -4,7 +4,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
 ## Please add your change on rollingchangelog.txt.
 
-## [0.9.7a] - DATE OF RELEASE (2016-06-24)
+## [0.9.7a] - DATE OF RELEASE (2016-06-24) (Last update : 2016-07-02)
 
 ### ADDED: For new features
 ### ADDED: Addon "Antiglitch"
@@ -24,6 +24,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender
 ### CHANGED: The night is far less dark
 ### CHANGED: The timer "night_check" is now set to 1 seconds
+### CHANGED: You can now enable or disable the night in the "cfgClient.lua" file.
 ### DEPRECATED: For once-stable removed in upcoming releases
 ### REMOVED: For deprecated features removed in the release it's mentioned in
 ### FIXED: For all bugs
@@ -33,8 +34,9 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: Ammo bug
 ### FIXED: Patrol Pack bug
 ### FIXED: Black & White shader not loading
-### FIXED : The player don't get damage if are submerged for along time
-### FIXED : "NV Goggles" and "IR Goggles" do not work properly at night
+### FIXED: The player don't get damage if are submerged for along time
+### FIXED: "NV Goggles" and "IR Goggles" do not work properly at night
+### FIXED: Disappearance of the body after the death of a player
 ### SECURITY: To invite users to upgrade in case of vulnerabilities
 ### LANGUAGE: Romanian is now available.
 

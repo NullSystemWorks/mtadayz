@@ -11,7 +11,7 @@
 -- PING CHECK
 gameplayVariables["ping"] = 600 -- Checks if ping is over the set amount. DEFAULT: 600
 
--- DAMAGE
+-- PARAMETER
 gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: 650, for consistent damage, remove math.random(400,900) and insert value (EXAMPLE: 1000)
 gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage received by a player every 4 seconds when it is under water. DEFAULT: math.random(5500,7100).
 

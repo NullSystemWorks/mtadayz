@@ -23,7 +23,6 @@ gameplayVariables["playerzombies"] = 6 -- At what amount of zombies should they 
 gameplayVariables["amountzombies"] = 3 -- How often should the script iterate through zombie spawning (= how many zombies should spawn)? - DEFAULT: 3
 gameplayVariables["temperaturewater"] = -0.1 -- Amount of temperature to be lost when in water - DEFAULT: -0.01
 gameplayVariables["temperaturesprint"] = 0.005 -- Amount of temperature to be gained when sprinting - DEFAULT: 0.005
-gameplayVariables["enablenight"] = false -- Whether or not the night should be darker - DEFAULT: false - SET TO true to enable - remember you need to set it in editor_client.lua too.
 gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn. Note: You can also do math on the number.
 gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
 gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players - DEFAULT: true
