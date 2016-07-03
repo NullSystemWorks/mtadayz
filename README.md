@@ -13,6 +13,11 @@ bug reports and suggestions. Note that you have to fork the repository first. Ed
 changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
+### Links ###
+- **Twitter :** https://twitter.com/MTADayZ_support
+- **Trello :** https://trello.com/b/8sEXKOEl/mta-dayz
+- **HipChat :** https://www.hipchat.com/gv0SKgXiJ
+
 ### Contact ###
 If you wish to contact us, you can do so at our HipChat room: https://www.hipchat.com/gv0SKgXiJ
 It's public and accessible for everyone - you don't need an account (although creating one is beneficial in case we wish to contact you).
