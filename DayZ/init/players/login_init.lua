@@ -13,7 +13,11 @@ function playerLogin(username, pass, player)
 	account = getPlayerAccount(player)
 	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
 	local skin = getAccountData(account,"skin")
-	local gender = getAccountData(account,"gender")
+	local weight = getAccountData(account, "player.weight")
+	local hoursalive = getPlayerAccount(account, "player.hoursalive")
+	setElementData(player, "hoursalive", hoursalive)
+	setPedStat(player, 21, weight)
+
 	createZombieTable (player)
 	if getAccountData(account,"isDead") then
 		spawnDayZPlayer(player)
@@ -34,11 +38,11 @@ function playerLogin(username, pass, player)
 	attachElements ( playerCol, player, 0, 0, 0 )
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
-	setElementData(player,"gender",gender)
+	
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
-			if data[1] == "brokenbone" or data[1] == "gender" or data[1] == "unconscious" or data[1] == "sepsis" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
+			if data[1] == "brokenbone" or data[1] == "unconscious" or data[1] == "sepsis" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
 				elementData = elementData
 			else
 				elementData = 0
@@ -51,6 +55,7 @@ function playerLogin(username, pass, player)
 		setElementData(player,"bloodtypediscovered","?")
 	end
 	setElementData(player,"logedin",true)
+	triggerEvent("onPlayerChangeClothes", player)
 	--Weapons
 	--Old Weapons
 	local weapon = getElementData(player,"currentweapon_1")
@@ -73,7 +78,6 @@ function playerLogin(username, pass, player)
 	setElementData(player,"admin",getAccountData(account,"admin") or false)
 	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
-	
 end
 addEvent("onPlayerDayZLogin", true)
 addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
@@ -81,16 +85,12 @@ addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
 function playerRegister(username, pass, player)
 	local number = math.random(table.size(spawnPositions))
 	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-	local skin = 73
-	local gender = getElementData(player, "gender")
-	if gender == "male" then
-		skin = 73
-	elseif gender == "female" then
-		skin = 172
-	end
+
 	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
 	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
+	setElementData(player, "hoursalive", 0)
+
 	setTimer( function(player)
 		if isElement(player) then
 			setElementFrozen(player, false)
@@ -102,6 +102,7 @@ function playerRegister(username, pass, player)
 	attachElements ( playerCol, player, 0, 0, 0 )
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
+	setPedStat(player, 21, math.random(200,400))
 	----------------------------------
 	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
@@ -111,6 +112,12 @@ function playerRegister(username, pass, player)
 			setElementData(player,data[1],1)
 		elseif data[1] == "Flashlight" then
 			setElementData(player,data[1],1)
+		elseif data[1] == "Beige Pants" then
+      		setElementData(player, data[1], 1)
+	    elseif data[1] == "Beige Vest" then
+	    	setElementData(player, data[1], 1)
+	    elseif data[1] == "Black Shoe" then
+	    	setElementData(player, data[1], 1)
 		elseif data[1] == "MAX_Slots" then
 			setElementData(player,data[1],8)
 		elseif data[1] =="Item_Slots" then
@@ -124,7 +131,7 @@ function playerRegister(username, pass, player)
 		elseif data[1] =="Back_Weapon_Slots" then
 			setElementData(player,data[1],0)
 		elseif data[1] =="skin" then
-			setElementData(player,data[1],skin)
+			setElementData(player,data[1],0)
 		elseif data[1] =="blood" then
 			setElementData(player,data[1],12000)
 		elseif data[1] =="temperature" then
@@ -153,15 +160,13 @@ function playerRegister(username, pass, player)
 			setElementData(player,data[1],false)	
 		elseif data[1] =="humanity" then
 			setElementData(player,data[1],2500)	
-		elseif data[1] == "gender" then
-			setElementData(player,data[1],gender)
 		elseif data[1] == "bloodtype" then
 			determineBloodType(player)
 		elseif data[1] == "bloodtypediscovered" then
 			setElementData(player,"bloodtypediscovered","?")
 		else
 			setElementData(player,data[1],0)
-		end	
+		end
 	end
 	account = getAccount(username)
 	local value = getAccounts()
@@ -169,7 +174,8 @@ function playerRegister(username, pass, player)
 	setElementData(player,"playerID",value+1)
 	setAccountData(account,"playerID",value+1)
 	setElementData(player,"logedin",true)
-	createZombieTable (player)
+	createZombieTable(player)
+	triggerEvent("onPlayerChangeClothes", player)
 end
 addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
@@ -181,11 +187,13 @@ function savePlayerAccount() -- Save in the database
 		setAccountData(account,data[1],getElementData(source,data[1]))
 	end
 		local x,y,z =  getElementPosition(source)
-		local gender = getElementData(source,"gender")
+		local weight = getPedStat(source, 21) or 0
+		local hoursalive = getElementData(source, "hoursalive")
 		setAccountData(account,"last_x",x)
 		setAccountData(account,"last_y",y)
 		setAccountData(account,"last_z",z)
-		setAccountData(account,"gender",gender)
+		setAccountData(account, "player.weight", weight)
+		setAccountData(account, "hoursalive", hoursalive)
 		if getElementData(source,"logedin") then
 			destroyElement(getElementData(source,"playerCol"))
 		end
@@ -206,11 +214,13 @@ function saveAllAccounts() -- Save in the database
 				setAccountData(account,data[1],getElementData(player,data[1]))
 			end
 			local x,y,z =  getElementPosition(player)
-			local gender = getElementData(player,"gender")
+			local weight = getPedStat(source, 21) or 0
+			local hoursalive = getElementData(source, "hoursalive")
 			setAccountData(account,"last_x",x)
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
-			setAccountData(account,"gender",gender)
+			setAccountData(account, "player.weight", weight)
+			setAccountData(account, "hoursalive", hoursalive)
 			if getElementData(player,"sepsis") == 4 then
 				setAccountData(account,"infection",true)
 			end

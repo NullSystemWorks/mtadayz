@@ -1,0 +1,35 @@
+<def name="Teleport Markers">
+<element name="Teleport_p" friendlyname="Pickup teleport marker"  icon="tele.png">
+	<data name="position" type="coord3d" required="true" default="0,0,0" />
+	<data name="rotation" type="coord3d" required="true" default="0,0,0" />
+	<data name="type" type="markerType" required="true" default="cylinder" />
+	<data name="size" type="number" required="true" default="2"/>
+	<data name="color" type="color" required="false" default="#ff0000ff" />
+	<data name="description" type="string" required="true" default="Teleport pickup" />
+	<data name="desccolor" type="color" required="false" default="#00ff00ff" />
+	<data name="destynation_id" type="element:destination_p" required="false" default="" />
+	<data name="restriction" type="selection:false,playerOnly,inVehicleOnly" required="true" default="false" />
+	<data name="dimension_" type="integer" required="false" default="0" />
+	<data name="interior_" type="integer" required="false" default="0" />
+	<object editorOnly="true" model="1272" position="0,0,0" />
+	<marker color="!color!" type="!type!" size="!size!" />
+</element>
+
+<element name="destination_p" friendlyname="destination for pickup teleport marker" icon="tar.png">
+	<data name="position" type="coord3d" required="true" default="0,0,0" />
+	<data name="relative" type="selection:false,coord,coordNrot" required="true" default="false" />
+	<data name="rotation" type="coord3d" required="true" default="0,0,0" />
+	<data name="use_dest_rot" type="selection:true,false" required="true" default="true" />
+	<data name="fixed_speed" type="number" required="true" default="0" />
+	<data name="speed_multiplayer" type="number" required="true" default="1" />
+	<data name="t_dimension" type="integer" required="false" default="0" />
+	<data name="t_interior" type="integer" required="false" default="0" />
+	<object editorOnly="true" model="1272" posZ="0.5" />
+	<vehicle model="441" />
+</element>
+
+<script src="edf_cl.lua" type="client"/>
+<script src="edf_sr.lua" type="server"/>
+<file src="tele.png" />
+<file src="tar.png" />
+</def>

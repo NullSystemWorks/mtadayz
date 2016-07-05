@@ -10,7 +10,7 @@
 
 addEventHandler("onClientResourceStart", getResourceRootElement(),
 	function()
-		dayzVersion = "MTA:DayZ 0.9.7a"
+		dayzVersion = "MTA:DayZ 0.9.8a"
 		versionLabel  = guiCreateLabel(1,1,0.3,0.3,dayzVersion,true)
 		guiSetSize ( versionLabel, guiLabelGetTextExtent ( versionLabel ), guiLabelGetFontHeight ( versionLabel ), false )
 		x,y = guiGetSize(versionLabel,true)
@@ -283,10 +283,18 @@ setTimer(updateDaysAliveTime,2880000,0)
 function updatePlayTime()
 	if getElementData(localPlayer,"logedin") then
 		local playtime = getElementData(localPlayer,"alivetime")
-		setElementData(localPlayer,"alivetime",playtime+1)	
+		setElementData(localPlayer,"alivetime",playtime+1)
 	end	
 end
 setTimer(updatePlayTime,60000,0)
+
+function updateHoursAliveTime()
+	if getElementData(localPlayer,"logedin") then
+		local hourstime = getElementData(localPlayer,"hoursalive")
+		setElementData(localPlayer,"hoursalive",hourstime+1)
+	end	
+end
+setTimer(updateHoursAliveTime,3600000,0)
 
 function playerBloodInWater()
 	if getElementData(localPlayer, "logedin") then

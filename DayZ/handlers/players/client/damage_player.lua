@@ -37,12 +37,6 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 			viralmultiplier = 1
 		end
 		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-(((gameplayVariables["zombiedamage"]*viralmultiplier)*multiplier)/damage_half))
-		local gender = getElementData(localPlayer,"gender")
-		if gender == "male" then
-			playSFX("pain_a",2,53,false)
-		elseif gender == "female" then
-			playSFX("pain_a",1,52,false)
-		end
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
 		local number = math.random(1,40)

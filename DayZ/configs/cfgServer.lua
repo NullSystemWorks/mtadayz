@@ -33,6 +33,13 @@ gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (
 gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true
 gameplayVariables["maxzombiesglobal"] = 600 -- Not in use
 
+-- WEIGHT SETTINGS
+gameplayVariables["weight_food"] = math.random(25,35) -- The weight that a player takes after eating. DEFAULT: math.random(25,35)
+gameplayVariables["weight_thirst"] = math.random(15,25) -- The weight that a player takes after drinking. DEFAULT: math.random(15,25)
+
+gameplayVariables["weight_loose"] = math.random(1,3) -- The weight that the player loses when he runs. DEFAULT: math.random(1,3)
+gameplayVariables["weight_loosetimer"] = 10000 -- The player loses weight all the "X" seconds. DEFAULT: 10000 ms = 10sec.
+
 -- BACKPACK SETTINGS | Use common sense when changing the weapon slots! Nobody likes backpacks with 3 item slots and 500 weapon slots.
 gameplayVariables["assaultpack_slots"] = 12 -- Slots for Assault Pack (ACU) - DEFAULT: 12
 gameplayVariables["assaultpack_gunslots"] = 1 -- Weapon slots for Assault Pack (ACU) - DEFAULT: 1

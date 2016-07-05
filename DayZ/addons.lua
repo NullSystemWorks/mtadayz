@@ -9,14 +9,14 @@
 ]]
 -- [[ Setting game type (Is this still needed?) ]] --
 
-addons = "DayZ 0.9.7a // "
+addons = "DayZ 0.9.8a // "
 function addAddonInfo (name,description)
 	addons = addons.." "..name.." | "
 	setGameType(addons)
 end
 
 function changeGameType()
-	setGameType("DayZ 0.9.7a")
+	setGameType("DayZ 0.9.8a")
 end
 addEventHandler("onResourceStart", root, changeGameType)
 

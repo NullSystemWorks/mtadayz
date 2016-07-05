@@ -45,22 +45,46 @@ end
 
 if not script_serverside then
 	function getBoneMatrix(ped,bone)
-		local x,y,z,tx,ty,tz,fx,fy,fz
-		x,y,z = getPedBonePosition(ped,bone_0[bone])
-		if bone == 1 then
-			local x6,y6,z6 = getPedBonePosition(ped,6)
-			local x7,y7,z7 = getPedBonePosition(ped,7)
-			tx,ty,tz = (x6+x7)*0.5,(y6+y7)*0.5,(z6+z7)*0.5
-		elseif bone == 3 then
-			local x21,y21,z21 = getPedBonePosition(ped,21)
-			local x31,y31,z31 = getPedBonePosition(ped,31)
-			tx,ty,tz = (x21+x31)*0.5,(y21+y31)*0.5,(z21+z31)*0.5
-		else
-			tx,ty,tz = getPedBonePosition(ped,bone_t[bone])
-		end
-		fx,fy,fz = getPedBonePosition(ped,bone_f[bone])
-		local xx,xy,xz,yx,yy,yz,zx,zy,zz = getMatrixFromPoints(x,y,z,tx,ty,tz,fx,fy,fz)
-		if bone == 1 or bone == 3 then xx,xy,xz,yx,yy,yz = -yx,-yy,-yz,xx,xy,xz end
-		return xx,xy,xz,yx,yy,yz,zx,zy,zz
-	end
+        local x,y,z,tx,ty,tz,fx,fy,fz
+        x,y,z = getPedBonePosition(ped,bone_0[bone])
+        if bone == 1 then
+            local x6,y6,z6 = getPedBonePosition(ped,6)
+            local x7,y7,z7 = getPedBonePosition(ped,7)
+            tx,ty,tz = (x6+x7)*0.5,(y6+y7)*0.5,(z6+z7)*0.5
+        elseif bone == 3 then
+            local x21,y21,z21, x31,y31,z31
+ 
+            x21,y21,z21 = getPedBonePosition(ped,21)
+            x31,y31,z31 = getPedBonePosition(ped,31)
+ 
+            if math.round(x21, 2) == math.round(x31, 2) and math.round(y21, 2) == math.round(y31, 2) and math.round(z21, 2) == math.round(z31, 2) then
+                x21,y21,z21 = getPedBonePosition(ped,21)
+                local _,_,rZ = getElementRotation(ped)
+ 
+                tx,ty,tz = getPointInFrontOfPoint(x21, y21, z21, rZ, 0.0001)
+            else
+                tx,ty,tz = (x21+x31)*0.5,(y21+y31)*0.5,(z21+z31)*0.5
+            end        
+        else
+            tx,ty,tz = getPedBonePosition(ped,bone_t[bone])
+        end
+        fx,fy,fz = getPedBonePosition(ped,bone_f[bone])
+        local xx,xy,xz,yx,yy,yz,zx,zy,zz = getMatrixFromPoints(x,y,z,tx,ty,tz,fx,fy,fz)
+        if bone == 1 or bone == 3 then xx,xy,xz,yx,yy,yz = -yx,-yy,-yz,xx,xy,xz end
+        return xx,xy,xz,yx,yy,yz,zx,zy,zz
+    end
+end
+
+function getPointInFrontOfPoint(x, y, z, rZ, dist)
+    local offsetRot = math.rad(rZ)
+    local vx = x + dist * math.cos(offsetRot)
+    local vy = y + dist * math.sin(offsetRot)  
+    return vx, vy, z
+end
+ 
+function math.round(number, decimals, method)
+    decimals = decimals or 0
+    local factor = 10 ^ decimals
+    if (method == "ceil" or method == "floor") then return math[method](number * factor) / factor
+    else return tonumber(("%."..decimals.."f"):format(number)) end
 end

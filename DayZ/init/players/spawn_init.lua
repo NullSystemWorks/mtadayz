@@ -11,13 +11,7 @@
 function spawnDayZPlayer(player)
 	local number = math.random(table.size(spawnPositions))
 	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-	local gender = getElementData(player,"gender")
-	local skin = 73
-	if gender == "male" then
-		skin = 73
-	elseif gender == "female" then
-		skin = 172
-	end
+	
 	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
 	fadeCamera (player, true)
@@ -40,6 +34,9 @@ function spawnDayZPlayer(player)
 	setElementData(player,"unconscious",false)
 	setElementData(player,"admin",getAccountData(account,"admin") or false)
 	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
+	setPedStat(player, 21, math.random(200,400))
+	setElementData(player, "hoursalive", 0)
+
 	----------------------------------
 	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
@@ -49,6 +46,12 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],1)
 		elseif data[1] == "Flashlight" then
 			setElementData(player,data[1],1)
+		elseif data[1] == "Beige Pants" then
+      		setElementData(player, data[1], 1)
+	    elseif data[1] == "Beige Vest" then
+	    	setElementData(player, data[1], 1)
+	    elseif data[1] == "Black Shoe" then
+	    	setElementData(player, data[1], 1)
 		elseif data[1] == "MAX_Slots" then
 			setElementData(player,data[1],8)
 		elseif data[1] =="Item_Slots" then
@@ -61,8 +64,6 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],8)
 		elseif data[1] =="Back_Weapon_Slots" then
 			setElementData(player,data[1],0)
-		elseif data[1] =="skin" then
-			setElementData(player,data[1],skin)
 		elseif data[1] =="blood" then
 			setElementData(player,data[1],12000)
 		elseif data[1] =="temperature" then
@@ -91,8 +92,6 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],false)
 		elseif data[1] =="humanity" then
 			setElementData(player,data[1],2500)
-		elseif data[1] =="gender" then
-			setElementData(player,data[1],gender)
 		elseif data[1] == "bloodtype" then
 			determineBloodType(player)
 		elseif data[1] == "bloodtypediscovered" then
@@ -101,22 +100,9 @@ function spawnDayZPlayer(player)
 			setElementData(player,data[1],0)
 		end
 	end
+	triggerEvent("onPlayerChangeClothes", player)
 	----------------------------------
 end
-
-function checkBuggedAccount()
-	for i,player in ipairs(getElementsByType("player")) do
-		local account = getPlayerAccount(player)
-		if not account then return end
-		if getElementData(player,"logedin") then
-			if getElementModel(player) == 0 then
-				spawnDayZPlayer(player)
-				outputSideChat(getPlayerName(player).."'s Account was buggy and has been reset.",root,22,255,22)
-			end
-		end
-	end	
-end
-setTimer(checkBuggedAccount,90000,0)
 
 function notifyAboutExplosion2()
 	for i,player in pairs(getVehicleOccupants(source)) do
@@ -171,14 +157,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 			else
 				minutes = minutes
 			end
-			if getElementData(source,"gender") == "male" then
-				genderstring = "His"
-				genderstring2 = "he"
-			else
-				genderstring = "Her"
-				genderstring2 = "she"
-			end
-			setElementData(pedCol,"deadreason",genderstring.." name was "..tostring(getPlayerName(source))..", it appears "..genderstring2.." died at "..hours..":"..minutes..".")
+			setElementData(pedCol,"deadreason"," name was "..tostring(getPlayerName(source))..", it appears died at "..hours..":"..minutes..".")
 		end	
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
@@ -227,9 +206,9 @@ function kilLDayZPlayer (killer,headshot,weapon)
 			setElementData(pedCol,data[1],plusData)
 		end
 		--Skin
-		local skinID = getElementData(source,"skin")
-		local skin = getSkinNameFromID(skinID)
-		setElementData(pedCol,skin,1)
+		--local skinID = getElementData(source,"skin")
+		--local skin = getSkinNameFromID(skinID)
+		--setElementData(pedCol,skin,1)
 		--Backpack
 		local backpackSlots = getElementData(source,"MAX_Slots")
 		if backpackSlots == gameplayVariables["assaultpack_slots"] then

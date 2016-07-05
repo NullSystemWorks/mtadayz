@@ -1,0 +1,5 @@
+addEvent("onTeleport",true)
+addEventHandler ( "onTeleport", getRootElement(),function (element,dim,inter)
+	setElementDimension(element,dim)
+	setElementInterior(element,inter)
+end)

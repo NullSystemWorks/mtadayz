@@ -8,20 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function getPlayerStance()
-	currentskin = getElementData(localPlayer,"skin")
-	if currentskin == 285 then
-		if getPedMoveState(localPlayer) == "stand" or getPedMoveState(localPlayer) == "crouch" then
-			triggerServerEvent("onPlayerGhillieStateOn",localPlayer)
-		else
-			triggerServerEvent("onPlayerGhillieStateOff",localPlayer)
-		end
-	else
-		triggerServerEvent("onPlayerGhillieStateOff",localPlayer)
-	end
-end
-setTimer(getPlayerStance,3000,0)
-
 local proned = false
 local proneObject
 local speed = 16

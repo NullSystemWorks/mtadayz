@@ -52,10 +52,11 @@ function unmarkButton (b,s)
 end
 
 news = {
-"[24/06/16]\nVersion 0.9.7a is out!\n\n--- MTA DayZ ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ"
+"[07/XX/16]\nVersion 0.9.8a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ"
 }
 
 oldnews = {
+"[06/24/16]\nVersion 0.9.7a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ",
 "[09/19/15]\nVersion 0.9.6a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ",
 "[08/19/15]\nVersion 0.9.5a is out!\n\n--- CHANGELOG ---\n[NEW]Language: Romanian (ro)\n[NEW]Status Effects: Sepsis, Infection & Unconsciousness\n[NEW]Items: Epi-Pen, Range Finder\n[NEW]Reworked inventory UI (rightclick to use items!)\n[NEW]Crosshair integration (please remove addon_crosshair if you have it)\n[NEW]Difficulty options (Normal, Veteran, Hardcore)\n[NEW]Salute animation (press , [Comma])\n[CHANGE]Weapon damage + magazine sizes\n[FIX]Not being able to access tents\n\n\n\nThe complete changelog can be found at mta-dayz.org/forum!",
 "[08/06/15]\nVersion 0.9.4a is out!\n\n--- CHANGELOG ---\n[NEW]Major restructuring of code base\n[NEW]Language: Spanish (es)\n[NEW]Helicrash sites now have 6 loot points\n[NEW]Dynamic Weather System\n[NEW]Binoculars image will fill out entire screen now\n[FIX]Vehicles not respawning at their initial spawnpoints\n[FIX]Bug with British Assault Pack\n[FIX]Temperature not decreasing when it's cold or night\n[FIX]Temperature increasing too fast (and beyond 37°) when sprinting or in vehicle\n\n\nThe complete changelog can be found at mta-dayz.org/forum!",
@@ -100,15 +101,13 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	background_news_label = guiCreateLabel(0.01, 0.01, 1, 0.1, "NEWS", true,background_news)
 	background_news_text = guiCreateLabel(0.01,0.1, 1, 0.9, news[1],true,background_news)
 	title_label = guiCreateLabel(0.29, 0.08, 0.43, 0.18, "MTA DayZ", true,background_front)
-	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.7a", true,background_front)
+	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.8a", true,background_front)
 	login_label = guiCreateLabel(0.05, 0.64, 0.20, 0.05, "LOGIN", true,background_front)
 	Login_Edit[1] = guiCreateEdit(0.05, 0.67, 0.25, 0.05, infoTable["account"], true,background_front)
 	Login_Edit[2] = guiCreateEdit(0.31, 0.67, 0.25, 0.05, infoTable["pass"], true,background_front)
 	register_label = guiCreateLabel(0.05, 0.79, 0.20, 0.05, "REGISTER", true,background_front)
 	Login_Edit[3] = guiCreateEdit(0.05, 0.82, 0.25, 0.05, "", true,background_front)
 	Login_Edit[4] = guiCreateEdit(0.31, 0.82, 0.25, 0.05, "", true,background_front)
-	Login_Edit[5] = guiCreateRadioButton(0.31, 0.89, 0.08, 0.03, "Male", true,background_front)
-	Login_Edit[6] = guiCreateRadioButton(0.39, 0.89, 0.08, 0.03, "Female", true,background_front)
 	loginButton = createMarwinButton(0.59, 0.67, 0.11, 0.05, "Login", true, background_front, "login")
 	registerButton = createMarwinButton(0.59, 0.82, 0.11, 0.05, "Register", true, background_front, "register")
 	error_label = guiCreateLabel(0.05, 0.56, 0.50, 0.06, "", true, background_front)
@@ -156,12 +155,7 @@ function clickPanelButton (button, state)
 		elseif info and info == "register" then  
 				local username = guiGetText(Login_Edit[3])
 				local pass = guiGetText(Login_Edit[4])
-				local gender = guiRadioButtonGetSelected(Login_Edit[5])
-				if gender then
-					setElementData(localPlayer,"gender","male")
-				else
-					setElementData(localPlayer,"gender","female")
-				end				
+						
 				if not (tostring(username) == "") then
 					if not (tostring(pass) == "") then
 						triggerServerEvent("onClientSendRegisterDataToServer", getLocalPlayer(), username, pass)

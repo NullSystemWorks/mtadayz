@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.7a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 	<script src="version.lua" type="server" />
 	<script src="logsystem.lua" type="server" />
@@ -78,7 +78,15 @@
 	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
 	<script src="handlers/world/client/lights.lua" type="client" cache="false" />
 	<script src="handlers/world/client/chat.lua" type="client" cache="false" />
-	
+
+	<script src="handlers/houses/teleporteditor/tele_cl.lua" type="client"/>
+	<script src="handlers/houses/teleporteditor/tele_sr.lua" type="server"/>
+	<file src="handlers/houses/teleporteditor/tele.png" />
+	<file src="handlers/houses/teleporteditor/tar.png" />
+
+	<map src="handlers/houses/mapping/mapping.map" dimension="0"></map>
+    <script src="handlers/houses/mapping/mapEditorScriptingExtension_s.lua" type="server"></script>
+    <script src="handlers/houses/mapping/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 	
 	<!-- Flashlight -->
 	<script src="handlers/players/client/flashlight/c_shader_light.lua" type="client" cache="false" />
@@ -419,30 +427,6 @@
     <export function="addAddonInfo" type="server" />    
    	
 	<!-- models folder -->
-    <file src="models/players/txd/ghilliesuit.txd" />
-    <file src="models/players/dff/ghilliesuit.dff" />
-    <file src="models/players/txd/civilian_male.txd" />
-    <file src="models/players/dff/civilian_male.dff" />
-	<file src="models/players/txd/bandit1_male.txd" />
-	<file src="models/players/dff/bandit1_male.dff" />
-	<file src="models/players/txd/bandit2_male.txd" />
-	<file src="models/players/dff/bandit2_male.dff" />
-	<file src="models/players/txd/bandit3_male.txd" />
-    <file src="models/players/dff/bandit3_male.dff" />
-    <file src="models/players/txd/standard_male.txd" />
-    <file src="models/players/dff/standard_male.dff" />
-	<file src="models/players/txd/civilian_female.txd" />
-    <file src="models/players/dff/civilian_female.dff" />
-	<file src="models/players/txd/bandit1_female.txd" />
-	<file src="models/players/dff/bandit1_female.dff" />
-	<file src="models/players/txd/bandit2_female.txd" />
-    <file src="models/players/dff/bandit2_female.dff" />
-    <file src="models/players/txd/standard_female.txd" />
-    <file src="models/players/dff/standard_female.dff" />
-    <file src="models/players/txd/hero_male.txd" />
-    <file src="models/players/dff/hero_male.dff" />
-	<file src="models/players/txd/army_male.txd" />
-	<file src="models/players/dff/army_male.dff" />
     <file src="models/animals/txd/bear.txd" />
     <file src="models/animals/dff/bear.dff" />
     <file src="models/animals/txd/fox.txd" />

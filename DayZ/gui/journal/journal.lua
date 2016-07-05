@@ -216,7 +216,6 @@ local coldstatus = false
 local murderstatus = false
 local loginstatus = false
 local humanitystatus = false
-local ghilliestatus = false
 
 function addJournalEntryOnStatus()
 	if getElementData(localPlayer,"logedin") then
@@ -353,21 +352,6 @@ function addJournalEntryOnStatus()
 			end
 		else
 			humanitystatus = false
-		end
-		if getElementData(localPlayer,"skin") == 285 then
-			if not ghilliestatus then
-				spacercount = spacercount+1
-				if spacercount == 16 then
-					guiSetText(JournalTable.label[3],"All ghillied up.")
-					ghilliestatus = true
-					spacercount = 0
-				else
-					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."All ghillied up.")
-					ghilliestatus = true
-				end
-			end
-		else
-			ghilliestatus = false
 		end
 	end
 end

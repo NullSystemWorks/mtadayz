@@ -1,0 +1,5 @@
+addEvent("onchangei",true)
+addEventHandler ( "onchangei", getRootElement(),function(elem,int)
+	exports.edf:edfSetElementInterior (elem, int)
+	--outputChatBox(int)
+end)

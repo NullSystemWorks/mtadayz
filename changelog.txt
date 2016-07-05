@@ -4,6 +4,84 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
 ## Please add your change on rollingchangelog.txt.
 
+## [0.9.8a PRE-RELEASE] - 2016-07-06 (YOU NEED REMOVE YOUR INTERNAL.DB FOR THIS UPDATE)
+### NEW: Advanced Clothes System (+60 clothes)
+### NEW: Beard and Hair System
+### NEW: Weight System
+### NEW: Interior System (with 4 interiors for the moment)
+### ADDED: Add variable "weight_food" on "CfgServer.lua"
+### ADDED: Add variable "weight_thirst" on "CfgServer.lua"
+### ADDED: Add variable "weight_loose" on "CfgServer.lua"
+### ADDED: Add variable "weight_loosetimer" on "CfgServer.lua"
+
+# CLOTHES #
+
+### ADDED: Military collar
+### ADDED: Africa collar
+### ADDED: Gold collar
+### ADDED: Silver collar
+### ADDED: LS collar
+### ADDED: Black Bandana (M)
+### ADDED: Blue Bandana (M)
+### ADDED: Green Bandana (M)
+### ADDED: Red Bandana (M)
+### ADDED: Black Bandana (H)
+### ADDED: Blue Bandana (H)
+### ADDED: Green Bandana (H)
+### ADDED: Red Bandana (H)
+### ADDED: Black Beret
+### ADDED: Red Beret
+### ADDED: Old Hat
+### ADDED: Black Hat
+### ADDED: Yellow Hat
+### ADDED: Black Trucker
+### ADDED: Blue Trucker
+### ADDED: Green Trucker
+### ADDED: Red Trucker
+### ADDED: Yellow Trucker
+### ADDED: Cow-Boy Hat
+### ADDED: White Hat
+### ADDED: Hockey Mask
+### ADDED: Black Shoe
+### ADDED: Sport Shoe
+### ADDED: Brown Shoe
+### ADDED: Biker Shoe
+### ADDED: Blue Shoe
+### ADDED: Red Shoe
+### ADDED: Beach Shoe
+### ADDED: Black Pants
+### ADDED: Beige Pants
+### ADDED: Gray Shorts
+### ADDED: Blue Shorts
+### ADDED: Blue Jeans
+### ADDED: Green Jeans
+### ADDED: Gray Pants
+### ADDED: Yellow Pants
+### ADDED: Blue Jogging
+### ADDED: Gray Jogging
+### ADDED: Military Pants
+### ADDED: Beige Vest
+### ADDED: Baseball Shirt
+### ADDED: Baseball 2 Shirt
+### ADDED: Red Vest
+### ADDED: Grey Shirt
+### ADDED: Green Vest
+### ADDED: Hawai Shirt
+### ADDED: Black Vest
+### ADDED: Brown Vest
+### ADDED: Biker Vest
+### ADDED: Blue Shirt
+### ADDED: Green 2 Vest
+### ADDED: Number 5 Shirt
+### ADDED: Monk Shirt
+### ADDED: Dark Glasses
+### ADDED: Square Glasses
+### ADDED: Red Glasses
+
+Known Issue :
+- The player can glitch during unconscious
+- When a player has 2 same clothes in her inventory. If he drop one, the garment disappear on him (He needs to re-equip the garment).
+
 ## [0.9.7a] - DATE OF RELEASE (2016-06-24) (Last update : 2016-07-02)
 
 ### ADDED: For new features

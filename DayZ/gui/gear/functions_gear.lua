@@ -141,6 +141,7 @@ local itemPlus = 1
 	elseif itemName == "Lee Enfield" or itemName == "AK-74" or itemName == "AKS-74U" or itemName == "RPK" or itemName == "AKM" or itemName == "Sa58V CCO" or itemName == "Sa58V RCO" or itemName == "FN FAL" or itemName == "M24" or itemName == "DMR" or itemName == "M40A3" or itemName == "G36A CAMO" or itemName == "G36C" or itemName == "G36C CAMO" or itemName == "G36K CAMO" or itemName == "L85A2 RIS Holo" or itemName == "M16A2" or itemName == "M16A2 M203" or itemName == "M16A2" or itemName == "M16A4" or itemName == "CZ 550" or itemName == "SVD Dragunov" or itemName == "Mosin-Nagant" or itemName == "Winchester 1866" or itemName == "Double-barreled Shotgun" or itemName == "M1014" or itemName == "Remington 870" or itemName == "Compound Crossbow" or itemName == "Hatchet" or itemName == "Bizon PP-19 SD" or itemName == "MP5A5" then
 		triggerServerEvent("removeBackWeaponOnDrop",localPlayer)
 	end
+
 	if loot then
 		if not getElementData(loot,"itemloot") and getElementType(getElementData(loot,"parent")) == "vehicle" then
 			if itemName == "Full Gas Canister" then
@@ -161,6 +162,7 @@ local itemPlus = 1
 			end
 		end
 	end
+	
 	itemName2 = itemName
 	if itemName == "Tire_inVehicle" then itemName2 = "Tire" end
 	if itemName == "Engine_inVehicle" then itemName2 = "Engine" end
@@ -345,7 +347,7 @@ function playerUseItem(itemName,itemInfo)
 			triggerServerEvent("onPlayerRequestChangingStats",localPlayer,itemName,itemInfo,"food")
 		end
 	elseif itemInfo == "Put clothes on" then
-		triggerServerEvent("onPlayerChangeSkin",localPlayer,itemName)
+		triggerServerEvent("onPlayerChangeClothes",localPlayer)
 	elseif itemName == "Empty Water Bottle" then
 		triggerServerEvent("onPlayerRefillWaterBottle",localPlayer,itemName)		
 	elseif itemName == "Tent" then

@@ -113,6 +113,250 @@ function playerDropAItem(itemName)
 	else
 		seconds = theTime.second
 	end
+
+	if itemName == "Military collar" then
+	  removePedClothes(source, 13, "dogtag", "neck")
+	end
+
+	if itemName == "Africa collar" then
+	  removePedClothes(source, 13, "neckafrica", "neck")
+	end
+	if itemName == "LS collar" then
+	  removePedClothes(source, 13, "neckls", "neck")
+	end
+
+	if itemName == "Gold collar" then
+	  removePedClothes(source, 13, "neckropeg", "neck2")
+	end
+
+	if itemName == "Silver collar" then
+	  removePedClothes(source, 13, "neckropes", "neck2")
+	end
+
+	if itemName == "Black Bandana (M)" then
+	  removePedClothes(source, 15, "bandblack3", "bandmask")
+	end
+
+	if itemName == "Blue Bandana (M)" then
+	  removePedClothes(source, 15, "bandblue3", "bandmask")
+	end
+
+	if itemName == "Green Bandana (M)" then
+	  removePedClothes(source, 15, "bandgang3", "bandmask")
+	end
+
+	if itemName == "Red Bandana (M)" then
+	  removePedClothes(source, 15, "bandgang3", "bandmask")
+	end
+
+	if itemName == "Dark Glasses" then
+	  removePedClothes(source, 15, "glasses01dark", "glasses01")
+	end
+
+	if itemName == "Red Glasses" then
+	  removePedClothes(source, 15, "glasses03red", "glasses03")
+	end
+
+	if itemName == "Square Glasses" then
+	  removePedClothes(source, 15, "glasses04dark", "glasses04")
+	end
+
+	if itemName == "Black Bandana (H)" then
+	  removePedClothes(source, 16, "bandblack", "bandana")
+	end
+
+	if itemName == "Blue Bandana (H)" then
+	  removePedClothes(source, 16, "bandblue", "bandana")
+	end
+
+	if itemName == "Green Bandana (H)" then
+	  removePedClothes(source, 16, "bandgang", "bandana")
+	end
+
+	if itemName == "Red Bandana (H)" then
+	  removePedClothes(source, 16, "bandred", "bandana")
+	end
+
+	if itemName == "Black Beret" then
+	  removePedClothes(source, 16, "beretblk", "beret")
+	end
+
+	if itemName == "Red Beret" then
+	  removePedClothes(source, 16, "beretred", "beret")
+	end
+
+	if itemName == "Old Hat" then
+	  removePedClothes(source, 16, "boater", "boater")
+	end
+
+	if itemName == "Black Hat" then
+	  removePedClothes(source, 16, "bowler", "bowler")
+	end
+
+	if itemName == "Yellow Hat" then
+	  removePedClothes(source, 16, "bowleryellow", "bowler")
+	end
+
+	if itemName == "Black Trucker" then
+	  removePedClothes(source, 16, "capblk", "cap")
+	end
+
+	if itemName == "Blue Trucker" then
+	  removePedClothes(source, 16, "capblue", "cap")
+	end
+
+	if itemName == "Green Trucker" then
+	  removePedClothes(source, 16, "capgang", "cap")
+	end
+
+	if itemName == "Red Trucker" then
+	  removePedClothes(source, 16, "capred", "cap")
+	end
+
+	if itemName == "Yellow Trucker" then
+	  removePedClothes(source, 16, "capzip", "cap")
+	end
+
+	if itemName == "Cow-Boy Hat" then
+	  removePedClothes(source, 16, "cowboy", "cowboy")
+	end
+
+	if itemName == "White Hat" then
+	  removePedClothes(source, 16, "hatmancplaid", "hatmanc")
+	end
+
+	if itemName == "Hockey Mask" then
+	  removePedClothes(source, 16, "hockey", "hockeymask")
+	end
+
+	if itemName == "Black Shoe" then
+	  removePedClothes(source, 3, "bask1problk", "bask1")
+	end
+
+	if itemName == "Sport Shoe" then
+	  removePedClothes(source, 3, "bask1prowht", "bask1")
+	end
+
+	if itemName == "Brown Shoe" then
+	  removePedClothes(source, 3, "timberfawn", "bask1")
+	end
+
+	if itemName == "Biker Shoe" then
+	  removePedClothes(source, 3, "boxingshoe", "biker")
+	end
+
+	if itemName == "Blue Shoe" then
+	  removePedClothes(source, 3, "convproblu", "conv")
+	end
+
+	if itemName == "Red Shoe" then
+	  removePedClothes(source, 3, "sneakerprored", "sneaker")
+	end
+
+	if itemName == "Beach Shoe" then
+	  removePedClothes(source, 3, "sandal", "flipflop")
+	end
+
+	if itemName == "Black Pants" then
+	  removePedClothes(source, 2, "chinosblack", "chinosb")
+	end
+
+	if itemName == "Beige Pants" then
+	  removePedClothes(source, 2, "chinosbiege", "chinosb")
+	end
+
+	if itemName == "Gray Shorts" then
+	  removePedClothes(source, 2, "chongergrey", "chonger")
+	end
+
+	if itemName == "Blue Shorts" then
+	  removePedClothes(source, 2, "chongerblue", "chonger")
+	end
+
+	if itemName == "Blue Jeans" then
+	  removePedClothes(source, 2, "jeansdenim", "jeans")
+	end
+
+	if itemName == "Green Jeans" then
+	  removePedClothes(source, 2, "denimsgang", "jeans")
+	end
+
+	if itemName == "Gray Pants" then
+	  removePedClothes(source, 2, "suit1trgreen", "suit1tr")
+	end
+
+	if itemName == "Yellow Pants" then
+	  removePedClothes(source, 2, "suit1tryellow", "suit1tr")
+	end
+
+	if itemName == "Blue Jogging" then
+	  removePedClothes(source, 2, "tracktrblue", "tracktr")
+	end
+
+	if itemName == "Gray Jogging" then
+	  removePedClothes(source, 2, "tracktrwhstr", "tracktr")
+	end
+
+	if itemName == "Military Pants" then
+	  removePedClothes(source, 2, "worktrcamogrn", "worktr")
+	end
+
+	if itemName == "Beige Vest" then
+	  removePedClothes(source, 0, "hoodjackbeige", "hoodjack")
+	end
+
+	if itemName == "Baseball Shirt" then
+	  removePedClothes(source, 0, "bandits", "baseball")
+	end
+
+	if itemName == "Baseball 2 Shirt" then
+	  removePedClothes(source, 0, "baskballdrib", "baskball")
+	end
+
+	if itemName == "Red Vest" then
+	  removePedClothes(source, 0, "bballjackrstar", "bbjack")
+	end
+
+	if itemName == "Grey Shirt" then
+	  removePedClothes(source, 0, "coachsemi", "coach")
+	end
+
+	if itemName == "Green Vest" then
+	  removePedClothes(source, 0, "field", "field")
+	end
+
+	if itemName == "Hawai Shirt" then
+	  removePedClothes(source, 0, "hawaiiwht", "hawaii")
+	end
+
+	if itemName == "Black Vest" then
+	  removePedClothes(source, 0, "hoodyAblack", "hoodyA")
+	end
+
+	if itemName == "Brown Vest" then
+	  removePedClothes(source, 0, "hoodyabase5", "hoodya")
+	end
+
+	if itemName == "Biker Vest" then
+	  removePedClothes(source, 0, "leather", "leather")
+	end
+
+	if itemName == "Blue Shirt" then
+	  removePedClothes(source, 0, "shirtbcheck", "shirtb")
+	end
+
+	if itemName == "Green 2 Vest" then
+	  removePedClothes(source, 0, "suit1gang", "suit1")
+	end
+
+	if itemName == "Number 5 Shirt" then
+	  removePedClothes(source, 0, "tshirtbase5", "tshirt")
+	end
+
+	if itemName == "Monk Shirt" then
+	  removePedClothes(source, 0, "tshirtbobomonk", "tshirt")
+	end
+
 	exports.DayZ:saveLog("[DayZ] ["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." dropped to ground: "..itemName.."\r\n","game")
 	outputDebugString("[DayZ] ["..hour..":"..minute..":"..seconds.."] "..getAccountName(theAccount).." dropped to ground: "..itemName,0,0,255,0)
 end

@@ -8,36 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function onPlayerGhillieStateOn()
-local getWeapon = getElementData(client,"currentweapon_1")
-local getAttach1 = isElementAttachedToBone(elementWeaponBack[source])
-local getAttach2 = isElementAttachedToBone(elementBackpack[source])
-setElementAlpha(client,50)
-	if getAttach1 then
-		setElementAlpha(elementWeaponBack[source],50)
-	end
-	if getAttach2 then
-		setElementAlpha(elementBackpack[source],50)
-	end
-end
-addEvent("onPlayerGhillieStateOn",true)
-addEventHandler("onPlayerGhillieStateOn",root,onPlayerGhillieStateOn)
-
-function onPlayerGhillieStateOff()
-local getWeapon = getElementData(client,"currentweapon_1")
-local getAttach1 = isElementAttachedToBone(elementWeaponBack[source])
-local getAttach2 = isElementAttachedToBone(elementBackpack[source])
-setElementAlpha(client,255)
-	if getAttach1 then
-		setElementAlpha(elementWeaponBack[source],255)
-	end
-	if getAttach2 then
-		setElementAlpha(elementBackpack[source],255)
-	end
-end
-addEvent("onPlayerGhillieStateOff",true)
-addEventHandler("onPlayerGhillieStateOff",root,onPlayerGhillieStateOff)
-
 local handsUp = false
 local sitting = false
 local lying = false
