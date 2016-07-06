@@ -18,7 +18,7 @@ end
 function checkClothes()
 	local skin1 = getElementData(source, "Military collar")
 	if skin1 >= 1 then
-	  addPedClothes(source, "dogtag", "neck", 13 )
+	  addPedClothes(source, "dogtag", "neck", 13)
 	else
 	  removePedClothes(source, 13, "dogtag", "neck")
 	end
@@ -76,7 +76,7 @@ function checkClothes()
 	if skin9 >= 1 then
 	  addPedClothes(source, "bandred3", "bandmask", 15 )
 	else
-	  removePedClothes(source, 15, "bandgang3", "bandmask")
+	  removePedClothes(source, 15, "bandred3", "bandmask")
 	end
 
 	local skin10 = getElementData(source, "Dark Glasses")
