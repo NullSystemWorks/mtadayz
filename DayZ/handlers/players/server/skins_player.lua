@@ -8,13 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function setPlayerClothes()
-	for k, player in ipairs(getElementsByType("player")) do
-        checkClothes(player)
-    end
-end
---setTimer(setPlayerClothes, 1000, 0)
-
 function checkClothes()
 	local skin1 = getElementData(source, "Military collar")
 	if skin1 >= 1 then
