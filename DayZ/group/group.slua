@@ -606,7 +606,10 @@ addEventHandler("groupSystem.viewWindow", root, viewWindow)
 
 function attemptMakeGroup(name)
 	if (isGuestAccount(getPlayerAccount(client))) then return end
-	
+	if(name:match("%W")) then 
+		outputChatBox("Use only Alphanumeric characters", client, 255, 0, 0)
+		return 
+	end
 	if (groupTable[name]) then
 		outputChatBox("There is already a group with this name", client, 255, 0, 0)
 		return
