@@ -8,6 +8,10 @@ Renkon			(Renkon)
 
 # - CONTRIBUTORS - #
 Sebbe (Smart)		(Group System: https://forum.multitheftauto.com/viewtopic.php?f=108&t=67832)
+DebexeL     (Patch Contributor)
+neves768    (Patch Contributor)
+
+# - TRANSLATORS - #
 Fortitu			(Translation: Czech)
 L			(Translation: German)
 imCEASER		(Translation: Portuguese)
