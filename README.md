@@ -19,7 +19,7 @@ Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zv
 ### Links ###
 - **Twitter :** https://twitter.com/MTADayZ_support
 - **Trello :** https://trello.com/b/8sEXKOEl/mta-dayz
-- **HipChat :** https://www.hipchat.com/gv0SKgXiJ
+- **Google Spaces :** https://goo.gl/spaces/ccaovoGwq8tZdUPS7
 
 ### Contact ###
 If you wish to contact us, you can do so at our HipChat room: https://www.hipchat.com/gv0SKgXiJ
