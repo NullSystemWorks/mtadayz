@@ -183,7 +183,9 @@ addEventHandler("onPlayerHideBody",getRootElement(),onPlayerHideBody)
 
 function changePlayerBeardAndHair()
 	for k, player in ipairs(getElementsByType("player")) do
-        editPlayerBeardAndHair(player)
+	  if getElementModel(player) == 0 then
+		 editPlayerBeardAndHair(player)
+	  end
     end
 end
 setTimer(changePlayerBeardAndHair, 120000, 0)
@@ -191,6 +193,7 @@ setTimer(changePlayerBeardAndHair, 120000, 0)
 function editPlayerBeardAndHair(thePlayer)
 	local pAliveTime = getElementData(thePlayer, "hoursalive")
 	if getElementData(thePlayer, "logedin") then
+		if not pAliveTime then return end
 		if pAliveTime == 0 or pAliveTime == 1 then
 			addPedClothes(thePlayer, "player_face", "head", 1)
 		elseif pAliveTime == 2 or pAliveTime == 3 then
