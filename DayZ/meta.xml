@@ -10,6 +10,7 @@
 <meta>
     <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
+
 	<script src="version.lua" type="server" />
 	<script src="logsystem.lua" type="server" />
 	<script src="utilities.lua" type="shared" />
@@ -26,6 +27,9 @@
     <script src="tools/bone_attach/attach_func.lua" type="server" />
     <script src="tools/bone_attach/attach_func.lua" type="client" />
     <script src="tools/bone_attach/bone_pos_rot.lua" type="client" />
+	
+	<!-- Mapping -->
+	<map src="mapping.map" dimension="0"></map>
 	
 	<!-- tables folder -->
 	<script src="tables/table_animals.lua" type="shared" />

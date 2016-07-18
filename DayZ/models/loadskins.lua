@@ -8,6 +8,104 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+-- // Buildings // --
+txd = engineLoadTXD(":DayZ/models/buildings/txd/baraquement.txd")
+engineImportTXD(txd, 3906)
+col = engineLoadCOL (":DayZ/models/buildings/col/baraquement.col")
+engineReplaceCOL (col, 3906)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/baraquement.dff", 3906)
+engineReplaceModel(dff, 3906)
+engineSetModelLODDistance(3906, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/fire.txd")
+engineImportTXD(txd, 3905)
+col = engineLoadCOL (":DayZ/models/buildings/col/fire.col")
+engineReplaceCOL (col, 3905)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/fire.dff", 3905)
+engineReplaceModel(dff, 3905)
+engineSetModelLODDistance(3905, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/hangar.txd")
+engineImportTXD(txd, 3890)
+col = engineLoadCOL (":DayZ/models/buildings/col/hangar.col")
+engineReplaceCOL (col, 3890)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/hangar.dff", 3890)
+engineReplaceModel(dff, 3890)
+engineSetModelLODDistance(3890, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/controltower.txd")
+engineImportTXD(txd, 1733)
+col = engineLoadCOL (":DayZ/models/buildings/col/controltower.col")
+engineReplaceCOL (col, 1733)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/controltower.dff", 1733)
+engineReplaceModel(dff, 1733)
+engineSetModelLODDistance(1733, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/medictent.txd")
+engineImportTXD(txd, 3903)
+col = engineLoadCOL (":DayZ/models/buildings/col/medictent.col")
+engineReplaceCOL (col, 3903)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/medictent.dff", 3903)
+engineReplaceModel(dff, 3903)
+engineSetModelLODDistance(3903, 900)
+
+-- Bulding by Condizition
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/baguilok.txd")
+engineImportTXD(txd, 14801)
+col = engineLoadCOL(":DayZ/models/buildings/col/baguilok.col")
+engineReplaceCOL(col, 14801)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/baguilok.dff", 14801)
+engineReplaceModel(dff, 14801)
+engineSetModelLODDistance(14801, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/teste.txd")
+engineImportTXD(txd, 1541)
+col = engineLoadCOL(":DayZ/models/buildings/col/teste.col")
+engineReplaceCOL(col, 1541)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/teste.dff", 1541)
+engineReplaceModel(dff, 1541)
+engineSetModelLODDistance(1541, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/tents.txd")
+engineImportTXD(txd, 14812)
+col = engineLoadCOL(":DayZ/models/buildings/col/tents.col")
+engineReplaceCOL(col, 14812)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/tents.dff", 14812)
+engineReplaceModel(dff, 14812)
+engineSetModelLODDistance(14812, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/tents2.txd")
+engineImportTXD(txd, 3971)
+col = engineLoadCOL(":DayZ/models/buildings/col/tents2.col")
+engineReplaceCOL(col, 3971)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/tents2.dff", 3971)
+engineReplaceModel(dff, 3971)
+engineSetModelLODDistance(3971, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/fires.txd")
+engineImportTXD(txd, 14838)
+col = engineLoadCOL(":DayZ/models/buildings/col/fires.col")
+engineReplaceCOL(col, 14838)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/fires.dff", 14838)
+engineReplaceModel(dff, 14838)
+engineSetModelLODDistance(14838, 900)
+
+txd = engineLoadTXD(":DayZ/models/buildings/txd/torre.txd")
+engineImportTXD(txd, 2624)
+col = engineLoadCOL(":DayZ/models/buildings/col/torre.col")
+engineReplaceCOL(col, 2624)
+dff = engineLoadDFF(":DayZ/models/buildings/dff/torre.dff", 2624)
+engineReplaceModel(dff, 2624)
+engineSetModelLODDistance(2624, 900)
+
+--[[
+engineSetModelLODDistance(12814, 900)
+engineSetModelLODDistance(866, 900)
+engineSetModelLODDistance(822, 900)
+engineSetModelLODDistance(874, 900)
+--]]
+
 -- // Animals // --
 animalTXD = engineLoadTXD(":DayZ/models/animals/txd/bear.txd")
 engineImportTXD(animalTXD, 12)
