@@ -725,6 +725,42 @@
     <file src="models/items/dff/jerrycan.dff" />
 	<file src="models/items/txd/windscreenglass.txd" />
 	<file src="models/items/dff/windscreenglass.dff" />
+
+	<file src="models/buildings/col/baguilok.col" />
+	<file src="models/buildings/col/baraquement.col" />
+	<file src="models/buildings/col/controltower.col" />
+	<file src="models/buildings/col/fire.col" />
+	<file src="models/buildings/col/fires.col" />
+	<file src="models/buildings/col/hangar.col" />
+	<file src="models/buildings/col/medictent.col" />
+	<file src="models/buildings/col/tents.col" />
+	<file src="models/buildings/col/tents2.col" />
+	<file src="models/buildings/col/teste.col" />
+	<file src="models/buildings/col/torre.col" />
+
+	<file src="models/buildings/dff/baguilok.dff" />
+	<file src="models/buildings/dff/baraquement.dff" />
+	<file src="models/buildings/dff/controltower.dff" />
+	<file src="models/buildings/dff/fire.dff" />
+	<file src="models/buildings/dff/fires.dff" />
+	<file src="models/buildings/dff/hangar.dff" />
+	<file src="models/buildings/dff/medictent.dff" />
+	<file src="models/buildings/dff/tents.dff" />
+	<file src="models/buildings/dff/tents2.dff" />
+	<file src="models/buildings/dff/teste.dff" />
+	<file src="models/buildings/dff/torre.dff" />
+
+	<file src="models/buildings/txd/baguilok.txd" />
+	<file src="models/buildings/txd/baraquement.txd" />
+	<file src="models/buildings/txd/controltower.txd" />
+	<file src="models/buildings/txd/fire.txd" />
+	<file src="models/buildings/txd/fires.txd" />
+	<file src="models/buildings/txd/hangar.txd" />
+	<file src="models/buildings/txd/medictent.txd" />
+	<file src="models/buildings/txd/tents.txd" />
+	<file src="models/buildings/txd/tents2.txd" />
+	<file src="models/buildings/txd/teste.txd" />
+	<file src="models/buildings/txd/torre.txd" />
 	
 	<script src="models/loadskins.lua" type="client" cache="false" />
 	<script src="models/weaponswitch.lua" type="client" cache="false" />
