@@ -14,7 +14,7 @@ function playerLogin(username, pass, player)
 	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
 	local skin = getAccountData(account,"skin")
 	local weight = getAccountData(account, "player.weight")
-	local hoursalive = getPlayerAccount(account, "player.hoursalive")
+	local hoursalive = getAccountData(account, "player.hoursalive")
 	setElementData(player, "hoursalive", hoursalive)
 	setPedStat(player, 21, weight)
 
