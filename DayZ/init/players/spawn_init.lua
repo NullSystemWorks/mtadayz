@@ -40,9 +40,9 @@ function spawnDayZPlayer(player)
 	----------------------------------
 	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
-		if data[1] =="Bandage" then
+		if data[1] == "Bandage" then
 			setElementData(player,data[1],2)	
-		elseif data[1] =="Painkiller" then
+		elseif data[1] == "Painkiller" then
 			setElementData(player,data[1],1)
 		elseif data[1] == "Flashlight" then
 			setElementData(player,data[1],1)
