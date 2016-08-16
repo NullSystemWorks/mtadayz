@@ -9,8 +9,9 @@
 ]]
 
 function playerLogin(username, pass, player)
-	local playerID = getAccountData(getPlayerAccount(player),"playerID")
+	if client then player = client end
 	account = getPlayerAccount(player)
+	local playerID = getAccountData(account,"playerID")
 	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
 	local skin = getAccountData(account,"skin")
 	local weight = getAccountData(account, "player.weight")
@@ -83,6 +84,7 @@ addEvent("onPlayerDayZLogin", true)
 addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
 
 function playerRegister(username, pass, player)
+	if client then player = client end
 	local number = math.random(table.size(spawnPositions))
 	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
 
@@ -214,8 +216,8 @@ function saveAllAccounts() -- Save in the database
 				setAccountData(account,data[1],getElementData(player,data[1]))
 			end
 			local x,y,z =  getElementPosition(player)
-			local weight = getPedStat(source, 21) or 0
-			local hoursalive = getElementData(source, "hoursalive")
+			local weight = getPedStat(player, 21) or 0
+			local hoursalive = getElementData(player, "hoursalive")
 			setAccountData(account,"last_x",x)
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
