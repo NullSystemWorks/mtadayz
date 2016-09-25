@@ -1,4 +1,0 @@
-﻿# CHANGELOG #
-This changelog lists all changes made to MTA DayZ, but have yet to be released. It adheres to the following features description.
-
-## [0.9.8a] - DATE OF RELEASE (YYYY-MM-DD)
