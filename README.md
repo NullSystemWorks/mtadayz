@@ -17,14 +17,9 @@ Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zv
 - MTA:DayZ Official Server #1 | **IP :** mtasa://51.254.84.14:22006
 
 ### Links ###
-- **Twitter :** https://twitter.com/MTADayZ_support
-- **Trello :** https://trello.com/b/8sEXKOEl/mta-dayz
-- **Google Spaces :** https://goo.gl/spaces/ccaovoGwq8tZdUPS7
 
 ### Contact ###
-If you wish to contact us, you can do so at our HipChat room: https://www.hipchat.com/gv0SKgXiJ
-It's public and accessible for everyone - you don't need an account (although creating one is beneficial in case we wish to contact you).
-Furthermore, you can try our forum: https://mta-dayz.org/forum/
+At the moment you can only contact us via the issues page.
 
 ### License ###
 We do not claim ownership for any of the models, textures, images or sounds provided, nor do we claim ownership for the idea or concept. However, we hereby
