@@ -14,7 +14,7 @@ changes appropriate, the pull request will be accepted, and you will be marked a
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### MTA:DayZ Server List ###
-- MTA:DayZ Official Server #1 | **IP :** mtasa://51.254.84.14:22006
+- MTA:DayZ Official Server #1 | **IP :**
 
 ### Links ###
 
