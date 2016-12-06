@@ -9,6 +9,11 @@
 ]]
 
 function addPlayerStats (player,data,value)
+	-- Fix for nil values on value,data,player variables
+	if not value or not player or not data then 
+		outputDebugString("[DayZ] ERROR: Nil values in addPlayerStats@consume_player.lua [SERVER]")
+	return end
+	--
 	if data == "food" then
 		local current = getElementData(player,data)
 		if current + value > 100 then
