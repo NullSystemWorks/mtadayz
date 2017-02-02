@@ -881,7 +881,9 @@ function itemLabelClicked(button)
 			if info then
 				--playerUseItem(name, info)
 				--setTimer(placeItemsInInventory, 200, 2)
+				if not isPlayerInLoot() then
 				showRightClickMenu(name,info,description)
+				end
 			end
 		end
 	end
