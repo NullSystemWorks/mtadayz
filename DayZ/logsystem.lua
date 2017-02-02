@@ -8,7 +8,7 @@
 
 local logTypes = { "admin", "debug", "updates", "accounts", "game", "chat" }
 
-function isCorrectLogType(funcname,logtype)
+function isCorrectLogType(logtype)
 	local isCorrectLogType = false
 	for _, v in ipairs( logTypes ) do
 		if v == logtype then
@@ -39,7 +39,7 @@ end
 
 
 function saveLog( tstring, logtype )	
-	if isCorrectLogType(funcname,logtype) ~= false then
+	if isCorrectLogType(logtype) ~= false then
 		return fileLog(logtype,tstring)
 	else
 		return false
