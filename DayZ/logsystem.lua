@@ -8,8 +8,7 @@
 
 local logTypes = { "admin", "debug", "updates", "accounts", "game", "chat" }
 
-
-function saveLog( tstring, logtype )
+function isCorrectLogType(funcname,logtype)
 	local isCorrectLogType = false
 	for _, v in ipairs( logTypes ) do
 		if v == logtype then
@@ -21,36 +20,30 @@ function saveLog( tstring, logtype )
 	if not isCorrectLogType then
 		outputDebugString( "[DayZ Logs] Error in 'saveLog' function. Wrong log type '".. logtype .."'!"  )
 		return false
-	end
-	
+	end	
+end
+
+function fileLog(logtype,tstring)
 	local file = fileOpen("logs/".. logtype .. ".log")
 	local size = fileGetSize( file )
-	local set = fileSetPos( file, size )
-	local writ = fileWrite( file, tstring )
+	if tstring then
+		local set = fileSetPos( file, size )
+		local writ = fileWrite( file, tstring )
+		local ret = true
+	else
+		local ret = fileRead( file, size )
+	end
 	fileClose( file )
-	return true
+	return ret
 end
 
 
-function returnLog( logtype )
-	local isCorrectLogType = false
-	for _, v in ipairs( logTypes ) do
-		if v == logtype then
-			isCorrectLogType = true
-			break
-		end
-	end
-	
-	if not isCorrectLogType then
-		outputDebugString( "[DayZ Logs] Error in 'returnLog' function. Wrong log type '".. logtype .."'!" )
+function saveLog( tstring, logtype )	
+	if isCorrectLogType(funcname,logtype) ~= false then
+		return fileLog(logtype,tstring)
+	else
 		return false
 	end
-
-	local file = fileOpen( "logs/".. logtype .. ".log" )
-	local size = fileGetSize( file )
-	local buf = fileRead( file, size )
-	fileClose( file )
-	return buf
 end
 
 
