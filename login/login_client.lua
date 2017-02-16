@@ -5,8 +5,8 @@ marwinButtons = {}
 sx,sy = guiGetScreenSize()
 font = {}
 scale = 1
-showPlayerHudComponent("area_name",false)
-showPlayerHudComponent("radar",false)
+setPlayerHudComponentVisible("area_name",false)
+setPlayerHudComponentVisible("radar",false)
 sound = playSound("dayzsoundtrack.mp3",true)
 setSoundVolume(sound,0.5)
 

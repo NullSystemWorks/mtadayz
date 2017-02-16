@@ -67,7 +67,7 @@ function checkTemperature2()
 			if isElementInWater(player) then
 				value = value+gameplayVariables["temperaturewater"]
 			end	
-			if getControlState (player,"sprint") then
+			if getControlState (player,"sprint") and not getElementData(player,"unconscious") then
 				if getElementData(player,"temperature") <= 37 then
 					value = value+gameplayVariables["temperaturesprint"]
 				end

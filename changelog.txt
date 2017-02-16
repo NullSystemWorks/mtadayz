@@ -13,6 +13,7 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Add variable "weight_thirst" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loose" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loosetimer" on "CfgServer.lua"
+### FIXED: body temperature keeps rising when unconscious bug
 
 # CLOTHES #
 
