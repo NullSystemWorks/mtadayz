@@ -8,7 +8,7 @@ function broadcast(text, type, channel)
 	if gameplayVariables["noadvert"] == true then
 	local Chunks = {(text:gsub("%s+", "")):match("(%d+)%.(%d+)%.(%d+)%.(%d+)")}
     	if (#Chunks == 4) then
-     	banPlayer ( source, false, false, true, nil, "Don't advertise other servers, you got an 1-day ban for it now.", 86400 )
+     	banPlayer ( source, false, false, true, nil, "Don't advertise other servers, you got an 1-day ban for it now.", gameplayVariables["adBanTime"] )
 	end
    	end
 	if channel == 1 then

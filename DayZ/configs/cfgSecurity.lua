@@ -18,3 +18,4 @@ gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a playe
 gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter - DEFAULT: 10
 gameplayVariables["maxslots"] = 30 -- Max slot amount in your server( Include VIP Slots ) - DEFAULT: 30
 gameplayVariables["noadvert"] = true -- Banning players who write the server ip
+gameplayVariables["adBanTime"] = 86400 -- If noadvert is true, define how much time should the banTime be in seconds. DEFAULT: 86400( 1 Day )
