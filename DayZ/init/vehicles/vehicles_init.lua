@@ -122,6 +122,7 @@ function createBackupOfVehiclesOnInterval()
 end
 setTimer(createBackupOfVehiclesOnInterval,gameplayVariables["backupinterval"],0)
 
+local v_counter = 0
 function createVehiclesFromDB(model, Veh_Health, last_x, last_y, last_z, last_rX, last_rY, last_rZ, MAX_Slots, fuel, Tire_inVehicle, Engine_inVehicle, Parts_inVehicle, Scrap_inVehicle, Glass_inVehicle, Rotary_inVehicle, vehicle_name, ColSize, ID, theItems, initial_X, initial_Y, initial_Z)
 	local veh = createVehicle(model, last_x, last_y, last_z, last_rX, last_rY, last_rZ)
     local vehCol = createColSphere(last_x, last_y, last_z, tonumber(ColSize))
@@ -139,6 +140,9 @@ function createVehiclesFromDB(model, Veh_Health, last_x, last_y, last_z, last_rX
     setElementData(vehCol, "spawn", {model, initial_X, initial_Y, initial_Z})
     setElementData(vehCol, "fuel", tonumber(fuel))
 	setElementID(vehCol, tostring(ID))
+	if tonumber(ID) >= tonumber(v_counter) then -- Optimization to avoid search in other loop
+		v_counter = tonumber(ID)+1
+	end
 	setElementData(vehCol,"vehicle_name",tostring(vehicle_name))
 	setElementHealth(veh,tonumber(Veh_Health))
     for i, data in ipairs(theItems) do
@@ -239,7 +243,6 @@ addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), lo
 
 function spawnDayZVehicles()
 if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
-local v_counter = 0
 	for i,veh in ipairs(ATV_Spawns) do
 		local number = math.percentChance(veh[7],8)
 		if number and number >= 1 then
@@ -1006,6 +1009,7 @@ end
 setTimer(spawnDayZVehicles,10000,1)
 
 function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
+	v_counter = v_counter+1
 	destroyElement(veh)
 	destroyElement(col)
 	veh = createVehicle(id,x,y,z+1)
@@ -1013,6 +1017,7 @@ function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
 	attachElements ( vehCol, veh, 0, 0, 0 )
 	setElementData(vehCol,"parent",veh)
 	setElementData(veh,"parent",vehCol)
+	setElementID(vehCol,tostring(v_counter))
 	setElementData(vehCol,"vehicle",true)
 	setElementData(vehCol,"MAX_Slots",max_slots)
 	--Engine + Tires
