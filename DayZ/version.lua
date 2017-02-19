@@ -10,8 +10,8 @@
 
 
 local timer
-local checkType = "stable" -- stable = Only check for stable versions; beta[SOON] = check for most recent version (including unstables)
-version = "0.9.8a"
+local checkType = "stable" -- stable = Only check for stable versions; beta = check for most recent version (including unstables)
+version = "0.9.8.1"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
@@ -32,7 +32,16 @@ function onVersionReturn(json)
 	v = fromJSON(json)
 	local new = ""
 	local old = ""
-	for num in string.gmatch(string.sub(v["name"],0,string.find(v["name"],"a")-1),".") do
+	local index1 = string.find(v["name"],"a")
+	local index2 = string.find(version,"a")
+	if not index1 then
+		index1 = tonumber(string.len(v["name"]))+1
+	end
+	if not index2 then
+		index2 = tonumber(string.len(version))+1
+	end
+	
+	for num in string.gmatch(string.sub(v["name"],0,index1-1),".") do
 		if(num ~= ".") then
 			if(num == " ") then
 				break;
@@ -40,7 +49,7 @@ function onVersionReturn(json)
 			new = new..num
 		end
 	end
-	for num in string.gmatch(string.sub(version,0,string.find(version,"a")-1),".") do
+	for num in string.gmatch(string.sub(version,0,index2-1),".") do
 		if(num ~= ".") then
 			if(num == " ") then
 				break;
@@ -58,6 +67,7 @@ function onVersionReturn(json)
 	elseif (string.len(tostring(old)) ~= string.len(tostring(new))) then -- Check the most recent version in a situation like: Most recent: 0.9.9a; Actual: 0.9.8.1a
 		local sactual = tostring(old)
 		local snew = tostring(new)
+		local draw = 0
 		if(string.len(sactual) > string.len(snew)) then
 			for i=0,string.len(snew)-1,1 do
 				if(tonumber(string.sub(snew,i,i+1))) > tonumber(string.sub(sactual,i,i+1)) then
@@ -78,6 +88,15 @@ function onVersionReturn(json)
 					return
 				end
 			end
+		end
+	end
+	if(tonumber(new) == tonumber(old)) then -- Check if version is same and has a newer version that modifies only a letter / Ex: New: 0.9.8.1a and current: 0.9.8.1 and vice-versa.
+		if (string.len(tostring(version)) ~= string.len(tostring(v["name"]))) then
+			outputServerLog("[DayZ] A new version of MTA DayZ is available!")
+			outputServerLog("[DayZ] Current Version: "..version.." | New Version: "..v["name"])
+			outputServerLog("[DayZ] Some changes: \n"..v["body"])
+			outputServerLog("[DayZ] Download the new version at https://github.com/mtadayz/MTADayZ/releases")
+			return
 		end
 	end
 	outputServerLog("[DayZ] MTA DayZ is up-to-date.")
