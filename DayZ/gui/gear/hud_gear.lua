@@ -28,13 +28,13 @@ local yFactor = xFactor
 function playerDrawMapGPSCompass()
 	if getElementData(getLocalPlayer(),"logedin") then
 		toggleControl ("radar",false)
-		showPlayerHudComponent ("clock",false) 
-		showPlayerHudComponent ("radar",false)
-		showPlayerHudComponent ("money",false) 
-		showPlayerHudComponent ("health",false) 
-		showPlayerHudComponent ("weapon",false) 
-		showPlayerHudComponent ("ammo",false) 
-		showPlayerHudComponent ("breath",false) 
+		setPlayerHudComponentVisible ("clock",false) 
+		setPlayerHudComponentVisible ("radar",false)
+		setPlayerHudComponentVisible ("money",false) 
+		setPlayerHudComponentVisible ("health",false) 
+		setPlayerHudComponentVisible ("weapon",false) 
+		setPlayerHudComponentVisible ("ammo",false) 
+		setPlayerHudComponentVisible ("breath",false) 
 		if getElementData(getLocalPlayer(),"Map") >= 1  then
 			if not mapkeybound then
 				bindKey("F11","down",toggleMap)

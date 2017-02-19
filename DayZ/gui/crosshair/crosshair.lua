@@ -5,7 +5,7 @@ local clicked = false
 local crosshair = ""
 local isFiring = 0
 
-showPlayerHudComponent("crosshair", false)
+setPlayerHudComponentVisible("crosshair", false)
 
 local crosshairTable = {
 
@@ -55,9 +55,9 @@ function drawCrosshair()
 			end
 		end
 		if getPedWeapon(localPlayer) == 34 then
-			showPlayerHudComponent("crosshair", true)
+			setPlayerHudComponentVisible("crosshair", true)
 		else
-			showPlayerHudComponent("crosshair", false)
+			setPlayerHudComponentVisible("crosshair", false)
 		end
 		if getPedWeapon(localPlayer) == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
 			crosshair = "none"
