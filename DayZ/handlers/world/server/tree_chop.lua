@@ -26,19 +26,19 @@ function onPlayerChopTree( worldID, worldX, worldY, worldZ, worldRX, worldRY, wo
 
 	local x, y, z = getElementPosition(source)
 	local item, itemString = getItemTablePosition("Wood Pile")
-  	local numberWood = math.random(1,3)
-  	
-  	if numberWood == 1 then
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
-	elseif numberWood == 2 then
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
-	elseif numberWood == 3 then
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
-		createItemPickup(item, x + math.random(-1.25, 1.25), y + math.random(-1.25, 1.25), z, itemString)
+	
+	local numberWood = trees["maxNumWood"] or 3
+	if (trees["maxNumWoodRandomised"]) then
+		numberWood = math.random(1,trees["maxNumWood"] or 3)
 	end
-
+	
+	--Debug code (Issue #86) - Hopefully to narrow down the inf spawn trees (if still present?) (1B0Y)
+	outputDebugString("onPlayerChopTree - WorldID: "..tostring(worldID).." - WorldIDLOD: "..tostring(worldIDLOD))
+  	
+	--for loops, as it allows server owners to define how much wood a player can receive.
+	for i=1,numberWood do
+		createItemPickup(item, x + math.random(-1.25,1.25), y + math.random(-1.25,1.25, z, itemString)
+	end
 end
 addEvent( "onPlayerChopTree", true )
 addEventHandler( "onPlayerChopTree", root, onPlayerChopTree )

@@ -56,3 +56,10 @@ treelist = {
 	[884] = { name = "Tree"},
 	[885] = { name = "Tree"},
 }
+
+trees = {
+	--If maxNumWoodRandomised is false, maxNumWood will be the amount of wood the player will receive from chopping a tree. 
+	--if true, maxNumWood will be the max the player can receive
+	["maxNumWoodRandomised"] = true,
+	["maxNumWood"] = 3
+}
