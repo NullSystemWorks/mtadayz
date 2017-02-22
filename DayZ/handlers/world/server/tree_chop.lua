@@ -37,7 +37,7 @@ function onPlayerChopTree( worldID, worldX, worldY, worldZ, worldRX, worldRY, wo
   	
 	--for loops, as it allows server owners to define how much wood a player can receive.
 	for i=1,numberWood do
-		createItemPickup(item, x + math.random(-1.25,1.25), y + math.random(-1.25,1.25, z, itemString)
+		createItemPickup(item, x + math.random(-1.25,1.25), y + math.random(-1.25,1.25), z, itemString)
 	end
 end
 addEvent( "onPlayerChopTree", true )

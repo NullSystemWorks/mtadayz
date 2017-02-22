@@ -21,15 +21,18 @@ end)
 
 function checkVersion()
 	if (checkType == "stable") then
-		fetchRemote("https://api.github.com/repos/mtadayz/MTADayZ/releases/latest",onVersionReturn)
+		fetchRemote("https://api.github.com/repos/ciber96/mtadayz/releases/latest",onVersionReturn)
 	elseif (checkType == "beta") then
-		fetchRemote("https://api.github.com/repos/mtadayz/MTADayZ/releases",onVersionReturn)
-		--onVersionReturn('[ { "url": "https://api.github.com/repos/mtadayz/MTADayZ/releases/3601990", "assets_url": "https://api.github.com/repos/mtadayz/MTADayZ/releases/3601990/assets", "upload_url": "https://uploads.github.com/repos/mtadayz/MTADayZ/releases/3601990/assets{?name,label}", "html_url": "https://github.com/mtadayz/MTADayZ/releases/tag/0.9.8.1a", "id": 3601990, "tag_name": "0.9.8.1a", "target_commitish": "master", "name": "0.9.8.1a NON STABLE", "draft": false, "author": null, "prerelease": true, "created_at": "2016-07-06T21:50:56Z", "published_at": "2016-07-06T21:52:37Z", "assets": [ ], "tarball_url": "https://api.github.com/repos/mtadayz/MTADayZ/tarball/0.9.8.1a", "zipball_url": "https://api.github.com/repos/mtadayz/MTADayZ/zipball/0.9.8.1a", "body": "Improve for **Advanced Clothes System**.\r\n" }, { "url": "https://api.github.com/repos/mtadayz/MTADayZ/releases/3593572", "assets_url": "https://api.github.com/repos/mtadayz/MTADayZ/releases/3593572/assets", "upload_url": "https://uploads.github.com/repos/mtadayz/MTADayZ/releases/3593572/assets{?name,label}", "html_url": "https://github.com/mtadayz/MTADayZ/releases/tag/0.9.8a", "id": 3593572, "tag_name": "0.9.8a", "target_commitish": "master", "name": "0.9.8a BETA", "draft": false, "author": null, "prerelease": true, "created_at": "2016-07-05T23:24:16Z", "published_at": "2016-07-05T23:25:08Z", "assets": [ ], "tarball_url": "https://api.github.com/repos/mtadayz/MTADayZ/tarball/0.9.8a", "zipball_url": "https://api.github.com/repos/mtadayz/MTADayZ/zipball/0.9.8a", "body": "" }]')
+		fetchRemote("https://api.github.com/repos/ciber96/mtadayz/releases",onVersionReturn)
 	end
 end
 
 function onVersionReturn(json)
 	v = fromJSON(json)
+	if (json == "ERROR" or not v["name"]) then
+		outputServerLog("[DayZ] Can't check for updates")
+		return
+	end
 	local new = ""
 	local old = ""
 	local index1 = string.find(v["name"],"a")
