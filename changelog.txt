@@ -4,7 +4,18 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
 ## Please add your change on rollingchangelog.txt.
 
-## [0.9.8a PRE-RELEASE] - 2016-07-06 (YOU NEED REMOVE YOUR INTERNAL.DB FOR THIS UPDATE)
+## [Upcoming release] - DATE OF RELEASE (Unknown)
+### CHANGED: Version rewrite, tree handling optimised.
+
+## [0.9.8.1] - DATE OF RELEASE (2017-02-18)
+### NEW: Version check system
+### FIXED: Vehicle unusable in admin panel after respawn
+### FIXED: Possibility to eat weapons as they were food
+### FIXED: Foods can't be eaten from inside loot collision sphere
+### FIXED: Body temperature keeps rising when unconscious bug
+### DEPRECATED: showPlayerHudComponent is now setPlayerHudComponentVisible
+
+## [0.9.8a] - 2016-07-06 (YOU NEED REMOVE YOUR INTERNAL.DB FOR THIS UPDATE)
 ### NEW: Advanced Clothes System (+60 clothes)
 ### NEW: Beard and Hair System
 ### NEW: Weight System
@@ -13,7 +24,6 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### ADDED: Add variable "weight_thirst" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loose" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loosetimer" on "CfgServer.lua"
-### FIXED: body temperature keeps rising when unconscious bug
 
 # CLOTHES #
 
