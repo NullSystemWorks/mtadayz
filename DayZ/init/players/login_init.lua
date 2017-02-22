@@ -17,7 +17,7 @@ function playerLogin(username, pass, player)
 	local weight = getAccountData(account, "player.weight")
 	local hoursalive = getAccountData(account, "player.hoursalive")
 	setElementData(player, "hoursalive", hoursalive)
-	setPedStat(player, 21, weight)
+	--setPedStat(player, 21, weight)
 
 	createZombieTable (player)
 	if getAccountData(account,"isDead") then
