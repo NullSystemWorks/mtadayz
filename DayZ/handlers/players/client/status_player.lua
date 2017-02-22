@@ -658,12 +658,14 @@ function getPlayerLoad()
 		itemLoad = 0
 		weaponLoad = 0
 		for i, item in ipairs(itemWeightTable) do
-			if item[3] == "Weapon" then
-				table.insert(weaponLoadTable,{item[2],getElementData(localPlayer,item[1])})
-			elseif item[3] == "Ammo" then
-				table.insert(ammoLoadTable,{item[2],getElementData(localPlayer,item[1])})
-			elseif item[3] == "Item" then
-				table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
+		if getElementData(localPlayer,item[1]) and getElementData(localPlayer,item[1]) > 0 then
+				if item[3] == "Weapon" then
+					table.insert(weaponLoadTable,{item[2],getElementData(localPlayer,item[1])})
+				elseif item[3] == "Ammo" then
+					table.insert(ammoLoadTable,{item[2],getElementData(localPlayer,item[1])})
+				elseif item[3] == "Item" then
+					table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
+				end
 			end
 		end
 		for i, load in ipairs(ammoLoadTable) do
@@ -696,7 +698,7 @@ function getPlayerLoad()
 		playerThirst = math.round(playerThirst+(thirst/120)*(getElementData(localPlayer,"temperature")/37),2)
 	end
 end
-setTimer(getPlayerLoad,30000,0)
+setTimer(getPlayerLoad,60000,0)
 
 function setPlayerHunger()
 	if getElementData(localPlayer,"logedin") then
@@ -707,7 +709,7 @@ function setPlayerHunger()
 		end
 	end
 end
-setTimer(setPlayerHunger,30100,0)
+setTimer(setPlayerHunger,61000,0)
 
 function setPlayerThirst()
 	if getElementData(localPlayer,"logedin") then
@@ -718,4 +720,4 @@ function setPlayerThirst()
 		end
 	end
 end
-setTimer(setPlayerThirst,30100,0)
+setTimer(setPlayerThirst,61000,0)
