@@ -204,7 +204,7 @@ local number = 0
 		setElementData(rowText[number],"usedItem","fireplace")
 		end
 	end
-	if arg1 == "patrol" then
+	if arg1 == "petrol" then
 		if getElementData(getLocalPlayer(),"Empty Gas Canister") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
@@ -213,7 +213,7 @@ local number = 0
 				guiLabelSetColor (rowText[number],255,255,255)
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
-				setElementData(rowText[number],"usedItem","patrolstation")
+				setElementData(rowText[number],"usedItem","petrolstation")
 		end	
 	end
 	if arg1 == "Wirefence" then
@@ -486,11 +486,11 @@ function onPlayerTargetPickup (theElement)
 		if player then
 			return
 		end
-		if getElementData(source,"patrolstation") then
-			showClientMenuItem("patrol")
+		if getElementData(source,"petrolstation") then
+			showClientMenuItem("petrol")
 			setElementData(getLocalPlayer(),"currentCol",source)
 			setElementData(getLocalPlayer(),"loot",false)
-			--setNewbieInfo (true,"patrolstation","Press '-' or 'middle-mouse' to refill a canister!\n REQUIRED: Empty Gas Canister",source)
+			--setNewbieInfo (true,"petrolstation","Press '-' or 'middle-mouse' to refill a canister!\n REQUIRED: Empty Gas Canister",source)
 			return
 		end
 		if getElementData(source,"wirefence") then
@@ -783,12 +783,19 @@ if ( keyState == "down" ) then
 			--disableMenu()
 			return
 		end
-		if itemName == "patrolstation" then
-			local col = getElementData(getLocalPlayer(),"currentCol")
-				setElementData(getLocalPlayer(),"Empty Gas Canister",getElementData(getLocalPlayer(),"Empty Gas Canister")-1)
-				setElementData(getLocalPlayer(),"Full Gas Canister",(getElementData(getLocalPlayer(),"Full Gas Canister") or 0)+1)
-				triggerEvent ("displayClientInfo",getLocalPlayer(),"patrolstation","Filled gas canister up!",22,255,0)
-				disableMenu()
+		if itemName == "petrolstation" then
+				local col = getElementData(getLocalPlayer(),"currentCol")
+				
+				--Determine if the petrol station has any fuel left, otherwise tell the player. (1B0Y)
+				if (getElementData(col,"petrolQuantity") >= 1)
+					setElementData(getLocalPlayer(),"Empty Gas Canister",getElementData(getLocalPlayer(),"Empty Gas Canister")-1)
+					setElementData(getLocalPlayer(),"Full Gas Canister",(getElementData(getLocalPlayer(),"Full Gas Canister") or 0)+1)
+					setElementData(col,"petrolQuantity",(getElementData(col,"petrolQuantity") or 10)-1)
+					triggerEvent ("displayClientInfo",getLocalPlayer(),"petrolstation","Filled gas canister up!",22,255,0)
+					disableMenu()
+				else
+					triggerEvent("displayClientInfo",localPlayer,"petrolstation","The petrol station has no fuel. Find another!")
+				end
 			return
 		end
 			if not playerPickedUpItem then

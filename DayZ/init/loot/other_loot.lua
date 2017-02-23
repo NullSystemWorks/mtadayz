@@ -10,6 +10,20 @@
 
 heliCrashSites = gameplayVariables["helicrashsides"]
 
+function onStart()
+	--Create Crash sites, hospital packs, ...
+	createHeliCrashSite()
+	createHospitalPacks()
+	
+	for i,petrol in ipairs(petrolPoints) do
+		local x,y,z = petrol[1],petrol[2],petrol[3]
+		petrolCol = createColSphere(x,y,z,3)
+		setElementData(petrolCol,"petrolstation",true)
+		setElementData(petrolCol,"petrolQuantity",math.random(1,15)) --1 Quantity = 1 full jerry can. (1B0Y)
+	end
+end
+addEventHandler("onResourceStart",resourceRoot,onStart)
+
 function createHeliCrashSite()
 	if heliLoot then
 		destroyElement(getElementData(heliLoot,"parent"))
@@ -42,7 +56,6 @@ function createHeliCrashSite()
 	end
 	setTimer(createHeliCrashSite,3600000,1)
 end
-createHeliCrashSite()
 
 function updateHospitals ()
 	for i,box in pairs(hospitalCol) do
@@ -70,11 +83,4 @@ function createHospitalPacks()
 		end	
 	end
 	setTimer(updateHospitals,3600000,1)
-end
-createHospitalPacks()
-
-for i,patrol in ipairs(patrolPoints) do
-	local x,y,z = patrol[1],patrol[2],patrol[3]
-	patrolCol = createColSphere(x,y,z,3)
-	setElementData(patrolCol,"patrolstation",true)
 end
