@@ -336,6 +336,13 @@
 	<file src="gui/status/temperature/2.png" />
 	<file src="gui/status/temperature/1.png" />
 	<file src="gui/status/temperature/0.png" />
+	<file src="gui/status/temperature/temperature_0.png" />
+	<file src="gui/status/temperature/temperature_1.png" />
+	<file src="gui/status/temperature/temperature_2.png" />
+	<file src="gui/status/temperature/temperature_3.png" />
+	<file src="gui/status/temperature/temperature_4.png" />
+	<file src="gui/status/temperature/temperature_5.png" />
+	<file src="gui/status/temperature/temperature_6.png" />
 	<file src="gui/status/thirst/thirst_border.png" />
 	<file src="gui/status/thirst/100.png" />
 	<file src="gui/status/thirst/80.png" />

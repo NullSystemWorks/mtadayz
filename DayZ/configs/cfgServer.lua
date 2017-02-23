@@ -32,6 +32,7 @@ gameplayVariables["realtime"] = false -- Enables/Disables real time use. When di
 gameplayVariables["customtime"] = 10000 -- How long should an ingame minute be (in ms)? Example: 10000ms (10s) realtime = 1 minute gametime - DEFAULT: 10000
 gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEFAULT: true
 gameplayVariables["maxzombiesglobal"] = 600 -- Not in use
+gameplayVariables["maxPetrolFuelAmount"] = math.random(1,15) -- Determine amount of fuel each petrol station in the world contains - DEFAULT: math.random(1,15)
 
 -- WEIGHT SETTINGS
 gameplayVariables["weight_food"] = math.random(25,35) -- The weight that a player takes after eating. DEFAULT: math.random(25,35)

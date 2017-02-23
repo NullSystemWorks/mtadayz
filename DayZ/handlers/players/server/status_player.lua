@@ -48,13 +48,44 @@ function checkTemperature()
 			local x,y,z = getElementPosition(player)
 			triggerClientEvent("isPlayerInBuilding",player,x,y,z)
 			if not getElementData(player,"isInBuilding") then
-				addPlayerStats(player,"temperature",value)
+				--addPlayerStats(player,"temperature",value)	
+				if value == -0.01 then
+					setElementData(player,"temperature_status",1)
+				elseif value == -0.02 then
+					setElementData(player,"temperature_status",2)
+				elseif value >= -0.03 then
+					setElementData(player,"temperature_status",3)
+				elseif value == 0.01 then
+					setElementData(player,"temperature_status",4)
+				elseif value == 0.02 then
+					setElementData(player,"temperature_status",5)
+				elseif value >= 0.03 then
+					setElementData(player,"temperature_status",6)
+				end
 			else
 				if getElementData(player,"temperature") < 37 then
 					value = 0.02
-					addPlayerStats(player,"temperature",value)
+					--addPlayerStats(player,"temperature",value)
+					setElementData(player,"temperature_status",5)
 				end
 			end
+			if isElementInWater(player) then
+				value = value+gameplayVariables["temperaturewater"]
+				setElementData(player,"temperature_status",3)
+			end	
+			if getControlState (player,"sprint") and not getElementData(player,"unconscious") then
+				if getElementData(player,"temperature") <= 37 then
+					value = value+gameplayVariables["temperaturesprint"]
+					setElementData(player,"temperature_status",4)
+				end
+			end
+			if isPedInVehicle(player) then
+				if getElementData(player,"temperature") <= 37 then
+					value = value+0.008
+					setElementData(player,"temperature_status",4)
+				end
+			end
+			addPlayerStats (player,"temperature",value)
 		end
 	end
 end
@@ -81,7 +112,7 @@ function checkTemperature2()
 		end	
 	end
 end
-setTimer(checkTemperature2,10000,0)
+--setTimer(checkTemperature2,30000,0)
 
 --[[
 function setHunger()

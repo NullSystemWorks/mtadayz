@@ -65,6 +65,7 @@ function updateStatusIcons()
 		dxDrawImage ( screenWidth*0.943 , screenHeight*0.63, screenHeight*0.055, screenHeight*0.055, ":DayZ/gui/status/humanity/"..h_number..".png",0,0,0)
 		-- Temperature
 		local temperature = math.round(getElementData(localPlayer,"temperature"),2)
+		local status = getElementData(localPlayer,"temperature_status") or 0
 		r,g,b = 0,255,0
 		local t_number = 3
 		if temperature <= 37 then
@@ -85,6 +86,7 @@ function updateStatusIcons()
 		else
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/background.png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/temperature/temperature_border.png",0,0,0)
+			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/temperature/temperature_"..status..".png",0,0,0)
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.7, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/temperature/"..t_number..".png",0,0,0,tocolor(r,g,b))
 		end
 		-- Thirst

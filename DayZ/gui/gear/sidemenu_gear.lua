@@ -787,7 +787,7 @@ if ( keyState == "down" ) then
 				local col = getElementData(getLocalPlayer(),"currentCol")
 				
 				--Determine if the petrol station has any fuel left, otherwise tell the player. (1B0Y)
-				if (getElementData(col,"petrolQuantity") >= 1)
+				if (getElementData(col,"petrolQuantity") >= 1) then
 					setElementData(getLocalPlayer(),"Empty Gas Canister",getElementData(getLocalPlayer(),"Empty Gas Canister")-1)
 					setElementData(getLocalPlayer(),"Full Gas Canister",(getElementData(getLocalPlayer(),"Full Gas Canister") or 0)+1)
 					setElementData(col,"petrolQuantity",(getElementData(col,"petrolQuantity") or 10)-1)

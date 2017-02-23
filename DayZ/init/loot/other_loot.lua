@@ -19,7 +19,7 @@ function onStart()
 		local x,y,z = petrol[1],petrol[2],petrol[3]
 		petrolCol = createColSphere(x,y,z,3)
 		setElementData(petrolCol,"petrolstation",true)
-		setElementData(petrolCol,"petrolQuantity",math.random(1,15)) --1 Quantity = 1 full jerry can. (1B0Y)
+		setElementData(petrolCol,"petrolQuantity",gameplayVariables["maxPetrolFuelAmount"]) --1 Quantity = 1 full jerry can. (1B0Y)
 	end
 end
 addEventHandler("onResourceStart",resourceRoot,onStart)

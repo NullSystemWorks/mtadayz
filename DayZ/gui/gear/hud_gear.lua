@@ -319,9 +319,16 @@ function WeaponHUD()
 		weaponID = getPedWeapon(localPlayer)
 		local divide = "|"
 		if weaponID == 22 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
-			divide = "|"
-			magsLeft()
+			if getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
+				weapName = "Flashlight"
+				clip = ""
+				ammo = ""
+				divide = ""
+			else
+				weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+				divide = "|"
+				magsLeft()
+			end
 		elseif weaponID == 23 then
 		   weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
 			divide = "|"
@@ -409,6 +416,11 @@ function WeaponHUD()
 			divide = ""
 		elseif weaponID == 8 then
 			weapName = "Hatchet"
+			clip = ""
+			ammo = ""
+			divide = ""
+		elseif weaponID == 2 then
+			weapName = "Crowbar"
 			clip = ""
 			ammo = ""
 			divide = ""
