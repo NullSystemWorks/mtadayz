@@ -37,8 +37,9 @@ function craftItem()
 				if not isCrafting then
 					triggerEvent("onStartCraftingTimer",localPlayer)
 					if crafted then
+						local cItem = getElementData(localPlayer,craftedItem)or 0
 						startRollMessage2("Crafting","Item has been crafted!",0,255,0)
-						setElementData(localPlayer,craftedItem,getElementData(localPlayer,craftedItem)+craftedAmount)
+						setElementData(localPlayer,craftedItem,cItem+craftedAmount)
 						setElementData(localPlayer,selectedBlueprint,getElementData(localPlayer,selectedBlueprint)-1)
 						setElementData(localPlayer,ComponentA,getElementData(localPlayer,ComponentA)-ComponentA_Amount)
 						setElementData(localPlayer,ComponentB,getElementData(localPlayer,ComponentB)-ComponentB_Amount)
@@ -116,6 +117,7 @@ function increaseTimer()
 			destroyElement(craftingBar)
 			destroyElement(secondsleftlabel)
 			killTimer(craftingTimer)
+			isCrafting = false
 			return
 		else
 			crafted = true
