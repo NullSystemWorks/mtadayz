@@ -1,6 +1,6 @@
 # README #
 
-### Curent Developers: ciber96, 1BOY ###
+### Curent Developers: L, ciber96, 1BOY ###
 
 ### Synopsis ###
 This repository serves as a "hub" for the development of MTA DayZ, a gamemode which is akin to the DayZ mod for ArmA II, only for MTA (Multi Theft Auto).
