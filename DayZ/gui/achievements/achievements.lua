@@ -76,9 +76,9 @@ end
 
 function check() -- Needs optimizing
 	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",{})
+		setElementData(getLocalPlayer(),"achievements",toJSON({}))
 	end
-	local achievementsunlocked = getElementData(getLocalPlayer(),"achievements")
+	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
 	local counter = 0
 	for i, all in pairs(achievements) do
 		if not achievementsunlocked[i] then
@@ -99,7 +99,7 @@ function check() -- Needs optimizing
 				if(counter == #all["conditions"]) then
 					giveAchievement(i)
 					achievementsunlocked[i] = true
-					setElementData(getLocalPlayer(),"achievements",achievementsunlocked)
+					setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 					for index, element in ipairs(all["items"]) do
 						setElementData(getLocalPlayer(),element[1],element[2])
 					end
@@ -164,53 +164,44 @@ end
 
 function loadList()  -- Needs optimizing (urgent)
 	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",{})
+		setElementData(getLocalPlayer(),"achievements",toJSON({}))
 	end
-	achievementsunlocked = getElementData(getLocalPlayer(),"achievements")
+	local achievunl = fromJSON(getElementData(getLocalPlayer(),"achievements"))
 	achievpanel(true)
 	local y1 = 0.00
 	local ind = 0
-	local aunlocked, aachiev = tablelength(achievementsunlocked),tablelength(achievements)
+	local aunlocked, aachiev = tablelength(achievunl),tablelength(achievements)
 	guiSetText(GUIAchiev.label[2], "Your achievements: "..aunlocked.." of "..aachiev.." ("..math.round((((aunlocked/aachiev) * 100) or 0),2).."% completed)")
-	for i, all in pairs(achievementsunlocked) do
+	for i, all in pairs(achievunl) do
 		ind = ind+1
 		if ind > 6 then
 			break
 		end
-	
 		panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[1])
 		
-		achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
+		achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, pathToImg..achievements[i]["image"], true, panelachiev)
 		achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
 
-		achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
+		achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, achievements[i]["name"], true, achievbg)
 		guiSetFont(achievname, "default-bold-small")
-		achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
-		
-		guiSetText(achievname,achievements[i]["name"])
-		guiSetText(achievdescript,achievements[i]["description"])
-		guiStaticImageLoadImage(achievIMG,pathToImg..achievements[i]["image"])
+		achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, achievements[i]["description"], true, achievbg)
 		y1 = y1+0.16
 	end
 	
 	y1 = 0.00
 	if aunlocked > 6 then
 		ind = 0
-		for i, all in pairs(achievementsunlocked) do
+		for i, all in pairs(achievunl) do
 			ind = ind+1
-			if ind > 6 then
+			if (ind > 6) then
 				panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[2])
 				
-				achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
+				achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, pathToImg..achievements[i]["image"], true, panelachiev)
 				achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
 
-				achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
+				achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, achievements[i]["name"], true, achievbg)
 				guiSetFont(achievname, "default-bold-small")
-				achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
-				
-				guiSetText(achievname,achievements[i]["name"])
-				guiSetText(achievdescript,achievements[i]["description"])
-				guiStaticImageLoadImage(achievIMG,pathToImg..achievements[i]["image"])
+				achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, achievements[i]["description"], true, achievbg)
 				y1 = y1+0.16
 			end
 		end
