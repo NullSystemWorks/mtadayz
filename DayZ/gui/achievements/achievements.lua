@@ -156,18 +156,28 @@ function achievpanel(state)
 	end
 end
 
-function loadList()
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
+function loadList()  -- Needs optimizing (urgent)
 	if not getElementData(getLocalPlayer(),"achievements") then
 		setElementData(getLocalPlayer(),"achievements",{})
 	end
 	achievementsunlocked = getElementData(getLocalPlayer(),"achievements")
 	achievpanel(true)
 	local y1 = 0.00
-	guiSetText(GUIAchiev.label[2], "Your achievements: "..#achievementsunlocked.." of "..#achievements.." ("..(((#achievementsunlocked/#achievements) * 100) or 0).."% completed)")
+	local ind = 0
+	local aunlocked, aachiev = tablelength(achievementsunlocked),tablelength(achievements)
+	guiSetText(GUIAchiev.label[2], "Your achievements: "..aunlocked.." of "..aachiev.." ("..math.round((((aunlocked/aachiev) * 100) or 0),2).."% completed)")
 	for i, all in pairs(achievementsunlocked) do
-		if i > 6 then
+		ind = ind+1
+		if ind > 6 then
 			break
 		end
+	
 		panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[1])
 		
 		achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
@@ -184,21 +194,25 @@ function loadList()
 	end
 	
 	y1 = 0.00
-	if #achievementsunlocked > 6 then
-		for i=7, #achievementsunlocked do
-			panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[2])
-			
-			achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
-			achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
+	if aunlocked > 6 then
+		ind = 0
+		for i, all in pairs(achievementsunlocked) do
+			ind = ind+1
+			if ind > 6 then
+				panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[2])
+				
+				achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
+				achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
 
-			achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
-			guiSetFont(achievname, "default-bold-small")
-			achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
-			
-			guiSetText(achievname,achievements[i]["name"])
-			guiSetText(achievdescript,achievements[i]["description"])
-			guiStaticImageLoadImage(achievIMG,pathToImg..achievements[i]["image"])
-			y1 = y1+0.16
+				achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
+				guiSetFont(achievname, "default-bold-small")
+				achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
+				
+				guiSetText(achievname,achievements[i]["name"])
+				guiSetText(achievdescript,achievements[i]["description"])
+				guiStaticImageLoadImage(achievIMG,pathToImg..achievements[i]["image"])
+				y1 = y1+0.16
+			end
 		end
 	end
 end

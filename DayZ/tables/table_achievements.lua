@@ -11,7 +11,7 @@
 pathToImg = "gui/achievements/icons/"
 achievements = {
 	["murderer"] = {
-		["name"] = "That's blood?",
+		["name"] = "There's bloood!!!",
 		["description"] = "Your first kill",
 		["items"] = {{"Gray Pants",1},{"Bandage",1}},
 		["conditions"] = {{"murders","greater",0}},
