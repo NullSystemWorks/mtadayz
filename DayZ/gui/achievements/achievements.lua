@@ -1,3 +1,13 @@
+--[[
+#-----------------------------------------------------------------------------#
+----*					MTA DayZ: achievements.lua							*----
+----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
+
+----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
+----* Type: CLIENT														*----
+#-----------------------------------------------------------------------------#
+]]
+
 waitList = {}
 GUIEdit = {
     label = {},
@@ -59,7 +69,6 @@ function giveAchievement(ID)
 		if ID then
 			guiSetText(GUIEdit.label[2],achievements[ID]["name"])
 			guiStaticImageLoadImage(GUIEdit.staticimage[2],pathToImg..achievements[ID]["image"])
-			outputChatBox(ID)
 			addEventHandler("onClientRender",getRootElement(),move)
 		end
 	end
@@ -164,7 +173,7 @@ function loadList()
 		achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
 		achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
 
-		achievname = guiCreateLabel(0.01, 0.00, 0.68, 0.28, "Achievement name", true, achievbg)
+		achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
 		guiSetFont(achievname, "default-bold-small")
 		achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
 		
@@ -182,7 +191,7 @@ function loadList()
 			achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, "gui/gear/items/white.png", true, panelachiev)
 			achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
 
-			achievname = guiCreateLabel(0.01, 0.00, 0.68, 0.28, "Achievement name", true, achievbg)
+			achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, "Achievement name", true, achievbg)
 			guiSetFont(achievname, "default-bold-small")
 			achievdescript = guiCreateLabel(0.01, 0.28, 0.99, 0.69, "Achievement description", true, achievbg)
 			
