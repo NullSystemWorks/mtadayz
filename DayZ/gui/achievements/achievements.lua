@@ -155,7 +155,7 @@ function loadList()
 	achievpanel(true)
 	local y1 = 0.00
 	guiSetText(GUIAchiev.label[2], "Your achievements: "..#achievementsunlocked.." of "..#achievements.." ("..(((#achievementsunlocked/#achievements) * 100) or 0).."% completed)")
-	for i, all in ipairs(achievementsunlocked) do
+	for i, all in pairs(achievementsunlocked) do
 		if i > 6 then
 			break
 		end
