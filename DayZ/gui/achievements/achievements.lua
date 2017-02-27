@@ -71,7 +71,7 @@ function check() -- Needs optimizing
 	end
 	local achievementsunlocked = getElementData(getLocalPlayer(),"achievements")
 	local counter = 0
-	for i, all in ipairs(achievements) do
+	for i, all in pairs(achievements) do
 		if not achievementsunlocked[i] then
 			for _,cond in ipairs(all["conditions"]) do
 				if(cond[2] == "greater") then
