@@ -91,6 +91,9 @@ function check() -- Needs optimizing
 					giveAchievement(i)
 					achievementsunlocked[i] = true
 					setElementData(getLocalPlayer(),"achievements",achievementsunlocked)
+					for index, element in ipairs(all["items"]) do
+						setElementData(getLocalPlayer(),element[1],element[2])
+					end
 				end
 			end
 			counter = 0
