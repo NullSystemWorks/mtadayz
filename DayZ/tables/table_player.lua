@@ -26,6 +26,7 @@ playerDataTable = {
 {"alivetime"},
 {"daysalive"},
 {"skin"},
+{"achievements"},
 {"MAX_Slots"},
 {"CURRENT_Slots"},
 {"Weapon_Slots"},

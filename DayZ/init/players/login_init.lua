@@ -43,7 +43,7 @@ function playerLogin(username, pass, player)
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
-			if data[1] == "brokenbone" or data[1] == "unconscious" or data[1] == "sepsis" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" then
+			if data[1] == "brokenbone" or data[1] == "unconscious" or data[1] == "sepsis" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" or data[1] == "achievements" then
 				elementData = elementData
 			else
 				elementData = 0

@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8a" type="gamemode" />
+    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8.1a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 
 	<script src="version.lua" type="server" />
@@ -41,6 +41,7 @@
 	<script src="tables/table_vehicles.lua" type="shared" />
 	<script src="tables/table_zombies.lua" type="shared" />
 	<script src="tables/table_functions.lua" type="shared" />
+	<script src="tables/table_achievements.lua" type="shared" />
 	
 	<!-- configs folder -->
     <script src="configs/cfgBaseDefines.lua" type="shared" cache="false" />
@@ -132,6 +133,8 @@
 	<script src="gui/gear/language_gear.lua" type="shared" cache="false" />
 	<script src="gui/gear/sidemenu_gear.lua" type="client" cache="false" />
 	<script src="gui/gear/ui_gear.lua" type="client" cache="false" />
+	<script src="gui/achievements/achievements.lua" type="client" />
+	<file src="gui/achievements/icons/achiev1.png"/>
 	<file src="gui/gear/icons/ak47.png"/>
 	<file src="gui/gear/icons/bat.png"/>
 	<file src="gui/gear/icons/binoculars.png"/>
