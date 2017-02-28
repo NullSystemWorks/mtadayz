@@ -30,7 +30,7 @@ function playerLogin(username, pass, player)
 	local playerID = getAccountData(account,"playerID")
 	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
 	local skin = getAccountData(account,"skin")
-	local weight = getAccountData(account, "player.weight")
+	--local weight = getAccountData(account, "player.weight")
 	local hoursalive = getAccountData(account, "player.hoursalive")
 	setElementData(player, "hoursalive", hoursalive)
 	--setPedStat(player, 21, weight)
@@ -126,15 +126,12 @@ function playerRegister(username, pass, player)
 	----------------------------------
 	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
-		if (playerDefaultValues[data[1]]) then
-			if data[1] == "bloodtype" then
-				determineBloodType(player)
-			else
-				setElementData(player,data[1],playerDefaultValues[data[1]][1])
-			end
+		if data[1] == "bloodtype" then
+			determineBloodType(player)
+		else
+			setElementData(player,data[1],data[2])
 		end
-	end
-	
+	end	
 	account = getAccount(username)
 	local value = getAccounts()
 	local value = #value

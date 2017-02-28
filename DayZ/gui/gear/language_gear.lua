@@ -3303,7 +3303,7 @@ itemWeightTable = {
 {"Soda Can (Pepsi)",1,"Item"},
 {"Soda Can (Cola)",1,"Item"},
 {"Soda Can (Mountain Dew)",1,"Item"},
-{"Can (Milk)"},
+{"Can (Milk)",1,"Item"},
 -- [[ Items ]] --
 {"Wood Pile",2,"Item"},
 {"Bandage",1,"Item"},

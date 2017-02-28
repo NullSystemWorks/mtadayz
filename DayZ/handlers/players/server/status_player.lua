@@ -245,6 +245,7 @@ end
 addEvent("onPlayerUsingHaircut", true)
 addEventHandler("onPlayerUsingHaircut", getRootElement(), resetPlayerBeard)
 
+--[[
 setTimer(function()
     for k, player in ipairs(getElementsByType("player")) do
         changeWeight(player)
@@ -259,3 +260,16 @@ function changeWeight(thePlayer)
       end
   end
 end
+]]
+
+function setPlayerUnconsciousAnimation(value,player)
+	if value == "unconscious" then
+		setPedAnimation(player,"ped","FLOOR_hit_f",-1,false)
+	elseif value == "awake" then
+		setPedAnimation(player,"ped","getup_front",-1,false)
+		setTimer(function() setPedAnimation (player,false) end,1300,1)
+	end
+end
+addEvent("onPlayerUnconsciousAnimation",true)
+addEventHandler("onPlayerUnconsciousAnimation",root,setPlayerUnconsciousAnimation)
+

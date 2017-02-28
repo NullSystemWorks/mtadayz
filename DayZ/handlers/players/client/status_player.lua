@@ -560,7 +560,8 @@ function setPlayerUnconscious()
 			if not isHourGlassActive then
 				addEventHandler("onClientRender",root,drawHourGlass)
 				isHourGlassActive = true
-				setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+				--setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+				triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"unconscious",localPlayer)
 				toggleAllControls(false,true,true)
 				enableBlackWhite(true)
 				unbindKey("J","down",initInventory)
@@ -571,8 +572,9 @@ function setPlayerUnconscious()
 			if isHourGlassActive then
 				removeEventHandler("onClientRender",root,drawHourGlass)
 				isHourGlassActive = false
-				setPedAnimation(localPlayer,"ped","getup_front",-1,false)
-				setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
+				--setPedAnimation(localPlayer,"ped","getup_front",-1,false)
+				--setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
+				triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"awake",localPlayer)
 				toggleAllControls(true,true,true)
 				enableBlackWhite(false)
 				bindKey("J","down",initInventory)
