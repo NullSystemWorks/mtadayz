@@ -29,37 +29,31 @@ function spawnZombies(x,y,z)
 		end
 	end	
 	if getElementData(source,"spawnedzombies")+3 <= gameplayVariables["playerzombies"] then
-		local viralzombierand = math.random(0,50)
+		--local viralzombierand = math.random(0,50)
 		for i = 1, gameplayVariables["amountzombies"] do
 			local x,y,z = getElementPosition(source)
 			counter = counter+1
 			local number1 = math.random(-20,20)
 			local number2 = math.random(-20,20)
-			--[[
-			if number1 < 18 and number1 > -18 then
-				number1 = 20
-			end
-			if number2 < 18 and number2 > -18 then
-				number2 = -20
-			end
-			]]
 			randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )	
 			zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"))
 			setElementData(zombie,"zombie",true)
-			if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
-				multiplier = 1
-			elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
-				multiplier = 1.5
-			elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
-				multiplier = 3
-			else
-				multiplier = 1
+			if gameplayVariables["difficulty"] then
+				if gameplayVariables["difficulty"] == "normal" then
+					multiplier = 1
+				elseif gameplayVariables["difficulty"] == "veteran" then
+					multiplier = 1.5
+				elseif gameplayVariables["difficulty"] == "hardcore" then
+					multiplier = 3
+				else
+					multiplier = 1
+				end
 			end
 			setElementData(zombie,"blood",gameplayVariables["zombieblood"]*multiplier)
 			setElementData(zombie,"owner",source)
 			call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
 			setPedAnimation (zombie, "RYDER", "RYD_Die_PT1", -1, true, true, true)
-			if viralzombierand >= 1 and viralzombierand <= 25 then
+			--[[if viralzombierand >= 1 and viralzombierand <= 25 then
 				viralzombie = call(getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z+0.1,math.random(0,360),206,0,0,getTeamFromName("Zombies"))
 				setElementData(viralzombie,"zombie",true)
 				setElementData(viralzombie,"viralzombie",true)
@@ -76,6 +70,7 @@ function spawnZombies(x,y,z)
 				setElementData(viralzombie,"owner",source)
 				setPedAnimation(viralzombie,"RYDER", "RYD_Die_PT1", -1, true, true, true)
 			end
+			]]
 		end
 		setElementData(source,"lastzombiespawnposition",{x,y,z})
 		setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"])
@@ -85,67 +80,62 @@ addEvent("createZomieForPlayer",true)
 addEventHandler("createZomieForPlayer",root,spawnZombies)
 
 --[[
+Code for new global zombie spawn system
+Current Problems:
+
+-- too laggy when zombie amount exceeds a certain number (> 100 zombies)
+-- zombies can't be killed
+
+
 local ZedCounter = 0
 function spawnZombies(x,y,z)
-	if ZedCounter >= gameplayVariables["maxzombiesglobal"] then outputServerLog("ZedCounter is higher than the variable") return end
-	ZedCounter = 0
-	if getElementData(source,"logedin") then
-		local x,y,z = getElementPosition(source)
-		for i, pos in ipairs(ZombieSpawnPositions) do
-			if getDistanceBetweenPoints3D(x,y,z,pos[1],pos[2],pos[3]) < 60 then
-				if getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"] <= gameplayVariables["playerzombies"] then
-					outputServerLog("Distance is less than 60, exact value: "..tostring(getDistanceBetweenPoints3D(x,y,z,pos[1],pos[2],pos[3])))
-					local viralzombierand = math.random(0,50)
-					for i = 1, gameplayVariables["amountzombies"] do
-						local number1 = math.random(-20,20)
-						local number2 = math.random(-20,20)
-						randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )	
-						zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"))
-						setElementData(zombie,"zombie",true)
-						if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
-							multiplier = 1
-						elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
-							multiplier = 1.5
-						elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
-							multiplier = 3
-						else
-							multiplier = 1
-						end
-						setElementData(zombie,"blood",gameplayVariables["zombieblood"]*multiplier)
-						setElementData(zombie,"owner",source)
-						call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
-						setPedAnimation (zombie, "RYDER", "RYD_Die_PT1", -1, true, true, true)
-						if viralzombierand >= 1 and viralzombierand <= 25 then
-							viralzombie = call(getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z+0.1,math.random(0,360),206,0,0,getTeamFromName("Zombies"))
-							setElementData(viralzombie,"zombie",true)
-							setElementData(viralzombie,"viralzombie",true)
-								if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
-								multiplier = 1
-								elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
-									multiplier = 1.5
-								elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
-									multiplier = 3
-								else
-									multiplier = 1
-								end
-							setElementData(viralzombie,"blood",24000*multiplier)
-							setElementData(viralzombie,"owner",source)
-							setPedAnimation(viralzombie,"RYDER", "RYD_Die_PT1", -1, true, true, true)
-						end	
-						ZedCounter = ZedCounter+i
-						outputServerLog("Zombies spawned: "..tostring(ZedCounter))
-					end
-				end
+	for i, pos in ipairs(ZombieSpawnPositions) do
+		local viralzombierand = math.random(0,50)
+		for i = 1, 2  do --gameplayVariables["amountzombies"]
+			local number1 = math.random(-20,20)
+			local number2 = math.random(-20,20)
+			randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )	
+			zombie = call (getResourceFromName("slothbot"),"spawnBot",pos[1]+number1,pos[2]+number2,pos[3],math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"))
+			setElementData(zombie,"zombie",true)
+			if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
+				multiplier = 1
+			elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
+				multiplier = 1.5
+			elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
+				multiplier = 3
 			else
-				outputServerLog("Distance is higher than 60, exact value: "..tostring(getDistanceBetweenPoints3D(x,y,z,pos[1],pos[2],pos[3])))
+				multiplier = 1
 			end
-			--setElementData(source,"lastzombiespawnposition",{x,y,z})
-			setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"])
+			setElementData(zombie,"blood",gameplayVariables["zombieblood"]*multiplier)
+			setElementData(zombie,"owner",source)
+			call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, pos[1]+number1,pos[2]+number2,pos[3], false)
+			setPedAnimation (zombie, "RYDER", "RYD_Die_PT1", -1, true, true, true)
+			if viralzombierand >= 1 and viralzombierand <= 25 then
+				viralzombie = call(getResourceFromName("slothbot"),"spawnBot",pos[1]+number1,pos[2]+number2,pos[3]+0.1,math.random(0,360),206,0,0,getTeamFromName("Zombies"))
+				setElementData(viralzombie,"zombie",true)
+				setElementData(viralzombie,"viralzombie",true)
+				if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
+					multiplier = 1
+				elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
+					multiplier = 1.5
+				elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
+					multiplier = 3
+				else
+					multiplier = 1
+				end
+				setElementData(viralzombie,"blood",24000*multiplier)
+				setElementData(viralzombie,"owner",source)
+				setPedAnimation(viralzombie,"RYDER", "RYD_Die_PT1", -1, true, true, true)
+			end	
 		end
+		ZedCounter = ZedCounter+i
+		outputServerLog("Zombies spawned: "..tostring(ZedCounter))
+		if ZedCounter >= gameplayVariables["maxzombiesglobal"] then outputServerLog("ZedCounter is higher than the variable") break end
 	end
+	--setElementData(source,"lastzombiespawnposition",{x,y,z})
+	--setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"])
 end
-addEvent("createZomieForPlayer",true)
-addEventHandler("createZomieForPlayer",root,spawnZombies)
+addEventHandler("onResourceStart",resourceRoot,spawnZombies)
 ]]
 
 function controlZombieSpawning()

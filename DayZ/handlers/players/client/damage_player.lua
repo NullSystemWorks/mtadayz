@@ -13,6 +13,7 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 	damage = 100
 	headshot = false
 	damage_half = 1
+	multiplier = 1
 	if weapon == 37 then
 		return
 	end
@@ -22,14 +23,16 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		else
 			damage_half = 1
 		end
-		if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
-			multiplier = 1
-		elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
-			multiplier = 1.5
-		elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
-			multiplier = 3
-		else
-			multiplier = 1
+		if gameplayVariables["difficulty"] then
+			if gameplayVariables["difficulty"] == "normal" then
+				multiplier = 1
+			elseif gameplayVariables["difficulty"] == "veteran" then
+				multiplier = 1.5
+			elseif gameplayVariables["difficulty"] == "hardcore" then
+				multiplier = 3
+			else
+				multiplier = 1
+			end
 		end
 		if getElementData(attacker,"viralzombie") then
 			viralmultiplier = 2

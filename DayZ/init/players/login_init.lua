@@ -35,7 +35,7 @@ function playerLogin(username, pass, player)
 	setElementData(player, "hoursalive", hoursalive)
 	--setPedStat(player, 21, weight)
 
-	createZombieTable (player)
+	setElementData(player,"spawnedzombies",0)
 	if getAccountData(account,"isDead") then
 		spawnDayZPlayer(player)
 		return
@@ -138,7 +138,7 @@ function playerRegister(username, pass, player)
 	setElementData(player,"playerID",value+1)
 	setAccountData(account,"playerID",value+1)
 	setElementData(player,"logedin",true)
-	createZombieTable(player)
+	setElementData(player,"spawnedzombies",0)
 	triggerEvent("onPlayerChangeClothes", player)
 end
 addEvent("onPlayerDayZRegister", true)

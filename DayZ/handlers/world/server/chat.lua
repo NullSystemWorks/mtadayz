@@ -32,7 +32,7 @@ function broadcast(text, type, channel)
 			seconds = theTime.second
 		end
 		local posX, posY, posZ = getElementPosition( source )
-		local chatRadius = 40
+		local chatRadius = 20
         local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
         local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
         destroyElement( chatSphere )
@@ -105,6 +105,74 @@ function clean(text)
 	cleanText = string.gsub(text, '#%x%x%x%x%x%x', '')
 	return cleanText
 end
+
+local chatRadius = 20
+local chatEadioRadius = 250
+ 
+function blockChatMessage(m,mt)
+	if not chatbox.shown then
+		if mt == 1 then
+			cancelEvent()
+		end
+	end
+end
+--addEventHandler( "onPlayerChat", getRootElement(), blockChatMessage)
+
+local MTAChatboxShown = false
+
+function checkIfMTAChatboxIsShown(state)
+	if state then
+		MTAChatboxShown = true
+	else
+		MTAChatboxShown = false
+	end
+end
+addEvent("onMTAChatboxShown",true)
+addEventHandler("onMTAChatboxShown",root,checkIfMTAChatboxIsShown)
+
+function sendMessageToNearbyPlayers( message, messageType )
+	if MTAChatboxShown then
+		if messageType == 1 then
+			cancelEvent()
+			return
+		end
+		cancelEvent()
+		if (messageType == 0) then
+			local theTime = getRealTime()
+			local hour = theTime.hour
+			local minute = theTime.minute
+			local seconds = theTime.second
+			if hour < 10 then
+				hour = "0"..hour
+			else
+				hour = theTime.hour
+			end
+			if minute < 10 then
+				minute  = "0"..minute
+			else
+				minute = theTime.minute
+			end
+			if seconds < 10 then
+				minute = "0"..seconds
+			else
+				seconds = theTime.second
+			end
+			local posX, posY, posZ = getElementPosition( source )
+			local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
+			local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
+			destroyElement( chatSphere )
+			for index, nearbyPlayer in ipairs( nearbyPlayers ) do
+				outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true )
+				--outputChat(message, nearbyPlayer, getPlayerName(source), "Local", 1)
+			end
+			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', '').."\n","chat")
+		end
+	else
+		outputDebugString("MTAChatboxShown: "..tostring(MTAChatboxShown)..", message: "..tostring(message))
+	end
+end
+addEventHandler( "onPlayerChat", getRootElement(), sendMessageToNearbyPlayers )
+
 
 function setVoiceChannel(channel)
 	voiceChannel = channel

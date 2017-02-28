@@ -8,43 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
---[[
-local chatRadius = 20
-local chatEadioRadius = 250
- 
-function sendMessageToNearbyPlayers( message, messageType )
-cancelEvent()
-    if (messageType == 0) then
-		local theTime = getRealTime()
-		local hour = theTime.hour
-		local minute = theTime.minute
-		local seconds = theTime.second
-		if hour < 10 then
-			hour = "0"..hour
-		else
-			hour = theTime.hour
-		end
-		if minute < 10 then
-			minute  = "0"..minute
-		else
-			minute = theTime.minute
-		end
-		if seconds < 10 then
-			minute = "0"..seconds
-		else
-			seconds = theTime.second
-		end
-		local posX, posY, posZ = getElementPosition( source )
-        local chatSphere = createColSphere( posX, posY, posZ, chatRadius )
-        local nearbyPlayers = getElementsWithinColShape( chatSphere, "player" )
-        destroyElement( chatSphere )
-        for index, nearbyPlayer in ipairs( nearbyPlayers ) do
-            outputChatBox("[LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', ''),nearbyPlayer, 244,244,244,true )
-        end
-		exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOCAL]"..string.gsub((getPlayerName(source)..": "..message), '#%x%x%x%x%x%x', '').."\n","chat")
-	end
-end
-addEventHandler( "onPlayerChat", getRootElement(), sendMessageToNearbyPlayers )
 
 function playerRadioChat(playersource,cmd,...)
 	if cmd == "radiochat" then
@@ -63,17 +26,18 @@ function playerRadioChat(playersource,cmd,...)
 end
 --addCommandHandler( "radiochat", playerRadioChat )
  
-function blockChatMessage(m,mt)
-    if mt == 1 then
-		cancelEvent()
-	end
-end
-addEventHandler( "onPlayerChat", getRootElement(), blockChatMessage )
-]]
-
 local chatbox = {}
 local chatSwitch = 1 -- 1 = Local, 2 = Global, 3 = Team/Group
 local screenX, screenY = guiGetScreenSize()
+local chatBoxLoaded = false
+
+function checkChatBoxInit()
+	if gameplayVariables["armachat"] then
+		initChatBox()
+		chatBoxLoaded = true
+	end
+end
+addEventHandler("onClientResourceStart", resourceRoot, checkChatBoxInit)
 
 function initChatBox()
 	local layout = getChatboxLayout()
@@ -169,7 +133,7 @@ function initChatBox()
 	end
 	toggleChatBox(true)
 end
-addEventHandler("onClientResourceStart", resourceRoot, initChatBox)
+
 
 function toggleChatBox(state)
 	if state and chatbox.shown then return end
@@ -181,6 +145,7 @@ function toggleChatBox(state)
 		bindKey(keyName, "down", toggleInput, "All")	
 		bindKey("backspace", "up", resetRemoveTick)
 		showChat(false)
+		triggerServerEvent("onMTAChatboxShown",localPlayer,false)
 		chatbox.shown = true
 	elseif chatbox.shown then
 		removeEventHandler("onClientRender", root, showChatBox)
@@ -188,6 +153,8 @@ function toggleChatBox(state)
 		unbindKey(keyName, "down", toggleInput)	
 		unbindKey("backspace", "up", resetRemoveTick)
 		chatbox.shown = false
+		showChat(true)
+		triggerServerEvent("onMTAChatboxShown",localPlayer,true)
 		if chatbox.inputShown == true then
 			removeEventHandler("onClientCharacter", root, fillInput)
 			chatbox.text = ""
@@ -198,16 +165,22 @@ function toggleChatBox(state)
 end
 
 function toggleCommand()
-	toggleChatBox()
+	if chatBoxLoaded then
+		toggleChatBox()
+	else
+		initChatBox()
+		chatBoxLoaded = true
+		receiveChat("","ARMA II styled chatbox activated!","Special",4)
+	end
 end
 addCommandHandler("chat", toggleCommand)
 
-function showChatBox(state)
+function showChatBoxEvent(state)
 	chatbox.isChatboxAllowed = state
 	toggleChatBox(state)
 end
 addEvent("showChatBox", true)
-addEventHandler("showChatBox", root, showChatBox)
+addEventHandler("showChatBox", root, showChatBoxEvent)
 
 function showChatBox()
 	if chatbox.lastMenuStatus ~= isMainMenuActive() then
@@ -280,7 +253,7 @@ function showChatBox()
 					end
 				end
 				if chat.channel == 1 then
-					r,g,b = 255,255,255
+					r,g,b = 244,244,244
 				elseif chat.channel == 2 then
 					r,g,b = 142,229,238
 				elseif chat.channel == 3 then
@@ -393,7 +366,9 @@ function buttonHandling(button, press)
 		removeEventHandler("onClientCharacter", root, fillInput)
 	elseif button == "enter" or button == "num_enter" then
 		if #chatbox.text > 0 then
-			send(chatbox.inputType, chatbox.text)
+			if chatbox.shown then
+				send(chatbox.inputType, chatbox.text)
+			end
 		end
 		chatbox.inputShown = false
 		showCursor(false)
@@ -515,6 +490,8 @@ function scrollDown()
 	end
 	setTimer(scrollDown, 80, 1)
 end
+
+local caughtChatMessage = false
 
 function receiveChat(player, text, type, channel)
 	local line = text
@@ -676,8 +653,10 @@ function clean(text)
 end
 
 function catchChatMessages(text,r,g,b)
-	receiveChat("", string.format("#%02X%02X%02X", r,g,b)..text, "Local", 4)
-	cancelEvent()
+	if chatbox.shown then
+		receiveChat("", string.format("#%02X%02X%02X", r,g,b)..text, "Local", 4)
+	end
+	--if chatbox.shown then cancelEvent() end
 end
 addEventHandler("onClientChatMessage", root, catchChatMessages)
 

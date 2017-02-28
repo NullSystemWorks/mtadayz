@@ -17,6 +17,7 @@ gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage received by 
 
 -- MISC
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
+gameplayVariables["armachat"] = false
 
 -- HEADSHOT MULTIPLIER
 gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5

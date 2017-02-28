@@ -102,15 +102,14 @@ function spawnDayZPlayer(player)
 		end
 	end
 	triggerEvent("onPlayerChangeClothes", player)
-	----------------------------------
 end
 
-function notifyAboutExplosion2()
+function killVehicleOccupantsOnExplode()
 	for i,player in pairs(getVehicleOccupants(source)) do
 		triggerEvent("kilLDayZPlayer",player)
 	end
 end
-addEventHandler("onVehicleExplode", getRootElement(), notifyAboutExplosion2)
+addEventHandler("onVehicleExplode", getRootElement(), killVehicleOccupantsOnExplode)
 
 function destroyDeadPlayer (ped,pedCol)
 	local x,y,z = getElementPosition(ped)
@@ -158,7 +157,7 @@ function kilLDayZPlayer (killer,headshot,weapon)
 			else
 				minutes = minutes
 			end
-			setElementData(pedCol,"deadreason"," name was "..tostring(getPlayerName(source))..", it appears died at "..hours..":"..minutes..".")
+			setElementData(pedCol,"deadreason"," name was "..tostring(getPlayerName(source))..", it appears they died at "..hours..":"..minutes..".")
 		end	
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
