@@ -8,6 +8,22 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+local sDataNames = { --Add your elementdata's here for them to be saved.
+	["brokenbone"] = {false},
+	["unconscious"] = {false},
+	["sepsis"] = {0},
+	["bloodtype"] = {false},
+	["bloodtypediscovered"] = {"?"},
+	["pain"] = {false},
+	["cold"] = {false},
+	["infection"] = {false},
+	["currentweapon_1"] = {false},
+	["currentweapon_2"] = {false},
+	["currentweapon_3"] = {false},
+	["bandit"] = {false},
+	["achievements"] = {}
+}
+
 function playerLogin(username, pass, player)
 	if client then player = client end
 	account = getPlayerAccount(player)
@@ -43,18 +59,20 @@ function playerLogin(username, pass, player)
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
-			if data[1] == "brokenbone" or data[1] == "unconscious" or data[1] == "sepsis" or data[1] == "bloodtype" or data[1] == "bloodtypediscovered" or data[1] == "pain" or data[1] == "cold" or data[1] == "infection" or data[1] == "currentweapon_1" or data[1] == "currentweapon_2" or data[1] == "currentweapon_3" or data[1] == "bandit" or data[1] == "achievements" then
-				elementData = elementData
+			if sDataNames[data[1]] then	
+				elementData = sDataNames[data[1]][1] --Grabs default value for these from sDataNames
 			else
 				elementData = 0
 			end
 		end
 		setElementData(player,data[1],elementData)
 	end
+	
 	if not getElementData(player,"bloodtype") then
 		determineBloodType(player)
 		setElementData(player,"bloodtypediscovered","?")
 	end
+	
 	setElementData(player,"logedin",true)
 	triggerEvent("onPlayerChangeClothes", player)
 	--Weapons
