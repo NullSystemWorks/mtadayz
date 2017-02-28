@@ -22,6 +22,37 @@ spawnPositions = {
 {-1056.8720703125,2939.068359375,42.311294555664},
 }
 
+playerDefaultValues = {
+	["Bandage"] = 2,
+	["Painkiller"] = 1,
+	["Flashlight"] = 1,
+	["Beiege Pants"] = 1,
+	["Beige Vest"] = 1,
+	["Black Shoe"] = 1,
+	["MAX_Slots"] = 8,
+	["Item_Slots"] = 1,
+	["Backpack_Slots"] = 8,
+	["Backpack_Item_Slots"] = 8,
+	["Back_Weapon_Slots"] = 0,
+	["skin"] = 0,
+	["blood"] = 12000,
+	["temperature"] = 37,
+	["brokenbone"] = false,
+	["pain"] = false,
+	["cold"] = false,
+	["infection"] = false,
+	["unconscious"] = false,
+	["food"] = 100,
+	["thirst"] = 100,
+	["currentweapon_1"] = false,
+	["currentweapon_2"] = false,
+	["currentweapon_3"] = false,
+	["bandit"] = false,
+	["humanity"] = 2500,
+	["bloodtype"] = {}, --Handled inside the for loop
+	["bloodtypeisdiscovered"] = "?"
+}
+
 playerDataTable = {
 {"alivetime"},
 {"daysalive"},

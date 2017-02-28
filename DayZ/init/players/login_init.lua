@@ -126,68 +126,15 @@ function playerRegister(username, pass, player)
 	----------------------------------
 	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
-		if data[1] =="Bandage" then
-			setElementData(player,data[1],2)
-		elseif data[1] =="Painkiller" then
-			setElementData(player,data[1],1)
-		elseif data[1] == "Flashlight" then
-			setElementData(player,data[1],1)
-		elseif data[1] == "Beige Pants" then
-      		setElementData(player, data[1], 1)
-	    elseif data[1] == "Beige Vest" then
-	    	setElementData(player, data[1], 1)
-	    elseif data[1] == "Black Shoe" then
-	    	setElementData(player, data[1], 1)
-		elseif data[1] == "MAX_Slots" then
-			setElementData(player,data[1],8)
-		elseif data[1] =="Item_Slots" then
-			setElementData(player,data[1],12)
-		elseif data[1] == "Weapon_Slots" then
-			setElementData(player,data[1],1)
-		elseif data[1] =="Backpack_Slots" then
-			setElementData(player,data[1],8)
-		elseif data[1] == "Backpack_Item_Slots" then
-			setElementData(player,data[1],8)
-		elseif data[1] =="Back_Weapon_Slots" then
-			setElementData(player,data[1],0)
-		elseif data[1] =="skin" then
-			setElementData(player,data[1],0)
-		elseif data[1] =="blood" then
-			setElementData(player,data[1],12000)
-		elseif data[1] =="temperature" then
-			setElementData(player,data[1],37)
-		elseif data[1] =="brokenbone" then
-			setElementData(player,data[1],false)	
-		elseif data[1] =="pain" then
-			setElementData(player,data[1],false)
-		elseif data[1] =="cold" then
-			setElementData(player,data[1],false)
-		elseif data[1] =="infection" then
-			setElementData(player,data[1],false)
-		elseif data[1] =="unconscious" then
-			setElementData(player,data[1],false)
-		elseif data[1] =="food" then
-			setElementData(player,data[1],100)
-		elseif data[1] =="thirst" then
-			setElementData(player,data[1],100)
-		elseif data[1] =="currentweapon_1" then
-			setElementData(player,data[1],false)
-		elseif data[1] =="currentweapon_2" then
-			setElementData(player,data[1],false)	
-		elseif data[1] =="currentweapon_3" then
-			setElementData(player,data[1],false)	
-		elseif data[1] =="bandit" then
-			setElementData(player,data[1],false)	
-		elseif data[1] =="humanity" then
-			setElementData(player,data[1],2500)	
-		elseif data[1] == "bloodtype" then
-			determineBloodType(player)
-		elseif data[1] == "bloodtypediscovered" then
-			setElementData(player,"bloodtypediscovered","?")
-		else
-			setElementData(player,data[1],0)
+		if (playerDefaultValues[data[1]]) then
+			if data[1] == "bloodtype" then
+				determineBloodType(player)
+			else
+				setElementData(player,data[1],playerDefaultValues[data[1]][1])
+			end
 		end
 	end
+	
 	account = getAccount(username)
 	local value = getAccounts()
 	local value = #value
