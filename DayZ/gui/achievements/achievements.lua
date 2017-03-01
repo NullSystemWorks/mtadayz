@@ -61,12 +61,24 @@ function move()
 	end
 end
 
+function getAchievements()
+	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	if not achievementsunlocked then
+		setElementData(getLocalPlayer(),"achievements",toJSON({}))
+		achievementsunlocked = {}
+	end
+	return achievementsunlocked
+end
+
 function giveAchievement(ID)
 	if GUIEdit.staticimage[1] and guiGetVisible(GUIEdit.staticimage[1]) then
 		table.insert(waitList,ID)
 	else
 		panel(true)
 		if ID then
+			local achievementsunlocked = getAchievements()
+			achievementsunlocked[ID] = true
+			setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 			guiSetText(GUIEdit.label[2],achievements[ID]["name"])
 			guiStaticImageLoadImage(GUIEdit.staticimage[2],pathToImg..achievements[ID]["image"])
 			addEventHandler("onClientRender",getRootElement(),move)
@@ -75,10 +87,7 @@ function giveAchievement(ID)
 end
 
 function check() -- Needs optimizing
-	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",toJSON({}))
-	end
-	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	local achievementsunlocked = getAchievements()
 	local counter = 0
 	for i, all in pairs(achievements) do
 		if not achievementsunlocked[i] then
@@ -103,8 +112,6 @@ function check() -- Needs optimizing
 				end
 				if(counter == #all["conditions"]) then
 					giveAchievement(i)
-					achievementsunlocked[i] = true
-					setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 					for index, element in ipairs(all["items"]) do
 						if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(element[1]) > getElementData(localPlayer,"MAX_Slots") then
 							startRollMessage2("Inventory","Inventory full, can't accept achievement rewards!",255,0,0)
@@ -173,10 +180,7 @@ function tablelength(T)
 end
 
 function loadList()  -- Needs optimizing (urgent)
-	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",toJSON({}))
-	end
-	local achievunl = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	local achievunl = getAchievements()
 	achievpanel(true)
 	local y1 = 0.00
 	local ind = 0
