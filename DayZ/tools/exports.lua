@@ -30,9 +30,8 @@ getDayZVersion - No Arguments. Returns running DayZ version
 ]]
 
 -- [[ VERSION HANDLER ]]
-version = "0.9.9a"
 function getDayZVersion()
-	return version
+	return "0.9.9a"
 end
 
 -- [[ Player Blood Functions ]] --

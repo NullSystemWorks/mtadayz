@@ -79,31 +79,15 @@ end
 addEvent("onClientSendRegisterDataToServer", true)
 addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsiterPlayer)
 
-function pullChangelog()
+function pullChangelog(news)
 	local player = client -- idk how to send it correctly to function()
-	fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/master/changelog.txt",function(data,err)
-		triggerClientEvent(player,"loadAPIData",player,"changelog",data)
-	end)
+	if news then
+		fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/master/changelog.txt",function(data,err)
+			triggerClientEvent(player,"loadAPIData",player,"changelog",data)
+		end)
+	end
 	fetchRemote("https://api.github.com/repos/ciber96/MTADayZ/contributors",function(data,err)
 		triggerClientEvent(player,"loadAPIData",player,"contributors",data)
-		
-		--[[local majorTable = split(data,"},")
-		local name, contri = "",""
-		local tbl = {}
-		for i, all in pairs(majorTable) do
-			if string.find(all,"login") then
-				if(i==3)then
-					name = string.sub(all,13,#all-1)
-				else
-					name = string.sub(all,11,#all-1)
-				end
-			end
-			if(string.find(all,"contributions"))then
-				contri = string.sub(all,17,#all)
-				table.insert(tbl,{name,contri})
-			end
-		end
-		]]
 	end)
 end
 addEvent("pullChangelog", true)
