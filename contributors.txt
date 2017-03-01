@@ -1,15 +1,15 @@
-﻿# - DEVELOPERS - #
+﻿﻿# - DEVELOPERS - #
 
 L			(mtadayz-dev)
 .:CiBeR:.		(CiBeR96)
 Jack Johnson		(1B0Y)
-Rémi Gaffet		(PicardRemi)
-Renkon			(Renkon)
 
 # - CONTRIBUTORS - #
 Sebbe (Smart)		(Group System: https://forum.multitheftauto.com/viewtopic.php?f=108&t=67832)
-DebexeL     (Patch Contributor)
-neves768    (Patch Contributor)
+DebexeL                 (Patch Contributor)
+neves768                (Patch Contributor)
+Rémi Gaffet		(PicardRemi)
+Renkon			(Renkon)
 
 # - TRANSLATORS - #
 Fortitu			(Translation: Czech)

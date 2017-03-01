@@ -14,7 +14,7 @@
 	<script src="version.lua" type="server" />
 	<script src="logsystem.lua" type="server" />
 	<script src="utilities.lua" type="shared" />
-	<script src="tools/exports.lua" type="server" />
+	<script src="tools/exports.lua" type="shared" />
 	<script src="tools/async/slither.lua" type="shared" />
 	<script src="tools/async/async.lua" type="shared" />
 	<script src="tools/sidenotifications/textlib.lua" type="client" />
@@ -422,15 +422,16 @@
 	<!-- Exports -->
 	<export function="addAddonInfo" type="server" /> 
 	<export function="saveLog" type="server" />
-	<export function="setPlayerBlood" type="server" />
-	<export function="setPlayerMurders" type="server" />
-	<export function="setPlayerZombiesKilled" type="server" />
-	<export function="setPlayerHumanity" type="server" />
-	<export function="getPlayerBlood" type="server" />
-	<export function="getPlayerMurders" type="server" />
-	<export function="getPlayerZombiesKilled" type="server" />
-	<export function="getPlayerHumanity" type="server" />
-	<export function="getActualTime" type="server"  />
+	<export function="setPlayerBlood" type="shared" />
+	<export function="setPlayerMurders" type="shared" />
+	<export function="setPlayerZombiesKilled" type="shared" />
+	<export function="setPlayerHumanity" type="shared" />
+	<export function="getDayZVersion" type="shared" />
+	<export function="getPlayerBlood" type="shared" />
+	<export function="getPlayerMurders" type="shared" />
+	<export function="getPlayerZombiesKilled" type="shared" />
+	<export function="getPlayerHumanity" type="shared" />
+	<export function="getActualTime" type="shared"  />
 	<export function="getPlayerCurrentSlots" type="client" />
 	<export function="getPlayerMaxAviableSlots" type="client" />
 	<export function="getItemSlots" type="client" />

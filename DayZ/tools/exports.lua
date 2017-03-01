@@ -25,8 +25,15 @@ setPlayerTemperature - Arguments: element player, int amount. Effect: sets tempe
 getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
 setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
 getActualTime - No Arguments. Returns Actual Real Time, Format: HH:MM:SS
+getDayZVersion - No Arguments. Returns running DayZ version
 
 ]]
+
+-- [[ VERSION HANDLER ]]
+version = "0.9.9a"
+function getDayZVersion()
+	return version
+end
 
 -- [[ Player Blood Functions ]] --
 function setPlayerBlood(player,blood)

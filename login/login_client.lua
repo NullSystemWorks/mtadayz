@@ -14,12 +14,12 @@ if sx < 1152 then
 	scale = sx/1152
 end
 
-font[-1] = guiCreateFont( "font2.ttf", 8*scale )
+font[-1]= guiCreateFont( "font2.ttf", 8*scale )
 font[0] = guiCreateFont( "font.ttf", 16*scale )
 font[1] = guiCreateFont( "font.ttf", 18*scale )
 font[2] = guiCreateFont( "font.ttf", 20*scale )
 font[3] = guiCreateFont( "font.ttf", 24*scale )
-font[4] = guiCreateFont("font.ttf",90*scale)
+font[4] = guiCreateFont( "font.ttf", 90*scale )
 
 --Button
 function createMarwinButton(x,y,widht,height,text,bool,parent,info)
@@ -98,10 +98,14 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	
 	background_front = guiCreateStaticImage(0.00, 0.00, 1, 1, "images/background_"..number..".png", true)
 	background_news = guiCreateStaticImage(0.72, 0.20, 0.27, 0.70, "images/background_news.png", true, background_front)
-	background_news_label = guiCreateLabel(0.01, 0.01, 1, 0.1, "NEWS", true,background_news)
-	background_news_text = guiCreateLabel(0.01,0.1, 1, 0.9, news[1],true,background_news)
+	background_panel = guiCreateScrollPane(0.00, 0.00, 1.00, 1.00, true, background_news)
+	background_news_label = guiCreateLabel(0.01, 0.01, 1, 0.1, "NEWS", true,background_panel)
+	background_news_text = guiCreateLabel(0.01, 0.10, 1.00, 2.00, news[1],true,background_panel)
+	background_contributors = guiCreateStaticImage(0.72, 0.92, 0.27, 0.05, "images/background_news.png", true, background_front)
+	background_contributors_contri = guiCreateLabel(0.00, 0.00, 1.00, 0.50, "CONTRIBUTORS",true,background_contributors)
+	background_contributors_label = guiCreateLabel(0.00, 0.50, 5.00, 0.50, "Loading contributors...",true,background_contributors)
 	title_label = guiCreateLabel(0.29, 0.08, 0.43, 0.18, "MTA DayZ", true,background_front)
-	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: 0.9.8a", true,background_front)
+	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: "..exports.DayZ:getDayZVersion(), true,background_front)
 	login_label = guiCreateLabel(0.05, 0.64, 0.20, 0.05, "LOGIN", true,background_front)
 	Login_Edit[1] = guiCreateEdit(0.05, 0.67, 0.25, 0.05, infoTable["account"], true,background_front)
 	Login_Edit[2] = guiCreateEdit(0.31, 0.67, 0.25, 0.05, infoTable["pass"], true,background_front)
@@ -118,7 +122,10 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	guiSetFont(register_label,font[0])
 	guiSetFont(error_label,font[1])
 	guiSetAlpha(background_news,0.7)
+	guiSetAlpha(background_contributors,0.7)
 	guiLabelSetHorizontalAlign(background_news_text,"left",true)
+	guiLabelSetHorizontalAlign(background_news_label,"center",true)
+	guiLabelSetHorizontalAlign(background_contributors_contri,"center",true)
 	guiRadioButtonSetSelected(Login_Edit[5],true)
 	guiEditSetMasked(Login_Edit[2],true)
 	guiEditSetMasked(Login_Edit[4],true)
@@ -188,11 +195,41 @@ function onErrorOutputReason(reason)
 end
 addEventHandler("onErrorOutputReason",root,onErrorOutputReason)
 
+local xcntri,ycntri = 0.00,0.50
+function startContributorsAnim()
+	if xcntri < -4.00 then
+		xcntri = 1.00
+	end
+	xcntri = xcntri-0.01
+	guiSetPosition(background_contributors_label,xcntri,ycntri,true)
+end
+
+-- Load changelog
+function loadAPIData(ele,data)
+	if data ~= "ERROR" then
+		if (ele == "changelog") then
+			--data = base64Decode(data)
+			guiSetText(background_news_text,data)
+		elseif (ele == "contributors") then
+			local v = {fromJSON(data)}
+			local contri = ""
+			for i, all in ipairs(v) do
+				contri = contri..all["login"].." ["..all["contributions"].." contributions]".." | "
+			end
+			guiSetText(background_contributors_label,contri)
+			addEventHandler("onClientRender",root,startContributorsAnim)
+		end
+	end
+end
+addEvent("loadAPIData",true)
+addEventHandler("loadAPIData",root,loadAPIData)
+
 --BUILD WINDOW ON RESOURCE START
 addEventHandler("onClientResourceStart", resourceRoot, 
 	function ()
 		fadeCamera(false,2000,0,0,0)
 		setCameraMatrix(6000,6000,2000)
+		triggerServerEvent("pullChangelog",getLocalPlayer())
 		showLogin()
 		guiSetInputMode("no_binds_when_editing")	
 	end
@@ -206,6 +243,7 @@ function hideLoginWindow(accountName, pass)
 	setElementData(getLocalPlayer(),"clickedButton",false)
 	toggleSavePassword(accountName, pass)
 	removeEventHandler("onClientRender",root,dayR)
+	removeEventHandler("onClientRender",root,startContributorsAnim)
 end
 addEvent("onPlayerDoneLogin", true)
 addEventHandler("onPlayerDoneLogin", getRootElement(), hideLoginWindow)

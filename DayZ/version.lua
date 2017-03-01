@@ -1,6 +1,6 @@
 --[[
 #-----------------------------------------------------------------------------#
-----*					MTA DayZ: version.lua						*----
+----*					MTA DayZ: version.lua						    *----
 ----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
 
 ----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
@@ -11,7 +11,7 @@
 
 local timer
 local checkType = "stable" -- stable = Only check for stable versions; beta = check for most recent version (including unstables)
-version = "0.9.8.1"
+version = "0.9.9a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()

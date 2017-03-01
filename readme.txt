@@ -55,7 +55,7 @@ getPlayerTemperature - Arguments: element player. Returns: Temperature of player
 setPlayerTemperature - Arguments: element player, int amount. Effect: sets temperature to specified value
 getPlayerHumanity - Arguments: element player. Returns: Humanity of player (int)
 setPlayerHumanity - Arguments: element player, int amount. Effect: sets humanity to specified value
-
+getDayZVersion - No Arguments. Returns running DayZ version
 
 ## FAQ ##
 Q: Help! Vehicles won't spawn/appear!
