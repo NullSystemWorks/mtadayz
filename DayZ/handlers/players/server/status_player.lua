@@ -53,7 +53,7 @@ function checkTemperature()
 					setElementData(player,"temperature_status",1)
 				elseif value == -0.02 then
 					setElementData(player,"temperature_status",2)
-				elseif value >= -0.03 then
+				elseif value <= -0.03 then
 					setElementData(player,"temperature_status",3)
 				elseif value == 0.01 then
 					setElementData(player,"temperature_status",4)

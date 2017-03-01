@@ -135,6 +135,7 @@
 	<script src="gui/gear/ui_gear.lua" type="client" cache="false" />
 	<script src="gui/achievements/achievements.lua" type="client" />
 	<file src="gui/achievements/icons/achiev1.png"/>
+	<file src="gui/achievements/icons/bg_achievements.png" />
 	<file src="gui/gear/icons/ak47.png"/>
 	<file src="gui/gear/icons/bat.png"/>
 	<file src="gui/gear/icons/binoculars.png"/>

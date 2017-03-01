@@ -16,7 +16,7 @@ GUIEdit = {
 
 function panel(state)
 	if not GUIEdit.staticimage[1] then
-		GUIEdit.staticimage[1] = guiCreateStaticImage(0.00, -0.15, 0.20, 0.14, "gui/gear/items/debug.png", true)
+		GUIEdit.staticimage[1] = guiCreateStaticImage(0.00, -0.15, 0.31, 0.14, "gui/achievements/icons/bg_achievements.png", true)
 		guiSetAlpha(GUIEdit.staticimage[1], 0.87)
 		guiBringToFront(GUIEdit.staticimage[1])
 
@@ -24,8 +24,8 @@ function panel(state)
 		GUIEdit.label[1] = guiCreateLabel(0.34, 0.16, 0.62, 0.17, "Achievement Unlocked", true, GUIEdit.staticimage[1])
 		guiSetFont(GUIEdit.label[1], "default-bold-small")
 		guiLabelSetHorizontalAlign(GUIEdit.label[1], "center", false)
-		GUIEdit.label[2] = guiCreateLabel(0.34, 0.33, 0.62, 0.50, "Killing 500 players", true, GUIEdit.staticimage[1])
-		guiLabelSetHorizontalAlign(GUIEdit.label[2], "center", false)
+		GUIEdit.label[2] = guiCreateLabel(0.34, 0.33, 0.99, 0.50, "", true, GUIEdit.staticimage[1])
+		guiLabelSetHorizontalAlign(GUIEdit.label[2], "left", false)
 		guiLabelSetVerticalAlign(GUIEdit.label[2], "center")
 	else
 		guiSetVisible(GUIEdit.staticimage[1],state)
@@ -95,13 +95,23 @@ function check() -- Needs optimizing
 					if getElementData(getLocalPlayer(),cond[1]) < cond[3] then
 						counter = counter+1
 					end
+				elseif(cond[2] == "misc_zaxis") then
+					local x,y,z = getElementPosition(localPlayer)
+					if z >= 300 then
+						counter = counter+1
+					end
 				end
 				if(counter == #all["conditions"]) then
 					giveAchievement(i)
 					achievementsunlocked[i] = true
 					setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 					for index, element in ipairs(all["items"]) do
-						setElementData(getLocalPlayer(),element[1],element[2])
+						if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(element[1]) > getElementData(localPlayer,"MAX_Slots") then
+							startRollMessage2("Inventory","Inventory full, can't accept achievement rewards!",255,0,0)
+							break
+						else
+							setElementData(getLocalPlayer(),element[1],element[2])
+						end
 					end
 				end
 			end
@@ -130,7 +140,7 @@ GUIAchiev = {
 
 function achievpanel(state)
 	if not GUIAchiev.staticimage[1] then
-		local font0_needhelp = guiCreateFont("fonts/needhelp.ttf", 30)
+		local font0_needhelp = guiCreateFont("fonts/needhelp.ttf", 20)
 		GUIAchiev.staticimage[1] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, "gui/journal/images/journal_page1.png", true)
 		guiBringToFront(GUIAchiev.staticimage[1])
 		
@@ -141,7 +151,7 @@ function achievpanel(state)
 		GUIAchiev.label[2] = guiCreateLabel(0.23, 0.11, 0.21, 0.03, "Your achievements: 01 of 100 (01% completed)", true, GUIAchiev.staticimage[1])
 		guiLabelSetColor(GUIAchiev.label[2], 45, 45, 45)
 		
-		GUIAchiev.label[3] = guiCreateLabel(0.80, 0.09, 0.14, 0.05, "CLOSE", true, GUIAchiev.staticimage[1])
+		GUIAchiev.label[3] = guiCreateLabel(0.80, 0.09, 0.14, 0.05, "Close", true, GUIAchiev.staticimage[1])
 		guiSetFont(GUIAchiev.label[3], font0_needhelp)
 		guiLabelSetColor(GUIAchiev.label[3], 0, 0, 0)
 		
@@ -180,7 +190,7 @@ function loadList()  -- Needs optimizing (urgent)
 		panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[1])
 		
 		achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, pathToImg..achievements[i]["image"], true, panelachiev)
-		achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
+		achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/achievements/icons/bg_achievements.png", true, panelachiev)
 
 		achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, achievements[i]["name"], true, achievbg)
 		guiSetFont(achievname, "default-bold-small")
@@ -197,7 +207,7 @@ function loadList()  -- Needs optimizing (urgent)
 				panelachiev = guiCreateStaticImage(0.00, y1, 1.00, 0.14, "gui/crosshair/none.png", true, GUIAchiev.scrollpane[2])
 				
 				achievIMG = guiCreateStaticImage(0.00, 0.00, 0.15, 1.00, pathToImg..achievements[i]["image"], true, panelachiev)
-				achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/gear/items/debug.png", true, panelachiev)
+				achievbg = guiCreateStaticImage(0.18, 0.00, 0.82, 1.00, "gui/achievements/icons/bg_achievements.png", true, panelachiev)
 
 				achievname = guiCreateLabel(0.01, 0.00, 0.99, 0.28, achievements[i]["name"], true, achievbg)
 				guiSetFont(achievname, "default-bold-small")
