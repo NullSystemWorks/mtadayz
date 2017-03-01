@@ -11,6 +11,19 @@
 outputDebugString("[DayZ] cfgVehicles loaded")
 
 -- VEHICLE SPAWNPOINTS
+--[[ STRUCTURE:
+
+gameplayVariables["vehiclenamespawns"] = 
+{
+{x,y,z,rX,rY,rZ,spawnChance},
+},
+
+The vehiclename MUST (!!!) correspond with the varName in the table vehicleAddonsInfo (Location: tables/table_vehicles.lua), or else the game breaks!
+The vehiclename MUST (!!!) contain "spawns" at the end of its name, or else the vehicle won't spawn!
+Examples: 
+gameplayVariables["infernusspawns"], gameplayVariables["hydraspawns"], ...
+
+]]
 -- ATV
 gameplayVariables["atvspawns"] = 
 {

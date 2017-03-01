@@ -8,30 +8,32 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+
+
 -- Vehicles
 ATV_Spawns = gameplayVariables["atvspawns"]
 Bus_Spawns = gameplayVariables["busspawns"]
 Bike_Spawns = gameplayVariables["bikespawns"]
 GAZ_Spawns = gameplayVariables["gazspawns"]
-Military_O_Spawns = gameplayVariables["militaryoffroadspawns"]
+MilitaryO_Spawns = gameplayVariables["militaryoffroadspawns"]
 Motorcycle_Spawns = gameplayVariables["motorcyclespawns"]
-Pickup_O_Spawns = gameplayVariables["pickupoffroadspawns"]
+PickupO_Spawns = gameplayVariables["pickupoffroadspawns"]
 Hatchback_Spawns = gameplayVariables["hatchbackspawns"]
 Pickup_Spawns = gameplayVariables["pickupspawns"]
 SVan_Spawns = gameplayVariables["svanspawns"]
 Skoda_Spawns = gameplayVariables["skodaspawns"]
 Tractor_Spawns = gameplayVariables["tractorspawns"]
 UAZ_Spawns = gameplayVariables["uazspawns"]
-Ural_C_Spawns = gameplayVariables["uralcivilianspawns"]
+UralC_Spawns = gameplayVariables["uralcivilianspawns"]
 SUV_Spawns = gameplayVariables["suvspawns"]
-V3S_C_Spawns = gameplayVariables["v3scivilianspawns"]
+V3SC_Spawns = gameplayVariables["v3scivilianspawns"]
 
 -- Aircraft
-AH6X_LB_Spawns = gameplayVariables["ah6xspawns"]
-UH1H_Huey_Spawns = gameplayVariables["hueyspawns"]
+AH6XLB_Spawns = gameplayVariables["ah6xspawns"]
+UH1HHuey_Spawns = gameplayVariables["hueyspawns"]
 Mi17_Spawns = gameplayVariables["mi17spawns"]
 MH6J_Spawns = gameplayVariables["mh6jspawns"]
-An2_BP_Spawns = gameplayVariables["an2biplanespawns"]
+An2BP_Spawns = gameplayVariables["an2biplanespawns"]
 
 -- Boats
 FishingBoat_Spawns = gameplayVariables["fishingboatspawns"]
@@ -241,6 +243,63 @@ function loadTentsOnServerStart()
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadTentsOnServerStart)
 
+
+function spawnDayZVehicles()
+if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
+	for i,veh in ipairs(vehicleAddonsInfo) do
+		local modelID = veh[1]
+		local tires = veh[2]
+		local engine = veh[3]
+		local parts = veh[4]
+		local scrap = veh[5]
+		local glass = veh[6]
+		local rotary = veh[7]
+		local name = veh[8]
+		local colSphereRadius = veh[9]
+		local maxslots = veh[10]
+		local fuel = veh[11]
+		local varName = veh[13]
+		local veh
+		local vehCol
+		local x,y,z
+		local rX,rY,rZ
+		for k, spawnpos in ipairs(gameplayVariables[varName.."spawns"]) do
+			local spawnChance = math.percentChance(spawnpos[7],8)
+			if spawnChance and spawnChance >= 1 then
+				v_counter = v_counter+1
+				x,y,z = spawnpos[1],spawnpos[2],spawnpos[3]
+				rX,rY,rZ = spawnpos[4],spawnpos[5],spawnpos[6]
+				veh = createVehicle(modelID,x,y,z,rX,rY,rZ)
+				vehCol = createColSphere(x,y,z,colSphereRadius)
+				attachElements ( vehCol, veh, 0, 0, 0 )
+				setElementData(vehCol,"parent",veh)
+				setElementData(veh,"parent",vehCol)
+				setElementData(vehCol,"vehicle",true)
+				setElementData(vehCol,"MAX_Slots",maxslots)
+				--Engine + Tires
+				--getElementModel(veh)
+				setElementData(vehCol,"Tire_inVehicle",math.random(0,tires))
+				setElementData(vehCol,"Engine_inVehicle",math.random(0,engine))
+				setElementData(vehCol,"Parts_inVehicle",math.random(0,parts))
+				setElementData(vehCol,"Scrap_inVehicle",math.random(0,scrap))
+				setElementData(vehCol,"Glass_inVehicle",math.random(0,glass))
+				setElementData(vehCol,"Rotary_inVehicle",math.random(0,rotary))
+				setElementData(vehCol,"vehicle_name",name)
+				--vehicle_indentifikation	
+				setElementData(vehCol,"spawn",{modelID,x,y,z})
+				--others
+				setElementData(vehCol,"fuel",fuel)
+				setElementID(vehCol,tostring(v_counter))
+				setElementHealth(veh,math.random(300,1000))
+				exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
+			end
+		end
+	end
+end
+setTimer(spawnDayZVehicles,10000,1)
+
+--[[
+-- Not needed anymore, keeping it just in case
 function spawnDayZVehicles()
 if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
 	for i,veh in ipairs(ATV_Spawns) do
@@ -1006,7 +1065,8 @@ if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),
 	setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
 	exports.DayZ:saveLog("----- END OF SPAWNING VEHICLES -----\r\n","debug")
 end
-setTimer(spawnDayZVehicles,10000,1)
+--setTimer(spawnDayZVehicles,10000,1)
+]]
 
 function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
 	v_counter = v_counter+1

@@ -105,7 +105,7 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	background_contributors_contri = guiCreateLabel(0.00, 0.00, 1.00, 0.50, "CONTRIBUTORS",true,background_contributors)
 	background_contributors_label = guiCreateLabel(0.00, 0.50, 5.00, 0.50, "Loading contributors...",true,background_contributors)
 	title_label = guiCreateLabel(0.29, 0.08, 0.43, 0.18, "MTA DayZ", true,background_front)
-	version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: "..exports.DayZ:getDayZVersion(), true,background_front)
+	--version_label = guiCreateLabel(0.29, 0.22, 0.34, 0.13, "Version: "..exports.DayZ:getDayZVersion(), true,background_front)
 	login_label = guiCreateLabel(0.05, 0.64, 0.20, 0.05, "LOGIN", true,background_front)
 	Login_Edit[1] = guiCreateEdit(0.05, 0.67, 0.25, 0.05, infoTable["account"], true,background_front)
 	Login_Edit[2] = guiCreateEdit(0.31, 0.67, 0.25, 0.05, infoTable["pass"], true,background_front)
@@ -118,7 +118,7 @@ confFile = xmlLoadFile("@preferencesL.xml")
 
 	guiSetFont(login_label,font[0])
 	guiSetFont(title_label,font[4])
-	guiSetFont(version_label,font[3])
+	--guiSetFont(version_label,font[3])
 	guiSetFont(register_label,font[0])
 	guiSetFont(error_label,font[1])
 	guiSetAlpha(background_news,0.7)
@@ -131,10 +131,10 @@ confFile = xmlLoadFile("@preferencesL.xml")
 	guiEditSetMasked(Login_Edit[4],true)
 	if number == 2 or number == 4 or number == 5 then
 		guiLabelSetColor(title_label,0,0,0)
-		guiLabelSetColor(version_label,0,0,0)
+		--guiLabelSetColor(version_label,0,0,0)
 	else
 		guiLabelSetColor(title_label,255,255,255)
-		guiLabelSetColor(version_label,255,255,255)
+		--guiLabelSetColor(version_label,255,255,255)
 	end
 end
 
