@@ -2,7 +2,6 @@
 This changelog lists all changes made to MTA DayZ. It adheres to the following features description.
 
 ## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
-## Please add your change on rollingchangelog.txt.
 
 ## [Upcoming release] - DATE OF RELEASE (Unknown)
 ### ADDED: Petrol stations now have a limited amount of fuel (between 1 - 15 jerry cans worth).
