@@ -1,22 +1,21 @@
-﻿﻿# - DEVELOPERS - #
-
+# - DEVELOPERS - #
 L			(mtadayz-dev)
-.:CiBeR:.		(CiBeR96)
+.:CiBeR:.		  	(CiBeR96)
 Jack Johnson		(1B0Y)
 
 # - CONTRIBUTORS - #
 Sebbe (Smart)		(Group System: https://forum.multitheftauto.com/viewtopic.php?f=108&t=67832)
-DebexeL                 (Patch Contributor)
-neves768                (Patch Contributor)
-Rémi Gaffet		(PicardRemi)
-Renkon			(Renkon)
+DebexeL         (Patch Contributor)
+neves768        (Patch Contributor)
+Rémi Gaffet			(PicardRemi)
+Renkon					(Renkon)
 
 # - TRANSLATORS - #
-Fortitu			(Translation: Czech)
-L			(Translation: German)
-imCEASER		(Translation: Portuguese)
-Bastard			(Translation: Dutch)
-monaguilloX		(Translation: Spanish)
-Rémi Gaffet		(Translation: French)
-AlYnZyX			(Translation: Romanian)
-KaSkA3eR 		(Translation: Polish)
+Fortitu					(Translation: Czech)
+L								(Translation: German)
+imCEASER				(Translation: Portuguese)
+Bastard					(Translation: Dutch)
+monaguilloX			(Translation: Spanish)
+Rémi Gaffet			(Translation: French)
+AlYnZyX					(Translation: Romanian)
+KaSkA3eR 				(Translation: Polish)
