@@ -92,20 +92,21 @@ function check() -- Needs optimizing
 	for i, all in pairs(achievements) do
 		if not achievementsunlocked[i] then
 			for _,cond in ipairs(all["conditions"]) do
-				if(cond[2] == "greater") then
-					if getElementData(getLocalPlayer(),cond[1]) > cond[3] then
+				if(cond[2] == "greater" and cond[3]) then
+					if getElementData(getLocalPlayer(),cond[1]) > tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif(cond[2] == "equal") then
 					if getElementData(getLocalPlayer(),cond[1]) == cond[3] then
 						counter = counter+1
 					end
-				elseif(cond[2] == "less") then
-					if getElementData(getLocalPlayer(),cond[1]) < cond[3] then
+				elseif(cond[2] == "less" and cond[3]) then
+					if getElementData(getLocalPlayer(),cond[1]) < tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif(cond[2] == "misc_zaxis") then
 					local x,y,z = getElementPosition(localPlayer)
+					-- outputChatBox(assert(loadstring("return "..tostring(cond[1])))()) -- Don't load > 100 above ground (idk why)
 					if z >= 300 then
 						counter = counter+1
 					end
