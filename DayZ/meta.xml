@@ -291,6 +291,29 @@
 	
 	<script src="gui/journal/journal.lua" type="client" cache="false" />
 	<file src="gui/journal/images/journal_page1.png" />
+	<file src="gui/journal/images/survivor.png" />
+	<file src="gui/journal/images/hero1.png" />
+	<file src="gui/journal/images/hero2.png" />
+	<file src="gui/journal/images/hero3.png" />
+	<file src="gui/journal/images/bandit1.png" />
+	<file src="gui/journal/images/bandit2.png" />
+	<file src="gui/journal/images/bandit3.png" />
+	<file src="gui/journal/images/banditskilled1.png" />
+	<file src="gui/journal/images/banditskilled2.png" />
+	<file src="gui/journal/images/banditskilled3.png" />
+	<file src="gui/journal/images/banditskilled4.png" />
+	<file src="gui/journal/images/zombieskilled1.png" />
+	<file src="gui/journal/images/zombieskilled2.png" />
+	<file src="gui/journal/images/zombieskilled3.png" />
+	<file src="gui/journal/images/zombieskilled4.png" />
+	<file src="gui/journal/images/headshots1.png" />
+	<file src="gui/journal/images/headshots2.png" />
+	<file src="gui/journal/images/headshots3.png" />
+	<file src="gui/journal/images/headshots4.png" />
+	<file src="gui/journal/images/murders1.png" />
+	<file src="gui/journal/images/murders2.png" />
+	<file src="gui/journal/images/murders3.png" />
+	<file src="gui/journal/images/murders4.png" />
 	
 	<script src="gui/scoreboard/scoreboard.lua" type="client" cache="false" />
 	<file src="gui/scoreboard/scoreboard.png" />

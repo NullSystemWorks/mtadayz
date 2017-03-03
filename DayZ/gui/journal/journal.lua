@@ -21,6 +21,7 @@ local isJournalOpen = false
 local isWriting = false
 font[1] = guiCreateFont(":DayZ/fonts/needhelp.ttf",30)
 font[2] = guiCreateFont(":DayZ/fonts/needhelp.ttf",17)
+font[3] = guiCreateFont(":DayZ/fonts/needhelp.ttf",15)
 
 function showJournal()
 	if getElementData(localPlayer,"logedin") then
@@ -29,39 +30,65 @@ function showJournal()
 			showCursor(true)
 			playSound(":DayZ/sounds/status/journal.wav",false)
 			guiSetVisible(JournalTable.image[1],true)
+			guiSetVisible(JournalTable.image[2],false)
+			guiSetVisible(JournalTable.image[4],false)
+			guiSetVisible(JournalTable.image[5],false)
+			guiSetVisible(JournalTable.image[6],false)
+			guiSetVisible(JournalTable.image[7],false)
+			guiSetVisible(JournalTable.image[8],false)
 			guiSetText(JournalTable.label[1],"Day "..getElementData(localPlayer,"daysalive"))
 			local x,y,z = getElementPosition(localPlayer)
 			guiSetText(JournalTable.label[2],getZoneName(x,y,z))
 			addEventHandler("onClientMouseEnter",JournalTable.label[5],function() writeSelected(5) end,false)
-			addEventHandler("onClientMouseLeave",JournalTable.label[5],function()writeDeselected(5) end,false)
-			addEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal,false)
+			addEventHandler("onClientMouseLeave",JournalTable.label[5],function() writeDeselected(5) end,false)
 			addEventHandler("onClientMouseEnter",JournalTable.label[7],function() writeSelected(7) end,false)
 			addEventHandler("onClientMouseLeave",JournalTable.label[7],function() writeDeselected(7) end,false)
-			addEventHandler("onClientGUIClick",JournalTable.label[7],function()
-				guiMoveToBack(JournalTable.image[1])
+			addEventHandler("onClientMouseEnter",JournalTable.label[8],function() writeSelected(8) end,false)
+			addEventHandler("onClientMouseLeave",JournalTable.label[8],function() writeDeselected(8) end,false)
+			addEventHandler("onClientMouseEnter",JournalTable.label[9],function() writeSelected(9) end,false)
+			addEventHandler("onClientMouseLeave",JournalTable.label[9],function() writeDeselected(9) end,false)
+			addEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal,false)
+			addEventHandler("onClientGUIClick",JournalTable.label[7],function() nextPreviousPage(7) end,false)
+			addEventHandler("onClientGUIClick",JournalTable.label[8],function() nextPreviousPage(8) end,false)
+			addEventHandler("onClientGUIClick",JournalTable.label[9],function()
+				guiMoveToBack(JournalTable.image[2])
 				loadList()
 			end,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal,false)
-			unbindKey("J","down",initInventory)
+			
+			guiSetText(JournalTable.label[20],tostring(getElementData(localPlayer,"blood")).." (Type: "..tostring(getElementData(localPlayer,"bloodtypediscovered"))..")")
+			guiSetText(JournalTable.label[21],tostring(math.floor(getElementData(localPlayer,"food"))))
+			guiSetText(JournalTable.label[22],tostring(math.floor(getElementData(localPlayer,"thirst"))))
+			guiSetText(JournalTable.label[23],tostring(math.floor(getElementData(localPlayer,"temperature"))).."°C")
+			guiSetText(JournalTable.label[24],tostring(math.floor(getElementData(localPlayer,"humanity"))))
+			guiSetText(JournalTable.label[25],tostring(math.floor(getElementData(getRootElement(),"zombiestotal") or 0)))
+			--unbindKey("J","down",initInventory)
 		else
 			isJournalOpen = false
 			showCursor(false)
 			guiSetVisible(JournalTable.image[1],false)
+			guiSetVisible(JournalTable.image[2],false)
 			removeEventHandler("onClientMouseEnter",JournalTable.label[5],writeSelected)
 			removeEventHandler("onClientMouseLeave",JournalTable.label[5],writeDeselected)
 			removeEventHandler("onClientMouseEnter",JournalTable.label[7],writeSelected)
-			removeEventHandler("onClientMouseLeave",JournalTable.label[5],writeDeselected)
+			removeEventHandler("onClientMouseLeave",JournalTable.label[7],writeDeselected)
+			removeEventHandler("onClientMouseEnter",JournalTable.label[8],writeSelected)
+			removeEventHandler("onClientMouseLeave",JournalTable.label[8],writeDeselected)
+			removeEventHandler("onClientMouseEnter",JournalTable.label[9],writeSelected)
+			removeEventHandler("onClientMouseLeave",JournalTable.label[9],writeDeselected)
 			removeEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal)
-			removeEventHandler("onClientGUIClick",JournalTable.label[7],loadList)
+			removeEventHandler("onClientGUIClick",JournalTable.label[7],nextPreviousPage)
+			removeEventHandler("onClientGUIClick",JournalTable.label[8],nextPreviousPage)
+			removeEventHandler("onClientGUIClick",JournalTable.label[9],loadList)
 			removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 			removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
-			bindKey("J","down",initInventory)
+			--bindKey("J","down",initInventory)
 		end
 	end
 end
 addCommandHandler("Show Journal",showJournal)
-bindKey("5","down","Show Journal")
+bindKey("6","down","Show Journal")
 
 function writeSelected(number)
 	guiLabelSetColor(JournalTable.label[number],255,0,0)
@@ -73,6 +100,14 @@ end
 
 function initJournal()
 	JournalTable.image[1] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
+	JournalTable.image[2] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
+	JournalTable.image[3] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
+	JournalTable.image[4] = guiCreateStaticImage(0.50, 0.07, 0.41, 0.80, ":DayZ/gui/journal/images/survivor.png", true, JournalTable.image[2])
+	JournalTable.image[5] = guiCreateStaticImage(0.00, 0.00, 1.00, 0.20, ":DayZ/gui/journal/images/banditskilled1.png", true, JournalTable.image[4])
+	JournalTable.image[6] = guiCreateStaticImage(0.00, 0.75, 1.00, 0.20, ":DayZ/gui/journal/images/murders1.png", true, JournalTable.image[4])
+	JournalTable.image[7] = guiCreateStaticImage(0.20, 0.22, 0.79, 0.14, ":DayZ/gui/journal/images/zombieskilled1.png", true, JournalTable.image[4])
+	JournalTable.image[8] = guiCreateStaticImage(0.00, 0.22, 0.79, 0.14, ":DayZ/gui/journal/images/headshots1.png", true, JournalTable.image[4])   
+
 	JournalTable.label[1] = guiCreateLabel(0.09, 0.09, 0.40, 0.06, "Day 0", true, JournalTable.image[1])
 	guiLabelSetColor(JournalTable.label[1], 0, 0, 0)
 	guiLabelSetHorizontalAlign(JournalTable.label[1], "left", true)
@@ -97,10 +132,88 @@ function initJournal()
 	guiLabelSetHorizontalAlign(JournalTable.label[5], "left", true)
 	guiSetFont(JournalTable.label[5],font[2])
 
-	JournalTable.label[7] = guiCreateLabel(0.75, 0.89, 0.21, 0.05, "Achievements", true, JournalTable.image[1])
+	JournalTable.label[7] = guiCreateLabel(0.75, 0.89, 0.21, 0.05, "Next Page", true, JournalTable.image[1])
 	guiLabelSetColor(JournalTable.label[7],0,0,0)
 	guiLabelSetHorizontalAlign(JournalTable.label[7], "left", true)
 	guiSetFont(JournalTable.label[7],font[2])
+	
+	JournalTable.label[8] = guiCreateLabel(0.51, 0.89, 0.21, 0.05, "Previous Page", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[8],0,0,0)
+	guiLabelSetHorizontalAlign(JournalTable.label[8], "left", true)
+	guiSetFont(JournalTable.label[8],font[2])
+	
+	JournalTable.label[9] = guiCreateLabel(0.75, 0.89, 0.21, 0.05, "Achievements", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[9],0,0,0)
+	guiLabelSetHorizontalAlign(JournalTable.label[9], "left", true)
+	guiSetFont(JournalTable.label[9],font[2])
+	
+	JournalTable.label[10] = guiCreateLabel(0.13, 0.15, 0.33, 0.14, "Statistics", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[10],0,0,0)
+	guiLabelSetHorizontalAlign(JournalTable.label[10], "center", false)
+	guiLabelSetVerticalAlign(JournalTable.label[10], "center")
+	guiSetFont(JournalTable.label[10],font[1])
+	
+	JournalTable.label[11] = guiCreateLabel(0.10, 0.42, 0.14, 0.03, "Blood/Bloodtype:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[11],0,0,0)
+	guiSetFont(JournalTable.label[11],font[3])
+	
+	JournalTable.label[12] = guiCreateLabel(0.10, 0.46, 0.14, 0.03, "Hunger:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[12],0,0,0)
+	guiSetFont(JournalTable.label[12],font[3])
+	
+	JournalTable.label[13] = guiCreateLabel(0.10, 0.50, 0.14, 0.03, "Thirst:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[13],0,0,0)
+	guiSetFont(JournalTable.label[13],font[3])
+	
+	JournalTable.label[14] = guiCreateLabel(0.10, 0.54, 0.14, 0.03, "Temperature:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[14],0,0,0)
+	guiSetFont(JournalTable.label[14],font[3])
+	
+	JournalTable.label[15] = guiCreateLabel(0.10, 0.58, 0.14, 0.03, "Humanity:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[15],0,0,0)
+	guiSetFont(JournalTable.label[15],font[3])
+	
+	JournalTable.label[16] = guiCreateLabel(0.10, 0.62, 0.14, 0.03, "Zombies:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[16],0,0,0)
+	guiSetFont(JournalTable.label[16],font[3])
+	
+	JournalTable.label[17] = guiCreateLabel(0.10, 0.77, 0.36, 0.03, "Survived: 0 Day(s)", true, JournalTable.image[2])
+	guiLabelSetHorizontalAlign(JournalTable.label[17], "center", false)
+	guiLabelSetColor(JournalTable.label[17],0,0,0)
+	guiSetFont(JournalTable.label[17],font[3])
+	
+	JournalTable.label[18] = guiCreateLabel(0.10, 0.85, 0.36, 0.03, "FPS:", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[18],0,0,0)
+	guiSetFont(JournalTable.label[18],font[3])
+	
+	JournalTable.label[19] = guiCreateLabel(0.13, 0.31, 0.33, 0.03, "Difficulty:", true, JournalTable.image[2])
+	guiLabelSetHorizontalAlign(JournalTable.label[19], "center", false)
+	guiLabelSetColor(JournalTable.label[19],0,0,0)
+	guiSetFont(JournalTable.label[19],font[3])
+	
+	JournalTable.label[20] = guiCreateLabel(0.33, 0.42, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[20],0,0,0)
+	guiSetFont(JournalTable.label[20],font[3])
+	
+	JournalTable.label[21] = guiCreateLabel(0.33, 0.46, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[21],0,0,0)
+	guiSetFont(JournalTable.label[21],font[3])
+	
+	JournalTable.label[22] = guiCreateLabel(0.33, 0.50, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[22],0,0,0)
+	guiSetFont(JournalTable.label[22],font[3])
+	
+	JournalTable.label[23] = guiCreateLabel(0.33, 0.54, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[23],0,0,0)
+	guiSetFont(JournalTable.label[23],font[3])
+	
+	JournalTable.label[24] = guiCreateLabel(0.33, 0.58, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[24],0,0,0)
+	guiSetFont(JournalTable.label[24],font[3])
+	
+	JournalTable.label[25] = guiCreateLabel(0.33, 0.62, 0.14, 0.03, "", true, JournalTable.image[2])
+	guiLabelSetColor(JournalTable.label[25],0,0,0)
+	guiSetFont(JournalTable.label[25],font[3])
 	
 	JournalTable.window[1] = guiCreateWindow(0.24, 0.14, 0.52, 0.80, "Write into Journal", true)
 	guiWindowSetMovable(JournalTable.window[1], false)
@@ -113,6 +226,13 @@ function initJournal()
 	JournalTable.button[2] = guiCreateButton(0.63, 0.92, 0.19, 0.06, "Cancel", true, JournalTable.window[1])    
 	
 	guiSetVisible(JournalTable.image[1],false)
+	guiSetVisible(JournalTable.image[2],false)
+	guiSetVisible(JournalTable.image[3],false)
+	guiSetVisible(JournalTable.image[4],false)
+	guiSetVisible(JournalTable.image[5],false)
+	guiSetVisible(JournalTable.image[6],false)
+	guiSetVisible(JournalTable.image[7],false)
+	guiSetVisible(JournalTable.image[8],false)
 	guiSetVisible(JournalTable.window[1],false)
 	
 end
@@ -194,6 +314,117 @@ function loadJournalOnJoin()
 end
 addEventHandler("onClientPlayerSpawn",root,loadJournalOnJoin)
 
+local fps = false
+function getCurrentFPS() -- Setup the useful function
+    return fps
+end
+
+local function updateFPS(msSinceLastFrame)
+    -- FPS are the frames per second, so count the frames rendered per milisecond using frame delta time and then convert that to frames per second.
+    fps = (1 / msSinceLastFrame) * 1000
+end
+addEventHandler("onClientPreRender", root, updateFPS)
+
+
+function nextPreviousPage(number)
+	if number then
+		fpsTimer = setTimer(function()
+			guiSetText(JournalTable.label[18],"FPS: "..math.floor(getCurrentFPS()))
+		end,1000,0)
+		if number == 7 then
+			guiSetVisible(JournalTable.image[2],true)
+			guiSetVisible(JournalTable.image[1],false)
+			playSound(":DayZ/sounds/status/journal.wav",false)
+			-- Data Check
+			local humanity = getElementData(localPlayer,"humanity")
+			local banditskilled = getElementData(localPlayer,"banditskilled")
+			local murders = getElementData(localPlayer,"murders")
+			local zombieskilled = getElementData(localPlayer,"zombieskilled")
+			local headshots = getElementData(localPlayer,"headshots")
+			if humanity >= 2001 and humanity <= 3000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/survivor.png")
+			elseif humanity >= 3001 and humanity <= 4000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/hero1.png")
+			elseif humanity >= 4001 and humanity < 5000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/hero2.png")
+			elseif humanity >= 5000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/hero3.png")
+			elseif humanity >= 1001 and humanity <= 2000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/bandit1.png")
+			elseif humanity >= 1 and humanity <= 1000 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/bandit2.png")
+			elseif humanity <= 0 then
+				guiSetVisible(JournalTable.image[4],true)
+				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/bandit3.png")
+			end
+			if banditskilled >= 1 and banditskilled <= 5 then
+				guiSetVisible(JournalTable.image[5],true)
+			elseif banditskilled >= 6 and banditskilled <= 10 then
+				guiSetVisible(JournalTable.image[5],true)
+				guiStaticImageLoadImage(JournalTable.image[5],":DayZ/gui/journal/images/banditskilled2.png")
+			elseif banditskilled >= 11 and banditskilled <= 15 then
+				guiSetVisible(JournalTable.image[5],true)
+				guiStaticImageLoadImage(JournalTable.image[5],":DayZ/gui/journal/images/banditskilled3.png")
+			elseif banditskilled >= 16 then
+				guiSetVisible(JournalTable.image[5],true)
+				guiStaticImageLoadImage(JournalTable.image[5],":DayZ/gui/journal/images/banditskilled4.png")
+			end
+			if murders >= 1 and murders <= 5 then
+				guiSetVisible(JournalTable.image[6],true)
+				guiStaticImageLoadImage(JournalTable.image[6],":DayZ/gui/journal/images/murders1.png")
+			elseif murders >= 6 and murders <= 10 then
+				guiSetVisible(JournalTable.image[6],true)
+				guiStaticImageLoadImage(JournalTable.image[6],":DayZ/gui/journal/images/murders2.png")
+			elseif murders >= 11 and murders <= 15 then
+				guiSetVisible(JournalTable.image[6],true)
+				guiStaticImageLoadImage(JournalTable.image[6],":DayZ/gui/journal/images/murders3.png")
+			elseif murders >= 16 then
+				guiSetVisible(JournalTable.image[6],true)
+				guiStaticImageLoadImage(JournalTable.image[6],":DayZ/gui/journal/images/murders4.png")
+			end
+			if headshots >= 1 and headshots <= 5 then
+				guiSetVisible(JournalTable.image[7],true)
+				guiStaticImageLoadImage(JournalTable.image[7],":DayZ/gui/journal/images/headshots1.png")
+			elseif headshots >= 6 and headshots <= 10 then
+				guiSetVisible(JournalTable.image[7],true)
+				guiStaticImageLoadImage(JournalTable.image[7],":DayZ/gui/journal/images/headshots2.png")
+			elseif headshots >= 11 and headshots <= 15 then
+				guiSetVisible(JournalTable.image[7],true)
+				guiStaticImageLoadImage(JournalTable.image[7],":DayZ/gui/journal/images/headshots3.png")
+			elseif headshots >= 16 then
+				guiSetVisible(JournalTable.image[7],true)
+				guiStaticImageLoadImage(JournalTable.image[7],":DayZ/gui/journal/images/headshots4.png")
+			end
+			if zombieskilled >= 1 and zombieskilled <= 5 then
+				guiSetVisible(JournalTable.image[8],true)
+				guiStaticImageLoadImage(JournalTable.image[7],":DayZ/gui/journal/images/zombieskilled1.png")
+			elseif zombieskilled >= 6 and zombieskilled <= 10 then
+				guiSetVisible(JournalTable.image[8],true)
+				guiStaticImageLoadImage(JournalTable.image[8],":DayZ/gui/journal/images/zombieskilled2.png")
+			elseif zombieskilled >= 11 and zombieskilled <= 15 then
+				guiSetVisible(JournalTable.image[8],true)
+				guiStaticImageLoadImage(JournalTable.image[8],":DayZ/gui/journal/images/zombieskilled3.png")
+			elseif zombieskilled >= 16 then
+				guiSetVisible(JournalTable.image[8],true)
+				guiStaticImageLoadImage(JournalTable.image[8],":DayZ/gui/journal/images/zombieskilled4.png")
+			end
+			guiSetText(JournalTable.label[18],"FPS: "..math.floor(getCurrentFPS()))
+			guiSetText(JournalTable.label[19],"Difficulty: "..tostring(gameplayVariables["difficulty"]))
+			guiSetText(JournalTable.label[17],"Survived: "..tostring(getElementData(localPlayer,"daysalive")).." Day(s)")
+		elseif number == 8 then
+			guiSetVisible(JournalTable.image[2],false)
+			guiSetVisible(JournalTable.image[1],true)
+			playSound(":DayZ/sounds/status/journal.wav",false)
+			killTimer(fpsTimer)
+		end
+	end
+end
 
 local spacer = "\n"
 local spacercount = 0
@@ -369,4 +600,5 @@ function addJournalEntryOnStatus()
 		end
 	end
 end
+setTimer(addJournalEntryOnStatus,10000,0)
 setTimer(addJournalEntryOnStatus,10000,0)

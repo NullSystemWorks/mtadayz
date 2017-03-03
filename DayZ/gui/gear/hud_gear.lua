@@ -497,7 +497,7 @@ setElementData(statsLabel["name"],"identifikation","name")
 
 function showDebugMintorOnLogin ()
 	if getElementData(localPlayer,"logedin") then
-		guiSetVisible(statsWindows,true)
+		--guiSetVisible(statsWindows,true)
 	end
 end
 addEvent("onClientPlayerDayZLogin", true)
@@ -517,17 +517,17 @@ function showDebugMonitorOnF5()
 		guiSetVisible(statsWindows,false)
 	end
 end
-bindKey("F5","down",showDebugMonitorOnF5)
+--bindKey("F5","down",showDebugMonitorOnF5)
 
 function showDebugMonitor()
-	guiSetVisible(statsWindows,true)
+	--guiSetVisible(statsWindows,true)
 	isVisible = true
 end
 addEvent("showDebugMonitor",true)
 addEventHandler("showDebugMonitor",root,showDebugMonitor)
 
 function hideDebugMonitor()
-	guiSetVisible(statsWindows,false)
+	--guiSetVisible(statsWindows,false)
 	isVisible = false
 end
 addEvent("hideDebugMonitor",true)
@@ -564,4 +564,4 @@ function refreshDebugMonitor()
 		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
 	end			
 end
-setTimer(refreshDebugMonitor,1000,0)
+--setTimer(refreshDebugMonitor,1000,0)
