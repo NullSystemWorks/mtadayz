@@ -196,7 +196,7 @@ function onPlayerHideBody()
             if getElementData(col,"deadman") or getElementData(col,"deadzombie") then
                 setElementData(source,"loot",false)
                 setElementData(source,"currentCol",false)
-                triggerClientEvent(source, "displayClientInfo", source, "Info","You hide the body", 22, 255, 0)
+                triggerClientEvent(source, "displayClientInfo", source, "Info","You hid the body", 22, 255, 0)
                 setTimer(function(colision)
                     if isElement (getElementData(colision,"parent")) then
                         destroyElement(getElementData(colision,"parent"))

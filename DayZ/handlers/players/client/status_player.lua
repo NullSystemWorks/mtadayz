@@ -659,6 +659,7 @@ function getPlayerLoad()
 		ammoLoad = 0
 		itemLoad = 0
 		weaponLoad = 0
+		-- We iterate through the weight table and insert the appropriate values into the appropriate tables, depending on if the player has the item in his inventory
 		for i, item in ipairs(itemWeightTable) do
 		if getElementData(localPlayer,item[1]) and getElementData(localPlayer,item[1]) > 0 then
 				if item[3] == "Weapon" then
@@ -670,6 +671,7 @@ function getPlayerLoad()
 				end
 			end
 		end
+		-- Now we calculate the amount of all items in the player's inventory + their respective weight
 		for i, load in ipairs(ammoLoadTable) do
 			ammoLoad = ammoLoad+(load[1]*load[2])
 		end
@@ -679,8 +681,9 @@ function getPlayerLoad()
 		for i, load in ipairs(weaponLoadTable) do
 			weaponLoad = weaponLoad+(load[1]*load[2])
 		end
+		-- Merging every value together to create a specific value for further calculation
 		local myLoad = (ammoLoad*0.2)+(itemLoad*0.1)+(weaponLoad*0.5)
-		
+		-- Checking the player's speed, since that's also important for determing how much hunger/thirst the player should lose, keeping in mind if the player is in a vehicle
 		if not isPedInVehicle(localPlayer) then
 			local speedx, speedy, speedz = getElementVelocity (localPlayer)
 			local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
@@ -689,11 +692,11 @@ function getPlayerLoad()
 			playerSpeed = 20
 		end
 		playerSpeed = math.floor(mps*3.5)
-		
+		-- Final calculation for hunger based on blood, speed and weight of all items combined
 		local hunger = (math.abs((((12000 - getElementData(localPlayer,"blood")) / 12000) * 5) + playerSpeed + myLoad) * 3)
 		playerHunger = 0
 		playerHunger = math.round(playerHunger+(hunger/80),2)
-		
+		-- Determining the thirst decrease value by using player speed and temperature
 		local thirst = 2
 		thirst = (playerSpeed+4)*3
 		playerThirst = 0
@@ -704,8 +707,22 @@ setTimer(getPlayerLoad,60000,0)
 
 function setPlayerHunger()
 	if getElementData(localPlayer,"logedin") then
+		local hungerMultiplier = 1
 		if getElementData(localPlayer,"food") > 0 then
-			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-playerHunger)
+			if gameplayVariables["difficulty"] then
+				if gameplayVariables["difficulty"] == "normal" then
+					hungerMultiplier = 1
+				elseif gameplayVariables["difficulty"] == "veteran" then
+					hungerMultiplier = 1.5
+				elseif gameplayVariables["difficulty"] == "hardcore" then
+					hungerMultiplier = 3
+				else
+					hungerMultiplier = 1
+				end
+			else
+				hungerMultiplier = 1
+			end
+			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-(playerHunger*hungerMultiplier))
 		else
 			setElementData(localPlayer,"food",0)
 		end
@@ -715,8 +732,22 @@ setTimer(setPlayerHunger,61000,0)
 
 function setPlayerThirst()
 	if getElementData(localPlayer,"logedin") then
+		local thirstMultiplier = 1
 		if getElementData(localPlayer,"thirst") > 0 then
-			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-playerThirst)
+			if gameplayVariables["difficulty"] then
+				if gameplayVariables["difficulty"] == "normal" then
+					thirstMultiplier = 1
+				elseif gameplayVariables["difficulty"] == "veteran" then
+					thirstMultiplier = 1.5
+				elseif gameplayVariables["difficulty"] == "hardcore" then
+					thirstMultiplier = 3
+				else
+					thirstMultiplier = 1
+				end
+			else
+				thirstMultiplier = 1
+			end
+			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-(playerThirst*thirstMultiplier))
 		else
 			setElementData(localPlayer,"thirst",0)
 		end
