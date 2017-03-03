@@ -61,12 +61,24 @@ function move()
 	end
 end
 
+function getAchievements()
+	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	if not achievementsunlocked then
+		setElementData(getLocalPlayer(),"achievements",toJSON({}))
+		achievementsunlocked = {}
+	end
+	return achievementsunlocked
+end
+
 function giveAchievement(ID)
 	if GUIEdit.staticimage[1] and guiGetVisible(GUIEdit.staticimage[1]) then
 		table.insert(waitList,ID)
 	else
 		panel(true)
 		if ID then
+			local achievementsunlocked = getAchievements()
+			achievementsunlocked[ID] = true
+			setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 			guiSetText(GUIEdit.label[2],achievements[ID]["name"])
 			guiStaticImageLoadImage(GUIEdit.staticimage[2],pathToImg..achievements[ID]["image"])
 			addEventHandler("onClientRender",getRootElement(),move)
@@ -75,36 +87,32 @@ function giveAchievement(ID)
 end
 
 function check() -- Needs optimizing
-	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",toJSON({}))
-	end
-	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	local achievementsunlocked = getAchievements()
 	local counter = 0
 	for i, all in pairs(achievements) do
 		if not achievementsunlocked[i] then
 			for _,cond in ipairs(all["conditions"]) do
-				if(cond[2] == "greater") then
-					if getElementData(getLocalPlayer(),cond[1]) > cond[3] then
+				if(cond[2] == "greater" and cond[3]) then
+					if getElementData(getLocalPlayer(),cond[1]) > tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif(cond[2] == "equal") then
 					if getElementData(getLocalPlayer(),cond[1]) == cond[3] then
 						counter = counter+1
 					end
-				elseif(cond[2] == "less") then
-					if getElementData(getLocalPlayer(),cond[1]) < cond[3] then
+				elseif(cond[2] == "less" and cond[3]) then
+					if getElementData(getLocalPlayer(),cond[1]) < tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif(cond[2] == "misc_zaxis") then
 					local x,y,z = getElementPosition(localPlayer)
+					-- outputChatBox(assert(loadstring("return "..tostring(cond[1])))()) -- Don't load > 100 above ground (idk why)
 					if z >= 300 then
 						counter = counter+1
 					end
 				end
 				if(counter == #all["conditions"]) then
 					giveAchievement(i)
-					achievementsunlocked[i] = true
-					setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
 					for index, element in ipairs(all["items"]) do
 						if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(element[1]) > getElementData(localPlayer,"MAX_Slots") then
 							startRollMessage2("Inventory","Inventory full, can't accept achievement rewards!",255,0,0)
@@ -173,10 +181,7 @@ function tablelength(T)
 end
 
 function loadList()  -- Needs optimizing (urgent)
-	if not getElementData(getLocalPlayer(),"achievements") then
-		setElementData(getLocalPlayer(),"achievements",toJSON({}))
-	end
-	local achievunl = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	local achievunl = getAchievements()
 	achievpanel(true)
 	local y1 = 0.00
 	local ind = 0

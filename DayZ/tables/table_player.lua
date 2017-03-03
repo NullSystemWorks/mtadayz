@@ -85,6 +85,8 @@ playerDefaultValues = {
 }
 ]]
 
+
+-- FORMAT: {"item",DefaultValue}
 playerDataTable = {
 {"alivetime",0},
 {"daysalive",0},
