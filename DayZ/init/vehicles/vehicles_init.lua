@@ -288,7 +288,7 @@ if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),
 				--vehicle_indentifikation	
 				setElementData(vehCol,"spawn",{modelID,x,y,z})
 				--others
-				setElementData(vehCol,"fuel",fuel)
+				setElementData(vehCol,"fuel",math.random(0,fuel))
 				setElementID(vehCol,tostring(v_counter))
 				setElementHealth(veh,math.random(300,1000))
 				exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
