@@ -211,7 +211,7 @@ function setVisibility()
 	if getPedMoveState (localPlayer) == "stand" then
 		value = 40
 	elseif getPedMoveState (localPlayer) == "crouch" then	
-		value = 0
+		value = 20
 	elseif getPedMoveState(localPlayer) == "crawl" then
 		value = 20
 	elseif getPedMoveState (localPlayer) == "walk" then
