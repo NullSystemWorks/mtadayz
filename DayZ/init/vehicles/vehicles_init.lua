@@ -291,6 +291,7 @@ if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),
 				setElementData(vehCol,"fuel",fuel)
 				setElementID(vehCol,tostring(v_counter))
 				setElementHealth(veh,math.random(300,1000))
+				setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
 				exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 			end
 		end
