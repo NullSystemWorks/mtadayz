@@ -168,7 +168,7 @@ function playSoundOnWeaponFire(weapon)
 			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
 				playSound3D(":DayZ/sounds/weapons/fire/M1911.wav",x2,y2,z2,false)
 			else
-				local sound = playSound(":DayZ/sounds/fire/weapons/M1911.wav",false)
+				local sound = playSound(":DayZ/sounds/weapons/fire/M1911.wav",false)
 				setSoundMaxDistance(sound,0)
 			end
 		elseif getElementData(source,"currentweapon_2") == "Makarov PM" then
