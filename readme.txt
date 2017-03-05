@@ -22,9 +22,6 @@ The following resources should have startup set to 0:
 
 scoreboard, mapcycler, mapmanager, spawnmanager, votemanager
 
-Version 0.9.0 will hopefully be the last version to do that, but you must replace your current internal.db with the fresh one provided
-in the download! It's located in the same directory as mtaserver.conf and acl.xml.
-
 And that's it! Start the server and MTA DayZ will start automatically. 
 
 
@@ -35,9 +32,6 @@ As of Version 0.9.4, the following commands are available for admins:
 admin: Makes the player an admin
 supporter: Makes the player a supporter
 remove: Removes the player from being admin/supporter
-
-/backup
-Will create a backup of all vehicles (must be enabled in editor_server.lua)
 
 
 ## EXPORTED FUNCTIONS ##
@@ -62,7 +56,7 @@ Q: Help! Vehicles won't spawn/appear!
 A: Check the vehicles database. Does it contain any entries? If not, delete the vehicleManager from the console (delaccount vehicleManager) and restart the server.
 
 Q: Error/Warning X is appearing in the server console!
-A: Please post your server log in the forum: http://mta-dayz.org/forum
+A: Please create an issue in our Github repository and all the info you can give us( Debugs, Images, CodeSnippets ) You can use https://paste.mta-day.org/
 
 Q: What just happened?! I have been kicked when I tried to enter my Rhino!
 A: The anticheat measures prevent players who are not admins (ACL-wise) from entering vehicles which do not normally spawn via the MTA DayZ script.
@@ -71,15 +65,13 @@ Q: The inventory is broken!
 A: Please provide a screenshot/video/accurate description of what exactly broke. Add server log and, if possible, the client log too.
 
 Q: I'm getting this strange error: "Infinite/too long execution (DayZ)".
-A: This error appears when items are respawning. We are trying to reduce lag as much as possible, but sometimes, the server is struggling with respawning said items.
-Usually, it should dissipate after a few minutes, but if the error persists, try restarting the server. In general, it is advised to restart the server
-every 24-48 hours to prevent possible, yet undetected memory leaks.
+A: This was fixed in latest versions, please update you server.
 
 Q: How to change backpack slots in this gamemode ?
 A: You can do this by modifying the configuration file "cfgServer.lua" (DayZ/configs/cfgServer.lua). Take care to change the "maxslots" variable in the file "cfgSecurity.lua" (DayZ/configs/cfgSecurity.lua) for the anti-cheat.
 
 Q: I want to help developing! How and where can I apply?
-A: Send a private message to Lawliet on the MTA forum. Read this topic before you apply: https://forum.multitheftauto.com/viewtopic.php?f=108&t=88188
+A: You can start by creating pull requests fixing or creating new features. We will contact you if we think you are suit for the job.
 
 Q: There is a question I have that does not appear in the FAQ!
-A: Go to the forum http://mta-dayz.org/forum, and ask there. We'll answer. Eventually.
+A: You can ask it on our forums or join discord!
