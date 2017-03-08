@@ -260,6 +260,12 @@ function getTerrainProperties()
 	if not terrainNoise then
 		terrainNoise = 1
 	end
+	if isPedInVehicle(localPlayer) then
+		if getElementModel(getPedOccupiedVehicle(localPlayer)) ~= 509 then
+			terrainNoise = 50
+			terrainVisibility = movement+1
+		end
+	end
 	return terrainVisibility,terrainNoise,initialValue
 end
 
@@ -303,6 +309,10 @@ function getSoundAndVisibilityLevel()
 	local playerSpeed = getPlayerSpeed()
 	totalSound = math.ceil((playerSpeed*terrainNoise*movement*muffleLevel)+playerHasShot)
 	totalVisibility = math.ceil((initialValue+(playerSpeed*3))*scale*lightLevel)*1.5
+	if isPedInVehicle(localPlayer) then
+		totalSound = 100
+		totalVisibility = 20
+	end
 	return totalSound,totalVisibility
 end
 

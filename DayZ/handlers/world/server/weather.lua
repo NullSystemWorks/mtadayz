@@ -98,7 +98,7 @@ local weather = getWeather()
 	if weather == 4 or weather == 7 or weather == 12 or weather == 15 then
 		local shouldItRain = math.random(0,99)
 		if shouldItRain > 74 then
-			setRainLevel(math.random(0,1))
+			setRainLevel(math.random())
 		end
 	end
 end
