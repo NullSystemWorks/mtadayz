@@ -146,282 +146,62 @@ addEventHandler("stopCampfireSound",root,stopCampfireSound)
 
 setWorldSoundEnabled(5,false)
 
+local weaponSounds = {
+	["M1911"] = {20,":DayZ/sounds/weapons/fire/M1911.wav"},
+	["G17"] = {20,":DayZ/sounds/weapons/fire/G17.wav"},
+	["M9"] = {20,":DayZ/sounds/weapons/fire/M1911.wav"},
+	["Makarov PM"] = {20,":DayZ/sounds/weapons/fire/Makarov.wav"},
+	["Makarov SD"] = {0,":DayZ/sounds/weapons/fire/MakarovSD.wav"},
+	["Revolver"] = {40,":DayZ/sounds/weapons/fire/Revolver.wav"},
+	["Compound Crossbow"] = {5,":DayZ/sounds/weapons/fire/Crossbow.wav"},
+	["Winchester 1866"] = {30,":DayZ/sounds/weapons/fire/Winchester.wav"},
+	["Double-barreled Shotgun"] = {30,":DayZ/sounds/weapons/fire/Double.wav"},
+	["M1014"] = {30,":DayZ/sounds/weapons/fire/M1014.wav"},
+	["Remington 870"] = {30,":DayZ/sounds/weapons/fire/M1014.wav"},
+	["PDW"] = {15,":DayZ/sounds/weapons/fire/PDW.wav"},
+	["Bizon PP-19 SD"] = {0,":DayZ/sounds/weapons/fire/Bizon.wav"},
+	["MP5A5"] = {15,":DayZ/sounds/weapons/fire/MP5A5.wav"},
+	["AK-74"] = {60,":DayZ/sounds/weapons/fire/AK74.wav"},
+	["AKS-74U"] = {60,":DayZ/sounds/weapons/fire/AK74.wav"},
+	["RPK"] = {60,":DayZ/sounds/weapons/fire/AK74.wav"},
+	["AKM"] = {60,":DayZ/sounds/weapons/fire/AKM.wav"},
+	["Sa58V CCO"] = {60,":DayZ/sounds/weapons/fire/AKM.wav"},
+	["FN FAL"] = {60,":DayZ/sounds/weapons/fire/FNFAL.wav"},
+	["G36A CAMO"] = {60,":DayZ/sounds/weapons/fire/G36C.wav"},
+	["G36C"] = {60,":DayZ/sounds/weapons/fire/G36C.wav"},
+	["G36C CAMO"] = {60,":DayZ/sounds/weapons/fire/G36C.wav"},
+	["G36K CAMO"] = {60,":DayZ/sounds/weapons/fire/G36C.wav"},
+	["L85A2 RIS Holo"] = {60,":DayZ/sounds/weapons/fire/G36C.wav"},
+	["M16A2"] = {60,":DayZ/sounds/weapons/fire/M16A2.wav"},
+	["M16A2 M203"] = {60,":DayZ/sounds/weapons/fire/M16A2.wav"},
+	["M4A1"] = {60,":DayZ/sounds/weapons/fire/M4A1.wav"},
+	["M16A1"] = {60,":DayZ/sounds/weapons/fire/M16A2.wav"},
+	["Mosin-Nagant"] = {120,":DayZ/sounds/weapons/fire/Mosin.wav"},
+	["Enfield"] = {120,":DayZ/sounds/weapons/fire/Enfield.wav"},
+	["CZ 550"] = {240,":DayZ/sounds/weapons/fire/CZ550.wav"},
+	["DMR"] = {5,":DayZ/sounds/weapons/fire/DMR.wav"},
+	["SVD Dragunov"] = {240,":DayZ/sounds/weapons/fire/Dragunov.wav"}
+}
+
 function playSoundOnWeaponFire(weapon)
 	local x,y,z = getElementPosition(localPlayer)
 	local x2,y2,z2 = getElementPosition(source)
-	if weapon == 22 then
-		if getElementData(source,"currentweapon_2") == "M1911" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
-				playSound3D(":DayZ/sounds/weapons/fire/M1911.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M1911.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_2") == "G17" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
-				playSound3D(":DayZ/sounds/weapons/fire/G17.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G17.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_2") == "M9" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
-				playSound3D(":DayZ/sounds/weapons/fire/M1911.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M1911.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_2") == "Makarov PM" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 20 then
-				playSound3D(":DayZ/sounds/weapons/fire/Makarov.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Makarov.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_2") == "Flashlight" then
-			return
-		end
-	elseif weapon == 23 then
-		if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 0 then
-			playSound3D(":DayZ/sounds/weapons/fire/MakarovSD.wav",x2,y2,z2,false)
+	
+	--Get weapon info based on the weapon id used.
+	if ((weapon == 22) or (weapon == 23) or (weapon == 24) or (weapon == 29)) then
+		wepSlot = "currentweapon_2"
+	elseif ((weapon == 25) or (weapon == 27) or (weapon == 28) or (weapon == 30) or (weapon == 31) or (weapon == 33) or (weapon == 34)) then
+		wepSlot == "currentweapon_1"
+	end
+	
+	--Check if we have a sound for specified weapon, get range and play accordingly.
+	local wepTable = weaponSounds[getElementData(source,wepSlot)]
+	if (wepTable) then
+		if (getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > wepTable[1]) then
+			playSound3D(wepTable[2],x2,y2,z2,false)
 		else
-			local sound = playSound(":DayZ/sounds/weapons/fire/MakarovSD.wav",false)
-			setSoundMaxDistance(sound,0)
+			setSoundMaxDistance(playSound(wepTable[2],false), 0)
 		end
-	elseif weapon == 24 then
-		if getElementData(source,"currentweapon_2") == "Revolver" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 40 then
-				playSound3D(":DayZ/sounds/weapons/fire/Revolver.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Revolver.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 25 then
-		if getElementData(source,"currentweapon_1") == "Compound Crossbow" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 5 then
-				playSound3D(":DayZ/sounds/weapons/Crossbow.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Crossbow.wav",false)
-				setSoundVolume(sound,0.3)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "Winchester 1866" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 30 then
-				playSound3D(":DayZ/sounds/weapons/fire/Winchester/.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Winchester.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "Double-barreled Shotgun" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 30 then
-				playSound3D(":DayZ/sounds/weapons/fire/Double.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Double.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 27 then
-		if getElementData(source,"currentweapon_1") == "M1014" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 30 then
-				playSound3D(":DayZ/sounds/weapons/fire/M1014.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M1014.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "Remington 870" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 30 then
-				playSound3D(":DayZ/sounds/weapons/fire/M1014.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M1014.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 28 then
-		if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 15 then
-			playSound3D(":DayZ/sounds/weapons/fire/PDW.wav",x2,y2,z2,false)
-		else
-			local sound = playSound(":DayZ/sounds/weapons/fire/PDW.wav",false)
-			setSoundMaxDistance(sound,0)
-		end
-	elseif weapon == 29 then
-		if getElementData(source,"currentweapon_2") == "Bizon PP-19 SD" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 0 then
-				playSound3D(":DayZ/sounds/weapons/fire/Bizon.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Bizon.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		else
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 15 then
-				playSound3D(":DayZ/sounds/weapons/fire/MP5A5.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/MP5A5.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 30 then
-		if getElementData(source,"currentweapon_1") == "AK-74" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AK74.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AK74.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "AKS-74U" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AK74.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AK74.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "RPK" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AK74.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AK74.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "AKM" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AKM.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AKM.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "Sa58V CCO" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AKM.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AKM.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "Sa58V CCO" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/AKM.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/AKM.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "FN FAL" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-				playSound3D(":DayZ/sounds/weapons/fire/FNFAL.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/FNFAL.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 31 then
-		if getElementData(source,"currentweapon_1") == "G36A CAMO" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/G36C.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G36C.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "G36C" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/G36C.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G36C.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "G36C CAMO" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/G36C.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G36C.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "G36K CAMO" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/G36C.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G36C.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "L85A2 RIS Holo" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/G36C.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/G36C.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "M16A2" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/M16A2.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M16A2.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "M16A2 M203" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/M16A2.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M16A2.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "M4A1" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/M4A1.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M4A1.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "M16A4" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 60 then
-					playSound3D(":DayZ/sounds/weapons/fire/M16A2.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M16A2.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 33 then
-		if getElementData(source,"currentweapon_1") == "Mosin-Nagant" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 120 then
-				playSound3D(":DayZ/sounds/weapons/fire/Mosin.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Mosin.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		else
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 120 then
-				playSound3D(":DayZ/sounds/weapons/fire/Enfield.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Enfield.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	elseif weapon == 34 then
-		if getElementData(source,"currentweapon_1") == "CZ 550" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 240 then
-				playSound3D(":DayZ/sounds/weapons/fire/CZ550.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/CZ550.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "DMR" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 5 then
-				playSound3D(":DayZ/sounds/weapons/fire/DMR.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/DMR.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "SVD Dragunov" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 240 then
-				playSound3D(":DayZ/sounds/weapons/fire/Dragunov.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/Dragunov.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		elseif getElementData(source,"currentweapon_1") == "SVD Dragunov" then
-			if getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > 240 then
-				playSound3D(":DayZ/sounds/weapons/fire/M40A3.wav",x2,y2,z2,false)
-			else
-				local sound = playSound(":DayZ/sounds/weapons/fire/M40A3.wav",false)
-				setSoundMaxDistance(sound,0)
-			end
-		end
-	end 
+	end
 end
 addEventHandler ( "onClientPlayerWeaponFire", root, playSoundOnWeaponFire )
