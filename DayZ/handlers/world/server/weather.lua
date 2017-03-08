@@ -13,7 +13,7 @@ Season = false
 local timeTimer = 10000
 local realtime = getRealTime()
 setTime(realtime.hour, realtime.minute)
-setFarClipDistance(1000)
+--setFarClipDistance(1000)
 
 function checkSetTime()
 	if gameplayVariables["realtime"] then
@@ -30,61 +30,6 @@ function checkSetTime()
 end
 setTimer(checkSetTime,timeTimer,0)
 
-function addDaysPassed()
-local hours,minute = getTime()
-	if hours == 0 and minute == 1 then
-		DaysPassed = DaysPassed+1
-	end
-end
-setTimer(addDaysPassed,10000,0)
-
-function resetDaysPassed()
-	if DaysPassed == 364 then
-		DaysPassed = 0
-	end
-end
-setTimer(resetDaysPassed,10000,0)
-
-function setSeason()
-	if DaysPassed == 0 then
-		Season = "Winter"
-	elseif DaysPassed == 91 then
-		Season = "Spring"
-	elseif DaysPassed == 182 then
-		Season = "Summer"
-	elseif DaysPassed == 273 then
-		Season = "Autumn"
-	end
-end
-setTimer(setSeason,10000,0)
-
-WeatherTable = {
-
-["Winter"] = {
-	{15}, -- Snow
-	{1},
-	{4},
-},
-
-["Spring"] = {
-	{2},
-	{16},
-	{5},
-},
-	
-["Summer"] = {
-	{0},
-	{16},
-	{18},
-},
-	
-["Autumn"] = {
-	{7},
-	{9},
-	{15}, -- Snow
-	
-},
-}
 --[[
 function setTheWeather()
 local number = math.random(1,3)
@@ -137,13 +82,24 @@ function setTheWeather()
 	local number = math.random(0,18)
 	weatherRandomizer = math.random(600000,1800000)
 	setWeatherBlended(number)
-	
-	if number == 8 then
+	--[[if number == 8 then
 		setFarClipDistance(400)
 	elseif number == 9 then
 		setFarClipDistance(200)
 	else
 		setFarClipDistance(900)
 	end
+	]]
 end
 setTimer(setTheWeather,weatherRandomizer,0)
+
+function setRainOnCloudyWeather()
+local weather = getWeather()
+	if weather == 4 or weather == 7 or weather == 12 or weather == 15 then
+		local shouldItRain = math.random(0,99)
+		if shouldItRain > 74 then
+			setRainLevel(math.random(0,1))
+		end
+	end
+end
+setTimer(setRainOnCloudyWeather,1200000,0)

@@ -8,8 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgWorld loaded")
-
 gameplayVariables["weather"] = {
 -- {WeatherID,TemperatureIncrease/Decrease},
 {0,0.03},
@@ -32,3 +30,5 @@ gameplayVariables["weather"] = {
 {17,0.03},
 {18,0.01},
 }
+
+outputDebugString("[DayZ] cfgWorld loaded")

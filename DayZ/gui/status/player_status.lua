@@ -28,23 +28,18 @@ function updateStatusIcons()
 		end
 		-- // Normal Icons (Sound etc.) // --
 		-- Sound
-		local sound = getElementData(localPlayer,"volume")
+		--local sound = getElementData(localPlayer,"volume")
+		sound,visibility = getSoundAndVisibilityLevel()
 		dxDrawImage( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/background.png",0,0,0)
-		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/sound.png",0,0,0,tocolor(255,255,255,(sound*2.5)+5))
-		--[[if sound > 0 then
-			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/level_"..sound..".png",0,0,0)
-		end
-		]]
+		--dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/sound.png",0,0,0,tocolor(255,255,255,(sound*2.5)+5))
+		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.41, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/sound.png",0,0,0,tocolor(255,255,255,math.min(sound,255)))
 		-- Visibility
-		local visibility = getElementData(localPlayer,"visibly")
+		--local visibility = getElementData(localPlayer,"visibly")
 		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/background.png",0,0,0)
-		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/eye.png",0,0,0,tocolor(255,255,255,(visibility*2.5)+5))
+		--dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/eye.png",0,0,0,tocolor(255,255,255,(visibility*2.5)+5))
+		dxDrawImage ( screenWidth*0.9325 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/eye.png",0,0,0,tocolor(255,255,255,math.min(visibility,255)))
+		-- Humanity
 		--[[
-		if visibility > 0 then
-			dxDrawImage ( screenWidth*0.9075 , screenHeight*0.475, screenHeight*0.075, screenHeight*0.075, ":DayZ/gui/status/misc/level_"..visibility..".png",0,0,0)
-		end
-		]]
-		-- Humanity	
 		local humanity = getElementData(localPlayer,"humanity")
 		local humanity_icon = ":DayZ/gui/status/humanity/2500.png"
 		local h_number = 0
@@ -61,8 +56,10 @@ function updateStatusIcons()
 		elseif humanity >= -2500 then
 			h_number = 0
 		end
+		
 		dxDrawImage ( screenWidth*0.94 , screenHeight*0.63, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/background.png",0,0,0)
 		dxDrawImage ( screenWidth*0.943 , screenHeight*0.63, screenHeight*0.055, screenHeight*0.055, ":DayZ/gui/status/humanity/"..h_number..".png",0,0,0)
+		]]
 		-- Temperature
 		local temperature = math.round(getElementData(localPlayer,"temperature"),2)
 		local status = getElementData(localPlayer,"temperature_status") or 0

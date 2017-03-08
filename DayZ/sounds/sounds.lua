@@ -191,7 +191,7 @@ function playSoundOnWeaponFire(weapon)
 	if ((weapon == 22) or (weapon == 23) or (weapon == 24) or (weapon == 29)) then
 		wepSlot = "currentweapon_2"
 	elseif ((weapon == 25) or (weapon == 27) or (weapon == 28) or (weapon == 30) or (weapon == 31) or (weapon == 33) or (weapon == 34)) then
-		wepSlot == "currentweapon_1"
+		wepSlot = "currentweapon_1"
 	end
 	
 	--Check if we have a sound for specified weapon, get range and play accordingly.

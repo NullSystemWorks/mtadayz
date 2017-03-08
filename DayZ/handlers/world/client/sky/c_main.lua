@@ -253,7 +253,7 @@ function renderTime()
 			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudstorm )
 		elseif thisWeather == 16 then
 			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudrain )
-		elseif thisWeather == 9 then
+		elseif thisWeather == 9 or thisWeather == 4 or thisWeather == 7 or thisWeather == 12 or thisWeather == 15 then
 			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloudcloudy)
 		else
 			dxSetShaderValue ( shaderTable.skyboxTropos, "sClouds", textureTable.cloud)
