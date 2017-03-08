@@ -260,12 +260,6 @@ function getTerrainProperties()
 	if not terrainNoise then
 		terrainNoise = 1
 	end
-	if isPedInVehicle(localPlayer) then
-		if getElementModel(getPedOccupiedVehicle(localPlayer)) ~= 509 then
-			terrainNoise = 50
-			terrainVisibility = movement+1
-		end
-	end
 	return terrainVisibility,terrainNoise,initialValue
 end
 
