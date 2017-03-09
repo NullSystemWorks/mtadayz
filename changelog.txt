@@ -1,135 +1,90 @@
 ﻿# CHANGELOG #
 This changelog lists all changes made to MTA DayZ. It adheres to the following features description.
 
-## [VERSION] - DATE OF RELEASE (YYYY-MM-DD)
+## [VERSION] - DATE OF RELEASE (Format: YYYY-MM-DD)
+### ADDED: For new features
+### CHANGED: For changes in existing features
+### FIXED: For all bugs
+### SECURITY: To invite users to upgrade in case of vulnerabilities
+### DEPRECATED: For once-stable features to be removed in upcoming releases
+### REMOVED: For deprecated features removed in the release it's mentioned in
 
-## [Upcoming release] - DATE OF RELEASE (Unknown)
-### ADDED: Petrol stations now have a limited amount of fuel (between 1 - 15 jerry cans worth).
+# - #
+## [0.9.9a] - 2017-MM-DD
+### ADDED: New Sound + Visibility System (based on terrain, weather, light, movement)
+### ADDED: Petrol stations now have a limited amount of fuel (configurable in cfgServer.lua)
 ### ADDED: Achievement System
-### CHANGED: Updated how Helicrashes and hospital bags were being initialised.
-### CHANGED: Version rewrite, tree handling optimised.
+### ADDED: Anti-Advertising for chat system
+### ADDED: Indicators for temperature rising/falling
+### ADDED: Occasional rain when weather is cloudy 
+### CHANGED: Logs System refactored
+### CHANGED: Simplified player spawning code
+### CHANGED: Simplified vehicle spawning code (makes it easier to add new vehicles)
+### CHANGED: Simplified sound code
+### CHANGED: Custom chat can now be toggled on/off (/chat)
+### CHANGED: Eased lag a bit
+### CHANGED: Updated how Helicrashes and hospital bags were being initialised
+### CHANGED: Version rewrite, tree handling optimised
+### CHANGED: Hunger & Thirst now decrease according to difficulty too
+### CHANGED: Moved debug monitor to Journal (Key: 6)
+### FIXED: consume_player.lua causing lots of errors
+### FIXED: Bug with tree chopping
+### FIXED: Hunger & Thirst not decreasing
+### FIXED: Bug with setPedStat
+### FIXED: Flashlight appearing on HUD with ammo count
+### FIXED: Bug where player would continue to lose blood after becoming unconscious and being killed
+### FIXED: Crafting getting bugged when inventory is full
+### FIXED: Milk breaking inventory
+### FIXED: Unconscious animation being clientside only
+### FIXED: M1911 not having a firing sound
+### REMOVED: Viral zombies (until a better solution is found for more dangerous zombies)
 
-## [0.9.8.1] - DATE OF RELEASE (2017-02-18)
-### NEW: Version check system
-### FIXED: Vehicle unusable in admin panel after respawn
-### FIXED: Possibility to eat weapons as they were food
-### FIXED: Foods can't be eaten from inside loot collision sphere
-### FIXED: Body temperature keeps rising when unconscious bug
+# - #
+## [0.9.8.1a] - 2017-02-18
+### CHANGED: Version Check System
+### FIXED: [DayZAdmin] Vehicle Editor becoming unusable once a vehicle respawned
+### FIXED: Being able to "consume" weapons
+### FIXED: Food can't be eaten from inside loot collision sphere
+### FIXED: Temperature rising when unconscious and sprinting
 ### DEPRECATED: showPlayerHudComponent is now setPlayerHudComponentVisible
 
-## [0.9.8a] - 2016-07-06 (YOU NEED REMOVE YOUR INTERNAL.DB FOR THIS UPDATE)
-### NEW: Advanced Clothes System (+60 clothes)
-### NEW: Beard and Hair System
-### NEW: Weight System
-### NEW: Interior System (with 4 interiors for the moment)
+# - #
+## [0.9.8a] - 2016-07-06 (NEW INTERNAL.DB NEEDED)
+### ADDED: Advanced Clothes System (+60 clothes)
+### ADDED: Beard and Hair System
+### ADDED: Weight System
+### ADDED: Interior System (with 4 interiors for the moment)
 ### ADDED: Add variable "weight_food" on "CfgServer.lua"
 ### ADDED: Add variable "weight_thirst" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loose" on "CfgServer.lua"
 ### ADDED: Add variable "weight_loosetimer" on "CfgServer.lua"
 
-# CLOTHES #
-
-### ADDED: Military collar
-### ADDED: Africa collar
-### ADDED: Gold collar
-### ADDED: Silver collar
-### ADDED: LS collar
-### ADDED: Black Bandana (M)
-### ADDED: Blue Bandana (M)
-### ADDED: Green Bandana (M)
-### ADDED: Red Bandana (M)
-### ADDED: Black Bandana (H)
-### ADDED: Blue Bandana (H)
-### ADDED: Green Bandana (H)
-### ADDED: Red Bandana (H)
-### ADDED: Black Beret
-### ADDED: Red Beret
-### ADDED: Old Hat
-### ADDED: Black Hat
-### ADDED: Yellow Hat
-### ADDED: Black Trucker
-### ADDED: Blue Trucker
-### ADDED: Green Trucker
-### ADDED: Red Trucker
-### ADDED: Yellow Trucker
-### ADDED: Cow-Boy Hat
-### ADDED: White Hat
-### ADDED: Hockey Mask
-### ADDED: Black Shoe
-### ADDED: Sport Shoe
-### ADDED: Brown Shoe
-### ADDED: Biker Shoe
-### ADDED: Blue Shoe
-### ADDED: Red Shoe
-### ADDED: Beach Shoe
-### ADDED: Black Pants
-### ADDED: Beige Pants
-### ADDED: Gray Shorts
-### ADDED: Blue Shorts
-### ADDED: Blue Jeans
-### ADDED: Green Jeans
-### ADDED: Gray Pants
-### ADDED: Yellow Pants
-### ADDED: Blue Jogging
-### ADDED: Gray Jogging
-### ADDED: Military Pants
-### ADDED: Beige Vest
-### ADDED: Baseball Shirt
-### ADDED: Baseball 2 Shirt
-### ADDED: Red Vest
-### ADDED: Grey Shirt
-### ADDED: Green Vest
-### ADDED: Hawai Shirt
-### ADDED: Black Vest
-### ADDED: Brown Vest
-### ADDED: Biker Vest
-### ADDED: Blue Shirt
-### ADDED: Green 2 Vest
-### ADDED: Number 5 Shirt
-### ADDED: Monk Shirt
-### ADDED: Dark Glasses
-### ADDED: Square Glasses
-### ADDED: Red Glasses
-
-Known Issue :
-- The player can glitch during unconscious
-- When a player has 2 same clothes in her inventory. If he drop one, the garment disappear on him (He needs to re-equip the garment).
-
-## [0.9.7a] - DATE OF RELEASE (2016-06-24) (Last update : 2016-07-02)
-
-### ADDED: For new features
+# - #
+## [0.9.7a] - 2016-06-24
 ### ADDED: Addon "Antiglitch"
-### ADDED: Polish Language
+### ADDED: Polish + Romanian Language
 ### ADDED: Nice MTA DayZ DX to Login
 ### ADDED: Arma II chatbox style
 ### ADDED: Server Console Output on Global Chat
 ### ADDED: "Dead Night" Addon
-### ADDED: Hide Body now available
-### ADDED : gameplayVariables["waterdamage"] in cfgClient.lua, damage received by a player when it is under water
-### ADDED: Anti-teleport detection method to BattlDayZ
-### CHANGED: For changes in existing features
-### CHANGED: Added Flashlight to Spanish Language
-### CHANGED: Moved warning ([PLAYERNAME]'s Account was buggy and has been reset.) to side chat
+### ADDED: Hiding dead bodies
+### ADDED: Damage when player is underwater (configurable in cfgClient)
+### CHANGED: Moved warning ("[PLAYERNAME]'s Account was buggy and has been reset.") to side chat
 ### CHANGED: Pain now uses setCameraShakeLevel(150) & Added config gameplayVariables["painshakelevel"]
 ### CHANGED: New animation binds (1 = Salute, 2 = Hands up, 3 = Sit, 5 = Journal)
 ### CHANGED: playerThirst and playerHunger calculation every 30 seconds instead of onClientRender
 ### CHANGED: The night is far less dark
-### CHANGED: The timer "night_check" is now set to 1 seconds
-### CHANGED: You can now enable or disable the night in the "cfgClient.lua" file.
-### DEPRECATED: For once-stable removed in upcoming releases
-### REMOVED: For deprecated features removed in the release it's mentioned in
-### FIXED: For all bugs
-### FIXED: FPS Drop on some PC.
-### FIXED: Anti-teleport detection
+### CHANGED: The timer "night_check" is now set to 1 second
+### CHANGED: You can now enable or disable the night in the "cfgClient.lua" file
+### FIXED: Added Flashlight to Spanish Language
+### FIXED: FPS drop on some computers
 ### FIXED: Fixed Polish Language Typo
 ### FIXED: Ammo bug
 ### FIXED: Patrol Pack bug
 ### FIXED: Black & White shader not loading
-### FIXED: The player don't get damage if are submerged for along time
-### FIXED: "NV Goggles" and "IR Goggles" do not work properly at night
-### FIXED: Disappearance of the body after the death of a player
-### SECURITY: To invite users to upgrade in case of vulnerabilities
-### LANGUAGE: Romanian is now available.
+### FIXED: "NV Goggles" and "IR Goggles" not properly working at night
+### FIXED: Player body disappearing after death
+### SECURITY: [BattlDayZ] Anti-Teleportation Hack
 
 # - #
 ## [0.9.5a] - 2015-08-19
@@ -162,7 +117,6 @@ Known Issue :
 ### FIXED: Debug monitor appearing when opening inventory
 ### FIXED: Heroes bleeding when hit by a weapon that does less than 1000 damage
 ### FIXED: Using the wrong items in inventory once you have more than 11
-
 
 # - #
 ## [0.9.4.3a] - 2015-08-12

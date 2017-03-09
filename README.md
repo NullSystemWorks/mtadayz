@@ -15,12 +15,15 @@ changes appropriate, the pull request will be accepted, and you will be marked a
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### MTA:DayZ Server List ###
-- MTA:DayZ Official Server #1 | **IP :**
+- Currently None -
 
 ### Links ###
+Website: https://mta-dayz.org/
+Discord: https://discord.gg/th86Tmw
+Issues: https://github.com/ciber96/mtadayz/issues
 
 ### Contact ###
-At the moment you can only contact us via the issues page.
+Please check "Links" if you wish to contact us. If you have a bug to report or a feature to propose, please do so on the "Issues" page of our repository.
 
 ### License ###
 We do not claim ownership for any of the models, textures, images or sounds provided, nor do we claim ownership for the idea or concept. However, we hereby
