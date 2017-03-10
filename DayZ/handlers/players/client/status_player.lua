@@ -192,7 +192,7 @@ function setVolume()
 	end
 	setElementData(localPlayer,"volume",value)
 end
-setTimer(setVolume,100,0)
+--setTimer(setVolume,100,0)
 
 --[[
 Visibility:
@@ -242,7 +242,7 @@ function setVisibility()
 	end
 	setElementData(localPlayer,"visibly",value)
 end
-setTimer(setVisibility,100,0)
+--setTimer(setVisibility,100,0)
 
 function debugJump()
 	if getControlState("jump") then
@@ -689,7 +689,7 @@ function getPlayerLoad()
 			local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
 			mps = actualspeed * 50
 		else
-			playerSpeed = 20
+			mps = 20
 		end
 		playerSpeed = math.floor(mps*3.5)
 		-- Final calculation for hunger based on blood, speed and weight of all items combined
