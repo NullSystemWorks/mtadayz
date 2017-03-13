@@ -258,7 +258,7 @@ function kilLDayZPlayer(killer,headshot,weapon)
 	destroyElement(getElementData(source,"playerCol"))
 	setTimer(function(source)
 		if gameplayVariables["spawnselection"] then
-			triggerClientEvent("showSpawnSelectionWindow",source)
+			triggerClientEvent(source,"showSpawnSelectionWindow",source)
 		else
 			spawnDayZPlayer(source)
 		end
