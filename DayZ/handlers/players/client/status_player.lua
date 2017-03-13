@@ -105,11 +105,11 @@ function setPlayerCold()
 			if randomsound >= 0 and randomsound <= 10 then
 				local getnumber = math.random(0,2)
 				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
-				setElementData(localPlayer,"volume",100)
-				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+				--setElementData(localPlayer,"volume",100)
+				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 			elseif randomsound >= 11 and randomsound <= 20 then	
-				setElementData(localPlayer,"volume",100)
-				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+				--setElementData(localPlayer,"volume",100)
+				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 				playSound(":DayZ/sounds/status/sneezing.mp3",false)
 			end
 		end	
@@ -278,7 +278,7 @@ function updateDaysAliveTime()
 		setElementData(localPlayer,"daysalive",daysalive+1)
 	end
 end
-setTimer(updateDaysAliveTime,2880000,0)
+--setTimer(updateDaysAliveTime,60000,0)
 
 function updatePlayTime()
 	if getElementData(localPlayer,"logedin") then
@@ -288,6 +288,7 @@ function updatePlayTime()
 end
 setTimer(updatePlayTime,60000,0)
 
+--[[
 function updateHoursAliveTime()
 	if getElementData(localPlayer,"logedin") then
 		local hourstime = getElementData(localPlayer,"hoursalive")
@@ -295,6 +296,7 @@ function updateHoursAliveTime()
 	end	
 end
 setTimer(updateHoursAliveTime,3600000,0)
+]]
 
 function playerBloodInWater()
 	if getElementData(localPlayer, "logedin") then
@@ -454,11 +456,11 @@ function infectionSigns()
 			if randomsound >= 0 and randomsound <= 20 then
 				local getnumber = math.random(0,2)
 				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
-				setElementData(localPlayer,"volume",100)
-				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+				--setElementData(localPlayer,"volume",100)
+				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 			elseif randomsound >= 21 and randomsound <= 40 then	
-				setElementData(localPlayer,"volume",100)
-				setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
+				--setElementData(localPlayer,"volume",100)
+				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 				playSound(":DayZ/sounds/status/sneezing.mp3",false)
 			end
 		end
@@ -466,6 +468,7 @@ function infectionSigns()
 end
 setTimer(infectionSigns,10000,0)
 
+--[[
 local sepsisTimer = 10000
 function checkSepsis()
 	if getElementData(localPlayer,"logedin") then
@@ -530,17 +533,18 @@ function transmitSepsis()
 	end
 end
 setTimer(transmitSepsis,30000,0)
+]]
 
 local isHourGlassActive = false
 function setPlayerUnconsciousWhenLowBlood()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"blood") < 3000 and not getElementData(localPlayer,"unconscious") then
+		if getElementData(localPlayer,"blood") < 3000 and not getElementData(localPlayer,"unconscious") and not getElementData(localPlayer,"isDead") then
 			local number = math.random(1,100)
 			if number == 1 then
 				if not isHourGlassActive then
 					addEventHandler("onClientRender",root,drawHourGlass)
 					isHourGlassActive = true
-					setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
+					triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"unconscious",localPlayer)
 					toggleAllControls(false,true,true)
 					enableBlackWhite(true)
 					unbindKey("J","down",initInventory)
@@ -560,7 +564,6 @@ function setPlayerUnconscious()
 			if not isHourGlassActive then
 				addEventHandler("onClientRender",root,drawHourGlass)
 				isHourGlassActive = true
-				--setPedAnimation(localPlayer,"ped","FLOOR_hit_f",-1,false)
 				triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"unconscious",localPlayer)
 				toggleAllControls(false,true,true)
 				enableBlackWhite(true)
@@ -572,8 +575,6 @@ function setPlayerUnconscious()
 			if isHourGlassActive then
 				removeEventHandler("onClientRender",root,drawHourGlass)
 				isHourGlassActive = false
-				--setPedAnimation(localPlayer,"ped","getup_front",-1,false)
-				--setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
 				triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"awake",localPlayer)
 				toggleAllControls(true,true,true)
 				enableBlackWhite(false)
@@ -594,8 +595,7 @@ function wakePlayerFromUnconsciousness()
 				removeEventHandler("onClientRender",root,drawHourGlass)
 				toggleAllControls(true,true,true)
 				enableBlackWhite(false)
-				setPedAnimation(localPlayer,"ped","getup_front",-1,false)
-				setTimer(function() setPedAnimation (localPlayer,false) end,1300,1)
+				triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"awake",localPlayer)
 				bindKey("J","down",initInventory)
 				triggerServerEvent("bindFuncKeys",localPlayer)
 				startRollMessage2("Status","You are awake.",0,255,0)
@@ -610,6 +610,7 @@ setTimer(wakePlayerFromUnconsciousness,60000,0)
 function removeUnconsciousHandlerOnDeath()
 	if getElementData(localPlayer,"isDead") then
 		if isHourGlassActive then
+			setElementData(localPlayer,"unconscious",false)
 			removeEventHandler("onClientRender",root,drawHourGlass)
 			toggleAllControls(true,true,true)
 			enableBlackWhite(false)
@@ -619,7 +620,7 @@ function removeUnconsciousHandlerOnDeath()
 		end
 	end
 end
-setTimer(removeUnconsciousHandlerOnDeath,4000,0)
+addEventHandler("onClientPlayerWasted",localPlayer,removeUnconsciousHandlerOnDeath)
 
 local hourglassrotation = 0
 local w, h = guiGetScreenSize()
@@ -701,6 +702,47 @@ function getPlayerLoad()
 		thirst = (playerSpeed+4)*3
 		playerThirst = 0
 		playerThirst = math.round(playerThirst+(thirst/120)*(getElementData(localPlayer,"temperature")/37),2)
+		
+		local hungerMultiplier = 1
+		if getElementData(localPlayer,"food") > 0 then
+			if gameplayVariables["difficulty"] then
+				if gameplayVariables["difficulty"] == "normal" then
+					hungerMultiplier = 1
+				elseif gameplayVariables["difficulty"] == "veteran" then
+					hungerMultiplier = 1.5
+				elseif gameplayVariables["difficulty"] == "hardcore" then
+					hungerMultiplier = 3
+				else
+					hungerMultiplier = 1
+				end
+			else
+				hungerMultiplier = 1
+			end
+			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-(playerHunger*hungerMultiplier))
+		else
+			setElementData(localPlayer,"food",0)
+		end
+		
+		local thirstMultiplier = 1
+		if getElementData(localPlayer,"thirst") > 0 then
+			if gameplayVariables["difficulty"] then
+				if gameplayVariables["difficulty"] == "normal" then
+					thirstMultiplier = 1
+				elseif gameplayVariables["difficulty"] == "veteran" then
+					thirstMultiplier = 1.5
+				elseif gameplayVariables["difficulty"] == "hardcore" then
+					thirstMultiplier = 3
+				else
+					thirstMultiplier = 1
+				end
+			else
+				thirstMultiplier = 1
+			end
+			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-(playerThirst*thirstMultiplier))
+		else
+			setElementData(localPlayer,"thirst",0)
+		end
+		
 	end
 end
 setTimer(getPlayerLoad,60000,0)
@@ -728,7 +770,7 @@ function setPlayerHunger()
 		end
 	end
 end
-setTimer(setPlayerHunger,61000,0)
+--setTimer(setPlayerHunger,61000,0)
 
 function setPlayerThirst()
 	if getElementData(localPlayer,"logedin") then
@@ -753,4 +795,293 @@ function setPlayerThirst()
 		end
 	end
 end
-setTimer(setPlayerThirst,61000,0)
+--setTimer(setPlayerThirst,61000,0)
+
+function getWeaponNoise(weapon)
+	for i,weapon2 in ipairs(weaponNoiseTable) do
+		if weapon == weapon2[1] then
+			return weapon2[2]
+		end
+	end
+	return 0
+end
+
+function getWeaponNoiseFactor(weapon)
+    for i,weapon2 in ipairs(weaponNoiseTable) do
+        if weapon == weapon2[1] then
+            return weapon2[3]
+        end
+    end
+	return 5
+end
+
+function setPlayerShootingLevel()
+	if getControlState("fire") then
+		local weapon = getPedWeapon(localPlayer)
+		local noise = getWeaponNoise(weapon) or 0
+		setElementData(localPlayer,"shooting",noise)
+		if shootTimer then
+			killTimer(shootTimer)
+		end
+		shootTimer = setTimer(resetPlayerShootingLevel,2000,1)
+	end
+end
+--setTimer(setPlayerShootingLevel,100,0)
+
+local playerHasShot = 0
+local shootTimer = false
+function setPlayerShootingLevel(weapon)
+	local noise = getWeaponNoise(weapon) or 0
+	playerHasShot = noise
+	if shootTimer then
+		killTimer(shootTimer)
+	end
+	shootTimer = setTimer(resetPlayerShootingLevel,1500,1)
+end
+addEventHandler("onClientPlayerWeaponFire",localPlayer,setPlayerShootingLevel)
+
+function resetPlayerShootingLevel()
+	playerHasShot = 0
+	shootTimer = false
+end
+
+-- New sound & visibility calculation
+local initialValue = 0
+
+-- returns a float number between 0 and 1, with 0 = moon and 1 = sun
+function isSunOrMoon()
+	local hours,minutes = getTime()
+	local sunOrMoon = 0
+	if hours > 12 then
+		sunOrMoon = 2-(hours/12)
+	else
+		sunOrMoon = hours/12
+	end
+	return sunOrMoon
+end
+
+-- returns a float number between 0 and 1, with 0 = no fog and 1 = fog
+function isFogOrNot()
+	local fog = getFogDistance()
+	local getFog = 0
+	if fog < 0 then
+		getFog = 1
+	else
+		getFog = 1-(fog/400)
+	end
+	return getFog
+end
+
+-- returns a float number between 0 and 1, representing moon light intensity
+function getMoonIntensity()
+	local moonIntensity = math.sin(math.pi*exports.DayZ:getMoonPhaseValue())*1
+	return moonIntensity
+end
+
+function getCurrentLightLevel()
+	local hours,minutes = getTime()
+	local weather = getWeather()
+	local moonSunLevel = isSunOrMoon()
+	local moonLightIntensity = getMoonIntensity()
+	local rain = getRainLevel()
+	local fog = isFogOrNot()
+	local cloudy = 0
+	local lightLevel = 0
+	-- Workaround for cloud density
+	if weather == 4 or weather == 7 or weather == 12 or weather == 15 then
+		cloudy = tonumber(weather)/15
+	end
+	if hours > 6 and hours < 20 then
+		moonLightIntensity = 0
+	end
+	local lightLevel = (moonSunLevel*2)+moonLightIntensity-(cloudy*0.2)-(rain*0.2)-(fog*0.5)
+	initialValue = 20+(moonSunLevel*20)
+	return lightLevel
+end
+
+-- For muffling sounds due to weather
+function getCurrentMuffleLevel()
+	local rain = getRainLevel()
+	local muffleLevel = 0
+	muffleLevel = 1-(rain*0.3)
+	return muffleLevel
+end
+
+function getPlayerPoseVisibility()
+	local block, animation = getPedAnimation(localPlayer)
+	local moveState = getPedMoveState(localPlayer)
+	local scalePose = 0.9
+	local scaleMovement = 0.2
+	if block == "ped" or block == "SHOP" or block == "BEACH" then
+		scalePose = 0.14
+		scaleMovement = 0.3
+	end
+	if moveState == "crouch" or moveState == "crawl" then
+		scalePose = 0.6
+		scaleMovement = 0.2
+	end
+	return scalePose,scaleMovement
+end
+
+local terrainTable = {
+["grass"] = {9,10,11,12,13,14,15,16,17,20,80,81,82,115,116,117,118,119,120,121,122,125,146,147,148,149,150,151,152,153,160},
+["concrete"] = {4,5,7,8,34,89,127,135,136,137,138,139,144,165},
+["forest"] = {23,41,111,112,113,114,19,21,22,24,25,26,27,40,83,84,87,88,100,110,123,124,126,128,130,132,141,142,145,155,156},
+["rock"] = {18,35,36,37,69,109,154,161,6,85,101,134,140},
+}
+
+function getTerrainProperties()
+	local x,y,z = getElementPosition(localPlayer)
+	local material = getGroundMaterial(x,y,z)
+	local scale,movement = getPlayerPoseVisibility()
+	local terrainVisibility = false
+	local terrainNoise = false
+	local moveState = getPedMoveState(localPlayer)
+	for i, terrain in ipairs(terrainTable["grass"]) do
+		if terrain == material then
+			initialValue = initialValue*0.65
+			terrainVisibility = movement-0.05
+			if moveState == "sprint" then
+				terrainNoise = 28
+			elseif moveState == "jog" then
+				terrainNoise = 23
+			elseif moveState == "powerwalk" or moveState == "walk" then
+				terrainNoise = 19
+			elseif moveState == "crawl" then
+				terrainNoise = 20
+			elseif moveState == "crouch" or moveState == "stand" then
+				terrainNoise = 1
+			else
+				terrainNoise = 23
+			end
+		end
+	end
+	for i, terrain in ipairs(terrainTable["concrete"]) do
+		if terrain == material then
+			initialValue = initialValue*0.85
+			terrainVisibility = movement+0.1
+			if moveState == "sprint" then
+				terrainNoise = 28
+			elseif moveState == "jog" then
+				terrainNoise = 25
+			elseif moveState == "powerwalk" or moveState == "walk" then
+				terrainNoise = 19
+			elseif moveState == "crawl" then
+				terrainNoise = 20
+			elseif moveState == "crouch" or moveState == "stand" then
+				terrainNoise = 1
+			else
+				terrainNoise = 25
+			end
+		end
+	end
+	for i, terrain in ipairs(terrainTable["forest"]) do
+		if terrain == material then
+			initialValue = initialValue*0.5
+			terrainVisibility = movement-0.1
+			if moveState == "sprint" then
+				terrainNoise = 32
+			elseif moveState == "jog" then
+				terrainNoise = 27
+			elseif moveState == "powerwalk" or moveState == "walk" then
+				terrainNoise = 22
+			elseif moveState == "crawl" then
+				terrainNoise = 20
+			elseif moveState == "crouch" or moveState == "stand" then
+				terrainNoise = 1
+			else
+				terrainNoise = 27
+			end
+		end
+	end
+	for i, terrain in ipairs(terrainTable["rock"]) do
+		if terrain == material then
+			initialValue = initialValue*0.80
+			terrainVisibility = movement+0.05
+			if moveState == "sprint" then
+				terrainNoise = 30
+			elseif moveState == "jog" then
+				terrainNoise = 23
+			elseif moveState == "powerwalk" or moveState == "walk" then
+				terrainNoise = 19
+			elseif moveState == "crawl" then
+				terrainNoise = 20
+			elseif moveState == "crouch" or moveState == "stand" then
+				terrainNoise = 1
+			else
+				terrainNoise = 23
+			end
+		end
+	end
+	if material == 0 or material == 1 or material == 2 or material == 3 then
+		initialValue = initialValue*1.3
+		terrainVisibility = movement+0.2
+		if moveState == "sprint" then
+				terrainNoise = 30
+			elseif moveState == "jog" then
+				terrainNoise = 23
+			elseif moveState == "powerwalk" or moveState == "walk" then
+				terrainNoise = 18
+			elseif moveState == "crawl" then
+				terrainNoise = 20
+			elseif moveState == "crouch" or moveState == "stand" then
+				terrainNoise = 1
+			else
+				terrainNoise = 23
+			end
+	end
+	if not terrainVisibility then
+		terrainVisibility = 1
+	end
+	if not terrainNoise then
+		terrainNoise = 1
+	end
+	return terrainVisibility,terrainNoise,initialValue
+end
+
+function getPlayerSpeed()
+	if not isPedInVehicle(localPlayer) then
+		local speedx, speedy, speedz = getElementVelocity(localPlayer)
+		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
+		mps = actualspeed * 50
+	else
+		playerSpeed = 20
+	end
+	playerSpeed = math.floor(mps*3.5)
+	return playerSpeed
+end
+
+--[[
+We check the chance for a zombie to detect a player based on his
+visibility and sound. The closer the player is to a zombie, the 
+bigger the chance to be detected.
+]]
+function checkLOSChance(distance,value)
+	local var = math.max((value-distance),0)
+	distance = math.max(0.1,distance)
+	local maxExp = math.exp(2)*distance
+	local myExp = (math.exp(2)*var)/maxExp
+	myExp = math.min(myExp*5,100)
+	return myExp
+end
+
+-- Working the magic math
+-- Left to do: light exposure to fireplace and roadflare, is player in building?
+function getSoundAndVisibilityLevel()
+	local rain = getRainLevel()
+	local fog = isFogOrNot()
+	local moonSunLevel = isSunOrMoon()
+	local moonLightIntensity = getMoonIntensity()
+	local muffleLevel = getCurrentMuffleLevel()
+	local lightLevel = getCurrentLightLevel()
+	local scale,movement = getPlayerPoseVisibility()
+	local terrainVisibility,terrainNoise,initialValue = getTerrainProperties()
+	local playerSpeed = getPlayerSpeed()
+	totalSound = math.ceil((playerSpeed*terrainNoise*movement*muffleLevel)+playerHasShot)
+	totalVisibility = math.ceil((initialValue+(playerSpeed*3))*scale*lightLevel)*1.5
+	if isPedInVehicle(localPlayer) then
+		totalSound = 100
+		totalVisibility = 20
+	end
+	return totalSound,totalVisibility
+end

@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgLoot loaded")
+
 
 -- SPAWNPOINTS (ITEMS)
 pickupPositions = {
@@ -2714,3 +2714,5 @@ pickupPositions = {
 {965.54089355469,-674.3095703125,131.05401611328},
 },
 }
+
+outputDebugString("[DayZ] cfgLoot loaded")

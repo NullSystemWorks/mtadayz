@@ -1,6 +1,6 @@
 --[[
 #-----------------------------------------------------------------------------#
-----*					MTA DayZ: achievements.lua							*----
+----*					MTA DayZ: achievements.lua						*----
 ----* Original Author: Marwin W., Germany, Lower Saxony, Otterndorf		*----
 
 ----* This gamemode is being developed by L, CiBeR96, 1B0Y				*----
@@ -87,6 +87,7 @@ function giveAchievement(ID)
 end
 
 function check() -- Needs optimizing
+	if not getElementData(localPlayer,"logedin") then return end
 	local achievementsunlocked = getAchievements()
 	local counter = 0
 	for i, all in pairs(achievements) do

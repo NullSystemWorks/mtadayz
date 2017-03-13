@@ -47,24 +47,27 @@ function createItemPickup(item,x,y,z,tableStringName)
 end
 
 function createItemLoot (lootPlace,x,y,z,id)
-	col = createColSphere(x,y,z,1.25)
-	setElementData(col,"itemloot",true)
-	setElementData(col,"parent",lootPlace)
-	setElementData(col,"MAX_Slots",20)
+	lootCol = createColSphere(x,y,z,1.25)
+	--zombieSpawnCol = createColSphere(x,y,z,10)
+	setElementData(lootCol,"itemloot",true)
+	setElementData(lootCol,"parent",lootPlace)
+	setElementData(lootCol,"MAX_Slots",20)
+	--setElementData(zombieSpawnCol,"isZombieSpawn",true)
+	--setElementData(zombieSpawnCol,"parent",lootPlace)
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do
 		local value =  math.percentChance(item[5],math.random(2,5))
-		setElementData(col,item[1],value)
+		setElementData(lootCol,item[1],value)
 		--weapon Ammo
 		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
 		if ammoData and value > 0 then
-			setElementData(col,ammoData,math.random(0,3))
+			setElementData(lootCol,ammoData,math.random(0,3))
 		end
 	end
 	--itemLoot
-	refreshItemLoot (col,lootPlace)
+	refreshItemLoot (lootCol,lootPlace)
 	
-	return col
+	return lootCol
 end
 
 function refreshItemLoot (col,place)
@@ -151,8 +154,10 @@ end
 function createPickupsOnServerStart()
 	iPickup = 0
 	async:foreach(pickupPositions["residential"], function(pos)
-		iPickup = iPickup + 1
-		createItemLoot("Residential", pos[1], pos[2], pos[3], iPickup)
+		if 0.5 > math.random() then
+			iPickup = iPickup + 1
+			createItemLoot("Residential", pos[1], pos[2], pos[3], iPickup)
+		end
 	end)
 	setTimer(createPickupsOnServerStart2, 60000, 1)
 end
@@ -185,8 +190,10 @@ end
 
 function createPickupsOnServerStart2()
 	for i,pos in ipairs(pickupPositions["industrial"]) do
-		iPickup = iPickup + 1
-		createItemLoot("Industrial",pos[1],pos[2],pos[3],iPickup)
+		if 0.3 > math.random() then
+			iPickup = iPickup + 1
+			createItemLoot("Industrial",pos[1],pos[2],pos[3],iPickup)
+		end
 	end
 	setTimer(createPickupsOnServerStart3,60000,1)
 end
@@ -206,8 +213,10 @@ end
 
 function createPickupsOnServerStart3()
 	for i,pos in ipairs(pickupPositions["farm"]) do
-		iPickup = iPickup + 1
-		createItemLoot("Farm",pos[1],pos[2],pos[3],iPickup)
+		if 0.5 > math.random() then
+			iPickup = iPickup + 1
+			createItemLoot("Farm",pos[1],pos[2],pos[3],iPickup)
+		end
 	end
 	setTimer(createPickupsOnServerStart4,60000,1)
 end
@@ -230,8 +239,10 @@ end
 
 function createPickupsOnServerStart4()
 	for i,pos in ipairs(pickupPositions["supermarket"]) do
-		iPickup = iPickup + 1
-		createItemLoot("Supermarket",pos[1],pos[2],pos[3],iPickup)
+		if 0.4 > math.random() then
+			iPickup = iPickup + 1
+			createItemLoot("Supermarket",pos[1],pos[2],pos[3],iPickup)
+		end
 	end
 	setTimer(createPickupsOnServerStart5,60000,1)
 end
@@ -253,8 +264,10 @@ end
 
 function createPickupsOnServerStart5()
 	for i,pos in ipairs(pickupPositions["military"]) do
-		iPickup = iPickup + 1
-		createItemLoot("Military",pos[1],pos[2],pos[3],iPickup)
+		if 0.4 > math.random() then
+			iPickup = iPickup + 1
+			createItemLoot("Military",pos[1],pos[2],pos[3],iPickup)
+		end
 	end
 end
 

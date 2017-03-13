@@ -180,7 +180,8 @@ local weaponSounds = {
 	["Enfield"] = {120,":DayZ/sounds/weapons/fire/Enfield.wav"},
 	["CZ 550"] = {240,":DayZ/sounds/weapons/fire/CZ550.wav"},
 	["DMR"] = {5,":DayZ/sounds/weapons/fire/DMR.wav"},
-	["SVD Dragunov"] = {240,":DayZ/sounds/weapons/fire/Dragunov.wav"}
+	["SVD Dragunov"] = {240,":DayZ/sounds/weapons/fire/Dragunov.wav"},
+	["M24"] = {240,":DayZ/sounds/weapons/fire/M24.wav"},
 }
 
 function playSoundOnWeaponFire(weapon)
