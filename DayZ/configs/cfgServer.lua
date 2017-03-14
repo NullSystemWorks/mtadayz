@@ -8,8 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgServer loaded")
-
 shownInfos["nomag"] = "No ammo left for this weapon!"
 shownInfos["youconsumed"] = "You consumed"
 shownInfos["needwatersource"] = "You have to be inside a body of water!"
@@ -62,3 +60,8 @@ gameplayVariables["czech_gunslots"] = 6 -- Weapon slots for Czech Backpack - DEF
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.
 gameplayVariables["backupinterval"] = 3600000 -- Number of milliseconds that should elapse before backup. Minimum: 50. - 1000 milliseconds = 1 second. - DEFAULT: 3600000ms (= 1 hour)
+
+-- WEAPON SETTINGS
+gameplayVariables["silencedDMRs"] = true
+
+outputDebugString("[DayZ] cfgServer loaded")
