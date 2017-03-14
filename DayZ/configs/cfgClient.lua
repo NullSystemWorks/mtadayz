@@ -29,4 +29,7 @@ gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds shoul
 -- PAIN SHAKE LEVEL
 gameplayVariables["painshakelevel"] = 150 -- How much should the camera shake when in pain. DEFAULT: 150, value can be from 0 - 255
 
+-- DEBUG MONITOR OPTION
+gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? true / false
+
 outputDebugString("[DayZ] client variables loaded")

@@ -497,7 +497,9 @@ setElementData(statsLabel["name"],"identifikation","name")
 
 function showDebugMintorOnLogin ()
 	if getElementData(localPlayer,"logedin") then
-		--guiSetVisible(statsWindows,true)
+		if (gameplayVariables["debugmonitorenabled"]) then
+			guiSetVisible(statsWindows,true)
+		end
 	end
 end
 addEvent("onClientPlayerDayZLogin", true)
@@ -506,18 +508,14 @@ addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 local isVisible = false
 function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
-		if not isVisible then
-			guiSetVisible(statsWindows,true)
-			isVisible = true
-		else
-			guiSetVisible(statsWindows,false)
-			isVisible = false
-		end
+		if not (gameplayVariables["debugmonitorenabled"]) then return end
+		
+		guiSetVisible(statsWindow,not guiGetVisible(statsWindow))
 	else
 		guiSetVisible(statsWindows,false)
 	end
 end
---bindKey("F5","down",showDebugMonitorOnF5)
+bindKey("F5","down",showDebugMonitorOnF5)
 
 function showDebugMonitor()
 	--guiSetVisible(statsWindows,true)
