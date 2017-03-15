@@ -130,4 +130,3 @@ achievements = {
 		["image"] = "achiev1.png"
 	},
 }
-}
