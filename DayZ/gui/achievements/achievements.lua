@@ -17,7 +17,7 @@ GUIEdit = {
 function panel(state)
 	if not GUIEdit.staticimage[1] then
 		GUIEdit.staticimage[1] = guiCreateStaticImage(0.00, -0.15, 0.31, 0.14, "gui/achievements/icons/bg_achievements.png", true)
-		guiSetAlpha(GUIEdit.staticimage[1], 0.87)
+		guiSetAlpha(GUIEdit.staticimage[1], 1.00)
 		guiBringToFront(GUIEdit.staticimage[1])
 
 		GUIEdit.staticimage[2] = guiCreateStaticImage(0.04, 0.16, 0.29, 0.67, "gui/gear/items/white.png", true, GUIEdit.staticimage[1])
@@ -97,18 +97,39 @@ function check() -- Needs optimizing
 					if getElementData(getLocalPlayer(),cond[1]) > tonumber(cond[3]) then
 						counter = counter+1
 					end
-				elseif(cond[2] == "equal") then
+				elseif (cond[2] == "equal") then
 					if getElementData(getLocalPlayer(),cond[1]) == cond[3] then
 						counter = counter+1
 					end
-				elseif(cond[2] == "less" and cond[3]) then
+				elseif (cond[2] == "less" and cond[3]) then
 					if getElementData(getLocalPlayer(),cond[1]) < tonumber(cond[3]) then
 						counter = counter+1
 					end
-				elseif(cond[2] == "misc_zaxis") then
+				elseif (cond[2] == "misc_zaxis") then
 					local x,y,z = getElementPosition(localPlayer)
 					-- outputChatBox(assert(loadstring("return "..tostring(cond[1])))()) -- Don't load > 100 above ground (idk why)
 					if z >= 300 then
+						counter = counter+1
+					end
+				elseif (cond[2] == "clothes") then
+					local playerClothesShirt = getPedClothes(localPlayer,0)
+					local playerClothesHead = getPedClothes(localPlayer,1)
+					local playerClothesPants = getPedClothes(localPlayer,2)
+					if playerClothesShirt == "player_torso" then
+						if playerClothesHead == "player_face" then
+							if playerClothesPants == "player_legs" then
+								counter = counter+1
+							end
+						end
+					end
+				elseif cond[2] == "area" then
+					local x,y,z = getElementPosition(localPlayer)
+					if getDistanceBetweenPoints3D(x,y,z,213,1898,17) <= 25 then
+						counter = counter+1
+					end
+				elseif cond[2] == "carrier" then
+					local x,y,z = getElementPosition(localPlayer)
+					if getDistanceBetweenPoints3D(x,y,z,-1325,502,18) <= 25 then
 						counter = counter+1
 					end
 				end
