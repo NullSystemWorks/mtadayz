@@ -515,7 +515,11 @@ function showDebugMonitorOnF5()
 		guiSetVisible(statsWindows,false)
 	end
 end
-bindKey("F5","down",showDebugMonitorOnF5)
+if not (gameplayVariables["debugmonitorenabled"]) then 
+	return
+else
+	bindKey("F5","down",showDebugMonitorOnF5)
+end
 
 function showDebugMonitor()
 	--guiSetVisible(statsWindows,true)
