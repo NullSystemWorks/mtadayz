@@ -100,7 +100,7 @@ local weather = getWeather()
 		if shouldItRain > 74 then
 			setRainLevel(math.random())
 		else
-			if getRainLevel() > 0 then
+			if getRainLevel() and getRainLevel() > 0 then
 				setRainLevel(0)
 			end
 		end
