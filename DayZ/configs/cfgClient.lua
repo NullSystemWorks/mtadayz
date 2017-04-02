@@ -32,4 +32,4 @@ gameplayVariables["painshakelevel"] = 150 -- How much should the camera shake wh
 -- DEBUG MONITOR OPTION
 gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? true / false
 
-outputDebugString("[DayZ] client variables loaded")
+outputDebugString("[DayZ] cfgClient loaded")

@@ -32,6 +32,9 @@ gameplayVariables["pingkick"] = true -- Should the ping kicker be enabled? - DEF
 gameplayVariables["maxzombiesglobal"] = 600 -- Not in use
 gameplayVariables["maxPetrolFuelAmount"] = math.random(1,15) -- Determines amount of fuel each petrol station in the world contains - DEFAULT: math.random(1,15)
 gameplayVariables["spawnselection"] = false -- Allow player to select his spawnpoint - DEFAULT: false
+gameplayVariables["newzombiespawnsystem"] = true -- Experimental feature, zombies only spawn near loot - DEFAULT: false
+gameplayVariables["zombiespawnradius"] = 20 -- If newzombiespawnsystem is set to true, determines the radius where zombies spawn around loot - DEFAULT: 20
+gameplayVariables["maxzombiesperloot"] = 6 -- if newzombiespawnsystem is set to true, determines how many zombies should spawn around loot - DEFAULT: 6
 
 
 -- WEIGHT SETTINGS

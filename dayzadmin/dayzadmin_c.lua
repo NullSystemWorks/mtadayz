@@ -14,6 +14,8 @@ function onAdminPanelOpen()
 	guiGridListClear(adminpanel.statvgridlist[1])
 	guiGridListClear(adminpanel.skingridlist[1])
 	guiGridListClear(adminpanel.vehgridlist[1])
+	guiGridListClear(adminpanel.accessgridlist[1])
+	guiGridListSetSortingEnabled(adminpanel.accessgridlist[1],false)
 	-- Populate the players gridlists
 	for id, player in ipairs(getElementsByType("player")) do
 		local row = guiGridListAddRow(adminpanel.gridlist[1])
@@ -35,12 +37,14 @@ function onAdminPanelOpen()
 			guiGridListSetItemText (adminpanel.gridlist[3], row, adminpanel.column[8], getElementID(getElementData(vehicle,"parent")),false,false)
 		end
 	end
+	showGameplayVariables()
 	guiSetVisible(adminpanel.window[1],true)
 	guiSetEnabled(adminpanel.button[12],false)
 	guiSetEnabled(adminpanel.button[13],false)
 	guiSetEnabled(adminpanel.statbutton[1],false)
 	guiSetInputEnabled( true )
 	showCursor(true)
+	populateGridlistWithGameplayVariables()
 end
 addEvent("onAdminPanelOpen",true)
 addEventHandler("onAdminPanelOpen",root,onAdminPanelOpen)
@@ -115,6 +119,7 @@ function onAdminPanelClose()
 	guiSetVisible(adminpanel.skinwindow[1],false)
 	guiSetInputEnabled( false )
 	showCursor(false)
+	gameplayVariablesTableC = {}
 end
 addEvent("onAdminPanelClose",true)
 addEventHandler("onAdminPanelClose",root,onAdminPanelClose)
@@ -236,6 +241,63 @@ local playerName = guiGridListGetItemText (adminpanel.gridlist[5], guiGridListGe
 	end
 end
 
+-- For Tab: "Admin Access"
+function showGameplayVariables()
+	local temp_gameplayVariablesTableC = exports.DayZ:getGameplayVariablesClient()
+	for i, data in pairs(temp_gameplayVariablesTableC) do
+		table.insert(gameplayVariablesTableC,{data[1],data[2],1})
+	end
+	temp_gameplayVariablesTableC = {}
+end
+
+function populateGridlistWithGameplayVariables()
+	for i, data in ipairs(gameplayVariablesTableC) do
+		for key, value in ipairs(variablesConversionTable) do
+			if value[1] == data[1] then
+				if value[2] ~= "Experimental" then
+					local row = guiGridListAddRow(adminpanel.accessgridlist[1])
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[1], value[2],false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[2], tostring(data[2]) ,false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[3], tostring(value[4]) ,false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[4], tostring(value[5]) ,false,false)
+				end
+			end
+		end
+	end
+end
+
+function onAdminAccessSendTable(theTable)
+	for i, data in ipairs(theTable) do
+		for key, value in ipairs(variablesConversionTable) do
+			if value[1] == data[1] then
+				if value[2] ~= "Experimental" then
+					local row = guiGridListAddRow(adminpanel.accessgridlist[1])
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[1], value[2],false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[2], tostring(data[2]) ,false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[3], tostring(value[4]) ,false,false)
+					guiGridListSetItemText (adminpanel.accessgridlist[1], row, adminpanel.accesscolumn[4], tostring(value[5]) ,false,false)
+				end
+			end
+		end
+	end
+end
+addEvent("onAdminAccessSendTable",true)
+addEventHandler("onAdminAccessSendTable",root,onAdminAccessSendTable)
+
+function changeDescriptionOnClick()
+	local selectedSetting = guiGridListGetItemText (adminpanel.accessgridlist[1], guiGridListGetSelectedItem (adminpanel.accessgridlist[1]),1)
+	if selectedSetting ~= "" then
+		for i, desc in ipairs(variablesConversionTable) do
+			if selectedSetting == desc[2] then
+				guiSetText(adminpanel.accessmemo[1],tostring(desc[3]))
+			end
+		end
+	end
+end
+
+function changeSetting()
+end
+
 function killPlayerOnButtonClick()
 local playerName = guiGridListGetItemText (adminpanel.gridlist[1], guiGridListGetSelectedItem (adminpanel.gridlist[1]),1)
 	if guiGridListGetItemText(adminpanel.gridlist[1], guiGridListGetSelectedItem(adminpanel.gridlist[1]), 1) ~= "" then
@@ -296,4 +358,63 @@ function getVehicleInfos(id)
 			return veh[2],veh[3], veh[4], veh[5], veh[6], veh[7],veh[8],veh[9], veh[10], veh[11], veh[12]
 		end
 	end
+end
+
+
+
+local expressionTable = {
+{nil,false},
+{false,false},
+{"false",false},
+{'"false"',false},
+{"",false},
+{'""',false},
+{0,false},
+{"0",false},
+{'"0"',false},
+{"nil",false},
+{'"nil"',false},
+
+{true,true},
+{"true",true},
+{'"true"',true},
+{1,true},
+{"1",true},
+{'"1"',true},
+}
+
+function toboolean(expression)
+local boolean = false
+	for i, expr in pairs(expressionTable) do
+		if expression == expr[1] then
+			boolean = expr[2]
+			return boolean
+		end
+	end
+end
+
+function editGameplayVariable(setting,environment,value)
+	for i, settings in ipairs(variablesConversionTable) do
+		if setting == settings[2] then
+			setting = settings[1]
+			break
+		end
+	end
+	if tonumber(value) ~= nil then
+		value = tonumber(value)
+	end
+	if value == "false" then
+		value = false
+	elseif value == "true" then
+		value = true
+	end
+	if environment == "Server" then
+		triggerServerEvent("onServerSideChangeSetting",root,tostring(setting),value)
+	elseif environment == "Client" then
+		exports.DayZ:setGameplayVariable(tostring(setting),value)
+	elseif environment == "Shared" then
+		triggerServerEvent("onServerSideChangeSetting",root,tostring(setting),value)
+		exports.DayZ:setGameplayVariable(tostring(setting),value)
+	end
+	outputChatBox("gameplayVariable "..tostring(setting).." has been set to: "..tostring(value),0,255,0,true)
 end

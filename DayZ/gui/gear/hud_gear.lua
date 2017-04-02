@@ -289,7 +289,6 @@ function playerActivateGoggles (key,keyState)
 				guiSetVisible(infravision,false)
 				showChat(false)
 				setCameraGoggleEffect("nightvision")
-				setFarClipDistance(1000)
 				triggerEvent("onPlayerEnabledGoggles", getLocalPlayer())
 			end
 		end
