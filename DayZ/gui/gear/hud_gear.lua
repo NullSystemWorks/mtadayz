@@ -514,7 +514,7 @@ function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
 		if not (gameplayVariables["debugmonitorenabled"]) then return end
 		
-		guiSetVisible(statsWindow,not guiGetVisible(statsWindow))
+		guiSetVisible(statsWindows,not guiGetVisible(statsWindows))
 	else
 		guiSetVisible(statsWindows,false)
 	end

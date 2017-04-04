@@ -128,7 +128,7 @@ function showLogin()
 	guiLabelSetHorizontalAlign(background_news_text,"left",true)
 	guiLabelSetHorizontalAlign(background_news_label,"center",true)
 	guiLabelSetHorizontalAlign(background_contributors_contri,"center",true)
-	guiRadioButtonSetSelected(Login_Edit[5],true)
+	--guiRadioButtonSetSelected(Login_Edit[5],true)
 	guiEditSetMasked(Login_Edit[2],true)
 	guiEditSetMasked(Login_Edit[4],true)
 	if number == 2 or number == 4 or number == 5 then
@@ -308,4 +308,4 @@ function dayR( )
         dxDrawText( "MTA DayZ", ( 40 / sourceX ) * sx, ( 850 / sourceY ) * sy, ( 187 / sourceX ) * sx, ( 324 / sourceY ) * sy, tocolor(0, 0, 0, 150), 2.00, ft, "left", "top", false, false, true, false, false )
 	end
 end
-addEventHandler ( "onClientRender", root, dayR)
+--addEventHandler ( "onClientRender", root, dayR)
