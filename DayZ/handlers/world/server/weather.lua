@@ -74,7 +74,7 @@ local initializeWeather = false
 local weatherRandomizer = 1800000
 
 if not initializeWeather then
-	setWeather(math.random(14,16))
+	setWeather(math.random(0,18))
 	initializeWeather = true
 end
 

@@ -696,14 +696,14 @@ function getPlayerLoad()
 		-- Final calculation for hunger based on blood, speed and weight of all items combined
 		local hunger = (math.abs((((12000 - getElementData(localPlayer,"blood")) / 12000) * 5) + playerSpeed + myLoad) * 3)
 		playerHunger = 0
-		playerHunger = math.round(playerHunger+(hunger/70),2)
-		playerHunger = math.max(math.min(playerHunger,2160,0))
+		playerHunger = playerHunger+(hunger/70)
+		--playerHunger = math.max(math.min(playerHunger,2160,0))
 		-- Determining the thirst decrease value by using player speed and temperature
 		local thirst = 2
 		thirst = (playerSpeed+4)*3
 		playerThirst = 0
-		playerThirst = math.round(playerThirst+(thirst/60)*(getElementData(localPlayer,"temperature")/37),2)
-		playerThirst = math.max(math.min(playerThirst,1440,0))
+		playerThirst = playerThirst+(thirst/60)*(getElementData(localPlayer,"temperature")/37)
+		--playerThirst = math.max(math.min(playerThirst,1440,0))
 		local hungerMultiplier = 1
 		if getElementData(localPlayer,"food") > 0 then
 			if gameplayVariables["difficulty"] then
