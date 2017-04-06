@@ -15,7 +15,7 @@ changes appropriate, the pull request will be accepted, and you will be marked a
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### MTA:DayZ Server List ###
-- Currently None -
+https://master.mta-dayz.org/
 
 ### Links ###
 Website: https://mta-dayz.org/
