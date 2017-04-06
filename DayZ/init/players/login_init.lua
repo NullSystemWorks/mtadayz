@@ -28,7 +28,7 @@ function playerLogin(username, pass, player)
 	if client then player = client end
 	account = getPlayerAccount(player)
 	local playerID = getAccountData(account,"playerID")
-	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
+	local x,y,z =  getAccountData(account,"last_x")or 0,getAccountData(account,"last_y")or 0,getAccountData(account,"last_z")or 0
 	local skin = getAccountData(account,"skin")
 	local hoursalive = getAccountData(account, "player.hoursalive")
 	setElementData(player, "hoursalive", hoursalive)
