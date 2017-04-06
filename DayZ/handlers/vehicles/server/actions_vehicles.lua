@@ -218,12 +218,16 @@ end
 addEvent("takeVehicleComponent",true)
 addEventHandler("takeVehicleComponent",root,takeVehicleComponent)
 
-function respawnVehiclesInWater()
-	for i,veh in ipairs(getElementsByType("vehicle")) do
-		if isElementInWater(veh) then
-			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473 then
+-- These next two functions are basically the same.
+-- First one is for automatic respawn while the other is for a command to manually respawn blown or sunken vehicles. Comes with an acl check.
+-- VehicleRespawnTimer *should* reset when the command is used to manually respawn these vehicles.
+
+function respawnIrrepairableVehicles()
+	for k, veh in ipairs(getElementsByType("vehicle")) do
+		if isVehicleBlown(veh) or isElementInWater(veh) then
+			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473  then
 				local col = getElementData(veh,"parent")
-				if col then
+					if col then
 					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
 					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
 				end
@@ -231,7 +235,25 @@ function respawnVehiclesInWater()
 		end
 	end
 end
-setTimer(respawnVehiclesInWater,1800000,0)
+local VehicleRespawnTimer = setTimer(respawnIrrepairableVehicles,2700000,0)
+
+function respawnDayZVehiclesCommand(player)
+	if hasObjectPermissionTo ( player, "function.banPlayer" ) then
+		for k, veh in ipairs(getElementsByType("vehicle")) do
+			if isVehicleBlown(veh) or isElementInWater(veh) then
+				if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473  then
+					local col = getElementData(veh,"parent")
+					if col then
+						id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+						respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+						resetTimer(VehicleRespawnTimer)
+					end
+				end
+			end
+		end
+	end
+end	
+addCommandHandler ( "respawndayzvehicles", respawnDayZVehiclesCommand ) -- Respawn blown and sunken vehicles when typed."	
 
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
