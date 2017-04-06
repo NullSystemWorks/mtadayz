@@ -158,3 +158,33 @@ function getActualTime()
 		end
 		return hour, minute, seconds
 end
+
+function getGameplayVariablesServer()
+local variablesTable = {}
+	for key, var in pairs(gameplayVariables) do
+		table.insert(variablesTable,{key,var})
+	end
+	return variablesTable
+end
+
+function getGameplayVariablesClient()
+local variablesTable = {}
+	for key, var in pairs(gameplayVariables) do
+		table.insert(variablesTable,{key,var})
+	end
+	return variablesTable
+end
+
+
+function setGameplayVariable(var,value)
+	if gameplayVariables[var] ~= nil then
+		gameplayVariables[var] = value
+	end
+end
+
+function getGameplayVariable(var)
+	return gameplayVariables[var]
+end
+
+
+

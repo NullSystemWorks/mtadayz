@@ -8,48 +8,124 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function spawnDayZPlayer(player)
-	local number = math.random(table.size(spawnPositions))
-	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-	
-	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
-	setElementFrozen(player, true)
-	fadeCamera (player, true)
-	setCameraTarget (player)
-	setTimer( function(player)
-		if isElement(player) then
-			setElementFrozen(player, false)
-		end
-	end,500,1,player)
-	playerCol = createColSphere(x,y,z,1.5)
-	setElementData(player,"playerCol",playerCol)
-	attachElements ( playerCol, player, 0, 0, 0 )
-	setElementData(playerCol,"parent",player)
-	setElementData(playerCol,"player",true)
-	local account = getPlayerAccount(player)
-	setAccountData(account,"isDead",false)
-	setElementData(player,"isDead",false)
-	setElementData(player,"logedin",true)
-	setElementData(player,"bleeding", 0)
-	setElementData(player,"sepsis",0)
-	setElementData(player,"unconscious",false)
-	setElementData(player,"admin",getAccountData(account,"admin") or false)
-	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
-	setPedStat(player, 21, math.random(200,400))
-	setElementData(player, "hoursalive", 0)
+spawnX,spawnY,spawnZ = 0,0,0
+spawnSelected = false
+function onSpawnSelectionEnabled(x,y,z)
+	spawnX = x
+	spawnY = y
+	spawnZ = z
+	spawnSelected = true
+	spawnDayZPlayer(source)
+end
+addEvent("onSpawnSelectionEnabled",true)
+addEventHandler("onSpawnSelectionEnabled",root,onSpawnSelectionEnabled)
 
-	----------------------------------
-	--Player Items on Respawn
-	for i,data in ipairs(playerDataTable) do
-		if data[1] == "bloodtype" then
-			determineBloodType(player)
-		elseif data[1] == "achievements" then
-			--
-		else
-			setElementData(player,data[1],data[2])
+function spawnDayZPlayer(player)
+	if not gameplayVariables["spawnselection"] then
+		local number = math.random(table.size(spawnPositions))
+		spawnX,spawnY,spawnZ = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
+		spawnSelected = true
+	end
+	if spawnSelected then
+		spawnPlayer (player, spawnX,spawnY,spawnZ, math.random(0,360), skin, 0, 0)
+		setElementFrozen(player, true)
+		fadeCamera (player, true)
+		setCameraTarget (player)
+		setTimer( function(player)
+			if isElement(player) then
+				setElementFrozen(player, false)
+			end
+		end,500,1,player)
+		playerCol = createColSphere(spawnX,spawnY,spawnZ,1.5)
+		setElementData(player,"playerCol",playerCol)
+		attachElements ( playerCol, player, 0, 0, 0 )
+		setElementData(playerCol,"parent",player)
+		setElementData(playerCol,"player",true)
+		local account = getPlayerAccount(player)
+		setAccountData(account,"isDead",false)
+		setElementData(player,"isDead",false)
+		setElementData(player,"logedin",true)
+		setElementData(player,"bleeding", 0)
+		setElementData(player,"sepsis",0)
+		setElementData(player,"unconscious",false)
+		setElementData(player,"admin",getAccountData(account,"admin") or false)
+		setElementData(player,"supporter",getAccountData(account,"supporter") or false)
+		setElementData(player, "hoursalive", 0)
+
+		----------------------------------
+		--Player Items on Respawn
+		for i,data in ipairs(playerDataTable) do
+			if data[1] == "bloodtype" then
+				determineBloodType(player)
+			elseif data[1] == "achievements" then
+				--
+			else
+				setElementData(player,data[1],data[2])
+			end
 		end
-	end	
+		for i,clothes in ipairs(clothesTable["Collar"]) do
+		local randomChance = math.random(0,100)
+			if randomChance < 11 then
+				local randomCloth = clothes[math.random(#clothesTable["Collar"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+		for i,clothes in ipairs(clothesTable["Head"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 26 then
+				local randomCloth = clothes[math.random(#clothesTable["Head"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+		for i,clothes in ipairs(clothesTable["Feet"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Feet"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+		for i,clothes in ipairs(clothesTable["Legs"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Legs"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+		for i,clothes in ipairs(clothesTable["Torso"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Torso"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+		for i,clothes in ipairs(clothesTable["Eyes"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 11 then
+				local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
+			end
+		end
+	end
 	triggerEvent("onPlayerChangeClothes", player)
+	triggerClientEvent("onPlayerStopVoices",player)
 end
 
 function killVehicleOccupantsOnExplode()
@@ -73,7 +149,7 @@ function destroyDeadPlayer (ped,pedCol)
 	destroyElement(tCol)
 end
 
-function kilLDayZPlayer (killer,headshot,weapon)
+function kilLDayZPlayer(killer,headshot,weapon)
 	pedCol = false
 	local account = getPlayerAccount(source)
 	if not account then return end
@@ -180,7 +256,13 @@ function kilLDayZPlayer (killer,headshot,weapon)
 	setElementData(source,"isDead",true)
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
 	destroyElement(getElementData(source,"playerCol"))
-	setTimer(spawnDayZPlayer,30000,1,source)
+	setTimer(function(source)
+		if gameplayVariables["spawnselection"] then
+			triggerClientEvent(source,"showSpawnSelectionWindow",source)
+		else
+			spawnDayZPlayer(source)
+		end
+	end,30000,1,source)
 end
 addEvent("kilLDayZPlayer",true)
 addEventHandler("kilLDayZPlayer",getRootElement(),kilLDayZPlayer)

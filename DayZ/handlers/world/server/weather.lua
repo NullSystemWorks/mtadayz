@@ -74,7 +74,7 @@ local initializeWeather = false
 local weatherRandomizer = 1800000
 
 if not initializeWeather then
-	setWeather(math.random(14,16))
+	setWeather(math.random(0,18))
 	initializeWeather = true
 end
 
@@ -96,9 +96,13 @@ setTimer(setTheWeather,weatherRandomizer,0)
 function setRainOnCloudyWeather()
 local weather = getWeather()
 	if weather == 4 or weather == 7 or weather == 12 or weather == 15 then
-		local shouldItRain = math.random(0,99)
+		local shouldItRain = math.random(0,100)
 		if shouldItRain > 74 then
 			setRainLevel(math.random())
+		else
+			if getRainLevel() and getRainLevel() > 0 then
+				setRainLevel(0)
+			end
 		end
 	end
 end

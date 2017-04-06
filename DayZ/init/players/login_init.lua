@@ -28,13 +28,10 @@ function playerLogin(username, pass, player)
 	if client then player = client end
 	account = getPlayerAccount(player)
 	local playerID = getAccountData(account,"playerID")
-	local x,y,z =  getAccountData(account,"last_x"),getAccountData(account,"last_y"),getAccountData(account,"last_z")
+	local x,y,z =  getAccountData(account,"last_x")or 0,getAccountData(account,"last_y")or 0,getAccountData(account,"last_z")or 0
 	local skin = getAccountData(account,"skin")
-	--local weight = getAccountData(account, "player.weight")
 	local hoursalive = getAccountData(account, "player.hoursalive")
 	setElementData(player, "hoursalive", hoursalive)
-	--setPedStat(player, 21, weight)
-
 	setElementData(player,"spawnedzombies",0)
 	if getAccountData(account,"isDead") then
 		spawnDayZPlayer(player)
@@ -52,10 +49,9 @@ function playerLogin(username, pass, player)
 	end,500,1,player)
 	playerCol = createColSphere(x,y,z,1.5)
 	setElementData(player,"playerCol",playerCol)
-	attachElements ( playerCol, player, 0, 0, 0 )
+	attachElements(playerCol,player,0,0,0)
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
-	
 	for i,data in ipairs(playerDataTable) do
 		local elementData = getAccountData(account,data[1])
 		if not elementData then
@@ -67,16 +63,12 @@ function playerLogin(username, pass, player)
 		end
 		setElementData(player,data[1],elementData)
 	end
-	
 	if not getElementData(player,"bloodtype") then
 		determineBloodType(player)
 		setElementData(player,"bloodtypediscovered","?")
 	end
-	
 	setElementData(player,"logedin",true)
 	triggerEvent("onPlayerChangeClothes", player)
-	--Weapons
-	--Old Weapons
 	local weapon = getElementData(player,"currentweapon_1")
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
@@ -93,7 +85,6 @@ function playerLogin(username, pass, player)
 		giveWeapon(player,weapID,getElementData(player,ammoData), false )
 	end
 	setElementModel(player, getElementData(player,"skin"))
-
 	setElementData(player,"admin",getAccountData(account,"admin") or false)
 	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
@@ -104,13 +95,11 @@ addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
 function playerRegister(username, pass, player)
 	if client then player = client end
 	local number = math.random(table.size(spawnPositions))
-	local x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
-
-	spawnPlayer (player, x,y,z, math.random(0,360), skin, 0, 0)
+	x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
+	spawnPlayer(player,x,y,z, math.random(0,360), skin, 0, 0)
 	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
 	setElementData(player, "hoursalive", 0)
-
 	setTimer( function(player)
 		if isElement(player) then
 			setElementFrozen(player, false)
@@ -122,16 +111,73 @@ function playerRegister(username, pass, player)
 	attachElements ( playerCol, player, 0, 0, 0 )
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
-	setPedStat(player, 21, math.random(200,400))
-	----------------------------------
-	--Player Items on Start
 	for i,data in ipairs(playerDataTable) do
 		if data[1] == "bloodtype" then
 			determineBloodType(player)
 		else
 			setElementData(player,data[1],data[2])
 		end
-	end	
+	end
+	for i,clothes in ipairs(clothesTable["Collar"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 11 then
+			local randomCloth = clothes[math.random(#clothesTable["Collar"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
+	for i,clothes in ipairs(clothesTable["Head"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 26 then
+			local randomCloth = clothes[math.random(#clothesTable["Head"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
+	for i,clothes in ipairs(clothesTable["Feet"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 95 then
+			local randomCloth = clothes[math.random(#clothesTable["Feet"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
+	for i,clothes in ipairs(clothesTable["Legs"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 95 then
+			local randomCloth = clothes[math.random(#clothesTable["Legs"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
+	for i,clothes in ipairs(clothesTable["Torso"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 95 then
+			local randomCloth = clothes[math.random(#clothesTable["Torso"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
+	for i,clothes in ipairs(clothesTable["Eyes"]) do
+		local randomChance = math.random(0,100)
+		if randomChance < 11 then
+			local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
+			if randomCloth then
+				setElementData(player,randomCloth,1)
+				break
+			end
+		end
+	end
 	account = getAccount(username)
 	local value = getAccounts()
 	local value = #value

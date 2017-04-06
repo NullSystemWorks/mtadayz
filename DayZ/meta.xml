@@ -62,6 +62,7 @@
 	<script src="init/vehicles/vehicles_init.lua" type="server" />
 	<script src="init/players/login_init.lua" type="server" />
 	<script src="init/players/spawn_init.lua" type="server" />
+	<script src="init/players/spawnselection_init.lua" type="client" />
 	<script src="init/permissions/permissions_init.lua" type="server" />
 	<script src="init/animals/animals_init.lua" type="server" />
 
@@ -134,6 +135,7 @@
 	<script src="gui/gear/sidemenu_gear.lua" type="client" cache="false" />
 	<script src="gui/gear/ui_gear.lua" type="client" cache="false" />
 	<script src="gui/achievements/achievements.lua" type="client" />
+	<file src="gui/spawnselection/spawnselection.png" />
 	<file src="gui/achievements/icons/achiev1.png"/>
 	<file src="gui/achievements/icons/bg_achievements.png" />
 	<file src="gui/gear/icons/ak47.png"/>
@@ -462,7 +464,11 @@
 	<export function="isPlayerInLoot" type="client" />
 	<export function="getLootMaxAviableSlots" type="client" />
 	<export function="getLootCurrentSlots" type="client" />
-	<export function="isToolbeltItem" type="client" />   
+	<export function="isToolbeltItem" type="client" />  
+	<export function="getGameplayVariablesServer" type="server" />
+	<export function="getGameplayVariablesClient" type="client" />
+	<export function="setGameplayVariable" type="shared" />
+	<export function="getGameplayVariable" type="shared" />
    	
 	<!-- models folder -->
     <file src="models/animals/txd/bear.txd" />
@@ -916,6 +922,7 @@
 	<file src="sounds/weapons/fire/PDW.wav" />
 	<file src="sounds/weapons/fire/Revolver.wav" />
 	<file src="sounds/weapons/fire/Winchester.wav" />
+	<file src="sounds/weapons/fire/M24.wav" />
 	<file src="sounds/weapons/reload/22.wav" />
 	<file src="sounds/weapons/reload/23.wav" />
 	<file src="sounds/weapons/reload/24.wav" />
@@ -976,6 +983,7 @@
 	<export function="getMoonPhaseValue" type="client" />
 	<export function="isDynamicSkyEnabled" type="client" />
 	
+	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	
@@ -986,4 +994,6 @@
 	<include resource="imageButton" />
 	<include resource="helpmanager" />
 	<include resource="dayzadmin" />
+	
+	
 </meta>

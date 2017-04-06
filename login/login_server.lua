@@ -56,7 +56,7 @@ function tryToRegsiterPlayer(username, pass)
 			outputChatBox("You successfully registered account '" ..username.. "' for player '" ..getPlayerName(source).. "'#FFFFFF with password '" ..pass.."'!", source, 255, 255, 255, true)
 			triggerClientEvent(source,"onPlayerDoneLogin", source,username,pass)	
 			triggerEvent("onPlayerDayZRegister", getRootElement(),username,pass,source)
-			triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
+			--triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
 			local theTime = getRealTime()
 			local hour = theTime.hour
 			local minute = theTime.minute

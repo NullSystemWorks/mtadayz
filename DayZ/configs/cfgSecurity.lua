@@ -9,8 +9,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgSecurity loaded")
-
 gameplayVariables["combatlog"] = true -- // Enable/Disable anti combat logging - DEFAULT: true
 gameplayVariables["securitylevel"] = 1 -- // Set security level: 2 = Ban, 1 = Kick, 0 = Disabled - DEFAULT: 1
 gameplayVariables["bantime"] = 0 -- // If security level is 2, for how long should the player be banned (in seconds)? - 0 = Forever - DEFAULT: 0
@@ -19,3 +17,5 @@ gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter - DEF
 gameplayVariables["maxslots"] = 30 -- Max slot amount in your server( Include VIP Slots ) - DEFAULT: 30
 gameplayVariables["noadvert"] = true -- Banning players who write the server ip
 gameplayVariables["adBanTime"] = 86400 -- If noadvert is true, define how much time should the banTime be in seconds. DEFAULT: 86400( 1 Day )
+
+outputDebugString("[DayZ] cfgSecurity loaded")

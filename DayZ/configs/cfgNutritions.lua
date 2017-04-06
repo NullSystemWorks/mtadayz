@@ -8,7 +8,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgNutritions loaded")
 
 gameplayVariables["nutritions"] = {
 -- {Name,bloodRegen,calories,food,water,temperature},
@@ -34,3 +33,5 @@ gameplayVariables["nutritions"] = {
 {"Can (Milk)",100,0,380,420,0},
 {"Cooked Meat",1000,817,900,0,2},
 }
+
+outputDebugString("[DayZ] cfgNutritions loaded")

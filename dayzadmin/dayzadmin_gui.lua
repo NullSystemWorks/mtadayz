@@ -8,644 +8,7 @@
 ]]
 
 
--- The DayZ Admin Panel GUI Table
-adminpanel = {
-    tab = {},
-    image = {},
-	map = {},
-    editbox = {},
-	statedit = {},
-	statvedit = {},
-	skinedit = {},
-    window = {},
-	statwindow = {},
-	statvwindow = {},
-	skinwindow = {},
-	vehwindow = {},
-    label = {},
-	statlabel = {},
-	statvlabel = {},
-	skinlabel = {},
-	vehlabel = {},
-    tabpanel = {},
-    checkbox = {},
-    gridlist = {},
-	statgridlist = {},
-	statvgridlist = {},
-	skingridlist = {},
-	vehgridlist = {},
-	column = {},
-	statcolumn = {},
-	statvcolumn = {},
-	skincolumn = {},
-	vehcolumn = {},
-    button = {},
-	statbutton = {},
-	statvbutton = {},
-	skinbutton = {},
-	vehbutton = {},
-    combobox = {},
-	statcombobox = {},
-	statvcombobox = {},
-	skincombobox = {},
-	vehcombobox = {},
-    memo = {}
-}
-
--- Items Table for Inventory Edito
-items = 
-{
-	["Weapons"] = {
-		"M1911",
-		"Revolver",
-		"Makarov PM",
-		"Bizon PP-19 SD",
-		"G17",
-		"M9",
-		"Makarov SD",
-		"PDW",
-		"MP5A5",
-		"Lee Enfield",
-		"AK-74",
-		"AKS-74U",
-		"RPK",
-		"AKM",
-		"Sa58V CCO",
-		"Sa58V RCO",
-		"FN FAL",
-		"M24",
-		"DMR",
-		"M40A3",
-		"G36A CAMO",
-		"G36C",
-		"G36C CAMO",
-		"G36K CAMO",
-		"L85A2 RIS Holo",
-		"M16A2",
-		"M16A2 M203",
-		"M4A1",
-		"M16A4",
-		"CZ 550",
-		"SVD Dragunov",
-		"Mosin-Nagant",
-		"Winchester 1866",
-		"Double-barreled Shotgun",
-		"M1014",
-		"Remington 870",
-		"Compound Crossbow",
-		"Baseball Bat",
-		"Crowbar",
-		"Hatchet",
-		"Machete",
-		"Parachute",
-		"Grenade",
-		"Hunting Knife",
-		"Binoculars",
-		"Range Finder",
-		"Shovel",
-		"Flashlight",
-	},
-	
-	["Ammo"] = {
-		"11.43x23mm Cartridge",
-		"9x18mm Cartridge",
-		"9x19mm Cartridge",
-		".303 British Cartridge",
-		"5.45x39mm Cartridge",
-		"7.62x39mm Cartridge",
-		"7.62x51mm Cartridge",
-		"5.56x45mm Cartridge",
-		".308 Winchester Cartridge",
-		"7.62x54mm Cartridge",
-		"1866 Slug",
-		"12 Gauge Pellet",
-		"Bolt",
-	},
-	
-	["Food/Drinks"] = {
-		"Baked Beans",
-		"Pasta",
-		"Sardines",
-		"Frank & Beans",
-		"Can (Corn)",
-		"Can (Peas)",
-		"Can (Pork)",
-		"Can (Stew)",
-		"Can (Ravioli)",
-		"Can (Fruit)",
-		"Can (Chowder)",
-		"MRE",
-		"Pistachios",
-		"Trail Mix",
-		"Water Bottle",
-		"Soda Can (Pepsi)",
-		"Soda Can (Cola)",
-		"Soda Can (Mountain Dew)",
-		"Can (Milk)",
-		"Raw Meat",
-		"Cooked Meat",
-	},
-	
-	["Backpacks"] = {
-		"Assault Pack (ACU)",
-		"Czech Vest Pouch",
-		"ALICE Pack",
-		"Survival ACU",
-		"British Assault Pack",
-		"Backpack (Coyote)",
-		"Czech Backpack",
-	},
-	
-	["Toolbelt"] = {
-		"Box of Matches",
-		"IR Goggles",
-		"NV Goggles",
-		"GPS",
-		"Map",
-		"Toolbox",
-		"Watch",
-		"Radio Device",
-		"Compass"
-	},
-	
-	["Medical Items"] = {
-		"Bandage",
-		"Morphine",
-		"Heat Pack",
-		"Blood Bag",
-		"Painkiller",
-		"Antibiotics",
-		"Epi-Pen",
-		"Blood Bag (Empty)",
-		"Blood Test Kit",
-		"Blood Transfusion Kit",
-	},
-	
-	["Car Parts"] = {
-		"Tire",
-		"Engine",
-		"Tank Parts",
-		"Main Rotary Parts",
-		"Windscreen Glass",
-		"Scrap Metal",
-	},
-	
-	["Clothes"] = {
-		"Military collar",
-		"Africa collar",
-		"Gold collar",
-		"Silver collar",
-		"LS collar",
-		"Black Bandana (M)",
-		"Blue Bandana (M)",
-		"Green Bandana (M)",
-		"Red Bandana (M)",
-		"Black Bandana (H)",
-		"Blue Bandana (H)",
-		"Green Bandana (H)",
-		"Red Bandana (H)",
-		"Black Beret",
-		"Red Beret",
-		"Old Hat",
-		"Black Hat",
-		"Yellow Hat",
-		"Black Trucker",
-		"Blue Trucker",
-		"Green Trucker",
-		"Red Trucker",
-		"Yellow Trucker",
-		"Cow-Boy Hat",
-		"White Hat",
-		"Hockey Mask",
-		"Black Shoe",
-		"Sport Shoe",
-		"Brown Shoe",
-		"Biker Shoe",
-		"Blue Shoe",
-		"Red Shoe",
-		"Beach Shoe",
-		"Black Pants",
-		"Beige Pants",
-		"Gray Shorts",
-		"Blue Shorts",
-		"Blue Jeans",
-		"Green Jeans",
-		"Gray Pants",
-		"Yellow Pants",
-		"Blue Jogging",
-		"Gray Jogging",
-		"Military Pants",
-		"Beige Vest",
-		"Baseball Shirt",
-		"Baseball 2 Shirt",
-		"Red Vest",
-		"Grey Shirt",
-		"Green Vest",
-		"Hawai Shirt",
-		"Black Vest",
-		"Brown Vest",
-		"Biker Vest",
-		"Blue Shirt",
-		"Green 2 Vest",
-		"Number 5 Shirt",
-		"Monk Shirt",
-		"Dark Glasses",
-		"Square Glasses",
-		"Red Glasses",
-	},	
-
-	["Blueprints"] = {
-		"M4 Blueprint",
-		"CZ 550 Blueprint",
-		"Winchester 1866 Blueprint",
-		"SPAZ-12 C. Shtgn. Blueprint",
-		"Sawn-Off Shtgn. Blueprint",
-		"AK-47 Blueprint",
-		"Lee Enfield Blueprint",
-		"Sporter 22 Blueprint",
-		"Mosin 9130 Blueprint",
-		"Crossbow Blueprint",
-		"SKS Blueprint",
-		"Blaze 95 D. R. Blueprint",
-		"Remington 870 Blueprint",
-		"FN FAL Blueprint",
-		"G36C Blueprint",
-		"Sa58V CCO Blueprint",
-		"SVD Dragunov Blueprint",
-		"DMR Blueprint",
-		"M1911 Blueprint",
-		"M9 SD Blueprint",
-		"PDW Blueprint",
-		"G17 Blueprint",
-		"MP5A5 Blueprint",
-		"Bizon PP-19 Blueprint",
-		"Revolver Blueprint",
-		"Desert Eagle Blueprint",
-		"Hunting Knife Blueprint",
-		"Hatchet Blueprint",
-		"Baseball Bat Blueprint",
-		"Shovel Blueprint",
-		"Golf Club Blueprint",
-		"Machete Blueprint",
-		"Crowbar Blueprint",
-		"Parachute Blueprint",
-		"Tear Gas Blueprint",
-		"Grenade Blueprint",
-		"Binoculars Blueprint",
-		".45 ACP Cartridge Blueprint",
-		"9x19mm SD Cartridge Blueprint",
-		"9x19mm Cartridge Blueprint",
-		"9x18mm Cartridge Blueprint",
-		"5.45x39mm Cartridge Blueprint",
-		"5.56x45mm Cartridge Blueprint",
-		"1866 Slug Blueprint",
-		"2Rnd. Slug Blueprint",
-		"12 Gauge Pellet Blueprint",
-		"9.3x62mm Cartridge Blueprint",
-		".303 British Cartridge Blueprint",
-		"Bolt Blueprint",
-		"Medic Kit Blueprint",
-		"Wire Fence Blueprint",
-		"Tent Blueprint",
-		"Camouflage Clthng. Blueprint",
-		"Survivor Clthng. Blueprint",
-		"Civilian Clthng. Blueprint",
-		"Ghillie Suit Blueprint",
-		"Road Flare Blueprint",
-		"Toolbox Blueprint",
-		"Radio Device Blueprint",
-		"IR Goggles Blueprint",
-		"NV Goggles Blueprint",
-	},
-	
-	["Blueprint Parts"] = {
-		"Gun Barrel",
-		"Short Gun Barrel",
-		"Gun Stock",
-		"Thread",
-		"Cloth",
-		"Gun Powder",
-		"Mechanical Supplies",
-		"Cables",
-		"Nails",
-		"Sheet",
-		"Barbed Wire",
-		"Duct Tape",
-		"Glue",
-		"Drugs",
-		"Bandaid",
-		"Vitamins",
-		"Tissue",
-		"Small Box",
-		"String",
-		"Needle",
-		"Microchips",
-		"Optics",
-		"Sharp Metal",
-		"Handle",
-		"Wooden Stick",
-		"Hand Saw",
-		"Metal Plate",
-		"Metallic Stick",
-		"Small Casing",
-		"DIY (Wood)",
-		"DIY (Metal)",
-		"Log",
-		"Stone",
-		"Plank",
-		"RSJ",
-		"Metal Sheet",
-		"Metal Sheet (Rusted)",
-	},
-	
-	["Other"] = {
-		"Wood Pile",
-		"Empty Gas Canister",
-		"Full Gas Canister",
-		"Road Flare",	
-		"Wire Fence",
-		"Tent",
-		"San Fierro Carrier Keycard",
-		"Area 69 Keycard"
-	},
-}
-
-playerDataTable = {
--- [[ Weapons ]] --
-{"M1911"},
-{"Revolver"},
-{"Makarov PM"},
-{"Bizon PP-19 SD"},
-{"G17"},
-{"M9"},
-{"Makarov SD"},
-{"PDW"},
-{"MP5A5"},
-{"Lee Enfield"},
-{"AK-74"},
-{"AKS-74U"},
-{"RPK"},
-{"AKM"},
-{"Sa58V CCO"},
-{"Sa58V RCO"},
-{"FN FAL"},
-{"M24"},
-{"DMR"},
-{"M40A3"},
-{"G36A CAMO"},
-{"G36C"},
-{"G36C CAMO"},
-{"G36K CAMO"},
-{"L85A2 RIS Holo"},
-{"M16A2"},
-{"M16A2 M203"},
-{"M4A1"},
-{"M16A4"},
-{"CZ 550"},
-{"SVD Dragunov"},
-{"Mosin-Nagant"},
-{"Winchester 1866"},
-{"Double-barreled Shotgun"},
-{"M1014"},
-{"Remington 870"},
-{"Compound Crossbow"},
-{"Baseball Bat"},
-{"Crowbar"},
-{"Hatchet"},
-{"Machete"},
-{"Parachute"},
-{"Grenade"},
-{"Hunting Knife"},
-{"Binoculars"},
-{"Range Finder"},
-{"Shovel"},
-{"Flashlight"},
--- [[ Ammo ]] --
-{"11.43x23mm Cartridge"},
-{"9x18mm Cartridge"},
-{"9x19mm Cartridge"},
-{".303 British Cartridge"},
-{"5.45x39mm Cartridge"},
-{"7.62x39mm Cartridge"},
-{"7.62x51mm Cartridge"},
-{"5.56x45mm Cartridge"},
-{".308 Winchester Cartridge"},
-{"7.62x54mm Cartridge"},
-{"1866 Slug"},
-{"12 Gauge Pellet"},
-{"Bolt"},
--- [[ Food / Drinks ]] --
-{"Baked Beans"},
-{"Pasta"},
-{"Sardines"},
-{"Frank & Beans"},
-{"Can (Corn)"},
-{"Can (Peas)"},
-{"Can (Pork)"},
-{"Can (Stew)"},
-{"Can (Ravioli)"},
-{"Can (Fruit)"},
-{"Can (Chowder)"},
-{"Pistachios"},
-{"Trail Mix"},
-{"MRE"},
-{"Water Bottle"},
-{"Soda Can (Pepsi)"},
-{"Soda Can (Cola)"},
-{"Soda Can (Mountain Dew)"},
-{"Can (Milk)"},
--- [[ Items ]] --
-{"Wood Pile"},
-{"Bandage"},
-{"Antibiotics"},
-{"Epi-Pen"},
-{"Road Flare"},
-{"Empty Gas Canister"},
-{"Full Gas Canister"},
-{"Heat Pack"},
-{"Painkiller"},
-{"Morphine"},
-{"Blood Bag"},
-{"Blood Bag (Empty)"},
-{"Transfusion Kit"},
-{"Blood Test Kit"},
-{"Wire Fence"},
-{"Raw Meat"},
-{"Tire"},
-{"Engine"},
-{"Tank Parts"},
-{"Scrap Metal"},
-{"Main Rotary Parts"},
-{"Windscreen Glass"},
-{"Tent"},
-{"Box of Matches"},
-{"Watch"},
-{"GPS"},
-{"Map"},
-{"Toolbox"},
-{"IR Goggles"},
-{"NV Goggles"},
-{"Cooked Meat"},
-{"Radio Device"},
-{"Compass"},
-{"Camouflage Clothing"},
-{"Civilian Clothing"},
-{"Survivor Clothing"},
-{"Survivor Clothing (Female)"},
-{"Civilian Clothing (Female)"},
-{"Ghillie Suit"},
-{"Empty Water Bottle"},
-{"Empty Soda Can"},
-{"Empty Tin Can"},
-{"Broken Whiskey Bottle"},
-{"Assault Pack (ACU)"},
-{"ALICE Pack"},
-{"British Assault Pack"},
-{"Czech Vest Pouch"},
-{"Backpack (Coyote)"},
-{"Czech Backpack"},
-{"Survival ACU"},
-{"San Fierro Carrier Keycard"},
-{"Area 69 Keycard"},
--- [[ Blueprints ]] --
-{"M4 Blueprint"},
-{"CZ 550 Blueprint"},
-{"Winchester 1866 Blueprint"},
-{"SPAZ-12 C. Shtgn. Blueprint"},
-{"Sawn-Off Shtgn. Blueprint"},
-{"AK-47 Blueprint"},
-{"Lee Enfield Blueprint"},
-{"Sporter 22 Blueprint"},
-{"Mosin 9130 Blueprint"},
-{"Crossbow Blueprint"},
-{"SKS Blueprint"},
-{"Blaze 95 D. R. Blueprint"},
-{"Remington 870 Blueprint"},
-{"FN FAL Blueprint"},
-{"G36C Blueprint"},
-{"Sa58V CCO Blueprint"},
-{"SVD Dragunov Blueprint"},
-{"DMR Blueprint"},
-{"M1911 Blueprint"},
-{"M9 SD Blueprint"},
-{"PDW Blueprint"},
-{"G17 Blueprint"},
-{"MP5A5 Blueprint"},
-{"Bizon PP-19 Blueprint"},
-{"Revolver Blueprint"},
-{"Desert Eagle Blueprint"},
-{"Hunting Knife Blueprint"},
-{"Hatchet Blueprint"},
-{"Baseball Bat Blueprint"},
-{"Shovel Blueprint"},
-{"Golf Club Blueprint"},
-{"Machete Blueprint"},
-{"Crowbar Blueprint"},
-{"Parachute Blueprint"},
-{"Tear Gas Blueprint"},
-{"Grenade Blueprint"},
-{"Binoculars Blueprint"},
-{".45 ACP Cartridge Blueprint"},
-{"9x19mm SD Cartridge Blueprint"},
-{"9x19mm Cartridge Blueprint"},
-{"9x18mm Cartridge Blueprint"},
-{"5.45x39mm Cartridge Blueprint"},
-{"5.56x45mm Cartridge Blueprint"},
-{"1866 Slug Blueprint"},
-{"2Rnd. Slug Blueprint"},
-{"12 Gauge Pellet Blueprint"},
-{"9.3x62mm Cartridge Blueprint"},
-{".303 British Cartridge Blueprint"},
-{"Bolt Blueprint"},
-{"Medic Kit Blueprint"},
-{"Wire Fence Blueprint"},
-{"Tent Blueprint"},
-{"Camouflage Clthng. Blueprint"},
-{"Survivor Clthng. Blueprint"},
-{"Civilian Clthng. Blueprint"},
-{"Ghillie Suit Blueprint"},
-{"Road Flare Blueprint"},
-{"Toolbox Blueprint"},
-{"Radio Device Blueprint"},
-{"IR Goggles Blueprint"},
-{"NV Goggles Blueprint"},
-{"Gun Barrel"},
-{"Short Gun Barrel"},
-{"Gun Stock"},
-{"Thread"},
-{"Cloth"},
-{"Gun Powder"},
-{"Mechanical Supplies"},
-{"Cables"},
-{"Nails"},
-{"Sheet"},
-{"Barbed Wire"},
-{"Duct Tape"},
-{"Glue"},
-{"Drugs"},
-{"Bandaid"},
-{"Vitamins"},
-{"Tissue"},
-{"Small Box"},
-{"String"},
-{"Needle"},
-{"Microchips"},
-{"Optics"},
-{"Sharp Metal"},
-{"Handle"},
-{"Wooden Stick"},
-{"Hand Saw"},
-{"Metal Plate"},
-{"Metallic Stick"},
-{"Small Casing"},
-
-{"DIY (Wood)"},
-{"DIY (Metal)"},
-{"Log"},
-{"Stone"},
-{"Plank"},
-{"RSJ"},
-{"Metal Sheet"},
-{"Metal Sheet (Rusted)"},
-}
-
-vehicleInfo = {
--- {Model, Wheels, Engine, TankParts, ScrapMetal, WindscreenGlass, RotaryParts, Name, ColsphereSize, Slots, Fuel,RealName}
-
--- VEHICLES
-{471,4,1,1,1,0,0,"ATV",2,50,30,"Quadbike"},
-{431,6,1,1,1,4,0,"Bus",5,50,100,"Bus"},
-{509,2,0,0,1,0,0,"Old Bike",2,0,0,"Bike"},
-{546,4,1,1,1,4,0,"GAZ",3,50,200,"Intruder"},
-{433,8,1,1,1,3,0,"Military Offroad",4,50,200,"Barracks"},
-{468,2,1,1,1,0,0,"Motorcycle",2,5,55,"Sanchez"},
-{543,4,1,1,1,4,0,"Offroad Pickup Truck",3,50,100,"Sadler"},
-{426,4,1,1,1,5,0,"Old Hatchback",3,50,50,"Premier"},
-{422,4,1,1,1,2,0,"Pickup Truck",3,50,200,"Bobcat"},
-{418,4,4,1,1,0,0,"S1203 Van",3,50,60,"Moonbeam"},
-{400,4,1,1,1,4,0,"Skoda",3,75,200,"Landstalker"},
-{531,4,1,1,1,3,0,"Tractor",3,50,100,"Tractor"},
-{470,4,1,1,1,6,0,"UAZ",3,50,100,"Patriot"},
-{455,6,1,1,1,0,0,"Ural Civilian",5,200,200,"Flatbed"},
-{490,4,1,1,1,4,0,"SUV",3,50,200,"FBI Rancher"},
-{478,6,1,1,1,0,0,"V3S Civilian",5,200,160,"Walton"},
-
--- AIRCRAFT
-{469,0,1,0,4,8,1,"AH6X Little Bird",7,20,1000,"Sparrow"},
-{417,0,1,0,4,8,1,"UH-1H Huey",7,50,1000,"Leviathan"},
-{487,0,1,0,4,8,1,"Mi-17",7,20,1000,"Maverick"},
-{488,0,1,0,2,4,1,"MH6J",7,20,600,"News Chopper"},
-{511,2,1,0,1,2,2,"An-2 Biplane",7,100,400,"Beagle"},
-
--- BOATS
-{453,0,1,0,1,2,0,"Fishing Boat",4,400,100,"Reefer"},
-{595,0,1,0,1,2,0,"Small Boat",3,0,100,"Launch"},
-{473,0,1,0,1,1,0,"PBX",2,0,100,"Dinghy"},
-}
-
 local isItemSelected = false
-
-
 addEventHandler("onClientResourceStart",root,
 function()
 	adminpanel.window[1] = guiCreateWindow(0.08, 0.06, 0.83, 0.86, "DayZ Admin Panel", true)
@@ -785,11 +148,38 @@ function()
 
 	-- Admin Access (Soon)
 	adminpanel.tab[4] = guiCreateTab("Admin Access", adminpanel.tabpanel[1])
-	adminpanel.label[69] = guiCreateLabel(0.01, 0.02, 0.31, 0.32, "SOON", true, adminpanel.tab[4])
+	adminpanel.accessgridlist[1] = guiCreateGridList(10, 24, 622, 247, false, adminpanel.tab[4])
+	adminpanel.accesscolumn[1] = guiGridListAddColumn(adminpanel.accessgridlist[1], "Setting", 0.4)
+	adminpanel.accesscolumn[2] = guiGridListAddColumn(adminpanel.accessgridlist[1], "Value", 0.2)
+	adminpanel.accesscolumn[3] = guiGridListAddColumn(adminpanel.accessgridlist[1], "Default", 0.2)
+	adminpanel.accesscolumn[4] = guiGridListAddColumn(adminpanel.accessgridlist[1], "Environment", 0.2)
+	adminpanel.accessbutton[1] = guiCreateButton(0.02, 0.63, 0.12, 0.07, "Edit Setting", true, adminpanel.tab[4])
+	adminpanel.accessbutton[2] = guiCreateButton(0.02, 0.72, 0.12, 0.07, "Reset Setting", true, adminpanel.tab[4])
+	adminpanel.accessmemo[1] = guiCreateMemo(0.59, 0.62, 0.39, 0.36, "", true, adminpanel.tab[4])
+	guiMemoSetReadOnly(adminpanel.accessmemo[1], true)
+	adminpanel.accesslabel[1] = guiCreateLabel(0.02, 0.85, 0.56, 0.10, "In \"Admin Access\", various settings of DayZ can be altered. Exercise extreme caution when editing these settings! \nSettings changed here will not be saved!", true, adminpanel.tab[4])
+	guiSetFont(adminpanel.accesslabel[1], "default-bold-small")
+	guiLabelSetColor(adminpanel.accesslabel[1], 255, 0, 0)
+	guiLabelSetHorizontalAlign(adminpanel.accesslabel[1], "left", true)
+	
+	-- Admin Access Edit Setting
+	adminpanel.accesseditwindow[1] = guiCreateWindow(0.25, 0.38, 0.46, 0.27, "Edit Setting: [SETTING]", true)
+	guiWindowSetSizable(adminpanel.accesseditwindow[1], false)
+	guiSetAlpha(adminpanel.accesseditwindow[1], 1.00)
+
+	adminpanel.accessedit[1] = guiCreateEdit(0.03, 0.36, 0.59, 0.16, "", true, adminpanel.accesseditwindow[1])
+	adminpanel.accesseditlabel[1] = guiCreateLabel(0.03, 0.15, 0.57, 0.21, "Allowed values: [VALUES]", true, adminpanel.accesseditwindow[1])
+	guiLabelSetVerticalAlign(adminpanel.label[1], "center")
+	adminpanel.accesseditbutton[1] = guiCreateButton(0.89, 0.76, 0.08, 0.17, "x", true, adminpanel.accesseditwindow[1])
+	adminpanel.accesseditbutton[2] = guiCreateButton(0.03, 0.76, 0.20, 0.17, "Save", true, adminpanel.accesseditwindow[1])
+	adminpanel.accesseditlabel[2] = guiCreateLabel(0.65, 0.16, 0.32, 0.57, "Be careful when editing settings - giving them the wrong value may result in the game breaking!", true, adminpanel.accesseditwindow[1])
+	guiSetFont(adminpanel.accesseditlabel[2], "default-bold-small")
+	guiLabelSetColor(adminpanel.accesseditlabel[2], 255, 0, 0)
+	guiLabelSetHorizontalAlign(adminpanel.accesseditlabel[2], "left", true) 
 
 	-- Live Map
 	adminpanel.tab[5] = guiCreateTab("Live Map", adminpanel.tabpanel[1])
-	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, "images/map.png", true, adminpanel.tab[5])
+	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, ":DayZ/dayzadmin/images/map.png", true, adminpanel.tab[5])
 	adminpanel.label[70] = guiCreateLabel(0.79, 0.04, 0.17, 0.03, "Map Settings", true, adminpanel.tab[5])
 	guiSetFont(adminpanel.label[70], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[70], 245, 0, 0)
@@ -809,6 +199,8 @@ function()
 	-- Search (Soon)
 	adminpanel.tab[6] = guiCreateTab("Search", adminpanel.tabpanel[1])
 	adminpanel.label[76] = guiCreateLabel(0.01, 0.02, 0.37, 0.41, "SOON", true, adminpanel.tab[6])
+	
+	
 
 	-- Leaderboard (Soon)
 	adminpanel.tab[7] = guiCreateTab("Leaderboard", adminpanel.tabpanel[1])
@@ -926,6 +318,7 @@ function()
 	guiSetVisible(adminpanel.statvwindow[1],false)
 	guiSetVisible(adminpanel.skinwindow[1],false)
 	guiSetVisible(adminpanel.vehwindow[1],false)
+	guiSetVisible(adminpanel.accesseditwindow[1],false)
 	
 	guiSetEnabled(adminpanel.button[12],false)
 	guiSetEnabled(adminpanel.button[13],false)
@@ -933,7 +326,7 @@ function()
 	guiSetEnabled(adminpanel.statvbutton[1],false)
 	guiSetEnabled(adminpanel.skinbutton[1],false)
 	--guiSetEnabled(adminpanel.tab[2],false)
-	guiSetEnabled(adminpanel.tab[4],false)
+	guiSetEnabled(adminpanel.tab[4],true)
 	guiSetEnabled(adminpanel.tab[6],false)
 	guiSetEnabled(adminpanel.tab[7],false)
 	
@@ -1046,6 +439,57 @@ function()
 		end
 	end, false)
 	
+	addEventHandler("onClientGUIClick", adminpanel.accessbutton[1],
+	function()
+		local setting = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 1)
+		local value = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 2)
+		local environment = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 4)
+		if setting ~= "" then
+			guiSetVisible(adminpanel.accesseditwindow[1],true)
+			guiSetText(adminpanel.accesseditwindow[1],"Edit Setting: "..tostring(setting).." ("..tostring(environment)..")")
+			for i, value in ipairs(variablesConversionTable) do
+				if setting == value[2] then
+					guiSetText(adminpanel.accesseditlabel[1],"Allowed Values: "..tostring(value[6]))
+					break
+				end
+			end
+			guiBringToFront(adminpanel.accesseditwindow[1])
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.accessbutton[2],
+	function()
+		local setting = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 1)
+		local value = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 2)
+		local environment = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 4)
+		if setting ~= "" then
+			for i, value in ipairs(variablesConversionTable) do
+				if setting == value[2] then
+					if environment == "Server" then
+						triggerServerEvent("onServerSideChangeSetting",root,tostring(setting),value[4])
+					elseif environment == "Client" then
+						exports.DayZ:setGameplayVariable(tostring(setting),value[4])
+					elseif environment == "Shared" then
+						triggerServerEvent("onServerSideChangeSetting",root,tostring(setting),value[4])
+						exports.DayZ:setGameplayVariable(tostring(setting),value[4])
+					end
+					outputChatBox("Setting "..tostring(setting).." has been reset to: "..tostring(value[4]))
+				end
+			end
+		end
+	end, false)
+	
+	addEventHandler("onClientGUIClick", adminpanel.accesseditbutton[2],
+	function()
+		local setting = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 1)
+		local environment = guiGridListGetItemText(adminpanel.accessgridlist[1], guiGridListGetSelectedItem(adminpanel.accessgridlist[1]), 4)
+		local editedSetting = guiGetText(adminpanel.accessedit[1])
+		if editedSetting ~= "" then
+			editGameplayVariable(setting,environment,editedSetting)
+			guiSetVisible(adminpanel.accesseditwindow[1],false)
+		end
+	end, false)
+	
 	addEventHandler("onClientGUIClick", adminpanel.button[14],
 	function()
 		local message = tostring(guiGetText(adminpanel.editbox[2]))
@@ -1127,6 +571,8 @@ function()
 	end, false)
 	
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[1],function() guiGridListClear(adminpanel.gridlist[2]) populateStatsOnPlayerSelect() end,false)
+	addEventHandler("onClientGUIClick",adminpanel.accessgridlist[1],changeDescriptionOnClick,false)
+	addEventHandler("onClientGUIClick", adminpanel.accesseditbutton[1],function() guiSetVisible(adminpanel.accesseditwindow[1],false) end,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],function() guiGridListClear(adminpanel.gridlist[6]) showPlayerInventory() end,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[3],populateStatsOnVehicleSelect,false)
 	addEventHandler("onClientGUIClick",adminpanel.gridlist[5],checkIfRequirementsMet,false)
