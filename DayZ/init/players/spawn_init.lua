@@ -125,7 +125,7 @@ function spawnDayZPlayer(player)
 		end
 	end
 	triggerEvent("onPlayerChangeClothes", player)
-	triggerClientEvent("onPlayerStopVoices",player)
+	setElementData(player,"spawnedzombies",0)
 end
 
 function killVehicleOccupantsOnExplode()

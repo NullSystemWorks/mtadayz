@@ -231,13 +231,13 @@ function respawnVehiclesInWater()
 		end
 	end
 end
-setTimer(respawnVehiclesInWater,1800000,0)
+setTimer(respawnVehiclesInWater,gameplayVariables["watervehiclerespawn"],0)
 
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
 	local x1,y1,z1 = getElementPosition(source)
 	id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
-    setTimer(respawnDayZVehicle,1800000,1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
+    setTimer(respawnDayZVehicle,gameplayVariables["explodedvehiclesrespawn"],1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
 	setElementData(col,"deadVehicle",true)
 	setElementData(source,"isExploded",true)
 	createExplosion (x1+4,y1+1,z1,4)

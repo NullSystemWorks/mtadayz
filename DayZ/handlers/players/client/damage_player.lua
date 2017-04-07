@@ -78,11 +78,12 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		damage = damage-(distance*5)
 		
 		if bodypart == 9 then
-			if (getElementData(source,"Helmet") >= 1 or getElementData(source,"MX Helmet") >= 1) then
-				-- I guess we should add some kind of statements so that stronger guns (like snipers) can penetrate the helmets.
-				return
+			local hasHelmet = getPedClothes(source,16)
+			if hasHelmet == "helmet" or hasHelmet == "moto" then
+				if weapon ~= 34 then
+					damage = 0
+				end
 			end
-		
 			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
 		end

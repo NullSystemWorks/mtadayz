@@ -79,6 +79,8 @@ spawnPositionsSelection = {
 
 }
 
+playerDynamicTable = {}
+
 -- FORMAT: {"item",DefaultValue}
 playerDataTable = {
 {"alivetime",0},
@@ -293,6 +295,8 @@ playerDataTable = {
 {"Dark Glasses",0},
 {"Square Glasses",0},
 {"Red Glasses",0},
+{"Helmet",0},
+{"MX Helmet",0},
 {"Empty Water Bottle",0},
 {"Empty Soda Can",0},
 {"Empty Tin Can",0},
