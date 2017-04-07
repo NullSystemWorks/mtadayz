@@ -91,12 +91,14 @@ end
 setTimer(checkAliveZombies,5000,0)
 
 function zombieSpawning()
-	if getElementData(localPlayer,"logedin") then
-		if not isPedInVehicle(localPlayer) then
-			local material,hitX, hitY, hitZ = isObjectAroundPlayer2(localPlayer, 30,3)
-			if material == 0 then
-				local x, y, z = getElementPosition(getLocalPlayer())
-				triggerServerEvent("createZomieForPlayer",getLocalPlayer(),x,y,z)
+	if not gameplayVariables["newzombiespawnsystem"] then
+		if getElementData(localPlayer,"logedin") then
+			if not isPedInVehicle(localPlayer) then
+				local material,hitX, hitY, hitZ = isObjectAroundPlayer2(localPlayer, 30,3)
+				if material == 0 or material == 1 or material == 2 or material == 3 then
+					local x, y, z = getElementPosition(getLocalPlayer())
+					triggerServerEvent("createZomieForPlayer",getLocalPlayer(),x,y,z)
+				end
 			end
 		end
 	end

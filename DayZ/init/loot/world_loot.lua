@@ -58,7 +58,6 @@ function createItemLoot (lootPlace,x,y,z,id)
 		setElementData(zombieSpawnCol,"isZombieSpawn",true)
 		setElementData(zombieSpawnCol,"parent",lootPlace)
 		setElementData(zombieSpawnCol,"colsphereZedID",ZedCounter)
-		setElementData(zombieSpawnCol,"colsphereMaxCounter",gameplayVariables["maxzombiesperloot"])
 	end
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do

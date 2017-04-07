@@ -50,7 +50,7 @@ function isObjectAroundPlayer2 ( thePlayer, distance, height )
 	for i = math.random(0,360), 360, 1 do
 		local nx, ny = getPointFromDistanceRotation( x, y, distance, i )
 		local hit, hitX, hitY, hitZ, hitElement, normalX, normalY, normalZ, material = processLineOfSight ( x, y, z + height, nx, ny, z + height,true,false,false,false,false,false,false,false )
-		if material == 0 then
+		if material == 0 or material == 1 or material == 2 or material == 3 then
 			material_value = material_value+1
 		end
 		if material_value > 40 then
