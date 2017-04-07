@@ -186,6 +186,8 @@ vehicleDataTable = {
 {"Dark Glasses"},
 {"Square Glasses"},
 {"Red Glasses"},
+{"Helmet"},
+{"MX Helmet"},
 {"Empty Water Bottle"},
 {"Empty Soda Can"},
 {"Empty Tin Can"},

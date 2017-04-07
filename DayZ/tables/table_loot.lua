@@ -221,6 +221,8 @@ buildingClasses = {
 {"Square Glasses",2654,1,90,0.96},
 {"Military Pants",2654,1,90,1.03},
 {"Black Bandana (H)",2654,1,90,0.28},
+{"Helmet",2654,1,90,0.28},
+{"MX Helmet",2654,1,90,0.28},
 {"Black Beret",2654,1,90,1.03},
 {"Black Bandana (M)",2654,1,90,0.54},
 {"White Hat",2654,1,90,0.08}, 

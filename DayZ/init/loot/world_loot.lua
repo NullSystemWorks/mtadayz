@@ -46,14 +46,20 @@ function createItemPickup(item,x,y,z,tableStringName)
 	end
 end
 
+local ZedCounter = 0
 function createItemLoot (lootPlace,x,y,z,id)
+	ZedCounter = ZedCounter+1
 	lootCol = createColSphere(x,y,z,1.25)
-	--zombieSpawnCol = createColSphere(x,y,z,10)
 	setElementData(lootCol,"itemloot",true)
 	setElementData(lootCol,"parent",lootPlace)
 	setElementData(lootCol,"MAX_Slots",20)
-	--setElementData(zombieSpawnCol,"isZombieSpawn",true)
-	--setElementData(zombieSpawnCol,"parent",lootPlace)
+	if gameplayVariables["newzombiespawnsystem"] then
+		zombieSpawnCol = createColSphere(x,y,z,gameplayVariables["zombiespawnradius"])
+		setElementData(zombieSpawnCol,"isZombieSpawn",true)
+		setElementData(zombieSpawnCol,"parent",lootPlace)
+		setElementData(zombieSpawnCol,"colsphereZedID",ZedCounter)
+		setElementData(zombieSpawnCol,"colsphereMaxCounter",gameplayVariables["maxzombiesperloot"])
+	end
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do
 		local value =  math.percentChance(item[5],math.random(2,5))

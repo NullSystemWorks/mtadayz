@@ -438,6 +438,21 @@ function checkClothes()
 	else
 	  removePedClothes(source, 0, "tshirtbobomonk", "tshirt")
 	end
+	
+	--helmets
+	local skin61 = getElementData(source,"Helmet")
+	if skin61 >= 1 then
+		addPedClothes(source,"helmet","helmet",16)
+	else
+		removePedClothes(source,16,"helmet","helmet")
+	end
+	
+	local skin62 = getElementData(source,"MX Helmet")
+	if skin62 >= 1 then
+		addPedClothes(source,"moto","moto",16)
+	else
+		removePedClothes(source,16,"moto","moto")
+	end
 end
 addEvent("onPlayerChangeClothes",true)
 addEventHandler("onPlayerChangeClothes",getRootElement(),checkClothes)

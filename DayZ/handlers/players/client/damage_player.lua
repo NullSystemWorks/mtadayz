@@ -14,9 +14,11 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 	headshot = false
 	damage_half = 1
 	multiplier = 1
+	
 	if weapon == 37 then
 		return
 	end
+	
 	if getElementData(attacker,"zombie") then
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			damage_half = 2
@@ -51,6 +53,7 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 			setElementData(localPlayer,"infection",true)
 		end
 	end
+	
 	if weapon == 49 then
 		if loss > 30 then
 			setElementData(localPlayer,"brokenbone",true)
@@ -66,20 +69,30 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 			end
 		end
 	end
+	
 	if weapon and weapon > 1 and attacker and getElementType(attacker) == "player" then
 		damage = getWeaponDamage(weapon,attacker)
 		local x1,y1,z1 = getElementPosition(localPlayer)
 		local x2,y2,z2 = getElementPosition(attacker)
 		local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
 		damage = damage-(distance*5)
+		
 		if bodypart == 9 then
+			local hasHelmet = getPedClothes(source,16)
+			if hasHelmet == "helmet" or hasHelmet == "moto" then
+				if weapon ~= 34 then
+					damage = 0
+				end
+			end
 			damage = damage*gameplayVariables["headshotdamage_player"]
 			headshot = true
 		end
+		
 		if bodypart == 7 or bodypart == 8 then
 			setElementData(localPlayer,"brokenbone",true)
 			playSound(":DayZ/sounds/status/bonecrack.mp3",false)
 		end
+		
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			if damage <= 1000 then
 				damage = 0
@@ -87,18 +100,22 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 				damage = damage
 			end
 		end
+		
 		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(damage))
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
+		
 		if damage >= 6000 then
 			setElementData(localPlayer,"unconscious",true)
 		end
+		
 		local number = math.random(1,8)
 		if number >= 6 and number <= 8 then
 			if damage > 0 then
 				setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding") + math.floor(loss*10))
 			end
 		end
+		
 		local number = math.random(1,7)
 		if number == 2 then
 			setElementData(localPlayer,"pain",true)
@@ -115,9 +132,11 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		local myKills = 200 - ((getElementData(localPlayer,"murders") / 3) * 150)
 		local rawDamage = math.floor(math.sqrt((damage/55.55)))
 		local humanityHit = -(myKills * rawDamage)
+		
 		if humanityHit > -800 then
 			humanityHit = -800
 		end
+		
 		if not getElementData(localPlayer,"bandit") then
 			triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",math.floor(humanityHit))
 			if getElementData(attacker,"humanity") < 0 then
@@ -132,6 +151,7 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 				setElementData(attacker,"bandit",false)
 			end
 		end	
+		
 		if getElementData(localPlayer,"blood") <= 0 then
 			if not getElementData(localPlayer,"isDead") then
 				triggerServerEvent("kilLDayZPlayer",localPlayer,attacker,headshot,getWeaponNameFromID(weapon))
@@ -142,19 +162,23 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.random(100,1000))
 		enableBlackWhite(true)
 		setTimer(function() enableBlackWhite(false) end,1000,1)
+		
 		local number = math.random(1,5)
 		if loss > 30 then
 			setElementData(localPlayer,"brokenbone",true)
 			setControlState ("jump",true)
 		end
+		
 		if loss >= 100 then
 			setElementData(localPlayer,"blood",49)
 			setElementData(localPlayer,"bleeding",50)
 		end
+		
 		local number = math.random(1,11)
 		if number == 3 then
 			setElementData(localPlayer,"pain",true)
 		end
+		
 		if getElementData(localPlayer,"blood") <= 0 then
 			if not getElementData(localPlayer,"isDead") == true then
 				triggerServerEvent("kilLDayZPlayer",localPlayer,attacker,headshot,getWeaponNameFromID (weapon))
@@ -203,6 +227,7 @@ function isPlayerUsingBinoculars(button, press)
 		else
 			visible = rangefinder
 		end
+		
 		if button == "mouse2" then
 			if press then
 				guiSetVisible(visible,true)
@@ -217,10 +242,11 @@ end
 addEventHandler("onClientKey",root,isPlayerUsingBinoculars)
 
 function rangeFinder()
-local w, h = guiGetScreenSize ()
-local tx, ty, tz = getWorldFromScreenPosition ( w/2, h/2, 500 )
-local px, py, pz = getPedBonePosition(localPlayer,8)
-hit, x, y, z, elementHit = processLineOfSight ( px, py, pz, tx, ty, tz )
+	local w, h = guiGetScreenSize ()
+	local tx, ty, tz = getWorldFromScreenPosition ( w/2, h/2, 500 )
+	local px, py, pz = getPedBonePosition(localPlayer,8)
+	hit, x, y, z, elementHit = processLineOfSight ( px, py, pz, tx, ty, tz )
+	
 	if getPedWeapon(localPlayer) == 43 and getElementData(localPlayer, "currentweapon_2") == "Range Finder" then
 		if getControlState("aim_weapon") then
 			if x and y and z then

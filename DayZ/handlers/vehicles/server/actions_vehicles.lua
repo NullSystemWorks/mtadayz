@@ -218,6 +218,21 @@ end
 addEvent("takeVehicleComponent",true)
 addEventHandler("takeVehicleComponent",root,takeVehicleComponent)
 
+function respawnVehiclesInWater()
+	for i,veh in ipairs(getElementsByType("vehicle")) do
+		if isElementInWater(veh) then
+			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473 then
+				local col = getElementData(veh,"parent")
+				if col then
+					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+				end
+			end
+		end
+	end
+end
+setTimer(respawnVehiclesInWater,gameplayVariables["watervehiclerespawn"],0)
+
 function respawnDayZVehicles(player)
     if player then
         if (not hasObjectPermissionTo(player,"function.banPlayer")) then
@@ -238,14 +253,13 @@ for k, veh in ipairs(getElementsByType("vehicle")) do
 		end
 	end
 end
-VehicleRespawnTimer = setTimer(respawnDayZVehicles,2700000,0) -- Original interval is 2700000 ms | 45 minutes.
 addCommandHandler ( "respawndayzvehicles", respawnDayZVehicles ) -- Respawn blown and sunken vehicles when typed.	
 
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
 	local x1,y1,z1 = getElementPosition(source)
 	id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
-    setTimer(respawnDayZVehicle,1800000,1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
+    setTimer(respawnDayZVehicle,gameplayVariables["explodedvehiclesrespawn"],1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
 	setElementData(col,"deadVehicle",true)
 	setElementData(source,"isExploded",true)
 	createExplosion (x1+4,y1+1,z1,4)
