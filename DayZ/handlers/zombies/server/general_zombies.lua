@@ -90,7 +90,7 @@ local ZedCounter = 0
 local colsphereID = 0
 local newColSphereID = 0
 local ZedSphereCounter = 0
-function spawnZombies(hitElement)
+function spawnZombiesCol(hitElement)
 	if not getElementData(source,"isZombieSpawn") then return end
 	if getElementData(hitElement,"zombie") then return end
 	if ZedCounter >= gameplayVariables["maxzombiesglobal"] then 
@@ -137,7 +137,7 @@ end
 
 function determineZombieSpawnSystem()
 	if gameplayVariables["newzombiespawnsystem"] then
-		addEventHandler("onColShapeHit",root,spawnZombies)
+		addEventHandler("onColShapeHit",root,spawnZombiesCol)
 	else
 		addEventHandler("createZomieForPlayer",root,spawnZombies)
 	end

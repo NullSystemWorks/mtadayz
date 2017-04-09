@@ -47,7 +47,9 @@ function killZombie(killer,headshot)
 		end
 	end
 	local zombieCreator = getElementData(source,"owner")
-	setElementData(zombieCreator,"spawnedzombies",getElementData(zombieCreator,"spawnedzombies")-1)
+	if not gameplayVariables["newzombiespawnsystem"] then
+		setElementData(zombieCreator,"spawnedzombies",getElementData(zombieCreator,"spawnedzombies")-1)
+	end
 	destroyElement(source)
 	if headshot then
 		setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
