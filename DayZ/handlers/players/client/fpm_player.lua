@@ -242,10 +242,13 @@ function freecamMouse (cX,cY,aX,aY)
 		elseif rotY > PI / 3.5 then
 			rotY = PI / 3.5
 		end
+		--[[
+		-- Disabled till the appropriate math is found
 		if rotX < -PI / 2 then
 			rotX = -PI / 2
 		elseif rotX > PI / 2 then
 			rotX = PI / 2
 		end
+		]]
 	end
 end

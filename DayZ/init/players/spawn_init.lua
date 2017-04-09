@@ -186,7 +186,7 @@ function kilLDayZPlayer(killer,headshot,weapon)
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	if killer then
-		setElementData(killer,"murders",getElementData(killer,"murders")+1)
+		setElementData(source,"killedBy",killer)
 		if getElementData(killer,"humanity") <= 0 then
 			setElementData(killer,"bandit",true)
 		end

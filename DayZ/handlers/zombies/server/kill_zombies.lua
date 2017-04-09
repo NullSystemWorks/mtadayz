@@ -14,15 +14,13 @@ function destroyDeadZombie (ped,pedCol)
 end
 
 function killZombie(killer,headshot)
-	if killer then
-		setElementData(killer,"zombieskilled",getElementData(killer,"zombieskilled")+1)
-	end	
 	local skin = getElementModel(source)
 	local x,y,z = getElementPosition(source)
 	local ped = createPed(skin,x,y,z)
 	local pedCol = createColSphere(x,y,z,1.5)
 	killPed(ped)
 	setTimer(destroyDeadZombie,360000 ,1,ped,pedCol)
+	
 	attachElements (pedCol,ped,0,0,0)
 	setElementData(pedCol,"parent",ped)
 	setElementData(pedCol,"playername","Zombie")
@@ -30,6 +28,9 @@ function killZombie(killer,headshot)
 	setElementData(ped,"deadzombie",true)
 	setElementData(pedCol,"deadman",true)
 	setElementData(pedCol,"MAX_Slots",12)
+	if killer then
+		setElementData(killer,"zombieskilled",getElementData(killer,"zombieskilled")+1)
+	end	
 	local hours,minutes = getTime()
 	local loot_table = ""
 	setElementData(pedCol,"deadreason","Looks like it's finally dead. Estimated time of death: "..hours..":"..minutes)
