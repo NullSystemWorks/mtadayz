@@ -326,8 +326,13 @@ function onClientOpenInventoryStopMenu()
 end
 
 function isPlayerInLoot()
-	if getElementData(localPlayer, "loot") then
-		return getElementData(localPlayer, "currentCol")
+	if getElementData(localPlayer, "loot") and (getElementType(getElementData(localPlayer,"loot")) == "player") then
+		local element = getElementData(localPlayer, "currentCol")
+		if not element then
+			return false
+		end
+		
+		return element
 	end
 	return false
 end
