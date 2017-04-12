@@ -233,6 +233,28 @@ function respawnVehiclesInWater()
 end
 setTimer(respawnVehiclesInWater,gameplayVariables["watervehiclerespawn"],0)
 
+function respawnDayZVehicles(player)
+    if player then
+        if (not hasObjectPermissionTo(player,"function.banPlayer")) then
+            return --Stops players from using the respawn command
+        end
+    end
+	
+for k, veh in ipairs(getElementsByType("vehicle")) do
+		if isVehicleBlown(veh) or isElementInWater(veh) then
+			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473  then
+				local col = getElementData(veh,"parent")
+				if col then
+					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
+					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+					resetTimer(VehicleRespawnTimer)
+				end
+			end
+		end
+	end
+end
+addCommandHandler ( "respawndayzvehicles", respawnDayZVehicles ) -- Respawn blown and sunken vehicles when typed.	
+
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
 	local x1,y1,z1 = getElementPosition(source)
