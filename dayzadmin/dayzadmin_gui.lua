@@ -179,7 +179,7 @@ function()
 
 	-- Live Map
 	adminpanel.tab[5] = guiCreateTab("Live Map", adminpanel.tabpanel[1])
-	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, ":DayZ/dayzadmin/images/map.png", true, adminpanel.tab[5])
+	adminpanel.map[1] = guiCreateStaticImage(0.02, 0.02, 0.73, 0.96, "images/map.png", true, adminpanel.tab[5])
 	adminpanel.label[70] = guiCreateLabel(0.79, 0.04, 0.17, 0.03, "Map Settings", true, adminpanel.tab[5])
 	guiSetFont(adminpanel.label[70], "default-bold-small")
 	guiLabelSetColor(adminpanel.label[70], 245, 0, 0)
