@@ -249,7 +249,7 @@ for k, veh in ipairs(getElementsByType("vehicle")) do
 					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
 					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
 					if isTimer(respawnExplodedVehicleTimer) then
-						resetTimer(respawnExplodedVehicleTimer)
+						killTimer(respawnExplodedVehicleTimer)
 					end
 				end
 			end
