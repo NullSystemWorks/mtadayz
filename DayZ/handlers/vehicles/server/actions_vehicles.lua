@@ -233,6 +233,7 @@ function respawnVehiclesInWater()
 end
 setTimer(respawnVehiclesInWater,gameplayVariables["watervehiclerespawn"],0)
 
+local respawnExplodedVehicleTimer = 0
 function respawnDayZVehicles(player)
     if player then
         if (not hasObjectPermissionTo(player,"function.banPlayer")) then
@@ -247,6 +248,9 @@ for k, veh in ipairs(getElementsByType("vehicle")) do
 				if col then
 					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
 					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
+					if isTimer(respawnExplodedVehicleTimer) then
+						resetTimer(respawnExplodedVehicleTimer)
+					end
 				end
 			end
 		end
@@ -258,7 +262,7 @@ function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
 	local x1,y1,z1 = getElementPosition(source)
 	id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
-    setTimer(respawnDayZVehicle,gameplayVariables["explodedvehiclesrespawn"],1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
+    respawnExplodedVehicleTimer = setTimer(respawnDayZVehicle,gameplayVariables["explodedvehiclesrespawn"],1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))
 	setElementData(col,"deadVehicle",true)
 	setElementData(source,"isExploded",true)
 	createExplosion (x1+4,y1+1,z1,4)
