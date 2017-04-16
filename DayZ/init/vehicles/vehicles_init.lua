@@ -1070,9 +1070,13 @@ end
 ]]
 
 function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
+	if isElement(veh) then 
+		destroyElement(veh)
+	end
+	if isElement(col) then
+		destroyElement(col)
+	end
 	v_counter = v_counter+1
-	destroyElement(veh)
-	destroyElement(col)
 	veh = createVehicle(id,x,y,z+1)
 	vehCol = createColSphere(x,y,z,4)
 	attachElements ( vehCol, veh, 0, 0, 0 )

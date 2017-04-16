@@ -247,7 +247,6 @@ for k, veh in ipairs(getElementsByType("vehicle")) do
 				if col then
 					id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
 					respawnDayZVehicle(id,x,y,z,veh,col,getElementData(col,"MAX_Slots"))
-					resetTimer(VehicleRespawnTimer)
 				end
 			end
 		end
