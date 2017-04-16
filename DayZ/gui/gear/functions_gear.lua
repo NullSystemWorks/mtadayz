@@ -325,6 +325,7 @@ function onClientOpenInventoryStopMenu()
   triggerEvent("disableMenu", localPlayer)
 end
 
+--[[
 function isPlayerInLoot()
 	if getElementData(localPlayer, "loot") and (getElementType(getElementData(localPlayer,"loot")) == "player") then
 		local element = getElementData(localPlayer, "currentCol")
@@ -333,6 +334,14 @@ function isPlayerInLoot()
 		end
 		
 		return element
+	end
+	return false
+end
+]]
+
+function isPlayerInLoot()
+	if getElementData(localPlayer,"loot") then
+			return getElementData(localPlayer,"currentCol")
 	end
 	return false
 end
