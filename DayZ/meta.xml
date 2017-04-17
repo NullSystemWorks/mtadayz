@@ -53,6 +53,7 @@
 	<script src="configs/cfgNutritions.lua" type="shared" cache="false" />
 	<script src="configs/cfgDifficulty.lua" type="shared" cache="false" />
 	<script src="configs/cfgClient.lua" type="client" cache="false" />
+	<script src="configs/cfgSettings.lua" type="shared" cache="false" />
 	<script src="addons.lua" type="server" />
 		
 	<!-- init folder -->
@@ -471,6 +472,31 @@
 	<export function="getGameplayVariable" type="shared" />
    	
 	<!-- models folder -->
+	<file src="models/players/txd/ghilliesuit.txd" />
+    <file src="models/players/dff/ghilliesuit.dff" />
+    <file src="models/players/txd/civilian_male.txd" />
+    <file src="models/players/dff/civilian_male.dff" />
+	<file src="models/players/txd/bandit1_male.txd" />
+	<file src="models/players/dff/bandit1_male.dff" />
+	<file src="models/players/txd/bandit2_male.txd" />
+	<file src="models/players/dff/bandit2_male.dff" />
+	<file src="models/players/txd/bandit3_male.txd" />
+    <file src="models/players/dff/bandit3_male.dff" />
+    <file src="models/players/txd/standard_male.txd" />
+    <file src="models/players/dff/standard_male.dff" />
+	<file src="models/players/txd/civilian_female.txd" />
+    <file src="models/players/dff/civilian_female.dff" />
+	<file src="models/players/txd/bandit1_female.txd" />
+	<file src="models/players/dff/bandit1_female.dff" />
+	<file src="models/players/txd/bandit2_female.txd" />
+    <file src="models/players/dff/bandit2_female.dff" />
+    <file src="models/players/txd/standard_female.txd" />
+    <file src="models/players/dff/standard_female.dff" />
+    <file src="models/players/txd/hero_male.txd" />
+    <file src="models/players/dff/hero_male.dff" />
+	<file src="models/players/txd/army_male.txd" />
+	<file src="models/players/dff/army_male.dff" />
+	
     <file src="models/animals/txd/bear.txd" />
     <file src="models/animals/dff/bear.dff" />
     <file src="models/animals/txd/fox.txd" />

@@ -36,19 +36,26 @@ function spawnZombies(x,y,z)
 			local number1 = math.random(-20,20)
 			local number2 = math.random(-20,20)
 			randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )	
-			zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"))
-			setElementData(zombie,"zombie",true)
+			local speedLevel = "normal"
 			if gameplayVariables["difficulty"] then
 				if gameplayVariables["difficulty"] == "normal" then
 					multiplier = 1
+					if math.random(0,100) <= 25 then
+						speedLevel = "sprint"
+					end
 				elseif gameplayVariables["difficulty"] == "veteran" then
 					multiplier = 1.5
+					speedLevel = "sprint"
 				elseif gameplayVariables["difficulty"] == "hardcore" then
 					multiplier = 3
+					speedLevel = "sprint"
 				else
 					multiplier = 1
+					speedLevel = "sprint"
 				end
 			end
+			zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"),false,false,false,speedLevel)
+			setElementData(zombie,"zombie",true)
 			setElementData(zombie,"blood",gameplayVariables["zombieblood"]*multiplier)
 			setElementData(zombie,"owner",source)
 			call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
@@ -108,18 +115,25 @@ function spawnZombiesCol(hitElement)
 				for i=1, gameplayVariables["maxzombiesperloot"] do
 					local number1 = math.random(-gameplayVariables["zombiespawnradius"],gameplayVariables["zombiespawnradius"])
 					local number2 = math.random(-gameplayVariables["zombiespawnradius"],gameplayVariables["zombiespawnradius"])
-					randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )	
-					zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z+0.3,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"))
-					setElementData(zombie,"zombie",true)
+					randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )
+					local speedLevel = "normal"
 					if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "normal" then
 						multiplier = 1
+						if math.random(0,100) <= 25 then
+							speedLevel = "sprint"
+						end
 					elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "veteran" then
 						multiplier = 1.5
+						speedLevel = "sprint"
 					elseif gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then
 						multiplier = 3
+						speedLevel = "sprint"
 					else
 						multiplier = 1
+						speedLevel = "sprint"
 					end
+					zombie = call (getResourceFromName("slothbot"),"spawnBot",x+number1,y+number2,z+0.3,math.random(0,360),ZombiePedSkins[randomZskin],0,0,getTeamFromName("Zombies"),false,false,false,speedLevel)
+					setElementData(zombie,"zombie",true)
 					setElementData(zombie,"blood",gameplayVariables["zombieblood"]*multiplier)
 					setElementData(zombie,"owner",source)
 					call ( getResourceFromName ( "slothbot" ), "setBotGuard", zombie, x+number1,y+number2,z, false)
@@ -179,7 +193,7 @@ end
 setTimer(controlZombieSpawning,20000,0)
 
 function botAttack(ped)
-	if ped then
+	if isElement(ped) then
 		setPedAnimation(ped,false)
 	end
 	call ( getResourceFromName ( "slothbot" ), "setBotFollow", ped, source)

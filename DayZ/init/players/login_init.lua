@@ -21,6 +21,7 @@ local sDataNames = { --Add your elementdata's here for them to be saved.
 	["currentweapon_2"] = {false},
 	["currentweapon_3"] = {false},
 	["bandit"] = {false},
+	["skin"] = {0},
 	["achievements"] = {}
 }
 
@@ -36,6 +37,17 @@ function playerLogin(username, pass, player)
 	if getAccountData(account,"isDead") then
 		spawnDayZPlayer(player)
 		return
+	end
+	if not skin then
+		if not gameplayVariables["newclothingsystem"] then
+			skin = 73
+		end
+	else
+		if not gameplayVariables["newclothingsystem"] then
+			if skin == 0 then
+				skin = 73
+			end
+		end
 	end
 	spawnPlayer (player, x,y,z+0.5, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
@@ -68,7 +80,10 @@ function playerLogin(username, pass, player)
 		setElementData(player,"bloodtypediscovered","?")
 	end
 	setElementData(player,"logedin",true)
-	triggerEvent("onPlayerChangeClothes", player)
+	setElementData(player,"gender","male")
+	if gameplayVariables["newclothingsystem"] then
+		triggerEvent("onPlayerChangeClothes", player)
+	end
 	local weapon = getElementData(player,"currentweapon_1")
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
@@ -84,7 +99,17 @@ function playerLogin(username, pass, player)
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		giveWeapon(player,weapID,getElementData(player,ammoData), false )
 	end
-	setElementModel(player, getElementData(player,"skin"))
+	if gameplayVariables["newclothingsystem"] then
+		setElementModel(player,0)
+		setElementData(player,"skin",0)
+	else
+		if getElementModel(player) == 0 or getElementData(player,"skin") == 0 or skin == 0 then
+			setElementModel(player,73)
+			setElementData(player,"skin",73)
+		else
+			setElementModel(player, getElementData(player,"skin"))
+		end
+	end
 	setElementData(player,"admin",getAccountData(account,"admin") or false)
 	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
@@ -96,6 +121,9 @@ function playerRegister(username, pass, player)
 	if client then player = client end
 	local number = math.random(table.size(spawnPositions))
 	x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
+	if not gameplayVariables["newclothingsystem"] then
+		skin = 73
+	end
 	spawnPlayer(player,x,y,z, math.random(0,360), skin, 0, 0)
 	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
@@ -114,67 +142,73 @@ function playerRegister(username, pass, player)
 	for i,data in ipairs(playerDataTable) do
 		if data[1] == "bloodtype" then
 			determineBloodType(player)
+		elseif data[1] == "skin" then
+			if not gameplayVariables["newclothingsystem"] then
+				setElementData(player,"skin",73)
+			end
 		else
 			setElementData(player,data[1],data[2])
 		end
 	end
-	for i,clothes in ipairs(clothesTable["Collar"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 11 then
-			local randomCloth = clothes[math.random(#clothesTable["Collar"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+	if gameplayVariables["newclothingsystem"] then
+		for i,clothes in ipairs(clothesTable["Collar"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 11 then
+				local randomCloth = clothes[math.random(#clothesTable["Collar"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
-	end
-	for i,clothes in ipairs(clothesTable["Head"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 26 then
-			local randomCloth = clothes[math.random(#clothesTable["Head"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+		for i,clothes in ipairs(clothesTable["Head"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 26 then
+				local randomCloth = clothes[math.random(#clothesTable["Head"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
-	end
-	for i,clothes in ipairs(clothesTable["Feet"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 95 then
-			local randomCloth = clothes[math.random(#clothesTable["Feet"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+		for i,clothes in ipairs(clothesTable["Feet"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Feet"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
-	end
-	for i,clothes in ipairs(clothesTable["Legs"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 95 then
-			local randomCloth = clothes[math.random(#clothesTable["Legs"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+		for i,clothes in ipairs(clothesTable["Legs"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Legs"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
-	end
-	for i,clothes in ipairs(clothesTable["Torso"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 95 then
-			local randomCloth = clothes[math.random(#clothesTable["Torso"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+		for i,clothes in ipairs(clothesTable["Torso"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 95 then
+				local randomCloth = clothes[math.random(#clothesTable["Torso"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
-	end
-	for i,clothes in ipairs(clothesTable["Eyes"]) do
-		local randomChance = math.random(0,100)
-		if randomChance < 11 then
-			local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
-			if randomCloth then
-				setElementData(player,randomCloth,1)
-				break
+		for i,clothes in ipairs(clothesTable["Eyes"]) do
+			local randomChance = math.random(0,100)
+			if randomChance < 11 then
+				local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
+				if randomCloth then
+					setElementData(player,randomCloth,1)
+					break
+				end
 			end
 		end
 	end
@@ -184,8 +218,11 @@ function playerRegister(username, pass, player)
 	setElementData(player,"playerID",value+1)
 	setAccountData(account,"playerID",value+1)
 	setElementData(player,"logedin",true)
+	setElementData(player,"gender","male")
 	setElementData(player,"spawnedzombies",0)
-	triggerEvent("onPlayerChangeClothes", player)
+	if gameplayVariables["newclothingsystem"] then
+		triggerEvent("onPlayerChangeClothes", player)
+	end
 end
 addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)

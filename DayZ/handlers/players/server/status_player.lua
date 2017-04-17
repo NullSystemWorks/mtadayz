@@ -219,7 +219,10 @@ function changePlayerBeardAndHair()
 	  end
     end
 end
-setTimer(changePlayerBeardAndHair, 120000, 0)
+
+if gameplayVariables["newclothingsystem"] then
+	setTimer(changePlayerBeardAndHair, 120000, 0)
+end
 
 function editPlayerBeardAndHair(thePlayer)
 	local pAliveTime = getElementData(thePlayer, "hoursalive")

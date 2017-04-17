@@ -202,6 +202,12 @@ items =
 	},
 	
 	["Clothes"] = {
+		"Survivor Clothing",
+		"Survivor Clothing (Female)",
+		"Camouflage Clothing",
+		"Civilian Clothing",
+		"Civilian Clothing (Female)",
+		"Ghillie Suit",
 		"Military collar",
 		"Africa collar",
 		"Gold collar",

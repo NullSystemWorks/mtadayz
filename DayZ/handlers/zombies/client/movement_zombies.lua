@@ -62,11 +62,11 @@ local x,y,z = getElementPosition(localPlayer)
 			else
 				if getElementData ( ped, "target" ) == localPlayer then
 					setElementData(ped,"target",nil)
-					triggerEvent("onZombieMove",root,ped)
+					zombieMovement(ped)
 				end
                 if getElementData ( ped, "leader" ) == localPlayer then
                    triggerServerEvent("botStopFollow",localPlayer,ped)
-                   triggerEvent("onZombieMove",root,ped)
+                   zombieMovement(ped)
                 end
             end
         end

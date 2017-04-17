@@ -234,6 +234,12 @@ playerDataTable = {
 {"Cooked Meat",0},
 {"Radio Device",0},
 {"Compass",0},
+{"Camouflage Clothing",0},
+{"Civilian Clothing",0},
+{"Survivor Clothing",0},
+{"Survivor Clothing (Female)",0},
+{"Civilian Clothing (Female)",0},
+{"Ghillie Suit",0},
 {"Military collar",0},
 {"Africa collar",0},
 {"Gold collar",0},
@@ -411,6 +417,15 @@ playerDataTable = {
 {"Metal Sheet (Rusted)",0},
 }
 
+skinTable = {
+{"Camouflage Clothing",287},
+{"Civilian Clothing",179},
+{"Ghillie Suit",285},
+{"Survivor Clothing",73},
+{"Survivor Clothing (Female)",192},
+{"Civilian Clothing (Female)",172},
+ }
+
 clothesTable = {
 ["Collar"] = {
 {"Military collar"},
@@ -526,9 +541,6 @@ weaponNoiseTable = {
 {34,100,0.4},
 {35,100,0.4},
 {36,100,0.4},
-}
-
-skinTable = {
 }
 
 craftingTable = {

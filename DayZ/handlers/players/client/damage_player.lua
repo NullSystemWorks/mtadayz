@@ -19,7 +19,7 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 		return
 	end
 	
-	if getElementData(attacker,"zombie") then
+	if isElement(attacker) and getElementData(attacker,"zombie") then
 		if getElementData(localPlayer,"humanity") >= 5000 then
 			damage_half = 2
 		else

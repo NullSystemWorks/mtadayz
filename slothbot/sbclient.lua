@@ -1324,3 +1324,9 @@ function resourcestart()
 	end
 end
 addEventHandler( "onClientResourceStart", resourceRoot, resourcestart )
+
+function setBotSprintingMode(ped)
+	setPedControlState(ped,"sprint",true)
+end
+addEvent("setBotSprintingMode",true)
+addEventHandler("setBotSprintingMode",root,setBotSprintingMode)

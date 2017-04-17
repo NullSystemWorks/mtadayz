@@ -27,6 +27,9 @@ function spawnDayZPlayer(player)
 		spawnSelected = true
 	end
 	if spawnSelected then
+		if not gameplayVariables["newclothingsystem"] then
+			skin = 73
+		end
 		spawnPlayer (player, spawnX,spawnY,spawnZ, math.random(0,360), skin, 0, 0)
 		setElementFrozen(player, true)
 		fadeCamera (player, true)
@@ -45,6 +48,7 @@ function spawnDayZPlayer(player)
 		setAccountData(account,"isDead",false)
 		setElementData(player,"isDead",false)
 		setElementData(player,"logedin",true)
+		setElementData(player,"gender","male")
 		setElementData(player,"bleeding", 0)
 		setElementData(player,"sepsis",0)
 		setElementData(player,"unconscious",false)
@@ -59,72 +63,80 @@ function spawnDayZPlayer(player)
 				determineBloodType(player)
 			elseif data[1] == "achievements" then
 				--
+			elseif data[1] == "skin" then
+				if not gameplayVariables["newclothingsystem"] then
+					setElementData(player,"skin",73)
+				end
 			else
 				setElementData(player,data[1],data[2])
 			end
 		end
-		for i,clothes in ipairs(clothesTable["Collar"]) do
-		local randomChance = math.random(0,100)
-			if randomChance < 11 then
-				local randomCloth = clothes[math.random(#clothesTable["Collar"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+		if gameplayVariables["newclothingsystem"] then
+			for i,clothes in ipairs(clothesTable["Collar"]) do
+			local randomChance = math.random(0,100)
+				if randomChance < 11 then
+					local randomCloth = clothes[math.random(#clothesTable["Collar"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
-		end
-		for i,clothes in ipairs(clothesTable["Head"]) do
-			local randomChance = math.random(0,100)
-			if randomChance < 26 then
-				local randomCloth = clothes[math.random(#clothesTable["Head"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+			for i,clothes in ipairs(clothesTable["Head"]) do
+				local randomChance = math.random(0,100)
+				if randomChance < 26 then
+					local randomCloth = clothes[math.random(#clothesTable["Head"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
-		end
-		for i,clothes in ipairs(clothesTable["Feet"]) do
-			local randomChance = math.random(0,100)
-			if randomChance < 95 then
-				local randomCloth = clothes[math.random(#clothesTable["Feet"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+			for i,clothes in ipairs(clothesTable["Feet"]) do
+				local randomChance = math.random(0,100)
+				if randomChance < 95 then
+					local randomCloth = clothes[math.random(#clothesTable["Feet"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
-		end
-		for i,clothes in ipairs(clothesTable["Legs"]) do
-			local randomChance = math.random(0,100)
-			if randomChance < 95 then
-				local randomCloth = clothes[math.random(#clothesTable["Legs"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+			for i,clothes in ipairs(clothesTable["Legs"]) do
+				local randomChance = math.random(0,100)
+				if randomChance < 95 then
+					local randomCloth = clothes[math.random(#clothesTable["Legs"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
-		end
-		for i,clothes in ipairs(clothesTable["Torso"]) do
-			local randomChance = math.random(0,100)
-			if randomChance < 95 then
-				local randomCloth = clothes[math.random(#clothesTable["Torso"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+			for i,clothes in ipairs(clothesTable["Torso"]) do
+				local randomChance = math.random(0,100)
+				if randomChance < 95 then
+					local randomCloth = clothes[math.random(#clothesTable["Torso"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
-		end
-		for i,clothes in ipairs(clothesTable["Eyes"]) do
-			local randomChance = math.random(0,100)
-			if randomChance < 11 then
-				local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
-				if randomCloth then
-					setElementData(player,randomCloth,1)
-					break
+			for i,clothes in ipairs(clothesTable["Eyes"]) do
+				local randomChance = math.random(0,100)
+				if randomChance < 11 then
+					local randomCloth = clothes[math.random(#clothesTable["Eyes"])]
+					if randomCloth then
+						setElementData(player,randomCloth,1)
+						break
+					end
 				end
 			end
 		end
 	end
-	triggerEvent("onPlayerChangeClothes", player)
+	if gameplayVariables["newclothingsystem"] then
+		triggerEvent("onPlayerChangeClothes", player)
+	end
 	setElementData(player,"spawnedzombies",0)
 end
 
@@ -148,6 +160,21 @@ function destroyDeadPlayer (ped,pedCol)
 	destroyElement(pedCol)
 	destroyElement(tCol)
 end
+
+function checkBuggedAccount()
+	if gameplayVariables["newclothingsystem"] then return end
+	for i,player in ipairs(getElementsByType("player")) do
+		local account = getPlayerAccount(player)
+		if not account then return end
+		if getElementData(player,"logedin") then
+			if getElementModel(player) == 0 then
+				spawnDayZPlayer(player)
+				outputSideChat(getPlayerName(player).."'s Account was buggy and has been reset",root,255,255,255)
+			end
+		end
+	end	
+end
+setTimer(checkBuggedAccount,90000,0)
 
 function kilLDayZPlayer(killer,headshot,weapon)
 	pedCol = false
@@ -181,7 +208,7 @@ function kilLDayZPlayer(killer,headshot,weapon)
 			else
 				minutes = minutes
 			end
-			setElementData(pedCol,"deadreason"," name was "..tostring(getPlayerName(source))..", it appears they died at "..hours..":"..minutes..".")
+			setElementData(pedCol,"deadreason","His name was "..tostring(getPlayerName(source))..", it appears they died at "..hours..":"..minutes..".")
 		end	
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
@@ -230,9 +257,11 @@ function kilLDayZPlayer(killer,headshot,weapon)
 			setElementData(pedCol,data[1],plusData)
 		end
 		--Skin
-		--local skinID = getElementData(source,"skin")
-		--local skin = getSkinNameFromID(skinID)
-		--setElementData(pedCol,skin,1)
+		if not gameplayVariables["newclothingsystem"] then
+			local skinID = getElementData(source,"skin")
+			local skin = getSkinNameFromID(skinID)
+			setElementData(pedCol,skin,1)
+		end
 		--Backpack
 		local backpackSlots = getElementData(source,"MAX_Slots")
 		if backpackSlots == gameplayVariables["assaultpack_slots"] then
