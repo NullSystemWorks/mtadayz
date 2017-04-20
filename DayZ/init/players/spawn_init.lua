@@ -176,7 +176,7 @@ function checkBuggedAccount()
 end
 setTimer(checkBuggedAccount,90000,0)
 
-function kilLDayZPlayer(killer,headshot,weapon)
+function kilLDayZPlayer(killer,headshot)
 	pedCol = false
 	local account = getPlayerAccount(source)
 	if not account then return end

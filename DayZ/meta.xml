@@ -85,15 +85,6 @@
 	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
 	<script src="handlers/world/client/lights.lua" type="client" cache="false" />
 	<script src="handlers/world/client/chat.lua" type="client" cache="false" />
-
-	<script src="handlers/houses/teleporteditor/tele_cl.lua" type="client"/>
-	<script src="handlers/houses/teleporteditor/tele_sr.lua" type="server"/>
-	<file src="handlers/houses/teleporteditor/tele.png" />
-	<file src="handlers/houses/teleporteditor/tar.png" />
-
-	<map src="handlers/houses/mapping/mapping.map" dimension="0"></map>
-    <script src="handlers/houses/mapping/mapEditorScriptingExtension_s.lua" type="server"></script>
-    <script src="handlers/houses/mapping/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 	
 	<!-- Flashlight -->
 	<script src="handlers/players/client/flashlight/c_shader_light.lua" type="client" cache="false" />

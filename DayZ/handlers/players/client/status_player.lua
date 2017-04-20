@@ -64,7 +64,7 @@ function setPlayerBleeding()
 		end
 	end
 end
-setTimer(setPlayerBleeding,1000,0)
+setTimer(setPlayerBleeding,3000,0)
 
 function setPlayerDeath()
 	if getElementData(localPlayer,"logedin") then
@@ -77,6 +77,30 @@ function setPlayerDeath()
 end
 setTimer(setPlayerDeath,1000,0)
 
+function setPlayerFracturedBones()
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"fracturedLegs") then
+			toggleControl("jump",false)
+			toggleControl("sprint",false)
+			setElementData(localPlayer,"brokenbone",true)
+		else
+			toggleControl("jump",true)
+			toggleControl("sprint",true)
+			setElementData(localPlayer,"brokenbone",false)
+		end
+		if getElementData(localPlayer,"fracturedArms") then
+			toggleControl("aim_weapon",false)
+			toggleControl("fire",false)
+			setElementData(localPlayer,"brokenbone",true)
+		else
+			toggleControl("aim_weapon",true)
+			toggleControl("fire",true)
+			setElementData(localPlayer,"brokenbone",false)
+		end
+	end
+end
+setTimer(setPlayerFracturedBones,2000,0)
+
 function setPlayerBrokenbone()
 	if getElementData(localPlayer,"logedin") then
 		if getElementData(localPlayer,"brokenbone") then
@@ -88,7 +112,7 @@ function setPlayerBrokenbone()
 		end
 	end
 end
-setTimer(setPlayerBrokenbone,2000,0)
+--setTimer(setPlayerBrokenbone,2000,0)
 
 function setPlayerCold()
 	if getElementData(localPlayer,"logedin") then

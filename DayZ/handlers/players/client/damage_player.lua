@@ -8,6 +8,157 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+function dayZPlayerDamage(attacker,weapon,bodypart,loss)
+	cancelEvent()
+	local damage = 0
+	local headshot = false
+	local halfDamage = 1
+	local damageMultiplier = 1
+	if weapon == 37 then return end
+	
+	-- Attacker: Zombie
+	if isElement(attacker) and getElementData(attacker,"zombie") then
+		if getElementData(localPlayer,"humanity") >= 5000 then
+			halfDamage = 2
+		end
+		local difficulty = gameplayVariables["difficulty"]
+		if difficulty then
+			if difficulty == "veteran" then
+				damageMultiplier = 1.5
+			elseif difficulty == "hardcore" then
+				damageMultiplier = 3
+			end
+		else
+			damageMultiplier = 1
+		end
+		setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-((gameplayVariables["zombiedamage"]*damageMultiplier)/halfDamage))
+		enableBlackWhite(true)
+		setTimer(function() enableBlackWhite(false) end,1000,1)
+		local painChance = math.min((((gameplayVariables["zombiedamage"]*damageMultiplier)/halfDamage)/100),100)
+		local bleedChance = 15
+		if math.random(0,100) <= painChance then
+			setElementData(localPlayer,"pain",true)
+		end
+		if math.random(0,100) <= bleedChance then
+			setElementData(localPlayer,"bleeding",math.floor(painChance*25))
+		end
+		
+	-- Attacker: Player
+	elseif isElement(attacker) and getElementType(attacker) == "player" then
+		if weapon and weapon > 1 then
+			damage = getWeaponDamage(weapon,attacker)
+			local x1,y1,z1 = getElementPosition(localPlayer)
+			local x2,y2,z2 = getElementPosition(attacker)
+			local distance = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
+			damage = damage-(distance*5)
+			if bodypart == 5 or bodypart == 6 then
+				damage = damage/1.07
+				setElementData(localPlayer,"fracturedArms",true)
+				playSound(":DayZ/sounds/status/bonecrack.mp3",false)
+				playSFX("pain_a",2,98,false)
+			elseif bodypart == 7 or bodypart == 8 then
+				damage = damage/1.05
+				setElementData(localPlayer,"fracturedLegs",true)
+				playSound(":DayZ/sounds/status/bonecrack.mp3",false)
+				playSFX("pain_a",2,95,false)
+			elseif bodypart == 9 then
+				local hasHelmet = getPedClothes(localPlayer,16)
+				if hasHelmet == "helmet" or hasHelmet == "moto" then
+					if weapon ~=34 then
+						damage = 0
+						playSFX("genrl",20,12,false)
+					else
+						damage = damage*gameplayVariables["headshotdamage_player"]
+						headshot = true
+						playSFX("pain_a",2,38,false)
+					end
+				end
+			end
+			if getElementData(localPlayer,"humanity") >= 5000 then
+				if damage <= 1000 then
+					damage = 0
+				end
+			end
+			if damage > 0 then
+				setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(damage))
+				enableBlackWhite(true)
+				setTimer(function() enableBlackWhite(false) end,1000,1)
+				if damage >= 6000 then
+					if math.random() < 0.5 then
+						setElementData(localPlayer,"unconscious",true)
+					end
+					if not getElementData(localPlayer,"unconscious") then
+						setElementData(localPlayer,"pain",true)
+					end
+				end
+				setElementData(localPlayer,"bleeding",getElementData(localPlayer,"bleeding")+10)
+			end
+			local humanityHit = 0
+			local myKills = 200-(getElementData(localPlayer,"murders")*3.3)
+			humanityHit = math.abs(myKills-damage)
+			if humanityHit >= 800 then
+				humanityHit = 800
+			end
+			if not getElementData(localPlayer,"bandit") then	
+				triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",humanityHit)
+			else
+				triggerServerEvent("onPlayerChangeStatus",attacker,"humanity",-humanityHit)
+			end
+		end
+	end
+	
+	-- Attacker: Explosions & Vehicle Crash/Runover
+	if weapon == 49 or weapon == 50 then
+		if loss >= 30 then
+			setElementData(localPlayer,"fracturedLegs",true)
+			setElementData(localPlayer,"fracturedArms",true)
+			playSound(":DayZ/sounds/status/bonecrack.mp3",false)
+			playSFX("pain_a",2,95,false)
+			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(loss*10))
+		else
+			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(loss*5))
+		end
+		enableBlackWhite(true)
+		setTimer(function() enableBlackWhite(false) end,1000,1)
+	elseif weapon == 63 or weapon == 51 or weapon == 19 then
+		if not getElementData(localPlayer,"isDead") then
+			setElementData(localPlayer,"blood",0)
+		end
+	elseif weapon == 54 then
+		local gravity = math.min(9.81,(loss/10))
+		local potentialEnergy = gravity*(loss/10)
+		local kineticEnergy = potentialEnergy/(5*9.81)
+		if loss >= 30 then
+			if kineticEnergy >= 0.001 then
+				setElementData(localPlayer,"fracturedLegs",true)
+				playSound(":DayZ/sounds/status/bonecrack.mp3",false)
+				playSFX("pain_a",2,95,false)
+				setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(potentialEnergy*25*loss))
+			end
+		else
+			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-math.floor(potentialEnergy*25*loss))
+		end
+		enableBlackWhite(true)
+		setTimer(function() enableBlackWhite(false) end,1000,1)
+	end
+	
+	-- Final calculations
+	if getElementData(localPlayer,"blood") <= 0 then
+		if not getElementData(localPlayer,"isDead") then
+			triggerServerEvent("kilLDayZPlayer",localPlayer,attacker,headshot)
+			setElementData(localPlayer,"isDead",true)
+		end
+	end
+	local gender = getElementData(localPlayer,"gender")
+	if gender == "male" then
+		playSFX("pain_a",2,53,false)
+	elseif gender == "female" then
+		playSFX("pain_a",1,52,false)
+	end
+end
+addEventHandler ("onClientPlayerDamage",localPlayer,dayZPlayerDamage)
+
+
 function playerDayZDamage(attacker,weapon,bodypart,loss)
 	cancelEvent()
 	damage = 100
@@ -186,8 +337,14 @@ function playerDayZDamage(attacker,weapon,bodypart,loss)
 			end
 		end
 	end
+	local gender = getElementData(localPlayer,"gender")
+	if gender == "male" then
+		playSFX("pain_a",2,53,false)
+	elseif gender == "female" then
+		playSFX("pain_a",1,52,false)
+	end
 end
-addEventHandler ("onClientPlayerDamage",localPlayer,playerDayZDamage)
+--addEventHandler ("onClientPlayerDamage",localPlayer,playerDayZDamage)
 
 
 function onPlayerDamageShader()
