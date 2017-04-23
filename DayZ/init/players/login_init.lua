@@ -7,7 +7,7 @@
 ----* Type: SERVER														*----
 #-----------------------------------------------------------------------------#
 ]]
-
+something = {} -- Secret thing
 local sDataNames = { --Add your elementdata's here for them to be saved.
 	["brokenbone"] = {false},
 	["unconscious"] = {false},
@@ -24,19 +24,78 @@ local sDataNames = { --Add your elementdata's here for them to be saved.
 	["skin"] = {0},
 	["achievements"] = {}
 }
+local dbConnection
+if gameplayVariables["MySQL"] then
+	dbConnection = dbConnect( "mysql", "dbname="..gameplayVariables["MySQL_DB"]..";host="..gameplayVariables["MySQL_host"]..";port="..gameplayVariables["MySQL_port"], gameplayVariables["MySQL_user"], gameplayVariables["MySQL_pass"], "share=1" )
+	dbExec(dbConnection,"CREATE TABLE IF NOT EXISTS `accounts` (`ID` int(11) NOT NULL AUTO_INCREMENT,`username` text NOT NULL,`password` text NOT NULL,`userdata` text NOT NULL,  `rank` text NOT NULL, `creationDate` text NOT NULL,`lastLogin` text NOT NULL, PRIMARY KEY (`ID`))")
+end
 
 function playerLogin(username, pass, player)
 	if client then player = client end
-	account = getPlayerAccount(player)
-	local playerID = getAccountData(account,"playerID")
-	local x,y,z =  getAccountData(account,"last_x")or 0,getAccountData(account,"last_y")or 0,getAccountData(account,"last_z")or 0
-	local skin = getAccountData(account,"skin")
-	local hoursalive = getAccountData(account, "player.hoursalive")
-	setElementData(player, "hoursalive", hoursalive)
+	local playerID,x,y,z,skin,hoursalive,isAdmin,isSupporter;
 	setElementData(player,"spawnedzombies",0)
-	if getAccountData(account,"isDead") then
-		spawnDayZPlayer(player)
-		return
+	if gameplayVariables["MySQL"] then
+		something[player] = username
+		account = username
+		local qh = dbQuery(dbConnection, "SELECT * FROM accounts WHERE `username`=? LIMIT 1",account)
+		local result = dbPoll(qh, -1)
+		local tableE = {}
+		for i, row in ipairs(result) do
+			tableE = fromJSON(row["userdata"])
+			playerID = row["ID"]
+		end
+		x,y,z = tableE["last_x"] or 0, tableE["last_y"] or 0, tableE["last_z"] or 0
+		skin = tableE["skin"]
+		hoursalive = tableE["hoursalive"]
+		for i,data in ipairs(playerDataTable) do
+			local elementData = tableE[data[1]]
+			--outputChatBox(tostring(elementData))
+			if not elementData then
+				if sDataNames[data[1]] then    
+					elementData = sDataNames[data[1]][1] --Grabs default value for these from sDataNames
+				else
+					elementData = 0
+				end
+			end
+			setElementData(player,data[1],elementData)
+		end
+		if tableE["isDead"] then
+			spawnDayZPlayer(player)
+			return
+		end
+		if tableE["rank"] == "Admin" then
+			isAdmin = true
+		else
+			isAdmin = false -- to avoid chance of bug
+		end
+		if tableE["rank"] == "Supporter" then
+			isSupporter = true
+		else
+			isSupporter = false -- to avoid chance of bug
+		end
+	else
+		account = getPlayerAccount(player)
+		playerID = getAccountData(account,"playerID")
+		x,y,z =  getAccountData(account,"last_x")or 0,getAccountData(account,"last_y")or 0,getAccountData(account,"last_z")or 0
+		skin = getAccountData(account,"skin")
+		hoursalive = getAccountData(account, "player.hoursalive")
+		for i,data in ipairs(playerDataTable) do
+			local elementData = getAccountData(account,data[1])
+			if not elementData then
+				if sDataNames[data[1]] then	
+					elementData = sDataNames[data[1]][1] --Grabs default value for these from sDataNames
+				else
+					elementData = 0
+				end
+			end
+			setElementData(player,data[1],elementData)
+		end
+		isAdmin = getAccountData(account,"admin") or false
+		isSupporter = getAccountData(account,"supporter") or false
+		if getAccountData(account,"isDead") then
+			spawnDayZPlayer(player)
+			return
+		end
 	end
 	if not skin then
 		if not gameplayVariables["newclothingsystem"] then
@@ -49,6 +108,7 @@ function playerLogin(username, pass, player)
 			end
 		end
 	end
+	setElementData(player, "hoursalive", hoursalive)
 	spawnPlayer (player, x,y,z+0.5, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
 	fadeCamera (player, false,2000,0,0,0)
@@ -64,17 +124,7 @@ function playerLogin(username, pass, player)
 	attachElements(playerCol,player,0,0,0)
 	setElementData(playerCol,"parent",player)
 	setElementData(playerCol,"player",true)
-	for i,data in ipairs(playerDataTable) do
-		local elementData = getAccountData(account,data[1])
-		if not elementData then
-			if sDataNames[data[1]] then	
-				elementData = sDataNames[data[1]][1] --Grabs default value for these from sDataNames
-			else
-				elementData = 0
-			end
-		end
-		setElementData(player,data[1],elementData)
-	end
+
 	if not getElementData(player,"bloodtype") then
 		determineBloodType(player)
 		setElementData(player,"bloodtypediscovered","?")
@@ -110,8 +160,8 @@ function playerLogin(username, pass, player)
 			setElementModel(player, getElementData(player,"skin"))
 		end
 	end
-	setElementData(player,"admin",getAccountData(account,"admin") or false)
-	setElementData(player,"supporter",getAccountData(account,"supporter") or false)
+	setElementData(player,"admin",isAdmin)
+	setElementData(player,"supporter",isSupporter)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
 end
 addEvent("onPlayerDayZLogin", true)
@@ -119,6 +169,7 @@ addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
 
 function playerRegister(username, pass, player)
 	if client then player = client end
+	something[player] = username
 	local number = math.random(table.size(spawnPositions))
 	x,y,z = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]
 	if not gameplayVariables["newclothingsystem"] then
@@ -212,11 +263,13 @@ function playerRegister(username, pass, player)
 			end
 		end
 	end
-	account = getAccount(username)
-	local value = getAccounts()
-	local value = #value
-	setElementData(player,"playerID",value+1)
-	setAccountData(account,"playerID",value+1)
+	if not gameplayVariables["MySQL"] then
+		account = getAccount(username)
+		local value = getAccounts()
+		local value = #value
+		setElementData(player,"playerID",value+1)
+		setAccountData(account,"playerID",value+1)
+	end
 	setElementData(player,"logedin",true)
 	setElementData(player,"gender","male")
 	setElementData(player,"spawnedzombies",0)
@@ -228,48 +281,88 @@ addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
 
 function savePlayerAccount() -- Save in the database
-	local account = getPlayerAccount(source)
-	if account then
-	for i,data in ipairs(playerDataTable) do
-		setAccountData(account,data[1],getElementData(source,data[1]))
-	end
-		local x,y,z =  getElementPosition(source)
-		local weight = getPedStat(source, 21) or 0
-		local hoursalive = getElementData(source, "hoursalive")
-		setAccountData(account,"last_x",x)
-		setAccountData(account,"last_y",y)
-		setAccountData(account,"last_z",z)
-		setAccountData(account, "player.weight", weight)
-		setAccountData(account, "hoursalive", hoursalive)
-		if getElementData(source,"logedin") then
-			destroyElement(getElementData(source,"playerCol"))
+	local x,y,z =  getElementPosition(source)
+	local weight = getPedStat(source, 21) or 0
+	local hoursalive = getElementData(source, "hoursalive")
+	if gameplayVariables["MySQL"] then
+		local account = something[source]
+		if account then
+			local tbl = {}
+			for i,data in ipairs(playerDataTable) do
+				tbl[data[1]] = getElementData(source,data[1])
+				--tbl[data[1]] = getElementData(player,data[1])
+			end
+			tbl["hoursalive"] = getElementData(source,"hoursalive") or 0
+			tbl["last_x"] = x
+			tbl["last_y"] = y
+			tbl["last_z"] = z
+			tbl["player.weight"] = weight
+			tbl["isDead"] = getElementData(source,"isDead")
+			dbExec(dbConnection,"UPDATE accounts SET `userdata`=? WHERE `username`=?",toJSON(tbl),account)
 		end
-		if getElementData(source,"sepsis") == 4 then
-			setAccountData(account,"infection",true)
-		end
-	end	
-	setElementData(source,"logedin",false)
-	outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
-end
-addEventHandler ( "onPlayerQuit", getRootElement(), savePlayerAccount)
-
-function saveAllAccounts() -- Save in the database
-	for i, player in ipairs(getElementsByType("player")) do
-		local account = getPlayerAccount(player)
+		outputServerLog("[DayZ] Player account "..account.." has been saved.")
+	else
+		local account = getPlayerAccount(source)
 		if account then
 			for i,data in ipairs(playerDataTable) do
-				setAccountData(account,data[1],getElementData(player,data[1]))
+				setAccountData(account,data[1],getElementData(source,data[1]))
 			end
-			local x,y,z =  getElementPosition(player)
-			local weight = getPedStat(player, 21) or 0
-			local hoursalive = getElementData(player, "hoursalive")
 			setAccountData(account,"last_x",x)
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
 			setAccountData(account, "player.weight", weight)
 			setAccountData(account, "hoursalive", hoursalive)
-			if getElementData(player,"sepsis") == 4 then
+			if getElementData(source,"sepsis") == 4 then
 				setAccountData(account,"infection",true)
+			end
+		end
+		outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
+	end
+	if getElementData(source,"logedin") then
+		destroyElement(getElementData(source,"playerCol"))
+	end
+	setElementData(source,"logedin",false)
+end
+addEventHandler ( "onPlayerQuit", getRootElement(), savePlayerAccount)
+
+function saveAllAccounts() -- Save in the database
+	for i, player in ipairs(getElementsByType("player")) do
+		local x,y,z =  getElementPosition(player)
+		local weight = getPedStat(player, 21) or 0
+		local hoursalive = getElementData(player, "hoursalive")
+		if gameplayVariables["MySQL"] then
+			local account = something[player]
+			if account then
+				local tbl = {}
+				for i,data in ipairs(playerDataTable) do
+					tbl[data[1]] = getElementData(player,data[1])
+					--tbl[data[1]] = getElementData(player,data[1])
+				end
+				tbl["hoursalive"] = getElementData(player,"hoursalive") or 0
+				tbl["last_x"] = x
+				tbl["last_y"] = y
+				tbl["last_z"] = z
+				tbl["player.weight"] = weight
+				tbl["isDead"] = getElementData(player,"isDead")
+				if getElementData(player,"sepsis") == 4 then
+					tbl["infection"] = true
+				end
+				dbExec(dbConnection,"UPDATE accounts SET `userdata`=? WHERE `username`=?",toJSON(tbl),account)
+			end
+		else
+			local account = getPlayerAccount(player)
+			if account then
+				for i,data in ipairs(playerDataTable) do
+					setAccountData(account,data[1],getElementData(player,data[1]))
+				end
+				setAccountData(account,"last_x",x)
+				setAccountData(account,"last_y",y)
+				setAccountData(account,"last_z",z)
+				setAccountData(account, "player.weight", weight)
+				setAccountData(account, "hoursalive", hoursalive)
+				if getElementData(player,"sepsis") == 4 then
+					setAccountData(account,"infection",true)
+				end
 			end
 		end
 	end
