@@ -457,6 +457,7 @@
 	<export function="getLootMaxAviableSlots" type="client" />
 	<export function="getLootCurrentSlots" type="client" />
 	<export function="isToolbeltItem" type="client" />  
+	<export function="getGameplayVariablesServerPairs" type="server" />
 	<export function="getGameplayVariablesServer" type="server" />
 	<export function="getGameplayVariablesClient" type="client" />
 	<export function="setGameplayVariable" type="shared" />

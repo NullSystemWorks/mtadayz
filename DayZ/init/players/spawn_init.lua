@@ -44,16 +44,20 @@ function spawnDayZPlayer(player)
 		attachElements ( playerCol, player, 0, 0, 0 )
 		setElementData(playerCol,"parent",player)
 		setElementData(playerCol,"player",true)
-		local account = getPlayerAccount(player)
-		setAccountData(account,"isDead",false)
+		if gameplayVariables["MySQL"] then
+			-- need to code it in MySQL
+		else
+			local account = getPlayerAccount(player)
+			setAccountData(account,"isDead",false)
+			setElementData(player,"admin",getAccountData(account,"admin") or false)
+			setElementData(player,"supporter",getAccountData(account,"supporter") or false)
+		end
 		setElementData(player,"isDead",false)
 		setElementData(player,"logedin",true)
 		setElementData(player,"gender","male")
 		setElementData(player,"bleeding", 0)
 		setElementData(player,"sepsis",0)
 		setElementData(player,"unconscious",false)
-		setElementData(player,"admin",getAccountData(account,"admin") or false)
-		setElementData(player,"supporter",getAccountData(account,"supporter") or false)
 		setElementData(player, "hoursalive", 0)
 
 		----------------------------------
@@ -281,7 +285,9 @@ function kilLDayZPlayer(killer,headshot)
 		end
 	end
 	setTimer(setElementPosition,500,1,source,6000,6000,0)
-	setAccountData(account,"isDead",true)
+	if not gameplayVariables["MySQL"] then
+		setAccountData(account,"isDead",true)
+	end
 	setElementData(source,"isDead",true)
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
 	destroyElement(getElementData(source,"playerCol"))

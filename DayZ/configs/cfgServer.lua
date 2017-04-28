@@ -39,6 +39,12 @@ gameplayVariables["watervehiclerespawn"] = 1800000 -- When should vehicles which
 gameplayVariables["newzombiespawnsystem"] = false -- Experimental feature, zombies only spawn near loot - DEFAULT: false
 gameplayVariables["zombiespawnradius"] = 20 -- If newzombiespawnsystem is set to true, determines the radius where zombies spawn around loot - DEFAULT: 20
 gameplayVariables["maxzombiesperloot"] = 6 -- if newzombiespawnsystem is set to true, determines how many zombies should spawn around loot - DEFAULT: 6
+gameplayVariables["MySQL"] = false -- if MySQL is set to true, MTA:DayZ will use MySQL to store accounts and items of players - DEFAULT: false
+gameplayVariables["MySQL_host"] = "localhost" -- MySQL host IP, example: 127.0.0.1 or localhost
+gameplayVariables["MySQL_port"] = "3306" -- MySQL port, example: 3306
+gameplayVariables["MySQL_user"] = "root" -- MySQL user
+gameplayVariables["MySQL_pass"] = "pass" -- MySQL pass
+gameplayVariables["MySQL_DB"]   = "dayz" -- MySQL Database name
 
 
 -- WEIGHT SETTINGS
