@@ -327,6 +327,7 @@
 	<file src="gui/status/misc/dead.jpg" />
 	<file src="gui/status/misc/hourglass.png" />
 	<file src="gui/status/misc/circle.png" />
+	<file src="gui/status/misc/helmet.png" />
 	<file src="gui/status/blood/blood_border.png" />
 	<file src="gui/status/blood/12000.png" />
 	<file src="gui/status/blood/10000.png" />

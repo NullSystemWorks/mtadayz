@@ -62,17 +62,33 @@ function dayZPlayerDamage(attacker,weapon,bodypart,loss)
 				playSound(":DayZ/sounds/status/bonecrack.mp3",false)
 				playSFX("pain_a",2,95,false)
 			elseif bodypart == 9 then
-				local hasHelmet = getPedClothes(localPlayer,16)
-				if hasHelmet == "helmet" or hasHelmet == "moto" then
-					if weapon ~=34 then
-						damage = 0
-						playSFX("genrl",20,12,false)
-					else
-						damage = damage*gameplayVariables["headshotdamage_player"]
-						headshot = true
-						playSFX("pain_a",2,38,false)
+				local hasHelmet
+				if gameplayVariables["newclothingsystem"] then
+					hasHelmet = getPedClothes(localPlayer,16)
+					if hasHelmet == "helmet" or hasHelmet == "moto" then
+						if weapon ~=34 then
+							damage = 0
+							playSFX("genrl",20,12,false)
+						else
+							damage = damage*gameplayVariables["headshotdamage_player"]
+							headshot = true
+							playSFX("pain_a",2,38,false)
+						end
+					end
+				else
+					hasHelmet = getElementData(localPlayer,"hasHelmet")
+					if hasHelmet then
+						if weapon ~=34 then
+							damage = 0
+							playSFX("genrl",20,12,false)
+						else
+							damage = damage*gameplayVariables["headshotdamage_player"]
+							headshot = true
+							playSFX("pain_a",2,38,false)
+						end
 					end
 				end
+				
 			end
 			if getElementData(localPlayer,"humanity") >= 5000 then
 				if damage <= 1000 then

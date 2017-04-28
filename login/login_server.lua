@@ -175,7 +175,7 @@ addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsi
 function pullChangelog(news)
 	local player = client -- idk how to send it correctly to function()
 	if news then
-		fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/master/changelog.txt",function(data,err)
+		fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/master/news.txt",function(data,err)
 			triggerClientEvent(player,"loadAPIData",player,"changelog",data)
 		end)
 	end

@@ -131,7 +131,7 @@ function showLogin()
 	--guiRadioButtonSetSelected(Login_Edit[5],true)
 	guiEditSetMasked(Login_Edit[2],true)
 	guiEditSetMasked(Login_Edit[4],true)
-	if number == 2 or number == 4 or number == 5 then
+	if number == 2 or number == 5 then
 		guiLabelSetColor(title_label,0,0,0)
 		guiLabelSetColor(version_label,0,0,0)
 	else
