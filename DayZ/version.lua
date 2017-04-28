@@ -11,7 +11,7 @@
 
 local timer
 local checkType = "stable" -- stable = Only check for stable versions; beta = check for most recent version (including unstables)
-version = "0.9.9a"
+version = "v0.9.9a"
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
@@ -29,22 +29,25 @@ end
 
 function onVersionReturn(json)
 	v = fromJSON(json)
-	if (json == "ERROR" or not v["name"]) then
+	if (json == "ERROR" or not v["tag_name"]) then
 		outputServerLog("[DayZ] Can't check for updates")
 		return
 	end
 	local new = ""
 	local old = ""
-	local index1 = string.find(v["name"],"a")
-	local index2 = string.find(version,"a")
-	if not index1 then
-		index1 = tonumber(string.len(v["name"]))+1
+	if string.find(v["tag_name"],"a") then
+		v["tag_name"] = string.gsub(v["tag_name"],"a","")
 	end
-	if not index2 then
-		index2 = tonumber(string.len(version))+1
+	if string.find(version,"a") then
+		version = string.sub(version,0,string.len(version)-1)
 	end
-	
-	for num in string.gmatch(string.sub(v["name"],0,index1-1),".") do
+	if string.find(v["tag_name"],"v") then
+		v["tag_name"] = string.gsub(v["tag_name"],"v","")
+	end
+	if string.find(version,"v") then
+		version = string.gsub(version,"v","")
+	end
+	for num in string.gmatch(string.sub(v["tag_name"],0,string.len(v["tag_name"])),".") do
 		if(num ~= ".") then
 			if(num == " ") then
 				break;
@@ -52,7 +55,7 @@ function onVersionReturn(json)
 			new = new..num
 		end
 	end
-	for num in string.gmatch(string.sub(version,0,index2-1),".") do
+	for num in string.gmatch(string.sub(version,0,string.len(version)),".") do
 		if(num ~= ".") then
 			if(num == " ") then
 				break;
@@ -60,30 +63,27 @@ function onVersionReturn(json)
 			old = old..num
 		end
 	end
+	--outputServerLog(old..":"..new)
 	-- most recent = 0.9.9 // current = 0.9.8.1 (0.9.8.1 > 0.9.9 = false)
 	if (tonumber(new) > tonumber(old)) and (string.len(tostring(old)) == string.len(tostring(new))) then -- that conversion system is to avoid appointment to older versions when the most recent wasn't released
-		return onVersionCheck(false,version,v["name"],v["body"])
+		return onVersionCheck(false,version,v["tag_name"],v["body"])
 	elseif (string.len(tostring(old)) ~= string.len(tostring(new))) then -- Check the most recent version in a situation like: Most recent: 0.9.9a; Actual: 0.9.8.1a
 		local sactual = tostring(old)
 		local snew = tostring(new)
 		local draw = 0
 		if(string.len(sactual) > string.len(snew)) then
-			for i=0,string.len(snew)-1,1 do
+			for i=0,string.len(snew),1 do
 				if(tonumber(string.sub(snew,i,i+1))) > tonumber(string.sub(sactual,i,i+1)) then
-					return onVersionCheck(false,version,v["name"],v["body"])
+					return onVersionCheck(false,version,v["tag_name"],v["body"])
 				end
 			end
-		else
-			for i=0,string.len(sactual)-1,1 do
-				if(tonumber(string.sub(snew,i,i+1))) > tonumber(string.sub(sactual,i,i+1)) then
-					return onVersionCheck(false,version,v["name"],v["body"])
-				end
-			end
+		else 
+			return onVersionCheck(false,version,v["tag_name"],v["body"])
 		end
 	end
 	if(tonumber(new) == tonumber(old)) then -- Check if version is same and has a newer version that modifies only a letter / Ex: New: 0.9.8.1a and current: 0.9.8.1 and vice-versa.
-		if (string.len(tostring(version)) ~= string.len(tostring(v["name"]))) then
-			return onVersionCheck(false,version,v["name"],v["body"])
+		if (string.len(tostring(version)) ~= string.len(tostring(v["tag_name"]))) then
+			return onVersionCheck(false,version,v["tag_name"],v["body"])
 		end
 	end
 	
@@ -94,9 +94,9 @@ end
 function onVersionCheck(state,old,new,changes)
 	if not state then
 		outputServerLog("[DayZ] A new version of MTA DayZ is available!")
-		outputServerLog("[DayZ] Current Version: "..version.." | New Version: "..v["name"])
-		outputServerLog("[DayZ] Some changes: \n"..v["body"])
-		outputServerLog("[DayZ] Download the new version at https://github.com/mtadayz/MTADayZ/releases")
+		outputServerLog("[DayZ] Current Version: "..version.." | New Version: "..new)
+		outputServerLog("[DayZ] Some changes: \n "..changes)
+		outputServerLog("\n[DayZ] Download the new version at https://github.com/mtadayz/MTADayZ/releases")
 	else
 		outputServerLog("[DayZ] MTA DayZ is up-to-date.")
 	end
