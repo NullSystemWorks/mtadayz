@@ -1,6 +1,6 @@
 # README #
 
-### Curent Developers: L, ciber96, 1BOY ###
+### Curent Developers: L, ciber96, 1B0Y ###
 
 ### Synopsis ###
 This repository serves as a "hub" for the development of MTA DayZ, a gamemode which is akin to the DayZ mod for ArmA II, only for MTA (Multi Theft Auto).
@@ -15,7 +15,7 @@ changes appropriate, the pull request will be accepted, and you will be marked a
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### MTA:DayZ Server List ###
-- Currently None -
+https://master.mta-dayz.org/
 
 ### Links ###
 Website: https://mta-dayz.org/

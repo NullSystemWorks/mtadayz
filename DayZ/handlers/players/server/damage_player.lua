@@ -145,7 +145,7 @@ addEventHandler("onElementDataChange",getRootElement(),weaponDelete)
 
 function onPlayerChangeStatus(status,value)
 	if status == "humanity" then
-		setElementData(source,status,getElementData(source,status)+value)
+		setElementData(source,status,getElementData(source,status)-value)
 	elseif status == "isInBuilding" then
 		setElementData(source,status,value)
 	end

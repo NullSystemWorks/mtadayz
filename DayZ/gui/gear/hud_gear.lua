@@ -48,11 +48,13 @@ function playerDrawMapGPSCompass()
 		end
 		if getElementData(getLocalPlayer(),"GPS") >= 1  then
 			if not gpskeybound then
+				bindKey("7","down",toggleGPS)
 				addCommandHandler("gps",toggleGPS)
 				gpskeybound = true
 			end
 		else
 			if gpskeybound then
+				unbindKey("7","down",toggleGPS)
 				removeEventHandler("onClientRender",root,drawTheGPS)
 				removeCommandHandler("gps",toggleGPS)
 				dxSetRenderTarget()
@@ -80,11 +82,13 @@ function playerDrawMapGPSCompass()
 		end
 		if getElementData(getLocalPlayer(),"Compass") >= 1 then
 			if not compasskeybound then
+				bindKey("8","down",toggleCompass)
 				addCommandHandler("compass",toggleCompass)
 				compasskeybound = true
 			end
 		else
 			if compasskeybound then
+				unbindKey("8","down",toggleCompass)
 				removeEventHandler("onClientRender",root,drawTheCompass)
 				removeCommandHandler("compass",toggleCompass)
 				compasskeybound = false
@@ -119,6 +123,7 @@ function toggleGPS()
 		removeEventHandler("onClientRender",root,drawTheGPS)
 	end
 end
+
 
 function toggleCompass()
 	if not isCompassShown then
@@ -284,7 +289,6 @@ function playerActivateGoggles (key,keyState)
 				guiSetVisible(infravision,false)
 				showChat(false)
 				setCameraGoggleEffect("nightvision")
-				setFarClipDistance(1000)
 				triggerEvent("onPlayerEnabledGoggles", getLocalPlayer())
 			end
 		end
@@ -497,7 +501,9 @@ setElementData(statsLabel["name"],"identifikation","name")
 
 function showDebugMintorOnLogin ()
 	if getElementData(localPlayer,"logedin") then
-		--guiSetVisible(statsWindows,true)
+		if (gameplayVariables["debugmonitorenabled"]) then
+			guiSetVisible(statsWindows,true)
+		end
 	end
 end
 addEvent("onClientPlayerDayZLogin", true)
@@ -506,18 +512,18 @@ addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 local isVisible = false
 function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
-		if not isVisible then
-			guiSetVisible(statsWindows,true)
-			isVisible = true
-		else
-			guiSetVisible(statsWindows,false)
-			isVisible = false
-		end
+		if not (gameplayVariables["debugmonitorenabled"]) then return end
+		
+		guiSetVisible(statsWindows,not guiGetVisible(statsWindows))
 	else
 		guiSetVisible(statsWindows,false)
 	end
 end
---bindKey("F5","down",showDebugMonitorOnF5)
+if not (gameplayVariables["debugmonitorenabled"]) then 
+	return
+else
+	bindKey("F5","down",showDebugMonitorOnF5)
+end
 
 function showDebugMonitor()
 	--guiSetVisible(statsWindows,true)
@@ -564,4 +570,4 @@ function refreshDebugMonitor()
 		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
 	end			
 end
---setTimer(refreshDebugMonitor,1000,0)
+setTimer(refreshDebugMonitor,1000,0)

@@ -60,8 +60,16 @@ function updateStatusIcons()
 		dxDrawImage ( screenWidth*0.94 , screenHeight*0.63, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/background.png",0,0,0)
 		dxDrawImage ( screenWidth*0.943 , screenHeight*0.63, screenHeight*0.055, screenHeight*0.055, ":DayZ/gui/status/humanity/"..h_number..".png",0,0,0)
 		]]
+		-- Helmet
+		if not gameplayVariables["newclothingsystem"] then
+			if getElementData(localPlayer,"hasHelmet") then
+				dxDrawImage ( screenWidth*0.94 , screenHeight*0.63, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/background.png",0,0,0)
+				dxDrawImage ( screenWidth*0.943 , screenHeight*0.63, screenHeight*0.055, screenHeight*0.055, ":DayZ/gui/status/misc/helmet.png",0,0,0)
+			end
+		end
 		-- Temperature
 		local temperature = math.round(getElementData(localPlayer,"temperature"),2)
+		--local temperature = math.round(playerDynamicTable.playerTemperature,2)
 		local status = getElementData(localPlayer,"temperature_status") or 0
 		r,g,b = 0,255,0
 		local t_number = 3
@@ -89,6 +97,7 @@ function updateStatusIcons()
 		-- Thirst
 		r,g,b = 0,255,0
 		local thirst = getElementData(localPlayer,"thirst")
+		--local thirst = playerDynamicTable.playerWater
 		local thirst_coloring = getElementData(localPlayer,"thirst")*2.55
 		r,g,b = 255-thirst_coloring,thirst_coloring,0
 		local thirst_icon = ":DayZ/gui/status/thirst/100.png"
@@ -117,6 +126,7 @@ function updateStatusIcons()
 		-- Blood
 		r,g,b = 0,255,0
 		local blood = getElementData(localPlayer,"blood")
+		--local blood = playerDynamicTable.playerBlood
 		local blood_coloring = getElementData(localPlayer,"blood")/47.2
 		r,g,b = 255-blood_coloring,blood_coloring,0
 		local blood_icon = ":DayZ/gui/status/blood/12000.png"
@@ -139,6 +149,7 @@ function updateStatusIcons()
 		-- Food
 		r,g,b = 0,255,0
 		local food = getElementData(localPlayer,"food")
+		--local food = playerDynamicTable.playerFood
 		local food_coloring = getElementData(localPlayer,"food")*2.55
 		r,g,b = 255-food_coloring,food_coloring,0
 		local food_icon = ":DayZ/gui/status/hunger/100.png"
@@ -167,12 +178,15 @@ function updateStatusIcons()
 		-- // Status Symbols (Broken bone, pain, bleeding, ...)
 		-- Broken bone
 		if getElementData(localPlayer,"brokenbone") then
+		--if playerDynamicTable.playerBrokenBone then
 			dxDrawImage ( screenWidth*0.9375 , screenHeight*0.55, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/brokenbone.png",0,0,0)
 		end
 		if getElementData(localPlayer,"bleeding") > 0 then
+		--if playerDynamicTable.playerBleeding > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
 		if getElementData(localPlayer,"infection") or getElementData(localPlayer,"sepsis") and getElementData(localPlayer,"sepsis") > 0 then
+		--if playerDynamicTable.playerInfection or playerDynamicTable.playerSepsis and playerDynamicTable.playerSepsis > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/blood/infection.png",0,0,0)
 		end
 		local x,y,z = getElementPosition(localPlayer)

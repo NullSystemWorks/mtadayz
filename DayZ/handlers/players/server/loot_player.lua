@@ -547,6 +547,18 @@ function checkPlayerClothes(itemName)
 	  	addPedClothes(source, "tshirtbobomonk", "tshirt", 0)
 	  end
 	end
+	if itemName == "Helmet" then
+		removePedClothes(source,16,"helmet","helmet")
+		if getElementData(source, itemName) >= 2 then
+			addPedClothes(source,"helmet","helmet",16)
+		end	
+	end
+	if itemName == "MX Helmet" then
+		removePedClothes(source,16,"moto","moto")
+		if getElementData(source, itemName) >= 2 then
+			addPedClothes(source,"moto","moto",16)
+		end	
+	end
 end
 addEvent("checkPlayerClothes", true)
 addEventHandler( "checkPlayerClothes", getRootElement(), checkPlayerClothes)

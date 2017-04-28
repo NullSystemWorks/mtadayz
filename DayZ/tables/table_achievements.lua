@@ -108,4 +108,25 @@ achievements = {
 		["conditions"] = {{"blood","less",6000}},
 		["image"] = "achiev1.png"
 	},
+	["goingcommando"] = {
+		["name"] = "Going Commando",
+		["description"] = "Wear no clothes",
+		["items"] = {{"MRE",0},{"Can (Corn)",0}},
+		["conditions"] = {{"blank","clothes",0}},
+		["image"] = "achiev1.png"
+	},
+	["area69"] = {
+		["name"] = "Roswell Conspiracies",
+		["description"] = "Visit Area 69",
+		["items"] = {{"MRE",0},{"Can (Corn)",0}},
+		["conditions"] = {{"blank","area",0}},
+		["image"] = "achiev1.png"
+	},
+	["sanfierrocarrier"] = {
+		["name"] = "USS Werfukd",
+		["description"] = "Visit the San Fierro Carrier",
+		["items"] = {{"MRE",0},{"Can (Corn)",0}},
+		["conditions"] = {{"blank","carrier",0}},
+		["image"] = "achiev1.png"
+	},
 }

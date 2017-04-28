@@ -778,14 +778,15 @@ if ( keyState == "down" ) then
 		if itemName == "deadreason" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
 			outputChatBox(getElementData(col,"deadreason"),255,255,255,true)
-			--triggerServerEvent("onPlayerHideBody",col)
-			--outputChatBox("You hid the body...",0,255,0,true)
-			--disableMenu()
+			if getElementData(col,"killedBy") and getElementData(col,"killedBy") == localPlayer then
+				setElementData(localPlayer,"murders",getElementData(localPlayer,"murders")+1)
+				setElementData(col,"killedBy",nil)
+			end
 			return
 		end
 		if itemName == "petrolstation" then
 				local col = getElementData(getLocalPlayer(),"currentCol")
-				
+
 				--Determine if the petrol station has any fuel left, otherwise tell the player. (1B0Y)
 				if (getElementData(col,"petrolQuantity") >= 1) then
 					setElementData(getLocalPlayer(),"Empty Gas Canister",getElementData(getLocalPlayer(),"Empty Gas Canister")-1)

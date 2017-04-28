@@ -1070,9 +1070,13 @@ end
 ]]
 
 function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
+	if isElement(veh) then 
+		destroyElement(veh)
+	end
+	if isElement(col) then
+		destroyElement(col)
+	end
 	v_counter = v_counter+1
-	destroyElement(veh)
-	destroyElement(col)
 	veh = createVehicle(id,x,y,z+1)
 	vehCol = createColSphere(x,y,z,4)
 	attachElements ( vehCol, veh, 0, 0, 0 )
@@ -1097,3 +1101,31 @@ function respawnDayZVehicle(id,x,y,z,veh,col,max_slots)
 	setElementData(veh,"isExploded",false)
 	setElementData(vehCol,"deadVehicle",false)
 end
+
+-- onVehicleEngineState: Pre-sets some data for onPlayerVehicleInteract to determine if the engine is already on or not
+-- As we can't correctly validate this with onVehicleEnter/Exit
+function onVehicleEngineState(vehicle,state)
+	if not vehicle then return end
+	
+	setElementData(vehicle,"engine_state",state)
+end
+addEventHandler("onVehicleStartEnter",root,function(player,seat) onVehicleEngineState(source,getVehicleEngineState(source)) end)
+
+-- onPlayerVehicleInteract: Handles keeping the engine off due to a GTA bug.
+function onPlayerVehicleInteract(player,seat,state)
+	if state then
+		if (seat ~= 0) then
+			--Determine if the engine is on, otherwise don't turn the engine on for passengers (GTA engine bug?)
+			if (not getElementData(source,"engine_state")) then
+				setVehicleEngineState(source,false)
+			end
+		end
+	else
+		if (seat ~= 0) then return end
+		if (wasEventCancelled()) then return end --Prevents engine_state being invalid in the events of onVehicleEnter/Exit being cancelled.
+		
+		setElementData(source,"engine_state",getVehicleEngineState(source))
+	end
+end
+addEventHandler("onVehicleEnter",root,function(player,seat) onPlayerVehicleInteract(player,seat,true) end)
+addEventHandler("onVehicleExit",root,function(player,seat) onPlayerVehicleInteract(player,seat,false) end)

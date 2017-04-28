@@ -53,6 +53,7 @@
 	<script src="configs/cfgNutritions.lua" type="shared" cache="false" />
 	<script src="configs/cfgDifficulty.lua" type="shared" cache="false" />
 	<script src="configs/cfgClient.lua" type="client" cache="false" />
+	<script src="configs/cfgSettings.lua" type="shared" cache="false" />
 	<script src="addons.lua" type="server" />
 		
 	<!-- init folder -->
@@ -62,6 +63,7 @@
 	<script src="init/vehicles/vehicles_init.lua" type="server" />
 	<script src="init/players/login_init.lua" type="server" />
 	<script src="init/players/spawn_init.lua" type="server" />
+	<script src="init/players/spawnselection_init.lua" type="client" />
 	<script src="init/permissions/permissions_init.lua" type="server" />
 	<script src="init/animals/animals_init.lua" type="server" />
 
@@ -83,15 +85,6 @@
 	<script src="handlers/players/client/reload_player.lua" type="client" cache="false" />
 	<script src="handlers/world/client/lights.lua" type="client" cache="false" />
 	<script src="handlers/world/client/chat.lua" type="client" cache="false" />
-
-	<script src="handlers/houses/teleporteditor/tele_cl.lua" type="client"/>
-	<script src="handlers/houses/teleporteditor/tele_sr.lua" type="server"/>
-	<file src="handlers/houses/teleporteditor/tele.png" />
-	<file src="handlers/houses/teleporteditor/tar.png" />
-
-	<map src="handlers/houses/mapping/mapping.map" dimension="0"></map>
-    <script src="handlers/houses/mapping/mapEditorScriptingExtension_s.lua" type="server"></script>
-    <script src="handlers/houses/mapping/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 	
 	<!-- Flashlight -->
 	<script src="handlers/players/client/flashlight/c_shader_light.lua" type="client" cache="false" />
@@ -134,6 +127,7 @@
 	<script src="gui/gear/sidemenu_gear.lua" type="client" cache="false" />
 	<script src="gui/gear/ui_gear.lua" type="client" cache="false" />
 	<script src="gui/achievements/achievements.lua" type="client" />
+	<file src="gui/spawnselection/spawnselection.png" />
 	<file src="gui/achievements/icons/achiev1.png"/>
 	<file src="gui/achievements/icons/bg_achievements.png" />
 	<file src="gui/gear/icons/ak47.png"/>
@@ -333,6 +327,7 @@
 	<file src="gui/status/misc/dead.jpg" />
 	<file src="gui/status/misc/hourglass.png" />
 	<file src="gui/status/misc/circle.png" />
+	<file src="gui/status/misc/helmet.png" />
 	<file src="gui/status/blood/blood_border.png" />
 	<file src="gui/status/blood/12000.png" />
 	<file src="gui/status/blood/10000.png" />
@@ -462,9 +457,39 @@
 	<export function="isPlayerInLoot" type="client" />
 	<export function="getLootMaxAviableSlots" type="client" />
 	<export function="getLootCurrentSlots" type="client" />
-	<export function="isToolbeltItem" type="client" />   
+	<export function="isToolbeltItem" type="client" />  
+	<export function="getGameplayVariablesServerPairs" type="server" />
+	<export function="getGameplayVariablesServer" type="server" />
+	<export function="getGameplayVariablesClient" type="client" />
+	<export function="setGameplayVariable" type="shared" />
+	<export function="getGameplayVariable" type="shared" />
    	
 	<!-- models folder -->
+	<file src="models/players/txd/ghilliesuit.txd" />
+    <file src="models/players/dff/ghilliesuit.dff" />
+    <file src="models/players/txd/civilian_male.txd" />
+    <file src="models/players/dff/civilian_male.dff" />
+	<file src="models/players/txd/bandit1_male.txd" />
+	<file src="models/players/dff/bandit1_male.dff" />
+	<file src="models/players/txd/bandit2_male.txd" />
+	<file src="models/players/dff/bandit2_male.dff" />
+	<file src="models/players/txd/bandit3_male.txd" />
+    <file src="models/players/dff/bandit3_male.dff" />
+    <file src="models/players/txd/standard_male.txd" />
+    <file src="models/players/dff/standard_male.dff" />
+	<file src="models/players/txd/civilian_female.txd" />
+    <file src="models/players/dff/civilian_female.dff" />
+	<file src="models/players/txd/bandit1_female.txd" />
+	<file src="models/players/dff/bandit1_female.dff" />
+	<file src="models/players/txd/bandit2_female.txd" />
+    <file src="models/players/dff/bandit2_female.dff" />
+    <file src="models/players/txd/standard_female.txd" />
+    <file src="models/players/dff/standard_female.dff" />
+    <file src="models/players/txd/hero_male.txd" />
+    <file src="models/players/dff/hero_male.dff" />
+	<file src="models/players/txd/army_male.txd" />
+	<file src="models/players/dff/army_male.dff" />
+	
     <file src="models/animals/txd/bear.txd" />
     <file src="models/animals/dff/bear.dff" />
     <file src="models/animals/txd/fox.txd" />
@@ -916,6 +941,7 @@
 	<file src="sounds/weapons/fire/PDW.wav" />
 	<file src="sounds/weapons/fire/Revolver.wav" />
 	<file src="sounds/weapons/fire/Winchester.wav" />
+	<file src="sounds/weapons/fire/M24.wav" />
 	<file src="sounds/weapons/reload/22.wav" />
 	<file src="sounds/weapons/reload/23.wav" />
 	<file src="sounds/weapons/reload/24.wav" />
@@ -976,6 +1002,7 @@
 	<export function="getMoonPhaseValue" type="client" />
 	<export function="isDynamicSkyEnabled" type="client" />
 	
+	
 	<!-- Enable OOP for some scripts -->
 	<oop>true</oop>
 	
@@ -986,4 +1013,6 @@
 	<include resource="imageButton" />
 	<include resource="helpmanager" />
 	<include resource="dayzadmin" />
+	
+	
 </meta>

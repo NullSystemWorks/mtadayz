@@ -70,17 +70,19 @@ hospitalCol = {}
 function createHospitalPacks()
 	number1 = 0
 	for i,box in ipairs(hospitalPacks) do
-		number1 = number1+1
-		local x,y,z = box[1],box[2],box[3]
-		object = createObject(1558,x,y,z-0.3,nil,nil,nil)
-		setObjectScale(object,3)
-		hospitalCol[i] = createColSphere(x,y,z,2)
-		setElementData(hospitalCol[i],"parent",object)
-		setElementData(hospitalCol[i],"hospitalbox",true)
-		setElementData(hospitalCol[i],"MAX_Slots",40)
-		for _,items in ipairs(otherLootItems["hospital"]) do
-			setElementData(hospitalCol[i],items[1],items[5])
-		end	
+		if 0.4 > math.random() then
+			number1 = number1+1
+			local x,y,z = box[1],box[2],box[3]
+			object = createObject(1558,x,y,z-0.3,nil,nil,nil)
+			setObjectScale(object,3)
+			hospitalCol[i] = createColSphere(x,y,z,2)
+			setElementData(hospitalCol[i],"parent",object)
+			setElementData(hospitalCol[i],"hospitalbox",true)
+			setElementData(hospitalCol[i],"MAX_Slots",40)
+			for _,items in ipairs(otherLootItems["hospital"]) do
+				setElementData(hospitalCol[i],items[1],items[5])
+			end
+		end
 	end
 	setTimer(updateHospitals,3600000,1)
 end

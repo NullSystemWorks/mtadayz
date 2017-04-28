@@ -185,7 +185,7 @@ end
 
 function whenPlayerQuits(this_player)
 	destroyWorldLightShader(this_player) 
-	destroyFlashlightModel(this_player) 
+	--destroyFlashlightModel(this_player) 
 	destroyFlashLightShader(this_player)  
 end
 

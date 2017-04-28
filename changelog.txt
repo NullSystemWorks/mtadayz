@@ -10,13 +10,25 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### REMOVED: For deprecated features removed in the release it's mentioned in
 
 # - #
-## [0.9.9a] - 2017-MM-DD
+## [0.9.9a] - 2017-04-28
 ### ADDED: New Sound + Visibility System (based on terrain, weather, light, movement)
+### ADDED: New zombie spawn system based on loot location
 ### ADDED: Petrol stations now have a limited amount of fuel (configurable in cfgServer.lua)
 ### ADDED: Achievement System
 ### ADDED: Anti-Advertising for chat system
 ### ADDED: Indicators for temperature rising/falling
 ### ADDED: Occasional rain when weather is cloudy 
+### ADDED: MySQL implementation
+### ADDED: Old clothes/skin system
+### ADDED: New condition (fractured arms)
+### ADDED: Vehicle respawn command
+### ADDED: Setting for camera sway when in pain
+### ADDED: Helmets for headshots
+### ADDED: [DayZAdmin] Ability to change gameplayVariables ingame
+### ADDED: Binds for GPS (Key: 7) and Compass (Key: 8)
+### ADDED: Spawn Selection System
+### ADDED: Randomized loot spots
+### ADDED: Random clothes on spawn if clothes system is activated
 ### CHANGED: Logs System refactored
 ### CHANGED: Simplified player spawning code
 ### CHANGED: Simplified vehicle spawning code (makes it easier to add new vehicles)
@@ -27,6 +39,10 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### CHANGED: Version rewrite, tree handling optimised
 ### CHANGED: Hunger & Thirst now decrease according to difficulty too
 ### CHANGED: Moved debug monitor to Journal (Key: 6)
+### CHANGED: New damage code for players
+### CHANGED: Some zombies will sprint (depends on difficulty)
+### CHANGED: Kills have to be confirmed with "Check Body" (player kills only)
+### CHANGED: First Person Mode (view can be rotated 360°)
 ### FIXED: consume_player.lua causing lots of errors
 ### FIXED: Bug with tree chopping
 ### FIXED: Hunger & Thirst not decreasing
@@ -37,7 +53,13 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### FIXED: Milk breaking inventory
 ### FIXED: Unconscious animation being clientside only
 ### FIXED: M1911 not having a firing sound
+### FIXED: Old bug with damage when falling
+### FIXED: Floating medical box in Fort Carson
+### FIXED: Constant raining
+### FIXED: Hunger and Thirst not really decreasing
+### FIXED: M24 not having any sound
 ### REMOVED: Viral zombies (until a better solution is found for more dangerous zombies)
+### REMOVED: Housing mod
 
 # - #
 ## [0.9.8.1a] - 2017-02-18

@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-outputDebugString("[DayZ] cfgLoot loaded")
+
 
 -- SPAWNPOINTS (ITEMS)
 pickupPositions = {
@@ -2714,3 +2714,17 @@ pickupPositions = {
 {965.54089355469,-674.3095703125,131.05401611328},
 },
 }
+
+
+zombieBuildingSpawn = {
+-- {zombieSpawnChance,minRoaming,maxRoaming}
+{"Residential",0.3,0,3},
+{"Farm",0.3,0,3},
+{"Supermarket",0.4,2,6},
+{"Military",0.3,0,6},
+{"Industrial",0.3,0,2},
+}
+
+
+
+outputDebugString("[DayZ] cfgLoot loaded")

@@ -1118,7 +1118,7 @@ function setBotGuard (theped, x, y, z, priority)
 	end
 end
 
-function spawnBot(x, y, z, rot, skin, interior, dimension, team, weapon, mode, modesubject)
+function spawnBot(x, y, z, rot, skin, interior, dimension, team, weapon, mode, modesubject, speedLevel)
 --checks the function commands to see if all neccesary parts are filled, sets defaults if not or returns false.
 	if not x then return false end
 	if not y then return false end
@@ -1131,6 +1131,7 @@ function spawnBot(x, y, z, rot, skin, interior, dimension, team, weapon, mode, m
 	if not weapon then weapon = 0 end
 	if not mode then mode = "hunting" end
 	if not modesubject then modesubject = nil end
+	if not speedLevel then speedLevel = "sprint" end
 	if mode == "following" then
 		if not modesubject then return false end
 	end
@@ -1164,6 +1165,9 @@ function spawnBot(x, y, z, rot, skin, interior, dimension, team, weapon, mode, m
 			setTimer ( setBotGuard, 400, 1, slothbot, x, y, z)
 		else
 			setTimer ( setElementData, 600, 1, slothbot, "status", "hunting")
+		end
+		if speedLevel == "sprint" then
+			triggerClientEvent("setBotSprintingMode",root,slothbot)
 		end
 		return slothbot
 	end

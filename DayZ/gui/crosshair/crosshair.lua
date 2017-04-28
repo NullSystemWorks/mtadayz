@@ -39,7 +39,8 @@ function setCrossHairSize(weapon)
 end
 addEventHandler("onClientPlayerWeaponFire",localPlayer,setCrossHairSize)
 
-function drawCrosshair() 
+function drawCrosshair()
+	if getElementData(localPlayer,"fracturedArms") then return end
     local hX,hY,hZ = getPedTargetEnd ( getLocalPlayer() )
     local screenX1, screenY1 = getScreenFromWorldPosition ( hX,hY,hZ )
 	if screenX1 then
@@ -73,7 +74,7 @@ end
 bindKey("aim_weapon", "both", function(key, state)       
     local weapon = getPedWeapon(getLocalPlayer())
 	if gameplayVariables["difficulty"] and gameplayVariables["difficulty"] == "hardcore" then return end
-    if weapon ~= 0 and weapon ~=1 then
+	if weapon ~= 0 and weapon ~=1 then
         if state == "down" then 
             addEventHandler("onClientRender", root, drawCrosshair)
         else

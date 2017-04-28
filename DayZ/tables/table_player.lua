@@ -8,83 +8,78 @@
 #-----------------------------------------------------------------------------#
 ]]
 spawnPositions = {
-{-278.6669921875,-2882.1572265625,32.104232788086},
-{-958.5595703125,-2887.9912109375,64.82421875},
+{-2185.6669921875,2957.380859375,11.474840164185},
+{-1056.8720703125,2939.068359375,42.311294555664},
+{-1952.9411621094,2200.000000000,5.3285703659058},
+{-233.46484375,-1735.8173828125,1.5520644187927},
+{1056.5900878906,-2356.1455078125,12.924290657043},
+{2896.6047363281,-2139.8461914063,3.377733707428},
+{-2911.51171875,-895.22265625,2.4013109207153},
+{-2947.7758789063,1095.8127441406,6.4143829345703},
+{-2369.7875976563,-884.27557373047,19.71940612793},
+{2803.943359375,595.9365234375,7.7612648010254},
+{1142.1452636719,672.907958983438,10.606409072876},
+{2432.7734375,2970.3952636719,28.820823669434},
 {-1816.9375,-2748.18359375,1.7327127456665},
 {-2816.166015625,-2439.0546875,2.4004096984863},
 {-2941.5673828125,-1206.2373046875,2.7848854064941},
-{-2911.51171875,-895.22265625,2.4013109207153},
-{-2185.6669921875,2957.380859375,11.474840164185},
+{-278.6669921875,-2882.1572265625,32.104232788086},
+{-958.5595703125,-2887.9912109375,64.82421875},
 {272.2265625,2928.505859375,1.3713493347168},
-{2803.943359375,595.9365234375,7.7612648010254},
+{157.36102294922,648.98712158203,3.1540131568909},
 {2883.7509765625,-178.4658203125,3.2714653015137},
-{-233.46484375,-1735.8173828125,1.5520644187927},
+{98.209899902344,141.20268249512,2.4296875},
+}
+
+spawnPositionsSelection = {
+["Tierra Robada"] = {
+{-2185.6669921875,2957.380859375,11.474840164185},
 {-1056.8720703125,2939.068359375,42.311294555664},
-}
---[[
-playerDefaultValues = {
-{"Bandage",2},
-{"Painkiller",1},
-{"Flashlight",1},
-{"Beige Pants",1},
-{"Beige Vest",1},
-{"Black Shoe",1},
-{"MAX_Slots",8},
-{"Item_Slots",1},
-{"Backpack_Slots",8},
-{"Backpack_Item_Slots",8},
-{"Back_Weapon_Slots",1},
-{"skin",0},
-{"blood",12000},
-{"temperature",37},
-{"brokenbone",false},
-{"pain",false},
-{"cold",false},
-{"infection",false},
-{"unconscious",false},
-{"food",100},
-{"thirst",100},
-{"currentweapon_1",false},
-{"currentweapon_2",false},
-{"currentweapon_3",false},
-{"bandit",false},
-{"humanity", 2500},
-{"bloodtype",{}}, --Handled inside the for loop
-{"bloodtypeisdiscovered","?"},
+{-1952.9411621094,2200.000000000,5.3285703659058},
+},
+
+["Los Santos"] = {
+{-233.46484375,-1735.8173828125,1.5520644187927},
+{1056.5900878906,-2356.1455078125,12.924290657043},
+{2896.6047363281,-2139.8461914063,3.377733707428},
+},
+
+["San Fierro"] = {
+{-2911.51171875,-895.22265625,2.4013109207153},
+{-2947.7758789063,1095.8127441406,6.4143829345703},
+{-2369.7875976563,-884.27557373047,19.71940612793},
+},
+
+["Las Venturas"] = {
+{2803.943359375,595.9365234375,7.7612648010254},
+{1142.1452636719,672.907958983438,10.606409072876},
+{2432.7734375,2970.3952636719,28.820823669434},
+},
+
+["Whetstone"] = {
+{-1816.9375,-2748.18359375,1.7327127456665},
+{-2816.166015625,-2439.0546875,2.4004096984863},
+{-2941.5673828125,-1206.2373046875,2.7848854064941},
+},
+
+["Flint County"] = {
+{-278.6669921875,-2882.1572265625,32.104232788086},
+{-958.5595703125,-2887.9912109375,64.82421875},
+},
+
+["Bone County"] = {
+{272.2265625,2928.505859375,1.3713493347168},
+{157.36102294922,648.98712158203,3.1540131568909},
+},
+
+["Red County"] = {
+{2883.7509765625,-178.4658203125,3.2714653015137},
+{98.209899902344,141.20268249512,2.4296875},
+},
+
 }
 
-playerDefaultValues = {
-	["Bandage"] = 2,
-	["Painkiller"] = 1,
-	["Flashlight"] = 1,
-	["Beige Pants"] = 1,
-	["Beige Vest"] = 1,
-	["Black Shoe"] = 1,
-	["MAX_Slots"] = 8,
-	["Item_Slots"] = 1,
-	["Backpack_Slots"] = 8,
-	["Backpack_Item_Slots"] = 8,
-	["Back_Weapon_Slots"] = 0,
-	["skin"] = 0,
-	["blood"] = 12000,
-	["temperature"] = 37,
-	["brokenbone"] = false,
-	["pain"] = false,
-	["cold"] = false,
-	["infection"] = false,
-	["unconscious"] = false,
-	["food"] = 100,
-	["thirst"] = 100,
-	["currentweapon_1"] = false,
-	["currentweapon_2"] = false,
-	["currentweapon_3"] = false,
-	["bandit"] = false,
-	["humanity"] = 2500,
-	["bloodtype"] = {}, --Handled inside the for loop
-	["bloodtypeisdiscovered"] = "?"
-}
-]]
-
+playerDynamicTable = {}
 
 -- FORMAT: {"item",DefaultValue}
 playerDataTable = {
@@ -239,6 +234,12 @@ playerDataTable = {
 {"Cooked Meat",0},
 {"Radio Device",0},
 {"Compass",0},
+{"Camouflage Clothing",0},
+{"Civilian Clothing",0},
+{"Survivor Clothing",0},
+{"Survivor Clothing (Female)",0},
+{"Civilian Clothing (Female)",0},
+{"Ghillie Suit",0},
 {"Military collar",0},
 {"Africa collar",0},
 {"Gold collar",0},
@@ -265,7 +266,7 @@ playerDataTable = {
 {"Cow-Boy Hat",0},
 {"White Hat",0},
 {"Hockey Mask",0},
-{"Black Shoe",1},
+{"Black Shoe",0},
 {"Sport Shoe",0},
 {"Brown Shoe",0},
 {"Biker Shoe",0},
@@ -273,7 +274,7 @@ playerDataTable = {
 {"Red Shoe",0},
 {"Beach Shoe",0},
 {"Black Pants",0},
-{"Beige Pants",1},
+{"Beige Pants",0},
 {"Gray Shorts",0},
 {"Blue Shorts",0},
 {"Blue Jeans",0},
@@ -283,7 +284,7 @@ playerDataTable = {
 {"Blue Jogging",0},
 {"Gray Jogging",0},
 {"Military Pants",0},
-{"Beige Vest",1},
+{"Beige Vest",0},
 {"Baseball Shirt",0},
 {"Baseball 2 Shirt",0},
 {"Red Vest",0},
@@ -300,6 +301,8 @@ playerDataTable = {
 {"Dark Glasses",0},
 {"Square Glasses",0},
 {"Red Glasses",0},
+{"Helmet",0},
+{"MX Helmet",0},
 {"Empty Water Bottle",0},
 {"Empty Soda Can",0},
 {"Empty Tin Can",0},
@@ -404,7 +407,6 @@ playerDataTable = {
 {"Metal Plate",0},
 {"Metallic Stick",0},
 {"Small Casing",0},
-
 {"DIY (Wood)",0},
 {"DIY (Metal)",0},
 {"Log",0},
@@ -414,6 +416,97 @@ playerDataTable = {
 {"Metal Sheet",0},
 {"Metal Sheet (Rusted)",0},
 }
+
+skinTable = {
+{"Camouflage Clothing",287},
+{"Civilian Clothing",179},
+{"Ghillie Suit",285},
+{"Survivor Clothing",73},
+{"Survivor Clothing (Female)",192},
+{"Civilian Clothing (Female)",172},
+ }
+
+clothesTable = {
+["Collar"] = {
+{"Military collar"},
+{"Africa collar"},
+{"Gold collar"},
+{"Silver collar"},
+{"LS collar"},
+},
+
+["Head"] = {
+{"Black Bandana (M)"},
+{"Blue Bandana (M)"},
+{"Green Bandana (M)"},
+{"Red Bandana (M)"},
+{"Black Bandana (H)"},
+{"Blue Bandana (H)"},
+{"Green Bandana (H)"},
+{"Red Bandana (H)"},
+{"Black Beret"},
+{"Red Beret"},
+{"Old Hat"},
+{"Black Hat"},
+{"Yellow Hat"},
+{"Black Trucker"},
+{"Blue Trucker"},
+{"Green Trucker"},
+{"Red Trucker"},
+{"Yellow Trucker"},
+{"Cow-Boy Hat"},
+{"White Hat"},
+{"Hockey Mask"},
+},
+
+["Feet"] = {
+{"Black Shoe"},
+{"Sport Shoe"},
+{"Brown Shoe"},
+{"Biker Shoe"},
+{"Blue Shoe"},
+{"Red Shoe"},
+{"Beach Shoe"},
+},
+
+["Legs"] = {
+{"Black Pants"},
+{"Beige Pants"},
+{"Gray Shorts"},
+{"Blue Shorts"},
+{"Blue Jeans"},
+{"Green Jeans"},
+{"Gray Pants"},
+{"Yellow Pants"},
+{"Blue Jogging"},
+{"Gray Jogging"},
+{"Military Pants"},
+},
+
+["Torso"] = {
+{"Beige Vest"},
+{"Baseball Shirt"},
+{"Baseball 2 Shirt"},
+{"Red Vest"},
+{"Grey Shirt"},
+{"Green Vest"},
+{"Hawai Shirt"},
+{"Black Vest"},
+{"Brown Vest"},
+{"Biker Vest"},
+{"Blue Shirt"},
+{"Green 2 Vest"},
+{"Number 5 Shirt"},
+{"Monk Shirt"},
+},
+
+["Eyes"] = {
+{"Dark Glasses"},
+{"Square Glasses"},
+{"Red Glasses"},
+},
+}
+
 
 weaponNoiseTable = {
 -- {ID, Base Noise, Divisor}
@@ -448,9 +541,6 @@ weaponNoiseTable = {
 {34,100,0.4},
 {35,100,0.4},
 {36,100,0.4},
-}
-
-skinTable = {
 }
 
 craftingTable = {

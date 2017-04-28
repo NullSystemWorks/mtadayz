@@ -438,6 +438,102 @@ function checkClothes()
 	else
 	  removePedClothes(source, 0, "tshirtbobomonk", "tshirt")
 	end
+	
+	--helmets
+	local skin61 = getElementData(source,"Helmet")
+	if skin61 >= 1 then
+		addPedClothes(source,"helmet","helmet",16)
+	else
+		removePedClothes(source,16,"helmet","helmet")
+	end
+	
+	local skin62 = getElementData(source,"MX Helmet")
+	if skin62 >= 1 then
+		addPedClothes(source,"moto","moto",16)
+	else
+		removePedClothes(source,16,"moto","moto")
+	end
 end
 addEvent("onPlayerChangeClothes",true)
 addEventHandler("onPlayerChangeClothes",getRootElement(),checkClothes)
+
+-- OLD CLOTHING/SKIN SYSTEM
+function getSkinIDFromName(name)
+	for i,skin in ipairs(skinTable) do
+		if name == skin[1] then
+			return skin[2]
+		end
+	end
+end
+
+function getSkinNameFromID(id)
+	for i,skin in ipairs(skinTable) do
+		if id == skin[2] then
+			return skin[1]
+		end
+	end
+end
+
+function addPlayerSkin(skin)
+	if skin == "MX Helmet" or skin == "Helmet" then
+		setElementData(source,"hasHelmet",true)
+		setElementData(source,skin,getElementData(source,skin)-1)
+		return
+	end
+	local current = getElementData(source,"skin")
+	local name = getSkinNameFromID(current)
+	local id = getSkinIDFromName(skin)
+	local gender = getElementData(source,"gender")
+	if gender == "female" then
+		if id == 172 or id == 192 or id == 285 then
+			setElementData(source,skin,getElementData(source,skin)-1)
+			setElementData(source,"skin",id)
+			setElementModel(source,id)
+			triggerClientEvent(source,"refreshInventoryManual",source)
+		else
+			outputChatBox("You can't wear this!",source,255,0,0,true)
+		end
+	else
+		if id == 172 or id == 192 then
+			outputChatBox("You can't wear this!",source,255,0,0,true)
+		else
+			setElementData(source,skin,getElementData(source,skin)-1)
+			setElementData(source,"skin",id)
+			setElementModel(source,id)
+			triggerClientEvent(source,"refreshInventoryManual",source)
+		end
+	end
+end
+addEvent("onPlayerChangeSkin",true)
+addEventHandler("onPlayerChangeSkin",getRootElement(),addPlayerSkin)
+
+function checkBandit ()
+	if gameplayVariables["newclothingsystem"] then return end
+	for i, player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			local current = getElementData(player,"skin")
+			if getElementData(player,"bandit") then
+				if getElementData(player,"gender") == "male" then
+					if current == 179 or current == 287 then
+						setElementModel(player,288)
+					elseif current == 73 then
+						setElementModel(player,180)
+					end
+				elseif getElementData(player,"gender") == "female" then
+					if current == 192 then
+						setElementModel(player,191)
+					elseif current == 172 then
+						setElementModel(player,211)
+					end
+				end
+			elseif getElementData(player,"humanity") == 5000 then
+				if current == 73 or current == 179 or current == 287 or current == 172 or current == 192 then
+					setElementModel(player,210)
+				end
+			else
+				setElementModel(player,current)
+			end
+		end
+	end
+end
+setTimer(checkBandit,20000,0)

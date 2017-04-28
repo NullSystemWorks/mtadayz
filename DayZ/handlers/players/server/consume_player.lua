@@ -129,6 +129,8 @@ function onPlayerUseMedicObject(itemName)
 			setElementData(playersource,"infection",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Morphine" then
+			setElementData(playersource,"fracturedArms",false)
+			setElementData(playersource,"fracturedLegs",false)
 			setElementData(playersource,"brokenbone",false)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Blood Bag" then
