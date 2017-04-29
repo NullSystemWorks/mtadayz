@@ -108,46 +108,6 @@ end
 
 
 ------------------------------------ AUTOUPDATER
-
-
---[[
-waitList = {}
-linkToFetch = "https://api.github.com/repositories/82748264/contents/"
-
-function init()
-	fetchRemote(linkToFetch.."DayZ",receive)
-end
-function receive(data,err)
-	if err == 0 then
-		local currentDir = {fromJSON(data)}
-		for i, all in pairs(currentDir) do
-			if all["type"] == "file" then
-				table.insert(waitList,{all["name"],all["path"],all["download_url"]})
-			elseif all["type"] == "dir" then
-				fetchRemote(linkToFetch..all["path"],receive)
-			end
-		end
-	end
-	if #waitList > 99 then
-		local newFile = fileCreate("test.txt")
-		if (newFile) then
-			for i, all in ipairs(waitList) do
-				if (i == (#waitList / 2)) then
-					outputServerLog("50%")
-				elseif(i == #waitList) then
-					outputServerLog("100%")
-				end
-				fileWrite(newFile, tostring(all[3]))
-			end
-			fileClose(newFile)
-		end
-	end
-end
-init()
-
-]]
-
--- Optimized way \/
 local lastCommit = "c10d90f46e7b38a12b082ac97acdd71b8ea1bc79"
 local commits = nil
 
