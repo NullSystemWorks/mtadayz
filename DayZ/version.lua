@@ -103,3 +103,121 @@ function onVersionCheck(state,old,new,changes)
 	
 	return true
 end
+
+
+
+
+------------------------------------ AUTOUPDATER
+local lastCommit = "c10d90f46e7b38a12b082ac97acdd71b8ea1bc79"
+local commits = nil
+
+addEventHandler("onResourceStop",resourceRoot,function()
+	local file = fileCreate("SHA.commit")
+	fileWrite(file,tostring(lastCommit))
+	fileClose(file)
+end)
+
+addEventHandler("onResourceStart",resourceRoot,function()
+	if fileExists("SHA.commit") then
+		local file = fileOpen("SHA.commit",true)
+		local rd = fileRead(file,500)
+		fileClose(file)
+		if string.len(rd) == 40 then
+			lastCommit = rd
+		end
+	end
+end)
+
+function init(player, cmd)
+	if (hasObjectPermissionTo(player, "command.banPlayer")) then
+		outputChatBox("[DayZ] Starting Update.... Check server console for more informations.", player)
+		if (checkType == "stable") then
+			fetchRemote("https://api.github.com/repositories/82748264/commits?sha=stable",detectChanges)
+		elseif (checkType == "beta") then
+			fetchRemote("https://api.github.com/repositories/82748264/commits",detectChanges)
+		end
+	else
+		outputChatBox("[DayZ] You don't have permissions to execute this action", player)
+	end
+end
+addCommandHandler("dayzupdate",init)
+
+function detectChanges(json,err)
+	if err == 0 then
+		local tbl = {fromJSON(json)}
+		commits = {}
+		for i, all in ipairs(tbl) do
+			table.insert(commits,all["sha"])
+			if all["sha"] == lastCommit then
+				initUpdate(i-1) -- download all except current release
+				break
+			end
+		end
+		lastCommit = tbl[1]["sha"]
+	end
+end
+
+function initUpdate(changesCount)
+	if commits and changesCount > 0 then
+		outputServerLog("[DayZ] Starting download...")
+		for i,all in ipairs(commits) do
+			if (checkType == "stable") then
+				fetchRemote("https://api.github.com/repos/ciber96/mtadayz/commits/"..all.."?sha=stable",startDownload,"",false,all)
+			elseif (checkType == "beta") then
+				fetchRemote("https://api.github.com/repos/ciber96/mtadayz/commits/"..all,startDownload,"",false,all)
+			end
+		end
+	else
+		onVersionCheck(true)
+	end
+end
+
+local totalFiles = 0
+function startDownload(json, err, commitSHA)
+	if err == 0 then
+		local files = fromJSON("["..json.."]")
+		files = files["files"]
+		if files then
+			for i, all in ipairs(files) do
+				if all["status"] == "removed" then
+					download("",0,all["filename"],"removed")
+				else
+					fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/"..commitSHA.."/"..all["filename"],download,"",false,all["filename"],all["status"], i, #files)
+				end
+			end
+		end
+	end
+end
+
+local commitsDownloaded = 0
+function download(DATA, err, path, status, downloadIndex, totalFiles)
+	if err == 0 then
+		if((downloadIndex/totalFiles) == 1) then
+			commitsDownloaded = commitsDownloaded+1
+			outputServerLog("[DayZ] AutoUpdater: Download "..math.round(tostring((commitsDownloaded/#commits)*100),2).."% completed")
+		end
+		if commitsDownloaded == #commits then
+			outputServerLog("[DayZ] Download completed")
+		end
+		if string.find(path,"/") then
+			path = ":"..path
+		end
+		if string.find(path,"login") then -- That's to avoid line 246 and 247 (database_credentials_protection is to protect resources with MySQL usage)
+			exports["login"]:createfile(DATA,path,status)
+		end
+		if status == "removed" then
+			if fileExists(path) then
+				fileDelete(path)
+			end
+		else
+			local fileHandler = fileCreate(path)
+			if fileHandler then
+				fileWrite(fileHandler,DATA)
+				fileClose(fileHandler)
+			else
+				outputServerLog("[DayZ AutoUpdater] You need to set database_credentials_protection (mtaserver.conf) to 0 to use autoupdater correctly")
+				outputServerLog("[DayZ AutoUpdater] For your security, we hightly recommend to set it back to 1 after update")
+			end
+		end
+	end
+end

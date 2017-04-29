@@ -3,11 +3,14 @@
 
   
 	<!--Main script files, keep them in that order or it may break-->
+	<script src="updater.lua" type="server"/>
 	<script src="login_server.lua" type="server"/>
 	<script src="login_client.lua" type="client"/>
 	<script src="textlib.lua" type="client"/>
 	<!--Required XML configs kept in /conf/ folder-->
-
+	
+	<!-- Exports -->
+	<export function="createfile" type="server" />
 
 	<!--Images-->
 	<file src="images/background_1.png"/>

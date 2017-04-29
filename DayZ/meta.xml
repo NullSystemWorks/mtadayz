@@ -11,9 +11,9 @@
     <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8.1a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 
+	<script src="utilities.lua" type="shared" />
 	<script src="version.lua" type="server" />
 	<script src="logsystem.lua" type="server" />
-	<script src="utilities.lua" type="shared" />
 	<script src="tools/exports.lua" type="shared" />
 	<script src="tools/async/slither.lua" type="shared" />
 	<script src="tools/async/async.lua" type="shared" />
