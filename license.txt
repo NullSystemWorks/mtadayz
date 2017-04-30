@@ -1,0 +1,51 @@
+Gamemode Terms and Conditions of Use
+
+
+1. Terms
+By downloading "MTA: DayZ", called "gamemode" from now on, you are agreeing to be bound by the following 
+Terms and Conditions of Use. If you do not agree with any of these terms, you are prohibited from 
+downloading or using the gamemode.
+
+
+2. User License
+Permission is granted to temporarily download one copy of the gamemode for personal, non-commercial 
+transitory using only. This is the grant of a license, not a transfer of title, and under this license 
+you may not:
+
+   - use the materials for any commercial purpose, or for any public display 
+     (commercial or non-commercial, by which is meant selling the gamemode for the purpose of profit);
+   - remove any copyright or other proprietary notations from the materials; or
+   - transfer the materials to another person or "mirror" the materials on any other server.
+
+This license shall automatically terminate if you violate any of these restrictions and 
+may be terminated by the original developer ("Marwin") or an authorized representative at any time. 
+Upon terminating your using of the gamemode or upon the termination of this license, you must destroy 
+any downloaded materials in your possession whether in electronic or printed format.
+
+3. Disclaimer
+The gamemode provided in the forum will be "delivered" and provided "as is". 
+The original developer and all authorized representatives make no warranties, expressed or implied, 
+and hereby disclaims and negates all other warranties, including without limitation, implied warranties 
+or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual 
+property or other violation of rights.
+Further, original developer and all authorized representatives do not warrant or make any 
+representations concerning the accuracy, likely results, or reliability of the use of the 
+materials on the forum or otherwise relating to such materials or on any sites linked to this site.
+
+5. Revisions and Errata
+The gamemode could include technical, typographical, or photographic errors.  
+The original developer and all authorized representatives do not warrant that the gamemode and its materials
+are accurate, complete, or current. The original developer and all authorized representatives may 
+make changes to the materials contained on the forum, gamemode and/or its materials at any time 
+without immediate notice.
+
+6. Links
+The original developer and all authorized representatives, while having reviewed the provided download 
+and download link, are not responsible for the contents of the download or download link. 
+Use of the download and download link is at the user's own risk.
+
+7. Gamemode Terms of Use
+The original developer and all authorized representatives may revise these terms of use for the gamemode
+ at any time without immediate notice. 
+By using the gamemode you are agreeing to be bound by the then current version of these 
+Terms and Conditions of Use.

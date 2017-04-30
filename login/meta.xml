@@ -1,0 +1,77 @@
+<meta>
+	<info author="Marwin & -ffs-Sniper" name="Login" type="script" version="0.6" />
+
+  
+	<!--Main script files, keep them in that order or it may break-->
+	<script src="login_server.lua" type="server"/>
+	<script src="login_client.lua" type="client"/>
+	<script src="textlib.lua" type="client"/>
+
+
+	<!--Images-->
+	<file src="images/background_1.png"/>
+	<file src="images/tab.png"/>
+	<file src="images/box_background.png"/>
+	<file src="images/button_mouse.png"/>
+	<file src="images/button_standard.png"/>
+	<file src="images/construction.png"/>
+	<file src="images/login_icon.png"/>
+	<file src="images/on.png"/>
+	<file src="images/signup_icon.png"/>
+	<file src="images/new.png"/>
+	<file src="images/news.png"/>
+	<file src="font.ttf"/>
+	<file src="font2.ttf"/>
+	<file src="button.mp3"/>
+	
+	<settings>
+	<setting name="*news1" value="#Update 2 - 16.04.2013: <br>-Tweaked Loginpanel<br>-Fixed line breaks \ o/<br><br>Greets -ffs-Sniper"
+					friendlyname="News 1"
+					group="News 1"
+					accept="*"
+					desc="Newest News."
+	/>
+	<setting name="*news1new" value="true"
+					friendlyname="News 1 bool"
+					group="News 1"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news2" value="#Update <br>-New Loginpanel"
+					friendlyname="News 2"
+					group="News 2"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news2new" value="false"
+					friendlyname="News 2 bool"
+					group="News 2"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news3" value="-"
+					friendlyname="News 3"
+					group="News 3"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news3new" value="false"
+					friendlyname="News 3 bool"
+					group="News 3"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news4" value="-"
+					friendlyname="News 4"
+					group="News 4"
+					accept="*"
+					desc="News."
+	/>
+	<setting name="*news4new" value="false"
+					friendlyname="News 4 bool"
+					group="News 4"
+					accept="*"
+					desc="News."
+	/>
+	</settings>
+</meta>
