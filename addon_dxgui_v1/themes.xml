@@ -1,0 +1,21 @@
+<themes>
+	<theme name="Lighter Black"  default="true">
+		<images src="CGUI.png" />
+		<imagesets src="CGUI.is.xml" />
+	</theme>
+	
+	<theme name="Lighter Blue" >
+		<images src="CGUI.png" />
+		<imagesets src="CGUI.is.xml" />
+	</theme>
+	
+	<theme name="Orange">
+		<images src="CGUI.png" />
+		<imagesets src="CGUI.is.xml" />
+	</theme>
+	
+	<theme name="DayZ" >
+		<images src="CGUI.png" />
+		<imagesets src="CGUI.is.xml" />
+	</theme>
+</themes>

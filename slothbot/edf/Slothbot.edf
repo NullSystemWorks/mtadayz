@@ -1,0 +1,12 @@
+<def name="AI">
+	<element name="pathpoint" friendlyname="Path point" icon="edf/flag/flag.png">
+		<data name="position" type="coord3d" default="0,0,0"/>
+		<object model="2993" rotation="0,0,0"/>
+	</element>
+
+	<script src="edf/AIedf_util.lua" type="client"/>
+	<script src="edf/AIedf.lua" type="client" />
+
+	<script src="edf/AIedf_s.lua" />
+	<script src="edf/AIedf_util.lua" />
+</def>

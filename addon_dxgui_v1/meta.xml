@@ -1,0 +1,194 @@
+<meta>
+	<info type="script" name="dxGUI" version="1.4.1" author="Skyline.(laserlaser)" />
+	<!-- Scripts -->
+		<script src="deprecatedFunction.lua" type="server" />
+		
+		<script src="dxGui.lua" type="client" />
+		<script src="dxShared.lua" type="client" />
+		<script src="dxRootPane.lua" type="client" />
+		<script src="dxTheme.lua" type="client" />
+		<script src="dxEvents.lua" type="client" />
+		<script src="dxGetter.lua" type="client" />
+		<script src="dxSetter.lua" type="client" />
+		<script src="dxAnimation.lua" type="client" />
+		<script src="dxStates.lua" type="client" />
+		<!-- Components -->
+			<script src="components/dxButton.lua" type="client" />
+			<script src="components/dxCheckBox.lua" type="client" />
+			<script src="components/dxRadioButton.lua" type="client" />
+			<script src="components/dxImage.lua" type="client" />
+			<script src="components/dxLabel.lua" type="client" />
+			<script src="components/dxList.lua" type="client" />
+			<script src="components/dxProgressBar.lua" type="client" />
+			<script src="components/dxScrollBar.lua" type="client" />
+			<script src="components/dxSpinner.lua" type="client" />
+			<script src="components/dxWindow.lua" type="client" />
+		<!-- #Components -->
+	<!-- #Scripts -->
+	<!-- Themes && Files -->
+		<file src="themes.xml" type="client" />
+		
+		<file src="themes/Lighter Black/CGUI.png" type="client" />
+		<file src="themes/Lighter Black/CGUI.is.xml" type="client" />
+		<file src="themes/Lighter Black/images/spinner.png" type="client" />
+		<file src="themes/Lighter Black/images/spinner.png" type="client" />
+		<file src="themes/Lighter Black/images/ListBox/Background.png" type="client" />
+		<file src="themes/Lighter Black/images/ListBox/_2ndcolor.png" type="client" />
+		<file src="themes/Lighter Black/images/ListBox/_1stcolor.png" type="client" />
+		<file src="themes/Lighter Black/images/ListBox/clicked.png" type="client" />
+		<file src="themes/Lighter Black/images/ListBox/arrow.png" type="client" />
+
+		
+		<file src="themes/Lighter Blue/CGUI.png" type="client" />
+		<file src="themes/Lighter Blue/CGUI.is.xml" type="client" />
+		<file src="themes/Lighter Blue/images/spinner.png" type="client" />
+		<file src="themes/Lighter Blue/images/ListBox/Background.png" type="client" />
+		<file src="themes/Lighter Blue/images/ListBox/_2ndcolor.png" type="client" />
+		<file src="themes/Lighter Blue/images/ListBox/_1stcolor.png" type="client" />
+		<file src="themes/Lighter Blue/images/ListBox/clicked.png" type="client" />
+		<file src="themes/Lighter Blue/images/ListBox/arrow.png" type="client" />
+		
+		<file src="themes/Orange/CGUI.png" type="client" />
+		<file src="themes/Orange/CGUI.is.xml" type="client" />
+		<file src="themes/Orange/images/spinner.png" type="client" />
+		<file src="themes/Orange/images/ListBox/Background.png" type="client" />
+		<file src="themes/Orange/images/ListBox/_2ndcolor.png" type="client" />
+		<file src="themes/Orange/images/ListBox/_1stcolor.png" type="client" />
+		<file src="themes/Orange/images/ListBox/clicked.png" type="client" />
+		<file src="themes/Orange/images/ListBox/arrow.png" type="client" />
+		
+		<file src="themes/DayZ/CGUI.png" type="client" />
+		<file src="themes/DayZ/CGUI.is.xml" type="client" />
+		<file src="themes/DayZ/images/spinner.png" type="client" />
+		<file src="themes/DayZ/images/ListBox/Background.png" type="client" />
+		<file src="themes/DayZ/images/ListBox/_2ndcolor.png" type="client" />
+		<file src="themes/DayZ/images/ListBox/_1stcolor.png" type="client" />
+		<file src="themes/DayZ/images/ListBox/clicked.png" type="client" />
+		<file src="themes/DayZ/images/ListBox/arrow.png" type="client" />
+	<!-- #Themes && Files -->
+	
+	<!-- Exports  -->
+		<!-- Shared -->
+			<export function="dxCreateRootPane" type="client" />
+			<export function="dxGetRootPane" type="client" />
+			<export function="dxRefreshThemes" type="client" />
+			<export function="dxGetTheme" type="client" />
+			<export function="dxGetDefaultTheme" type="client" />
+			<export function="dxGetPosition" type="client" />
+			<export function="dxGetSize" type="client" />
+			<export function="dxGetVisible" type="client" />
+			<export function="dxGetElementTheme" type="client" />
+			<export function="dxGetFont" type="client" />
+			<export function="dxGetColor" type="client" />
+			<export function="dxGetColorCoded" type="client" />
+			<export function="dxGetText" type="client" />
+			<export function="dxGetAlpha" type="client" />
+			<export function="dxSetPosition" type="client" />
+			<export function="dxSetSize" type="client" />
+			<export function="dxSetVisible" type="client" />
+			<export function="dxSetElementTheme" type="client" />
+			<export function="dxSetFont" type="client" />
+			<export function="dxSetColor" type="client" />
+			<export function="dxSetColorCoded" type="client" />
+			<export function="dxSetText" type="client" />
+			<export function="dxSetAlpha" type="client" />
+			<export function="dxMove" type="client" />
+			<export function="dxRefreshStates" type="client" />
+			<export function="dxRefreshClickStates" type="client" />
+			<export function="guiAttachToDirectX" type="client" />
+			<export function="dxGetAlwaysOnTop" type="client" />
+			<export function="dxSetAlwaysOnTop" type="client" />
+			<export function="dxGetZOrder" type="client" />
+			<export function="dxSetZOrder" type="client" />
+			<export function="dxBringToFront" type="client" />
+			<export function="dxMoveToBack" type="client" />
+			<export function="dxDestroyElement" type="client" />
+			<export function="dxDestroyElements" type="client" />
+		<!-- Button -->
+			<export function="dxCreateButton" type="client" />
+			<export function="dxButtonRender" type="client" />
+		<!-- Checkbox -->
+			<export function="dxCreateCheckBox" type="client" />
+			<export function="dxCheckBoxGetSelected" type="client" />
+			<export function="dxCheckBoxSetSelected" type="client" />
+			<export function="dxCheckBoxRender" type="client" />
+		<!-- Label -->
+			<export function="dxCreateLabel" type="client" />
+			<export function="dxLabelGetScale" type="client" />
+			<export function="dxLabelGetHorizontalAlign" type="client" />
+			<export function="dxLabelGetVerticalAlign" type="client" />
+			<export function="dxLabelSetScale" type="client" />
+			<export function="dxLabelSetHorizontalAlign" type="client" />
+			<export function="dxLabelSetVerticalAlign" type="client" />
+			<export function="dxLabelRender" type="client" />
+		<!-- Progressbar -->
+			<export function="dxCreateProgressBar" type="client" />
+			<export function="dxProgressBarGetProgress" type="client" />
+			<export function="dxProgressBarGetProgressPercent" type="client" />
+			<export function="dxProgressBarGetMaxProgress" type="client" />
+			<export function="dxProgressBarSetProgress" type="client" />
+			<export function="dxProgressBarSetProgressPercent" type="client" />
+			<export function="dxProgressBarSetMaxProgress" type="client" />
+			<export function="dxProgressBarRender" type="client" />
+		<!-- Radio button -->
+			<export function="dxCreateRadioButton" type="client" />
+			<export function="dxRadioButtonGetSelected" type="client" />
+			<export function="dxRadioButtonGetGroup" type="client" />
+			<export function="dxRadioButtonSetSelected" type="client" />
+			<export function="dxRadioButtonSetGroup" type="client" />
+			<export function="dxRadioButtonRender" type="client" />
+		<!-- Scrollbar -->
+			<export function="dxCreateScrollBar" type="client" />
+			<export function="dxScrollBarGetProgress" type="client" />
+			<export function="dxScrollBarGetProgressPercent" type="client" />
+			<export function="dxScrollBarGetMaxProgress" type="client" />
+			<export function="dxScrollBarSetProgress" type="client" />
+			<export function="dxScrollBarSetProgressPercent" type="client" />
+			<export function="dxScrollBarSetMaxProgress" type="client" />
+			<export function="dxScrollBarRender" type="client" />
+		<!-- Spinner -->
+			<export function="dxCreateSpinner" type="client" />
+			<export function="dxSpinnerGetPosition" type="client" />
+			<export function="dxSpinnerGetMin" type="client" />
+			<export function="dxSpinnerGetMin" type="client" />
+			<export function="dxSpinnerSetPosition" type="client" />
+			<export function="dxSpinnerSetMin" type="client" />
+			<export function="dxSpinnerSetMin" type="client" />
+			<export function="dxSpinnerRender" type="client" />
+		<!-- Static Image -->
+			<export function="dxCreateStaticImage" type="client" />
+			<export function="dxCreateStaticImageSection" type="client" />
+			<export function="dxStaticImageGetLoadedImage" type="client" />
+			<export function="dxStaticImageGetSection" type="client" />
+			<export function="dxStaticImageGetRotation" type="client" />
+			<export function="dxStaticImageLoadImage" type="client" />
+			<export function="dxStaticImageSetSection" type="client" />
+			<export function="dxStaticImageSetRotation" type="client" />
+			<export function="dxStaticImageRender" type="client" />
+		<!-- Window -->
+			<export function="dxCreateWindow" type="client" />
+			<export function="dxWindowGetTitlePosition" type="client" />
+			<export function="dxWindowGetMovable" type="client" />
+			<export function="dxWindowIsMoving" type="client" />
+			<export function="dxWindowGetTitleVisible" type="client" />
+			<export function="dxWindowSetTitlePosition" type="client" />
+			<export function="dxWindowSetMovable" type="client" />
+			<export function="dxWindowGetTitleVisible" type="client" />
+			<export function="dxWindowGetPostGUI" type="client" /> <!-- WARNING: Deprecated -->
+			<export function="dxWindowSetPostGUI" type="client" /> <!-- WARNING: Deprecated -->
+			<export function="dxWindowRender" type="client" />
+			<export function="dxWindowMoveControl" type="client" />
+			<export function="dxWindowComponentRender" type="client" />
+		<!-- Listbox -->
+			<export function="dxCreateList" type="client" />
+			<export function="dxListClear" type="client" />
+			<export function="dxListGetSelectedItem" type="client" />
+			<export function="dxListSetSelectedItem" type="client" />
+			<export function="dxListGetItemCount" type="client" />
+			<export function="dxListRemoveRow" type="client" />
+			<export function="dxListAddRow" type="client" />
+			<export function="dxListSetTitleShow" type="client" />
+			<export function="dxListGetTitleShow" type="client" />
+			<export function="dxListRender" type="client" />
+	<!-- #Exports -->
+</meta>
