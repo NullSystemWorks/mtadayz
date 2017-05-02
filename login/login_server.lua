@@ -51,7 +51,8 @@ function tryToLoginPlayer (username, password)
 					return
 				end
 			end
-			triggerClientEvent(source,"onPlayerDoneLogin", source, username, password)		
+			triggerClientEvent(source,"onPlayerDoneLogin", source, username, password)
+			triggerClientEvent(source,"getTheServerName", source, getServerName())		
 			triggerEvent("onPlayerDayZLogin", getRootElement(), username, password, source)
 			local theTime = getRealTime()
 			local hour = theTime.hour
