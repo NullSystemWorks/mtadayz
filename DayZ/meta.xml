@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------#
 -->
 <meta>
-    <info author="L, CiBeR, JBoy (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8.1a" type="gamemode" />
+    <info author="L, CiBeR, 1B0Y, Neves (Original: Marwin)" description="MTA:DayZ - DayZ for MTA" version="0.9.8.1a" type="gamemode" />
 	<min_mta_version server="1.4.1" client="1.4.1" />
 
 	<script src="utilities.lua" type="shared" />
@@ -66,6 +66,7 @@
 	<script src="init/players/spawnselection_init.lua" type="client" />
 	<script src="init/permissions/permissions_init.lua" type="server" />
 	<script src="init/animals/animals_init.lua" type="server" />
+	<script src="init/server/caching.lua" type="server" />
 
 	<!-- handlers folder -->
 	<script src="handlers/world/client/tree_chop.lua" type="client" cache="false" />
@@ -119,6 +120,8 @@
 	<script src="handlers/animals/client/damage_animals.lua" type="client" cache="false" />
 	<script src="handlers/animals/client/movement_animals.lua" type="client" cache="false" />
 	<script src="handlers/animals/server/kill_animals.lua" type="server" />
+	
+	<script src="handlers/caching/caching.lua" type="client" />
 	
 	<!-- gui folder -->
 	<script src="gui/gear/functions_gear.lua" type="client" cache="false" />
@@ -1001,6 +1004,9 @@
 	<export function="getDynamicMoonVector" type="client" />
 	<export function="getMoonPhaseValue" type="client" />
 	<export function="isDynamicSkyEnabled" type="client" />
+	
+	<!-- Version file -->
+	<file src="version.txt" download="false"/>
 	
 	
 	<!-- Enable OOP for some scripts -->

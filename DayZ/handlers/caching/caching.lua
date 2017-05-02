@@ -32,6 +32,7 @@ function getClientVersion()
 		fileClose(verFile)
 	else
 		clearCache()
+		downloadFile("version.txt")
 		return false
 	end
 	
