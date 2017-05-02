@@ -11,10 +11,15 @@
 
 local timer
 local checkType = "stable" -- stable = Only check for stable versions; beta = check for most recent version (including unstables)
-version = "v0.9.9a"
+version = ""
 
 addEventHandler("onResourceStart",resourceRoot,
 function()
+	--Load version from file. (Jack)
+	verFile = fileOpen("version.txt")
+	version = fileRead(verFile,fileGetSize(verFile))
+	fileClose(verFile)
+	
 	checkVersion()
 	timer = setTimer(checkVersion,60000*60,0) --Update hourly [It help to avoid overcharging from GitHub API]
 end)
