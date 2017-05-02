@@ -45,6 +45,7 @@ gameplayVariables["MySQL_port"] = "3306" -- MySQL port, example: 3306
 gameplayVariables["MySQL_user"] = "root" -- MySQL user
 gameplayVariables["MySQL_pass"] = "pass" -- MySQL pass
 gameplayVariables["MySQL_DB"]   = "dayz" -- MySQL Database name
+gameplayVariables["secret_key"]   = "^^XmakP9*31z{}ç';'" -- WARNING TO SERVERS OWNERS: CHANGE IT (before letting players register) TO ANY OTHER SECURE STRING
 
 
 -- WEIGHT SETTINGS

@@ -6,7 +6,7 @@ local blockedAccounts = {
 	{"seasonmanager"}
 }
 
-secretKey = "^^XmakP9*31z{}ç';'" -- WARNING TO SERVERS OWNERS: CHANGE IT (before letting players register) TO ANY OTHER SECURE STRING
+secretKey = exports["DayZ"].getGameplayVariablesServerPairs()["secret_key"]
 
 --LOGIN THE PLAYER FROM GUI
 function tryToLoginPlayer (username, password)
