@@ -21,6 +21,7 @@ https://master.mta-dayz.org/
 Website: https://mta-dayz.org/
 Discord: https://discord.gg/th86Tmw
 Issues: https://github.com/ciber96/mtadayz/issues
+Donations: https://mta-dayz.org/donate.html
 
 ### Contact ###
 Please check "Links" if you wish to contact us. If you have a bug to report or a feature to propose, please do so on the "Issues" page of our repository.
