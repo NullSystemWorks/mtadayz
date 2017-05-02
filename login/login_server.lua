@@ -6,6 +6,8 @@ local blockedAccounts = {
 	{"seasonmanager"}
 }
 
+secretKey = "^^XmakP9*31z{}ç';'" -- WARNING TO SERVERS OWNERS: CHANGE IT (before letting players register) TO ANY OTHER SECURE STRING
+
 --LOGIN THE PLAYER FROM GUI
 function tryToLoginPlayer (username, password)
 	--Parse through our blockedAccounts array for system accounts
@@ -23,8 +25,9 @@ function tryToLoginPlayer (username, password)
 	if exports["DayZ"].getGameplayVariablesServerPairs()["MySQL"] then
 		local dbConnection = dbConnect( "mysql", "dbname="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_DB"]..";host="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_host"]..";port="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_port"], exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_user"], exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_pass"], "share=1" )
 		dbExec(dbConnection,"CREATE TABLE IF NOT EXISTS `accounts` (`ID` int(11) NOT NULL AUTO_INCREMENT,`username` text NOT NULL,`password` text NOT NULL,`userdata` text NOT NULL,  `rank` text NOT NULL, `creationDate` text NOT NULL,`lastLogin` text NOT NULL, PRIMARY KEY (`ID`))")
-		local qh = dbQuery(dbConnection, "SELECT * FROM accounts WHERE `username`=? AND `password`=? LIMIT 1",username,md5(password))
+		local qh = dbQuery(dbConnection, "SELECT * FROM accounts WHERE `username`=? AND `password`=? LIMIT 1",username,md5(password..secretKey))
 		local result = dbPoll(qh, -1)
+		dbFree(qh) -- Just to avoid console flood or security vulnerability, but it's not necessary.
 		if #result > 0 then
 			if getPlayerAccount(client) then
 				logOut(client)
@@ -101,14 +104,19 @@ function tryToRegsiterPlayer(username, pass)
 	if exports["DayZ"].getGameplayVariablesServerPairs()["MySQL"] then
 		local dbConnection = dbConnect( "mysql", "dbname="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_DB"]..";host="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_host"]..";port="..exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_port"], exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_user"], exports["DayZ"].getGameplayVariablesServerPairs()["MySQL_pass"], "share=1" )
 		dbExec(dbConnection,"CREATE TABLE IF NOT EXISTS `accounts` (`ID` int(11) NOT NULL AUTO_INCREMENT,`username` text NOT NULL,`password` text NOT NULL,`userdata` text NOT NULL,  `rank` text NOT NULL, `creationDate` text NOT NULL,`lastLogin` text NOT NULL, PRIMARY KEY (`ID`))")		local qh = dbQuery(dbConnection, "SELECT * FROM accounts WHERE `username`=? LIMIT 1",username)
+		local qh = dbQuery(dbConnection, "SELECT * FROM accounts WHERE `username`=? LIMIT 1",username)
 		local result = dbPoll(qh, -1)
+		dbFree(qh) -- Just to avoid console flood or security vulnerability, but it's not necessary.
 		if #result == 0 then
+			if getPlayerAccount(client) then
+				logOut(client)
+			end
 			local theTime = getRealTime()
 			local hour = theTime.hour
 			local minute = theTime.minute
 			local seconds = theTime.second
 			local currentTime = theTime.monthday.."/"..(theTime.month+1).."/"..(theTime.year+1900)
-			local exec = dbExec(dbConnection, "INSERT INTO accounts VALUES (?,?,?,?,?,?,?)", nil, username, md5(pass), toJSON({}), "Survivor", currentTime, currentTime)
+			local exec = dbExec(dbConnection, "INSERT INTO accounts VALUES (?,?,?,?,?,?,?)", nil, username, md5(pass..secretKey), toJSON({}), "Survivor", currentTime, currentTime)
 			if exec then
 				local cc = getAccount(username) -- Why we're still using internal DB with MySQL? That's the solution to avoid script bugs (scripts that still uses ACL or something)
 				if cc then
