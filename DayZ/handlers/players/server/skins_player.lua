@@ -476,9 +476,11 @@ end
 
 function addPlayerSkin(skin)
 	if skin == "MX Helmet" or skin == "Helmet" then
-		setElementData(source,"hasHelmet",true)
-		setElementData(source,skin,getElementData(source,skin)-1)
-		return
+		if not gameplayVariables["newclothingsystem"] then
+			setElementData(source,"hasHelmet",true)
+			setElementData(source,skin,getElementData(source,skin)-1)
+			return
+		end
 	end
 	local current = getElementData(source,"skin")
 	local name = getSkinNameFromID(current)

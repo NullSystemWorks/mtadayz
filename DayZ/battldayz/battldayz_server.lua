@@ -156,7 +156,7 @@ function checkLoss()
 			if loss > 80 then -- If we have packet loss then send message and add counter.
 				if not isLosingConnection then
 					isLosingConnection = true
-					triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
+					--triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
 					outputSideChat("Player "..string.gsub(getPlayerName(v), '#%x%x%x%x%x%x', '' ).." is losing connection",root,255,0,0)
 				end
 				lossCount[v] = lossCount[v] + 1
@@ -167,7 +167,7 @@ function checkLoss()
 			else -- If packet loss was corrected then reset counter
 				lossCount[v] = 0
 				isLosingConnection = false
-				triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
+				--triggerClientEvent("onPlayerIsLosingConnection",v,isLosingConnection)
 			end
 		end
 	end

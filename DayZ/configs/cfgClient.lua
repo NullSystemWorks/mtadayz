@@ -18,6 +18,9 @@ gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage dealt when d
 -- MISC
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
 gameplayVariables["armachat"] = false -- Activates/deactivates ArmA II style chatbox - DEFAULT: false
+gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? DEFAULT: false
+gameplayVariables["oldmap"] = true -- Activates/deactivates the normal map provided by MTA - DEFAULT: true
+gameplayVariables["oldgps"] = true -- Activates/deactivates the normal GPS provided by GTA - DEFAULT: true
 
 -- HEADSHOT MULTIPLIER
 gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
@@ -30,7 +33,5 @@ gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds shoul
 gameplayVariables["painshakesway"] = true -- Determines if camera should sway from left to right or shake violently - DEFAULT: true (= camera will sway)
 gameplayVariables["painshakelevel"] = 150 -- How much should the camera shake when in pain. DEFAULT: 150, value can be from 0 - 255
 
--- DEBUG MONITOR OPTION
-gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? DEFAULT: false
 
 outputDebugString("[DayZ] cfgClient loaded")

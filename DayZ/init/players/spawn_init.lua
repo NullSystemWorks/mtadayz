@@ -217,15 +217,17 @@ function kilLDayZPlayer(killer,headshot)
 	end
 	triggerClientEvent(source,"onClientPlayerDeathInfo",source)
 	if killer then
-		setElementData(source,"killedBy",killer)
-		if getElementData(killer,"humanity") <= 0 then
-			setElementData(killer,"bandit",true)
-		end
-		if getElementData(source,"bandit") == true then
-			setElementData(killer,"banditskilled",getElementData(killer,"banditskilled")+1)
-		end
-		if headshot == true then
-			setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
+		if not getElementData(killer,"zombie") then
+			setElementData(source,"killedBy",killer)
+			if getElementData(killer,"humanity") <= 0 then
+				setElementData(killer,"bandit",true)
+			end
+			if getElementData(source,"bandit") == true then
+				setElementData(killer,"banditskilled",getElementData(killer,"banditskilled")+1)
+			end
+			if headshot == true then
+				setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
+			end
 		end
 	end
 	--SetElementDatas
@@ -289,6 +291,7 @@ function kilLDayZPlayer(killer,headshot)
 		setAccountData(account,"isDead",true)
 	end
 	setElementData(source,"isDead",true)
+	setElementData(source,"hasHelmet",false)
 	outputSideChat("Player "..getPlayerName(source).." was killed",root,255,255,255)
 	destroyElement(getElementData(source,"playerCol"))
 	setTimer(function(source)

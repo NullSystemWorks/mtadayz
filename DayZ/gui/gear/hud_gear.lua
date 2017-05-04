@@ -25,24 +25,33 @@ local rt = dxCreateRenderTarget(290, 175)
 local xFactor, yFactor = sx/1366, sy/768
 local yFactor = xFactor
 
+toggleControl ("radar",false)
+setPlayerHudComponentVisible ("clock",false) 
+setPlayerHudComponentVisible ("radar",false)
+setPlayerHudComponentVisible ("money",false) 
+setPlayerHudComponentVisible ("health",false) 
+setPlayerHudComponentVisible ("weapon",false) 
+setPlayerHudComponentVisible ("ammo",false)
+setPlayerHudComponentVisible ("breath",false)
+
 function playerDrawMapGPSCompass()
 	if getElementData(getLocalPlayer(),"logedin") then
-		toggleControl ("radar",false)
-		setPlayerHudComponentVisible ("clock",false) 
-		setPlayerHudComponentVisible ("radar",false)
-		setPlayerHudComponentVisible ("money",false) 
-		setPlayerHudComponentVisible ("health",false) 
-		setPlayerHudComponentVisible ("weapon",false) 
-		setPlayerHudComponentVisible ("ammo",false) 
-		setPlayerHudComponentVisible ("breath",false) 
 		if getElementData(getLocalPlayer(),"Map") >= 1  then
 			if not mapkeybound then
-				bindKey("F11","down",toggleMap)
+				if not gameplayVariables["oldmap"] then
+					bindKey("F11","down",toggleMap)
+				else
+					toggleControl("radar",true)
+				end
 				mapkeybound = true
 			end
 		else
 			if mapkeybound then
-				unbindKey("F11","down",toggleMap)
+				if not gameplayVariables["oldmap"] then
+					unbindKey("F11","down",toggleMap)
+				else
+					toggleControl("radar",false)
+				end
 				mapkeybound = false
 			end
 		end
@@ -117,10 +126,18 @@ end
 function toggleGPS()
 	if not isGPSShown then
 		isGPSShown = true
-		addEventHandler("onClientRender",root,drawTheGPS)
+		if not gameplayVariables["oldgps"] then
+			addEventHandler("onClientRender",root,drawTheGPS)
+		else
+			setPlayerHudComponentVisible("radar",true)
+		end
 	else
 		isGPSShown = false
-		removeEventHandler("onClientRender",root,drawTheGPS)
+		if not gameplayVariables["oldgps"] then
+			removeEventHandler("onClientRender",root,drawTheGPS)
+		else
+			setPlayerHudComponentVisible("radar",false)
+		end
 	end
 end
 
