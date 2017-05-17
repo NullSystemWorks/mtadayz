@@ -9,15 +9,15 @@
 local logTypes = { "admin", "debug", "updates", "accounts", "game", "chat" }
 
 function isCorrectLogType(logtype)
-	local isCorrectLogType = false
+	local _isCorrectLogType = false
 	for _, v in ipairs( logTypes ) do
 		if v == logtype then
-			isCorrectLogType = true
+			_isCorrectLogType = true
 			break
 		end
 	end
 	
-	if not isCorrectLogType then
+	if _isCorrectLogType ~= true then
 		outputDebugString( "[DayZ Logs] Error in 'saveLog' function. Wrong log type '".. logtype .."'!"  )
 		return false
 	end	
@@ -29,12 +29,12 @@ function fileLog(logtype,tstring)
 	if tstring then
 		local set = fileSetPos( file, size )
 		local writ = fileWrite( file, tstring )
-		local ret = true
+		fileClose( file )
+		return true
 	else
-		local ret = fileRead( file, size )
+		fileClose( file )
+		return fileRead( file, size )
 	end
-	fileClose( file )
-	return ret
 end
 
 
