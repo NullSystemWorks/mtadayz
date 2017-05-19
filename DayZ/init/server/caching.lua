@@ -16,6 +16,6 @@ function versionValidate(clientVer)
 		validate = true
 	end
 	
-	return triggerClientEvent(client,"onClientVersionVersionValidateReturn",resourceRoot,validate)
+	return triggerClientEvent(client,"onClientServerVersionValidateReturn",resourceRoot,validate)
 end
 addEventHandler("onClientServerVersionValidate",root,versionValidate)

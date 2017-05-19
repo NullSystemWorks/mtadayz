@@ -20,7 +20,6 @@ function addPlayerStats (player,data,value)
 			setElementData(player,data,100)
 		elseif current + value < 1 then
 			setElementData(player,data,0)
-			setElementData(player,"blood",getElementData(player,"blood")-math.random(50,120))
 		else
 			setElementData(player,data,current+value)
 		end
@@ -30,7 +29,6 @@ function addPlayerStats (player,data,value)
 			setElementData(player,data,100)
 		elseif 	current + value < 1 then
 			setElementData(player,data,0)
-			setElementData(player,"blood",getElementData(player,"blood")-math.random(50,120))
 		else
 			setElementData(player,data,current+value)
 		end

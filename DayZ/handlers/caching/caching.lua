@@ -14,21 +14,21 @@ addEventHandler("onClientResourceStart",resourceRoot,onStart)
 function onValidationCompleted(state)
 	if not state then
 		clearCache()
-		triggerServerEvent("forcePlayerRedirect",resourceRoot)
+		--triggerServerEvent("forcePlayerRedirect",resourceRoot)
 		return true
 	end
 	
 	outputDebugString("[Cache] Validation completed. Client up-to-date.")
 	return true
 end
-addEventHandler("onClientServerVersionValidateReturn",root,onValidationComplete)
+addEventHandler("onClientServerVersionValidateReturn",root,onValidationCompleted)
 
 function getClientVersion()
 	local version
 	
 	if (fileExists("version.txt")) then
 		local verFile = fileOpen("version.txt")
-		version = fileRead(verFile,getGetSize(verFile))
+		version = fileRead(verFile,fileGetSize(verFile))
 		fileClose(verFile)
 	else
 		clearCache()

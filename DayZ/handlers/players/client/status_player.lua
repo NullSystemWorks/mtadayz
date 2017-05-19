@@ -28,18 +28,47 @@ function stopPlayerVoices()
 end
 setTimer(stopPlayerVoices,1000,0)
 
-function createBloodFX()
+function regenerateBlood()
 	if getElementData(localPlayer,"logedin") then
+		local blood = getElementData(localPlayer,"blood")
+		local thirst = getElementData(localPlayer,"thirst")
+		local hunger = getElementData(localPlayer,"food")
+		local block,anim = getPedAnimation(localPlayer)
+		local bloodRegen = 0
+		if blood < 12000 then
+			local isWellFed = ((hunger+thirst)/2)/100
+			if isWellFed <= 0.50 then
+				return
+			else
+				if getPedMoveState(localPlayer) == "crouch" then
+					bloodRegen = math.round((1+4*math.sqrt((12000-blood)/12000)),0)
+				elseif block == "ped" then
+					bloodRegen = math.round((1+10*(12000-blood)/12000))
+				end
+			end
+			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")+bloodRegen)
+		end
+	end
+end
+setTimer(regenerateBlood,60000,0)
+
+function processBleeding()
+	if getElementData(localPlayer,"logedin") then
+		local hunger = getElementData(localPlayer,"food")
+		local thirst = getElementData(localPlayer,"thirst")
+		local bloodLossPerSec = getElementData(localPlayer,"bleeding") or 0
 		local x,y,z = getElementPosition(localPlayer)
-		local bleeding = getElementData(localPlayer,"bleeding") or 0
-		if bleeding > 0 then
+		if hunger <= 0 or thirst <= 0 then
+			bloodLossPerSec = bloodLossPerSec+10
+		end
+		if bloodLossPerSec > 0 then
 			local px,py,pz = getPedBonePosition(localPlayer,3)
 			local pdistance = getDistanceBetweenPoints3D(x,y,z,px,py,pz)
-			if bleeding >= 61 then
+			if bloodLossPerSec >= 61 then
 				number = 5
-			elseif bleeding >= 31 and bleeding <= 60 then
+			elseif bloodLossPerSec >= 31 and bloodLossPerSec <= 60 then
 				number = 3
-			elseif bleeding >= 10 and bleeding <= 30 then
+			elseif bloodLossPerSec >= 10 and bloodLossPerSec <= 30 then
 				number = 1
 			else
 				number = 0
@@ -47,24 +76,11 @@ function createBloodFX()
 			if pdistance <= 120 then
 				fxAddBlood (px,py,pz,0,0,0,number,1)
 			end
+			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-bloodLossPerSec)
 		end
 	end	
 end
-setTimer(createBloodFX,300,0)
-
-function setPlayerBleeding()
-	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"bleeding") > 20 then
-			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-getElementData(localPlayer,"bleeding"))
-		else
-			local randomnumber = math.random(0,10)
-			if randomnumber < 5 then
-				setElementData(localPlayer,"bleeding",0)
-			end
-		end
-	end
-end
-setTimer(setPlayerBleeding,3000,0)
+setTimer(processBleeding,1000,0)
 
 function setPlayerDeath()
 	if getElementData(localPlayer,"logedin") then
@@ -438,21 +454,12 @@ local bloodTypeSpawn = false
 function assignTypeToDrop()
 	if not bloodTypeSpawn then
 		local bloodstring = ""
-		for i = 1, 4 do
-			if i == 1 then
-				bloodstring = "0"
-				setElementData(bloodTest["drop1"],"bloodtype",bloodstring)
-			elseif i == 2 then
-				bloodstring = "A"
-				setElementData(bloodTest["drop2"],"bloodtype",bloodstring)
-			elseif i == 3 then
-				bloodstring = "B"
-				setElementData(bloodTest["drop3"],"bloodtype",bloodstring)
-			elseif i == 4 then
-				bloodstring = "AB"
-				setElementData(bloodTest["drop4"],"bloodtype",bloodstring)
-			end
-			addEventHandler("onClientGUIClick",bloodTest["drop"..i],checkBloodType, false)
+		setElementData(bloodTest["drop1"],"bloodtype","0")
+		setElementData(bloodTest["drop2"],"bloodtype","A")
+		setElementData(bloodTest["drop3"],"bloodtype","B")
+		setElementData(bloodTest["drop4"],"bloodtype","AB")
+		for i = 1, 4 do 
+			addEventHandler("onClientGUIClick",bloodTest["drop"..i],checkBloodType,false)
 		end
 		addEventHandler("onClientGUIClick",bloodTest["close"],closeBloodTest,false)
 		bloodTypeSpawn = true
@@ -494,11 +501,7 @@ function infectionSigns()
 			if randomsound >= 0 and randomsound <= 20 then
 				local getnumber = math.random(0,2)
 				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
-				--setElementData(localPlayer,"volume",100)
-				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 			elseif randomsound >= 21 and randomsound <= 40 then	
-				--setElementData(localPlayer,"volume",100)
-				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
 				playSound(":DayZ/sounds/status/sneezing.mp3",false)
 			end
 		end
@@ -677,164 +680,6 @@ function drawHourGlass()
 	dxDrawImage(w * 0.3900, h * 0.3217, w * 0.2500, h * 0.3333, ":DayZ/gui/status/misc/circle.png", 0, 0, 0, tocolor(255, 255, 255, 255), false)
 	dxDrawImage(w * 0.4363, h * 0.3567, w * 0.1563, h * 0.2583, ":DayZ/gui/status/misc/hourglass.png", hourglassrotation, 0, 0, tocolor(255, 255, 255, 255), false)
 end
-
-local backpackLoadTable = {}
-local ammoLoadTable = {}
-local itemLoadTable = {}
-local weaponLoadTable = {}
-local mps = 0
-local ammoLoad = 0
-local itemLoad = 0
-local weaponLoad = 0
-local playerSpeed = 0
-local playerHunger = 0
-local playerThirst = 0
-function getPlayerLoad()
-	if getElementData(localPlayer,"logedin") then
-		backpackLoadTable = {}
-		ammoLoadTable = {}
-		itemLoadTable = {}
-		weaponLoadTable = {}
-		ammoLoad = 0
-		itemLoad = 0
-		weaponLoad = 0
-		-- We iterate through the weight table and insert the appropriate values into the appropriate tables, depending on if the player has the item in his inventory
-		for i, item in ipairs(itemWeightTable) do
-		if getElementData(localPlayer,item[1]) and getElementData(localPlayer,item[1]) > 0 then
-				if item[3] == "Weapon" then
-					table.insert(weaponLoadTable,{item[2],getElementData(localPlayer,item[1])})
-				elseif item[3] == "Ammo" then
-					table.insert(ammoLoadTable,{item[2],getElementData(localPlayer,item[1])})
-				elseif item[3] == "Item" then
-					table.insert(itemLoadTable,{item[2],getElementData(localPlayer,item[1])})
-				end
-			end
-		end
-		-- Now we calculate the amount of all items in the player's inventory + their respective weight
-		for i, load in ipairs(ammoLoadTable) do
-			ammoLoad = ammoLoad+(load[1]*load[2])
-		end
-		for i, load in ipairs(itemLoadTable) do
-			itemLoad = itemLoad+(load[1]*load[2])
-		end
-		for i, load in ipairs(weaponLoadTable) do
-			weaponLoad = weaponLoad+(load[1]*load[2])
-		end
-		-- Merging every value together to create a specific value for further calculation
-		local myLoad = (ammoLoad*0.2)+(itemLoad*0.1)+(weaponLoad*0.5)
-		-- Checking the player's speed, since that's also important for determing how much hunger/thirst the player should lose, keeping in mind if the player is in a vehicle
-		if not isPedInVehicle(localPlayer) then
-			local speedx, speedy, speedz = getElementVelocity (localPlayer)
-			local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
-			mps = actualspeed * 50
-		else
-			mps = 20
-		end
-		playerSpeed = math.floor(mps*3.5)
-		-- Final calculation for hunger based on blood, speed and weight of all items combined
-		local hunger = (math.abs((((12000 - getElementData(localPlayer,"blood")) / 12000) * 5) + playerSpeed + myLoad) * 3)
-		playerHunger = 0
-		playerHunger = playerHunger+(hunger/70)
-		--playerHunger = math.max(math.min(playerHunger,2160,0))
-		-- Determining the thirst decrease value by using player speed and temperature
-		local thirst = 2
-		thirst = (playerSpeed+4)*3
-		playerThirst = 0
-		playerThirst = playerThirst+(thirst/60)*(getElementData(localPlayer,"temperature")/37)
-		--playerThirst = math.max(math.min(playerThirst,1440,0))
-		local hungerMultiplier = 1
-		if getElementData(localPlayer,"food") > 0 then
-			if gameplayVariables["difficulty"] then
-				if gameplayVariables["difficulty"] == "normal" then
-					hungerMultiplier = 1
-				elseif gameplayVariables["difficulty"] == "veteran" then
-					hungerMultiplier = 1.5
-				elseif gameplayVariables["difficulty"] == "hardcore" then
-					hungerMultiplier = 3
-				else
-					hungerMultiplier = 1
-				end
-			else
-				hungerMultiplier = 1
-			end
-			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-(playerHunger*hungerMultiplier))
-		else
-			setElementData(localPlayer,"food",0)
-		end
-		
-		local thirstMultiplier = 1
-		if getElementData(localPlayer,"thirst") > 0 then
-			if gameplayVariables["difficulty"] then
-				if gameplayVariables["difficulty"] == "normal" then
-					thirstMultiplier = 1
-				elseif gameplayVariables["difficulty"] == "veteran" then
-					thirstMultiplier = 1.5
-				elseif gameplayVariables["difficulty"] == "hardcore" then
-					thirstMultiplier = 3
-				else
-					thirstMultiplier = 1
-				end
-			else
-				thirstMultiplier = 1
-			end
-			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-(playerThirst*thirstMultiplier))
-		else
-			setElementData(localPlayer,"thirst",0)
-		end
-		
-	end
-end
-setTimer(getPlayerLoad,60000,0)
-
-function setPlayerHunger()
-	if getElementData(localPlayer,"logedin") then
-		local hungerMultiplier = 1
-		if getElementData(localPlayer,"food") > 0 then
-			if gameplayVariables["difficulty"] then
-				if gameplayVariables["difficulty"] == "normal" then
-					hungerMultiplier = 1
-				elseif gameplayVariables["difficulty"] == "veteran" then
-					hungerMultiplier = 1.5
-				elseif gameplayVariables["difficulty"] == "hardcore" then
-					hungerMultiplier = 3
-				else
-					hungerMultiplier = 1
-				end
-			else
-				hungerMultiplier = 1
-			end
-			setElementData(localPlayer,"food",getElementData(localPlayer,"food")-(playerHunger*hungerMultiplier))
-		else
-			setElementData(localPlayer,"food",0)
-		end
-	end
-end
---setTimer(setPlayerHunger,61000,0)
-
-function setPlayerThirst()
-	if getElementData(localPlayer,"logedin") then
-		local thirstMultiplier = 1
-		if getElementData(localPlayer,"thirst") > 0 then
-			if gameplayVariables["difficulty"] then
-				if gameplayVariables["difficulty"] == "normal" then
-					thirstMultiplier = 1
-				elseif gameplayVariables["difficulty"] == "veteran" then
-					thirstMultiplier = 1.5
-				elseif gameplayVariables["difficulty"] == "hardcore" then
-					thirstMultiplier = 3
-				else
-					thirstMultiplier = 1
-				end
-			else
-				thirstMultiplier = 1
-			end
-			setElementData(localPlayer,"thirst",getElementData(localPlayer,"thirst")-(playerThirst*thirstMultiplier))
-		else
-			setElementData(localPlayer,"thirst",0)
-		end
-	end
-end
---setTimer(setPlayerThirst,61000,0)
 
 function getWeaponNoise(weapon)
 	for i,weapon2 in ipairs(weaponNoiseTable) do
