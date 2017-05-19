@@ -32,8 +32,7 @@ function fileLog(logtype,tstring)
 		fileClose( file )
 		return true
 	else
-		fileClose( file )
-		return fileRead( file, size )
+		return fileRead( file, size ),fileClose( file )
 	end
 end
 
