@@ -12,20 +12,24 @@ function refreshItemLoots ()
 	for i, loots in ipairs(getElementsByType("colshape")) do
 		local itemloot = getElementData(loots,"itemloot")
 		if itemloot then
-		local objects = getElementData(loots,"objectsINloot")
-		if objects then
-			if objects[1] ~= nil then
-				destroyElement(objects[1])
+			local objects = getElementData(loots,"objectsINloot")
+			if objects then
+				if objects[1] ~= nil then
+					destroyElement(objects[1])
+				end
+				if objects[2] ~= nil then
+					destroyElement(objects[2])
+				end
+				if objects[3] ~= nil then
+					destroyElement(objects[3])
+				end
 			end
-			if objects[2] ~= nil then
-				destroyElement(objects[2])
-			end
-			if objects[3] ~= nil then
-				destroyElement(objects[3])
-			end
-		end
 			destroyElement(loots)
-		end	
+		end
+		local petrolCol = getElementData(loots,"petrolstation")
+		if petrolCol then
+			setElementData(petrolCol,"petrolQuantity",gameplayVariables["maxPetrolFuelAmount"])
+		end
 	end
 	triggerEvent("onServerRespawnTrees",root)
 	insertIntoTableResidential()

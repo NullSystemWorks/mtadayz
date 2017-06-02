@@ -300,7 +300,7 @@ function savePlayerAccount() -- Save in the database
 			tbl["isDead"] = getElementData(source,"isDead")
 			dbExec(dbConnection,"UPDATE accounts SET `userdata`=? WHERE `username`=?",toJSON(tbl),account)
 		end
-		outputServerLog("[DayZ] Player account "..account.." has been saved.")
+		outputServerLog("[DayZ] Player account "..getPlayerName(source).." has been saved.")
 	else
 		local account = getPlayerAccount(source)
 		if account then

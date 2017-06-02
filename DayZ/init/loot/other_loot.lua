@@ -26,7 +26,7 @@ addEventHandler("onResourceStart",resourceRoot,onStart)
 
 function createHeliCrashSite()
 	if heliLoot then
-		destroyElement(getElementData(heliLoot,"parent"))
+		--destroyElement(getElementData(heliLoot,"parent"))
 		destroyElement(heliLoot)
 	end
 	local item_id = math.random(table.size(heliCrashSites))
@@ -43,9 +43,9 @@ function createHeliCrashSite()
 		setElementData(object,"parent",cargobob)
 		setElementData(heliLoot,"itemloot",true)
 		setElementData(heliLoot,"helicrash",true)
-		setElementData(heliLoot,"parent",cargobob)
+		--setElementData(heliLoot,"parent",cargobob)
 		setElementData(heliLoot,"MAX_Slots",30)
-		for i, item in ipairs(otherLootItems["helicrashsides"]) do
+		for k, item in ipairs(otherLootItems["helicrashsides"]) do
 			local value =  math.percentChance (item[5]*3.5,math.random(1,2))
 			setElementData(heliLoot,item[1],value)
 			local ammoData = getWeaponAmmoFromID(item[1])
@@ -54,10 +54,10 @@ function createHeliCrashSite()
 			end
 		end
 	end
-	setTimer(createHeliCrashSite,3600000,1)
+	setTimer(createHeliCrashSite,10000,1) --3600000
 end
 
-function updateHospitals ()
+function updateHospitals()
 	for i,box in pairs(hospitalCol) do
 		for _,items in ipairs(otherLootItems["hospital"]) do
 			setElementData(hospitalCol[i],items[1],items[5])

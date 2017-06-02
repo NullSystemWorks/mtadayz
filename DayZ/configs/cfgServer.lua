@@ -21,7 +21,7 @@ gameplayVariables["playerzombies"] = 6 -- At what amount of zombies should they 
 gameplayVariables["amountzombies"] = 3 -- How often should the script iterate through zombie spawning (= how many zombies should spawn)? - DEFAULT: 3
 gameplayVariables["temperaturewater"] = -0.1 -- Amount of temperature to be lost when in water - DEFAULT: -0.01
 gameplayVariables["temperaturesprint"] = 0.005 -- Amount of temperature to be gained when sprinting - DEFAULT: 0.005
-gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn. Note: You can also do math on the number
+gameplayVariables["itemrespawntimer"] = 14400000 -- Number of milliseconds that should elapse before the items will respawn - DEFAULT: 14400000
 gameplayVariables["autostartaddons"] = true -- Allow the gamemode to autostart resources with addon_ prefix
 gameplayVariables["enableprone"] = true --Whether or not prone is enabled for players - DEFAULT: true
 gameplayVariables["respawnwarning"] = true -- Should the warning "BEWARE OF MASSIVE LAG" when items are being respawned be displayed? If set to true, warning will be displayed. - DEFAULT: true
