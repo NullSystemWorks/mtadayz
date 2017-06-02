@@ -26,10 +26,6 @@ function refreshItemLoots ()
 			end
 			destroyElement(loots)
 		end
-		local petrolCol = getElementData(loots,"petrolstation")
-		if petrolCol then
-			setElementData(petrolCol,"petrolQuantity",gameplayVariables["maxPetrolFuelAmount"])
-		end
 	end
 	triggerEvent("onServerRespawnTrees",root)
 	insertIntoTableResidential()
