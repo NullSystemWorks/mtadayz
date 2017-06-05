@@ -862,10 +862,14 @@ addEventHandler ( "onPlayerQuit", getRootElement(), quitPlayer )
 --this is to correct the problem that unstreamed peds loose all but 1 bullet for the local player
 addEvent( "StreamWeapon", true )
 function SetBotWeapon (weapon)
-	setTimer ( giveWeapon, 300, 1, source, tonumber(weapon), 999999, true )
-	if (getElementData ( source, "BotWeapon" ) ~= tonumber(weapon) ) then
-		setElementData(source, "BotWeapon", tonumber(weapon))
-	end
+    if source and getElementType(source) == "ped" then
+	    setTimer ( giveWeapon, 300, 1, source, tonumber(weapon), 999999, true )
+	    if (getElementData ( source, "BotWeapon" ) ~= tonumber(weapon) ) then
+		    setElementData(source, "BotWeapon", tonumber(weapon))
+	    end
+    else
+        exports.DayZ:saveLog( "[DEBUG] Wrong source or source type (@slothbot/sbserver.lua Line: 864", "debug" )
+    end
 end
 addEventHandler("StreamWeapon", getRootElement(), SetBotWeapon)
 
