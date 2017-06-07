@@ -204,7 +204,7 @@ addEventHandler("onPlayerTransfuseBlood",root,onPlayerTransfuseBlood)
 
 function onPlayerRefillWaterBottle (itemName)
 	if isElementInWater(source) then
-		triggerClientEvent(source,"onPlayerActionPlaySound",playersource,"water")
+		triggerClientEvent(source,"onPlayerActionPlaySound",source,"water")
 		setElementData(source,"Water Bottle",getElementData(source,"Water Bottle")+1)
 		setElementData(source,itemName,getElementData(source,itemName)-1)
 		triggerClientEvent(source,"refreshInventoryManual",source)
