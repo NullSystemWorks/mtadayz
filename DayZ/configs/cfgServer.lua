@@ -15,6 +15,9 @@ shownInfos["filledup"] = "You filled your Water Bottle up!"
 shownInfos["noradio"] = "You have no Radio Device!"
 	
 --GAMEPLAY
+gameplayVariables["loseHunger"] = -1 -- Amount of losing hunger per minute - DEFAULT: -1
+gameplayVariables["loseThirst"] = -1 -- Amount of losing thirst per minute - DEFAULT: -1
+gameplayVariables["sprintthirst"] = -0.2 -- Amount of losing thirst when sprinting - DEFAULT: -0.2
 gameplayVariables["zombieblood"] = 4500 -- Zombie Blood/Health - DEFAULT: 4500
 gameplayVariables["loseWire"] = 1000 -- Amount of losing blood when hitting a Wirefence that's not yours - DEFAULT: 1000
 gameplayVariables["playerzombies"] = 6 -- At what amount of zombies should they respawn? - DEFAULT: 6
