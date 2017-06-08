@@ -10,6 +10,8 @@
 something = {} -- Secret thing
 local sDataNames = { --Add your elementdata's here for them to be saved.
 	["brokenbone"] = {false},
+	["fracturedArms"] = {false},
+	["fracturedLegs"] = {false},
 	["unconscious"] = {false},
 	["sepsis"] = {0},
 	["bloodtype"] = {false},

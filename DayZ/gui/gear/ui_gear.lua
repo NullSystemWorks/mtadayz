@@ -792,7 +792,7 @@ function getInventoryInfosForRightClickMenu(itemName)
 				if itemInfo[1] == "Water Bottle" or itemInfo[1] == "Soda Can (Pepsi)" or itemInfo[1] == "Soda Can (Cola)" or itemInfo[1] == "Soda Can (Mountain Dew)" or itemInfo[1] == "Can (Milk)" then
 					info = "Drink"
 					description = "Drink "..itemName
-				elseif itemInfo[1] == "Baked Beans" or itemInfo[1] == "Pasta" or itemInfo[1] == "Frank & Beans" or itemInfo[1] == "Sardines" or itemInfo[1] == "Can (Corn)" or itemInfo[1] == "Can (Peas)" or itemInfo[1] == "Can (Stew)" or itemInfo[1] == "Can (Pork)" or itemInfo[1] == "Can (Ravioli)" or itemInfo[1] == "Can (Fruit)" or itemInfo[1] == "Can (Chowder)" or itemInfo[1] == "Pistachios" or itemInfo[1] == "Trail Mix" or itemInfo[1] == "MRE" then
+				elseif itemInfo[1] == "Baked Beans" or itemInfo[1] == "Pasta" or itemInfo[1] == "Frank & Beans" or itemInfo[1] == "Sardines" or itemInfo[1] == "Can (Corn)" or itemInfo[1] == "Can (Peas)" or itemInfo[1] == "Can (Stew)" or itemInfo[1] == "Can (Pork)" or itemInfo[1] == "Can (Ravioli)" or itemInfo[1] == "Can (Fruit)" or itemInfo[1] == "Can (Chowder)" or itemInfo[1] == "Pistachios" or itemInfo[1] == "Trail Mix" or itemInfo[1] == "MRE" or itemInfo[1] == "Cooked Meat" then
 					info = "Eat"
 					description = "Eat "..itemName
 				end
