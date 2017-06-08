@@ -104,6 +104,8 @@ playerDataTable = {
 {"currentweapon_3",false},
 {"bleeding",0},
 {"brokenbone",false},
+{"fracturedArms",false},
+{"fracturedLegs",false},
 {"pain",false},
 {"cold",false},
 {"infection",false},
