@@ -58,7 +58,7 @@ Q: Help! Vehicles won't spawn/appear!
 A: Check the vehicles database. Does it contain any entries? If not, delete the vehicleManager from the console (delaccount vehicleManager) and restart the server.
 
 Q: Error/Warning X is appearing in the server console!
-A: Please create an issue in our Github repository and all the info you can give us( Debugs, Images, CodeSnippets ) You can use https://paste.mta-day.org/
+A: Check first has it been listed in the Warnings/Errors FAQ below. In case it is not, then please proceed to create an issue in our Github repository and all the info you can give us( Debugs, Images, CodeSnippets )
 
 Q: What just happened?! I have been kicked when I tried to enter my Rhino!
 A: The anticheat measures prevent players who are not admins (ACL-wise) from entering vehicles which do not normally spawn via the MTA DayZ script.
@@ -67,7 +67,7 @@ Q: The inventory is broken!
 A: Please provide a screenshot/video/accurate description of what exactly broke. Add server log and, if possible, the client log too.
 
 Q: I'm getting this strange error: "Infinite/too long execution (DayZ)".
-A: This was fixed in latest versions, please update you server.
+A: This was fixed in latest versions, please update your server.
 
 Q: How to change backpack slots in this gamemode ?
 A: You can do this by modifying the configuration file "cfgServer.lua" (DayZ/configs/cfgServer.lua). Take care to change the "maxslots" variable in the file "cfgSecurity.lua" (DayZ/configs/cfgSecurity.lua) for the anti-cheat.
@@ -77,3 +77,12 @@ A: You can start by creating pull requests fixing or creating new features. We w
 
 Q: There is a question I have that does not appear in the FAQ!
 A: You can ask it on our forums or join discord!
+
+## Warnings/Errors FAQ ##
+
+Q: WARNING: DayZ\handlers\players\server\backpack_player.lua:17: Bad argument @ 'destroyElement' [Expected element at argument 1]
+A: Happens when a player logs out and his element is destroyed. You can safely ignore it.
+
+Q: WARNING: DayZ\handlers\vehicles\server\actions_vehicles.lua:264: Bad argument @ 'getElementData' [Expected element at argument 1, got boolean]  [DUP x63]
+   ERROR: DayZ\handlers\vehicles\server\actions_vehicles.lua:264: attempt to index a boolean value  [DUP x63]
+A: Happens when the script tries to respawn a vehicle that exploded, but since it has no respawning coordinates associated with it, it throws out that kind of error/warning. Usually happens when someone adds his own vehicles, but does so improperly.
