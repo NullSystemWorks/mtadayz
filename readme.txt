@@ -11,6 +11,8 @@ Once you have moved the contents of mtadayz.zip to the resources folder, open ac
     <object name="user.[YOUR_NAME]"></object>
     
     You need edit "[YOUR_NAME]" per your nickname in game for playing with your admin rights.
+    Also, you need to make sure the DayZ resource name is written exactly like the folder name (without [] brackets).
+    For example, if the folder name is "[DaYZ]", you would write <object name="resource.DaYZ"></object> in acl.xml.
     
 Now open mtaserver.conf, scroll down and add these lines:
 
@@ -20,7 +22,7 @@ Now open mtaserver.conf, scroll down and add these lines:
 	
 The following resources should have startup set to 0:
 
-scoreboard, mapcycler, mapmanager, spawnmanager, votemanager
+mapcycler, mapmanager, scoreboard, spawnmanager, votemanager
 
 And that's it! Start the server and MTA DayZ will start automatically. 
 
