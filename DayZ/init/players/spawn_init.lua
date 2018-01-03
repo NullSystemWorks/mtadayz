@@ -300,7 +300,7 @@ function kilLDayZPlayer(killer,headshot)
 		else
 			spawnDayZPlayer(source)
 		end
-	end,30000,1,source)
+	end,gameplayVariables["playerRespawnCountdown"] * 1000,1,source)
 end
 addEvent("kilLDayZPlayer",true)
 addEventHandler("kilLDayZPlayer",getRootElement(),kilLDayZPlayer)
