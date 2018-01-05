@@ -76,7 +76,7 @@ function night_init()
 	end
 
 	if gameplayVariables["enablenight"] == true then
-		nightTimer = setTimer(night_check, 1000, 0)
+		nightTimer = setTimer(night_check, gameplayVariables["nightCheckInterval"], 0)
 	end
 
 	addEventHandler('onClientHUDRender', root, night_render)
