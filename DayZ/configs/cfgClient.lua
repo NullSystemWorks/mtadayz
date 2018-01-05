@@ -17,6 +17,7 @@ gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage dealt when d
 
 -- MISC
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
+gameplayVariables["nightCheckInterval"] = 300000 -- Interval for client checking if it is currently night
 gameplayVariables["armachat"] = false -- Activates/deactivates ArmA II style chatbox - DEFAULT: false
 gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? DEFAULT: false
 gameplayVariables["oldmap"] = true -- Activates/deactivates the normal map provided by MTA - DEFAULT: true
