@@ -1,4 +1,5 @@
 # README #
+![Discord](https://img.shields.io/discord/283776441450102785.svg)
 
 ### Curent Developers: L, ciber96, 1B0Y, neves768 ###
 
