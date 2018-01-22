@@ -1,5 +1,6 @@
 # README #
-![Discord](https://img.shields.io/discord/283776441450102785.svg?style=flat-square)
+[![Discord][discord-shield]][discord-link]
+
 
 ### Curent Developers: L, ciber96, 1B0Y, neves768 ###
 
@@ -35,3 +36,6 @@ claim ownership of the code that is being used to provide a proper gamemode. As 
 code in any way you see fit. You are allowed to change the models, textures, images or sounds to whatever you want to, as long as you have permission by the
 author to do so. You are not allowed to replicate the code and distribute, sell, offer or anything else that remotely resembles the aforementioned methods of
 distribution as your own creation. Credits are not to be removed, ever.
+
+[discord-shield]: https://img.shields.io/discord/283776441450102785.svg?style=flat-square "Discord Server"
+[discord-link]: https://discordapp.com/invite/aj8kJsM
