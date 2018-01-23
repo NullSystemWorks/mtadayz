@@ -81,6 +81,12 @@ function processBleeding()
 			if bloodLossPerSec > 0 then
 				triggerClientEvent(player,"onClientPlayerAddBloodFX",player,bloodLossPerSec)		
 				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]-bloodLossPerSec
+				if playerStatusTable[player]["blood"] <= 0 then
+					if not getElementData(player,"isDead") then
+						triggerEvent("kilLDayZPlayer",player,false,false)
+						setElementData(player,"isDead",true)
+					end
+				end
 			end
 		end
 	end	
