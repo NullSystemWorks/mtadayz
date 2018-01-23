@@ -482,14 +482,14 @@ function addPlayerSkin(skin)
 			return
 		end
 	end
-	local current = getElementData(source,"skin")
+	local current = playerStatusTable[source]["skin"]
 	local name = getSkinNameFromID(current)
 	local id = getSkinIDFromName(skin)
-	local gender = getElementData(source,"gender")
+	local gender = playerStatusTable[source]["gender"]
 	if gender == "female" then
 		if id == 172 or id == 192 or id == 285 then
 			setElementData(source,skin,getElementData(source,skin)-1)
-			setElementData(source,"skin",id)
+			playerStatusTable[source]["skin"] = id
 			setElementModel(source,id)
 			triggerClientEvent(source,"refreshInventoryManual",source)
 		else
@@ -500,7 +500,7 @@ function addPlayerSkin(skin)
 			outputChatBox("You can't wear this!",source,255,0,0,true)
 		else
 			setElementData(source,skin,getElementData(source,skin)-1)
-			setElementData(source,"skin",id)
+			playerStatusTable[source]["skin"] = id
 			setElementModel(source,id)
 			triggerClientEvent(source,"refreshInventoryManual",source)
 		end
@@ -513,22 +513,22 @@ function checkBandit ()
 	if gameplayVariables["newclothingsystem"] then return end
 	for i, player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
-			local current = getElementData(player,"skin")
-			if getElementData(player,"bandit") then
-				if getElementData(player,"gender") == "male" then
+			local current = playerStatusTable[player]["skin"]
+			if playerStatusTable[player]["isBandit"] then
+				if playerStatusTable[player]["gender"] == "male" then
 					if current == 179 or current == 287 then
 						setElementModel(player,288)
 					elseif current == 73 then
 						setElementModel(player,180)
 					end
-				elseif getElementData(player,"gender") == "female" then
+				elseif playerStatusTable[player]["gender"] == "female" then
 					if current == 192 then
 						setElementModel(player,191)
 					elseif current == 172 then
 						setElementModel(player,211)
 					end
 				end
-			elseif getElementData(player,"humanity") == 5000 then
+			elseif playerStatusTable[player]["humanity"] == 5000 then
 				if current == 73 or current == 179 or current == 287 or current == 172 or current == 192 then
 					setElementModel(player,210)
 				end

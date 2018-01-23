@@ -28,134 +28,35 @@ function stopPlayerVoices()
 end
 setTimer(stopPlayerVoices,1000,0)
 
-function regenerateBlood()
-	if getElementData(localPlayer,"logedin") then
-		local blood = getElementData(localPlayer,"blood")
-		local thirst = getElementData(localPlayer,"thirst")
-		local hunger = getElementData(localPlayer,"food")
-		local block,anim = getPedAnimation(localPlayer)
-		local bloodRegen = 0
-		if blood < 12000 then
-			local isWellFed = ((hunger+thirst)/2)/100
-			if isWellFed <= 0.50 then
-				return
-			else
-				if getPedMoveState(localPlayer) == "crouch" then
-					bloodRegen = math.round((1+4*math.sqrt((12000-blood)/12000)),0)
-				elseif block == "ped" then
-					bloodRegen = math.round((1+10*(12000-blood)/12000))
-				end
-			end
-			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")+bloodRegen)
-		end
+function playerAddBloodFX(bloodLoss)
+	local px,py,pz = getPedBonePosition(localPlayer,3)
+	local pdistance = getDistanceBetweenPoints3D(x,y,z,px,py,pz)
+	if bloodLoss >= 61 then
+		number = 10
+	elseif bloodLoss >= 31 and bloodLoss <= 60 then
+		number = 6
+	elseif bloodLoss >= 10 and bloodLoss <= 30 then
+		number = 2
+	else
+		number = 0
+	end
+	if pdistance <= 120 then
+		fxAddBlood (px,py,pz,0,0,0,number,1)
 	end
 end
-setTimer(regenerateBlood,60000,0)
-
-function processBleeding()
-	if getElementData(localPlayer,"logedin") then
-		local hunger = getElementData(localPlayer,"food")
-		local thirst = getElementData(localPlayer,"thirst")
-		local bloodLossPerSec = getElementData(localPlayer,"bleeding") or 0
-		local x,y,z = getElementPosition(localPlayer)
-		if hunger <= 0 or thirst <= 0 then
-			bloodLossPerSec = bloodLossPerSec+10
-		end
-		if bloodLossPerSec > 0 then
-			local px,py,pz = getPedBonePosition(localPlayer,3)
-			local pdistance = getDistanceBetweenPoints3D(x,y,z,px,py,pz)
-			if bloodLossPerSec >= 61 then
-				number = 5
-			elseif bloodLossPerSec >= 31 and bloodLossPerSec <= 60 then
-				number = 3
-			elseif bloodLossPerSec >= 10 and bloodLossPerSec <= 30 then
-				number = 1
-			else
-				number = 0
-			end
-			if pdistance <= 120 then
-				fxAddBlood (px,py,pz,0,0,0,number,1)
-			end
-			setElementData(localPlayer,"blood",getElementData(localPlayer,"blood")-bloodLossPerSec)
-		end
-	end	
-end
-setTimer(processBleeding,1000,0)
+addEvent("onClientPlayerAddBloodFX",true)
+addEventHandler("onClientPlayerAddBloodFX",root,playerAddBloodFX)
 
 function setPlayerDeath()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"blood") <= 0 then
+		if playerStatusTable[localPlayer]["blood"] <= 0 then
 			if not getElementData(localPlayer,"isDead") then
 				triggerServerEvent("kilLDayZPlayer",localPlayer,false,false)
 			end
 		end
 	end
 end
-setTimer(setPlayerDeath,1000,0)
-
-function setPlayerFracturedBones()
-	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"fracturedLegs") then
-			toggleControl("jump",false)
-			toggleControl("sprint",false)
-			setElementData(localPlayer,"brokenbone",true)
-		else
-			toggleControl("jump",true)
-			toggleControl("sprint",true)
-			setElementData(localPlayer,"brokenbone",false)
-		end
-		if getElementData(localPlayer,"fracturedArms") then
-			toggleControl("aim_weapon",false)
-			toggleControl("fire",false)
-			setElementData(localPlayer,"brokenbone",true)
-		else
-			toggleControl("aim_weapon",true)
-			toggleControl("fire",true)
-			setElementData(localPlayer,"brokenbone",false)
-		end
-	end
-end
-setTimer(setPlayerFracturedBones,2000,0)
-
-function setPlayerBrokenbone()
-	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"brokenbone") then
-			toggleControl("jump", false)
-			toggleControl("sprint",false)
-		else
-			toggleControl("jump", true)
-			toggleControl("sprint", true)
-		end
-	end
-end
---setTimer(setPlayerBrokenbone,2000,0)
-
-function setPlayerCold()
-	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"temperature") <= 33 then
-			setElementData(localPlayer,"cold",true)
-		elseif getElementData(localPlayer,"temperature") > 33 then
-			setElementData(localPlayer,"cold",false)
-		end
-		if getElementData(localPlayer,"cold") then
-			local x,y,z = getElementPosition(localPlayer)
-			createExplosion (x,y,z+15,8,false,0.5,false)
-			local x, y, z, lx, ly, lz = getCameraMatrix()
-			randomsound = math.random(0,99)
-			if randomsound >= 0 and randomsound <= 10 then
-				local getnumber = math.random(0,2)
-				playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
-				--setElementData(localPlayer,"volume",100)
-				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
-			elseif randomsound >= 11 and randomsound <= 20 then	
-				--setElementData(localPlayer,"volume",100)
-				--setTimer(function() setElementData(localPlayer,"volume",0) end,1500,1)
-				playSound(":DayZ/sounds/status/sneezing.mp3",false)
-			end
-		end	
-	end
-end
-setTimer(setPlayerCold,40000,0)
+--setTimer(setPlayerDeath,1000,0)
 
 function isPlayerInBuilding(x,y,z)
 	if isInBuilding(x,y,z) then
@@ -167,10 +68,24 @@ end
 addEvent("isPlayerInBuilding",true)
 addEventHandler("isPlayerInBuilding",root,isPlayerInBuilding)
 
+function createSneezeOnCold(x,y,z)
+	createExplosion(x,y,z+15,8,false,0.5,false)
+	local x, y, z, lx, ly, lz = getCameraMatrix()
+	randomsound = math.random(0,99)
+	if randomsound >= 0 and randomsound <= 10 then
+		local getnumber = math.random(0,2)
+		playSound(":DayZ/sounds/status/cough_"..getnumber..".ogg",false)
+	elseif randomsound >= 11 and randomsound <= 20 then	
+		playSound(":DayZ/sounds/status/sneezing.mp3",false)
+	end
+end
+addEvent("onClientPlayerCreateSneezeShake",true)
+addEventHandler("onClientPlayerCreateSneezeShake",root,createSneezeOnCold)
+
 local painTimer = 1500
 function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"pain") then
+		if playerStatusTable[localPlayer]["pain"] ~= nil and playerStatusTable[localPlayer]["pain"] then
 			if gameplayVariables["painshakesway"] then
 				painTimer = 90000
 				setCameraShakeLevel(gameplayVariables["painshakelevel"])
@@ -192,111 +107,6 @@ function setPlayerPain()
 	end
 end
 setTimer(setPlayerPain,painTimer,0)
---[[ 
-Volume (Noise):
-
-0 = Silent
-20 = Very Low
-40 = Low
-60 = Moderate
-80 = High
-100 = Very High
-
-]]
-
-function setVolume()
-	local value = 0
-	local block, animation = getPedAnimation(localPlayer)
-	if getPedMoveState (localPlayer) == "stand" then
-		value = 0
-	elseif getPedMoveState (localPlayer) == "crouch" then	
-		value = 0
-	elseif getPedMoveState(localPlayer) == "crawl" then
-		value = 20
-	elseif getPedMoveState (localPlayer) == "walk" then
-		value = 40
-	elseif getPedMoveState (localPlayer) == "powerwalk" then
-		value = 60
-	elseif getPedMoveState (localPlayer) == "jog" then
-		value = 80
-	elseif getPedMoveState (localPlayer) == "sprint" then	
-		value = 100
-	elseif not getPedMoveState (localPlayer) then
-		value = 20
-	end
-	if getElementData(localPlayer,"shooting") and getElementData(localPlayer,"shooting") > 0 then
-		value = value+getElementData(localPlayer,"shooting")
-	end
-	if isPedInVehicle (localPlayer) then
-		if getPedOccupiedVehicle(localPlayer) ~= 509 then
-			if getVehicleEngineState(getPedOccupiedVehicle(localPlayer)) then
-				value = 100
-			else
-				value = 0
-			end
-		else
-			value = 0
-		end
-	end
-	if value > 100 then
-		value = 100
-	end
-	if block == "ped" or block == "SHOP" or block == "BEACH" then
-		value = 0
-	end
-	setElementData(localPlayer,"volume",value)
-end
---setTimer(setVolume,100,0)
-
---[[
-Visibility:
-
-0 = Invisible
-20 = Very Low Visibility
-40 = Low Visibility
-60 = Moderate Visibility
-80 = High Visibility
-100 = Very High Visibility
-
-]]
-function setVisibility()
-	local value = 0
-	local block, animation = getPedAnimation(localPlayer)
-	if getPedMoveState (localPlayer) == "stand" then
-		value = 40
-	elseif getPedMoveState (localPlayer) == "crouch" then	
-		value = 20
-	elseif getPedMoveState(localPlayer) == "crawl" then
-		value = 20
-	elseif getPedMoveState (localPlayer) == "walk" then
-		value = 60
-	elseif getPedMoveState (localPlayer) == "powerwalk" then
-		value = 60
-	elseif getPedMoveState (localPlayer) == "jog" then
-		value = 60
-	elseif getPedMoveState (localPlayer) == "sprint" then	
-		value = 80
-	elseif not getPedMoveState (localPlayer) then	
-		value = 20
-	end
-	if getElementData(localPlayer,"jumping") then
-		value = 100
-	end
-	if isObjectAroundPlayer (localPlayer,2, 4 ) then
-		value = 0
-	end
-	if isPedInVehicle (localPlayer) then
-		value = 100
-	end
-	if block == "ped" or block == "SHOP" or block == "BEACH" then
-		value = 0
-	end
-	if value > 100 then
-		value = 100
-	end
-	setElementData(localPlayer,"visibly",value)
-end
---setTimer(setVisibility,100,0)
 
 function debugJump()
 	if getControlState("jump") then
@@ -340,7 +150,7 @@ function updatePlayTime()
 		setElementData(localPlayer,"alivetime",playtime+1)
 	end	
 end
-setTimer(updatePlayTime,60000,0)
+--setTimer(updatePlayTime,60000,0)
 
 --[[
 function updateHoursAliveTime()
@@ -352,19 +162,20 @@ end
 setTimer(updateHoursAliveTime,3600000,0)
 ]]
 
+-- Switch to serverside
 function playerBloodInWater()
 	if getElementData(localPlayer, "logedin") then
 		local posX, posY, posZ = getElementPosition(localPlayer)
 		if posZ <= -4 then
 			if isElementInWater(localPlayer) then
-				local pBlood = getElementData(localPlayer,"blood")
+				local pBlood = playerStatusTable[localPlayer]["blood"]
 				setElementData(localPlayer,"blood", pBlood - gameplayVariables["waterdamage"])
 				setElementData(localPlayer,"pain",true)
 			end
 		end
 	end
 end
-setTimer(playerBloodInWater,4000,0)
+--setTimer(playerBloodInWater,4000,0)
 
 function onPlayerActionPlaySound(item)
 	if item == "meat" then
@@ -470,9 +281,9 @@ addEventHandler("onClientPlayerSpawn",localPlayer,assignTypeToDrop)
 function checkBloodType(button, state)
 	if button == "left" then
 		if vialsLeft > 0 then
-			if getElementData(source,"bloodtype") == getElementData(localPlayer,"bloodtype") then
+			if getElementData(source,"bloodtype") == playerStatusTable[localPlayer]["bloodtype"] then
 				guiSetProperty(source, "ImageColours", "tl:FF00FF00 tr:FF00FF00 bl:FF00FF00 br:FF00FF00")
-				setElementData(localPlayer,"bloodtypediscovered",getElementData(localPlayer,"bloodtype"))
+				--setElementData(localPlayer,"bloodtypediscovered",getElementData(localPlayer,"bloodtype")) <- needs to be changed
 				vialsLeft = 0
 				guiSetText(bloodTest["substanceleft"],vialsLeft)
 			else
@@ -507,91 +318,26 @@ function infectionSigns()
 		end
 	end
 end
-setTimer(infectionSigns,10000,0)
-
---[[
-local sepsisTimer = 10000
-function checkSepsis()
-	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"sepsis") == 1 then
-			timer = 900000
-			setTimer(function(timer)
-				setElementData(localPlayer,"sepsis",2)
-				if isTimer(theSepsis) then killTimer(theSepsis) end
-			end,timer,1)
-		elseif getElementData(localPlayer,"sepsis") == 2 then
-			timer = 450000
-			setTimer(function(timer)
-				setElementData(localPlayer,"sepsis",3)
-				if isTimer(theSepsis) then killTimer(theSepsis) end
-			end,timer,1)
-			timer = 1000
-			if not isTimer(theSepsis) then
-				theSepsis1= setTimer(function(timer)
-					oldBlood = getElementData(localPlayer,"blood")
-					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-1)
-				end,timer,0)
-			end
-		elseif getElementData(localPlayer,"sepsis") == 3 then
-			timer = 450000
-			setTimer(function(timer)
-				setElementData(localPlayer,"sepsis",4)
-				if isTimer(theSepsis) then killTimer(theSepsis) end
-			end,timer,1)
-			timer = 1000
-			if not isTimer(theSepsis2) then
-				theSepsis = setTimer(function(timer)
-					oldBlood = getElementData(localPlayer,"blood")
-					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-2)
-				end,timer,0)
-			end
-		elseif getElementData(localPlayer,"sepsis") == 4 then
-			timer = 1000
-			if not isTimer(theSepsis) then
-				theSepsis = setTimer(function(timer)
-					oldBlood = getElementData(localPlayer,"blood")
-					triggerServerEvent("onPlayerHasContractedSepsis",localPlayer,4,-3)
-				end,timer,0)
-			end
-		end
-	end
-end
-setTimer(checkSepsis,sepsisTimer,0)
-
-function transmitSepsis()
-	for i,player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			if getElementData(localPlayer,"sepsis") == 4 then
-				local x1,y1,z1 = getElementPosition(localPlayer)
-				local x2,y2,z2 = getElementPosition(player)
-				if getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2) <= 5 then
-					if getElementData(player,"sepsis") == 0 then
-						triggerServerEvent("onPlayerTransmitSepsis",player)
-					end
-				end
-			end
-		end
-	end
-end
-setTimer(transmitSepsis,30000,0)
-]]
+--setTimer(infectionSigns,10000,0)
 
 local isHourGlassActive = false
 function setPlayerUnconsciousWhenLowBlood()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"blood") < 3000 and not getElementData(localPlayer,"unconscious") and not getElementData(localPlayer,"isDead") then
-			local number = math.random(1,100)
-			if number == 1 then
-				if not isHourGlassActive then
-					addEventHandler("onClientRender",root,drawHourGlass)
-					isHourGlassActive = true
-					triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"unconscious",localPlayer)
-					toggleAllControls(false,true,true)
-					enableBlackWhite(true)
-					unbindKey("J","down",initInventory)
-					triggerServerEvent("unbindFuncKeys",localPlayer)
-					setElementData(localPlayer,"unconscious",true)
-					startRollMessage2("Status","You are unconscious!",255,0,0)
+		if playerStatusTable[localPlayer] then
+			if playerStatusTable[localPlayer]["blood"] < 3000 and not playerStatusTable[localPlayer]["unconscious"] and not getElementData(localPlayer,"isDead") then
+				local number = math.random(1,100)
+				if number == 1 then
+					if not isHourGlassActive then
+						addEventHandler("onClientRender",root,drawHourGlass)
+						isHourGlassActive = true
+						triggerServerEvent("onPlayerUnconsciousAnimation",localPlayer,"unconscious",localPlayer)
+						toggleAllControls(false,true,true)
+						enableBlackWhite(true)
+						unbindKey("J","down",initInventory)
+						triggerServerEvent("unbindFuncKeys",localPlayer)
+						--setElementData(localPlayer,"unconscious",true) <- need to be changed
+						startRollMessage2("Status","You are unconscious!",255,0,0)
+					end
 				end
 			end
 		end
@@ -601,7 +347,7 @@ setTimer(setPlayerUnconsciousWhenLowBlood,1000,0)
 
 function setPlayerUnconscious()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"unconscious") then
+		if playerStatusTable[localPlayer]["unconscious"] then
 			if not isHourGlassActive then
 				addEventHandler("onClientRender",root,drawHourGlass)
 				isHourGlassActive = true
@@ -630,7 +376,7 @@ setTimer(setPlayerUnconscious,3000,0)
 
 function wakePlayerFromUnconsciousness()
 	if getElementData(localPlayer,"logedin") then
-		if getElementData(localPlayer,"unconscious") then
+		if playerStatusTable[localPlayer]["unconscious"] then
 			local number = math.random(1,100)
 			if number >= 1 and number <= 25 then
 				removeEventHandler("onClientRender",root,drawHourGlass)
@@ -641,7 +387,7 @@ function wakePlayerFromUnconsciousness()
 				triggerServerEvent("bindFuncKeys",localPlayer)
 				startRollMessage2("Status","You are awake.",0,255,0)
 				isHourGlassActive = false
-				setElementData(localPlayer,"unconscious",false)
+				--setElementData(localPlayer,"unconscious",false) <- needs to be changed
 			end
 		end
 	end
@@ -651,7 +397,7 @@ setTimer(wakePlayerFromUnconsciousness,60000,0)
 function removeUnconsciousHandlerOnDeath()
 	if getElementData(localPlayer,"isDead") then
 		if isHourGlassActive then
-			setElementData(localPlayer,"unconscious",false)
+			--setElementData(localPlayer,"unconscious",false) <- needs to be changed
 			removeEventHandler("onClientRender",root,drawHourGlass)
 			toggleAllControls(true,true,true)
 			enableBlackWhite(false)

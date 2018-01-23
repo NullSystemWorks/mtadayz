@@ -54,6 +54,7 @@ setTimer(PlayCityAmbience,300000,0)
 function toggleAmbience()
 	if ambienceOn then
 		ambienceOn = false
+		if ambiencesound then stopSound(ambiencesound) end
 		outputChatBox("Turned off ambience sounds.",255,0,0)
 	else
 		ambienceOn = true
@@ -196,7 +197,7 @@ function playSoundOnWeaponFire(weapon)
 	end
 	
 	--Check if we have a sound for specified weapon, get range and play accordingly.
-	local wepTable = weaponSounds[getElementData(source,wepSlot)]
+	local wepTable = weaponSounds[playerStatusTable[localPlayer][wepSlot]]
 	if (wepTable) then
 		if (getDistanceBetweenPoints3D(x,y,z,x2,y2,z2) > wepTable[1]) then
 			playSound3D(wepTable[2],x2,y2,z2,false)

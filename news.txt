@@ -1,50 +1,9 @@
-﻿[0.9.9a] - 2017-04-28
-ADDED: New Sound + Visibility System (based on terrain, weather, light, movement)
-ADDED: New zombie spawn system based on loot location
-ADDED: Petrol stations now have a limited amount of fuel (configurable in cfgServer.lua)
-ADDED: Achievement System
-ADDED: Anti-Advertising for chat system
-ADDED: Indicators for temperature rising/falling
-ADDED: Occasional rain when weather is cloudy 
-ADDED: MySQL implementation
-ADDED: Old clothes/skin system
-ADDED: New condition (fractured arms)
-ADDED: Vehicle respawn command
-ADDED: Setting for camera sway when in pain
-ADDED: Helmets for headshots
-ADDED: [DayZAdmin] Ability to change gameplayVariables ingame
-ADDED: Binds for GPS (Key: 7) and Compass (Key: 8)
-ADDED: Spawn Selection System
-ADDED: Randomized loot spots
-ADDED: Random clothes on spawn if clothes system is activated
-CHANGED: Logs System refactored
-CHANGED: Simplified player spawning code
-CHANGED: Simplified vehicle spawning code (makes it easier to add new vehicles)
-CHANGED: Simplified sound code
-CHANGED: Custom chat can now be toggled on/off (/chat)
-CHANGED: Eased lag a bit
-CHANGED: Updated how Helicrashes and hospital bags were being initialised
-CHANGED: Version rewrite, tree handling optimised
-CHANGED: Hunger & Thirst now decrease according to difficulty too
-CHANGED: Moved debug monitor to Journal (Key: 6)
-CHANGED: New damage code for players
-CHANGED: Some zombies will sprint (depends on difficulty)
-CHANGED: Kills have to be confirmed with "Check Body" (player kills only)
-CHANGED: First Person Mode (view can be rotated 360°)
-FIXED: consume_player.lua causing lots of errors
-FIXED: Bug with tree chopping
-FIXED: Hunger & Thirst not decreasing
-FIXED: Bug with setPedStat
-FIXED: Flashlight appearing on HUD with ammo count
-FIXED: Bug where player would continue to lose blood after becoming unconscious and being killed
-FIXED: Crafting getting bugged when inventory is full
-FIXED: Milk breaking inventory
-FIXED: Unconscious animation being clientside only
-FIXED: M1911 not having a firing sound
-FIXED: Old bug with damage when falling
-FIXED: Floating medical box in Fort Carson
-FIXED: Constant raining
-FIXED: Hunger and Thirst not really decreasing
-FIXED: M24 not having any sound
-REMOVED: Viral zombies (until a better solution is found for more dangerous zombies)
-REMOVED: Housing mod
+﻿[0.9.9.1a] - 2018-01-23
+ADDED: Several new export functions
+CHANGED: Status info has been moved to tables
+CHANGED: Increased backpack slots
+CHANGED: Disabled attacks with fists
+CHANGED: DayZ Admin Panel now supports changes to status info
+FIXED: Broken bones persisting after death
+FIXED: Broken bones not being curable with Morphine
+FIXED: Console spam for deprecated functions

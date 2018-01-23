@@ -34,6 +34,8 @@ gameplayVariables["maxPetrolFuelAmount"] = math.random(1,15) -- Determines amoun
 gameplayVariables["spawnselection"] = false -- Allow player to select his spawnpoint - DEFAULT: false
 gameplayVariables["explodedvehiclesrespawn"] = 1800000 -- When should exploded vehicles respawn? - DEFAULT: 1800000 (= 30 Min)
 gameplayVariables["watervehiclerespawn"] = 1800000 -- When should vehicles which are submerged in water respawn? - DEFAULT: 1800000 (= 30 Min)
+gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: 650
+
 
 -- EXPERIMENTAL FEATURES
 gameplayVariables["newzombiespawnsystem"] = false -- Experimental feature, zombies only spawn near loot - DEFAULT: false

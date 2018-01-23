@@ -340,65 +340,65 @@ function WeaponHUD()
 		weaponID = getPedWeapon(localPlayer)
 		local divide = "|"
 		if weaponID == 22 then
-			if getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
+			if playerStatusTable[localPlayer]["currentweapon_2"] == "Flashlight" then
 				weapName = "Flashlight"
 				clip = ""
 				ammo = ""
 				divide = ""
 			else
-				weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+				weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
 				divide = "|"
 				magsLeft()
 			end
 		elseif weaponID == 23 then
-		   weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 24 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 25 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 26 then
-		   weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 27 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 28 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 29 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_2"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 30 then
-		   weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 31 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 33 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 34 then
-			weapName = tostring(getElementData(localPlayer,"currentweapon_1"))
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 16 then
 			weapName = "Grenade"
 			divide = "|"
 		elseif weaponID == 43 then
-			if getElementData(localPlayer,"currentweapon_2") == "Range Finder" then
+			if playerStatusTable[localPlayer]["currentweapon_2"] == "Range Finder" then
 				weapName = "Range Finder"
 			else
 				weapName = "Binoculars"
@@ -558,33 +558,27 @@ addEventHandler("hideDebugMonitor",root,hideDebugMonitor)
 
 function refreshDebugMonitor()
 	if getElementData(getLocalPlayer(),"logedin") then
-		local zombieskilled = getElementData(getLocalPlayer(),getElementData(statsLabel["zombieskilled"],"identifikation"))
-		guiSetText(statsLabel["zombieskilled"],"Zombies killed: "..zombieskilled)
-		
-		local headshots = getElementData(getLocalPlayer(),getElementData(statsLabel["headshots"],"identifikation"))
-		guiSetText(statsLabel["headshots"],"Headshots: "..headshots)
-		
-		local banditskilled = getElementData(getLocalPlayer(),getElementData(statsLabel["banditskilled"],"identifikation"))
-		guiSetText(statsLabel["banditskilled"],"Bandits killed: "..banditskilled)
-		
-		local murders = getElementData(getLocalPlayer(),getElementData(statsLabel["murders"],"identifikation"))
-		guiSetText(statsLabel["murders"],"Murders: "..murders)
-		
-		local blood = getElementData(getLocalPlayer(),getElementData(statsLabel["blood"],"identifikation"))
-		local bloodtype = getElementData(localPlayer,"bloodtypediscovered")
-		guiSetText(statsLabel["blood"],"Blood: "..blood.." (Type: "..tostring(bloodtype)..")")
-		
-		local zombiesalive = getElementData(getRootElement(),"zombiesalive") or 0
-		local zombiestotal = getElementData(getRootElement(),"zombiestotal") or 0
-		guiSetText(statsLabel["zombies"],"Zombies (Alive/Total): "..zombiesalive.."/"..zombiestotal)
-		
-		local temperature = getElementData(getLocalPlayer(),getElementData(statsLabel["temperature"],"identifikation"))
-		guiSetText(statsLabel["temperature"],"Temperature: "..math.round(temperature,2).."°C")
-		
-		local humanity = getElementData(getLocalPlayer(),getElementData(statsLabel["humanity"],"identifikation"))
-		guiSetText(statsLabel["humanity"],"Humanity: "..math.round(humanity,2))
-		
-		guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
+		if playerStatusTable[localPlayer] then
+			guiSetText(statsLabel["zombieskilled"],"Zombies killed: "..tostring(playerStatusTable[localPlayer]["killedZombies"]))
+			
+			guiSetText(statsLabel["headshots"],"Headshots: "..tostring(playerStatusTable[localPlayer]["headshots"]))
+			
+			guiSetText(statsLabel["banditskilled"],"Bandits killed: "..tostring(playerStatusTable[localPlayer]["killedBandits"]))
+
+			guiSetText(statsLabel["murders"],"Murders: "..tostring(playerStatusTable[localPlayer]["murders"]))
+			
+			guiSetText(statsLabel["blood"],"Blood: "..tostring(playerStatusTable[localPlayer]["blood"]).." (Type: "..tostring(playerStatusTable[localPlayer]["bloodtype"])..")")
+			
+			local zombiesalive = getElementData(getRootElement(),"zombiesalive") or 0
+			local zombiestotal = getElementData(getRootElement(),"zombiestotal") or 0
+			guiSetText(statsLabel["zombies"],"Zombies (Alive/Total): "..zombiesalive.."/"..zombiestotal)
+			
+			guiSetText(statsLabel["temperature"],"Temperature: "..math.round(playerStatusTable[localPlayer]["temperature"],2).."°C")
+			
+			guiSetText(statsLabel["humanity"],"Humanity: "..math.round(playerStatusTable[localPlayer]["humanity"],2))
+			
+			guiSetText(statsLabel["name"],"Name: "..getPlayerName(getLocalPlayer()))
+		end
 	end			
 end
 setTimer(refreshDebugMonitor,1000,0)

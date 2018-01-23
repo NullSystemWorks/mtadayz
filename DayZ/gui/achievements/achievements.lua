@@ -62,9 +62,11 @@ function move()
 end
 
 function getAchievements()
-	local achievementsunlocked = fromJSON(getElementData(getLocalPlayer(),"achievements"))
+	if playerStatusTable[localPlayer]["achievements"] then
+		achievementsunlocked = fromJSON(playerStatusTable[localPlayer]["achievements"])
+	end
 	if not achievementsunlocked then
-		setElementData(getLocalPlayer(),"achievements",toJSON({}))
+		playerStatusTable[localPlayer]["achievements"] = toJSON({})
 		achievementsunlocked = {}
 	end
 	return achievementsunlocked
@@ -78,7 +80,7 @@ function giveAchievement(ID)
 		if ID then
 			local achievementsunlocked = getAchievements()
 			achievementsunlocked[ID] = true
-			setElementData(getLocalPlayer(),"achievements",toJSON(achievementsunlocked))
+			playerStatusTable[localPlayer]["achievements"] = toJSON(achievementsunlocked)
 			guiSetText(GUIEdit.label[2],achievements[ID]["name"])
 			guiStaticImageLoadImage(GUIEdit.staticimage[2],pathToImg..achievements[ID]["image"])
 			addEventHandler("onClientRender",getRootElement(),move)
@@ -94,15 +96,15 @@ function check() -- Needs optimizing
 		if not achievementsunlocked[i] then
 			for _,cond in ipairs(all["conditions"]) do
 				if(cond[2] == "greater" and cond[3]) then
-					if getElementData(getLocalPlayer(),cond[1]) > tonumber(cond[3]) then
+					if playerStatusTable[localPlayer]["achievements"][cond[1]] > tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif (cond[2] == "equal") then
-					if getElementData(getLocalPlayer(),cond[1]) == cond[3] then
+					if playerStatusTable[localPlayer]["achievements"][cond[1]]== cond[3] then
 						counter = counter+1
 					end
 				elseif (cond[2] == "less" and cond[3]) then
-					if getElementData(getLocalPlayer(),cond[1]) < tonumber(cond[3]) then
+					if playerStatusTable[localPlayer]["achievements"][cond[1]]< tonumber(cond[3]) then
 						counter = counter+1
 					end
 				elseif (cond[2] == "misc_zaxis") then
@@ -136,7 +138,7 @@ function check() -- Needs optimizing
 				if(counter == #all["conditions"]) then
 					giveAchievement(i)
 					for index, element in ipairs(all["items"]) do
-						if getElementData(localPlayer,"CURRENT_Slots") + getItemSlots(element[1]) > getElementData(localPlayer,"MAX_Slots") then
+						if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(element[1]) >playerStatusTable[localPlayer]["MAX_Slots"] then
 							startRollMessage2("Inventory","Inventory full, can't accept achievement rewards!",255,0,0)
 							break
 						else
@@ -149,7 +151,7 @@ function check() -- Needs optimizing
 		end
 	end	
 end
-setTimer(check,10000,0)
+--setTimer(check,10000,0) Currently broken due to moving status+achievements to tables instead of elementData
 
 --giveAchievement(2)
 --giveAchievement(1)
@@ -178,7 +180,7 @@ function achievpanel(state)
 		guiSetFont(GUIAchiev.label[1], font0_needhelp)
 		guiLabelSetColor(GUIAchiev.label[1], 0, 0, 0)
 		
-		GUIAchiev.label[2] = guiCreateLabel(0.23, 0.11, 0.21, 0.03, "Your achievements: 01 of 100 (01% completed)", true, GUIAchiev.staticimage[1])
+		GUIAchiev.label[2] = guiCreateLabel(0.23, 0.11, 0.21, 0.03, "Your achievements: 01 of 100 (1% completed)", true, GUIAchiev.staticimage[1])
 		guiLabelSetColor(GUIAchiev.label[2], 45, 45, 45)
 		
 		GUIAchiev.label[3] = guiCreateLabel(0.80, 0.09, 0.14, 0.05, "Close", true, GUIAchiev.staticimage[1])

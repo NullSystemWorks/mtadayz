@@ -54,7 +54,7 @@ end
 
 local onlinenews = true -- if true, it try to get DayZ changelog from GitHub. Otherwise it uses news table; Default: true
 local news = {
-	"[03/XX/17]\nVersion 0.9.9a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ"
+	"[03/XX/17]\nVersion 0.9.9.1a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\n https://github.com/NullSystemWorks/mtadayz"
 }
 local oldnews = {
 	"[07/05/16]\nVersion 0.9.8a is out!\n\n--- CHANGELOG ---\nMTA DayZ has gone open source!\nYou can get the newest version at our repository:\n\nhttps://github.com/mtadayz/MTADayZ",
@@ -271,7 +271,7 @@ function toggleSavePassword(name, pass)
 	xmlUnloadFile(confFile)
 end
 local sourceX, sourceY = 1440, 900
-local ft = dxCreateFont(":DayZ/fonts/28dayslater.ttf")
+--local ft = dxCreateFont(":DayZ/fonts/28dayslater.ttf")
  
  local texts = { }
  

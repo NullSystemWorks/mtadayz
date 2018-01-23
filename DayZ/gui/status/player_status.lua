@@ -14,6 +14,23 @@ local screenWidth,screenHeight = guiGetScreenSize()
 local playerTarget = false
 local value = 0
 
+function pullPlayerStatusInfoFromServer(statusTable)
+	playerStatusTable[localPlayer] = {}
+	for i, data in pairs(statusTable) do
+		playerStatusTable[localPlayer][i] = data
+	end
+end
+addEvent("onClientPullPlayerStatusInfoFromServer",true)
+addEventHandler("onClientPullPlayerStatusInfoFromServer",root,pullPlayerStatusInfoFromServer)
+
+function pullSingleStatusInfoFromServer(status,value)
+	if playerStatusTable[localPlayer] ~= nil then
+		playerStatusTable[localPlayer][status] = value
+	end
+end
+addEvent("onClientPlayerPullSingleStatusInfoFromServer",true)
+addEventHandler("onClientPlayerPullSingleStatusInfoFromServer",root,pullSingleStatusInfoFromServer)
+
 function updateStatusIcons()
 	if getElementData(localPlayer,"logedin") then
 		if fading >= 0 and fading2 == "up" then
@@ -68,8 +85,9 @@ function updateStatusIcons()
 			end
 		end
 		-- Temperature
-		local temperature = math.round(getElementData(localPlayer,"temperature"),2)
-		--local temperature = math.round(playerDynamicTable.playerTemperature,2)
+		if playerStatusTable[localPlayer]["temperature"] ~= nil then
+			temperature = math.round(playerStatusTable[localPlayer]["temperature"],2)
+		end
 		local status = getElementData(localPlayer,"temperature_status") or 0
 		r,g,b = 0,255,0
 		local t_number = 3
@@ -96,9 +114,10 @@ function updateStatusIcons()
 		end
 		-- Thirst
 		r,g,b = 0,255,0
-		local thirst = getElementData(localPlayer,"thirst")
-		--local thirst = playerDynamicTable.playerWater
-		local thirst_coloring = getElementData(localPlayer,"thirst")*2.55
+		if playerStatusTable[localPlayer]["thirst"] ~= nil then
+			thirst = playerStatusTable[localPlayer]["thirst"]
+		end
+		local thirst_coloring = playerStatusTable[localPlayer]["thirst"]*2.55
 		r,g,b = 255-thirst_coloring,thirst_coloring,0
 		local thirst_icon = ":DayZ/gui/status/thirst/100.png"
 		if thirst >= 100 and thirst <= 81 then
@@ -125,9 +144,11 @@ function updateStatusIcons()
 		end
 		-- Blood
 		r,g,b = 0,255,0
-		local blood = getElementData(localPlayer,"blood")
+		if playerStatusTable[localPlayer]["blood"] ~= nil then
+			blood = playerStatusTable[localPlayer]["blood"]
+		end
 		--local blood = playerDynamicTable.playerBlood
-		local blood_coloring = getElementData(localPlayer,"blood")/47.2
+		local blood_coloring = playerStatusTable[localPlayer]["blood"]/47.2
 		r,g,b = 255-blood_coloring,blood_coloring,0
 		local blood_icon = ":DayZ/gui/status/blood/12000.png"
 		if blood >= 12000 and blood >= 10001 then
@@ -148,9 +169,11 @@ function updateStatusIcons()
 		dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, blood_icon,0,0,0,tocolor(r,g,b))
 		-- Food
 		r,g,b = 0,255,0
-		local food = getElementData(localPlayer,"food")
+		if playerStatusTable[localPlayer]["food"] ~= nil then
+			food = playerStatusTable[localPlayer]["food"]
+		end
 		--local food = playerDynamicTable.playerFood
-		local food_coloring = getElementData(localPlayer,"food")*2.55
+		local food_coloring = playerStatusTable[localPlayer]["food"]*2.55
 		r,g,b = 255-food_coloring,food_coloring,0
 		local food_icon = ":DayZ/gui/status/hunger/100.png"
 		if food >= 100 and food <= 81 then
@@ -177,16 +200,13 @@ function updateStatusIcons()
 		end
 		-- // Status Symbols (Broken bone, pain, bleeding, ...)
 		-- Broken bone
-		if getElementData(localPlayer,"brokenbone") then
-		--if playerDynamicTable.playerBrokenBone then
+		if playerStatusTable[localPlayer]["brokenbone"] then
 			dxDrawImage ( screenWidth*0.9375 , screenHeight*0.55, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/brokenbone.png",0,0,0)
 		end
-		if getElementData(localPlayer,"bleeding") > 0 then
-		--if playerDynamicTable.playerBleeding > 0 then
+		if playerStatusTable[localPlayer]["bleeding"] and playerStatusTable[localPlayer]["bleeding"] > 0 then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/misc/medic.png",0,0,0,tocolor(255,255,255,fading))
 		end
-		if getElementData(localPlayer,"infection") or getElementData(localPlayer,"sepsis") and getElementData(localPlayer,"sepsis") > 0 then
-		--if playerDynamicTable.playerInfection or playerDynamicTable.playerSepsis and playerDynamicTable.playerSepsis > 0 then
+		if playerStatusTable[localPlayer]["infection"] or playerStatusTable[localPlayer]["sepsis"] then
 			dxDrawImage ( screenWidth*0.94 , screenHeight*0.85, screenHeight*0.065, screenHeight*0.065, ":DayZ/gui/status/blood/infection.png",0,0,0)
 		end
 		local x,y,z = getElementPosition(localPlayer)

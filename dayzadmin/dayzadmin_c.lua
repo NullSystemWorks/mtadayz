@@ -157,25 +157,25 @@ local playerName = guiGridListGetItemText (adminpanel.gridlist[1], guiGridListGe
 		local text = ""
 		local x,y,z = getElementPosition(getPlayerFromName(playerName))
 		local bandit = ""
-		guiSetText(adminpanel.label[16],tostring(getElementData(getPlayerFromName(playerName),"blood")))
-		guiSetText(adminpanel.label[17],tostring(getElementData(getPlayerFromName(playerName),"food")))
-		guiSetText(adminpanel.label[18],tostring(getElementData(getPlayerFromName(playerName),"thirst")))
-		guiSetText(adminpanel.label[19],tostring(getElementData(getPlayerFromName(playerName),"temperature")))
-		guiSetText(adminpanel.label[20],tostring(getElementData(getPlayerFromName(playerName),"humanity")))
-		if not getElementData(getPlayerFromName(playerName),"bandit") then
+		guiSetText(adminpanel.label[16],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"blood")))
+		guiSetText(adminpanel.label[17],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"food")))
+		guiSetText(adminpanel.label[18],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"thirst")))
+		guiSetText(adminpanel.label[19],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"temperature")))
+		guiSetText(adminpanel.label[20],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"humanity")))
+		if not exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"isBandit") then
 			bandit = "No"
 		else
 			bandit = "Yes"
 		end
 		guiSetText(adminpanel.label[21],bandit)
-		guiSetText(adminpanel.label[22],tostring(getElementData(getPlayerFromName(playerName),"zombieskilled")))
-		guiSetText(adminpanel.label[23],tostring(getElementData(getPlayerFromName(playerName),"alivetime")))
-		guiSetText(adminpanel.label[24],tostring(getElementData(getPlayerFromName(playerName),"daysalive")))
-		guiSetText(adminpanel.label[25],tostring(getElementData(getPlayerFromName(playerName),"MAX_Slots")))
-		guiSetText(adminpanel.label[26],tostring(getElementData(getPlayerFromName(playerName),"murders")))
-		guiSetText(adminpanel.label[27],tostring(getElementData(getPlayerFromName(playerName),"headshots")))
-		guiSetText(adminpanel.label[28],tostring(getElementData(getPlayerFromName(playerName),"skin")))
-		guiSetText(adminpanel.label[29],tostring(getElementData(getPlayerFromName(playerName),"currentweapon_1") or "N/A"))
+		guiSetText(adminpanel.label[22],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"killedZombies")))
+		guiSetText(adminpanel.label[23],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"alivetime")))
+		guiSetText(adminpanel.label[24],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"daysalive")))
+		guiSetText(adminpanel.label[25],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"MAX_Slots")))
+		guiSetText(adminpanel.label[26],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"murders")))
+		guiSetText(adminpanel.label[27],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"headshots")))
+		guiSetText(adminpanel.label[28],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"skin")))
+		guiSetText(adminpanel.label[29],tostring(exports.DayZ:getPlayerStatus(getPlayerFromName(playerName),"currentweapon_1")) or "N/A")
 		if not getPedOccupiedVehicle(getPlayerFromName(playerName)) then
 			text = "On Foot"
 		else
@@ -385,7 +385,7 @@ local expressionTable = {
 
 function toboolean(expression)
 local boolean = false
-	for i, expr in pairs(expressionTable) do
+	for i, expr in ipairs(expressionTable) do
 		if expression == expr[1] then
 			boolean = expr[2]
 			return boolean

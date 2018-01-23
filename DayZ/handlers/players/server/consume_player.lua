@@ -15,47 +15,47 @@ function addPlayerStats (player,data,value)
 	return end
 	--
 	if data == "food" then
-		local current = getElementData(player,data)
+		local current = playerStatusTable[player]["food"]
 		if current + value > 100 then
-			setElementData(player,data,100)
+			playerStatusTable[player]["food"] = 100
 		elseif current + value < 1 then
-			setElementData(player,data,0)
+			playerStatusTable[player]["food"] = 0
 		else
-			setElementData(player,data,current+value)
+			playerStatusTable[player]["food"] = current+value
 		end
 	elseif data == "thirst" then
-		local current = getElementData(player,data)
+		local current = playerStatusTable[player]["thirst"]
 		if current + value > 100 then
-			setElementData(player,data,100)
+			playerStatusTable[player]["thirst"] = 100
 		elseif 	current + value < 1 then
-			setElementData(player,data,0)
+			playerStatusTable[player]["thirst"] = 0
 		else
-			setElementData(player,data,current+value)
+			playerStatusTable[player]["thirst"] = current+value
 		end
 	elseif data == "blood" then
-		local current = getElementData(player,data)
+		local current = playerStatusTable[player]["blood"]
 		if current + value > 12000 then
-			setElementData(player,data,12000)
+		playerStatusTable[player]["blood"] = 12000
 		elseif 	current + value < 1 then
-			setElementData(player,data,0)
+			playerStatusTable[player]["blood"] = 0
 		else
-			setElementData(player,data,current+value)
+			playerStatusTable[player]["blood"] = current+value
 		end
 	elseif data == "temperature" then
-		local current = getElementData(player,data)
+		local current = playerStatusTable[player]["temperature"]
 		if current + value > 41 then
-			setElementData(player,data,41)
+			playerStatusTable[player]["temperature"] = 41
 		elseif 	current + value <= 31 then
-			setElementData(player,data,31)
+			playerStatusTable[player]["temperature"] = 31
 		else
-			setElementData(player,data,current+value)
+			playerStatusTable[player]["temperature"] = current+value
 		end
 	elseif data == "humanity" then
-		local current = getElementData(player,data)
+		local current = playerStatusTable[player]["humanity"]
 		if current + value > 5000 then
-			setElementData(player,data,5000)
+			playerStatusTable[player]["temperature"] = 5000
 		else
-			setElementData(player,data,current+value)
+			playerStatusTable[player]["temperature"] = current+value
 		end
 	--[[
 	elseif data == "calories" then
@@ -79,13 +79,10 @@ function onPlayerRequestChangingStats(itemName,itemInfo,data)
 			temperatureGain = value[6]
 		end
 	end
-	local weight = getPedStat(source, 21) or 0
 	if data == "food" then
 		setPedAnimation (source,"FOOD","EAT_Burger",6000,false,false,nil,false)
-		setPedStat(source, 21, weight + gameplayVariables["weight_food"])
 	elseif data == "thirst" then
 		setPedAnimation (source,"VENDING","VEND_Drink2_P",6000,false,false,nil,false)
-		setPedStat(source, 21, weight + gameplayVariables["weight_thirst"])
 		if itemName == "Water Bottle" then
 			setElementData(source,"Empty Water Bottle",(getElementData(source,"Empty Water Bottle") or 0)+1)
 		end
@@ -95,8 +92,8 @@ function onPlayerRequestChangingStats(itemName,itemInfo,data)
 	--addPlayerStats (source,"calories",calorieGain)
 	addPlayerStats (source,"food",foodGain)
 	addPlayerStats (source,"thirst",waterGain)
-	if getElementData(source,"temperature") <= 35 then
-		setElementData(source,"temperature",getElementData(source,"temperature")+temperatureGain)
+	if playerStatusTable[source]["temperature"] <= 35 then
+		addPlayerStats(source,"temperature",temperatureGain)
 	end
 	triggerClientEvent (source, "displayClientInfo", source,"Food",shownInfos["youconsumed"].." "..itemName,22,255,0)
 	triggerClientEvent(source,"refreshInventoryManual",source)
@@ -109,28 +106,29 @@ function onPlayerUseMedicObject(itemName)
 	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	setTimer( function ()
 		if itemName == "Bandage" then
-			setElementData(playersource,"bleeding",0)
+			playerStatusTable[playersource]["bleeding"] = 0
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Medic Kit" then
 			addPlayerStats (playersource,"blood",7000)
-			setElementData(playersource,"bleeding",0)
+			playerStatusTable[playersource]["bleeding"] = 0
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Heat Pack" then
-			setElementData(playersource,"cold",false)
-			setElementData(playersource,"temperature",37)
+			playerStatusTable[playersource]["cold"] = false
+			playerStatusTable[playersource]["temperature"] = 37
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Painkiller" then
-			setElementData(playersource,"pain",false)
+			playerStatusTable[playersource]["pain"] = false
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Antibiotics" then
-			setElementData(playersource,"sepsis",0)
-			setElementData(playersource,"infection",false)
+			playerStatusTable[playersource]["sepsis"] = false
+			playerStatusTable[playersource]["infection"] = false
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
 		elseif itemName == "Morphine" then
-			setElementData(playersource,"fracturedArms",false)
-			setElementData(playersource,"fracturedLegs",false)
-			setElementData(playersource,"brokenbone",false)
+			playerStatusTable[playersource]["brokenbone"] = false
+			playerStatusTable[playersource]["fracturedArms"] = false
+			playerStatusTable[playersource]["fracturedLegs"] = false
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
+			setPlayerFracturedBones(playersource,false)
 		elseif itemName == "Blood Bag" then
 			addPlayerStats (playersource,"blood",4000)
 			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
@@ -147,33 +145,36 @@ function onPlayerGiveMedicObject(itemName,player)
 	setPedAnimation (playersource,"BOMBER","BOM_Plant",5000,false,false,nil,false)
 	setTimer( function (player,playersource,itemName)
 		if itemName == "bandage" then
-			setElementData(player,"bleeding",0)
+			playerStatusTable[player]["bleeding"] = 0
 			setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")-1)
 			addPlayerStats (playersource,"humanity",40)
 		elseif itemName == "giveblood" then
-			if getElementData(player,"bloodtype") == getElementData(playersource,"bloodtype") or getElementData(player,"bloodtype") == "AB" then
+			if playerStatusTable[player]["bloodtype"] == playerStatusTable[playersource]["bloodtype"] or playerStatusTable[player]["bloodtype"] == "AB" then
 				addPlayerStats (player,"blood",12000)
 				setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
 				setElementData(playersource,"Blood Bag (Empty)",getElementData(playersource,"Blood Bag (Empty)")+1)
 				addPlayerStats (playersource,"humanity",250)
 			else
-				setElementData(player,"blood",getElementData(player,"blood")-2000)
+				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]-2000
 				setElementData(playersource,"Blood Bag",getElementData(playersource,"Blood Bag")-1)
 				setElementData(playersource,"Blood Bag (Empty)",getElementData(playersource,"Blood Bag (Empty)")+1)
 				triggerClientEvent(playersource,"displayClientInfo",playersource,"BloodType","Your blood type is incompatible with "..getPlayerName(player).."!",255,0,0)
 				triggerClientEvent(player,"displayClientInfo",player,"BloodType","Your blood type is incompatible with "..getPlayerName(playersource).."!",255,0,0)
 			end
 		elseif itemName == "morphine" then
-			setElementData(player,"brokenbone",false)
+			playerStatusTable[player]["brokenbone"] = false
+			playerStatusTable[player]["fracturedArms"] = false
+			playerStatusTable[player]["fracturedLegs"] = false
 			setElementData(playersource,"Morphine",getElementData(playersource,"Morphine")-1)
 			addPlayerStats (playersource,"humanity",50)
+			setPlayerFracturedBones(player,false)
 		elseif itemName == "antibiotics" then
-			setElementData(player,"sepsis",0)
-			setElementData(player,"infection",false)
+			playerStatusTable[player]["sepsis"] = false
+			playerStatusTable[player]["infection"] = false
 			setElementData(playersource,itemName,getElementData(playersource,"Antibiotics")-1)
 			addPlayerStats (playersource,"humanity",20)
 		elseif itemName == "epipen" then
-			setElementData(player,"unconscious",false)
+			playerStatusTable[player]["unconscious"] = false
 			setElementData(playersource,itemName,getElementData(playersource,"Epi-Pen")-1)
 			addPlayerStats (playersource,"humanity",25)
 		end
@@ -185,11 +186,16 @@ addEventHandler("onPlayerGiveMedicObject",getRootElement(),onPlayerGiveMedicObje
 function onPlayerTransfuseBlood()
 	if getElementData(source,"Transfusion Kit") > 0 then
 		if getElementData(source,"Blood Bag (Empty)") > 0 then
-			setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
-			setElementData(source,"Blood Bag",getElementData(source,"Blood Bag")+1)
-			setElementData(source,"Blood Bag (Empty)",getElementData(source,"Blood Bag (Empty)")-1)
-			setElementData(source,"blood",getElementData(source,"blood")-4000)
-			triggerClientEvent(source,"displayClientInfo",source,"BloodTransfusion","You transfused some blood into the blood bag.",0,255,0)
+			if playerStatusTable[source]["blood"] >= 4001 then
+				setPedAnimation (source,"BOMBER","BOM_Plant",5000,false,false,nil,false)
+				setElementData(source,"Blood Bag",getElementData(source,"Blood Bag")+1)
+				setElementData(source,"Blood Bag (Empty)",getElementData(source,"Blood Bag (Empty)")-1)
+				playerStatusTable[source]["blood"] = playerStatusTable[source]["blood"]-4000
+				triggerClientEvent(source,"displayClientInfo",source,"BloodTransfusion","You transfused your blood into the blood bag.",0,255,0)
+			else
+				triggerClientEvent(source,"displayClientInfo",source,"BloodType","That action would kill you!",255,0,0)
+				return
+			end
 		else
 			triggerClientEvent(source,"displayClientInfo",source,"BloodType","You need Blood Bag (Empty) for that!",255,0,0)
 			return

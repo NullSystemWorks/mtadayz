@@ -29,7 +29,7 @@ function killZombie(killer,headshot)
 	setElementData(pedCol,"deadman",true)
 	setElementData(pedCol,"MAX_Slots",12)
 	if killer then
-		setElementData(killer,"zombieskilled",getElementData(killer,"zombieskilled")+1)
+		playerStatusTable[killer]["killedZombies"] = playerStatusTable[killer]["killedZombies"]+1
 	end	
 	local hours,minutes = getTime()
 	local loot_table = ""
@@ -53,7 +53,7 @@ function killZombie(killer,headshot)
 	end
 	destroyElement(source)
 	if headshot then
-		setElementData(killer,"headshots",getElementData(killer,"headshots")+1)
+		playerStatusTable[killer]["headshots"] = playerStatusTable[killer]["headshots"]+1
 	end	
 end
 addEvent("onZombieGetsKilled",true)

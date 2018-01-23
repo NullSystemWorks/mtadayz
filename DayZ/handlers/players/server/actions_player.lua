@@ -138,40 +138,68 @@ end
 addEvent("onPlayerPlaceRoadflare",true)
 addEventHandler("onPlayerPlaceRoadflare",getRootElement(),onPlayerPlaceRoadflare)
 
+elementBackpack = {}
 function onPlayerEquipBackpack(itemName)
 	local backpack_item = 0
 	local backpack_weapons = 0
+	if elementBackpack[source] and playerStatusTable[source]["MAX_Slots"] ~= 8 then
+		detachElementFromBone(elementBackpack[source])
+		destroyElement(elementBackpack[source])
+		elementBackpack[source] = false
+	end
+	local x,y,z = getElementPosition(source)
+	local rx,ry,rz = getElementRotation(source)
 	if itemName == "Assault Pack (ACU)" then
 		backpack_item = gameplayVariables["assaultpack_slots"]
 		backpack_weapons = gameplayVariables["assaultpack_gunslots"]
+		elementBackpack[source] = createObject(1644,x,y,z) -- Assault Pack (ACU)
 	elseif itemName == "Czech Vest Pouch" then
 		backpack_item = gameplayVariables["czechvest_slots"]
 		backpack_weapons = gameplayVariables["czechvest_gunslots"]
+		elementBackpack[source] = createObject(1248,x,y,z) -- Czech Vest Pouch
 	elseif itemName == "ALICE Pack" then
 		backpack_item = gameplayVariables["alice_slots"]
 		backpack_weapons = gameplayVariables["alice_gunslots"]
+		elementBackpack[source] = createObject(2382,x,y,z) -- ALICE Pack
 	elseif itemName == "Survival ACU" then
 		backpack_item = gameplayVariables["survival_slots"]
 		backpack_weapons = gameplayVariables["survival_gunslots"]
+		elementBackpack[source] = createObject(1314,x,y,z) -- Survival ACU
 	elseif itemName == "British Assault Pack" then
 		backpack_item = gameplayVariables["britishassault_slots"]
 		backpack_weapons = gameplayVariables["britishassault_gunslots"]
+		elementBackpack[source] = createObject(1318,x,y,z) -- British Assault Pack
 	elseif itemName == "Backpack (Coyote)" then
 		backpack_item = gameplayVariables["coyote_slots"]
 		backpack_weapons = gameplayVariables["coyote_gunslots"]
+		elementBackpack[source] = createObject(1252,x,y,z) -- Backpack (Coyote)
 	elseif itemName == "Czech Backpack" then
 		backpack_item = gameplayVariables["czech_slots"]
 		backpack_weapons = gameplayVariables["czech_gunslots"]
+		elementBackpack[source] = createObject(1575,x,y,z) -- Czech Backpack
+	else
+		elementBackpack[source] = createObject(3026,x,y,z) -- Patrol Pack
+		backpack_item = 8
+		backpack_weapons = 1
 	end
-	setElementData(source,itemName,getElementData(source,itemName)-1)
-	setElementData(source,"Backpack_Slots",backpack_item)
-	setElementData(source,"Backpack_Item_Slots",backpack_item)
-	setElementData(source,"Backpack_Weapon_Slots",backpack_weapons)
-	setElementData(source,"MAX_Slots",backpack_item)
+	if itemName == "Czech Backpack" then
+		attachElementToBone(elementBackpack[source],source,3,0,-0.16,0.05,270,0,180)
+	else
+		attachElementToBone(elementBackpack[source],source,3,0,-0.225,0.05,90,0,0)
+	end
+	if getElementData(source,itemName) > 0 then
+		setElementData(source,itemName,getElementData(source,itemName)-1)
+	end
+	playerStatusTable[source]["Backpack_Slots"] = backpack_item -- Not in use
+	playerStatusTable[source]["Backpack_Item_Slots"] = backpack_item -- Not in use
+	playerStatusTable[source]["Backpack_Weapon_Slots"] = backpack_weapons -- Not in use
+	playerStatusTable[source]["MAX_Slots"] = backpack_item
+	triggerEvent("onPlayerRetrieveStatusInfo",source,"MAX_Slots",playerStatusTable[source]["MAX_Slots"])
 end
 addEvent("onPlayerEquipBackpack",true)
 addEventHandler("onPlayerEquipBackpack",root,onPlayerEquipBackpack)
 
+-- Needs rework
 function updateTotalKills()
 	for i, player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -181,7 +209,7 @@ function updateTotalKills()
 		end
 	end
 end
-setTimer(updateTotalKills,3000,0)
+--setTimer(updateTotalKills,3000,0)
 
 function antiWaterGlitch()
    if isElementInWater(source) then
@@ -193,7 +221,7 @@ addEventHandler("onPlayerQuit", root, antiWaterGlitch)
 
 function changeWeaponMagSize()
 	for i, data in ipairs(weaponMagSize) do	
-		if getElementData(source,"currentweapon_"..data[1]) == data[2] then
+		if playerStatusTable[source]["currentweapon_"..data[1]] == data[2] then
 			setWeaponProperty(data[3],"poor","maximum_clip_ammo",data[4])
 			setWeaponProperty(data[3],"std","maximum_clip_ammo",data[4])
 			setWeaponProperty(data[3],"pro","maximum_clip_ammo",data[4])

@@ -40,7 +40,7 @@ end
 addEventHandler("onClientPlayerWeaponFire",localPlayer,setCrossHairSize)
 
 function drawCrosshair()
-	if getElementData(localPlayer,"fracturedArms") then return end
+	if playerStatusTable[localPlayer]["fracturedArms"] then return end
     local hX,hY,hZ = getPedTargetEnd ( getLocalPlayer() )
     local screenX1, screenY1 = getScreenFromWorldPosition ( hX,hY,hZ )
 	if screenX1 then
@@ -60,7 +60,7 @@ function drawCrosshair()
 		else
 			setPlayerHudComponentVisible("crosshair", false)
 		end
-		if getPedWeapon(localPlayer) == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" then
+		if getPedWeapon(localPlayer) == 22 and playerStatusTable[localPlayer]["currentweapon_2"] == "Flashlight" then
 			crosshair = "none"
 		end
 		dxDrawImage(screenX1-((size+isFiring)/2)+1, screenY1-((size+isFiring)/2)-1, size+isFiring, size+isFiring, ":DayZ/gui/crosshair/"..crosshair..".png", 0,0,0, tocolor(0,0,0,255))

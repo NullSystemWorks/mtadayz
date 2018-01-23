@@ -8,44 +8,35 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-elementBackpack = {}
-function addBackpackToPlayer(dataName,oldValue)
-	if getElementType(source) == "player" and dataName == "MAX_Slots" then
-		local newValue = getElementData(source,dataName)
-		if elementBackpack[source] then
-			detachElementFromBone(elementBackpack[source])
-			destroyElement(elementBackpack[source])
-			elementBackpack[source] = false
-		end
-		local x,y,z = getElementPosition(source)
-		local rx,ry,rz = getElementRotation(source)
-		if newValue == 8 then
-			elementBackpack[source] = createObject(3026,x,y,z) -- Patrol Pack
-		elseif newValue == gameplayVariables["assaultpack_slots"] then
-			elementBackpack[source] = createObject(1644,x,y,z) -- Assault Pack (ACU)
-		elseif newValue == gameplayVariables["czechvest_slots"] then
-			elementBackpack[source] = createObject(1248,x,y,z) -- Czech Vest Pouch
-		elseif newValue == gameplayVariables["alice_slots"] then
-			elementBackpack[source] = createObject(2382,x,y,z) -- ALICE Pack
-		elseif newValue == gameplayVariables["survival_slots"] then
-			elementBackpack[source] = createObject(1314,x,y,z) -- Survival ACU
-		elseif newValue == gameplayVariables["britishassault_slots"] then
-			elementBackpack[source] = createObject(1318,x,y,z) -- British Assault Pack
-		elseif newValue == gameplayVariables["coyote_slots"] then
-			elementBackpack[source] = createObject(1252,x,y,z) -- Backpack (Coyote)
-		elseif newValue == gameplayVariables["czech_slots"] then
-			elementBackpack[source] = createObject(1575,x,y,z) -- Czech Backpack
-		elseif newValue > gameplayVariables["czech_slots"] then
-			return
-		end
-		if newValue == gameplayVariables["czech_slots"] then
-			attachElementToBone(elementBackpack[source],source,3,0,-0.16,0.05,270,0,180)
-		else
-			attachElementToBone(elementBackpack[source],source,3,0,-0.225,0.05,90,0,0)
-		end
+function addBackpackToPlayer(slots)
+	local x,y,z = getElementPosition(source)
+	local rx,ry,rz = getElementRotation(source)
+	if slots == 8 then
+		elementBackpack[source] = createObject(3026,x,y,z) -- Patrol Pack
+	elseif slots == gameplayVariables["assaultpack_slots"] then
+		elementBackpack[source] = createObject(1644,x,y,z) -- Assault Pack (ACU)
+	elseif slots == gameplayVariables["czechvest_slots"] then
+		elementBackpack[source] = createObject(1248,x,y,z) -- Czech Vest Pouch
+	elseif slots == gameplayVariables["alice_slots"] then
+		elementBackpack[source] = createObject(2382,x,y,z) -- ALICE Pack
+	elseif slots == gameplayVariables["survival_slots"] then
+		elementBackpack[source] = createObject(1314,x,y,z) -- Survival ACU
+	elseif slots == gameplayVariables["britishassault_slots"] then
+		elementBackpack[source] = createObject(1318,x,y,z) -- British Assault Pack
+	elseif slots == gameplayVariables["coyote_slots"] then
+		elementBackpack[source] = createObject(1252,x,y,z) -- Backpack (Coyote)
+	elseif slots == gameplayVariables["czech_slots"] then
+		elementBackpack[source] = createObject(1575,x,y,z) -- Czech Backpack
+	elseif slots > gameplayVariables["czech_slots"] then
+		return
+	end
+	if slots == gameplayVariables["czech_slots"] then
+		attachElementToBone(elementBackpack[source],source,3,0,-0.16,0.05,270,0,180)
+	else
+		attachElementToBone(elementBackpack[source],source,3,0,-0.225,0.05,90,0,0)
 	end	
 end
-addEventHandler ("onElementDataChange", root, addBackpackToPlayer)
+--addEventHandler ("onElementDataChange", root, addBackpackToPlayer)
 
 function backpackRemoveQuit ()
 	if elementBackpack[source] then
@@ -62,7 +53,7 @@ addEventHandler ( "onPlayerQuit", getRootElement(), backpackRemoveQuit )
 
 elementWeaponBack = {}
 function weaponSwitchBack ( previousWeaponID, currentWeaponID )
-	local weapon1 = getElementData(source,"currentweapon_1")
+	local weapon1 = playerStatusTable[source]["currentweapon_1"]
 	if not weapon1 then return end
 	local ammoData1,weapID1 = getWeaponAmmoFromName(weapon1)
 	local x,y,z = getElementPosition(source)
@@ -109,7 +100,7 @@ addEvent("removeBackWeaponOnDrop",true)
 addEventHandler("removeBackWeaponOnDrop",getRootElement(),removeBackWeaponOnDrop)
 
 function removeAttachedOnDeath ()
-	if elementBackpack[source] and getElementData(source,"MAX_Slots") ~= 8 then
+	if elementBackpack[source] and playerStatusTable[source]["MAX_Slots"] ~= 8 then
 		detachElementFromBone(elementBackpack[source])
 		destroyElement(elementBackpack[source])
 	end

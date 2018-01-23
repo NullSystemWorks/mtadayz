@@ -116,7 +116,10 @@ function(pName, item, quantity, action)
 end)
 
 function onAdminPanelSetPlayerStat(name, stat, value)
-	setElementData(getPlayerFromName(name), string.lower(stat), tonumber(value))
+	if stat ~= "killedZombies" then
+		stat = string.lower(stat)
+	end
+	exports.DayZ:setPlayerStatus(getPlayerFromName(name),stat,tonumber(value))
 	outputChatBox("Set "..stat.." of "..name.." to "..value,source,0,255,0)
 end
 addEvent("onAdminPanelSetPlayerStat",true)
@@ -129,20 +132,23 @@ addEvent("onAdminPanelSendGlobalMessage",true)
 addEventHandler("onAdminPanelSendGlobalMessage",root,onAdminPanelSendGlobalMessage)
 
 function onAdminPanelKillPlayer(player)
-	setElementData(getPlayerFromName(player), "blood", -1)
+	exports.DayZ:dayzKillPlayer(getPlayerFromName(player))
 	outputChatBox("You killed "..player.."!",source,255,0,0)
 end
 addEvent("onAdminPanelKillPlayer",true)
 addEventHandler("onAdminPanelKillPlayer",root,onAdminPanelKillPlayer)
 
 function onAdminPanelHealPlayer(player)
-	setElementData(getPlayerFromName(player), "blood", 12000)
-	setElementData(getPlayerFromName(player), "food", 100)
-	setElementData(getPlayerFromName(player), "thirst", 100)
-	setElementData(getPlayerFromName(player), "temperature", 37)
-	setElementData(getPlayerFromName(player), "cold", false)
-	setElementData(getPlayerFromName(player), "pain", false)
-	setElementData(getPlayerFromName(player), "infection", false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"blood",12000)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"food",100)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"thirst",100)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"temperature",37)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"cold",false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"pain",false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"infection",false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"brokenbone",false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"fracturedArms",false)
+	exports.DayZ:setPlayerStatus(getPlayerFromName(player),"fracturedLegs",false)
 	outputChatBox("You healed "..player..".",source,0,255,0)
 end
 addEvent("onAdminPanelHealPlayer",true)
@@ -162,8 +168,8 @@ function onAdminPanelSetPlayerSkin(player,skin)
 	for i,data in ipairs(skinTable) do
 		if skin == data[1] then
 			setElementModel(getPlayerFromName(player),data[2])
-			setElementData(getPlayerFromName(player),"skin",data[2])
-			setElementData(getPlayerFromName(player),"gender",data[3])
+			exports.DayZ:setPlayerStatus(getPlayerFromName(player),"skin",data[2])
+			exports.DayZ:getPlayerStatus(getPlayerFromName(player),"gender",data[3])
 			outputChatBox("Skin of "..player.." has been changed to "..data[1],source,0,255,0)
 		end
 	end

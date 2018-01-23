@@ -127,7 +127,7 @@ local number = 0
 	end
 	if arg1 == "Player" then
 		--1
-		if getElementData(arg2,"bleeding") > 0 and getElementData(getLocalPlayer(),"Bandage") >= 1 then
+		if playerStatusTable[arg2]["bleeding"] > 0 and getElementData(getLocalPlayer(),"Bandage") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Bandage")
@@ -135,7 +135,7 @@ local number = 0
 			setElementData(rowText[1],"markedMenuItem",true)
 			setElementData(rowText[number],"usedItem","bandage")
 		end	
-		if getElementData(arg2,"blood") < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
+		if playerStatusTable[arg2]["blood"] < 11900 and getElementData(getLocalPlayer(),"Blood Bag") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Administer Blood Bag")	
@@ -145,7 +145,7 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
-		if getElementData(arg2,"brokenbone") == true and getElementData(getLocalPlayer(),"Morphine") >= 1 then
+		if playerStatusTable[arg2]["brokenbone"] == true and getElementData(getLocalPlayer(),"Morphine") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Morphine")	
@@ -155,7 +155,7 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
-		if getElementData(arg2,"cold") == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
+		if playerStatusTable[arg2]["cold"] == true and getElementData(getLocalPlayer(),"Antibiotics") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Give Antibiotics")	
@@ -165,7 +165,7 @@ local number = 0
 				setElementData(rowText[number],"markedMenuItem",true)
 			end
 		end
-		if getElementData(arg2,"unconscious") == true and getElementData(getLocalPlayer(),"Epi-Pen") >= 1 then
+		if playerStatusTable[arg2]["unconscious"] == true and getElementData(getLocalPlayer(),"Epi-Pen") >= 1 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
 			guiSetText(rowText[number],"Inject Epi-Pen")	
@@ -618,14 +618,15 @@ function()
 end
 )
 
-function fireRaiseTemperature ()
+-- Will be changed accordingly
+function fireRaiseTemperature()
 	if isInFirePlace then
-		if getElementData(getLocalPlayer(),"temperature") <= 38 then
-			setElementData(getLocalPlayer(),"temperature",getElementData(getLocalPlayer(),"temperature")+0.25)
+		if playerStatusTable[localPlayer]["temperature"] <= 38 then
+			return
 		end
 	end
 end
-setTimer(fireRaiseTemperature,10000,0)
+--setTimer(fireRaiseTemperature,10000,0)
 
 ------------------------------------------------------------------------------
 
@@ -812,7 +813,7 @@ if ( keyState == "down" ) then
 					disableMenu()
 					return
 				end
-				if getPlayerCurrentSlots() + getItemSlots(itemName) <= getPlayerMaxAviableSlots() then	
+				if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then	
 					local col = getElementData(getLocalPlayer(),"currentCol")
 					triggerServerEvent("onPlayerTakeItemFromGround",getLocalPlayer(),itemName,col)
 					disableMenu()

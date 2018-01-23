@@ -101,7 +101,7 @@ function onVersionCheck(state,old,new,changes)
 		outputServerLog("[DayZ] A new version of MTA DayZ is available!")
 		outputServerLog("[DayZ] Current Version: "..version.." | New Version: "..new)
 		outputServerLog("[DayZ] Some changes: \n "..changes)
-		outputServerLog("\n[DayZ] Download the new version at https://github.com/mtadayz/MTADayZ/releases")
+		outputServerLog("\n[DayZ] Download the new version at https://github.com/NullSystemWorks/mtadayz")
 	else
 		outputServerLog("[DayZ] MTA DayZ is up-to-date.")
 	end

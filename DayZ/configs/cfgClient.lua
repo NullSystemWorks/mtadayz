@@ -11,15 +11,14 @@
 -- PING CHECK
 gameplayVariables["ping"] = 600 -- Checks if ping is over the set amount - DEFAULT: 600
 
--- PARAMETER
-gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: 650
+-- DAMAGE
 gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage dealt when drowning - DEFAULT: math.random(5500,7100)
 
 -- MISC
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
 gameplayVariables["nightCheckInterval"] = 300000 -- Interval (in milliseconds) for client checking if it is currently night - DEFAULT: 300000
 gameplayVariables["armachat"] = false -- Activates/deactivates ArmA II style chatbox - DEFAULT: false
-gameplayVariables["debugmonitorenabled"] = false --Debug Monitor available to the players? DEFAULT: false
+gameplayVariables["debugmonitorenabled"] = true --Debug Monitor available to the players? DEFAULT: false
 gameplayVariables["oldmap"] = true -- Activates/deactivates the normal map provided by MTA - DEFAULT: true
 gameplayVariables["oldgps"] = true -- Activates/deactivates the normal GPS provided by GTA - DEFAULT: true
 

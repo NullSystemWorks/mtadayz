@@ -25,7 +25,7 @@ function chopTree()
 	local tx = x + - ( length ) * math.sin( math.rad( rz ) )
 	local ty = y + length * math.cos( math.rad( rz ) )
 	local tz = z
-	if getControlState( "fire" ) and getPedWeapon( localPlayer ) == 8 then
+	if getPedControlState(localPlayer,"fire" ) and getPedWeapon( localPlayer ) == 8 then
 		local hit, hitX, hitY, hitZ, hitElement, normalX, normalY, normalZ, material, lighting, piece, worldID, worldX, worldY, worldZ, worldRX, worldRY, worldRZ, worldLODID = processLineOfSight( x, y, z, tx, ty, tz, true, false, false, true, true, false, false, false, localPlayer, true, false )
 		if worldID and not startwoodtick and treelist[worldID] then
 			local treename = treelist[worldID].name

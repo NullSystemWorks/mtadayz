@@ -184,11 +184,11 @@ addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsi
 function pullChangelog(news)
 	local player = client -- idk how to send it correctly to function()
 	if news then
-		fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/master/news.txt",function(data,err)
+		fetchRemote("https://raw.githubusercontent.com/NullSystemWorks/mtadayz/master/news.txt",function(data,err)
 			triggerClientEvent(player,"loadAPIData",player,"changelog",data)
 		end)
 	end
-	fetchRemote("https://api.github.com/repos/ciber96/MTADayZ/contributors",function(data,err)
+	fetchRemote("https://api.github.com/repos/NullSystemWorks/mtadayz/contributors",function(data,err)
 		triggerClientEvent(player,"loadAPIData",player,"contributors",data)
 	end)
 end

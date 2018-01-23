@@ -260,6 +260,7 @@ addCommandHandler ( "respawndayzvehicles", respawnDayZVehicles ) -- Respawn blow
 
 function notifyAboutExplosion()
 	local col = getElementData(source,"parent")
+	if not col then return end
 	local x1,y1,z1 = getElementPosition(source)
 	id,x,y,z  = getElementData(col,"spawn")[1],getElementData(col,"spawn")[2],getElementData(col,"spawn")[3],getElementData(col,"spawn")[4]
     respawnExplodedVehicleTimer = setTimer(respawnDayZVehicle,gameplayVariables["explodedvehiclesrespawn"],1,id,x,y,z,source,col,getElementData(col,"MAX_Slots"))

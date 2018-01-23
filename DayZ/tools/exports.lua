@@ -41,19 +41,31 @@ getGameplayVariable - Arguments: variable name. Returns: Value of the variable [
 
 -- [[ VERSION HANDLER ]]
 function getDayZVersion()
-	return "0.9.9a"
+	return "0.9.9.1a"
+end
+
+function getPlayerStatus(player,status)
+	if isElement(player) and getElementType(player) == "player" and status then
+		return playerStatusTable[player][status]
+	end
+end
+
+function setPlayerStatus(player,status,value)
+	if isElement(player) and getElementType(player) == "player" and status then
+		playerStatusTable[player][status] = value
+	end
 end
 
 -- [[ Player Blood Functions ]] --
 function setPlayerBlood(player,blood)
 	if isElement(player) and ( getElementType(player) == "player" ) and blood then
-		setElementData(player,"blood",blood)
+		playerStatusTable[player]["blood"] = blood
 	end
 end
 
 function getPlayerBlood(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local blood = getElementData(player,"blood")
+		local blood = playerStatusTable[player]["blood"]
 		return blood
 	end
 end
@@ -61,13 +73,13 @@ end
 -- [[ Player Zombies Functions ]] --
 function setPlayerZombiesKilled(player,zkill)
 	if isElement(player) and ( getElementType(player) == "player" ) and zkill then
-		setElementData(player,"zombieskilled",zkill)
+		playerStatusTable[player]["killedZombies"] = zkill
 	end
 end
 
 function getPlayerZombiesKilled(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local murders = getElementData(player,"zombieskilled")
+		local murders = playerStatusTable[player]["killedZombies"]
 		return murders
 	end
 end
@@ -76,13 +88,13 @@ end
 -- [[ Player Headshots Function ]] --
 function setPlayerHeadshots(player,headshots)
 	if isElement(player) and ( getElementType(player) == "player" ) and headshots then
-		setElementData(player,"headshots",headshots)
+		playerStatusTable[player]["headshots"] = headshots
 	end
 end
 
 function getPlayerHeadshots(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local headshots = getElementData(player,"headshots")
+		local headshots = playerStatusTable[player]["headshots"]
 		return headshots
 	end
 end
@@ -90,13 +102,13 @@ end
 -- [[ Player Murders Function ]] --
 function setPlayerMurders(player,murders)
 	if isElement(player) and ( getElementType(player) == "player" ) and murders then
-		setElementData(player,"murders",murders)
+		playerStatusTable[player]["murders"] = murders
 	end
 end
 
 function getPlayerMurders(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local murders = getElementData(player,"murders")
+		local murders = playerStatusTable[player]["murders"]
 		return murders
 	end
 end
@@ -105,13 +117,13 @@ end
 -- [[ Player Bandits Killed Function ]] --
 function setPlayerBanditsKilled(player,bkill)
 	if isElement(player) and ( getElementType(player) == "player" ) and bkill then
-		setElementData(player,"banditskilled",bkill)
+		playerStatusTable[player]["killedBandits"] = bkill
 	end
 end
 
 function getPlayerBanditsKilled(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local bkill = getElementData(player,"banditskilled")
+		local bkill = playerStatusTable[player]["killedBandits"]
 		return bkill
 	end
 end
@@ -120,13 +132,13 @@ end
 -- [[ Player Temperature Function ]] --
 function setPlayerTemperature(player,temperature)
 	if isElement(player) and ( getElementType(player) == "player" ) and temperature then
-		setElementData(player,"temperature",temperature)
+		playerStatusTable[player]["temperature"] = temperature
 	end
 end
 
 function getPlayerTemperature(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local temperature = getElementData(player,"temperature")
+		local temperature = playerStatusTable[player]["temperature"]
 		return temperature
 	end
 end
@@ -135,14 +147,20 @@ end
 -- [[ Player Humanity Function ]] --
 function setPlayerHumanity(player,humanity)
 	if isElement(player) and ( getElementType(player) == "player" ) and humanity then
-		setElementData(player,"humanity",humanity)
+		playerStatusTable[player]["humanity"] = humanity
 	end
 end
 
 function getPlayerHumanity(player)
 	if isElement(player) and (getElementType(player) == "player") then
-		local humanity = getElementData(player,"humanity")
+		local humanity = playerStatusTable[player]["humanity"]
 		return humanity
+	end
+end
+
+function dayzKillPlayer(player)
+	if isElement(player) and (getElementType(player) == "player") then
+		triggerEvent("onDayZPlayerDamage",player,false,63,1,100)
 	end
 end
 

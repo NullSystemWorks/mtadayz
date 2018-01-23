@@ -9,9 +9,15 @@
 ]]
 --Disallow blocking attacks
 addEventHandler("onClientRender", root,
-function ()
-if getControlState("aim_weapon") and getControlState("jump") then
-	setControlState("jump",false)
-end
-end
-)
+function()
+	if getPedControlState(localPlayer,"aim_weapon") and getPedControlState(localPlayer,"jump") then
+		setControlState("jump",false)
+	end
+	if getPedWeapon(localPlayer) == 0 then
+		toggleControl("fire",false)
+		toggleControl("aim_weapon",false)
+	else
+		toggleControl("fire",true)
+		toggleControl("aim_weapon",true)
+	end
+end)

@@ -9,6 +9,101 @@
 #-----------------------------------------------------------------------------#
 ]]
 
+local dataInfoTable = {}
+function sendPlayerStatusInfoToClient()
+	for i, player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			triggerClientEvent(player,"onClientPullPlayerStatusInfoFromServer",player,playerStatusTable[player])
+		end
+	end
+end
+setTimer(sendPlayerStatusInfoToClient,1000,0)
+
+function onPlayerRetrieveStatusInfo(status,value)
+	triggerClientEvent(source,"onClientPlayerPullSingleStatusInfoFromServer",source,status,value)
+end
+addEvent("onPlayerRetrieveStatusInfo",true)
+addEventHandler("onPlayerRetrieveStatusInfo",root,onPlayerRetrieveStatusInfo)
+
+function updatePlayerCurrentSlots(isHoldingWeapon)
+	local current_SLOTS = 0
+	for id,item in ipairs(itemWeightTable) do
+		if getElementData(client, item[1]) and getElementData(client, item[1]) >= 1 then
+			current_SLOTS = current_SLOTS + item[2] * getElementData(client, item[1])
+		end
+	end
+	if isHoldingWeapon then
+		playerStatusTable[client]["CURRENT_Slots"] = math.floor(current_SLOTS)-10
+	else
+		playerStatusTable[client]["CURRENT_Slots"] = math.floor(current_SLOTS)
+	end
+	triggerEvent("onPlayerRetrieveStatusInfo",client,"CURRENT_Slots",playerStatusTable[client]["CURRENT_Slots"])
+end
+addEvent("onUpdatePlayerCurrentSlots",true)
+addEventHandler("onUpdatePlayerCurrentSlots",root,updatePlayerCurrentSlots)
+
+function regenerateBlood()
+	for i, player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			local blood = playerStatusTable[player]["blood"]
+			local thirst = playerStatusTable[player]["thirst"]
+			local hunger = playerStatusTable[player]["food"]
+			local bloodRegen = 0
+			if blood < 12000 then
+				local isWellFed = ((hunger+thirst)/2)/100
+				if isWellFed <= 0.50 then
+					return
+				else
+					if isPedDucked(player) then
+						bloodRegen = math.round((1+4*math.sqrt((12000-blood)/12000)),0)
+					else
+						bloodRegen = math.round((1+10*(12000-blood)/12000))
+					end
+				end
+				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]+bloodRegen
+			end
+		end
+	end
+end
+setTimer(regenerateBlood,60000,0)
+
+function processBleeding()
+	for i, player in ipairs(getElementsByType("player")) do
+		if getElementData(player,"logedin") then
+			local blood = playerStatusTable[player]["blood"]
+			local hunger = playerStatusTable[player]["food"]
+			local thirst = playerStatusTable[player]["thirst"]
+			local bloodLossPerSec = playerStatusTable[player]["bleeding"] or 0
+			local x,y,z = getElementPosition(player)
+			if hunger <= 0 or thirst <= 0 then
+				bloodLossPerSec = bloodLossPerSec+1
+			end
+			if bloodLossPerSec > 0 then
+				triggerClientEvent(player,"onClientPlayerAddBloodFX",player,bloodLossPerSec)		
+				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]-bloodLossPerSec
+			end
+		end
+	end	
+end
+setTimer(processBleeding,5000,0)
+
+function setPlayerFracturedBones(player,fracturedBone)
+	if getElementData(player,"logedin") then
+		if fracturedBone == "fracturedLegs" then
+			toggleControl(player,"jump",false)
+			toggleControl(player,"sprint",false)
+		elseif fracturedBone == "fracturedArms" then
+			toggleControl(player,"aim_weapon",false)
+			toggleControl(player,"fire",false)
+		elseif not fracturedBone then
+			toggleControl(player,"aim_weapon",true)
+			toggleControl(player,"fire",true)
+			toggleControl(player,"jump",true)
+			toggleControl(player,"sprint",true)
+		end
+	end
+end
+
 function checkTemperature()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -41,9 +136,8 @@ function checkTemperature()
 					setElementData(player,"temperature_status",6)
 				end
 			else
-				if getElementData(player,"temperature") < 37 then
+				if playerStatusTable[player]["temperature"] < 37 then
 					value = 0.02
-					--addPlayerStats(player,"temperature",value)
 					setElementData(player,"temperature_status",5)
 				end
 			end
@@ -51,14 +145,14 @@ function checkTemperature()
 				value = value+gameplayVariables["temperaturewater"]
 				setElementData(player,"temperature_status",3)
 			end	
-			if getControlState (player,"sprint") and not getElementData(player,"unconscious") then
-				if getElementData(player,"temperature") <= 37 then
+			if getControlState (player,"sprint") and not playerStatusTable[player]["unconscious"] then
+				if playerStatusTable[player]["temperature"] <= 37 then
 					value = value+gameplayVariables["temperaturesprint"]
 					setElementData(player,"temperature_status",4)
 				end
 			end
 			if isPedInVehicle(player) then
-				if getElementData(player,"temperature") <= 37 then
+				if playerStatusTable[player]["temperature"] <= 37 then
 					value = value+0.008
 					setElementData(player,"temperature_status",4)
 				end
@@ -69,63 +163,21 @@ function checkTemperature()
 end
 setTimer(checkTemperature,30000,0)
 
-function checkTemperature2()
-	for i,player in ipairs(getElementsByType("player")) do
+function setPlayerCold()
+	for i, player in ipairs(getElementsByType("players")) do
 		if getElementData(player,"logedin") then
-			value = 0
-			if isElementInWater(player) then
-				value = value+gameplayVariables["temperaturewater"]
-			end	
-			if getControlState (player,"sprint") and not getElementData(player,"unconscious") then
-				if getElementData(player,"temperature") <= 37 then
-					value = value+gameplayVariables["temperaturesprint"]
-				end
+			if playerStatusTable[player]["temperature"] <= 33 then
+				playerStatusTable[player]["cold"] = true
+				local x,y,z = getElementPosition(player)
+				triggerClientEvent(player,"onClientPlayerCreateSneezeShake",player,x,y,z)
+			elseif playerStatusTable[player]["temperature"] > 33 then
+				playerStatusTable[player]["cold"] = false
 			end
-			if isPedInVehicle(player) then
-				if getElementData(player,"temperature") <= 37 then
-					value = value+0.008
-				end
-			end
-			addPlayerStats (player,"temperature",value)
-		end	
-	end
-end
---setTimer(checkTemperature2,30000,0)
-
---[[
-function setHunger()
-	for i,player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			value = gameplayVariables["loseHunger"]
-			addPlayerStats (player,"food",value)
-		end	
-	end
-end
-setTimer(setHunger,60000,0)
-
-function setThirsty()
-	for i,player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			value = gameplayVariables["loseThirst"]
-			addPlayerStats (player,"thirst",value)
 		end
 	end
 end
-setTimer(setThirsty,60000,0)
+setTimer(setPlayerCold,40000,0)
 
-function checkThirsty()
-	for i,player in ipairs(getElementsByType("player")) do
-		if getElementData(player,"logedin") then
-			value = 0
-			if getControlState (player,"sprint") then
-				value = gameplayVariables["sprintthirst"]
-			end	
-			addPlayerStats (player,"thirst",value)
-		end
-	end
-end
-setTimer(checkThirsty,10000,0)
-]]
 
 local backpackLoadTable = {}
 local ammoLoadTable = {}
@@ -182,7 +234,7 @@ function getPlayerLoad()
 			end
 			playerSpeed = math.floor(mps*3.5)
 			-- Final calculation for hunger based on blood, speed and weight of all items combined
-			local hunger = (math.abs((((12000 - getElementData(player,"blood")) / 12000) * 5) + playerSpeed + myLoad) * 3)
+			local hunger = (math.abs((((12000 - playerStatusTable[player]["blood"]) / 12000) * 5) + playerSpeed + myLoad) * 3)
 			playerHunger = 0
 			playerHunger = playerHunger+(hunger/70)
 			--playerHunger = math.max(math.min(playerHunger,2160,0))
@@ -190,10 +242,10 @@ function getPlayerLoad()
 			local thirst = 2
 			thirst = (playerSpeed+4)*3
 			playerThirst = 0
-			playerThirst = playerThirst+(thirst/60)*(getElementData(player,"temperature")/37)
+			playerThirst = playerThirst+(thirst/60)*(playerStatusTable[player]["temperature"])/37
 			--playerThirst = math.max(math.min(playerThirst,1440,0))
 			local hungerMultiplier = 1
-			if getElementData(player,"food") > 0 then
+			if playerStatusTable[player]["food"] > 0 then
 				if gameplayVariables["difficulty"] then
 					if gameplayVariables["difficulty"] == "normal" then
 						hungerMultiplier = 1
@@ -207,13 +259,13 @@ function getPlayerLoad()
 				else
 					hungerMultiplier = 1
 				end
-				setElementData(player,"food",getElementData(player,"food")-(playerHunger*hungerMultiplier))
+				playerStatusTable[player]["food"] = playerStatusTable[player]["food"]-(playerHunger*hungerMultiplier)
 			else
-				setElementData(player,"food",0)
+				playerStatusTable[player]["food"] = 0
 			end
 			
 			local thirstMultiplier = 1
-			if getElementData(player,"thirst") > 0 then
+			if playerStatusTable[player]["thirst"] > 0 then
 				if gameplayVariables["difficulty"] then
 					if gameplayVariables["difficulty"] == "normal" then
 						thirstMultiplier = 1
@@ -227,9 +279,9 @@ function getPlayerLoad()
 				else
 					thirstMultiplier = 1
 				end
-				setElementData(player,"thirst",getElementData(player,"thirst")-(playerThirst*thirstMultiplier))
+				playerStatusTable[player]["thirst"] = playerStatusTable[player]["thirst"]-(playerThirst*thirstMultiplier)
 			else
-				setElementData(player,"thirst",0)
+				playerStatusTable[player]["thirst"] = 0
 			end
 			
 		end
@@ -240,10 +292,10 @@ setTimer(getPlayerLoad,60000,0)
 function checkHumanity()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
-			if getElementData(player,"humanity") < 2500 then
+			if playerStatusTable[player]["humanity"] < 2500 then
 				addPlayerStats (player,"humanity",30)
-				if getElementData(player,"humanity") > 2000 then
-					setElementData(player,"bandit",false)
+				if playerStatusTable[player]["humanity"] > 2000 then
+					playerStatusTable[player]["bandit"] = false
 				end
 			end
 		end	
@@ -254,7 +306,7 @@ setTimer(checkHumanity,60000,0)
 function checkInfection()
 	for i,player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
-			if getElementData(player,"infection") then
+			if playerStatusTable[player]["infection"] then
 				addPlayerStats(player,"blood",-3)
 			end
 		end
@@ -284,7 +336,7 @@ function onPlayerHideBody()
             if getElementData(col,"deadman") or getElementData(col,"deadzombie") then
                 setElementData(source,"loot",false)
                 setElementData(source,"currentCol",false)
-                triggerClientEvent(source, "displayClientInfo", source, "Info","You hid the body", 22, 255, 0)
+                triggerClientEvent(source, "displayClientInfo", source, "Info","Body has been buried...", 22, 255, 0)
                 setTimer(function(colision)
                     if isElement (getElementData(colision,"parent")) then
                         destroyElement(getElementData(colision,"parent"))
@@ -294,7 +346,7 @@ function onPlayerHideBody()
             end 
         end
     else
-      triggerClientEvent(source, "displayClientInfo", source, "Info", "You must have a shovel !", 255, 51, 51)
+      triggerClientEvent(source, "displayClientInfo", source, "Info", "You need a shovel!", 255, 51, 51)
     end
 end
 addEvent("onPlayerHideBody",true)
@@ -336,22 +388,6 @@ end
 addEvent("onPlayerUsingHaircut", true)
 addEventHandler("onPlayerUsingHaircut", getRootElement(), resetPlayerBeard)
 
---[[
-setTimer(function()
-    for k, player in ipairs(getElementsByType("player")) do
-        changeWeight(player)
-    end
-end, gameplayVariables["weight_loosetimer"], 0)
-
-function changeWeight(thePlayer)
-  local weight = getPedStat(thePlayer, 21) or 0  
-    if getElementData(thePlayer, "logedin") then
-      if getControlState(thePlayer, "sprint") then
-        setPedStat(thePlayer, 21, weight - gameplayVariables["weight_loose"])
-      end
-  end
-end
-]]
 
 function setPlayerUnconsciousAnimation(value,player)
 	if value == "unconscious" then

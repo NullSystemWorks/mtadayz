@@ -36,7 +36,7 @@ function showJournal()
 			guiSetVisible(JournalTable.image[6],false)
 			guiSetVisible(JournalTable.image[7],false)
 			guiSetVisible(JournalTable.image[8],false)
-			guiSetText(JournalTable.label[1],"Day "..getElementData(localPlayer,"daysalive"))
+			guiSetText(JournalTable.label[1],"Day "..tostring(playerStatusTable[localPlayer]["daysalive"]))
 			local x,y,z = getElementPosition(localPlayer)
 			guiSetText(JournalTable.label[2],getZoneName(x,y,z))
 			addEventHandler("onClientMouseEnter",JournalTable.label[5],function() writeSelected(5) end,false)
@@ -57,12 +57,13 @@ function showJournal()
 			addEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal,false)
 			
-			guiSetText(JournalTable.label[20],tostring(getElementData(localPlayer,"blood")).." (Type: "..tostring(getElementData(localPlayer,"bloodtypediscovered"))..")")
-			guiSetText(JournalTable.label[21],tostring(math.floor(getElementData(localPlayer,"food"))))
-			guiSetText(JournalTable.label[22],tostring(math.floor(getElementData(localPlayer,"thirst"))))
-			guiSetText(JournalTable.label[23],tostring(math.floor(getElementData(localPlayer,"temperature"))).."°C")
-			guiSetText(JournalTable.label[24],tostring(math.floor(getElementData(localPlayer,"humanity"))))
+			guiSetText(JournalTable.label[20],tostring(playerStatusTable[localPlayer]["blood"]).." (Type: "..tostring(playerStatusTable[localPlayer]["bloodtype"])..")")
+			guiSetText(JournalTable.label[21],tostring(math.floor(playerStatusTable[localPlayer]["food"])))
+			guiSetText(JournalTable.label[22],tostring(math.floor(playerStatusTable[localPlayer]["thirst"])))
+			guiSetText(JournalTable.label[23],tostring(math.floor(playerStatusTable[localPlayer]["temperature"])).."°C")
+			guiSetText(JournalTable.label[24],tostring(math.floor(playerStatusTable[localPlayer]["humanity"])))
 			guiSetText(JournalTable.label[25],tostring(math.floor(getElementData(getRootElement(),"zombiestotal") or 0)))
+			addJournalEntryOnStatus()
 			--unbindKey("J","down",initInventory)
 		else
 			isJournalOpen = false
@@ -336,11 +337,11 @@ function nextPreviousPage(number)
 			guiSetVisible(JournalTable.image[1],false)
 			playSound(":DayZ/sounds/status/journal.wav",false)
 			-- Data Check
-			local humanity = getElementData(localPlayer,"humanity")
-			local banditskilled = getElementData(localPlayer,"banditskilled")
-			local murders = getElementData(localPlayer,"murders")
-			local zombieskilled = getElementData(localPlayer,"zombieskilled")
-			local headshots = getElementData(localPlayer,"headshots")
+			local humanity = playerStatusTable[localPlayer]["humanity"]
+			local banditskilled = playerStatusTable[localPlayer]["killedBandits"]
+			local murders = playerStatusTable[localPlayer]["murders"]
+			local zombieskilled = playerStatusTable[localPlayer]["killedZombies"]
+			local headshots = playerStatusTable[localPlayer]["headshots"]
 			if humanity >= 2001 and humanity <= 3000 then
 				guiSetVisible(JournalTable.image[4],true)
 				guiStaticImageLoadImage(JournalTable.image[4],":DayZ/gui/journal/images/survivor.png")
@@ -416,7 +417,7 @@ function nextPreviousPage(number)
 			end
 			guiSetText(JournalTable.label[18],"FPS: "..math.floor(getCurrentFPS()))
 			guiSetText(JournalTable.label[19],"Difficulty: "..tostring(gameplayVariables["difficulty"]))
-			guiSetText(JournalTable.label[17],"Survived: "..tostring(getElementData(localPlayer,"daysalive")).." Day(s)")
+			guiSetText(JournalTable.label[17],"Survived: "..tostring(playerStatusTable[localPlayer]["daysalive"]).." Day(s)")
 		elseif number == 8 then
 			guiSetVisible(JournalTable.image[2],false)
 			guiSetVisible(JournalTable.image[1],true)
@@ -434,10 +435,10 @@ function addJournalEntryOnDamage(attacker,weapon)
 		if getElementType(attacker) == "ped" then
 			spacercount = spacercount+1
 			if spacercount == 16 then
-				guiSetText(JournalTable.label[3],"A zombie attacked me.")
+				guiSetText(JournalTable.label[3],"A zombie attacked me...!")
 				spacercount = 0
 			else
-				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..""..spacer.."A zombie attacked me.")
+				guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..""..spacer.."A zombie attacked me...!")
 			end
 		elseif getElementType(attacker) == "player" then
 			spacercount = spacercount+1
@@ -478,7 +479,7 @@ function addJournalEntryOnStatus()
 				end
 			end
 		end
-		if getElementData(localPlayer,"thirst") < 20 then
+		if playerStatusTable[localPlayer]["thirst"] < 20 then
 			if not thirststatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -493,7 +494,7 @@ function addJournalEntryOnStatus()
 		else
 			thirststatus = false
 		end
-		if getElementData(localPlayer,"food") < 20 then
+		if playerStatusTable[localPlayer]["food"] < 20 then
 			if not foodstatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -508,7 +509,7 @@ function addJournalEntryOnStatus()
 		else
 			foodstatus = false
 		end
-		if getElementData(localPlayer,"blood") < 6000 then
+		if playerStatusTable[localPlayer]["blood"] < 6000 then
 			if not bloodstatus1 then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -523,7 +524,7 @@ function addJournalEntryOnStatus()
 		else
 			bloodstatus1 = false
 		end
-		if getElementData(localPlayer,"blood") < 1000 then
+		if playerStatusTable[localPlayer]["blood"] < 1000 then
 			if not bloodstatus2 then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -538,22 +539,37 @@ function addJournalEntryOnStatus()
 		else
 			bloodstatus2 = false
 		end
-		if getElementData(localPlayer,"brokenbone") then
+		if playerStatusTable[localPlayer]["fracturedLegs"] then
 			if not bonestatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
-					guiSetText(JournalTable.label[3],"Broke my leg. Damn.")
+					guiSetText(JournalTable.label[3],"Broke my legs. Damn.")
 					bonestatus = true
 					spacercount = 0
 				else
-					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my leg. Damn.")
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my legs. Damn.")
 					bonestatus = true
 				end
 			end
 		else
 			bonestatus = false
 		end
-		if getElementData(localPlayer,"cold") then
+		if playerStatusTable[localPlayer]["fracturedArms"] then
+			if not bonestatus then
+				spacercount = spacercount+1
+				if spacercount == 16 then
+					guiSetText(JournalTable.label[3],"Broke my arms. Damn.")
+					bonestatus = true
+					spacercount = 0
+				else
+					guiSetText(JournalTable.label[3],guiGetText(JournalTable.label[3])..spacer.."Broke my arms. Damn.")
+					bonestatus = true
+				end
+			end
+		else
+			bonestatus = false
+		end
+		if playerStatusTable[localPlayer]["cold"] then
 			if not coldstatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -568,7 +584,7 @@ function addJournalEntryOnStatus()
 		else
 			coldstatus = false
 		end
-		if getElementData(localPlayer,"murders") == 1 then
+		if playerStatusTable[localPlayer]["murders"] == 1 then
 			if not murderstatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -583,7 +599,7 @@ function addJournalEntryOnStatus()
 		else
 			murderstatus = false
 		end
-		if getElementData(localPlayer,"humanity") == 5000 then
+		if playerStatusTable[localPlayer]["humanity"] == 5000 then
 			if not humanitystatus then
 				spacercount = spacercount+1
 				if spacercount == 16 then
@@ -600,5 +616,4 @@ function addJournalEntryOnStatus()
 		end
 	end
 end
-setTimer(addJournalEntryOnStatus,10000,0)
-setTimer(addJournalEntryOnStatus,10000,0)
+--setTimer(addJournalEntryOnStatus,10000,0)

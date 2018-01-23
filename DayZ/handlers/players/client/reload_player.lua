@@ -44,7 +44,7 @@ addCommandHandler("Reload weapon", function()
 	setTimer(function()
 		if getPedControlState(localPlayer, "aim_weapon") then return end
 		local playerWeapon = getPedWeapon(localPlayer)
-		if playerWeapon == 22 and getElementData(localPlayer,"currentweapon_2") == "Flashlight" or playerWeapon == 33 or playerWeapon == 34 then
+		if playerWeapon == 22 and playerStatusTable[localPlayer]["currentweapon_2"] == "Flashlight" or playerWeapon == 33 or playerWeapon == 34 then
 			return 
 		end
 		if getPedTotalAmmo (localPlayer) - getPedAmmoInClip (localPlayer) <= 0 then

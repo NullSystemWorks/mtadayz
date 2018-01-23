@@ -10,6 +10,18 @@ This changelog lists all changes made to MTA DayZ. It adheres to the following f
 ### REMOVED: For deprecated features removed in the release it's mentioned in
 
 # - #
+## [0.9.9.1a] - 2018-01-23
+### ADDED: Several new export functions
+### CHANGED: Status info has been moved to tables
+### CHANGED: Increased backpack slots
+### CHANGED: Disabled attacks with fists
+### CHANGED: DayZ Admin Panel now supports changes to status info
+### FIXED: Broken bones persisting after death
+### FIXED: Broken bones not being curable with Morphine
+### FIXED: Console spam for deprecated functions
+
+
+# - #
 ## [0.9.9a] - 2017-04-28
 ### ADDED: New Sound + Visibility System (based on terrain, weather, light, movement)
 ### ADDED: New zombie spawn system based on loot location

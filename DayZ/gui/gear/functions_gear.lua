@@ -28,7 +28,7 @@ addEvent("refreshLootManual", true)
 addEventHandler("refreshLootManual", localPlayer, refreshLootManual)
 
 function getPlayerMaxAviableSlots()
-	return getElementData(localPlayer, "MAX_Slots")
+	return playerStatusTable[localPlayer]["MAX_Slots"]
 end
 --[[
 function getPlayerMaxAviableSlots()
@@ -343,7 +343,7 @@ end
 
 function isPlayerInLoot()
 	if getElementData(localPlayer,"loot") then
-			return getElementData(localPlayer,"currentCol")
+		return getElementData(localPlayer,"currentCol")
 	end
 	return false
 end
@@ -437,43 +437,43 @@ function playerUseItem(itemName,itemInfo)
 		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
 	elseif itemInfo == "Equip Backpack" then
 		if itemName == "Assault Pack (ACU)" then
-			if getPlayerCurrentSlots() <= 12 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["assaultpack_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "Czech Vest Pouch" then
-			if getPlayerCurrentSlots() <= 13 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["czechvest_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "ALICE Pack" then
-			if getPlayerCurrentSlots() <= 16 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["alice_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "Survival ACU" then
-			if getPlayerCurrentSlots() <= 17 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["survival_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "British Assault Pack" then
-			if getPlayerCurrentSlots() <= 18 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["britishassault_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "Backpack (Coyote)" then
-			if getPlayerCurrentSlots() <= 24 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["coyote_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
 			end
 		elseif itemName == "Czech Backpack" then
-			if getPlayerCurrentSlots() <= 30 then
+			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["czech_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
 			else
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
@@ -484,8 +484,8 @@ end
 
 function onWeaponFireDeductAmmo(weapon)
 	if source == localPlayer then
-		local weapon_1 = getElementData(source,"currentweapon_1")
-		local weapon_2 = getElementData(source,"currentweapon_2")
+		local weapon_1 = playerStatusTable[localPlayer]["currentweapon_1"]
+		local weapon_2 = playerStatusTable[localPlayer]["currentweapon_2"]
 		local ammoName
 		if weapon == 25 or weapon == 26 or weapon == 27 or weapon == 30 or weapon == 31 or weapon == 33 or weapon == 34 then
 			ammoName = getWeaponAmmoFromName(weapon_1)

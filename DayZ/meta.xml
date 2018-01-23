@@ -54,6 +54,7 @@
 	<script src="configs/cfgDifficulty.lua" type="shared" cache="false" />
 	<script src="configs/cfgClient.lua" type="client" cache="false" />
 	<script src="configs/cfgSettings.lua" type="shared" cache="false" />
+	<script src="configs/cfgBackpacks.lua" type="shared" cache="false" />
 	<script src="addons.lua" type="server" />
 		
 	<!-- init folder -->
@@ -444,6 +445,8 @@
 	<!-- Exports -->
 	<export function="addAddonInfo" type="server" /> 
 	<export function="saveLog" type="server" />
+	<export function="setPlayerStatus" type="shared" />
+	<export function="getPlayerStatus" type="shared" />
 	<export function="setPlayerBlood" type="shared" />
 	<export function="setPlayerMurders" type="shared" />
 	<export function="setPlayerZombiesKilled" type="shared" />
@@ -466,6 +469,7 @@
 	<export function="getGameplayVariablesClient" type="client" />
 	<export function="setGameplayVariable" type="shared" />
 	<export function="getGameplayVariable" type="shared" />
+	<export function="dayzKillPlayer" type="server" />
    	
 	<!-- models folder -->
 	<file src="models/players/txd/ghilliesuit.txd" />
