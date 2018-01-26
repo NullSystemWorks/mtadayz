@@ -1,5 +1,5 @@
 # README #
-[![Discord][discord-shield]][discord-link]
+[![Discord][discord-shield]][https://discord.gg/th86Tmw]
 
 
 ### Curent Developers: L, ciber96, 1B0Y, neves768 ###
@@ -16,15 +16,15 @@ bug reports and suggestions. Note that you have to fork the repository first. Ed
 changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
 Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
-### MTA:DayZ Server List ###
-https://master.mta-dayz.org/ --  -Not working at the moment.
+### Current Version ###
+https://github.com/NullSystemWorks/mtadayz/releases/tag/v0.9.9a
 
 
 ### Links ###
-Website: https://nullsystems.xyz/site/
+Website: https://nullsystems.tech/forums/
 Discord: https://discord.gg/th86Tmw
-Issues: https://github.com/ciber96/mtadayz/issues
-Donations: https://www.paypal.me/ciber96 (will be used to fund the web-server, domain and related services)
+Issues: https://github.com/NullSystemWorks/mtadayz/issues
+Donations: https://www.paypal.me/ciber96 (will be used to fund the webserver, domain and related services)
 
 
 ### Contact ###
