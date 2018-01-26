@@ -1,8 +1,9 @@
 # README #
-[![Discord][discord-shield]][https://discord.gg/th86Tmw]
+[![Discord][discord-shield]][discord-link]
 
 
-### Curent Developers: L, ciber96, 1B0Y, neves768 ###
+### Current Developers: L, ciber96, neves768 ###
+### Inactive Developers: 1B0Y ###
 
 ### Synopsis ###
 This repository serves as a "hub" for the development of MTA DayZ, a gamemode which is akin to the DayZ mod for ArmA II, only for MTA (Multi Theft Auto).
@@ -12,9 +13,9 @@ to make this gamemode even better.
 
 ### What should I do? ###
 Generally, there is always something to do. You can either take a look at the issues list on GitHub, or go the forum (https://nullsystems.xyz/site/) and check out the
-bug reports and suggestions. Note that you have to fork the repository first. Edit whatever you want, and make a pull request. If the developers deems your
+bug reports and suggestions. Note that you have to fork the repository first. Edit whatever you want, and make a pull request. If the developers deem your
 changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
-Remeber to keep your fork in sync, more info: http://www.youtube.com/watch?v=-zvHQXnBO6c
+Remember to keep your fork in sync, more info can be found here: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
 ### Current Version ###
 https://github.com/NullSystemWorks/mtadayz/releases/tag/v0.9.9a
