@@ -1,3 +1,5 @@
+[:us:](README.md)
+
 # README #
 [![Discord][discord-shield]][discord-link]
 
