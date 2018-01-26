@@ -67,16 +67,16 @@ Q: The inventory is broken!
 A: Please provide a screenshot/video/accurate description of what exactly broke. Add server log and, if possible, the client log too.
 
 Q: I'm getting this strange error: "Infinite/too long execution (DayZ)".
-A: This was fixed in latest versions, please update your server.
+A: This was fixed in the latest version, please update your server.
 
 Q: How to change backpack slots in this gamemode ?
 A: You can do this by modifying the configuration file "cfgServer.lua" (DayZ/configs/cfgServer.lua). Take care to change the "maxslots" variable in the file "cfgSecurity.lua" (DayZ/configs/cfgSecurity.lua) for the anti-cheat.
 
 Q: I want to help developing! How and where can I apply?
-A: You can start by creating pull requests fixing or creating new features. We will contact you if we think you are suit for the job.
+A: You can start by creating pull requests, fixing or creating new features. We will contact you if we think you are suited for the job.
 
 Q: There is a question I have that does not appear in the FAQ!
-A: You can ask it on our forums or join discord!
+A: You can ask it on our forums or join discord! Alternatively, check our wiki: https://github.com/NullSystemWorks/mtadayz/wiki/Installation-Instructions
 
 ## Warnings/Errors FAQ ##
 
