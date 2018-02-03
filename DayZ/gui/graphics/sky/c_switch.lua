@@ -16,20 +16,9 @@
 ----------------------------------------------------------------
 
 --------------------------------
--- onClientResourceStart
--- Auto switch on at start
---------------------------------
-addEventHandler( "onClientResourceStart", getResourceRootElement( getThisResource()),
-	function()
-		triggerEvent( "switchDynamicSky", resourceRoot, true )
-	end
-)
-
-
---------------------------------
 -- Switch effect on or off
 --------------------------------
-function switchDynamicSky( dsOn )
+function toggleSkyDetail( dsOn )
 	outputDebugString( "switchDynamicSky: " .. tostring(dsOn) )
 	if dsOn then
 		startDynamicSky()
@@ -39,7 +28,7 @@ function switchDynamicSky( dsOn )
 end
 
 addEvent( "switchDynamicSky", true )
-addEventHandler( "switchDynamicSky", resourceRoot, switchDynamicSky )
+addEventHandler( "switchDynamicSky", resourceRoot, toggleSkyDetail )
 
 --------------------------------
 -- onClientResourceStop

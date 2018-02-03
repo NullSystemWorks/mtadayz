@@ -15,6 +15,9 @@ gameplayVariables["bantime"] = 0 -- // If security level is 2, for how long shou
 gameplayVariables["packetlosskick"] = true -- Allow the gamemode to kick a player if his packet loss is 100% for 5 seconds - DEFAULT: true
 gameplayVariables["packetlossmax"] = 10 -- Set the max packet loss counter - DEFAULT: 10
 gameplayVariables["maxslots"] = 30 -- Max slot amount in your server( Include VIP Slots ) - DEFAULT: 30
+gameplayVariables["maxblood"] = 12000 -- Max blood of a player - DEFAULT: 12000
+gameplayVariables["maxfood"] = 100 -- Max food level of a player - DEFAULT: 100
+gameplayVariables["maxthirst"] = 100 -- Max thirst level of a player - DEFAULT: 100
 gameplayVariables["noadvert"] = true -- Banning players who write the server ip
 gameplayVariables["adBanTime"] = 86400 -- If noadvert is true, define how much time should the banTime be in seconds. DEFAULT: 86400( 1 Day )
 

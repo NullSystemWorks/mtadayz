@@ -1,0 +1,21 @@
+<meta>
+	<info description="Shader - Detail" version="0.0.3" author="ccw" type="script" />
+	<min_mta_version client="1.3.0" server="1.3.0" />
+
+	<script src="c_detail.lua" type="client" />
+	<script src="c_switch.lua" type="client" />
+
+	<file src="fx/detail.fx" type="client" />
+	<file src="fx/mta-helper.fx" type="client" />
+
+	<file src="media/dirty.png" type="client" />
+	<file src="media/detail04.png" type="client" />
+	<file src="media/detail22.png" type="client" />
+	<file src="media/detail29.png" type="client" />
+	<file src="media/detail35T.png" type="client" />
+	<file src="media/detail55.png" type="client" />
+	<file src="media/detail58.png" type="client" />
+	<file src="media/detail63.png" type="client" />
+	<file src="media/detail68.png" type="client" />
+
+</meta>

@@ -408,6 +408,51 @@
 	<file src="gui/crosshair/mp.png" />
 	<file src="gui/crosshair/none.png" />
 	
+	<script src="gui/graphics/graphics.lua" type="client" cache="false" />
+	
+	<script src="gui/graphics/water/c_water.lua" type="client" />
+	<file src="gui/graphics/water/water.fx" type="client" />
+	<file src="gui/graphics/water/mta-helper.fx" type="client" />
+	<file src="gui/graphics/water/images/smallnoise3d.dds" type="client" />
+	<file src="gui/graphics/water/images/cube_env256.dds" type="client" />
+	
+	<script src="gui/graphics/detail/c_detail.lua" type="client" />
+	<script src="gui/graphics/detail/c_switch.lua" type="client" />
+
+	<file src="gui/graphics/detail/fx/detail.fx" type="client" />
+	<file src="gui/graphics/detail/fx/mta-helper.fx" type="client" />
+
+	<file src="gui/graphics/detail/media/dirty.png" type="client" />
+	<file src="gui/graphics/detail/media/detail04.png" type="client" />
+	<file src="gui/graphics/detail/media/detail22.png" type="client" />
+	<file src="gui/graphics/detail/media/detail29.png" type="client" />
+	<file src="gui/graphics/detail/media/detail35T.png" type="client" />
+	<file src="gui/graphics/detail/media/detail55.png" type="client" />
+	<file src="gui/graphics/detail/media/detail58.png" type="client" />
+	<file src="gui/graphics/detail/media/detail63.png" type="client" />
+	<file src="gui/graphics/detail/media/detail68.png" type="client" />
+	
+	<script src="gui/graphics/bloom/c_bloom.lua" type="client" />
+	<file src="gui/graphics/bloom/addBlend.fx" type="client" />
+	<file src="gui/graphics/bloom/blurH.fx" type="client" />
+	<file src="gui/graphics/bloom/blurV.fx" type="client" />
+	<file src="gui/graphics/bloom/brightPass.fx" type="client" />
+	<file src="gui/graphics/bloom/mta-helper.fx" type="client" />
+	
+	<script src="gui/graphics/hdr/c_switch.lua" type="client" />
+	<script src="gui/graphics/hdr/c_rtpool.lua" type="client" />
+	<script src="gui/graphics/hdr/c_contrast.lua" type="client" />
+	<file src="gui/graphics/hdr/fx/bloom_combine.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/bloom_extract.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/blurH.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/blurV.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/contrast.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/modulation.fx" type="client" />
+	<file src="gui/graphics/hdr/fx/mta-helper.fx" type="client" />
+
+	<file src="gui/graphics/hdr/images/vignette1.dds" type="client" />
+	
+	
 	<!-- BattlDayZ (V1) -->
 	<script src="battldayz/battldayz_server.lua" type="server" />
 	<script src="battldayz/battldayz_client.lua" type="client" cache="false" />
@@ -962,48 +1007,48 @@
 	<file src="sounds/weapons/reload/34.wav" />
 	
 	<!-- Night -->
-	<script src="handlers/world/client/night/c_night.lua" type="client" cache="false" />
-	<file src="handlers/world/client/night/mta-helper.fx" type="client" />
-	<file src="handlers/world/client/night/night.fx" type="client" />
+	<script src="gui/graphics/night/c_night.lua" type="client" cache="false" />
+	<file src="gui/graphics/night/mta-helper.fx" type="client" />
+	<file src="gui/graphics/night/night.fx" type="client" />
 	
 	<!-- Better Sky -->
-	<script src="handlers/world/client/sky/c_main.lua" type="client" />
-	<script src="handlers/world/client/sky/c_helper_functions.lua" type="client" />
-	<script src="handlers/world/client/sky/c_switch.lua" type="client" />
-	<file src="handlers/world/client/sky/fx/shader_dynamicSky2tropos.fx" type="client" />
-	<file src="handlers/world/client/sky/fx/shader_dynamicSky2stratos.fx" type="client" />
-	<file src="handlers/world/client/sky/fx/shader_dynamicSky2bottom.fx" type="client" />
-	<file src="handlers/world/client/sky/fx/shader_clear.fx" type="client" />
-	<file src="handlers/world/client/sky/tex/skybox.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds_rain.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds_storm.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds_cloudy.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds_normal.jpg" type="client" />
-	<file src="handlers/world/client/sky/tex/clouds_night.dds" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/0.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/1.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/10.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/11.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/12.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/13.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/14.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/15.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/16.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/17.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/18.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/19.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/2.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/20.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/3.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/4.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/5.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/6.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/7.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/8.png" type="client" />
-	<file src="handlers/world/client/sky/tex/moon/9.png" type="client" />
-	<file src="handlers/world/client/sky/dff/skybox_model.dff" type="client" />
-	<file src="handlers/world/client/sky/tex/skybox_model.txd" type="client" />
+	<script src="gui/graphics/sky/c_main.lua" type="client" />
+	<script src="gui/graphics/sky/c_helper_functions.lua" type="client" />
+	<script src="gui/graphics/sky/c_switch.lua" type="client" />
+	<file src="gui/graphics/sky/fx/shader_dynamicSky2tropos.fx" type="client" />
+	<file src="gui/graphics/sky/fx/shader_dynamicSky2stratos.fx" type="client" />
+	<file src="gui/graphics/sky/fx/shader_dynamicSky2bottom.fx" type="client" />
+	<file src="gui/graphics/sky/fx/shader_clear.fx" type="client" />
+	<file src="gui/graphics/sky/tex/skybox.dds" type="client" />
+	<file src="gui/graphics/sky/tex/clouds.dds" type="client" />
+	<file src="gui/graphics/sky/tex/clouds_rain.dds" type="client" />
+	<file src="gui/graphics/sky/tex/clouds_storm.dds" type="client" />
+	<file src="gui/graphics/sky/tex/clouds_cloudy.dds" type="client" />
+	<file src="gui/graphics/sky/tex/clouds_normal.jpg" type="client" />
+	<file src="gui/graphics/sky/tex/clouds_night.dds" type="client" />
+	<file src="gui/graphics/sky/tex/moon/0.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/1.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/10.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/11.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/12.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/13.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/14.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/15.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/16.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/17.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/18.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/19.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/2.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/20.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/3.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/4.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/5.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/6.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/7.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/8.png" type="client" />
+	<file src="gui/graphics/sky/tex/moon/9.png" type="client" />
+	<file src="gui/graphics/sky/dff/skybox_model.dff" type="client" />
+	<file src="gui/graphics/sky/tex/skybox_model.txd" type="client" />
 	<export function="getDynamicSunVector" type="client" />
 	<export function="getDynamicMoonVector" type="client" />
 	<export function="getMoonPhaseValue" type="client" />

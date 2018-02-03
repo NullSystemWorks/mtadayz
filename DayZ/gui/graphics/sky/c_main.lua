@@ -48,7 +48,7 @@ function startDynamicSky()
 	textureTable.moon = dxCreateTexture ( ":DayZ/handlers/world/client/sky/tex/moon/"..toint( 20 - toint( moonPhase * 20 ) )..".png" )
 	
 	-- Get list of all elements used
-	effectParts = {
+	effectPartsSky = {
 						textureTable.cloud,
 						textureTable.cloudrain,
 						textureTable.normal,
@@ -61,11 +61,11 @@ function startDynamicSky()
 					}
 
 	-- Check list of all elements used
-	bAllValid = true
-	for _,part in ipairs(effectParts) do
-		bAllValid = part and bAllValid
+	bAllValidSky = true
+	for _,part in ipairs(effectPartsSky) do
+		bAllValidSky = part and bAllValidSky
 	end
-	if not bAllValid then 
+	if not bAllValidSky then 
 		outputChatBox('Dynamic Sky v2: failed to start shaders!',255,0,0)
 		return
 	end
@@ -147,7 +147,7 @@ function stopDynamicSky()
 		engineRemoveShaderFromWorldTexture( shaderTable.clear, "*" )
 	end	
 	
-	for _,part in ipairs(effectParts) do
+	for _,part in ipairs(effectPartsSky) do
 		destroyElement(part)
 	end
 	

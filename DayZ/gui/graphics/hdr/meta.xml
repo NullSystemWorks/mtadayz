@@ -1,0 +1,18 @@
+<meta>
+	<info description="Shader - HDR contrast" version="0.0.2" type="script" />
+	<min_mta_version client="1.1.0" server="1.1.0" />
+
+	<script src="c_switch.lua" type="client" />
+	<script src="c_contrast.lua" type="client" />
+	<script src="c_rtpool.lua" type="client" />
+
+	<file src="fx/bloom_combine.fx" type="client" />
+	<file src="fx/bloom_extract.fx" type="client" />
+	<file src="fx/blurH.fx" type="client" />
+	<file src="fx/blurV.fx" type="client" />
+	<file src="fx/contrast.fx" type="client" />
+	<file src="fx/modulation.fx" type="client" />
+	<file src="fx/mta-helper.fx" type="client" />
+
+	<file src="images/vignette1.dds" type="client" />
+</meta>

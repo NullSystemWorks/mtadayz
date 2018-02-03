@@ -85,23 +85,26 @@ addEventHandler("onClientPlayerCreateSneezeShake",root,createSneezeOnCold)
 local painTimer = 1500
 function setPlayerPain()
 	if getElementData(localPlayer,"logedin") then
-		if playerStatusTable[localPlayer]["pain"] ~= nil and playerStatusTable[localPlayer]["pain"] then
-			if gameplayVariables["painshakesway"] then
-				painTimer = 90000
-				setCameraShakeLevel(gameplayVariables["painshakelevel"])
-				setTimer(setCameraShakeLevel,15000,1,0)
+		if playerStatusTable[localPlayer]["pain"] ~= nil then
+			if playerStatusTable[localPlayer]["pain"] then
+				if gameplayVariables["painshakesway"] then
+					painTimer = 1500
+					if getCameraShakeLevel == gameplayVariables["painshakelevel"] then return end
+					setCameraShakeLevel(gameplayVariables["painshakelevel"])
+					setTimer(setCameraShakeLevel,15000,1,0)
+				else
+					painTimer = 1500
+					local x,y,z = getElementPosition(getLocalPlayer())
+					createExplosion (x,y,z+15,8,false,1.0,false)
+					local x, y, z, lx, ly, lz = getCameraMatrix() -- Get the current location and lookat of camera
+					x, lx = x + 1, lx + 1 -- What will be the new x and x lookat values
+					setCameraMatrix(x,y,z,lx,ly,lz) -- Set camera to new position
+					setCameraTarget (getLocalPlayer())
+				end
 			else
-				painTimer = 1500
-				local x,y,z = getElementPosition(getLocalPlayer())
-				createExplosion (x,y,z+15,8,false,1.0,false)
-				local x, y, z, lx, ly, lz = getCameraMatrix() -- Get the current location and lookat of camera
-				x, lx = x + 1, lx + 1 -- What will be the new x and x lookat values
-				setCameraMatrix(x,y,z,lx,ly,lz) -- Set camera to new position
-				setCameraTarget (getLocalPlayer())
-			end
-		else
-			if gameplayVariables["painshakesway"] then
-				setCameraShakeLevel(0)
+				if gameplayVariables["painshakesway"] then
+					setCameraShakeLevel(0)
+				end
 			end
 		end
 	end

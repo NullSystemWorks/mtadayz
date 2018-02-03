@@ -140,5 +140,5 @@ defaultOdometerSettings = {
 
 -- This sets the key and command name to open/close the settings gui.
 -- If you don't want to use one of them, set it's value to nil.
-toggleSettingsGuiKey = "F3" 
+toggleSettingsGuiKey = "F10" 
 toggleSettingsGuiCommand = "speedometer"

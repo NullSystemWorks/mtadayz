@@ -171,27 +171,31 @@ function playerLogin(username, pass, player)
 		account = getPlayerAccount(player)
 		playerID = getAccountData(account,"playerID")
 		x,y,z =  getAccountData(account,"last_x")or 0,getAccountData(account,"last_y")or 0,getAccountData(account,"last_z")or 0
-		skin = getAccountData(account,"skin")
-		hoursalive = getAccountData(account, "player.hoursalive")
-		initDefaultStatusTable(player)
 		
-		for i,data in ipairs(playerDataTable) do
-			local elementData = getAccountData(account,data[1])
-			if not elementData then
-				if sDataNames[data[1]] then	
-					elementData = sDataNames[data[1]][1] --Grabs default value for these from sDataNames
-				else
-					elementData = 0
-				end
-			end
+		local inventoryData = fromJSON(getAccountData(account,"PlayerInventory"))	
+		for i, data in ipairs(playerDataTable) do
+			local elementData = inventoryData[data[1]]
 			setElementData(player,data[1],elementData)
 		end
 		
+		initDefaultStatusTable(player)
+		
+		local statusData = fromJSON(getAccountData(account,"PlayerStatus"))
+		for i, data in pairs(playerStatusTable[player]) do
+			local status = statusData[i]
+			playerStatusTable[player][i] = status
+		end
+		
+		hoursalive = getAccountData(account, "player.hoursalive")
+		
+	
+		--[[
 		for i, data in pairs(playerStatusTable[player]) do
 			local accountData = getAccountData(account,i)
 			playerStatusTable[player][i] = accountData
 		end
-
+		]]
+		skin = playerStatusTable[player]["skin"]
 		isAdmin = getAccountData(account,"admin") or false
 		isSupporter = getAccountData(account,"supporter") or false
 		if getAccountData(account,"isDead") then
@@ -405,8 +409,8 @@ addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
 
 function savePlayerAccount() -- Save in the database
-	local x,y,z =  getElementPosition(source)
-	local weight = getPedStat(source, 21) or 0
+	local x,y,z = getElementPosition(source)
+	local isDead = getElementData(source,"isDead") or false
 	if gameplayVariables["MySQL"] then
 		local account = something[source]
 		if account then
@@ -427,12 +431,21 @@ function savePlayerAccount() -- Save in the database
 	else
 		local account = getPlayerAccount(source)
 		if account then
+			local tablePlayerInventory = {}
 			for i,data in ipairs(playerDataTable) do
-				setAccountData(account,data[1],getElementData(source,data[1]))
+				tablePlayerInventory[data[1]] = getElementData(source,data[1])
 			end
-			for i, data in pairs(playerStatusTable[source]) do
-				setAccountData(account,i,data)
+			
+			local tablePlayerStatus = {}
+			if playerStatusTable[source] then
+				for k, status in pairs(playerStatusTable[source]) do
+					tablePlayerStatus[k] = status
+				end
 			end
+				
+			setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
+			setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
+			setAccountData(account,"isDead",isDead)
 			setAccountData(account,"last_x",x)
 			setAccountData(account,"last_y",y)
 			setAccountData(account,"last_z",z)
@@ -449,7 +462,6 @@ addEventHandler ( "onPlayerQuit", getRootElement(), savePlayerAccount)
 function saveAllAccounts() -- Save in the database
 	for i, player in ipairs(getElementsByType("player")) do
 		local x,y,z =  getElementPosition(player)
-		local weight = getPedStat(player, 21) or 0
 		if gameplayVariables["MySQL"] then
 			local account = something[player]
 			if account then
@@ -469,12 +481,19 @@ function saveAllAccounts() -- Save in the database
 		else
 			local account = getPlayerAccount(player)
 			if account then
+				local tablePlayerInventory = {}
 				for i,data in ipairs(playerDataTable) do
-					setAccountData(account,data[1],getElementData(player,data[1]))
+					tablePlayerInventory[data[1]] = getElementData(player,data[1])
 				end
+				
+				local tablePlayerStatus = {}
 				for k, status in pairs(playerStatusTable[player]) do
-					setAccountData(account,k,status)
+					tablePlayerStatus[k] = status
 				end
+				
+				setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
+				setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
+				setAccountData(account,"isDead",getElementData(player,"isDead"))
 				setAccountData(account,"last_x",x)
 				setAccountData(account,"last_y",y)
 				setAccountData(account,"last_z",z)

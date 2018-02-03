@@ -760,7 +760,7 @@ function changeWeaponStatus()
 local itemName = playerStatusTable[localPlayer]["currentweapon_1"]
 	if itemName then
 		if getElementData(source,"toCarryLabel") then
-			if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"]() then
+			if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then
 				isCarryingWeapon = true
 				isHoldingWeapon = false
 				triggerServerEvent("onPlayerTakeWeapon",localPlayer,itemName,1,"toCarry")
@@ -1061,7 +1061,7 @@ function renderDisplay()
 		dxDrawImage(xPos, yPos,45,45,":DayZ/gui/gear/icons/"..itemsInventory[i][2])
 	end
 	
-	local whatBackpack = getElementData(localPlayer,"MAX_Slots")
+	local whatBackpack = playerStatusTable[localPlayer]["MAX_Slots"]
 	if whatBackpack == 12 then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/acu.png")
 	elseif whatBackpack == 13 then
@@ -1240,7 +1240,7 @@ function moveItemInInventory()
 				end
 			elseif isHoldingWeapon then
 				if not isToolbeltItem(itemName) then
-					if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"]() then
+					if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then
 						if not playerMovedInInventory then
 							triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
 							playerMovedInInventory = true
