@@ -112,7 +112,7 @@ end
 setTimer(setPlayerPain,painTimer,0)
 
 function debugJump()
-	if getControlState("jump") then
+	if getPedControlState(localPlayer,"jump") then
 		setElementData(localPlayer,"jumping",true)
 		setTimer(debugJump2,650,1)
 	end
@@ -125,7 +125,7 @@ end
 
 local SneakEnabled = false
 function setPlayerSneakOnWalk()
-	if getControlState("walk") then
+	if getPedControlState(localPlayer,"walk") then
 		if not SneakEnabled then
 			triggerServerEvent("setPlayerSneak",localPlayer,69)
 			SneakEnabled = true
@@ -449,7 +449,7 @@ function getWeaponNoiseFactor(weapon)
 end
 
 function setPlayerShootingLevel()
-	if getControlState("fire") then
+	if getPedControlState(localPlayer,"fire") then
 		local weapon = getPedWeapon(localPlayer)
 		local noise = getWeaponNoise(weapon) or 0
 		setElementData(localPlayer,"shooting",noise)

@@ -32,7 +32,7 @@ function spawnDayZPlayer(player)
 		end
 		spawnPlayer (player, spawnX,spawnY,spawnZ, math.random(0,360), skin, 0, 0)
 		setElementFrozen(player, true)
-		fadeCamera (player, true)
+		setTimer(fadeCamera,3000,1,player,true,3.0,255,255,255)
 		setCameraTarget (player)
 		setTimer( function(player)
 			if isElement(player) then

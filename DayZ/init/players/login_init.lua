@@ -214,14 +214,13 @@ function playerLogin(username, pass, player)
 			end
 		end
 	end
+	setTimer(fadeCamera,500,1,player,true,3.0,255,255,255)
 	spawnPlayer (player, x,y,z+0.5, math.random(0,360), skin, 0, 0)
 	setElementFrozen(player, true)
-	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
 	setTimer( function(player)
 		if isElement(player) then
-			setElementFrozen(player, false)
-			fadeCamera(player,true)
+			setElementFrozen(player, false)	
 		end
 	end,500,1,player)
 	playerCol = createColSphere(x,y,z,1.5)
@@ -289,6 +288,12 @@ function playerLogin(username, pass, player)
 	setElementData(player,"supporter",isSupporter)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
 	sendPlayerStatusInfoToClient()
+	
+	if gameplayVariables["armachat"] then
+		triggerClientEvent(player,"showChatBox",player,true)
+	else
+		showChat(player,true)
+	end
 end
 addEvent("onPlayerDayZLogin", true)
 addEventHandler("onPlayerDayZLogin", getRootElement(), playerLogin)
@@ -301,13 +306,12 @@ function playerRegister(username, pass, player)
 	if not gameplayVariables["newclothingsystem"] then
 		skin = 73
 	end
+	setTimer(fadeCamera,500,1,player,true,3.0,255,255,255)
 	spawnPlayer(player,x,y,z, math.random(0,360), skin, 0, 0)
-	fadeCamera (player, false,2000,0,0,0)
 	setCameraTarget (player, player)
 	setTimer( function(player)
 		if isElement(player) then
 			setElementFrozen(player, false)
-			fadeCamera(player,true)
 		end
 	end,500,1,player)
 	playerCol = createColSphere(x,y,z,1.5)
@@ -404,58 +408,66 @@ function playerRegister(username, pass, player)
 		triggerEvent("onPlayerChangeClothes", player)
 	end
 	sendPlayerStatusInfoToClient()
+	
+	if gameplayVariables["armachat"] then
+		triggerClientEvent(player,"showChatBox",player,true)
+	else
+		showChat(player,true)
+	end
 end
 addEvent("onPlayerDayZRegister", true)
 addEventHandler("onPlayerDayZRegister", getRootElement(), playerRegister)
 
 function savePlayerAccount() -- Save in the database
-	local x,y,z = getElementPosition(source)
-	local isDead = getElementData(source,"isDead") or false
-	if gameplayVariables["MySQL"] then
-		local account = something[source]
-		if account then
-			local tbl = {}
-			for i,data in ipairs(playerDataTable) do
-				tbl[data[1]] = getElementData(source,data[1])
-			end
-			for k, status in pairs(playerStatusTable[source]) do
-				tbl[k] = status
-			end
-			tbl["last_x"] = x
-			tbl["last_y"] = y
-			tbl["last_z"] = z
-			tbl["isDead"] = getElementData(source,"isDead")
-			dbExec(dbConnection,"UPDATE accounts SET `userdata`=? WHERE `username`=?",toJSON(tbl),account)
-		end
-		outputServerLog("[DayZ] Player account "..getPlayerName(source).." has been saved.")
-	else
-		local account = getPlayerAccount(source)
-		if account then
-			local tablePlayerInventory = {}
-			for i,data in ipairs(playerDataTable) do
-				tablePlayerInventory[data[1]] = getElementData(source,data[1])
-			end
-			
-			local tablePlayerStatus = {}
-			if playerStatusTable[source] then
-				for k, status in pairs(playerStatusTable[source]) do
-					tablePlayerStatus[k] = status
-				end
-			end
-				
-			setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
-			setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
-			setAccountData(account,"isDead",isDead)
-			setAccountData(account,"last_x",x)
-			setAccountData(account,"last_y",y)
-			setAccountData(account,"last_z",z)
-		end
-		outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
-	end
 	if getElementData(source,"logedin") then
-		destroyElement(getElementData(source,"playerCol"))
+		local x,y,z = getElementPosition(source)
+		local isDead = getElementData(source,"isDead") or false
+		if gameplayVariables["MySQL"] then
+			local account = something[source]
+			if account then
+				local tbl = {}
+				for i,data in ipairs(playerDataTable) do
+					tbl[data[1]] = getElementData(source,data[1])
+				end
+				for k, status in pairs(playerStatusTable[source]) do
+					tbl[k] = status
+				end
+				tbl["last_x"] = x
+				tbl["last_y"] = y
+				tbl["last_z"] = z
+				tbl["isDead"] = getElementData(source,"isDead")
+				dbExec(dbConnection,"UPDATE accounts SET `userdata`=? WHERE `username`=?",toJSON(tbl),account)
+			end
+			outputServerLog("[DayZ] Player account "..getPlayerName(source).." has been saved.")
+		else
+			local account = getPlayerAccount(source)
+			if account then
+				local tablePlayerInventory = {}
+				for i,data in ipairs(playerDataTable) do
+					tablePlayerInventory[data[1]] = getElementData(source,data[1])
+				end
+				
+				local tablePlayerStatus = {}
+				if playerStatusTable[source] then
+					for k, status in pairs(playerStatusTable[source]) do
+						tablePlayerStatus[k] = status
+					end
+				end
+					
+				setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
+				setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
+				setAccountData(account,"isDead",isDead)
+				setAccountData(account,"last_x",x)
+				setAccountData(account,"last_y",y)
+				setAccountData(account,"last_z",z)
+			end
+			outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
+		end
+		if getElementData(source,"logedin") then
+			destroyElement(getElementData(source,"playerCol"))
+		end
+		setElementData(source,"logedin",false)
 	end
-	setElementData(source,"logedin",false)
 end
 addEventHandler ( "onPlayerQuit", getRootElement(), savePlayerAccount)
 

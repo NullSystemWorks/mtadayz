@@ -4,8 +4,8 @@
   
 	<!--Main script files, keep them in that order or it may break-->
 	<script src="updater.lua" type="server"/>
-	<script src="login_server.lua" type="server"/>
 	<script src="login_client.lua" type="client"/>
+	<script src="login_server.lua" type="server"/>
 	<script src="textlib.lua" type="client"/>
 	<!--Required XML configs kept in /conf/ folder-->
 	
@@ -13,12 +13,9 @@
 	<export function="createfile" type="server" />
 
 	<!--Images-->
-	<file src="images/background_1.png"/>
-	<file src="images/background_2.png"/>
-	<file src="images/background_3.png"/>
-	<file src="images/background_4.png"/>
-	<file src="images/background_5.png"/>
 	<file src="images/background_news.png"/>
+	<file src="images/background_transparent.png" />
+	<file src="images/mtadayz_logo.png" />
 	<file src="images/button.png" />
 	<file src="font.ttf"/>
 	<file src="font2.ttf"/>

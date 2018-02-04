@@ -100,19 +100,21 @@ addEventHandler ("onClientRender",getRootElement(),
 	function ()
 		--if isPlayerHudComponentVisible ("radar") then
 			if scState then
-				local chatData = getChatboxLayout()
-				local _,scale = chatData["chat_scale"]
-				local bg = {chatData["chat_color"]}
-				local color = --[[{205,205,205,255}]] chatData["chat_text_color"]
-				local lines = chatData["chat_lines"]
-				local chatX,chatY = 0.015625*sx,16 + 15*lines + 25
-				for k,v in ipairs(oocMessages) do
-					local tx,ty = chatX,chatY + (maxLines+1)*15 - k*15
-					local vNC = v
-					repeat vNC = vNC:gsub("#%x%x%x%x%x%x", "")
-					until not vNC:find("#%x%x%x%x%x%x")
-					dxDrawText (vNC,tx+1,ty+1,0,0,tocolor(0,0,0,255),1,bitstream,"left","top",false,false,false,false)
-					dxDrawText (v,tx,ty,0,0,tocolor(color[1],color[2],color[3],color[4]),1,bitstream,"left","top",false,false,false,true)
+				if getElementData(localPlayer,"logedin") then
+					local chatData = getChatboxLayout()
+					local _,scale = chatData["chat_scale"]
+					local bg = {chatData["chat_color"]}
+					local color = --[[{205,205,205,255}]] chatData["chat_text_color"]
+					local lines = chatData["chat_lines"]
+					local chatX,chatY = 0.015625*sx,16 + 15*lines + 25
+					for k,v in ipairs(oocMessages) do
+						local tx,ty = chatX,chatY + (maxLines+1)*15 - k*15
+						local vNC = v
+						repeat vNC = vNC:gsub("#%x%x%x%x%x%x", "")
+						until not vNC:find("#%x%x%x%x%x%x")
+						dxDrawText (vNC,tx+1,ty+1,0,0,tocolor(0,0,0,255),1,bitstream,"left","top",false,false,false,false)
+						dxDrawText (v,tx,ty,0,0,tocolor(color[1],color[2],color[3],color[4]),1,bitstream,"left","top",false,false,false,true)
+					end
 				end
 			end
 		--end

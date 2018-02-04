@@ -49,7 +49,7 @@ function drawCrosshair()
 				crosshair = cross[2]
 			end
 		end
-		if not getControlState("fire") then
+		if not getPedControlState(localPlayer,"fire") then
 			isFiring = isFiring-1.2
 			if isFiring < 0 then
 				isFiring = 0

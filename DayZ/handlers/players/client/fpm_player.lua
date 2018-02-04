@@ -118,13 +118,13 @@ function updateCamera()
 			end
 			cameraAngleX = rotX - math.rad(rz)
 			cameraAngleY = rotY + math.rad(rx)
-			if getControlState("vehicle_look_behind") or ( getControlState("vehicle_look_right") and getControlState("vehicle_look_left") ) then
+			if getPedControlState(localPlayer,"vehicle_look_behind") or ( getPedControlState(localPlayer,"vehicle_look_right") and getPedControlState(localPlayer,"vehicle_look_left") ) then
 				cameraAngleX = cameraAngleX + math.rad(180)
 				--cameraAngleY = cameraAngleY + math.rad(180)
-			elseif getControlState("vehicle_look_left") then
+			elseif getPedControlState(localPlayer,"vehicle_look_left") then
 				cameraAngleX = cameraAngleX - math.rad(90)
 				--roll = rx doesn't work out well
-			elseif getControlState("vehicle_look_right") then
+			elseif getPedControlState(localPlayer,"vehicle_look_right") then
 				cameraAngleX = cameraAngleX + math.rad(90)  
 				--roll = -rx
 			end

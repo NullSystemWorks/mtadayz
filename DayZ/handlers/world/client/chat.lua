@@ -35,6 +35,8 @@ function checkChatBoxInit()
 	if gameplayVariables["armachat"] then
 		initChatBox()
 		chatBoxLoaded = true
+	else
+		triggerServerEvent("onMTAChatboxShown",root,true)
 	end
 end
 addEventHandler("onClientResourceStart", resourceRoot, checkChatBoxInit)

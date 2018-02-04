@@ -8,12 +8,9 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-DaysPassed = 0
-Season = false
 local timeTimer = 10000
 local realtime = getRealTime()
 setTime(realtime.hour, realtime.minute)
---setFarClipDistance(1000)
 
 function checkSetTime()
 	if gameplayVariables["realtime"] then
@@ -30,51 +27,13 @@ function checkSetTime()
 end
 setTimer(checkSetTime,timeTimer,0)
 
---[[
-function setTheWeather()
-local number = math.random(1,3)
-	if Season == "Winter" then
-		if number == 1 then
-			setWeather(15)
-		elseif number == 2 then
-			setWeather(1)
-		elseif number == 3 then
-			setWeather(4)
-		end
-	elseif Season == "Spring" then
-		if number == 1 then
-			setWeather(1)
-		elseif number == 2 then
-			setWeather(16)
-		elseif  number == 3 then
-			setWeather(5)
-		end
-	elseif Season == "Summer" then
-		if number == 1 then
-			setWeather(0)
-		elseif number == 2 then
-			setWeather(16)
-		elseif number == 3 then
-			setWeather(18)
-		end
-	elseif Season == "Autumn" then
-		if number == 1 then
-			setWeather(4)
-		elseif number == 2 then
-			setWeather(9)
-		elseif number == 3 then
-			setWeather(15)
-		end
-	end
-end
-setTimer(setTheWeather,math.random(1800000,3600000),0)
-]]
-
 local initializeWeather = false
 local weatherRandomizer = 1800000
 
 if not initializeWeather then
 	setWeather(math.random(0,18))
+	local x,y,z = math.random(0,15),math.random(0,15),math.random(0,15)
+	setWindVelocity(x,y,z)
 	initializeWeather = true
 end
 
@@ -82,14 +41,6 @@ function setTheWeather()
 	local number = math.random(0,18)
 	weatherRandomizer = math.random(600000,1800000)
 	setWeatherBlended(number)
-	--[[if number == 8 then
-		setFarClipDistance(400)
-	elseif number == 9 then
-		setFarClipDistance(200)
-	else
-		setFarClipDistance(900)
-	end
-	]]
 end
 setTimer(setTheWeather,weatherRandomizer,0)
 
@@ -107,3 +58,9 @@ local weather = getWeather()
 	end
 end
 setTimer(setRainOnCloudyWeather,1200000,0)
+
+function setRandomWindVelocity()
+	local x,y,z = math.random(0,15),math.random(0,15),math.random(0,15)
+	setWindVelocity(x,y,z)
+end
+setTimer(setRandomWindVelocity,300000,0)

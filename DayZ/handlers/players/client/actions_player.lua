@@ -11,7 +11,7 @@
 addEventHandler("onClientRender", root,
 function()
 	if getPedControlState(localPlayer,"aim_weapon") and getPedControlState(localPlayer,"jump") then
-		setControlState("jump",false)
+		setPedControlState(localPlayer,"jump",false)
 	end
 	if getPedWeapon(localPlayer) == 0 then
 		toggleControl("fire",false)

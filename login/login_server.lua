@@ -8,6 +8,57 @@ local blockedAccounts = {
 
 secretKey = exports["DayZ"].getGameplayVariablesServerPairs()["secret_key"]
 
+local loginSkin = 0
+local x,y,z = 0,0,0
+local reason = ""
+local pedDimension = 0
+local loginPed = {}
+
+function spawnPedFromPlayerInfo()
+	pedDimension = pedDimension+1
+	local playerName = getPlayerName(source) -- we assume the player name matches the account name, needs a better solution (pull from XML)
+	local account = getAccount(playerName)
+	setCameraMatrix(source,-1645.4077,-2221.677001,31.8351001,-1644.5368,-2222.152099,31.7088756,0,70)
+	setElementDimension(source,666)
+	fadeCamera(source,true)
+	if account then
+		if exports["DayZ"].getGameplayVariablesServerPairs()["MySQL"] then
+			local newSkinSystem = exports.DayZ:getGameplayVariable("newclothingsystem")
+			if newSkinSystem then
+				loginSkin = 0
+			else
+				loginSkin = 73
+			end
+		else
+			local playerData = fromJSON(getAccountData(account,"PlayerStatus"))
+			loginSkin = playerData["skin"]
+		end
+		loginPed[source] = createPed(loginSkin,-1642.3599,-2224.3393,30.793333053589,31.854591369629)
+		setElementDimension(loginPed[source],666+pedDimension)
+		setElementDimension(source,666+pedDimension)
+	else
+		local newSkinSystem = exports.DayZ:getGameplayVariable("newclothingsystem")
+		local skinID = 0
+		if newSkinSystem then
+			skinID = 0
+		else
+			skinID = 73
+		end
+		loginPed[source] = createPed(skinID,-1642.3599,-2224.3393,30.793333053589,31.854591369629)
+		setElementDimension(loginPed[source],666+pedDimension)
+		setElementDimension(source,666+pedDimension)
+	end
+end
+addEventHandler("onPlayerJoin",root,spawnPedFromPlayerInfo)
+
+function removePedDimensionOnPlayerQuit()
+	pedDimension = pedDimension-1
+	if isElement(loginPed[source]) then
+		destroyElement(loginPed[source])
+	end
+end
+addEventHandler("onPlayerQuit",root,removePedDimensionOnPlayerQuit)
+
 --LOGIN THE PLAYER FROM GUI
 function tryToLoginPlayer (username, password)
 	--Parse through our blockedAccounts array for system accounts
@@ -54,37 +105,49 @@ function tryToLoginPlayer (username, password)
 					return
 				end
 			end
-			triggerClientEvent(source,"onPlayerDoneLogin", source, username, password)
-			triggerClientEvent(source,"getTheServerName", source, getServerName())		
-			triggerEvent("onPlayerDayZLogin", getRootElement(), username, password, source)
+			fadeCamera(source,false,3.0,0,0,0)
+			triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,"login")
+			triggerClientEvent(source,"getTheServerName", source, getServerName())
+			triggerClientEvent(source,"onPlayerDoneLogin", source, username, password)			
+			setTimer(triggerEvent,3000,1,"onPlayerDayZLogin", getRootElement(), username, password, source)
 			local theTime = getRealTime()
 			local hour = theTime.hour
 			local minute = theTime.minute
 			local seconds = theTime.second
 			local theAccount = getPlayerAccount(client)
 			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client).."\n","accounts")
+			if isElement(loginPed[source]) then
+				destroyElement(loginPed[source])
+			end
 		else
-			reason = "Account does not exist"
+			reason = "Account does not exist or wrong password"
+			triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
 			triggerClientEvent("onErrorOutputReason",source,reason)
 			return
 		end
 	else
 		local account = getAccount(username, password)
 		if not account then
-			reason = "Account does not exist"
+			reason = "Account does not exist or wrong password"
 			triggerClientEvent("onErrorOutputReason",source,reason)
+			triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
 			return
 		elseif account then
+			fadeCamera(source,false,3.0,0,0,0)
+			triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,"login")
 			local accountName = getAccountName(account)
 			logIn(source, account, password)
 			triggerClientEvent(source,"onPlayerDoneLogin", source, accountName, password)		
-			triggerEvent("onPlayerDayZLogin", getRootElement(),username,password,source)
+			setTimer(triggerEvent,3000,1,"onPlayerDayZLogin", getRootElement(),username,password,source)
 			local theTime = getRealTime()
 			local hour = theTime.hour
 			local minute = theTime.minute
 			local seconds = theTime.second
-			local theAccount = getPlayerAccount(client)
-			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(client).."\n","accounts")
+			local theAccount = getPlayerAccount(source)
+			exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [LOGIN] "..username.." has logged in. Player: "..getPlayerName(source).."\n","accounts")
+			if isElement(loginPed[source]) then
+				destroyElement(loginPed[source])
+			end
 		end
 	end
 end
@@ -128,6 +191,7 @@ function tryToRegsiterPlayer(username, pass)
 							if not logIn(source, cc, pass) then
 								reason = "Unknown error"
 								triggerClientEvent("onErrorOutputReason",source,reason)
+								triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
 								return
 							end
 						end
@@ -137,46 +201,60 @@ function tryToRegsiterPlayer(username, pass)
 					if not logIn(source, cc, pass) then
 						reason = "Unknown error"
 						triggerClientEvent("onErrorOutputReason",source,reason)
+						triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
 						return
 					end
 				end
+				fadeCamera(source,false,3.0,0,0,0)
+				triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,"register")
 				outputChatBox("You successfully registered account '" ..username.. "' for player '" ..getPlayerName(source).. "'#FFFFFF with password '" ..pass.."'!", source, 255, 255, 255, true)
 				triggerClientEvent(source,"onPlayerDoneLogin", source,username,pass)	
-				triggerEvent("onPlayerDayZRegister", getRootElement(),username,pass,source)
-				--triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
+				setTimer(triggerEvent,3000,1,"onPlayerDayZRegister", getRootElement(),username,pass,source)
 				exports.DayZ:saveLog("["..currentTime.." - "..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client).."\n","accounts")
+				if isElement(loginPed[source]) then
+					destroyElement(loginPed[source])
+				end
 				return true
 			else
 				reason = "Was unable to add account"
+				return
 			end
 		else
 			reason = "Account already exists"
+			return
 		end
 	else
-		if not getAccount(username) then
+		if not getAccount(username,pass) then
 			theAccount = addAccount(username, pass)
 			if (theAccount) then
 				logIn(source, theAccount, pass)
 				outputChatBox("You successfully registered account '" ..username.. "' for player '" ..getPlayerName(source).. "'#FFFFFF with password '" ..pass.."'!", source, 255, 255, 255, true)
+				fadeCamera(source,false,3.0,0,0,0)
+				triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,"register")
 				triggerClientEvent(source,"onPlayerDoneLogin", source,username,pass)	
-				triggerEvent("onPlayerDayZRegister", getRootElement(),username,pass,source)
-				--triggerEvent("onPlayerDayZLogin", getRootElement(),username,pass,source)
+				setTimer(triggerEvent,3000,1,"onPlayerDayZRegister", getRootElement(),username,pass,source)
 				local theTime = getRealTime()
 				local hour = theTime.hour
 				local minute = theTime.minute
 				local seconds = theTime.second
 				exports.DayZ:saveLog("["..hour..":"..minute..":"..seconds.."] [REGISTER]: "..username.." registered this account. Initial player: "..getPlayerName(client).."\n","accounts")
+				if isElement(loginPed[source]) then
+					destroyElement(loginPed[source])
+				end
 				return true
 			else
 				reason = "Was unable to add account"
+				triggerClientEvent("onErrorOutputReason",source,reason)
+				triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
+				return
 			end
 		else
-			reason = "Account already exists"
+			reason = "Account exists already or wrong password" 
+			triggerClientEvent("onErrorOutputReason",source,reason)
+			triggerClientEvent(source,"checkIfRegisterOrLoginOkay",source,false)
+			return
 		end
 	end
-	
-	triggerClientEvent("onErrorOutputReason",source,reason)
-	return
 end
 addEvent("onClientSendRegisterDataToServer", true)
 addEventHandler("onClientSendRegisterDataToServer", getRootElement(), tryToRegsiterPlayer)
