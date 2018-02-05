@@ -19,3 +19,8 @@ monaguilloX	(Translation: Spanish)
 Rémi Gaffet	(Translation: French)
 AlYnZyX		(Translation: Romanian)
 KaSkA3eR 	(Translation: Polish)
+
+# - MODELS/TEXTURES - #
+Most weapon models created/ported by Condizition.
+A few weapon models created/ported by alexey.
+Some building models/textures created by Bryan Nicolas (Cobain).
