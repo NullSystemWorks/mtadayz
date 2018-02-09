@@ -19,7 +19,10 @@ bug reports and suggestions. Note that you have to fork the repository first. Ed
 changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
 Remember to keep your fork in sync, more info can be found here: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
-### Current Version ###
+### Latest Files [ALWAYS UP-TO-DATE] ###
+https://github.com/NullSystemWorks/mtadayz/archive/master.zip
+
+### Current Release [NOT UPDATED FREQUENTLY] ###
 https://github.com/NullSystemWorks/mtadayz/releases/tag/v0.9.9a
 
 
