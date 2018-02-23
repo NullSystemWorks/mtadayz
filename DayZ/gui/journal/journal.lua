@@ -8,13 +8,7 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-JournalTable = {
-	window = {},
-	image = {},
-    label = {},
-	memo = {},
-	button = {},
-}
+
 
 local font = {}
 local isJournalOpen = false
@@ -47,15 +41,23 @@ function showJournal()
 			addEventHandler("onClientMouseLeave",JournalTable.label[8],function() writeDeselected(8) end,false)
 			addEventHandler("onClientMouseEnter",JournalTable.label[9],function() writeSelected(9) end,false)
 			addEventHandler("onClientMouseLeave",JournalTable.label[9],function() writeDeselected(9) end,false)
+			addEventHandler("onClientMouseEnter",JournalTable.label[28],function() writeSelected(28) end,false)
+			addEventHandler("onClientMouseLeave",JournalTable.label[28],function() writeDeselected(28) end,false)
 			addEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.label[7],function() nextPreviousPage(7) end,false)
 			addEventHandler("onClientGUIClick",JournalTable.label[8],function() nextPreviousPage(8) end,false)
 			addEventHandler("onClientGUIClick",JournalTable.label[9],function()
-				guiMoveToBack(JournalTable.image[2])
 				loadList()
 			end,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal,false)
 			addEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal,false)
+			addEventHandler("onClientGUIClick",JournalTable.label[28],function()
+				guiSetVisible(JournalTable.image[1],false)
+				guiSetVisible(JournalTable.image[2],false)
+				guiSetVisible(JournalTable.image[3],false)
+				guiSetVisible(JournalTable.image[9],false)
+				showCursor(false)
+			end,false)
 			
 			guiSetText(JournalTable.label[20],tostring(playerStatusTable[localPlayer]["blood"]).." (Type: "..tostring(playerStatusTable[localPlayer]["bloodtype"])..")")
 			guiSetText(JournalTable.label[21],tostring(math.floor(playerStatusTable[localPlayer]["food"])))
@@ -70,6 +72,8 @@ function showJournal()
 			showCursor(false)
 			guiSetVisible(JournalTable.image[1],false)
 			guiSetVisible(JournalTable.image[2],false)
+			guiSetVisible(JournalTable.image[3],false)
+			guiSetVisible(JournalTable.image[4],false)
 			removeEventHandler("onClientMouseEnter",JournalTable.label[5],writeSelected)
 			removeEventHandler("onClientMouseLeave",JournalTable.label[5],writeDeselected)
 			removeEventHandler("onClientMouseEnter",JournalTable.label[7],writeSelected)
@@ -100,6 +104,15 @@ function writeDeselected (number)
 end
 
 function initJournal()
+	JournalTable = {
+		window = {},
+		image = {},
+		label = {},
+		memo = {},
+		button = {},
+		scrollpane = {},
+	}
+	
 	JournalTable.image[1] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
 	JournalTable.image[2] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
 	JournalTable.image[3] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)
@@ -107,7 +120,8 @@ function initJournal()
 	JournalTable.image[5] = guiCreateStaticImage(0.00, 0.00, 1.00, 0.20, ":DayZ/gui/journal/images/banditskilled1.png", true, JournalTable.image[4])
 	JournalTable.image[6] = guiCreateStaticImage(0.00, 0.75, 1.00, 0.20, ":DayZ/gui/journal/images/murders1.png", true, JournalTable.image[4])
 	JournalTable.image[7] = guiCreateStaticImage(0.20, 0.22, 0.79, 0.14, ":DayZ/gui/journal/images/zombieskilled1.png", true, JournalTable.image[4])
-	JournalTable.image[8] = guiCreateStaticImage(0.00, 0.22, 0.79, 0.14, ":DayZ/gui/journal/images/headshots1.png", true, JournalTable.image[4])   
+	JournalTable.image[8] = guiCreateStaticImage(0.00, 0.22, 0.79, 0.14, ":DayZ/gui/journal/images/headshots1.png", true, JournalTable.image[4])
+	JournalTable.image[9] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true)	
 
 	JournalTable.label[1] = guiCreateLabel(0.09, 0.09, 0.40, 0.06, "Day 0", true, JournalTable.image[1])
 	guiLabelSetColor(JournalTable.label[1], 0, 0, 0)
@@ -216,6 +230,26 @@ function initJournal()
 	guiLabelSetColor(JournalTable.label[25],0,0,0)
 	guiSetFont(JournalTable.label[25],font[3])
 	
+	local font0_needhelp = guiCreateFont("fonts/needhelp.ttf", 20)
+	JournalTable.label[26] = guiCreateLabel(0.09, 0.09, 0.14, 0.05, "Achievements", true, JournalTable.image[9])
+	guiSetFont(JournalTable.label[26], font0_needhelp)
+	guiLabelSetColor(JournalTable.label[26], 0, 0, 0)
+	
+	JournalTable.label[27] = guiCreateLabel(0.23, 0.11, 0.21, 0.30, "Your achievements: 01 of 100 (1% completed)", true, JournalTable.image[9])
+	guiLabelSetColor(JournalTable.label[27], 45, 45, 45)
+	guiLabelSetHorizontalAlign(JournalTable.label[27], "left", true)
+		
+	JournalTable.label[28] = guiCreateLabel(0.80, 0.09, 0.14, 0.05, "Close", true, JournalTable.image[9])
+	guiSetFont(JournalTable.label[28], font0_needhelp)
+	guiLabelSetColor(JournalTable.label[28], 0, 0, 0)
+	
+	JournalTable.label[29] = guiCreateLabel(0.34, 0.33, 0.99, 0.50, "", true, JournalTable.image[9])
+	guiLabelSetHorizontalAlign(JournalTable.label[29], "left", false)
+	guiLabelSetVerticalAlign(JournalTable.label[29], "center")
+		
+	JournalTable.scrollpane[1] = guiCreateScrollPane(0.09, 0.17, 0.37, 0.70, true, JournalTable.image[9])
+	JournalTable.scrollpane[2] = guiCreateScrollPane(0.54, 0.17, 0.35, 0.71, true, JournalTable.image[9])
+	
 	JournalTable.window[1] = guiCreateWindow(0.24, 0.14, 0.52, 0.80, "Write into Journal", true)
 	guiWindowSetMovable(JournalTable.window[1], false)
 	guiWindowSetSizable(JournalTable.window[1], false)
@@ -224,7 +258,7 @@ function initJournal()
 	JournalTable.label[6] = guiCreateLabel(0.04, 0.10, 0.91, 0.08, "Journal Entry:", true, JournalTable.window[1])
 	guiLabelSetVerticalAlign(JournalTable.label[1], "center")
 	JournalTable.button[1] = guiCreateButton(0.17, 0.92, 0.19, 0.06, "Save", true, JournalTable.window[1])
-	JournalTable.button[2] = guiCreateButton(0.63, 0.92, 0.19, 0.06, "Cancel", true, JournalTable.window[1])    
+	JournalTable.button[2] = guiCreateButton(0.63, 0.92, 0.19, 0.06, "Cancel", true, JournalTable.window[1])
 	
 	guiSetVisible(JournalTable.image[1],false)
 	guiSetVisible(JournalTable.image[2],false)
@@ -234,8 +268,8 @@ function initJournal()
 	guiSetVisible(JournalTable.image[6],false)
 	guiSetVisible(JournalTable.image[7],false)
 	guiSetVisible(JournalTable.image[8],false)
-	guiSetVisible(JournalTable.window[1],false)
-	
+	guiSetVisible(JournalTable.image[9],false)
+	guiSetVisible(JournalTable.window[1],false)	
 end
 addEventHandler("onClientResourceStart",getResourceRootElement(getThisResource()),initJournal)
 
@@ -246,7 +280,7 @@ function openWriteJournal(button, state)
 			guiBringToFront(JournalTable.window[1])
 			isWriting = true
 			guiSetVisible(JournalTable.image[1],false)
-			unbindKey("1","down",showJournal)
+			unbindKey("6","down",showJournal)
 			guiSetInputEnabled(true)
 		end
 	else
@@ -264,7 +298,7 @@ function closeWriteJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.label[5],openWriteJournal)
 	removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
-	bindKey("1","down",showJournal)
+	bindKey("6","down",showJournal)
 	bindKey("J","down",initInventory)
 	guiSetInputEnabled(false)
 end
@@ -281,7 +315,7 @@ function writeIntoJournal()
 	removeEventHandler("onClientGUIClick",JournalTable.button[1],writeIntoJournal)
 	removeEventHandler("onClientGUIClick",JournalTable.button[2],closeWriteJournal)
 	triggerEvent("saveJournalOnQuit",localPlayer)
-	bindKey("1","down",showJournal)
+	bindKey("6","down",showJournal)
 	guiSetInputEnabled(false)
 	bindKey("J","down",initInventory)
 end
