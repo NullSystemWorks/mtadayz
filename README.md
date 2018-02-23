@@ -14,12 +14,15 @@ In the past, MTA DayZ used to be compiled, but now that it's open source, there'
 to make this gamemode even better.
 
 ### What should I do? ###
-Generally, there is always something to do. You can either take a look at the issues list on GitHub, or go the forum (https://nullsystems.xyz/site/) and check out the
+Generally, there is always something to do. You can either take a look at the issues list on GitHub, or go the forum (https://nullsystems.tech/forums/) and check out the
 bug reports and suggestions. Note that you have to fork the repository first. Edit whatever you want, and make a pull request. If the developers deem your
 changes appropriate, the pull request will be accepted, and you will be marked as a collaborator.
 Remember to keep your fork in sync, more info can be found here: http://www.youtube.com/watch?v=-zvHQXnBO6c
 
-### Current Version ###
+### Latest Files [ALWAYS UP-TO-DATE] ###
+https://github.com/NullSystemWorks/mtadayz/archive/master.zip
+
+### Current Release [NOT UPDATED FREQUENTLY] ###
 https://github.com/NullSystemWorks/mtadayz/releases/tag/v0.9.9a
 
 
