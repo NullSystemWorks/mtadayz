@@ -55,12 +55,12 @@ function night_init()
 		return false
 	end
 
-	local testShader, tec = dxCreateShader(':DayZ/handlers/world/client/night/night.fx')
+	local testShader, tec = dxCreateShader(':DayZ/gui/graphics/night/night.fx')
 	if not testShader then
 		outputChatBox('Could not create night shader. Please use debugscript 3')
 	else
 		for c=65,96 do
-			clone = dxCreateShader(':DayZ/handlers/world/client/night/night.fx',nil,nil,nil,"all")
+			clone = dxCreateShader(':DayZ/gui/graphics/night/night.fx',nil,nil,nil,"all")
 			engineApplyShaderToWorldTexture(clone, string.format('%c*', c + 32))
 			for i,v in pairs(removables) do
 				engineRemoveShaderFromWorldTexture(clone, v)

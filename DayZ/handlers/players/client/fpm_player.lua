@@ -24,7 +24,8 @@ local recentlyMoved = false
 local Xdiff,Ydiff
 
 function toggleFPS()
-weapon = getPedWeapon(localPlayer)
+	if not getElementData(localPlayer, "blood") then return end
+	weapon = getPedWeapon(localPlayer)
 	if weapon ~= 34 then
 		if (not isEnabled) then
 			fadeCamera(false,0,0,0,0)
@@ -47,7 +48,7 @@ end
 bindKey("o","down",toggleFPS)
 
 function toggleViewIfSniper()
-weapon = getPedWeapon(localPlayer)
+	weapon = getPedWeapon(localPlayer)
 	if isEnabled then
 		if weapon == 34 then
 			fadeCamera(false,0,0,0,0)
