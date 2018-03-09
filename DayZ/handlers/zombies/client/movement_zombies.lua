@@ -47,6 +47,11 @@ local x,y,z = getElementPosition(localPlayer)
 			-- Visibility Detection
 			if ZedDistance <= visibility/2 then
 				local LOSChance = checkLOSChance(ZedDistance,visibility)
+				if playerSkillsTable[localPlayer] then
+					if playerSkillsTable[localPlayer]["ScavengerShadowChance"] > 0 then
+						LOSChance = LOSChance-LOSChance*playerSkillsTable[localPlayer]["ScavengerShadowChance"]
+					end
+				end
 				if math.random(0,100) < LOSChance then
 					targetByVisibility = true
 				end
@@ -97,7 +102,7 @@ function zombieSpawning()
 				local material,hitX, hitY, hitZ = isObjectAroundPlayer2(localPlayer, 30,3)
 				if material == 0 or material == 1 or material == 2 or material == 3 then
 					local x, y, z = getElementPosition(getLocalPlayer())
-					triggerServerEvent("createZomieForPlayer",getLocalPlayer(),x,y,z)
+					triggerServerEvent("createZombieForPlayer",getLocalPlayer(),x,y,z)
 				end
 			end
 		end

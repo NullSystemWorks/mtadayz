@@ -18,6 +18,16 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 	
 	-- Attacker: Zombie
 	if isElement(attacker) and getElementData(attacker,"zombie") then
+		if isElementWithinColShape(client,whetstone_safezone) then return end
+		if playerSkillsTable[client] then
+			if playerSkillsTable[client]["SoldierDodgeChance"] > 0 then
+				local dodgeChance = math.random(0,100)
+				if dodgeChance <= playerSkillsTable[client]["SoldierDodgeChance"] then 
+					return
+				end
+			end
+		end
+		-- Destroy zombie or let NPCs handle it?
 		if playerStatusTable[client]["humanity"] >= 5000 then
 			halfDamage = 2
 		end
@@ -31,7 +41,13 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 		else
 			damageMultiplier = 1
 		end
-		playerStatusTable[client]["blood"] = playerStatusTable[client]["blood"]-((gameplayVariables["zombiedamage"]*damageMultiplier)/halfDamage)
+		local totalDamage = (gameplayVariables["zombiedamage"]*damageMultiplier)/halfDamage
+		if playerSkillsTable[client] then
+			if playerSkillsTable[client]["SoldierToughChance"] > 0 then
+				totalDamage = totalDamage-(totalDamage*(playerSkillsTable[client]["SoldierToughChance"]/100))
+			end
+		end
+		playerStatusTable[client]["blood"] = playerStatusTable[client]["blood"]-totalDamage
 		triggerClientEvent(client,"onPlayerDamageShader",client)
 		
 		local painChance = math.min((((gameplayVariables["zombiedamage"]*damageMultiplier)/halfDamage)/100),100)
@@ -45,6 +61,7 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 		
 	-- Attacker: Player
 	elseif isElement(attacker) and getElementType(attacker) == "player" then
+		if isElementWithinColShape(client,whetstone_safezone) then return end
 		if weapon and weapon > 1 then
 			damage = getWeaponDamage(weapon,attacker)
 			local x1,y1,z1 = getElementPosition(client)
@@ -98,6 +115,19 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 				end
 			end
 			if damage > 0 then
+				if playerSkillsTable[attacker] then
+					if playerSkillsTable[attacker]["SoldierCritChance"] > 0 then
+						local critChance = math.random(0,100)
+						if critChance < playerSkillsTable[attacker]["SoldierCritChance"] then
+							damage = damage*2
+						end
+					end
+				end
+				if playerSkillsTable[client] then
+					if playerSkillsTable[client]["SoldierToughChance"] > 0 then
+						damage = damage-(damage*(playerSkillsTable[client]["SoldierToughChance"]/100))
+					end
+				end
 				playerStatusTable[client]["blood"] = playerStatusTable[client]["blood"]-math.floor(damage)
 				triggerClientEvent(client,"onPlayerDamageShader",client)
 				if damage >= 6000 then
@@ -128,6 +158,7 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 	
 	-- Attacker: Explosions & Vehicle Crash/Runover
 	if weapon == 49 or weapon == 50 then
+		if isElementWithinColShape(client,whetstone_safezone) then return end
 		if loss >= 30 then
 			playerStatusTable[client]["brokenbone"] = true
 			playerStatusTable[client]["fracturedArms"] = true
@@ -167,7 +198,27 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 	-- Final calculations
 	if playerStatusTable[client]["blood"] <= 0 then
 		if not getElementData(client,"isDead") then
-			triggerEvent("kilLDayZPlayer",client,attacker,headshot)
+			if playerSkillsTable[client] then
+				if playerSkillsTable[client]["MedicChanceChance"] > 0 then
+					local secondChance = math.random(0,100)
+					if secondChance < playerSkillsTable[client]["MedicChanceChance"] then
+						if playerStatusTable[client]["blood"] ~= 1 then
+							playerStatusTable[client]["blood"] = 1
+							playerStatusTable[client]["bleeding"] = 0
+							playerStatusTable[client]["brokenbone"] = false
+							playerStatusTable[client]["fracturedArms"] = false
+							playerStatusTable[client]["fracturedLegs"] = false
+							playerStatusTable[client]["unconscious"] = false
+							playerStatusTable[client]["pain"] = false
+							setPlayerFracturedBones(client,false)
+							return
+						else
+							killDayZPlayer(client,attacker,headshot)
+						end
+					end
+				end
+			end
+			killDayZPlayer(client,attacker,headshot)
 			setElementData(client,"isDead",true)
 		end
 	end

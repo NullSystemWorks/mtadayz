@@ -82,9 +82,9 @@ end
 ]]
 
 function bindTheKeys()
-	bindKey(source,"1","down",funcBindSalute)
-	bindKey(source,"2","down",funcBindHandsup)
-	bindKey(source,"3","down",funcBindSit)
+	bindKey(source,",","down",funcBindSalute)
+	bindKey(source,".","down",funcBindHandsup)
+	bindKey(source,"-","down",funcBindSit)
 	bindKey(source,"l","down",funcBindLie)
 end
 addEventHandler("onPlayerLogin", root, bindTheKeys)
@@ -93,27 +93,27 @@ addEventHandler("onResourceStart",resourceRoot,
 function()
 	for k,v in ipairs(getElementsByType("player")) do
 		if not isGuestAccount(getPlayerAccount(v)) then
-			bindKey(v,"1","down",funcBindSalute)
-			bindKey(v,"2","down",funcBindHandsup)
-			bindKey(v,"3","down",funcBindSit)
+			bindKey(v,",","down",funcBindSalute)
+			bindKey(v,".","down",funcBindHandsup)
+			bindKey(v,"-","down",funcBindSit)
 			bindKey(v,"l","down",funcBindLie)
 		end
 	end
 end)
 
 function unbindFuncKeys()
-	unbindKey(source,"1","down",funcBindSalute)
-	unbindKey(source,"2","down",funcBindHandsup)
-	unbindKey(source,"3","down",funcBindSit)
+	unbindKey(source,",","down",funcBindSalute)
+	unbindKey(source,".","down",funcBindHandsup)
+	unbindKey(source,"-","down",funcBindSit)
 	unbindKey(source,"l","down",funcBindLie)
 end
 addEvent("unbindFuncKeys",true)
 addEventHandler("unbindFuncKeys",root,unbindFuncKeys)
 
 function bindFuncKeys()
-	bindKey(source,"1","down",funcBindSalute)
-	bindKey(source,"2","down",funcBindHandsup)
-	bindKey(source,"3","down",funcBindSit)
+	bindKey(source,",","down",funcBindSalute)
+	bindKey(source,".","down",funcBindHandsup)
+	bindKey(source,"-","down",funcBindSit)
 	bindKey(source,"l","down",funcBindLie)
 	handsUp = false
 	sitting = false

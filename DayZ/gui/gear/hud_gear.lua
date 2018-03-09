@@ -8,22 +8,10 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-local enableBlips = true
-local renderNorthBlip = false
-local alwaysRenderMap = false
-local worldmap
-local gpsborder
+local sx, sy = guiGetScreenSize()
 local alpha = 255
 local font = {}
 font[1] = dxCreateFont(":DayZ/fonts/bitstream.ttf", 10)
-
-local worldW, worldH = 3200, 3200
-local blip = 12 
-
-local sx, sy = guiGetScreenSize()
-local rt = dxCreateRenderTarget(290, 175)
-local xFactor, yFactor = sx/1366, sy/768
-local yFactor = xFactor
 
 toggleControl ("radar",false)
 setPlayerHudComponentVisible ("clock",false) 
@@ -34,226 +22,93 @@ setPlayerHudComponentVisible ("weapon",false)
 setPlayerHudComponentVisible ("ammo",false)
 setPlayerHudComponentVisible ("breath",false)
 
-function playerDrawMapGPSCompass()
-	if getElementData(getLocalPlayer(),"logedin") then
-		if getElementData(getLocalPlayer(),"Map") >= 1  then
-			if not mapkeybound then
-				if not gameplayVariables["oldmap"] then
-					bindKey("F11","down",toggleMap)
-				else
+function toggleMap(key,state)
+	if getElementData(localPlayer,"logedin") then
+		local mapKey = getKeyBoundToCommand("radar")
+		if key then
+			if key == mapKey then
+				if getElementData(localPlayer,"Map") > 0 then
 					toggleControl("radar",true)
-				end
-				mapkeybound = true
-			end
-		else
-			if mapkeybound then
-				if not gameplayVariables["oldmap"] then
-					unbindKey("F11","down",toggleMap)
 				else
 					toggleControl("radar",false)
 				end
-				mapkeybound = false
 			end
 		end
-		if getElementData(getLocalPlayer(),"GPS") >= 1  then
-			if not gpskeybound then
-				bindKey("7","down",toggleGPS)
-				addCommandHandler("gps",toggleGPS)
-				gpskeybound = true
-			end
-		else
-			if gpskeybound then
-				unbindKey("7","down",toggleGPS)
-				removeEventHandler("onClientRender",root,drawTheGPS)
-				removeCommandHandler("gps",toggleGPS)
-				dxSetRenderTarget()
-				gpskeybound = false
-			end
-		end
-		if getElementData(getLocalPlayer(),"Watch") >= 1 then
-			local hour, minutes = getTime()
-			if hour < 10 then
-				hour = "0"..hour
+	end
+end
+addEventHandler("onClientKey",root,toggleMap)
+
+local gpsToggle = false
+function toggleGPS(key)
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(localPlayer,"GPS") > 0 then
+			if not gpsToggle then
+				setPlayerHudComponentVisible("radar",true)
+				gpsToggle = true
 			else
-				hour = hour
+				setPlayerHudComponentVisible("radar",false)
+				gpsToggle = false
 			end
-			if minutes < 10 then
-				minutes = "0"..minutes
+		end
+	end	
+end
+bindKey("1","down",toggleGPS)
+
+local watchToggle = false
+function toggleWatch(key)
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(getLocalPlayer(),"Watch") > 0 then
+			if not watchToggle then
+				addEventHandler("onClientRender",root,drawWatch)
+				watchToggle = true
 			else
-				minutes = minutes
+				removeEventHandler("onClientRender",root,drawWatch)
+				watchToggle = false
 			end
-			local screenW, screenH = guiGetScreenSize()
-			dxDrawText(hour..":"..minutes, (screenW * 0.8287) - 1, (screenH * 0.1667) - 1, (screenW * 0.9550) - 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
-			dxDrawText(hour..":"..minutes, (screenW * 0.8287) + 1, (screenH * 0.1667) - 1, (screenW * 0.9550) + 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
-			dxDrawText(hour..":"..minutes, (screenW * 0.8287) - 1, (screenH * 0.1667) + 1, (screenW * 0.9550) - 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
-			dxDrawText(hour..":"..minutes, (screenW * 0.8287) + 1, (screenH * 0.1667) + 1, (screenW * 0.9550) + 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
-			dxDrawText(hour..":"..minutes, screenW * 0.8287, screenH * 0.1667, screenW * 0.9550, screenH * 0.1983, tocolor(0, 255, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
-		end
-		if getElementData(getLocalPlayer(),"Compass") >= 1 then
-			if not compasskeybound then
-				bindKey("8","down",toggleCompass)
-				addCommandHandler("compass",toggleCompass)
-				compasskeybound = true
-			end
-		else
-			if compasskeybound then
-				unbindKey("8","down",toggleCompass)
-				removeEventHandler("onClientRender",root,drawTheCompass)
-				removeCommandHandler("compass",toggleCompass)
-				compasskeybound = false
-			end
+			
 		end
 	end
 end
-addEventHandler("onClientRender",root,playerDrawMapGPSCompass)
+bindKey("2","down",toggleWatch)
 
-local isMapShown = false
-local isGPSShown = false
-local isCompassShown = false
-
-function toggleMap()
-	if not isMapShown then
-		isMapShown = true
-		addEventHandler("onClientRender",root,drawTheMap)
-		alpha = 0
+function drawWatch()
+	local hour, minutes = getTime()
+	if hour < 10 then
+		hour = "0"..hour
 	else
-		isMapShown = false
-		removeEventHandler("onClientRender",root,drawTheMap)
-		alpha = 255
+		hour = hour
 	end
-end
-
-function toggleGPS()
-	if not isGPSShown then
-		isGPSShown = true
-		if not gameplayVariables["oldgps"] then
-			addEventHandler("onClientRender",root,drawTheGPS)
-		else
-			setPlayerHudComponentVisible("radar",true)
-		end
+	if minutes < 10 then
+		minutes = "0"..minutes
 	else
-		isGPSShown = false
-		if not gameplayVariables["oldgps"] then
-			removeEventHandler("onClientRender",root,drawTheGPS)
-		else
-			setPlayerHudComponentVisible("radar",false)
-		end
+		minutes = minutes
 	end
+	local screenW, screenH = guiGetScreenSize()
+	dxDrawText(hour..":"..minutes,(screenW * 0.8287) - 1, (screenH * 0.1667) - 1, (screenW * 0.9550) - 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
+	dxDrawText(hour..":"..minutes,(screenW * 0.8287) + 1, (screenH * 0.1667) - 1, (screenW * 0.9550) + 1, (screenH * 0.1983) - 1, tocolor(0, 0, 0, 255), 1.00, font[1], "center", "center", false, false, false, false, false)
+	dxDrawText(hour..":"..minutes,(screenW * 0.8287) - 1, (screenH * 0.1667) + 1, (screenW * 0.9550) - 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
+	dxDrawText(hour..":"..minutes,(screenW * 0.8287) + 1, (screenH * 0.1667) + 1, (screenW * 0.9550) + 1, (screenH * 0.1983) + 1, tocolor(0, 0, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)			
+	dxDrawText(hour..":"..minutes, screenW * 0.8287, screenH * 0.1667, screenW * 0.9550, screenH * 0.1983, tocolor(0, 255, 0, 255), 1.00,  font[1], "center", "center", false, false, false, false, false)
 end
 
-
-function toggleCompass()
-	if not isCompassShown then
-		isCompassShown = true
-		addEventHandler("onClientRender",root,drawTheCompass)
-	else
-		isCompassShown = false
-		removeEventHandler("onClientRender",root,drawTheCompass)
-	end
-end
-
-function drawTheMap()
-	local x, y = getElementPosition(localPlayer)
-	local X, Y = sx/2 -(x/(6000/(worldW-200))), sy/2 + (y/(6000/(worldH-200)))
-	local camX,camY,camZ = getElementRotation(getCamera())
-	if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
-		dxDrawRectangle(0, 0, sx, sy, tocolor(176, 200, 210,255))
-		dxDrawImage(X - worldW/2, Y - worldH/2, worldW, worldH, ":DayZ/gui/gear/items/world.png", 0, (x/(6000/worldW)), -(y/(6000/worldH)), tocolor(255, 255, 255, 255))
-	end
-	local col = tocolor(r, g, b, 190)
-	local bg = tocolor(r, g, b, 100)
-	local rx, ry, rz = getElementRotation(localPlayer)
-	local lB = (15)*xFactor
-	local rB = (15+sx)*xFactor
-	local tB = sy-(205)*yFactor
-	local bB = tB + (sy)*yFactor
-	local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
-	local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
-	for k, v in ipairs(getElementsByType("blip")) do
-		local bx, by = getElementPosition(v)
-		local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
-		local maxDist = getBlipVisibleDistance(v)
-		if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
-			local dist = actualDist/(6000/((3072+3072)/2))
-			local rot = findRotation(bx, by, x, y)-camZ
-			local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
-			local bpx = math.max(lB, math.min(rB, bpx))
-			local bpy = math.max(tB, math.min(bB, bpy))
-			local bid = getElementData(v, "customIcon") or getBlipIcon(v)
-			local _, _, _, bcA = getBlipColor(v)
-			local bcR, bcG, bcB = 255, 255, 255
-				if getBlipIcon(v) == 0 then
-					bcR, bcG, bcB = getBlipColor(v)
-				end
-			local bS = getBlipSize(v)
-			dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
-		end
-	end
-	dxDrawImage(sx * 0.5, sy * 0.5, (blip*2)*xFactor, (blip*2)*yFactor, ":DayZ/gui/gear/items/player.png", camZ-rz, 0, 0, tocolor(255,30,0,255))
-end
-
-function drawTheGPS()
-	if (not isPlayerMapVisible()) then
-		local mW, mH = dxGetMaterialSize(rt)
-		local x, y = getElementPosition(localPlayer)
-		local X, Y = mW/2 -(x/(6000/(3072))), mH/2 +(y/(6000/(3072)))
-		local camX,camY,camZ = getElementRotation(getCamera())
-		dxSetRenderTarget(rt, true)
-		if alwaysRenderMap or getElementInterior(localPlayer) == 0 then
-			dxDrawRectangle(0, 0, mW, mH, tocolor(176, 200, 210,alpha)) --render background
-			worldmap = dxDrawImage(X - 3072/2, mH/5 + (Y - 3072/2), 3072, 3072, ":DayZ/gui/gear/items/radarworld.png", camZ, (x/(6000/(3072))), -(y/(6000/3072)), tocolor(255, 255, 255, alpha))
-		end
-		dxSetRenderTarget()
-		gpsborder = dxDrawImage((990)*xFactor, sy-((300+10))*yFactor, (300)*xFactor, (200)*yFactor, ":DayZ/gui/gear/items/gps.png",0,0,0,tocolor(255,255,255,alpha),true)
-		--dxDrawRectangle((10)*xFactor, sy-((200+10))*yFactor, (300)*xFactor, (200)*yFactor, tocolor(0, 0, 0, 175))
-		dxDrawImage((5+1000)*xFactor, sy-((300+10))*yFactor, (300-30)*xFactor, (175)*yFactor, rt, 0, 0, 0, tocolor(255, 255, 255, alpha))
-		local col = tocolor(r, g, b, 190)
-		local bg = tocolor(r, g, b, 100)
-		local rx, ry, rz = getElementRotation(localPlayer)
-		local lB = (15)*xFactor
-		local rB = (15+290)*xFactor
-		local tB = sy-(205)*yFactor
-		local bB = tB + (175)*yFactor
-		local cX, cY = (rB+lB)/2, (tB+bB)/2 +(35)*yFactor
-		local toLeft, toTop, toRight, toBottom = cX-lB, cY-tB, rB-cX, bB-cY
-		for k, v in ipairs(getElementsByType("blip")) do
-			local bx, by = getElementPosition(v)
-			local actualDist = getDistanceBetweenPoints2D(x, y, bx, by)
-			local maxDist = getBlipVisibleDistance(v)
-			if actualDist <= maxDist and getElementDimension(v)==getElementDimension(localPlayer) and getElementInterior(v)==getElementInterior(localPlayer) then
-				local dist = actualDist/(6000/((3072+3072)/2))
-				local rot = findRotation(bx, by, x, y)-camZ
-				local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.min(dist, math.sqrt(toTop^2 + toRight^2)), rot)
-				local bpx = math.max(lB, math.min(rB, bpx))
-				local bpy = math.max(tB, math.min(bB, bpy))
-				local bid = getElementData(v, "customIcon") or getBlipIcon(v)
-				local _, _, _, bcA = getBlipColor(v)
-				local bcR, bcG, bcB = 255, 255, 255
-					if getBlipIcon(v) == 0 then
-						bcR, bcG, bcB = getBlipColor(v)
-					end
-				local bS = getBlipSize(v)
-				--dxDrawImage(bpx -(blip*bS)*xFactor/2, bpy -(blip*bS)*yFactor/2, (blip*bS)*xFactor, (blip*bS)*yFactor, ":DayZ/gui/gear/items/blip/0.png", 0, 0, 0, tocolor(bcR, bcG, bcB, alpha))
+local compassToggle = false
+function toggleCompass(key)
+	if getElementData(localPlayer,"logedin") then
+		if getElementData(getLocalPlayer(),"Compass") > 0 then
+			if not compassToggle then
+				addEventHandler("onClientRender",root,drawCompass)
+				compassToggle = true
+			else
+				removeEventHandler("onClientRender",root,drawCompass)
+				compassToggle = false
 			end
+			
 		end
-		if renderNorthBlip then
-			local rot = -camZ+180
-			local bpx, bpy = getPointFromDistanceRotation(cX, cY, math.sqrt(toTop^2 + toRight^2), rot) --get position
-			local bpx = math.max(lB, math.min(rB, bpx))
-			local bpy = math.max(tB, math.min(bB, bpy)) --cap position to screen
-			local dist = getDistanceBetweenPoints2D(cX, cY, bpx, bpy) --get distance to the capped position
-			local bpx, bpy = getPointFromDistanceRotation(cX, cY, dist, rot) --re-calculate position based on new distance
-			if bpx and bpy then --if position was obtained successfully
-				local bpx = math.max(lB, math.min(rB, bpx))
-				local bpy = math.max(tB, math.min(bB, bpy)) --cap position just in case
-				--dxDrawImage(bpx -(blip*2)/2, bpy -(blip*2)/2, blip*2, blip*2, ":DayZ/gui/gear/items/blip/4.png", 0, 0, 0) --draw north (4) blip
-			end
-		end
-		--dxDrawImage(cX -(blip*2)*xFactor/2, cY -(blip*2)*yFactor/2, (blip*2)*xFactor, (blip*2)*yFactor, ":DayZ/gui/gear/items/player.png", camZ-rz, 0, 0, tocolor(255,30,0,alpha))
 	end
 end
+bindKey("3","down",toggleCompass)
 
-function drawTheCompass()
+function drawCompass()
 	local rx,ry,rz = getRotationOfCamera(localPlayer)
 	local bX, bY, bX2, bY2 = 0, 0, 0, 0
 	local aX, aY, aY2, aY2 = 0, 0, 0, 0
@@ -271,74 +126,67 @@ function drawTheCompass()
 	dxDrawImage(sx * aX, sy * aY, sx * aX2, sy * aY2, ":DayZ/gui/gear/items/compassarrow.png", rz )
 end
 
-function hideGPSOnInventoryOpen()
-	alpha = 0
-end
-addEvent("hideGPSOnInventoryOpen",true)
-addEventHandler("hideGPSOnInventoryOpen",root,hideGPSOnInventoryOpen)
-
-function showGPSOnInventoryClose()
-	alpha = 255
-end
-addEvent("showGPSOnInventoryClose",true)
-addEventHandler("showGPSOnInventoryClose",root,showGPSOnInventoryClose)
-
-
-nightvisionimage = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/nightvision.png",true)
+local nightVisionActive = false
+local nightvisionimage = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/nightvision.png",true)
 guiSetVisible(nightvisionimage,false)
 
-infravision = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/infravision.png",true)
+local infraredVisionActive = false
+local infravision = guiCreateStaticImage(0,0,1,1,":DayZ/gui/gear/items/infravision.png",true)
 guiSetVisible(infravision,false)
 
-function playerActivateGoggles (key,keyState)
-	if key == "n" then
-		if getElementData(getLocalPlayer(),"NV Goggles") > 0 then
-			if nightvision then
-				nightvision = false
-				guiSetVisible(nightvisionimage,false)
-				guiSetVisible(infravision,false)
-				showChat(true)
-				setCameraGoggleEffect("normal")
-				triggerEvent("onPlayerDisabledGoggles", getLocalPlayer())
-			else 
-				nightvision = true
-				guiSetVisible(nightvisionimage,true)
-				guiSetVisible(infravision,false)
-				showChat(false)
-				setCameraGoggleEffect("nightvision")
-				triggerEvent("onPlayerEnabledGoggles", getLocalPlayer())
+function activateGoggles(key,state)
+	if getElementData(localPlayer,"logedin") then
+		if key == "n" then
+			if getElementData(localPlayer,"NV Goggles") > 0 then
+				if nightVisionActive then
+					guiSetVisible(nightvisionimage,false)
+					guiSetVisible(infravision,false)
+					showChat(true)
+					setCameraGoggleEffect("normal")
+					togglePlayerGoggles(false)
+					nightVisionActive = false
+				else
+					guiSetVisible(nightvisionimage,true)
+					guiSetVisible(infravision,false)
+					showChat(false)
+					setCameraGoggleEffect("nightvision")
+					togglePlayerGoggles(true)
+					nightVisionActive = true
+				end
 			end
-		end
-	elseif key == "i" then
-		if getElementData(getLocalPlayer(),"IR Goggles") > 0 then
-			if infaredvision then
-				infaredvision = false
-				guiSetVisible(infravision,false)
-				guiSetVisible(nightvisionimage,false)
-				showChat(true)
-				setCameraGoggleEffect("normal")
-				triggerEvent("onPlayerDisabledGoggles", getLocalPlayer())
-			else 
-				infaredvision = true
-				guiSetVisible(infravision,true)
-				guiSetVisible(nightvisionimage,false)
-				showChat(false)
-				setCameraGoggleEffect("thermalvision")
-				triggerEvent("onPlayerEnabledGoggles", getLocalPlayer())
+		elseif key == "i" then
+			if getElementData(getLocalPlayer(),"IR Goggles") > 0 then
+				if infraredVisionActive then
+					guiSetVisible(infravision,false)
+					guiSetVisible(nightvisionimage,false)
+					showChat(true)
+					setCameraGoggleEffect("normal")
+					togglePlayerGoggles(false)
+					infraredVisionActive = false
+				else 
+					infraredVisionActive = true
+					guiSetVisible(infravision,true)
+					guiSetVisible(nightvisionimage,false)
+					showChat(false)
+					setCameraGoggleEffect("thermalvision")
+					togglePlayerGoggles(true)
+					infraredVisionActive = true
+				end
 			end
 		end
 	end
 end
-bindKey("n","down",playerActivateGoggles)
-bindKey("i","up",playerActivateGoggles)
+addEventHandler("onClientKey",root,activateGoggles)
 
 local sWidth,sHeight = guiGetScreenSize()
 function WeaponHUD()
 	if getElementData(localPlayer,"logedin") then
-		ammo = getPedTotalAmmo (localPlayer) - getPedAmmoInClip (localPlayer)
-		clip = getPedAmmoInClip (localPlayer)
-		weaponID = getPedWeapon(localPlayer)
+		local ammo = 0
+		local ammoType = ""
+		local clip = 0
+		local weaponID = getPedWeapon(localPlayer)
 		local divide = "|"
+		local weapName = ""
 		if weaponID == 22 then
 			if playerStatusTable[localPlayer]["currentweapon_2"] == "Flashlight" then
 				weapName = "Flashlight"
@@ -347,51 +195,87 @@ function WeaponHUD()
 				divide = ""
 			else
 				weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+				ammoType = getWeaponAmmoFromName(weapName)
+				ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+				clip = getPedAmmoInClip(localPlayer)
 				divide = "|"
 				magsLeft()
 			end
 		elseif weaponID == 23 then
-		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 24 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 25 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 26 then
-		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 27 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 28 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 29 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_2"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 30 then
 		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 31 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 33 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 34 then
 			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			ammoType = getWeaponAmmoFromName(weapName)
+			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
+			clip = getPedAmmoInClip(localPlayer)
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 16 then
@@ -463,8 +347,8 @@ function magsLeft()
 	dxDrawText(math.floor(getPedTotalAmmo (localPlayer) / getWeaponProperty(getPedWeapon( localPlayer ), "poor", "maximum_clip_ammo")) or 0,sWidth*0.9399999999,sHeight*0.093,sWidth*0.37,sHeight*0.50166666666,tocolor(0,255,0,255),.6,font[1],"left","top",false,false,false)
 end
 
-statsLabel = {}
-statsFont = guiCreateFont(":DayZ/fonts/bitstream.ttf",8)
+local statsLabel = {}
+local statsFont = guiCreateFont(":DayZ/fonts/bitstream.ttf",8)
 
 
 statsWindows = guiCreateStaticImage(0.775,0.2,0.225,0.22,":DayZ/gui/gear/items/debug.png",true)
@@ -516,7 +400,7 @@ guiLabelSetHorizontalAlign (statsLabel["name"],"center")
 guiSetFont (statsLabel["name"], statsFont )
 setElementData(statsLabel["name"],"identifikation","name")
 
-function showDebugMintorOnLogin ()
+function showDebugMintorOnLogin()
 	if getElementData(localPlayer,"logedin") then
 		if (gameplayVariables["debugmonitorenabled"]) then
 			guiSetVisible(statsWindows,true)
@@ -526,35 +410,24 @@ end
 addEvent("onClientPlayerDayZLogin", true)
 addEventHandler("onClientPlayerDayZLogin", root, showDebugMintorOnLogin)
 
-local isVisible = false
+local isDebugMonitorActive = false
 function showDebugMonitorOnF5()
 	if getElementData(localPlayer,"logedin") then
-		if not (gameplayVariables["debugmonitorenabled"]) then return end
-		
-		guiSetVisible(statsWindows,not guiGetVisible(statsWindows))
-	else
-		guiSetVisible(statsWindows,false)
+		if gameplayVariables["debugmonitorenabled"] then
+			isDebugMonitorActive = not isDebugMonitorActive
+			guiSetVisible(statsWindows,isDebugMonitorActive)
+		end
 	end
 end
-if not (gameplayVariables["debugmonitorenabled"]) then 
-	return
-else
+
+if (gameplayVariables["debugmonitorenabled"]) then 
 	bindKey("F5","down",showDebugMonitorOnF5)
 end
 
-function showDebugMonitor()
-	--guiSetVisible(statsWindows,true)
-	isVisible = true
+function toggleDebugMonitorOnInventory(state)
+	isDebugMonitorActive = state
+	guiSetVisible(statsWindows,state)
 end
-addEvent("showDebugMonitor",true)
-addEventHandler("showDebugMonitor",root,showDebugMonitor)
-
-function hideDebugMonitor()
-	--guiSetVisible(statsWindows,false)
-	isVisible = false
-end
-addEvent("hideDebugMonitor",true)
-addEventHandler("hideDebugMonitor",root,hideDebugMonitor)
 
 function refreshDebugMonitor()
 	if getElementData(getLocalPlayer(),"logedin") then

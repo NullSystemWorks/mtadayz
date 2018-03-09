@@ -18,6 +18,7 @@ function createZombieTable(player)
 end
 
 function spawnZombies(x,y,z)
+	if isElementWithinColShape(source,whetstone_safezone) then return end
 	x,y,z = getElementPosition(source)
 	counter = 0
 	if getElementData(source,"lastzombiespawnposition") then
@@ -84,7 +85,7 @@ function spawnZombies(x,y,z)
 		setElementData(source,"spawnedzombies",getElementData(source,"spawnedzombies")+gameplayVariables["amountzombies"])
 	end
 end
-addEvent("createZomieForPlayer",true)
+addEvent("createZombieForPlayer",true)
 
 --[[
 Code for new zombie spawn system
@@ -98,6 +99,7 @@ local colsphereID = 0
 local newColSphereID = 0
 local ZedSphereCounter = 0
 function spawnZombiesCol(hitElement)
+	if isElementWithinColShape(hitElement,whetstone_safezone) then return end
 	if not getElementData(source,"isZombieSpawn") then return end
 	if getElementData(hitElement,"zombie") then return end
 	if ZedCounter >= gameplayVariables["maxzombiesglobal"] then 
@@ -109,7 +111,7 @@ function spawnZombiesCol(hitElement)
 		return 
 	end
 	local buildingClass = getElementData(source,"parent")
-	for i, chance in pairs(zombieBuildingSpawn) do
+	for i, chance in ipairs(zombieBuildingSpawn) do
 		if buildingClass == chance[1] then
 			if math.random() < chance[2] then
 				for i=1, gameplayVariables["maxzombiesperloot"] do
@@ -153,7 +155,7 @@ function determineZombieSpawnSystem()
 	if gameplayVariables["newzombiespawnsystem"] then
 		addEventHandler("onColShapeHit",root,spawnZombiesCol)
 	else
-		addEventHandler("createZomieForPlayer",root,spawnZombies)
+		addEventHandler("createZombieForPlayer",root,spawnZombies)
 	end
 end
 addEventHandler("onResourceStart",resourceRoot,determineZombieSpawnSystem)

@@ -79,7 +79,7 @@ spawnPositionsSelection = {
 
 }
 
-playerDynamicTable = {}
+playerJobTable = {}
 
 playerStatusTable = {
 	["alivetime"] = 0,
@@ -124,6 +124,46 @@ playerStatusTable = {
 	["bloodtype"] = "?",
 	["bloodtypediscovered"] = "?",
 	["isZombie"] = false,
+}
+
+playerSkillsTable = {
+	["XP"] = 0,
+	["SP"] = 0,
+	["usedSP"] = 0,
+	["conversionRate"] = 1.0,
+	["conversionXP"] = 20,
+	
+	["SoldierActive"] = false,
+	["SoldierDodge"] = 0,
+	["SoldierTough"] = 0,
+	["SoldierCrit"] = 0,
+	["SoldierDodgeChance"] = 0,
+	["SoldierToughChance"] = 0,
+	["SoldierCritChance"] = 0,
+
+	["MedicActive"] = false,
+	["MedicChance"] = 0,
+	["MedicProf"] = 0,
+	["MedicBorders"] = 0,
+	["MedicChanceChance"] = 0,
+	["MedicProfChance"] = 0,
+	["MedicBordersChance"] = 0,
+	
+	["ScavengerActive"] = false,
+	["ScavengerGood"] = 0,
+	["ScavengerCamouflage"] = 0,
+	["ScavengerShadow"] = 0,
+	["ScavengerGoodChance"] = 0,
+	["ScavengerCamouflageChance"] = 0,
+	["ScavengerShadowChance"] = 0,
+	
+	["EngineerActive"] = false,
+	["EngineerAmmo"] = 0,
+	["EngineerDuct"] = 0,
+	["EngineerAnalysis"] = 0,
+	["EngineerAmmoChance"] = 0,
+	["EngineerDuctChance"] = 0,
+	["EngineerAnalysisChance"] = 0,
 }
 
 -- FORMAT: {"item",DefaultValue}

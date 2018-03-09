@@ -29,9 +29,4 @@ gameplayVariables["headshotdamage_zombie"] = 1.5 -- Multiplier for damage on hea
 -- SOUND VOLUME
 gameplayVariables["ambiencesoundvolume"] = 0.8 -- How loud ambience sounds should be. Set to 0 to disable, max is 1.0. - DEFAULT: 0.8
 
--- PAIN SHAKE
-gameplayVariables["painshakesway"] = true -- Determines if camera should sway from left to right or shake violently - DEFAULT: true (= camera will sway)
-gameplayVariables["painshakelevel"] = 150 -- How much should the camera shake when in pain. DEFAULT: 150, value can be from 0 - 255
-
-
 outputDebugString("[DayZ] cfgClient loaded")

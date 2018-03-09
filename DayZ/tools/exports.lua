@@ -41,7 +41,7 @@ getGameplayVariable - Arguments: variable name. Returns: Value of the variable [
 
 -- [[ VERSION HANDLER ]]
 function getDayZVersion()
-	return "0.9.9.1a"
+	return "0.9.9.5a"
 end
 
 function getPlayerStatus(player,status)

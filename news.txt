@@ -1,15 +1,12 @@
-﻿[0.9.9.1a] - 2018-01-23
-ADDED: Several new export functions
-ADDED: Fade in/out when spawning
-ADDED: Wind to weather
-ADDED: Toggleable status icons (hotkey: F4)
-CHANGED: New login panel
-CHANGED: Status info has been moved to tables
-CHANGED: Increased backpack slots
-CHANGED: Disabled attacks with fists
-CHANGED: DayZ Admin Panel now supports changes to status info
-FIXED: Broken bones persisting after death
-FIXED: Broken bones not being curable with Morphine
-FIXED: Console spam for deprecated functions
-FIXED: Local chat not working when arma is disabled
-FIXED: Players spawning inside ground & and as CJ when trying to log in with username, but without correct password
+﻿[0.9.9.5a] - 2018-03-09
+ADDED: Skills
+ADDED: NPC's to Whetstone
+ADDED: Jobs/Quests in Whetstone
+CHANGED: Key for Journal: F1
+CHANGED: Animations: Comma, Period & Hyphen (, / . / -)
+CHANGED: Keys for GPS/Watch toggle: 1 / 2
+REMOVED: Map and GPS, reverted back to old GTA SA style
+REMOVED: Camera sway when in pain
+REMOVED: Scoreboard
+FIXED: First person mode in login screen
+FIXED: Weapons not appearing on right side of inventory when equipped

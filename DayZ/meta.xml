@@ -68,6 +68,7 @@
 	<script src="init/permissions/permissions_init.lua" type="server" />
 	<script src="init/animals/animals_init.lua" type="server" />
 	<script src="init/server/caching.lua" type="server" />
+	<script src="init/rpg/rpg_init.lua" type="server" />
 
 	<!-- handlers folder -->
 	<script src="handlers/world/client/tree_chop.lua" type="client" cache="false" />
@@ -452,6 +453,27 @@
 
 	<file src="gui/graphics/hdr/images/vignette1.dds" type="client" />
 	
+	<script src="gui/rpg/rpg_c.lua" type="client" cache="false"/>
+	<script src="gui/rpg/rpg_s.lua" type="server"/>
+	<file src="gui/rpg/icons/eng_ammo.png" />
+	<file src="gui/rpg/icons/eng_duct.png" />
+	<file src="gui/rpg/icons/eng_analysis.png" />
+	<file src="gui/rpg/icons/eng_icon.png" />
+	<file src="gui/rpg/icons/med_icon.png" />
+	<file src="gui/rpg/icons/med_prof.png" />
+	<file src="gui/rpg/icons/med_scndchance.png" />
+	<file src="gui/rpg/icons/med_wbor.png" />
+	<file src="gui/rpg/icons/scav_good.png" />
+	<file src="gui/rpg/icons/scav_icon.png" />
+	<file src="gui/rpg/icons/scav_camouflage.png" />
+	<file src="gui/rpg/icons/scav_shadow.png" />
+	<file src="gui/rpg/icons/sold_crit.png" />
+	<file src="gui/rpg/icons/sold_icon.png" />
+	<file src="gui/rpg/icons/sold_tough.png" />
+	<file src="gui/rpg/icons/sold_dodge.png" />
+	<file src="gui/rpg/icons/background.png" />
+	<file src="gui/rpg/icons/line.png" />
+	<file src="gui/rpg/icons/journal_page1.png" />
 	
 	<!-- BattlDayZ (V1) -->
 	<script src="battldayz/battldayz_server.lua" type="server" />
@@ -872,9 +894,12 @@
 	<file src="models/buildings/txd/tents2.txd" />
 	<file src="models/buildings/txd/teste.txd" />
 	<file src="models/buildings/txd/torre.txd" />
+	<file src="models/buildings/txd/tunnel.txd" />
 	
 	<script src="models/loadskins.lua" type="client" cache="false" />
 	<script src="models/weaponswitch.lua" type="client" cache="false" />
+	<script src="models/mapEditorScriptingExtension_s.lua" type="server"></script>
+    <script src="models/mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 	
 	<!-- sounds folder -->	
 	<script src="sounds/sounds.lua" type="client" cache="false" />

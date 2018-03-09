@@ -14,59 +14,60 @@ local button2 = dxCreateTexture ( ":DayZ/gui/gear/inventory/butclick.png" )
 local buttArrow = dxCreateTexture ( ":DayZ/gui/gear/inventory/buttArrow.png" )
 local buttArrowDown = dxCreateTexture ( ":DayZ/gui/gear/inventory/buttArrowDown.png" )
 local inventoryShow = false
-bX, bY = screenWidth/2,screenHeight/2
+local bX, bY = screenWidth/2,screenHeight/2
 
-inventory = {}
-inventoryWeap = {}
+local inventory = {}
+local inventoryWeap = {}
 inventoryWeap.main = {}
 inventoryWeap.addit = {}
 inventoryWeap.spec = {}
 inventoryWeap.ammo = {}
 
-foodInventory={}
-toolInventory={}
-itemsInventory={}
-ammoInventory={}
-gearName = ""
+local foodInventory = {}
+local toolInventory = {}
+local itemsInventory = {}
+local ammoInventory = {}
+local gearName = ""
 isCarryingWeapon = false
 isHoldingWeapon = false
 isOpeningBackpack = false
-loot = false
+local loot = false
 
-prevY = 0
-prevYPos = 0
-itOff = 0
-heightLabel = ((screenHeight/2-90)-5*(#inventory-9))-(screenHeight/2-235)
+local prevY = 0
+local prevYPos = 0
+local itOff = 0
+local heightLabel = ((screenHeight/2-90)-5*(#inventory-9))-(screenHeight/2-235)
 
 local clicked=false
-scrollLabelSelected = false
+local scrollLabelSelected = false
 
-mainWeaponSelection = false
-additWeaponSelection = false
-selectedMainWeapon = 0
-selectedAdditWeapon = 0
-selectedItemLabel = 0
-selectedItemLabelID = 0
-selectedAmmoLabelID = 0
-selectedToolLabelID = 0
-selectedSpecLabelID = 0
-rightItemLabelSelected = false
-ammoLabelSelected = false
-specLabelSelected = false
-toolLabelSelected = false
+local mainWeaponSelection = false
+local additWeaponSelection = false
+local selectedMainWeapon = 0
+local selectedAdditWeapon = 0
+local selectedItemLabel = 0
+local selectedItemLabelID = 0
+local selectedAmmoLabelID = 0
+local selectedToolLabelID = 0
+local selectedSpecLabelID = 0
+local rightItemLabelSelected = false
+local ammoLabelSelected = false
+local specLabelSelected = false
+local toolLabelSelected = false
 
-itemLabels = {}
-itemLabelsButtons ={}
-ammoLabelsButtons={}
-toolLabelsButtons={}
-rightItemLabelButtons = {}
-weaponLabelsButtons = {}
-weaponStatusLabelsButtons = {}
-itemLabelID = {}
+local itemLabels = {}
+local itemLabelsButtons ={}
+local ammoLabelsButtons={}
+local toolLabelsButtons={}
+local rightItemLabelButtons = {}
+local weaponLabelsButtons = {}
+local weaponStatusLabelsButtons = {}
+local itemLabelID = {}
 
-languageCode = getLocalization()["code"]
+language = "en_US"
 
 function checkTheLanguage()
+	languageCode = getLocalization()["code"]
 	if languageCode == "en_US" then
 		languageCode = "en_US"
 	elseif languageCode == "de" then
@@ -252,7 +253,7 @@ function placeItemsInInventory()
 		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Primary Weapon"] ) do
 			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
 				table.insert ( inventoryWeap.main, {weap[1],weap[3],weap[4],weap[5]} )
-				if getElementData(localPlayer, "currentweapon_1") == weap[1] then
+				if playerStatusTable[localPlayer]["currentweapon_1"] == weap[1] then
 					selectedMainWeapon = #inventoryWeap.main
 				end
 			end
@@ -267,7 +268,7 @@ function placeItemsInInventory()
 		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Secondary Weapon"] ) do
 			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
 				table.insert ( inventoryWeap.addit, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
-				if getElementData(localPlayer, "currentweapon_2") == weap[1] then
+				if playerStatusTable[localPlayer]["currentweapon_2"] == weap[1] then
 					selectedAdditWeapon = #inventoryWeap.addit
 				end
 			end
@@ -282,7 +283,7 @@ function placeItemsInInventory()
 		for i, weap in ipairs ( languageTextTable[languageCode]["Weapons"]["Specially Weapon"] ) do
 			if getElementData ( localPlayer, weap[1] ) and getElementData ( localPlayer, weap[1] ) >= 1 then
 				table.insert ( inventoryWeap.addit, {weap[1],weap[3],weap[4],weap[5],weap[6],weap[7],weap[8]} )
-				if getElementData(localPlayer, "currentweapon_2") == weap[1] then
+				if playerStatusTable[localPlayer]["currentweapon_2"] == weap[1] then
 					selectedAdditWeapon = #inventoryWeap.addit
 				end
 			end
@@ -436,9 +437,8 @@ function initInventory ()
 			addEventHandler( "onClientMouseLeave", testoLab, buttonLabelLeaved, false )
 			local numberInventory = math.random(0,4)
 			setSoundVolume(playSound (":DayZ/sounds/items/backpack_"..numberInventory..".ogg",false), .3)
-			triggerEvent("disableMenu",localPlayer)
-			triggerEvent("hideDebugMonitor",localPlayer)
-			triggerEvent("hideGPSOnInventoryOpen",localPlayer)
+			disableMenu()
+			toggleDebugMonitorOnInventory(false)
 			addEventHandler ( "onClientRender", root, renderDisplay )
 			
 			local backpackLabel = guiCreateLabel(bX+330,bY-250,38,97,"",false)
@@ -554,8 +554,11 @@ function initInventory ()
 				addEventHandler ( "onClientGUIClick", createdLabel, rightItemClicked, false )
 				table.insert ( toolLabelsButtons, createdLabel )
 			end
-			showCursor (true)
+			showCursor(true)
 			showChat(false)
+			
+			onClientJobCheckIfItemInInventory()
+			
 		else
 			closeInventory ()
 		end
@@ -565,8 +568,7 @@ end
 function closeInventory() 
 	showCursor ( false )
 	showChat(true)
-	triggerEvent("showDebugMonitor",localPlayer)
-	triggerEvent("showGPSOnInventoryClose",localPlayer)
+	toggleDebugMonitorOnInventory(true)
 	unbindKey ( 'mouse1', 'down', checkOnButton )
 	unbindKey ( 'mouse1', 'up', testoLabClick )
 	if isElement(testolab) then
@@ -1218,8 +1220,9 @@ function moveItemInInventory()
 				if not isToolbeltItem(itemName) then
 					if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then
 						if not playerMovedInInventory then
-							triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+							onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 							playerMovedInInventory = true
+							onClientJobCheckIfItemInInventory()
 							setTimer(function()
 								playerMovedInInventory = false
 							end, 700, 1)
@@ -1236,14 +1239,15 @@ function moveItemInInventory()
 					 setTimer(function()
 						 playerMovedInInventory = false
 					end, 700, 1)
-					triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+					onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 				end
 			elseif isHoldingWeapon then
 				if not isToolbeltItem(itemName) then
 					if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then
 						if not playerMovedInInventory then
-							triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+							onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 							playerMovedInInventory = true
+							onClientJobCheckIfItemInInventory()
 							setTimer(function()
 								playerMovedInInventory = false
 							end, 700, 1)
@@ -1260,14 +1264,15 @@ function moveItemInInventory()
 					 setTimer(function()
 						 playerMovedInInventory = false
 					end, 700, 1)
-					triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+					onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 				end
 			else
 				if not isToolbeltItem(itemName) then
 					if playerStatusTable[localPlayer]["CURRENT_Slots"] + getItemSlots(itemName) <= playerStatusTable[localPlayer]["MAX_Slots"] then
 						if not playerMovedInInventory then
-							triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+							onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 							playerMovedInInventory = true
+							onClientJobCheckIfItemInInventory()
 							setTimer(function()
 								playerMovedInInventory = false
 							end, 700, 1)
@@ -1281,10 +1286,11 @@ function moveItemInInventory()
 					end
 				else
 					playerMovedInInventory = true
+					onClientJobCheckIfItemInInventory()
 					 setTimer(function()
 						 playerMovedInInventory = false
 					end, 700, 1)
-					triggerEvent("onPlayerMoveItemInInventory", getLocalPlayer(), itemName, isPlayerInLoot())
+					onPlayerMoveItemInInventory(itemName,isPlayerInLoot())
 				end
 			end
 		end

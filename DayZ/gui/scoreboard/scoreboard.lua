@@ -189,5 +189,5 @@ function tabular(key, keyState, arguments)
 		isScoreboardOn = false
 	end
 end
-addCommandHandler("toggle",tabular)
-bindKey("tab","down","toggle","1")
+--addCommandHandler("toggle",tabular)
+--bindKey("tab","down","toggle","1")
