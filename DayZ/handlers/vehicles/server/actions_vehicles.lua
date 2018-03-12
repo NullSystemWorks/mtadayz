@@ -128,7 +128,13 @@ addEventHandler("repairVehicle",getRootElement(),repairVehicle)
 function fixVehicleDayZ(veh,player,name)
 	local scrap = getElementData(player,"Scrap Metal")
 	if scrap then
-		setElementHealth(veh,getElementHealth(veh)+200)
+		local repairHealth = 200
+		if playerSkillsTable[player] then
+			if playerSkillsTable[player]["EngineerDuctChance"] > 0 then
+				repairHealth = repairHealth+repairHealth*(playerSkillsTable[player]["EngineerDuctChance"]/100)
+			end
+		end
+		setElementHealth(veh,getElementHealth(veh)+repairHealth)
 		if getElementHealth(veh) >= 1000 then 
 			setElementHealth(veh,1000) 
 			fixVehicle (veh) 

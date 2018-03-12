@@ -197,6 +197,7 @@ function onPlayerMoveItemOutOFInventory (itemName,loot)
 	if loot and getElementData(loot,"itemloot") then
 		triggerServerEvent("refreshItemLoot",getRootElement(),loot,getElementData(loot,"parent"))
 	end
+	onClientJobCheckIfItemInInventory()
 end
 addEvent( "onPlayerMoveItemOutOFInventory", true )
 addEventHandler( "onPlayerMoveItemOutOFInventory", getRootElement(), onPlayerMoveItemOutOFInventory )
@@ -247,6 +248,16 @@ function onPlayerMoveItemInInventory(itemName,loot)
 		itemPlus = 1
 	elseif itemName == "Czech Backpack" then
 		itemPlus = 1
+	end
+	if playerSkillsTable[localPlayer] then
+		if playerSkillsTable[localPlayer]["ScavengerGoodChance"] > 0 then
+			local additionalItemChance = math.random(0,100)
+			if additionalItemChance <= playerSkillsTable[localPlayer]["ScavengerGoodChance"] then
+				if playerStatusTable[localPlayer]["CURRENT_Slots"] + (getItemSlots(itemName)*2) <= playerStatusTable[localPlayer]["MAX_Slots"] then
+					itemPlus = itemPlus+1
+				end
+			end
+		end
 	end
 	if not getElementData(localPlayer, itemName) then
 		setElementData(localPlayer, itemName, itemPlus)
@@ -480,6 +491,7 @@ function playerUseItem(itemName,itemInfo)
 			end
 		end
 	end
+	onClientJobCheckIfItemInInventory()
 end
 
 function onWeaponFireDeductAmmo(weapon)
@@ -493,6 +505,14 @@ function onWeaponFireDeductAmmo(weapon)
 			ammoName = getWeaponAmmoFromName(weapon_2)
 		end
 		if getElementData(localPlayer,ammoName) > 0 then
+			if playerSkillsTable[localPlayer] then
+				if playerSkillsTable[localPlayer]["EngineerAmmoChance"] > 0 then
+					local ammoChance = math.random()
+					if ammoChance <= playerSkillsTable[localPlayer]["EngineerAmmoChance"] then
+						return
+					end
+				end
+			end
 			setElementData(localPlayer,ammoName,getElementData(localPlayer,ammoName)-1)
 		end
 	end

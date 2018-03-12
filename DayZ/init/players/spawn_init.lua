@@ -56,52 +56,10 @@ function spawnDayZPlayer(player)
 		setElementData(player,"logedin",true)
 		
 		playerStatusTable[player] = {}
-		
-		playerStatusTable[player] = {
-		["alivetime"] = 0,
-		["daysalive"] = 0,
-		["skin"] = 0,
-		["gender"] = "male",
-		["bleeding"] = 0,
-		["sepsis"] = false,
-		["unconscious"] = false,
-		["hoursalive"] = 0,
-		["achievements"] = toJSON({}),
-		["MAX_Slots"] = 8,
-		["CURRENT_Slots"] = 0,
-		["Weapon_Slots"] = 0,
-		["Item_Slots"] = 1,
-		["Backpack_Slots"] = 8,
-		["Backpack_Item_Slots"] = 8,
-		["Backpack_Weapon_Slots"] = 1,
-		["isBandit"] = false,
-		["blood"] = 12000,
-		["food"] = 100,
-		["thirst"] = 100,
-		["temperature"] = 37,
-		["currentweapon_1"] = false,
-		["currentweapon_2"] = false,
-		["currentweapon_3"] = false,
-		["bleeding"] = 0,
-		["brokenbone"] = false,
-		["fracturedArms"] = false,
-		["fracturedLegs"] = false,
-		["pain"] = false,
-		["cold"] = false,
-		["infection"] = false,
-		["unconscious"] = false,
-		["sepsis"] = false,
-		["humanity"] = 2500,
-		["killedZombies"] = 0,
-		["headshots"] = 0,
-		["murders"] = 0,
-		["killedBandits"] = 0,
-		["hasFuel"] = false,
-		["bloodtype"] = "?",
-		["bloodtypediscovered"] = "?",
-		["isZombie"] = false,
-		}
-		
+		initDefaultStatusTable(player)
+		initDefaultSkillsTable(player)
+		initDefaultJobTable(player)
+
 		for i,data in ipairs(playerDataTable) do
 			setElementData(player,data[1],data[2])
 		end
@@ -182,11 +140,13 @@ function spawnDayZPlayer(player)
 		triggerEvent("onPlayerChangeClothes", player)
 	end
 	setElementData(player,"spawnedzombies",0)
+	sendPlayerStatusInfoToClient()
+	triggerClientEvent(player,"onPlayerUpdateSkillsToJournal",player,playerSkillsTable[player])
 end
 
 function killVehicleOccupantsOnExplode()
 	for i,player in pairs(getVehicleOccupants(source)) do
-		triggerEvent("kilLDayZPlayer",player)
+		triggerEvent("killDayZPlayer",player)
 	end
 end
 addEventHandler("onVehicleExplode", getRootElement(), killVehicleOccupantsOnExplode)
@@ -220,7 +180,7 @@ function checkBuggedAccount()
 end
 setTimer(checkBuggedAccount,90000,0)
 
-function kilLDayZPlayer(killer,headshot)
+function killDayZPlayer(killer,headshot)
 	pedCol = false
 	local account = getPlayerAccount(source)
 	if not account then return end
@@ -345,5 +305,5 @@ function kilLDayZPlayer(killer,headshot)
 	end,gameplayVariables["playerRespawnCountdown"] * 1000,1,source)
 	sendPlayerStatusInfoToClient()
 end
-addEvent("kilLDayZPlayer",true)
-addEventHandler("kilLDayZPlayer",getRootElement(),kilLDayZPlayer)
+addEvent("killDayZPlayer",true)
+addEventHandler("killDayZPlayer",getRootElement(),killDayZPlayer)

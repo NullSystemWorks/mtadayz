@@ -26,9 +26,9 @@ end)
 
 function checkVersion()
 	if (checkType == "stable") then
-		fetchRemote("https://api.github.com/repos/ciber96/mtadayz/releases/latest",onVersionReturn)
+		fetchRemote("https://api.github.com/repos/NullSystemWorks/mtadayz/releases/latest",onVersionReturn)
 	elseif (checkType == "beta") then
-		fetchRemote("https://api.github.com/repos/ciber96/mtadayz/releases",onVersionReturn)
+		fetchRemote("https://api.github.com/repos/NullSystemWorks/mtadayz/releases",onVersionReturn)
 	end
 end
 
@@ -113,7 +113,7 @@ end
 
 
 ------------------------------------ AUTOUPDATER
-local lastCommit = "c10d90f46e7b38a12b082ac97acdd71b8ea1bc79"
+local lastCommit = "2d84554733e82de50746b7c95883729900d1d205"
 local commits = nil
 
 addEventHandler("onResourceStop",resourceRoot,function()
@@ -135,7 +135,7 @@ end)
 
 function init(player, cmd)
 	if (hasObjectPermissionTo(player, "command.banPlayer")) then
-		outputChatBox("[DayZ] Starting Update.... Check server console for more informations.", player)
+		outputChatBox("[DayZ] Starting Update... Check server console for more informations.", player)
 		if (checkType == "stable") then
 			fetchRemote("https://api.github.com/repositories/82748264/commits?sha=stable",detectChanges)
 		elseif (checkType == "beta") then
@@ -167,9 +167,10 @@ function initUpdate(changesCount)
 		outputServerLog("[DayZ] Starting download...")
 		for i,all in ipairs(commits) do
 			if (checkType == "stable") then
-				fetchRemote("https://api.github.com/repos/ciber96/mtadayz/commits/"..all.."?sha=stable",startDownload,"",false,all)
+				
+				fetchRemote("https://api.github.com/repos/NullSystemWorks/mtadayz/commits/"..all.."?sha=stable",startDownload,"",false,all)
 			elseif (checkType == "beta") then
-				fetchRemote("https://api.github.com/repos/ciber96/mtadayz/commits/"..all,startDownload,"",false,all)
+				fetchRemote("https://api.github.com/repos/NullSystemWorks/mtadayz/commits/"..all,startDownload,"",false,all)
 			end
 		end
 	else
@@ -187,7 +188,7 @@ function startDownload(json, err, commitSHA)
 				if all["status"] == "removed" then
 					download("",0,all["filename"],"removed")
 				else
-					fetchRemote("https://raw.githubusercontent.com/ciber96/mtadayz/"..commitSHA.."/"..all["filename"],download,"",false,all["filename"],all["status"], i, #files)
+					fetchRemote("https://raw.githubusercontent.com/NullSystemWorks/mtadayz/"..commitSHA.."/"..all["filename"],download,"",false,all["filename"],all["status"], i, #files)
 				end
 			end
 		end

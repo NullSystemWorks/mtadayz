@@ -9,6 +9,7 @@
 ]]
 
 function zombieDayZDamage(attacker,weapon,bodypart,loss)
+	if getElementData(source,"isNPC") then setElementHealth(source,100) return end
 	if getElementData(source,"zombie") then
 		if attacker and getElementType(attacker) == "player" then
 			damage = 100
@@ -37,11 +38,34 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 							setPedHeadless(source,false)
 						end
 					end
+					if playerSkillsTable[attacker] then
+						if playerSkillsTable[attacker]["SoldierCritChance"] > 0 then
+							local critChance = math.random(0,100)
+							if critChance < playerSkillsTable[attacker]["SoldierCritChance"] then
+								damage = damage*2
+							end
+						end
+					end
 					setElementData(source,"blood",getElementData(source,"blood")-math.floor(damage))
 					local soundnumber =  math.random(0,6)
 					playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
 					if getElementData(source,"blood") <= 0 then
 						triggerServerEvent("onZombieGetsKilled",source,attacker,headshot)
+						if playerJobTable[attacker] then
+							if playerJobTable[attacker]["jobType"] == "Extermination" then
+								local jobX,jobY,jobZ = getElementPosition(attacker)
+								if getDistanceBetweenPoints3D(jobX,jobY,jobZ,playerJobTable[attacker]["x"],playerJobTable[attacker]["y"],playerJobTable[attacker]["z"]) <= 125 then
+									playerJobTable[attacker]["killsRequired"] = playerJobTable[attacker]["killsRequired"]-1
+									playerJobTable[attacker]["killsRequired"] = math.max(playerJobTable[attacker]["killsRequired"],0)
+									if playerJobTable[attacker]["killsRequired"] >= 0 then
+										triggerServerEvent("onJobSetRequiredKills",attacker,playerJobTable[attacker]["killsRequired"])
+									end
+									if playerJobTable[attacker]["killsRequired"] == 0 then
+										onClientJobCompletedByPlayer(playerJobTable[attacker]["jobType"])
+									end
+								end
+							end
+						end
 					end
 				elseif weapon == 0 then
 					setElementHealth(source,100)

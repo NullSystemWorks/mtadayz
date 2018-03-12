@@ -197,7 +197,7 @@ guiLabelSetHorizontalAlign(NewsWindow.label["changeloglabel"], "center", false)
 
 NewsWindow.button["close"] = guiCreateButton(0.96, 0.02, 0.03, 0.05, "x", true, NewsWindow.staticimage["newswindow"])
 
-NewsWindow.label["info"] = guiCreateLabel(0.44, 0.16, 0.54, 0.16, "MTA: DayZ\nOriginal Creator: Marwin\nCurrent Team: NullSystemWorks\n\nVersion: 0.9.9.2a", true, NewsWindow.staticimage["newswindow"])
+NewsWindow.label["info"] = guiCreateLabel(0.44, 0.16, 0.54, 0.16, "MTA: DayZ\nOriginal Creator: Marwin\nCurrent Team: NullSystemWorks\n\nVersion: 0.9.9.5a", true, NewsWindow.staticimage["newswindow"])
 guiLabelSetHorizontalAlign(NewsWindow.label["info"], "left", true)
 
 NewsWindow.label["contributorslabel"] = guiCreateLabel(0.44, 0.78, 0.39, 0.06, "Contributors", true, NewsWindow.staticimage["newswindow"])
@@ -205,7 +205,6 @@ NewsWindow.label["contributorstop"] = guiCreateLabel(0.44, 0.84, 0.39, 0.06, "",
 NewsWindow.label["contributors"] = guiCreateLabel(0, 0, 5.00, 1, "Loading contributors...", true, NewsWindow.label["contributorstop"])
 
 guiSetVisible(NewsWindow.staticimage["newswindow"],false)
-guiSetVisible(NewsWindow.staticimage["contributors"],false)
 
 
 function showStartWindow()
@@ -274,7 +273,6 @@ function clickPanelButton(button, state)
 					guiBringToFront(StartStory.staticimage["invis"])
 				elseif info == "showNews" then
 					guiSetVisible(NewsWindow.staticimage["newswindow"],true)
-					guiSetVisible(NewsWindow.staticimage["contributors"],true)
 					guiSetVisible(StartWindow.staticimage["continuebutton"] ,false)
 					guiSetVisible(StartWindow.staticimage["startbutton"] ,false)
 					guiSetVisible(StartWindow.staticimage["newsbutton"] ,false)
@@ -348,8 +346,6 @@ function hideNewsWindow(button,state)
 		guiSetVisible(marwinButtons["showLogin"],true)
 		guiSetVisible(marwinButtons["showRegister"],true)
 		guiSetVisible(marwinButtons["showNews"],true)
-		
-		guiSetVisible(NewsWindow.staticimage["contributors"],false)
 
 	end
 end

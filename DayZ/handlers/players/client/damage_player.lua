@@ -46,7 +46,9 @@ function disableCameraOnSwitch ( prevSlot, newSlot )
 			toggleControl("fire",false)
 		end
 	else
-		toggleControl ( "fire", true )
+		if not isPlayerInsideSafeZone then
+			toggleControl ( "fire", true )
+		end
 	end
 end
 addEventHandler ("onClientPlayerWeaponSwitch",root,disableCameraOnSwitch)

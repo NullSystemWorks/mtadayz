@@ -79,6 +79,53 @@ function initDefaultStatusTable(player)
 	}
 end
 
+function initDefaultSkillsTable(player)
+	playerSkillsTable[player] = {
+		["XP"] = 0,
+		["SP"] = 0,
+		["usedSP"] = 0,
+		["conversionRate"] = 1.0,
+		["conversionXP"] = 20,
+		
+		["SoldierActive"] = false,
+		["SoldierDodge"] = 0,
+		["SoldierTough"] = 0,
+		["SoldierCrit"] = 0,
+		["SoldierDodgeChance"] = 0,
+		["SoldierToughChance"] = 0,
+		["SoldierCritChance"] = 0,
+
+		["MedicActive"] = false,
+		["MedicChance"] = 0,
+		["MedicProf"] = 0,
+		["MedicBorders"] = 0,
+		["MedicChanceChance"] = 0,
+		["MedicProfChance"] = 0,
+		["MedicBordersChance"] = 0,
+		
+		["ScavengerActive"] = false,
+		["ScavengerGood"] = 0,
+		["ScavengerCamouflage"] = 0,
+		["ScavengerShadow"] = 0,
+		["ScavengerGoodChance"] = 0,
+		["ScavengerCamouflageChance"] = 0,
+		["ScavengerShadowChance"] = 0,
+		
+		["EngineerActive"] = false,
+		["EngineerAmmo"] = 0,
+		["EngineerDuct"] = 0,
+		["EngineerAnalysis"] = 0,
+		["EngineerAmmoChance"] = 0,
+		["EngineerDuctChance"] = 0,
+		["EngineerAnalysisChance"] = 0,
+	}
+	outputDebugString("Default Skills Table initialized!")
+end
+
+function initDefaultJobTable(player)
+	playerJobTable[player] = {}
+end
+
 function playerLogin(username, pass, player)
 	if client then player = client end
 	local playerID,x,y,z,skin,hoursalive,isAdmin,isSupporter;
@@ -179,14 +226,24 @@ function playerLogin(username, pass, player)
 		end
 		
 		initDefaultStatusTable(player)
+		initDefaultSkillsTable(player)
+		initDefaultJobTable(player)
 		
 		local statusData = fromJSON(getAccountData(account,"PlayerStatus"))
 		for i, data in pairs(playerStatusTable[player]) do
 			local status = statusData[i]
 			playerStatusTable[player][i] = status
 		end
-		
 		hoursalive = getAccountData(account, "player.hoursalive")
+		
+		local jobData = fromJSON(getAccountData(account,"PlayerCurrentJob"))
+		for i, job in pairs(jobData) do
+			local job = jobData[i]
+			playerJobTable[player][i] = job
+		end
+		triggerClientEvent(player,"onClientJobLoad",player,playerJobTable[player])
+		
+		dbQuery(loadSkillsFromDB, {player,username}, skillsDB, "SELECT skillsData FROM skills WHERE playerName = ?",username)
 		
 	
 		--[[
@@ -288,6 +345,7 @@ function playerLogin(username, pass, player)
 	setElementData(player,"supporter",isSupporter)
 	triggerClientEvent(player, "onClientPlayerDayZLogin", player)
 	sendPlayerStatusInfoToClient()
+	triggerClientEvent(player,"onPlayerUpdateSkillsToJournal",player,playerSkillsTable[player])
 	
 	if gameplayVariables["armachat"] then
 		triggerClientEvent(player,"showChatBox",player,true)
@@ -325,6 +383,11 @@ function playerRegister(username, pass, player)
 	end
 	
 	initDefaultStatusTable(player)
+	initDefaultSkillsTable(player)
+	initDefaultJobTable(player)
+	
+	dbQuery(loadSkillsFromDB, {player,username}, skillsDB, "SELECT skillsData FROM skills WHERE playerName = ?",username)
+	--dbExec(skillsDB, "INSERT INTO skills (playerName,skillsData) VALUES(?,?)",username,toJSON(playerSkillsTable[player]))
 	
 	determineBloodType(player)
 	addBackpackToPlayer(playerStatusTable[player]["MAX_Slots"])
@@ -408,6 +471,7 @@ function playerRegister(username, pass, player)
 		triggerEvent("onPlayerChangeClothes", player)
 	end
 	sendPlayerStatusInfoToClient()
+	triggerClientEvent(player,"onPlayerUpdateSkillsToJournal",player,playerSkillsTable[player])
 	
 	if gameplayVariables["armachat"] then
 		triggerClientEvent(player,"showChatBox",player,true)
@@ -453,13 +517,31 @@ function savePlayerAccount() -- Save in the database
 						tablePlayerStatus[k] = status
 					end
 				end
+				
+				local tablePlayerSkills = {}
+				if playerSkillsTable[source] then
+					for k, skills in pairs(playerSkillsTable[source]) do
+						tablePlayerSkills[k] = skills
+					end
+				end
+				
+				local tablePlayerJob = {}
+				if playerJobTable[source] then
+					for k, job in pairs(playerJobTable[source]) do
+						tablePlayerJob[k] = job
+					end
+				end
+					
 					
 				setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
 				setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
+				setAccountData(account,"PlayerCurrentJob",toJSON(tablePlayerJob))
 				setAccountData(account,"isDead",isDead)
 				setAccountData(account,"last_x",x)
 				setAccountData(account,"last_y",y)
 				setAccountData(account,"last_z",z)
+				dbExec(skillsDB, "DELETE FROM skills WHERE playerName=?",getPlayerName(source))
+				dbExec(skillsDB, "INSERT INTO skills (playerName,skillsData) VALUES(?,?)",getPlayerName(source),toJSON(playerSkillsTable[source]))
 			end
 			outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
 		end
@@ -502,9 +584,17 @@ function saveAllAccounts() -- Save in the database
 				for k, status in pairs(playerStatusTable[player]) do
 					tablePlayerStatus[k] = status
 				end
+
+				local tablePlayerJob = {}
+				if playerJobTable[player] then
+					for k, job in pairs(playerJobTable[player]) do
+						tablePlayerJob[k] = job
+					end
+				end
 				
 				setAccountData(account,"PlayerInventory",toJSON(tablePlayerInventory))
 				setAccountData(account,"PlayerStatus",toJSON(tablePlayerStatus))
+				setAccountData(account,"PlayerCurrentJob",toJSON(tablePlayerJob))
 				setAccountData(account,"isDead",getElementData(player,"isDead"))
 				setAccountData(account,"last_x",x)
 				setAccountData(account,"last_y",y)
@@ -515,6 +605,28 @@ function saveAllAccounts() -- Save in the database
 	outputServerLog("[DayZ] All accounts have been saved.")
 end
 addEventHandler ( "onResourceStop", getResourceRootElement(getThisResource()), saveAllAccounts)
+
+function loadSkillsFromDB(query,player,username)
+	if query then
+		local poll = dbPoll(query,-1)
+		local skillsData = {}
+		if #poll > 0 then
+			for i, data in pairs(poll) do
+				for k, skills in pairs(data) do
+					skillsData = fromJSON(skills)			
+				end
+			end
+			for i, data in pairs(playerSkillsTable[player]) do
+				local skills = skillsData[i]
+				playerSkillsTable[player][i] = skills
+			end
+			triggerClientEvent(player,"onPlayerUpdateSkillsToJournal",player,playerSkillsTable[player])
+		else
+			dbExec(skillsDB, "INSERT INTO skills (playerName,skillsData) VALUES(?,?)",username,toJSON(playerSkillsTable[player]))
+		end
+	end
+end
+
 
 --[[
 We determine the blood type using real world statistics

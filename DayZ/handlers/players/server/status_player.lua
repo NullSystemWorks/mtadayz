@@ -9,7 +9,6 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-local dataInfoTable = {}
 function sendPlayerStatusInfoToClient()
 	for i, player in ipairs(getElementsByType("player")) do
 		if getElementData(player,"logedin") then
@@ -60,7 +59,16 @@ function regenerateBlood()
 						bloodRegen = math.round((1+10*(12000-blood)/12000))
 					end
 				end
+				if playerSkillsTable[player] then
+					if playerSkillsTable[player]["MedicProfChance"] > 0 then
+						bloodRegen = bloodRegen+bloodRegen*(playerSkillsTable[player]["MedicProfChance"]/100)
+					end
+					
+				end
 				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]+bloodRegen
+				if playerStatusTable[player]["blood"] > 12000 then
+					playerStatusTable[player]["blood"] = 12000
+				end
 			end
 		end
 	end
@@ -83,7 +91,7 @@ function processBleeding()
 				playerStatusTable[player]["blood"] = playerStatusTable[player]["blood"]-bloodLossPerSec
 				if playerStatusTable[player]["blood"] <= 0 then
 					if not getElementData(player,"isDead") then
-						triggerEvent("kilLDayZPlayer",player,false,false)
+						triggerEvent("killDayZPlayer",player,false,false)
 						setElementData(player,"isDead",true)
 					end
 				end

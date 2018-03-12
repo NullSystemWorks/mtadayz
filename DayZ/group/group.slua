@@ -974,8 +974,10 @@ end
 	
 function setCorrectElementData()
 	for ind, plr in pairs(getElementsByType("player")) do
-		if (not GAC[GetAccount(plr)]) then
-			setElementData(plr, "Group", false)
+		if getElementData(plr,"logedin") then
+			if (not GAC[GetAccount(plr)]) then
+				setElementData(plr, "Group", false)
+			end
 		end
 	end
 end

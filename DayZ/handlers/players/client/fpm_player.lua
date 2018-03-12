@@ -24,7 +24,7 @@ local recentlyMoved = false
 local Xdiff,Ydiff
 
 function toggleFPS()
-	if not getElementData(localPlayer, "blood") then return end
+	if not getElementData(localPlayer,"logedin") then return end
 	weapon = getPedWeapon(localPlayer)
 	if weapon ~= 34 then
 		if (not isEnabled) then

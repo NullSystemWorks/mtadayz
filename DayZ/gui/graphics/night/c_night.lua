@@ -18,20 +18,10 @@ local shaderList = {}
 local fading = false
 local clone
 
-nightStatus = true
-
-function onPlayerEnabledGoggles()
-	nightStatus = false
+local nightStatus = true
+function togglePlayerGoggles(state)
+	nightStatus = not state
 end
-addEvent("onPlayerEnabledGoggles",true)
-addEventHandler("onPlayerEnabledGoggles",root,onPlayerEnabledGoggles)
-
-
-function onPlayerDisabledGoggles()
-	nightStatus = true
-end
-addEvent("onPlayerDisabledGoggles",true)
-addEventHandler("onPlayerDisabledGoggles",root,onPlayerDisabledGoggles)
 
 -- Feel free to add more removables.
 local removables = {
@@ -75,7 +65,7 @@ function night_init()
 		end
 	end
 
-	if gameplayVariables["enablenight"] == true then
+	if gameplayVariables["enablenight"] then
 		nightTimer = setTimer(night_check, gameplayVariables["nightCheckInterval"], 0)
 	end
 
@@ -83,7 +73,7 @@ function night_init()
 end
 
 function night_check()
-	if nightStatus == true then
+	if nightStatus then
 		local hours, minutes = getTime()
 		if hours >= 5 and hours < 12 then
 			fading = false

@@ -110,5 +110,4 @@ function removeAttachedOnDeath ()
 		elementWeaponBack[source] = false
 	end	
 end
-addEvent("kilLDayZPlayer",true)
-addEventHandler("kilLDayZPlayer",getRootElement(),removeAttachedOnDeath)
+addEventHandler("killDayZPlayer",getRootElement(),removeAttachedOnDeath)

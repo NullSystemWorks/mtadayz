@@ -8,27 +8,21 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-waitList = {}
-JournalTable = {
-    label = {},
-    staticimage = {}
-}
-
 function panel(state)
-	if not JournalTable.staticimage[1] then
-		JournalTable.staticimage[1] = guiCreateStaticImage(0.00, -0.15, 0.31, 0.14, "gui/achievements/icons/bg_achievements.png", true)
-		guiSetAlpha(JournalTable.staticimage[1], 1.00)
-		guiBringToFront(JournalTable.staticimage[1])
+	if not JournalTable.image[1] then
+		JournalTable.image[11] = guiCreateStaticImage(0.00, -0.15, 0.31, 0.14, "gui/achievements/icons/bg_achievements.png", true)
+		guiSetAlpha(JournalTable.image[11], 1.00)
+		guiBringToFront(JournalTable.image[11])
 
-		JournalTable.staticimage[2] = guiCreateStaticImage(0.04, 0.16, 0.29, 0.67, "gui/gear/items/white.png", true, JournalTable.staticimage[1])
-		JournalTable.label[1] = guiCreateLabel(0.34, 0.16, 0.62, 0.17, "Achievement Unlocked", true, JournalTable.staticimage[1])
-		guiSetFont(JournalTable.label[1], "default-bold-small")
-		guiLabelSetHorizontalAlign(JournalTable.label[1], "center", false)
-		JournalTable.label[2] = guiCreateLabel(0.34, 0.33, 0.99, 0.50, "", true, JournalTable.staticimage[1])
-		guiLabelSetHorizontalAlign(JournalTable.label[2], "left", false)
-		guiLabelSetVerticalAlign(JournalTable.label[2], "center")
+		JournalTable.image[12] = guiCreateStaticImage(0.04, 0.16, 0.29, 0.67, "gui/gear/items/white.png", true, JournalTable.image[11])
+		JournalTable.label[30] = guiCreateLabel(0.34, 0.16, 0.62, 0.17, "Achievement Unlocked", true, JournalTable.image[11])
+		guiSetFont(JournalTable.label[30], "default-bold-small")
+		guiLabelSetHorizontalAlign(JournalTable.label[30], "center", false)
+		JournalTable.label[31] = guiCreateLabel(0.34, 0.33, 0.99, 0.50, "", true, JournalTable.image[1])
+		guiLabelSetHorizontalAlign(JournalTable.label[31], "left", false)
+		guiLabelSetVerticalAlign(JournalTable.label[31], "center")
 	else
-		guiSetVisible(JournalTable.staticimage[1],state)
+		guiSetVisible(JournalTable.image[11],state)
 	end
 end
 
@@ -37,13 +31,13 @@ local yaux = -0.15
 local xaux = 0.00
 function move()
 	yaux = yaux+0.01
-	guiSetPosition(JournalTable.staticimage[1],xac,yaux,true)
+	guiSetPosition(JournalTable.image[11],xac,yaux,true)
 	if yaux >= 0.00 then
 		removeEventHandler("onClientRender",getRootElement(),move)
 		setTimer(function()
 			function moverparaolado()
 				xaux = xaux-0.01
-				guiSetPosition(JournalTable.staticimage[1],xaux,yaux,true)
+				guiSetPosition(JournalTable.image[11],xaux,yaux,true)
 				if xaux <= -0.22 then
 					yaux = yac
 					xaux = xac
@@ -63,10 +57,10 @@ end
 
 function getAchievements()
 	if playerStatusTable[localPlayer]["achievements"] then
-		achievementsunlocked = playerStatusTable[localPlayer]["achievements"]
+		achievementsunlocked = fromJSON(playerStatusTable[localPlayer]["achievements"])
 	end
 	if not achievementsunlocked then
-		playerStatusTable[localPlayer]["achievements"] = {}
+		playerStatusTable[localPlayer]["achievements"] = toJSON({})
 		achievementsunlocked = {}
 	end
 	return achievementsunlocked
@@ -80,9 +74,9 @@ function giveAchievement(ID)
 		if ID then
 			local achievementsunlocked = getAchievements()
 			achievementsunlocked[ID] = true
-			playerStatusTable[localPlayer]["achievements"] = toJSON(achievementsunlocked)
-			guiSetText(JournalTable.label[2],achievements[ID]["name"])
-			guiStaticImageLoadImage(JournalTable.staticimage[2],pathToImg..achievements[ID]["image"])
+			playerStatusTable[localPlayer]["achievements"] = fromJSON(achievementsunlocked)
+			guiSetText(JournalTable.label[31],achievements[ID]["name"])
+			guiStaticImageLoadImage(JournalTable.image[12],pathToImg..achievements[ID]["image"])
 			addEventHandler("onClientRender",getRootElement(),move)
 		end
 	end
@@ -204,10 +198,11 @@ end
 
 function loadList()  -- Needs optimizing (urgent)
 	local achievunl = getAchievements()
+	playSound(":DayZ/sounds/status/journal.wav",false)
 	guiSetVisible(JournalTable.image[9],true)
 	guiSetVisible(JournalTable.image[1],false)
 	guiSetVisible(JournalTable.image[2],false)
-	guiSetVisible(JournalTable.image[3],false)
+	guiSetVisible(Skills.staticimage[1],false)
 	local y1 = 0.00
 	local ind = 0
 	local aunlocked, aachiev = tablelength(achievunl),tablelength(achievements)
