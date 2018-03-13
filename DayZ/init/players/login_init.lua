@@ -236,11 +236,15 @@ function playerLogin(username, pass, player)
 		end
 		hoursalive = getAccountData(account, "player.hoursalive")
 		
-		local jobData = fromJSON(getAccountData(account,"PlayerCurrentJob"))
-		for i, job in pairs(jobData) do
+		local jsonJobData = getAccountData(account,"PlayerCurrentJob")
+		local jobData = {}
+		if jsonJobData then
+			jobData = fromJSON(jsonJobData)
+			for i, job in pairs(jobData) do
 			local job = jobData[i]
 			playerJobTable[player][i] = job
 		end
+		
 		triggerClientEvent(player,"onClientJobLoad",player,playerJobTable[player])
 		
 		dbQuery(loadSkillsFromDB, {player,username}, skillsDB, "SELECT skillsData FROM skills WHERE playerName = ?",username)
