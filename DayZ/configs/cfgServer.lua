@@ -36,7 +36,6 @@ gameplayVariables["explodedvehiclesrespawn"] = 1800000 -- When should exploded v
 gameplayVariables["watervehiclerespawn"] = 1800000 -- When should vehicles which are submerged in water respawn? - DEFAULT: 1800000 (= 30 Min)
 gameplayVariables["zombiedamage"] = 650 -- Damage done by zombies - DEFAULT: 650
 
-
 -- EXPERIMENTAL FEATURES
 gameplayVariables["newzombiespawnsystem"] = false -- Experimental feature, zombies only spawn near loot - DEFAULT: false
 gameplayVariables["zombiespawnradius"] = 20 -- If newzombiespawnsystem is set to true, determines the radius where zombies spawn around loot - DEFAULT: 20
@@ -48,23 +47,6 @@ gameplayVariables["MySQL_user"] = "root" -- MySQL user
 gameplayVariables["MySQL_pass"] = "pass" -- MySQL pass
 gameplayVariables["MySQL_DB"]   = "dayz" -- MySQL Database name
 gameplayVariables["secret_key"]   = "^^XmakP9*31z{}ç';'" -- WARNING TO SERVERS OWNERS: CHANGE IT (before letting players register) TO ANY OTHER SECURE STRING
-
-
--- BACKPACK SETTINGS | Use common sense when changing the weapon slots! Nobody likes backpacks with 3 item slots and 500 weapon slots.
-gameplayVariables["assaultpack_slots"] = 12 -- Slots for Assault Pack (ACU) - DEFAULT: 12
-gameplayVariables["assaultpack_gunslots"] = 1 -- Weapon slots for Assault Pack (ACU) - DEFAULT: 1
-gameplayVariables["czechvest_slots"] = 13 -- Slots for Czech Vest Pouch - DEFAULT: 13
-gameplayVariables["czechvest_gunslots"] = 1 -- Weapon slots for Czech Vest Pouch - DEFAULT: 1
-gameplayVariables["alice_slots"] = 16 -- Slots for ALICE Pack - DEFAULT: 16
-gameplayVariables["alice_gunslots"] = 1 -- Weapon slots for ALICE Pack - DEFAULT: 1
-gameplayVariables["survival_slots"] = 17 -- Slots for Survival ACU - DEFAULT: 17
-gameplayVariables["survival_gunslots"] = 1 -- Weapon slots for Survival ACU - DEFAULT: 1
-gameplayVariables["britishassault_slots"] = 18 -- Slots for British Assault Pack - DEFAULT: 18
-gameplayVariables["britishassault_gunslots"] = 1 -- Weapon slots for British Assault Pack - DEFAULT: 1
-gameplayVariables["coyote_slots"] = 24 -- Slots for Backpack (Coyote) - DEFAULT: 24
-gameplayVariables["coyote_gunslots"] = 2 -- Weapon slots for Backpack (Coyote) - DEFAULT: 2
-gameplayVariables["czech_slots"] = 30 -- Slots for Czech Backpack - DEFAULT: 30
-gameplayVariables["czech_gunslots"] = 6 -- Weapon slots for Czech Backpack - DEFAULT: 6
 	
 -- SERVER BACKUP
 gameplayVariables["backupenabled"] = true -- Whether or not backup should be enabled. Backup = saves all tents, accounts & vehicles. - DEFAULT: true - Set to false to disable backup.

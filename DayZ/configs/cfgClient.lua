@@ -18,9 +18,7 @@ gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage dealt when d
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
 gameplayVariables["nightCheckInterval"] = 300000 -- Interval (in milliseconds) for client checking if it is currently night - DEFAULT: 300000
 gameplayVariables["armachat"] = false -- Activates/deactivates ArmA II style chatbox - DEFAULT: false
-gameplayVariables["debugmonitorenabled"] = true --Debug Monitor available to the players? DEFAULT: false
-gameplayVariables["oldmap"] = true -- Activates/deactivates the normal map provided by MTA - DEFAULT: true
-gameplayVariables["oldgps"] = true -- Activates/deactivates the normal GPS provided by GTA - DEFAULT: true
+gameplayVariables["debugmonitorenabled"] = true --Debug Monitor available to the players? DEFAULT: true
 
 -- HEADSHOT MULTIPLIER
 gameplayVariables["headshotdamage_player"] = 1.5 -- Multiplier for damage on head shot (player). DEFAULT: 1.5, EXAMPLE: damage*1.5
