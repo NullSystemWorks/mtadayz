@@ -241,8 +241,9 @@ function playerLogin(username, pass, player)
 		if jsonJobData then
 			jobData = fromJSON(jsonJobData)
 			for i, job in pairs(jobData) do
-			local job = jobData[i]
-			playerJobTable[player][i] = job
+				local job = jobData[i]
+				playerJobTable[player][i] = job
+			end
 		end
 		
 		triggerClientEvent(player,"onClientJobLoad",player,playerJobTable[player])
