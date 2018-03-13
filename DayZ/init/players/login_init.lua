@@ -238,9 +238,9 @@ function playerLogin(username, pass, player)
 		
 		local jsonJobData = getAccountData(account,"PlayerCurrentJob")
 		local jobData = {}
-			if jsonJobData then
-				jobData = fromJSON(jsonJobData)
-				for i, job in pairs(jobData) do
+		if jsonJobData then
+			jobData = fromJSON(jsonJobData)
+			for i, job in pairs(jobData) do
 				local job = jobData[i]
 				playerJobTable[player][i] = job
 			end
