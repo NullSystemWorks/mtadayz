@@ -17,6 +17,15 @@ font[1] = guiCreateFont(":DayZ/fonts/needhelp.ttf",30)
 font[2] = guiCreateFont(":DayZ/fonts/needhelp.ttf",17)
 font[3] = guiCreateFont(":DayZ/fonts/needhelp.ttf",15)
 
+JournalTable = {
+		window = {},
+		image = {},
+		label = {},
+		memo = {},
+		button = {},
+		scrollpane = {},
+	}
+
 function showJournal()
 	if getElementData(localPlayer,"logedin") then
 		if not isJournalOpen then
@@ -118,7 +127,7 @@ function writeDeselected (number)
 end
 
 function initJournal()
-	JournalTable = {
+	--[[JournalTable = {
 		window = {},
 		image = {},
 		label = {},
@@ -126,6 +135,7 @@ function initJournal()
 		button = {},
 		scrollpane = {},
 	}
+	]]
 	
 	JournalTable.image[1] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true) -- Journal Entry
 	JournalTable.image[2] = guiCreateStaticImage(0.00, 0.06, 1.00, 0.90, ":DayZ/gui/journal/images/journal_page1.png", true) -- Info/Statistics

@@ -546,6 +546,8 @@ function onPlayerTargetPickup (theElement)
 					name = getElementData(source,"vehicle_name")
 				else
 					name = "Tent"
+					triggerServerEvent("onPlayerToggleRestAtTent",localPlayer,true,localPlayer)
+					outputDebugString("Tent entered")
 				end
 				showClientMenuItem("Vehicle",name,getElementData(source,"parent"))
 				setElementData(getLocalPlayer(),"currentCol",source)
@@ -564,20 +566,24 @@ function onPlayerTargetPickup (theElement)
 			return
 		end
 	showClientMenuItem("stop")
-end	
+	end	
 end
 addEventHandler("onClientColShapeHit",getRootElement(),onPlayerTargetPickup)
 
 function onPlayerTargetPickup (theElement)
-if theElement == getLocalPlayer() then
-	local players = getElementsWithinColShape ( source, "player" )
-	if players == getLocalPlayer() then --[[return ]]end
-	showClientMenuItem("stop")
-	setElementData(getLocalPlayer(),"loot",false)
-	setElementData(getLocalPlayer(),"currentCol",false)
-	setNewbieInfo (false,"","")
-	isInFirePlace = false
-end
+	if theElement == getLocalPlayer() then
+		local players = getElementsWithinColShape ( source, "player" )
+		if players == getLocalPlayer() then --[[return ]]end
+		showClientMenuItem("stop")
+		setElementData(getLocalPlayer(),"loot",false)
+		setElementData(getLocalPlayer(),"currentCol",false)
+		setNewbieInfo (false,"","")
+		isInFirePlace = false
+		if getElementData(source,"tent") then
+			triggerServerEvent("onPlayerToggleRestAtTent",localPlayer,false,localPlayer)
+			outputDebugString("Left tent")
+		end
+	end
 end
 addEventHandler("onClientColShapeLeave",getRootElement(),onPlayerTargetPickup)
 
@@ -778,7 +784,26 @@ if ( keyState == "down" ) then
 		end
 		if itemName == "deadreason" then
 			local col = getElementData(getLocalPlayer(),"currentCol")
-			outputChatBox(getElementData(col,"deadreason"),255,255,255,true)
+				local deadH = getElementData(col,"deadTimeHour")
+				local deadM = getElementData(col,"deadTimeMinute")
+				local deathText = ""
+			if getElementData(localPlayer,"Watch") > 0 then
+				deathText = "It's finally dead. Given the state of decay, I'd say it died at "..deadH..":"..deadM.."."
+			else
+				local checkH,checkM = getTime()
+				if checkH == deadH then
+					deathText = "It's finally dead. I'd say it died just now, but I'm not sure."
+				elseif checkH-deadH == 1 then
+					deathText = "It's finally dead. I'd say it died approximately 1 hour ago."
+				elseif checkH-deadH == 3 or checkH-deadH == 4 or checkH-deadH == 5 then
+					deathText = "It's finally dead. Looks like it's been killed 3 to 5 hours ago."
+				elseif checkH-deadH >= 6 then
+					deathText = "I can't tell if this is a zombie, as it seems as if it's been lying here for 6 or more hours."
+				elseif checkH-deadH < 0 then
+					deathText = "This thing has decomposed beyond recognition. It's probably older than 24 hours."
+				end
+			end
+			outputChatBox(tostring(deathText),255,255,255,true)
 			if getElementData(col,"killedBy") and getElementData(col,"killedBy") == localPlayer then
 				setElementData(localPlayer,"murders",getElementData(localPlayer,"murders")+1)
 				setElementData(col,"killedBy",nil)

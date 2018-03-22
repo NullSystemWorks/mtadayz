@@ -192,6 +192,27 @@ function setPlayerCold()
 end
 setTimer(setPlayerCold,40000,0)
 
+local tentRestTimer 
+function toggleRestAtTent(status,player)
+	if status then
+		if player then
+			if getElementData(player,"logedin") then
+				if playerStatusTable[player]["blood"] < 12000 then
+					if not isTimer(tentRestTimer) then
+						tentRestTimer = setTimer(function(player)
+							playerStatusTable[player]["blood"] = math.min(playerStatusTable[player]["blood"]+25,12000)
+						end,10000,0,player)
+					end
+				end
+			end
+		end
+	else
+		if isTimer(tentRestTimer) then killTimer(tentRestTimer) end
+	end
+end
+addEvent("onPlayerToggleRestAtTent",true)
+addEventHandler("onPlayerToggleRestAtTent",root,toggleRestAtTent)
+
 
 local backpackLoadTable = {}
 local ammoLoadTable = {}

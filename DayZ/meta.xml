@@ -557,8 +557,6 @@
 	<file src="models/players/dff/bandit1_female.dff" />
 	<file src="models/players/txd/bandit2_female.txd" />
     <file src="models/players/dff/bandit2_female.dff" />
-    <file src="models/players/txd/standard_female.txd" />
-    <file src="models/players/dff/standard_female.dff" />
     <file src="models/players/txd/hero_male.txd" />
     <file src="models/players/dff/hero_male.dff" />
 	<file src="models/players/txd/army_male.txd" />

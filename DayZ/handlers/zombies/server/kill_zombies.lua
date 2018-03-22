@@ -33,7 +33,10 @@ function killZombie(killer,headshot)
 	end	
 	local hours,minutes = getTime()
 	local loot_table = ""
-	setElementData(pedCol,"deadreason","Looks like it's finally dead. Estimated time of death: "..hours..":"..minutes)
+	local deathText = ""
+	setElementData(pedCol,"deadTimeHour",hours)
+	setElementData(pedCol,"deadTimeMinute",minutes)
+	setElementData(pedCol,"deadreason",true)
 	for i, id in ipairs(ZombieLoot) do
 		if skin == id[1] then
 			loot_table = tostring(id[2])

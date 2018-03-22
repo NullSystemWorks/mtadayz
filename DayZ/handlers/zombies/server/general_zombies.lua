@@ -30,8 +30,16 @@ function spawnZombies(x,y,z)
 		end
 	end	
 	if getElementData(source,"spawnedzombies")+3 <= gameplayVariables["playerzombies"] then
+		local zombieSpawnAmount = 0
 		--local viralzombierand = math.random(0,50)
-		for i = 1, gameplayVariables["amountzombies"] do
+		if playerJobTable[source] then
+			if playerJobTable[source]["jobType"] == "Extermination" then
+				zombieSpawnAmount = gameplayVariables["amountzombies"]*2
+			else
+				zombieSpawnAmount = gameplayVariables["amountzombies"]
+			end
+		end
+		for i = 1, zombieSpawnAmount do
 			local x,y,z = getElementPosition(source)
 			counter = counter+1
 			local number1 = math.random(-20,20)
@@ -114,7 +122,15 @@ function spawnZombiesCol(hitElement)
 	for i, chance in ipairs(zombieBuildingSpawn) do
 		if buildingClass == chance[1] then
 			if math.random() < chance[2] then
-				for i=1, gameplayVariables["maxzombiesperloot"] do
+				local zombieSpawnAmount = 0
+				if playerJobTable[source] then
+					if playerJobTable[source]["jobType"] == "Extermination" then
+						zombieSpawnAmount = gameplayVariables["maxzombiesperloot"]*2
+					else
+						zombieSpawnAmount = gameplayVariables["maxzombiesperloot"]
+					end
+				end
+				for i=1, zombieSpawnAmount do
 					local number1 = math.random(-gameplayVariables["zombiespawnradius"],gameplayVariables["zombiespawnradius"])
 					local number2 = math.random(-gameplayVariables["zombiespawnradius"],gameplayVariables["zombiespawnradius"])
 					randomZskin = math.random ( 1, table.getn ( ZombiePedSkins ) )

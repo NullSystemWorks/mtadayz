@@ -44,14 +44,11 @@ PBX_Spawns = gameplayVariables["pbxspawns"]
 tentSpawns = gameplayVariables["tentsspawns"]
 
 addEventHandler("onResourceStart",getResourceRootElement(getThisResource()), function()
-	local vehicleManager = getAccount("vehicleManager","ds4f9$")
-	if not vehicleManager then
-		addAccount("vehicleManager","ds4f9$")
-	end
 	vehicledatabase = dbConnect("sqlite", "database/vehicles.db","","","share=0")
 	tentdatabase = dbConnect("sqlite", "database/tents.db","","","share=0")
 	local vehicle_table = dbExec(vehicledatabase, "CREATE TABLE IF NOT EXISTS vehicles (model INT, Veh_Health FLOAT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, fuel FLOAT, Tire_inVehicle INT, Engine_inVehicle INT, Parts_inVehicle INT, Scrap_inVehicle INT, Glass_inVehicle INT, Rotary_inVehicle INT, vehicle_name TEXT, ColSize FLOAT, ID INT, initial_X FLOAT, initial_Y FLOAT, initial_Z FLOAT)")
 	local tent_table = dbExec(tentdatabase, "CREATE TABLE IF NOT EXISTS tents (model INT, last_x FLOAT, last_y FLOAT, last_z FLOAT, last_rX FLOAT, last_rY FLOAT, last_rZ FLOAT, MAX_Slots INT, objectscale FLOAT, ColsphereSize FLOAT, Owner TEXT)")
+	local vehicleLoader = dbExec(vehicledatabase,"CREATE TABLE IF NOT EXISTS vehicleLoader (hasLoaded TEXT)")
 	if vehicledatabase and tentdatabase then
 		outputServerLog("[DayZ] CONNECTED TO VEHICLE DATABASE.")
 		outputServerLog("[DayZ] CONNECTED TO TENTS DATABASE.")
@@ -63,6 +60,7 @@ end)
 
 theItems = {}
 theTentItems = {}
+local vehicleLoaderStatus
 
 function saveVehiclesToDB()
     dbExec(vehicledatabase, "DROP TABLE vehicles")
@@ -158,6 +156,9 @@ function loadVehiclesFromDB(q)
     if (q) then
         local p = dbPoll( q, -1 )
         if (#p > 0) then
+			dbExec(vehicledatabase, "DROP TABLE vehicleLoader")
+			dbExec(vehicledatabase,"CREATE TABLE IF NOT EXISTS vehicleLoader (hasLoaded TEXT)")
+			dbExec(vehicledatabase, "INSERT INTO vehicleLoader (hasLoaded) VALUES(?)", tostring(true))
             for _, d in pairs (p) do
 				for i,item in ipairs(vehicleDataTable) do
 					if d[item[1]] then
@@ -172,6 +173,7 @@ end
 
 function loadVehiclesOnServerStart()
 	dbQuery(loadVehiclesFromDB, { }, vehicledatabase, "SELECT * FROM vehicles")
+	dbQuery(getVehicleLoaderStatus,{},vehicledatabase,"SELECT * FROM vehicleLoader")
 	outputServerLog("[DayZ] VEHICLES HAVE BEEN LOADED.")
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadVehiclesOnServerStart)
@@ -243,9 +245,23 @@ function loadTentsOnServerStart()
 end
 addEventHandler("onResourceStart", getResourceRootElement(getThisResource()), loadTentsOnServerStart)
 
+function getVehicleLoaderStatus(q)
+	if q then
+		local p = dbPoll(q,-1)
+		if #p > 0 then
+			for i, data in pairs(p) do
+				vehicleLoaderStatus = data["hasLoaded"]
+			end
+			if not vehicleLoaderStatus then
+				spawnDayZVehicles()
+			end
+		else
+			spawnDayZVehicles()
+		end
+	end
+end
 
 function spawnDayZVehicles()
-if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),"serverhasloadvehicles") then return end
 	for i,veh in ipairs(vehicleAddonsInfo) do
 		local modelID = veh[1]
 		local tires = veh[2]
@@ -291,13 +307,12 @@ if getAccount("vehicleManager") and getAccountData(getAccount("vehicleManager"),
 				setElementData(vehCol,"fuel",math.random(0,fuel))
 				setElementID(vehCol,tostring(v_counter))
 				setElementHealth(veh,math.random(300,1000))
-				setAccountData(getAccount("vehicleManager"),"serverhasloadvehicles",true)
 				exports.DayZ:saveLog("Vehicle "..getVehicleName(veh).." has been created (ID: "..getElementID(vehCol)..")\r\n","debug")
 			end
 		end
 	end
+	dbExec(vehicledatabase, "INSERT INTO vehicleLoader (hasLoaded) VALUES(?)", tostring(true))
 end
-setTimer(spawnDayZVehicles,10000,1)
 
 --[[
 -- Not needed anymore, keeping it just in case

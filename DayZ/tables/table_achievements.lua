@@ -35,14 +35,14 @@ achievements = {
 		["name"] = "Survival Of The Fittest I",
 		["description"] = "Kill 1 Zombie",
 		["items"] = {{"MRE",1},{"Bandage",3}},
-		["conditions"] = {{"zombieskilled","greater",0}}, -- zombieskilled > 0 (1 or more)
+		["conditions"] = {{"killedZombies","greater",0}}, -- zombieskilled > 0 (1 or more)
 		["image"] = "achiev1.png"
 	},
 	["zombies02"] = {
 		["name"] = "Survival Of The Fittest II",
 		["description"] = "Kill 50 Zombies",
 		["items"] = {{"MRE",1},{"Bandage",3}},
-		["conditions"] = {{"zombieskilled","greater",49}},
+		["conditions"] = {{"killedZombies","greater",49}},
 		["image"] = "achiev1.png"
 	},
 	["ATimeRecordist"] = {
@@ -63,28 +63,28 @@ achievements = {
 		["name"] = "What You Are In The Dark",
 		["description"] = "Become a bandit",
 		["items"] = {{"MRE",1},{"Black Bandana (H)",1}},
-		["conditions"] = {{"bandit","equal",true}},
+		["conditions"] = {{"isBandit","equal",true}},
 		["image"] = "achiev1.png"
 	},
 	["hero"] = {
 		["name"] = "He Who Fights Monsters I",
 		["description"] = "Kill 1 Bandit",
 		["items"] = {{"Compound Crossbow",1},{"MRE",1},{"Bolt",5}},
-		["conditions"] = {{"banditskilled","greater",0}},
+		["conditions"] = {{"killedBandits","greater",0}},
 		["image"] = "achiev1.png"
 	},
 	["hero2"] = {
 		["name"] = "He Who Fights Monsters II",
 		["description"] = "Kill 10 Bandits",
 		["items"] = {{"G36K CAMO",1},{"5.56x45mm Cartridge",30}},
-		["conditions"] = {{"banditskilled","greater",9}},
+		["conditions"] = {{"killedBandits","greater",9}},
 		["image"] = "achiev1.png"
 	},
 	["hero3"] = {
 		["name"] = "He Who Fights Monsters III",
 		["description"] = "Kill 50 Bandits",
 		["items"] = {{"SVD Dragunov",1},{"7.62x54mm Cartridge",10}},
-		["conditions"] = {{"banditskilled","greater",49}},
+		["conditions"] = {{"killedBandits","greater",49}},
 		["image"] = "achiev1.png"
 	},
 	["litterbug"] = {
