@@ -8,7 +8,8 @@
 #-----------------------------------------------------------------------------#
 ]]
 
-function addBackpackToPlayer(slots)
+function addBackpackToPlayer(player,slots)
+	local source = player
 	local x,y,z = getElementPosition(source)
 	local rx,ry,rz = getElementRotation(source)
 	if slots == 8 then

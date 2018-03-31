@@ -395,7 +395,7 @@ function playerRegister(username, pass, player)
 	--dbExec(skillsDB, "INSERT INTO skills (playerName,skillsData) VALUES(?,?)",username,toJSON(playerSkillsTable[player]))
 	
 	determineBloodType(player)
-	addBackpackToPlayer(playerStatusTable[player]["MAX_Slots"])
+	addBackpackToPlayer(player,playerStatusTable[player]["MAX_Slots"])
 	
 	if not gameplayVariables["newclothingsystem"] then
 		playerStatusTable[player]["skin"] = 73

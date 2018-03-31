@@ -66,7 +66,7 @@ function spawnDayZPlayer(player)
 		
 		determineBloodType(player)
 		setPlayerFracturedBones(player,false)
-		addBackpackToPlayer(playerStatusTable[player]["MAX_Slots"])
+		addBackpackToPlayer(player,playerStatusTable[player]["MAX_Slots"])
 		
 		if not gameplayVariables["newclothingsystem"] then
 			playerStatusTable[player]["skin"] = 73
