@@ -309,7 +309,7 @@ function playerLogin(username, pass, player)
 		elseif backpackSlots == gameplayVariables["czech_slots"] then
 			backpackType = "Czech Backpack"
 		end
-		triggerEvent("onPlayerEquipBackpack",player,backpackType)
+		onPlayerEquipBackpack(backpackType)
 	end
 	
 

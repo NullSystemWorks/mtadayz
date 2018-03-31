@@ -29,7 +29,13 @@ function killZombie(killer,headshot)
 	setElementData(pedCol,"deadman",true)
 	setElementData(pedCol,"MAX_Slots",12)
 	if killer then
-		playerStatusTable[killer]["killedZombies"] = playerStatusTable[killer]["killedZombies"]+1
+		if isElement(killer) then
+			if getElementType(killer) == "player" then
+				if playerStatusTable[killer] then
+					playerStatusTable[killer]["killedZombies"] = playerStatusTable[killer]["killedZombies"]+1
+				end
+			end
+		end
 	end	
 	local hours,minutes = getTime()
 	local loot_table = ""
