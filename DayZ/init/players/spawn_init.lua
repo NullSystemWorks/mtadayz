@@ -200,7 +200,7 @@ function killDayZPlayer(killer,headshot)
 			setElementData(pedCol,"parent",ped)
 			setElementData(pedCol,"playername",getPlayerName(source))
 			setElementData(pedCol,"deadman",true)
-			setElementData(pedCol,"MAX_Slots",playerDataTable[source]["MAX_Slots"])
+			setElementData(pedCol,"MAX_Slots",playerStatusTable[source]["MAX_Slots"])
 			if elementBackpack[source] then
 				detachElementFromBone(elementBackpack[source])
 				destroyElement(elementBackpack[source])

@@ -29,6 +29,7 @@ local ambiencesounds = {
 }
 
 local ambienceOn = true
+local ambiencesound
 
 function playAmbienceMusic()
 	if getElementData(localPlayer,"logedin") then

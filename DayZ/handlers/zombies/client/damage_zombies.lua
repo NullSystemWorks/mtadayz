@@ -9,7 +9,7 @@
 ]]
 
 function zombieDayZDamage(attacker,weapon,bodypart,loss)
-	if getElementData(source,"isNPC") then setElementHealth(source,100) return end
+	if getElementData(source,"isNPC") then cancelEvent() return end
 	if getElementData(source,"zombie") then
 		if attacker and getElementType(attacker) == "player" then
 			damage = 100
@@ -80,22 +80,28 @@ function zombieDayZDamage(attacker,weapon,bodypart,loss)
 			end
 			if weapon then
 				if weapon == 63 or weapon == 51 or weapon == 19 then
+					local soundnumber =  math.random(0,6)
+					playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
 					setElementHealth(source,100)
 					setElementData(source,"blood",0)
 					if getElementData(source,"blood") <= 0 then
 						triggerServerEvent("onZombieGetsKilled",source,attacker)
 					end
 				elseif weapon == 49 then
-					damage = 700
+					local soundnumber =  math.random(0,6)
+					playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
+					damage = 0
 					setElementHealth(source,100)
-					setElementData(source,"blood",getElementData(source,"blood")-damage)
+					setElementData(source,"blood",damage)
 					if getElementData(source,"blood") <= 0 then
 						triggerServerEvent("onZombieGetsKilled",source,attacker,headshot)
 					end
 				elseif weapon == 50 then
+					local soundnumber =  math.random(0,6)
+					playSound(":DayZ/sounds/zombies/hit_"..soundnumber..".ogg",false)
 					damage = 0
 					setElementHealth(source,100)
-					setElementData(source,"blood",getElementData(source,"blood")-damage)
+					setElementData(source,"blood",damage)
 					if getElementData(source,"blood") <= 0 then
 						triggerServerEvent("onZombieGetsKilled",source,attacker,headshot)
 					end

@@ -487,12 +487,28 @@ function prohibitWeaponsInSafeZone(hitElement)
 	if getElementType(hitElement) == "player" then
 		triggerClientEvent(hitElement,"onPlayerToggleWeaponsInSafeZone",hitElement,false)
 	end
+	if getElementType(hitElement) == "vehicle" then
+		local vehicleOccupants = getVehicleOccupants(hitElement)
+		if vehicleOccupants then
+			for i, players in pairs(vehicleOccupants) do
+				triggerClientEvent(players,"onPlayerToggleWeaponsInSafeZone",players,false)
+			end
+		end
+	end
 end
 addEventHandler("onColShapeHit",whetstone_safezone,prohibitWeaponsInSafeZone)
 
 function enableWeaponsOutsideSafeZone(leaveElement)
 	if getElementType(leaveElement) == "player" then
 		triggerClientEvent(leaveElement,"onPlayerToggleWeaponsInSafeZone",leaveElement,true)
+	end
+	if getElementType(leaveElement) == "vehicle" then
+		local vehicleOccupants = getVehicleOccupants(leaveElement)
+		if vehicleOccupants then
+			for i, players in pairs(vehicleOccupants) do
+				triggerClientEvent(players,"onPlayerToggleWeaponsInSafeZone",players,true)
+			end
+		end
 	end
 end
 addEventHandler("onColShapeLeave",whetstone_safezone,enableWeaponsOutsideSafeZone)
@@ -551,6 +567,23 @@ function onJobTakeRequiredItem(item,value)
 end
 addEvent("onJobTakeRequiredItem",true)
 addEventHandler("onJobTakeRequiredItem",root,onJobTakeRequiredItem)
+
+function returnNPCToOldPosition()
+	for i, npc in ipairs(getElementsByType("ped")) do
+		if getElementData(npc,"isNPC") then
+			for k, spawnpos in ipairs(jobsSpawnPosTable) do
+				if getElementModel(npc) == spawnpos[2] then
+					local maxDistance = 45
+					local x,y,z = getElementPosition(npc)
+					if getDistanceBetweenPoints3D(x,y,z,spawnpos[3],spawnpos[4],spawnpos[5]) >= maxDistance then
+						setElementPosition(npc,spawnpos[3],spawnpos[4],spawnpos[5])
+					end
+				end
+			end
+		end
+	end
+end
+setTimer(returnNPCToOldPosition,10000,0) -- 600000
 
 
 			

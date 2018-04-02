@@ -173,6 +173,7 @@ function onDayZPlayerDamage(attacker,weapon,bodypart,loss)
 		end
 		triggerClientEvent(client,"onPlayerDamageShader",client)
 	elseif weapon == 63 or weapon == 51 or weapon == 19 then
+		if isElementWithinColShape(client,whetstone_safezone) then return end
 		if not getElementData(client,"isDead") then
 			playerStatusTable[client]["blood"] = 0
 		end

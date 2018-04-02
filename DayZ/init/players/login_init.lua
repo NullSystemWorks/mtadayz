@@ -292,26 +292,7 @@ function playerLogin(username, pass, player)
 	setElementData(playerCol,"player",true)
 	
 	local backpackSlots = playerStatusTable[player]["MAX_Slots"]
-	local backpackType = ""
-	if backpackSlots > 8 then
-		if backpackSlots == gameplayVariables["assaultpack_slots"] then
-			backpackType = "Assault Pack (ACU)"
-		elseif backpackSlots == gameplayVariables["czechvest_slots"] then
-			backpackType = "Czech Vest Pouch"
-		elseif backpackSlots == gameplayVariables["alice_slots"] then
-			backpackType = "ALICE Pack"
-		elseif backpackSlots == gameplayVariables["survival_slots"] then
-			backpackType = "Survival ACU"
-		elseif backpackSlots == gameplayVariables["britishassault_slots"] then
-			backpackType = "British Assault Pack"
-		elseif backpackSlots == gameplayVariables["coyote_slots"] then
-			backpackType = "Backpack (Coyote)"
-		elseif backpackSlots == gameplayVariables["czech_slots"] then
-			backpackType = "Czech Backpack"
-		end
-		onPlayerEquipBackpack(backpackType)
-	end
-	
+	addBackpackToPlayer(player,backpackSlots)
 
 	if not playerStatusTable[player]["bloodtype"] then
 		determineBloodType(player)
