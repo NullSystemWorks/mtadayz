@@ -1064,19 +1064,21 @@ function renderDisplay()
 	end
 	
 	local whatBackpack = playerStatusTable[localPlayer]["MAX_Slots"]
-	if whatBackpack == 12 then
+	if whatBackpack == 8 then
+		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/patrol.png")
+	elseif whatBackpack == gameplayVariables["assaultpack_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/acu.png")
-	elseif whatBackpack == 13 then
+	elseif whatBackpack == gameplayVariables["czechvest_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/czechpouch.png")
-	elseif whatBackpack == 16 then
+	elseif whatBackpack == gameplayVariables["alice_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/alice.png")
-	elseif whatBackpack == 17 then
+	elseif whatBackpack == gameplayVariables["survival_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/survival.png")
-	elseif whatBackpack == 18 then
+	elseif whatBackpack == gameplayVariables["britishassault_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/britishpack.png")
-	elseif whatBackpack == 24 then
+	elseif whatBackpack == gameplayVariables["coyote_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/coyote.png")
-	elseif whatBackpack == 30 then
+	elseif whatBackpack == gameplayVariables["czech_slots"] then
 		dxDrawImage(bX+180,bY-250,96,96,":DayZ/gui/gear/icons/czech.png")
 	end
 	

@@ -40,6 +40,7 @@ end
 --addEventHandler ("onElementDataChange", root, addBackpackToPlayer)
 
 function backpackRemoveQuit ()
+	if getElementData(source,"isDead") then return end
 	if elementBackpack[source] then
 		detachElementFromBone(elementBackpack[source])
 		destroyElement(elementBackpack[source])

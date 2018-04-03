@@ -531,8 +531,11 @@ function savePlayerAccount() -- Save in the database
 			end
 			outputServerLog("[DayZ] Player account "..getAccountName(account).." has been saved.")
 		end
-		if getElementData(source,"logedin") then
-			destroyElement(getElementData(source,"playerCol"))
+		if isElement(source) then
+			if getElementData(source,"logedin") then
+				if isDead then return end
+				destroyElement(getElementData(source,"playerCol"))
+			end
 		end
 		setElementData(source,"logedin",false)
 	end

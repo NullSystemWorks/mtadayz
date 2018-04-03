@@ -21,6 +21,7 @@ addEvent("onSpawnSelectionEnabled",true)
 addEventHandler("onSpawnSelectionEnabled",root,onSpawnSelectionEnabled)
 
 function spawnDayZPlayer(player)
+	if not isElement(player) then return end
 	if not gameplayVariables["spawnselection"] then
 		local number = math.random(table.size(spawnPositions))
 		spawnX,spawnY,spawnZ = spawnPositions[number][1],spawnPositions[number][2],spawnPositions[number][3]

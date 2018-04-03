@@ -142,7 +142,7 @@ elementBackpack = {}
 function onPlayerEquipBackpack(itemName)
 	local backpack_item = 0
 	local backpack_weapons = 0
-	if elementBackpack[source] and playerStatusTable[source]["MAX_Slots"] ~= 8 then
+	if elementBackpack[source] and isElement(elementBackpack[source]) then
 		detachElementFromBone(elementBackpack[source])
 		destroyElement(elementBackpack[source])
 		elementBackpack[source] = false

@@ -116,7 +116,7 @@ function repairVehicle (veh)
 		setElementData(veh,"repairer",source)
 		setElementData(source,"repairingvehicle",veh)
 		triggerClientEvent(source,"onPlayerActionPlaySound",source,"repair")
-		setPedAnimation (source,"SCRATCHING","sclng_r",-1,true)
+		setPedAnimation (source,"SCRATCHING","sclng_r",(1000-health)*120,false)
 		triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You started to repair "..name,0,255,0)
 	else
 		triggerClientEvent (source, "displayClientInfo", source,"Vehicle","You need Scrap Metal to repair a vehicle!",255,0,0)

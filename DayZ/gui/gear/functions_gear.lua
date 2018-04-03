@@ -448,46 +448,74 @@ function playerUseItem(itemName,itemInfo)
 		triggerServerEvent("onPlayerTransfuseBlood",localPlayer)
 	elseif itemInfo == "Equip Backpack" then
 		if itemName == "Assault Pack (ACU)" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["assaultpack_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["assaultpack_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["assaultpack_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["assaultpack_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "Czech Vest Pouch" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["czechvest_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["czechvest_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["czechvest_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["czechvest_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "ALICE Pack" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["alice_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["alice_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["alice_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["alice_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "Survival ACU" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["survival_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["survival_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["survival_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["survival_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "British Assault Pack" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["britishassault_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["britishassault_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["britishassault_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["britishassault_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "Backpack (Coyote)" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["coyote_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["coyote_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["coyote_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["coyote_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		elseif itemName == "Czech Backpack" then
-			if playerStatusTable[localPlayer]["MAX_Slots"] <= gameplayVariables["czech_slots"] then
+			if playerStatusTable[localPlayer]["MAX_Slots"] == gameplayVariables["czech_slots"] then
+				startRollMessage2("Backpack","You have that backpack already!",255,0,0)
+				return
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] < gameplayVariables["czech_slots"] then
 				triggerServerEvent("onPlayerEquipBackpack",localPlayer,itemName)
-			else
+			elseif playerStatusTable[localPlayer]["MAX_Slots"] > gameplayVariables["czech_slots"] then
 				startRollMessage2("Backpack","This backpack is too small.",255,0,0)
+				return
 			end
 		end
 	end
