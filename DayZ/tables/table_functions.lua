@@ -29,149 +29,23 @@ end
 
 -- // Players // --
 function getWeaponAmmoFromID(weaponID)
-	for i,weaponData in ipairs(weaponAmmoTable["others"]) do
-		if weaponID == weaponData[2] then
-			return weaponData[1],weaponData[2]
-		end
-	end
-	for i,weaponData in ipairs(weaponAmmoTable["11.43x23mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "11.43x23mm Cartridge",weaponData[2]
+    for key,value in pairs(weaponAmmoTable) do 
+        for j,weaponData in ipairs(weaponAmmoTable[key]) do
+            if weaponID == weaponData[2] then
+                return key,weaponData[2]
+            end
         end
     end
-	for i,weaponData in ipairs(weaponAmmoTable["9x18mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "9x18mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9x19mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "9x19mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable[".303 British Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return ".303 British Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.45x39mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "5.45x39mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x39mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "7.62x39mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x51mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "7.62x51mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.56x45mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "5.56x45mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable[".308 Winchester Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return ".308 Winchester Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x54mm Cartridge"]) do
-        if weaponID == weaponData[2] then
-            return "9.3x62mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["1866 Slug"]) do
-        if weaponID == weaponData[2] then
-            return "1866 Slug",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["12 Gauge Pellet"]) do
-        if weaponID == weaponData[2] then
-            return "12 Gauge Pellet",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["Bolt"]) do
-		if weaponID == weaponData[2] then
-			return "Bolt",weaponData[2]
-		end
-	end
 end
 
 function getWeaponAmmoFromName(weaponName)
-    for i,weaponData in ipairs(weaponAmmoTable["others"]) do
-		if weaponName == weaponData[1] then
-			return weaponData[1],weaponData[2]
-		end
-	end
-	for i,weaponData in ipairs(weaponAmmoTable["11.43x23mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "11.43x23mm Cartridge",weaponData[2]
+    for key,value in pairs(weaponAmmoTable) do 
+        for j,weaponData in ipairs(weaponAmmoTable[key]) do
+            if weaponName == weaponData[1] then
+                return key,weaponData[2]
+            end
         end
     end
-	for i,weaponData in ipairs(weaponAmmoTable["9x18mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9x18mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["9x19mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "9x19mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable[".303 British Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return ".303 British Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.45x39mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "5.45x39mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x39mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "7.62x39mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x51mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "7.62x51mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["5.56x45mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "5.56x45mm Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable[".308 Winchester Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return ".308 Winchester Cartridge",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["7.62x54mm Cartridge"]) do
-        if weaponName == weaponData[1] then
-            return "7.62x54mm Cartridge",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["1866 Slug"]) do
-        if weaponName == weaponData[1] then
-            return "1866 Slug",weaponData[2]
-        end
-    end
-    for i,weaponData in ipairs(weaponAmmoTable["12 Gauge Pellet"]) do
-        if weaponName == weaponData[1] then
-            return "12 Gauge Pellet",weaponData[2]
-        end
-    end
-	for i,weaponData in ipairs(weaponAmmoTable["Bolt"]) do
-		if weaponName == weaponData[1] then
-			return "Bolt",weaponData[2]
-		end
-	end
 end
 
 function getWeaponDamage(weapon,attacker)
