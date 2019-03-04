@@ -341,7 +341,7 @@ playerDataTable = {
 {"Red Vest",0},
 {"Grey Shirt",0},
 {"Green Vest",0},
-{"Hawai Shirt",0},
+{"Hawaii Shirt",0},
 {"Black Vest",0},
 {"Brown Vest",0},
 {"Biker Vest",0},

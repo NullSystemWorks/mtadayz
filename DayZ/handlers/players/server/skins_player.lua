@@ -383,7 +383,7 @@ function checkClothes()
 	  removePedClothes(source, 0, "field", "field")
 	end
 
-	local skin53 = getElementData(source, "Hawai Shirt")
+	local skin53 = getElementData(source, "Hawaii Shirt")
 	if skin53 >= 1 then
 	  addPedClothes(source, "hawaiiwht", "hawaii", 0 )
 	else
