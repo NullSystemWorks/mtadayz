@@ -258,7 +258,7 @@ items =
 		"Red Vest",
 		"Grey Shirt",
 		"Green Vest",
-		"Hawai Shirt",
+		"Hawaii Shirt",
 		"Black Vest",
 		"Brown Vest",
 		"Biker Vest",

@@ -700,8 +700,18 @@ function getInventoryInfosForRightClickMenu(itemName)
 	for i,itemInfo in ipairs(languageTextTable[languageCode]["Items"]) do
 		if itemName == itemInfo[1] then
 			if not isPlayerInLoot() then
-				if #itemInfo >= 9 then
+				if #itemInfo == 9 then
 					return itemName, itemInfo[9], "Use "..itemName
+				elseif #itemInfo == 10 then
+					if gameplayVariables["newclothingsystem"] then
+						-- FOR DEBUG PURPOSES ##outputChatBox(itemName)
+						-- FOR DEBUG PURPOSES ##outputChatBox(itemInfo[9])
+						return itemName, itemInfo[9], "Use "..itemName
+					else
+						-- FOR DEBUG PURPOSES ##outputChatBox(itemName)
+						-- FOR DEBUG PURPOSES ##outputChatBox(itemInfo[10])
+						return itemName, itemInfo[10], "Tear up "..itemName
+					end
 				end
 				break
 			end

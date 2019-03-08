@@ -492,7 +492,7 @@ function checkPlayerClothes(itemName)
 	  end
 	end
 
-	if itemName == "Hawai Shirt" then
+	if itemName == "Hawaii Shirt" then
 	  removePedClothes(source, 0, "hawaiiwht", "hawaii")
 	  if getElementData(source, itemName) >= 2 then
 	  	addPedClothes(source, "hawaiiwht", "hawaii", 0)

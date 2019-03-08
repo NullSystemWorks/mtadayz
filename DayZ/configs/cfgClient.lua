@@ -15,6 +15,7 @@ gameplayVariables["ping"] = 600 -- Checks if ping is over the set amount - DEFAU
 gameplayVariables["waterdamage"] = math.random(5500,7100) -- Damage dealt when drowning - DEFAULT: math.random(5500,7100)
 
 -- MISC
+gameplayVariables["craftableBandages"] = true -- Whether or not the server should ignore "newclothingsystem" state, thus spawning the new clothing items and allowing players to turn them into bandages.
 gameplayVariables["enablenight"] = true -- Whether or not the night should be darker - DEFAULT: true
 gameplayVariables["nightCheckInterval"] = 300000 -- Interval (in milliseconds) for client checking if it is currently night - DEFAULT: 300000
 gameplayVariables["armachat"] = false -- Activates/deactivates ArmA II style chatbox - DEFAULT: false

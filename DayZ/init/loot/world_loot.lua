@@ -62,15 +62,18 @@ function createItemLoot (lootPlace,x,y,z,id)
 	--Items
 	for i, item in ipairs(buildingClasses[lootPlace]) do
 		local value = math.percentChance(item[5],math.random(2,5))
-		if gameplayVariables["newclothingsystem"] then
-			if item[1] == "Survivor Clothing" or item[1] == "Survivor Clothing (Female)" or item[1] == "Camouflage Clothing" or item[1] == "Ghillie Suit" or item[1] == "Civilian Clothing" or item[1] == "Civilian Clothing (Female)" then
-				value = 0
+			if gameplayVariables["craftableBandages"] == false then
+				if gameplayVariables["newclothingsystem"] then
+					if item[1] == "Survivor Clothing" or item[1] == "Survivor Clothing (Female)" or item[1] == "Camouflage Clothing" or item[1] == "Ghillie Suit" or item[1] == "Civilian Clothing" or item[1] == "Civilian Clothing (Female)" then
+						value = 0
+					end
+				else
+					if item[1] == "Military collar" or item[1] == "Africa collar" or item[1] == "LS collar" or item[1] == "Gold collar" or item[1] == "Silver collar" or item[1] == "Black Bandana (M)" or item[1] == "Blue Bandana (M)" or item[1] == "Green Bandana (M)" or item[1] == "Red Bandana (M)" or item[1] == "Dark Glasses" or item[1] == "Red Glasses" or item[1] == "Square Glasses" or item[1] == "Black Bandana (H)" or item[1] == "Blue Bandana (H)" or item[1] == "Green Bandana (H)" or item[1] == "Red Bandana (H)" or item[1] == "Black Beret" or item[1] == "Red Beret" or item[1] == "Old Hat" or item[1] == "Black Hat" or item[1] == "Yellow Hat" or item[1] == "Black Trucker" or item[1] == "Blue Trucker" or item[1] == "Green Trucker" or item[1] == "Red Trucker" or item[1] == "Yellow Trucker" or item[1] == "Cow-Boy Hat" or item[1] == "White Hat" or item[1] == "Hockey Mask" or item[1] == "Black Shoe" or item[1] == "Sport Shoe" or item[1] == "Brown Shoe" or item[1] == "Biker Shoe" or item[1] == "Blue Shoe" or item[1] == "Red Shoe" or item[1] == "Beach Shoe" or item[1] == "Black Pants" or item[1] == "Beige Pants" or item[1] == "Gray Shorts" or item[1] == "Blue Shorts" or item[1] == "Blue Jeans" or item[1] == "Green Jeans" or item[1] == "Gray Pants" or item[1] == "Yellow Pants" or item[1] == "Blue Jogging" or item[1] == "Gray Jogging" or item[1] == "Military Pants" or item[1] == "Beige Vest" or item[1] == "Baseball Shirt" or item[1] == "Baseball 2 Shirt" or item[1] == "Red Vest" or item[1] == "Grey Shirt" or item[1] == "Green Vest" or item[1] == "Hawai Shirt" or item[1] == "Black Vest" or item[1] == "Brown Vest" or item[1] == "Biker Vest" or item[1] == "Blue Shirt" or item[1] == "Green 2 Vest" or item[1] == "Number 5 Shirt" or item[1] == "Monk Shirt" or item[1] == "Helmet" or item[1] == "MX Helmet" then
+						value = 0
+					end
+				end
 			end
-		else
-			if item[1] == "Military collar" or item[1] == "Africa collar" or item[1] == "LS collar" or item[1] == "Gold collar" or item[1] == "Silver collar" or item[1] == "Black Bandana (M)" or item[1] == "Blue Bandana (M)" or item[1] == "Green Bandana (M)" or item[1] == "Red Bandana (M)" or item[1] == "Dark Glasses" or item[1] == "Red Glasses" or item[1] == "Square Glasses" or item[1] == "Black Bandana (H)" or item[1] == "Blue Bandana (H)" or item[1] == "Green Bandana (H)" or item[1] == "Red Bandana (H)" or item[1] == "Black Beret" or item[1] == "Red Beret" or item[1] == "Old Hat" or item[1] == "Black Hat" or item[1] == "Yellow Hat" or item[1] == "Black Trucker" or item[1] == "Blue Trucker" or item[1] == "Green Trucker" or item[1] == "Red Trucker" or item[1] == "Yellow Trucker" or item[1] == "Cow-Boy Hat" or item[1] == "White Hat" or item[1] == "Hockey Mask" or item[1] == "Black Shoe" or item[1] == "Sport Shoe" or item[1] == "Brown Shoe" or item[1] == "Biker Shoe" or item[1] == "Blue Shoe" or item[1] == "Red Shoe" or item[1] == "Beach Shoe" or item[1] == "Black Pants" or item[1] == "Beige Pants" or item[1] == "Gray Shorts" or item[1] == "Blue Shorts" or item[1] == "Blue Jeans" or item[1] == "Green Jeans" or item[1] == "Gray Pants" or item[1] == "Yellow Pants" or item[1] == "Blue Jogging" or item[1] == "Gray Jogging" or item[1] == "Military Pants" or item[1] == "Beige Vest" or item[1] == "Baseball Shirt" or item[1] == "Baseball 2 Shirt" or item[1] == "Red Vest" or item[1] == "Grey Shirt" or item[1] == "Green Vest" or item[1] == "Hawai Shirt" or item[1] == "Black Vest" or item[1] == "Brown Vest" or item[1] == "Biker Vest" or item[1] == "Blue Shirt" or item[1] == "Green 2 Vest" or item[1] == "Number 5 Shirt" or item[1] == "Monk Shirt" or item[1] == "Helmet" or item[1] == "MX Helmet" then
-				value = 0
-			end
-		end
+		
 		setElementData(lootCol,item[1],value)
 		--weapon Ammo
 		local ammoData,weapID = getWeaponAmmoFromName (item[1],true)
