@@ -104,12 +104,10 @@ addEventHandler("onPlayerRequestChangingStats",getRootElement(),onPlayerRequestC
 function onPlayerCreateDIYBandage(itemName, itemInfo)
 	local playersource = source
 	setPedAnimation (playersource,"BOMBER","BOM_Plant",3000,false,false,nil,false)
-	setTimer( function ()
-		if itemInfo == "Tear cloth up" then
-			setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
-			setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")+1)
-		end
-	end,1500,1)	
+	if itemInfo == "Tear cloth up" then
+		setElementData(playersource,itemName,getElementData(playersource,itemName)-1)
+		setElementData(playersource,"Bandage",getElementData(playersource,"Bandage")+1)
+	end
 	triggerClientEvent(playersource,"refreshInventoryManual",playersource)
 end
 addEvent("onPlayerCreateDIYBandage",true)
