@@ -6,7 +6,9 @@ local blockedAccounts = {
 	{"seasonmanager"}
 }
 
-secretKey = exports["DayZ"].getGameplayVariablesServerPairs()["secret_key"]
+-- ***If uncommented, this breaks the whole login.***
+-- secretKey = exports["DayZ"].getGameplayVariablesServerPairs()["secret_key"]
+-- ***Unfortunately, this also causes the use of MySQL to be difficult - if not impossible - until fixed.***
 
 local loginSkin = 0
 local x,y,z = 0,0,0
