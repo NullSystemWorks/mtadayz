@@ -27,7 +27,7 @@ https://github.com/NullSystemWorks/mtadayz/releases/tag/v0.9.9a
 
 
 ### Links ###
-Website: https://nullsystems.tech/forums/
+Website: https://nullsystems.tech/forum/
 Discord: https://discord.gg/th86Tmw
 Issues: https://github.com/NullSystemWorks/mtadayz/issues
 Donations: https://www.paypal.me/ciber96 (will be used to fund the webserver, domain and related services)
