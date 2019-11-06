@@ -241,21 +241,33 @@ function rearmPlayerWeapon (weaponName,slot)
 	takeAllWeapons(source)
 	--Rearm
 	local ammoData,weapID = getWeaponAmmoFromName(weaponName)
-	if getElementData(source,ammoData) <= 0 then 
-		triggerClientEvent (source, "displayClientInfo", source,"Rearm",shownInfos["nomag"],255,22,0) 
-		return 
+	if not (ammoData == "others") then
+		if getElementData(source,ammoData) <= 0 then 
+			triggerClientEvent (source, "displayClientInfo", source,"Rearm",shownInfos["nomag"],255,22,0) 
+			return 
+		end
 	end
 	playerStatusTable[source]["currentweapon_"..slot] = weaponName
 	--Old Weapons
 	local weapon = playerStatusTable[source]["currentweapon_1"]
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
-		giveWeapon(source,weapID,getElementData(source,ammoData), true )
+		if (ammoData == "others") then
+				giveWeapon(source,weapID,1, true )
+		else 
+			local ammoData,weapID = getWeaponAmmoFromName (weapon)
+			giveWeapon(source,weapID,getElementData(source,ammoData), true )
+		end
 	end
 	local weapon = playerStatusTable[source]["currentweapon_2"]
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
-		giveWeapon(source,weapID,getElementData(source,ammoData), false )
+		if (ammoData == "others") then
+			giveWeapon(source,weapID,1, false )
+		else
+			local ammoData,weapID = getWeaponAmmoFromName (weapon)
+			giveWeapon(source,weapID,getElementData(source,ammoData), false )
+		end
 	end
 	local weapon = playerStatusTable[source]["currentweapon_3"]
 	if weapon then
@@ -277,7 +289,12 @@ function onPlayerTakeWeapon(itemName,slot,action)
 		takeWeapon(source,weapID)
 	elseif action == "toHold" then
 		local ammoData,weapID = getWeaponAmmoFromName(itemName)
-		giveWeapon(source,weapID,getElementData(source,ammoData),false)
+		if (ammoData == "others") then
+			giveWeapon(source,weapID,1, false )
+		else
+			local ammoData,weapID = getWeaponAmmoFromName(itemName)
+			giveWeapon(source,weapID,getElementData(source,ammoData),false)
+		end
 	end
 end
 addEvent("onPlayerTakeWeapon",true)
