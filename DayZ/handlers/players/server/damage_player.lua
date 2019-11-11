@@ -253,7 +253,7 @@ function rearmPlayerWeapon (weaponName,slot)
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
 		if (ammoData == "others") then
-				giveWeapon(source,weapID,1, true )
+			giveWeapon(source,weapID,1, true )
 		else 
 			local ammoData,weapID = getWeaponAmmoFromName (weapon)
 			giveWeapon(source,weapID,getElementData(source,ammoData), true )
