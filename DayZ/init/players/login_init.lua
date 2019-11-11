@@ -304,12 +304,22 @@ function playerLogin(username, pass, player)
 	local weapon = playerStatusTable[player]["currentweapon_1"] 
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
-		giveWeapon(player,weapID,getElementData(player,ammoData), true )
+		if (ammoData == "others") then
+			giveWeapon(player,weapID,1, true )
+		else 
+			local ammoData,weapID = getWeaponAmmoFromName (weapon)
+			giveWeapon(player,weapID,getElementData(player,ammoData), true )
+		end
 	end
-	local weapon = playerStatusTable[player]["currentweapon_2"] 
+	local weapon = playerStatusTable[player]["currentweapon_2"]
 	if weapon then
 		local ammoData,weapID = getWeaponAmmoFromName (weapon)
-		giveWeapon(player,weapID,getElementData(player,ammoData), false )
+		if (ammoData == "others") then
+			giveWeapon(player,weapID,1, false )
+		else 
+			local ammoData,weapID = getWeaponAmmoFromName (weapon)
+			giveWeapon(player,weapID,getElementData(player,ammoData), false )
+		end
 	end
 	local weapon = playerStatusTable[player]["currentweapon_3"] 
 	if weapon then
