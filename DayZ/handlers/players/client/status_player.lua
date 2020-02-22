@@ -272,9 +272,9 @@ addEventHandler("onClientPlayerSpawn",localPlayer,assignTypeToDrop)
 function checkBloodType(button, state)
 	if button == "left" then
 		if vialsLeft > 0 then
-			if getElementData(source,"bloodtype") == playerStatusTable[localPlayer]["bloodtype"] then
+			if getElementData(source,"bloodtype") == playerStatusTable[localPlayer]["bloodtypediscovered"] then
 				guiSetProperty(source, "ImageColours", "tl:FF00FF00 tr:FF00FF00 bl:FF00FF00 br:FF00FF00")
-				--setElementData(localPlayer,"bloodtypediscovered",getElementData(localPlayer,"bloodtype")) <- needs to be changed
+				playerStatusTable[localPlayer]["bloodtype"] = playerStatusTable[localPlayer]["bloodtypediscovered"]
 				vialsLeft = 0
 				guiSetText(bloodTest["substanceleft"],vialsLeft)
 			else

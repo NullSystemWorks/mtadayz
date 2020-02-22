@@ -33,7 +33,7 @@ local weatherRandomizer = 1800000
 if not initializeWeather then
 	setWeather(math.random(0,18))
 	local x,y,z = math.random(0,15),math.random(0,15),math.random(0,15)
-	setWindVelocity(x,y,z)
+	setWindVelocity(0,0,0)
 	initializeWeather = true
 end
 
@@ -61,6 +61,6 @@ setTimer(setRainOnCloudyWeather,1200000,0)
 
 function setRandomWindVelocity()
 	local x,y,z = math.random(0,15),math.random(0,15),math.random(0,15)
-	setWindVelocity(x,y,z)
+	setWindVelocity(0,0,0)
 end
-setTimer(setRandomWindVelocity,300000,0)
+--setTimer(setRandomWindVelocity,300000,0)

@@ -109,13 +109,13 @@ local number = 0
 		if getElementData(getElementData(arg3,"parent"),"Tire_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
-			guiSetText(rowText[number],"Take Wheel of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
+			guiSetText(rowText[number],"Take Wheel off of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
 			setElementData(rowText[number],"usedItem","takewheel")
 		end
 		if getElementData(getElementData(arg3,"parent"),"Engine_inVehicle") > 0 and getElementData(localPlayer,"Toolbox") > 0 then
 			number = number+1
 			guiSetVisible(rowImage[number],true)
-			guiSetText(rowText[number],"Take Engine of "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
+			guiSetText(rowText[number],"Take Engine off of  "..getElementData(getElementData(arg3,"parent"),"vehicle_name"))
 			setElementData(rowText[number],"usedItem","takeengine")
 		end
 		if getElementData(getElementData(arg3,"parent"),"fuel") > 0 and getElementData(localPlayer,"Empty Gas Canister") > 0 then

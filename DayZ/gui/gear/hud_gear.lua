@@ -251,7 +251,7 @@ function WeaponHUD()
 			divide = "|"
 			magsLeft()
 		elseif weaponID == 30 then
-		   weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
+			weapName = tostring(playerStatusTable[localPlayer]["currentweapon_1"])
 			ammoType = getWeaponAmmoFromName(weapName)
 			ammo = getElementData(localPlayer,ammoType) - getPedAmmoInClip(localPlayer)
 			clip = getPedAmmoInClip(localPlayer)
@@ -440,7 +440,7 @@ function refreshDebugMonitor()
 
 			guiSetText(statsLabel["murders"],"Murders: "..tostring(playerStatusTable[localPlayer]["murders"]))
 			
-			guiSetText(statsLabel["blood"],"Blood: "..tostring(playerStatusTable[localPlayer]["blood"]).." (Type: "..tostring(playerStatusTable[localPlayer]["bloodtype"])..")")
+			guiSetText(statsLabel["blood"],"Blood: "..tostring(playerStatusTable[localPlayer]["blood"]).." (Type: "..tostring(playerStatusTable[localPlayer]["bloodtypediscovered"])..")")
 			
 			local zombiesalive = getElementData(getRootElement(),"zombiesalive") or 0
 			local zombiestotal = getElementData(getRootElement(),"zombiestotal") or 0

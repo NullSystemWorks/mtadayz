@@ -122,7 +122,7 @@ end
 addCommandHandler("language",changeLanguageOnCommand)
 
 function getPlayerCurrentSlots()
-	triggerServerEvent("onPlayerGetCurrentSlots",localPlayer)
+	return playerStatusTable[localPlayer]["CURRENT_Slots"]
 end
 
 function getLootCurrentSlots(loot)

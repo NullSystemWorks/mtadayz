@@ -40,7 +40,7 @@ function onPlayerEnterDayzVehicle(veh,seat)
 	end
 	if (getElementData(col,"fuel") or 0) < 0 then
 		if getElementModel(veh) ~= 509 then
-			triggerClientEvent (source, "displayClientInfo", source,"Vehicle","No tank left in this vehicle!",22,255,0)
+			triggerClientEvent (source, "displayClientInfo", source,"Vehicle","No fuel left in this vehicle!",22,255,0)
 			setVehicleEngineState ( veh, false )
 			return
 		end
@@ -246,8 +246,7 @@ function respawnDayZVehicles(player)
             return --Stops players from using the respawn command
         end
     end
-	
-for k, veh in ipairs(getElementsByType("vehicle")) do
+	for k, veh in ipairs(getElementsByType("vehicle")) do
 		if isVehicleBlown(veh) or isElementInWater(veh) then
 			if getElementModel(veh) ~= 453 or getElementModel(veh) ~= 595 or getElementModel(veh) ~= 473  then
 				local col = getElementData(veh,"parent")
